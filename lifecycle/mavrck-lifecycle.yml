@@ -1,0 +1,124 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  (article updated 2026-04-15) + https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1
+  + https://status.later.com/api/v2/ + derived from openapi/
+docs: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+
+versioning:
+  scheme: uri-path
+  published_statement: 'API versioning supported through URI path'
+  current_versions:
+  - surface: Mavrck Platform API
+    version: v1
+    spec_version: '1.0.0'
+  - surface: Later Influence Reporting API
+    version: v1
+    spec_version: 1.2.1
+    spec_versions_published: ['1.0.0', '1.1.0', '1.2.0', '1.2.1']
+    spec_last_modified: '2026-03-24'
+
+deprecation:
+  policy_published: true
+  policy_url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  headers:
+    sunset: false
+    deprecation: false
+    note: >-
+      No RFC 8594 Sunset or Deprecation header is emitted on any live response
+      from api.mavrck.co (probed 2026-08-12). The deprecation is announced in
+      prose in the help centre only, so a running integration receives no
+      machine-readable warning.
+  announced:
+  - surface: Later Influence Reporting API v1 (https://api.mavrck.co)
+    status: deprecated
+    statement: >-
+      "The v1 API will be deprecated within the next 6 months. We will
+      communicate a firm migration date in advance."
+    announced_in: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+    article_last_updated: '2026-04-15'
+    firm_sunset_date: null
+    successor: https://reporting.api.later.com (v2)
+    migration_map:
+    - v1: POST /oauth/token
+      v2: POST /oauth/token
+      note: Same concept, new base URL.
+    - v1: GET /v1/reporting-api/instance
+      v2: GET /v2/instances
+      note: Renamed; same purpose.
+    - v1: GET /v1/reporting-api/campaign
+      v2: GET /v2/campaigns
+      note: Renamed; richer response in v2.
+    - v1: GET /v1/reporting-api/reporting-group
+      v2: null
+      note: No direct equivalent — replaced by the campaign/platform hierarchy.
+    - v1: GET /v1/reporting-api/report
+      v2: GET /v2/campaigns/performance or GET /v2/instances/performance
+      note: Replaced by multiple purpose-specific endpoints.
+    breaking_changes:
+    - Base URL moves from api.mavrck.co to reporting.api.later.com.
+    - 'Response envelope changes to { "data": {}, "pagination": {} }.'
+    - The reporting-group concept is removed entirely.
+  deprecated_operations:
+  - operationId: fetchContent
+    method: POST
+    path: /v1/global-users/{globalUserId}/content
+    spec: openapi/mavrck-globaluser-api-openapi.yml
+    note: >-
+      The only operation in the 687-operation platform surface carrying
+      `deprecated: true`. Note separately that ~30 definitions in the spec are
+      named `*Deprecated` (ActionDeprecated, ActivationDeprecated,
+      ActionGroupDeprecated, ConversationTemplateDeprecated, LinksDeprecated,
+      DataPointDefinitionDeprecated) while the operations that return them are
+      NOT flagged — the decay is visible in the schema names but invisible to a
+      tool that checks the `deprecated` flag.
+
+brand_lifecycle:
+  events:
+  - date: '2024-01-17'
+    event: >-
+      Mavrck rebranded to Later. mavrck.co now serves a single "New Name. New
+      Look. Same Expert Service." landing page pointing at
+      later.com/influencer-marketing-platform/. The product is now sold as Later
+      Influence.
+    evidence: https://www.mavrck.co/
+  - date: null
+    event: >-
+      The API host api.mavrck.co is still live, still serving a valid Amazon-issued
+      certificate (CN=mavrck.co, expires 2026-12-25) and still serving both
+      published contracts. The legacy corporate host app.splashscore.com — the
+      founding legal entity SplashScore, Inc. — answers the identical API with
+      the identical error envelope.
+    evidence: 'https://api.mavrck.co/api-docs -> 200; https://app.splashscore.com/api-docs -> 200 (identical, 2 199 890 bytes), 2026-08-12'
+  - date: null
+    event: >-
+      The apex host mavrck.co serves an EXPIRED TLS certificate; only
+      www.mavrck.co has a current one (Google Trust Services, expires
+      2026-09-15). A browser hitting the bare domain gets a certificate error.
+    evidence: 'https://mavrck.co/ -> TLS CERTIFICATE_VERIFY_FAILED (certificate has expired), 2026-08-12'
+
+sla:
+  published: false
+  note: No public SLA or uptime commitment is published for Later Influence.
+
+status_page:
+  url: https://status.later.com/
+  covers_this_surface: partial
+  evidence: >-
+    The Statuspage exposes 16 components, all of them Later Social
+    (app.later.com, Scheduling, linkin.bio, Media Library and the social
+    networks) — there is no Later Influence or app.mavrck.co component. Later
+    Influence incidents ARE published there in prose, e.g. "High Error Rates in
+    Later Social and Later Influence" (2025-11-04,
+    https://stspg.io/nhdh4l522nnl). Probed
+    https://status.later.com/api/v2/components.json and
+    /api/v2/incidents.json -> 200, 2026-08-12.
+
+support:
+  self_serve: false
+  note: >-
+    Both API surfaces are gated on a human. The help centre directs customers to
+    their Account Manager / Customer Success Manager to obtain platform API keys
+    and Reporting API client credentials; there is no signup, sandbox or key
+    self-service page.

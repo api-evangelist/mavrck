@@ -1,0 +1,250 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Bazaar Voice API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: BazaarVoice
+paths:
+  /v1/bazaar-apps:
+    get:
+      operationId: getBazaarApps
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BazaarVoiceAppResponse'
+                type: array
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BazaarVoice
+    post:
+      operationId: createBazaarApp
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BazaarVoiceAppResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BazaarVoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BazaarVoiceAppPostRequest'
+        required: true
+  /v1/bazaar-apps/locales:
+    get:
+      operationId: getBazaarAppLocales
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BazaarVoiceLocaleResponse'
+                type: array
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BazaarVoice
+components:
+  schemas:
+    BazaarVoiceLocaleResponse:
+      $ref: '#/components/schemas/DBBazaarVoiceLocale'
+    BazaarVoiceAppResponse:
+      $ref: '#/components/schemas/DBBazaarVoiceApp'
+    BazaarVoiceAppPostRequestBody:
+      properties:
+        locales:
+          items:
+            type: string
+          type: array
+        secret:
+          type: string
+        name:
+          type: string
+        environment:
+          type: string
+        apiKey:
+          type: string
+      required:
+      - locales
+      - secret
+      - name
+      - apiKey
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBBazaarVoiceCommunityApp:
+      properties:
+        bazaarAppId:
+          type: number
+          format: double
+        communityId:
+          type: string
+      required:
+      - bazaarAppId
+      - communityId
+      type: object
+    DBBazaarVoiceApp:
+      properties:
+        BazaarVoiceLocales:
+          items:
+            $ref: '#/components/schemas/DBBazaarVoiceLocale'
+          type: array
+        BazaarVoiceCommunityApps:
+          items:
+            $ref: '#/components/schemas/DBBazaarVoiceCommunityApp'
+          type: array
+        name:
+          type: string
+        secret:
+          type: string
+        environment:
+          type: string
+        apiKey:
+          type: string
+        id:
+          type: number
+          format: double
+      required:
+      - name
+      - secret
+      - apiKey
+      - id
+      type: object
+    BazaarVoiceAppPostRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/BazaarVoiceAppPostRequestBody'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBBazaarVoiceLocale:
+      properties:
+        country:
+          type: string
+        language:
+          type: string
+        code:
+          type: string
+      required:
+      - country
+      - language
+      - code
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

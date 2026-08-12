@@ -1,0 +1,454 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Entitlements API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Entitlements
+paths:
+  /v1/entitlements:
+    get:
+      operationId: getEntitlements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entitlements'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Entitlements
+      parameters:
+      - in: query
+        name: featureIds
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+    put:
+      operationId: updateEntitlements
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Entitlements
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEntitlementFields'
+        required: true
+  /v1/entitlements/bulk:
+    put:
+      operationId: bulkUpdateEntitlements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUpdateEntitlementsResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Bulk enable/disable a feature flag for many communities in a single operation.
+
+        Replaces the frontend pattern of firing N sequential PUT /v1/entitlements calls.
+
+
+        Accepts three targeting modes (see BulkUpdateEntitlementsRequest):
+
+        - allCommunities: updates every community + flips features.default_state
+
+        - groups: backend resolves to matching community IDs (e.g. all omni instances)
+
+        - communityIds: explicit list'
+      tags:
+      - Entitlements
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUpdateEntitlementsRequest'
+        required: true
+components:
+  schemas:
+    EntitlementGroup:
+      type: string
+      enum:
+      - omni
+      - mavely
+      - private_label
+      description: Predefined instance groups that the backend can resolve without the frontend sending individual IDs.
+    FeatureId:
+      type: string
+      enum:
+      - ''
+      - add_creator_non_root
+      - add_to_creators_v2
+      - ai_brand_suitability
+      - ai_brand_suitability_bulk_reports
+      - ai_brand_suitability_v02
+      - ai_brand_suitability_v03
+      - ai_brand_suitability_internal
+      - ai_creator_match
+      - amazon_mavely_integration
+      - amplify_content
+      - audience_predominant_city_filter
+      - background_content_export
+      - bazaarvoice_ratings_only
+      - brand_safety
+      - budget_reference_id_required
+      - budget_reference_id_required_fulfillment
+      - campaign_application_embed
+      - campaign_subscription
+      - community
+      - concepts_for_creators
+      - content_module
+      - create_content
+      - creator_refresh_non_root
+      - creator_tax_collection
+      - custom_analytics_reporting
+      - custom_workflow_stages
+      - export_email
+      - facebook_cds_v2
+      - facebook_creator_api
+      - fraud_risk
+      - funds_tracking
+      - global_influencer_performance_data_2
+      - global_influencer_performance_data
+      - ig_paid_media
+      - incentive_advisor_v2
+      - influence_two_admin
+      - influence_two_campaign_content
+      - influence_two_campaign_manage
+      - influence_two_campaign_performance
+      - influence_two_campaign_search
+      - influence_two_campaign_setup
+      - influence_two_campaign_workflow
+      - influence_two_campaigns
+      - influence_two_content
+      - influence_two_dashboard
+      - influence_two_incentives
+      - influence_two_influencers
+      - influence_two_messages
+      - influence_two_reports
+      - influence_two_search_summary
+      - influence_two_search
+      - influence_two_settings
+      - influence_two
+      - instagram_cds_v2
+      - instance_branding
+      - keyword_search_chips
+      - later_360_reports_shareable_link
+      - later_cta
+      - mavely_campaign_experience
+      - mavely_integration
+      - mavely_payments
+      - messages_scheduling
+      - meta_business_integration
+      - meta_post_partnerships
+      - payments_custom_reports
+      - paypal_payments
+      - pinterest_cds_v2
+      - public_campaign_summary
+      - react_migration
+      - remove_creator
+      - reports_module
+      - reports_audience_demographics
+      - search_account_type_dropdown
+      - search_creator_card_grid_view
+      - search_filter_redesign
+      - search_later_influencers
+      - search_non_registered
+      - search_query_tuning
+      - search_refactor_query_builder
+      - search_relevance_tuning
+      - search_onsocial_relevance
+      - self_serve_users
+      - shareable_links
+      - shopify_discount_creation
+      - show_search_count
+      - stripe_international_payments
+      - stripe_payments
+      - submit_review
+      - submit_survey
+      - threaded_influencer_feedback
+      - tipalti_payments_usd
+      - tiktok_paid_media
+      - use_new_opensearch_index
+      - webhook_setup
+      - ytbc_deal_reporting_enabled
+    BulkUpdateEntitlementsRequest:
+      properties:
+        communityIds:
+          items:
+            type: string
+          type: array
+        groups:
+          items:
+            $ref: '#/components/schemas/EntitlementGroup'
+          type: array
+        allCommunities:
+          type: boolean
+        featureEnabled:
+          type: boolean
+        featureId:
+          $ref: '#/components/schemas/FeatureId'
+      required:
+      - featureEnabled
+      - featureId
+      type: object
+      description: 'Request body for PUT /v1/entitlements/bulk.
+
+
+        Exactly one targeting strategy is required:
+
+        - `allCommunities: true` — updates every community (and flips features.default_state).
+
+        - `groups` — backend resolves to matching community IDs (prefix match or hardcoded list).
+
+        - `communityIds` — explicit list of community IDs.
+
+
+        `groups` and `communityIds` can be combined (merged with OR).
+
+        `allCommunities` is exclusive and ignores the other two.'
+    BulkUpdateEntitlementsResponse:
+      properties:
+        paymentProvisioning:
+          properties:
+            failed:
+              type: number
+              format: double
+            succeeded:
+              type: number
+              format: double
+            attempted:
+              type: number
+              format: double
+          required:
+          - failed
+          - succeeded
+          - attempted
+          type: object
+          description: Present when enabling stripe_payments or mavely_payments triggers payment provider app provisioning.
+        cascaded:
+          properties:
+            affectedCount:
+              type: number
+              format: double
+            featureEnabled:
+              type: boolean
+            featureId:
+              $ref: '#/components/schemas/FeatureId'
+          required:
+          - affectedCount
+          - featureEnabled
+          - featureId
+          type: object
+          description: Present when the operation triggered a dependent feature flag cascade.
+        affectedCount:
+          type: number
+          format: double
+          description: Number of feature_toggles rows updated by the primary operation.
+      required:
+      - affectedCount
+      type: object
+      description: 'Response from PUT /v1/entitlements/bulk.
+
+
+        Always includes the count of feature_toggles rows updated. Optionally includes
+
+        cascade info (bazaarvoice/submit_review coupling) and payment provisioning results
+
+        (stripe/mavely) when those side-effects are triggered.'
+    Entitlement:
+      properties:
+        id:
+          type: number
+          format: double
+        featureId:
+          $ref: '#/components/schemas/FeatureId'
+        communityId:
+          type: string
+        featureEnabled:
+          type: boolean
+        label:
+          type: string
+      required:
+      - id
+      - featureId
+      - communityId
+      - featureEnabled
+      type: object
+      additionalProperties: false
+    UpdateEntitlementFields:
+      properties:
+        communityId:
+          type: string
+        label:
+          type: string
+        featureId:
+          $ref: '#/components/schemas/FeatureId'
+        featureEnabled:
+          type: boolean
+      required:
+      - featureId
+      - featureEnabled
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Entitlements:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Entitlement'
+          type: array
+      required:
+      - data
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

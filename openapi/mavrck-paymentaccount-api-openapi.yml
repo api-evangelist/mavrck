@@ -1,0 +1,807 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Payment Account API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: PaymentAccount
+paths:
+  /v1/payment-accounts:
+    get:
+      operationId: getInstancePaymentAccounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DBPaymentAccountWithAssociations'
+                type: array
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+    post:
+      operationId: createPaymentAccount
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DBPaymentAccount'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentAccountData'
+        required: true
+  /v1/payment-accounts/net-deposits:
+    get:
+      operationId: getNetDepositsForPaymentAccounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PaymentAccountNetDeposits'
+                type: array
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+      parameters:
+      - in: query
+        name: paymentAccountIds
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+  /v1/payment-accounts/{paymentAccountId}:
+    get:
+      operationId: getPaymentAccountById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DBPaymentAccountWithAssociations'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+      parameters:
+      - in: path
+        name: paymentAccountId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/payment-accounts/{paymentAccountId}/transactions:
+    post:
+      operationId: recordAccountingTransaction
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: number
+                    format: double
+                required:
+                - id
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+      parameters:
+      - in: path
+        name: paymentAccountId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountingTransactionCreateDetails'
+        required: true
+  /v1/payment-accounts/info/supported-currencies:
+    get:
+      operationId: getStripeSupportedCurrencies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StripeSupportedCurrencies'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+  /v1/payment-accounts/info/instance:
+    get:
+      operationId: getInstanceInternationalCurrencies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+  /v1/payment-accounts/instance/{instanceId}:
+    get:
+      operationId: getPaymentAccountByInstanceId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+      parameters:
+      - in: path
+        name: instanceId
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: updateInstanceInternationalCurrency
+      responses:
+        '200':
+          description: Instance international currencies updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partial_PaymentAccountSupportedCurrencies_'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+      parameters:
+      - in: path
+        name: instanceId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentAccountSupportedCurrenciesRequestBody'
+        required: true
+  /v1/payment-accounts/{paymentAccountId}/transactions/{transactionId}/reward-wins/{rewardWinId}:
+    patch:
+      operationId: updateTransactionAndRewardWin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+      parameters:
+      - in: path
+        name: paymentAccountId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: transactionId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: rewardWinId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaxUpdateRequestDTO'
+        required: true
+  /v1/payment-accounts/{paymentAccountId}/transactions/{transactionId}:
+    patch:
+      operationId: updateTransaction
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentAccount
+      parameters:
+      - in: path
+        name: paymentAccountId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: transactionId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePaymentAccountTransactionRequestDTO'
+        required: true
+components:
+  schemas:
+    PaymentAccountNetDeposits:
+      properties:
+        paymentAccountId:
+          type: number
+          format: double
+        currencyCode:
+          type:
+          - string
+          - 'null'
+        netDeposits:
+          type: number
+          format: double
+        earliestTransactionDate:
+          type: string
+          format: date-time
+      required:
+      - paymentAccountId
+      - currencyCode
+      - netDeposits
+      - earliestTransactionDate
+      type: object
+      additionalProperties: false
+    UpdatePaymentAccountTransactionRequestDTO:
+      properties:
+        budgetReferenceId:
+          type:
+          - string
+          - 'null'
+        budgetReferenceIdType:
+          type: object
+        taxId:
+          type:
+          - string
+          - 'null'
+        invoiceNumber:
+          type:
+          - string
+          - 'null'
+        taxLineItems:
+          items:
+            $ref: '#/components/schemas/TaxLineItem'
+          type:
+          - array
+          - 'null'
+        communityId:
+          type: string
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TaxUpdateRequestDTO:
+      properties:
+        taxId:
+          type:
+          - string
+          - 'null'
+        invoiceNumber:
+          type:
+          - string
+          - 'null'
+        taxLineItems:
+          items:
+            $ref: '#/components/schemas/TaxLineItem'
+          type:
+          - array
+          - 'null'
+      type: object
+      additionalProperties: false
+    StripeSupportedCurrencies:
+      items:
+        $ref: '#/components/schemas/StripeInternationalCurrency'
+      type: array
+    TaxLineItemType:
+      type: string
+      enum:
+      - GST
+      - HST
+      - VAT
+      - PST
+      - QST
+      - RST
+    PaymentAccountSupportedCurrenciesRequestBody:
+      properties:
+        instanceId:
+          type: string
+        internationalCurrencies:
+          type: string
+      required:
+      - instanceId
+      - internationalCurrencies
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PaymentAccountType:
+      enum:
+      - CASH
+      - GIFT_CARD
+      type: string
+    StripeInternationalCurrency:
+      properties:
+        country:
+          type: string
+        currencyCode:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+      required:
+      - country
+      - currencyCode
+      - name
+      - symbol
+      type: object
+      additionalProperties: false
+    AccountingTransactionCreateDetails:
+      properties:
+        budgetReferenceIdType:
+          type: object
+        budgetReferenceId:
+          type:
+          - string
+          - 'null'
+        targetPaymentAccountId:
+          type: number
+          format: double
+        transactionType:
+          $ref: '#/components/schemas/AccountingTransactionType'
+        description:
+          type: string
+        amount:
+          type: number
+          format: double
+        paymentAccountId:
+          type: number
+          format: double
+      required:
+      - transactionType
+      - description
+      - amount
+      - paymentAccountId
+      type: object
+    TaxLineItem:
+      properties:
+        amount:
+          type: number
+          format: double
+        type:
+          $ref: '#/components/schemas/TaxLineItemType'
+      required:
+      - amount
+      - type
+      type: object
+    DBPaymentAccount:
+      properties:
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        currencyCode:
+          type: object
+        cashPaymentAppId:
+          type:
+          - number
+          - 'null'
+          format: double
+        description:
+          type: string
+        accountType:
+          $ref: '#/components/schemas/PaymentAccountType'
+        communityId:
+          type: string
+        balance:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+      required:
+      - currencyCode
+      - cashPaymentAppId
+      - description
+      - accountType
+      - communityId
+      - balance
+      - id
+      type: object
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    Partial_PaymentAccountSupportedCurrencies_:
+      properties:
+        instanceId:
+          type: string
+        internationalCurrencies:
+          type:
+          - string
+          - 'null'
+      type: object
+      description: Make all properties in T optional
+    AccountingTransactionType:
+      type: string
+      enum:
+      - BALANCE_INCREASE
+      - BALANCE_DECREASE
+      - BALANCE_TRANSFER
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    DBPaymentAccountWithAssociations:
+      type: object
+      properties: {}
+    CreatePaymentAccountData:
+      properties:
+        currencyCode:
+          type: object
+        communityId:
+          type: string
+        cashPaymentAppId:
+          type: number
+          format: double
+      required:
+      - communityId
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

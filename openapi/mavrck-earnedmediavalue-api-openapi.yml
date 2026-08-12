@@ -1,0 +1,168 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Earned Media Value API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: EarnedMediaValue
+paths:
+  /v1/earned-media-value:
+    post:
+      operationId: backfillEmv
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - EarnedMediaValue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmvParams'
+        required: true
+  /v1/earned-media-value/backfill-lists-and-list-members:
+    post:
+      operationId: backfillEmvForListsAndListMembers
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - EarnedMediaValue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmvParams'
+        required: true
+components:
+  schemas:
+    UpdateEmvParams:
+      properties:
+        periodStart:
+          type: string
+        periodEnd:
+          type: string
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

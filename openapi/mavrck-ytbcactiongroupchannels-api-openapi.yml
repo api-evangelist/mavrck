@@ -1,0 +1,275 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Ytbc Action Group Channels API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: YtbcActionGroupChannels
+paths:
+  /v1/ytbc/action-groups/{actionGroupId}/campaign-code:
+    get:
+      operationId: getActionGroupCampaignCode
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupCampaignCodeResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - YtbcActionGroupChannels
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/ytbc/action-groups/{actionGroupId}/youtube-channel:
+    get:
+      operationId: getActionGroupYoutubeChannel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupYoutubeChannelResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - YtbcActionGroupChannels
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+    put:
+      operationId: setActionGroupYoutubeChannel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupYoutubeChannelResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - YtbcActionGroupChannels
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetYoutubeChannelRequest'
+        required: true
+    delete:
+      operationId: clearActionGroupYoutubeChannel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupYoutubeChannelResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - YtbcActionGroupChannels
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+components:
+  schemas:
+    SetYoutubeChannelRequest:
+      properties:
+        channelInput:
+          type: string
+        hasNoYoutubeChannel:
+          type: boolean
+      type: object
+      additionalProperties: false
+    ActionGroupCampaignCodeResponse:
+      properties:
+        campaignCode:
+          type:
+          - string
+          - 'null'
+      required:
+      - campaignCode
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActionGroupYoutubeChannelResponse:
+      properties:
+        channelId:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        channelHandle:
+          type:
+          - string
+          - 'null'
+        thumbnailUri:
+          type:
+          - string
+          - 'null'
+        source:
+          type:
+          - string
+          - 'null'
+          enum:
+          - overridden
+          - inherited
+          - null
+        hasNoYoutubeChannel:
+          type: boolean
+      required:
+      - channelId
+      - title
+      - channelHandle
+      - thumbnailUri
+      - source
+      - hasNoYoutubeChannel
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

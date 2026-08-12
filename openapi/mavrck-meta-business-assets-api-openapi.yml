@@ -1,0 +1,226 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Meta Business Assets API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Meta Business Assets
+paths:
+  /v2/marketers/meta/business/assets:
+    get:
+      operationId: getBusinessAssets
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/MetaBusinessAssetAuthorizationDto'
+                    type: array
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Meta Business Assets
+  /v2/marketers/meta/business/assets/{id}:
+    patch:
+      operationId: updateBusinessAsset
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaBusinessAssetAuthorizationDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Meta Business Assets
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBusinessAssetRequestBody'
+        required: true
+components:
+  schemas:
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    MetaBusinessAssetAuthorizationDto:
+      properties:
+        id:
+          type: number
+          format: double
+        type:
+          type: string
+        name:
+          type: string
+        selected:
+          type: boolean
+        externalId:
+          type: string
+        externalBusinessPortfolioId:
+          type: string
+        administratorId:
+          type: number
+          format: double
+        integrationId:
+          type: number
+          format: double
+        communityId:
+          type: string
+        handle:
+          type: string
+        status:
+          type: number
+          format: double
+        pictureUrl:
+          type: string
+        externalFacebookPageId:
+          type: string
+      required:
+      - id
+      - type
+      - name
+      - selected
+      - externalId
+      - externalBusinessPortfolioId
+      - administratorId
+      - integrationId
+      - communityId
+      type: object
+      additionalProperties: false
+    UpdateBusinessAssetRequestBody:
+      properties:
+        selected:
+          type: boolean
+      required:
+      - selected
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

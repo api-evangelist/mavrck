@@ -1,0 +1,93 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1 (info.description
+  auth section) + https://help-influence.later.com/hc/en-us/articles/20462385592087
+  + derived from the 180 refined specs in openapi/ + live probe of
+  POST https://api.mavrck.co/oauth/token on 2026-08-12
+docs: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  surfaces: 2
+  oauth2_declared: false
+  note: >-
+    Two distinct authentication surfaces sit behind the same host. The platform
+    API (the 548-path Swagger 2.0 document served at api.mavrck.co/api-docs)
+    takes a static API key in an `api-key` request header. The Reporting API
+    (published by owner `mavrck` on SwaggerHub) uses a client-credentials
+    exchange that returns a JWT bearer token. The Reporting API's token exchange
+    is OAuth-2.0-SHAPED but is NOT declared as an oauth2 securityScheme: the
+    spec declares `http`/`bearer`/`JWT` and the token endpoint takes a JSON body
+    of `clientId`/`clientSecret` rather than the RFC 6749 form encoding, so no
+    scopes artifact is derivable.
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: api-key
+  surface: Mavrck Platform API
+  base: https://api.mavrck.co/v1
+  provisioning: >-
+    Not self-serve. Keys are issued by the Later Influence team; the help centre
+    directs customers to their Account Manager / Customer Success Manager.
+  failure_modes:
+  - status: 403
+    body: '{"type":"RESOURCE_FORBIDDEN_ERROR","error":"Access to this resource is forbidden."}'
+    observed: 'live, 2026-08-12, GET https://api.mavrck.co/v1/influencers with no credentials'
+  - status: 403
+    description: Invalid API Key
+    source: openapi 4xx response descriptions (87 operations)
+  - status: 401
+    description: Session expired.
+    source: openapi 4xx response descriptions (141 operations)
+  source_specs: 175
+  source_example: openapi/mavrck-influencers-api-openapi.yml
+- name: JWT
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  surface: Later Influence Reporting API (v1)
+  base: https://api.mavrck.co
+  description: JWT obtained from the client-credentials token endpoint.
+  token_endpoint: https://api.mavrck.co/oauth/token
+  token_request:
+    method: POST
+    content_type: application/json
+    body_fields:
+    - clientId
+    - clientSecret
+  token_response_field: jwt
+  token_lifetime: >-
+    12 hours per the OpenAPI info.description; the help-centre article states 24
+    hours. The two published numbers disagree — treat the shorter as the safe
+    assumption and refresh on 401.
+  request_header: 'Authorization: Bearer <jwt>'
+  failure_modes:
+  - status: 401
+    content_type: application/problem+json
+    body: '{"type":"ANL_00401","title":"Invalid Client Credentials","detail":"The client ID or client secret is incorrect."}'
+    observed: 'live, 2026-08-12, POST https://api.mavrck.co/oauth/token with bogus credentials'
+  - code: INVALID_CLIENT_CREDENTIALS
+    meaning: Wrong clientId or clientSecret
+    source: help centre article
+  - code: CLIENT_DISABLED
+    meaning: Client account has been disabled
+    source: help centre article
+  - code: NO_ACCESSIBLE_INSTANCES
+    meaning: Client has no active instance associations
+    source: help centre article
+  provisioning: >-
+    Not self-serve. Credentials are requested from the Later Influence support
+    team / Account Manager per the published documentation.
+  source_specs: 6
+  source_example: openapi/mavrck-instance-level-api-openapi.yml
+successor:
+  note: >-
+    Later Influence has published a v2 Reporting API at
+    https://reporting.api.later.com with the same clientId/clientSecret to JWT
+    exchange. It is a different host and belongs to the Later profile, not this
+    one; see lifecycle/mavrck-lifecycle.yml for the deprecation timeline.

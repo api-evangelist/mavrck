@@ -1,0 +1,123 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Membership Purchases API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: MembershipPurchases
+paths:
+  /v1/membership-points-for-purchase:
+    post:
+      operationId: awardPointsForPurchase
+      responses:
+        '200':
+          description: Successfully awarded points for a purchase event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostMembershipPurchaseResponse'
+        '400':
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Points already awarded for this purchase
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - MembershipPurchases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostMembershipPurchaseBody'
+        required: true
+components:
+  schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PostMembershipPurchaseResponse:
+      properties:
+        pointsAwarded:
+          type: string
+      required:
+      - pointsAwarded
+      type: object
+      additionalProperties: false
+    PostMembershipPurchaseBody:
+      properties:
+        orderId:
+          type: string
+        purchaseValue:
+          type: string
+      required:
+      - orderId
+      - purchaseValue
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

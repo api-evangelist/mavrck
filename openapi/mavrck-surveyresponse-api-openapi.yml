@@ -1,0 +1,337 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Survey Response API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: SurveyResponse
+paths:
+  /v1/action-groups/{actionGroupId}/survey-response-summary:
+    get:
+      operationId: getSurveySummaries
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SurveyResponseSummary'
+                    type: array
+                required:
+                - data
+                type: object
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - SurveyResponse
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/action-groups/{actionGroupId}/survey-responses:
+    get:
+      operationId: getSurveyResponses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SurveyResponse'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                required:
+                - data
+                - meta
+                type: object
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - SurveyResponse
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+components:
+  schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SurveyResponseSummary:
+      properties:
+        id:
+          type: number
+          format: double
+        questionText:
+          type: string
+        order:
+          type: number
+          format: double
+        total:
+          type: number
+          format: double
+        options:
+          items:
+            properties:
+              percentage:
+                type: number
+                format: double
+              count:
+                type: number
+                format: double
+              value:
+                type: string
+            required:
+            - percentage
+            - count
+            - value
+            type: object
+          type: array
+      required:
+      - id
+      - questionText
+      - order
+      - total
+      - options
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SurveyResponse:
+      properties:
+        age:
+          type: number
+          format: double
+        birthday:
+          type: string
+        city:
+          type: string
+        communityId:
+          type: string
+        country:
+          type: string
+        createdAt:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        fullName:
+          type: string
+        gender:
+          type: string
+        genderDescription:
+          type: string
+        id:
+          type: number
+          format: double
+        instagramHandle:
+          type: string
+        lastName:
+          type: string
+        lifetimeImpressions:
+          type: number
+          format: double
+        membershipId:
+          type: number
+          format: double
+        phone:
+          type: string
+        profilePicture:
+          type: string
+        questionResponses:
+          $ref: '#/components/schemas/Record_string.any_'
+        state:
+          type: string
+        status:
+          type: string
+        street:
+          type: string
+        zip:
+          type: string
+      required:
+      - age
+      - birthday
+      - city
+      - communityId
+      - country
+      - createdAt
+      - email
+      - firstName
+      - fullName
+      - gender
+      - genderDescription
+      - id
+      - instagramHandle
+      - lastName
+      - lifetimeImpressions
+      - membershipId
+      - phone
+      - profilePicture
+      - questionResponses
+      - state
+      - status
+      - street
+      - zip
+      type: object
+      additionalProperties: false
+    Record_string.any_:
+      properties: {}
+      type: object
+      description: Construct a type with a set of properties K of type T
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

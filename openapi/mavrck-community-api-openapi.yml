@@ -1,0 +1,570 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Community API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Community
+paths:
+  /v1/comm-info:
+    get:
+      operationId: getCommunityInfoWithAffiliates
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommSiteInfo'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Community
+    put:
+      operationId: updateCommmunityInfo
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Community
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCommunityInfoFieldsDTO'
+        required: true
+  /comm/{communityId}/info:
+    get:
+      operationId: getCommunityInfo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommSiteInfo'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Community
+      parameters:
+      - in: path
+        name: communityId
+        required: true
+        schema:
+          type: string
+  /comm/{communityId}/news:
+    get:
+      operationId: getCommunityNews
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DBCommunityNews'
+                type: array
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Community
+      parameters:
+      - in: path
+        name: communityId
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    CommSiteInfo:
+      properties:
+        accent_color:
+          type: string
+        affiliateProviders:
+          additionalProperties: true
+        back_color:
+          type: string
+        back_img:
+          type: string
+        banner_img:
+          type: string
+        bazaar_app_id:
+          type: number
+          format: double
+        bazaar_voice_enabled:
+          type: boolean
+        bluekai_enabled:
+          type: boolean
+        bluekai_site_id:
+          type: string
+        button_color:
+          type: string
+        cc_img:
+          type: string
+        cc_text:
+          type: string
+        cc_url:
+          type: string
+        community_id:
+          type: string
+        community_name:
+          type: string
+        community_url:
+          type: string
+        conversion_contest_action_id:
+          type: string
+        conversion_contest_conversion_count_target:
+          type: number
+          format: double
+        conversion_contest_reward_description:
+          type: string
+        custom_css:
+          type: string
+        custom_scripts:
+          type: string
+        customer_website:
+          type: string
+        default_country:
+          type: string
+        description:
+          type: string
+        displayName:
+          type: string
+        email:
+          type: string
+        end_date:
+          type: string
+        facebook_app_name:
+          type: string
+        fav_icon:
+          type: string
+        fb_app_id:
+          type: string
+        fb_app_version:
+          type: string
+        fb_conversation_html:
+          type: string
+        fb_conversation_image:
+          type: string
+        fb_conversation_link:
+          type: string
+        fb_featured_post:
+          type: string
+        fb_id:
+          type: string
+        footer:
+          type: string
+        google_property_id:
+          type: string
+        has_gb_referrals_enabled:
+          type: boolean
+        has_points_enabled:
+          type: boolean
+        has_policy_link_in_footer:
+          type: boolean
+        header_frame_link:
+          type: string
+        headline_color:
+          type: string
+        help_url:
+          type: string
+        instagram_handle:
+          type: string
+        instagram_square_image:
+          type: string
+        launch_date:
+          type: string
+        locale:
+          type: string
+        logo_large:
+          type: string
+        logo_medium:
+          type: string
+        logo_small:
+          type: string
+        num_actions_displayed:
+          type: number
+          format: double
+        og_image:
+          type: string
+        onboarding_section_enabled:
+          type: boolean
+        paypal_enabled:
+          type: boolean
+        permissions:
+          type: string
+        pinterest_app_id:
+          type: string
+        pinterest_app_version:
+          type: number
+          format: double
+        points:
+          additionalProperties: true
+        pointsForPurchaseRatio:
+          type: number
+          format: double
+        points_per_member_referred:
+          type: number
+          format: double
+        policy_link:
+          type: string
+        post_signup_tags:
+          type: string
+        privacy_custom_text:
+          type: string
+        privacy_policy_link_text:
+          type: string
+        privacy_policy_required:
+          type: boolean
+        publish_og_story:
+          type: boolean
+        referral_email_enabled:
+          type: boolean
+        referral_facebook_enabled:
+          type: boolean
+        referral_link_route:
+          type: string
+        referral_program_description:
+          type: string
+        referral_text:
+          type: string
+        referral_twitter_enabled:
+          type: boolean
+        referral_widget_enabled:
+          type: boolean
+        rejected_user_redirect_link:
+          type: string
+        required_to_view_all_contracts:
+          type: object
+        retired:
+          type: boolean
+        signature_required:
+          type: boolean
+        start_date:
+          type: string
+        status:
+          type: string
+        tagline:
+          type: string
+        tango_card_enabled:
+          type: boolean
+        terms_link:
+          type: string
+        terms_of_use_link_text:
+          type: string
+        tiktokAppId:
+          type: string
+        tiktokAppRid:
+          type: string
+        tiktokAppScope:
+          type: string
+        url:
+          type: string
+        usage_details:
+          type: string
+        widgetsToShow:
+          items:
+            type: string
+          type: array
+        isTest:
+          type: boolean
+      required:
+      - accent_color
+      - button_color
+      - community_id
+      - community_url
+      - default_country
+      - fb_app_id
+      - has_gb_referrals_enabled
+      - has_points_enabled
+      - locale
+      - og_image
+      - pointsForPurchaseRatio
+      - privacy_policy_required
+      - referral_email_enabled
+      - referral_facebook_enabled
+      - referral_twitter_enabled
+      - referral_widget_enabled
+      - retired
+      - signature_required
+      - start_date
+      - terms_link
+      - isTest
+      type: object
+      additionalProperties: false
+    DBCommunityNews:
+      properties:
+        id:
+          type: number
+          format: double
+        community_id:
+          type: string
+        title:
+          type: string
+        desc:
+          type: string
+        img:
+          type: string
+        link:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        order:
+          type: number
+          format: double
+        status:
+          type: string
+      required:
+      - id
+      - community_id
+      - title
+      - desc
+      - img
+      - link
+      - start_date
+      - end_date
+      - order
+      - status
+      type: object
+      additionalProperties: false
+    UpdateCommunityInfoFieldsDTO:
+      properties:
+        weekly_digest_subscribers:
+          type: string
+        weekly_digest_preference:
+          type: string
+        usage_details:
+          type: string
+        url:
+          type: string
+        terms_of_use_link_text:
+          type: string
+        terms_link:
+          type: string
+        tagline:
+          type: string
+        required_to_view_all_contracts:
+          type: object
+        referral_widget_enabled:
+          type: object
+        referral_twitter_enabled:
+          type: object
+        referral_text:
+          type: string
+        referral_link_route:
+          type: string
+        referral_facebook_enabled:
+          type: object
+        referral_email_enabled:
+          type: number
+          format: double
+        referral_confirmation_email_text:
+          type: string
+        privacy_policy_required:
+          type: object
+        privacy_policy_link_text:
+          type: string
+        policy_link:
+          type: string
+        points_per_referral_click:
+          type: string
+        points_per_member_referred:
+          type: number
+          format: double
+        og_image:
+          type: string
+        logo_small:
+          type: string
+        locale:
+          type: string
+        launch_date:
+          type: string
+        instagram_square_image:
+          type: string
+        instagram_handle:
+          type: string
+        help_url:
+          type: string
+        headline_color:
+          type: string
+        has_points_enabled:
+          type: object
+        fav_icon:
+          type: string
+        email_header_image_url:
+          type: string
+        email_domain_white_labeled:
+          type: object
+        description:
+          type: string
+        default_country:
+          type: string
+        community_url:
+          type: string
+        community_name:
+          type: string
+        button_color:
+          type: string
+        back_img:
+          type: string
+        back_color:
+          type: string
+        accent_color:
+          type: string
+      type: object
+    ValidationError:
+      properties:
+        property:
+          type: string
+        message:
+          type: string
+        schema:
+          type: object
+        instance:
+          additionalProperties: true
+        name:
+          type: string
+        argument:
+          additionalProperties: true
+      required:
+      - property
+      - message
+      - schema
+      - instance
+      - name
+      - argument
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

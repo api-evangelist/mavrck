@@ -1,0 +1,55 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  Live unauthenticated responses from https://api.mavrck.co (GET /v1/influencers,
+  POST /oauth/token, GET /api-docs) on 2026-08-12, plus a full scan of
+  openapi/_original/mavrck-openapi.json and
+  openapi/_original/mavrck-reporting-api.json and the Later Influence help centre.
+docs: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+limit_count: 0
+limits: []
+response_headers:
+  ratelimit_headers: none
+  x_ratelimit_headers: none
+  retry_after: none
+  observed: >-
+    Live responses carry only date, content-type, content-length, server
+    (nginx/1.21.3), x-powered-by (Express), access-control-allow-origin (*),
+    vary and a weak etag. No rate-limit signalling of any kind.
+note: >-
+  Mavrck publishes no rate limits and emits no rate-limit headers. A scan of the
+  2.2 MB platform specification finds zero occurrences of "ratelimit",
+  "rate-limit" or "retry-after"; the Reporting API specification and the help
+  centre are equally silent. An agent integrating this API has no runtime signal
+  to back off on and no documented number to design against — it can only
+  discover a limit by hitting one.
+related_ceilings:
+- kind: pagination
+  surface: Later Influence Reporting API
+  detail: 'pageSize defaults to 50 and is capped at 100 items per request.'
+  source: 'openapi/_original/mavrck-reporting-api.json info.description'
+- kind: request-payload
+  surface: Later Influence Reporting API
+  detail: 'campaignIds accepts a maximum of 50 items.'
+  source: parameter description on the performance endpoints
+- kind: query-window
+  surface: Later Influence Reporting API
+  detail: 'The startDate/endDate range may not exceed 2 years.'
+  source: 'openapi/_original/mavrck-reporting-api.json info.description'
+- kind: concurrency
+  surface: Mavrck Platform API
+  detail: >-
+    Exactly one operation in the 687-operation surface declares a 429, and it
+    means "Priority export slot is busy" — a queue-slot conflict on the export
+    endpoint, not a throughput limit. No Retry-After accompanies it.
+  source: openapi/_original/mavrck-openapi.json
+probes:
+- url: https://api.mavrck.co/v1/influencers
+  status: 403
+  ratelimit_headers: none
+- url: https://api.mavrck.co/oauth/token
+  status: 401
+  ratelimit_headers: none
+- url: https://api.mavrck.co/api-docs
+  status: 200
+  ratelimit_headers: none

@@ -1,0 +1,635 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Campaign Application API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: CampaignApplication
+paths:
+  /v1/external-campaign-application:
+    post:
+      operationId: submitCampaignApplication
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CampaignApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalCampaignApplicationRequest'
+        required: true
+  /v1/external-campaign-application/connect-mavely:
+    get:
+      operationId: linkMavely
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CampaignApplication
+      parameters:
+      - in: query
+        name: mavely_profile_id
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: state
+        required: true
+        schema:
+          type: string
+  /v1/external-campaign-application/connect-mavely/url:
+    get:
+      operationId: connectMavelyUrl
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CampaignApplication
+      parameters:
+      - in: query
+        name: global_user_id
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: action_group_id
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    InstagramAudience:
+      properties:
+        predominant_country:
+          type: string
+        predominant_city:
+          type: string
+        predominant_age_range:
+          type: string
+        locales:
+          items:
+            $ref: '#/components/schemas/InstagramAudienceLocale'
+          type: array
+        gender_percentages:
+          properties:
+            F:
+              type: number
+              format: double
+            M:
+              type: number
+              format: double
+            U:
+              type: number
+              format: double
+          type: object
+        countries:
+          items:
+            $ref: '#/components/schemas/InstagramAudienceCountry'
+          type: array
+        cities:
+          items:
+            $ref: '#/components/schemas/InstagramAudienceCity'
+          type: array
+        age_percentages:
+          properties:
+            65+:
+              type: number
+              format: double
+            55-64:
+              type: number
+              format: double
+            45-54:
+              type: number
+              format: double
+            35-44:
+              type: number
+              format: double
+            25-34:
+              type: number
+              format: double
+            18-24:
+              type: number
+              format: double
+            13-17:
+              type: number
+              format: double
+          type: object
+      type: object
+    CreatorOptInInstagram:
+      properties:
+        website:
+          type: string
+        source_detail:
+          type: string
+        profile_type:
+          type: string
+          description: 'TODO: Redefine ''profile_type'' as an enumeration: ''BUSINESS'' | ''MEDIA_CREATOR'' | ''PERSONAL''
+
+            Basic Display API: https://developers.facebook.com/docs/instagram-basic-display-api/reference/user#fields
+
+            Graph API: https://developers.facebook.com/docs/instagram-api/reference/ig-user#fields'
+        profile_picture:
+          type: string
+        media_count:
+          type: number
+          format: double
+        is_private:
+          type: boolean
+        is_female_percentage:
+          type: number
+          format: double
+        is_business:
+          type: boolean
+        instagram_external_id:
+          type: string
+          description: 'ID generated by Instagram Graph API.
+
+            As of December 2023, Later and Mavrck use API v12.0, and ID is not app-scoped.'
+        handle:
+          type: string
+        full_name:
+          type: string
+        following_count:
+          type: number
+          format: double
+        followers_count:
+          type: number
+          format: double
+        derived_language:
+          type: string
+        bio:
+          type: string
+        audience:
+          $ref: '#/components/schemas/InstagramAudience'
+      required:
+      - instagram_external_id
+      - handle
+      type: object
+      description: 'Represents a Professional Instagram account.
+
+        Professional accounts include Business and Creator accounts.
+
+        Personal accounts are not yet supported.'
+    InstagramAudienceCity:
+      properties:
+        state:
+          type: string
+        percentage:
+          type: number
+          format: double
+        end_time:
+          $ref: '#/components/schemas/DateOrTimestamp'
+        count:
+          type: number
+          format: double
+        city_state:
+          type: string
+        city_name:
+          type: string
+      type: object
+    CreatorOptInRequest:
+      properties:
+        social_medias:
+          $ref: '#/components/schemas/CreatorOptInRequestSocialMedias'
+      type: object
+      additionalProperties: false
+    CreatorOptInTwitter:
+      properties:
+        verified:
+          type: boolean
+        utc_offset:
+          type: number
+          format: double
+        twitter_external_id:
+          type: string
+        time_zone:
+          type: string
+        protected:
+          type: boolean
+        profile_picture:
+          type: string
+        location:
+          type: string
+        listed_count:
+          type: number
+          format: double
+        lang:
+          type: string
+        handle:
+          type: string
+        geo_enabled:
+          type: boolean
+        full_name:
+          type: string
+        following_count:
+          type: number
+          format: double
+        followers_count:
+          type: number
+          format: double
+        engagement_rate:
+          type: number
+          format: double
+        description:
+          type: string
+        average_retweets:
+          type: number
+          format: double
+        average_favorites:
+          type: number
+          format: double
+        average_engagements:
+          type: number
+          format: double
+        account_created_at:
+          type: string
+      required:
+      - twitter_external_id
+      - handle
+      type: object
+    InstagramAudienceCountry:
+      properties:
+        percentage:
+          type: number
+          format: double
+        iso_code:
+          type: string
+        end_time:
+          $ref: '#/components/schemas/DateOrTimestamp'
+        country_name:
+          type: string
+        count:
+          type: number
+          format: double
+      type: object
+    CreatorOptInPinterest:
+      properties:
+        username:
+          type: string
+        profile_picture:
+          type: string
+        pinterest_external_id:
+          type: string
+        pins_count:
+          type: number
+          format: double
+        monthly_viewers:
+          type: number
+          format: double
+        last_name:
+          type: string
+        following_count:
+          type: number
+          format: double
+        followers_count:
+          type: number
+          format: double
+        first_name:
+          type: string
+        engagement_rate:
+          type: number
+          format: double
+        boards_count:
+          type: number
+          format: double
+        bio:
+          type: string
+        average_engagements:
+          type: number
+          format: double
+        account_created_at:
+          $ref: '#/components/schemas/DateOrTimestamp'
+      required:
+      - username
+      type: object
+    ExternalCampaignApplicationRequest:
+      properties:
+        quote:
+          type: number
+          format: double
+          minimum: 0
+        payment_recipient_uuid:
+          type: string
+        mavely_profile_id:
+          type: string
+        influencer:
+          $ref: '#/components/schemas/CreatorOptInRequest'
+        creator_profile_id:
+          type: string
+        concept:
+          type: string
+          minLength: 1
+          maxLength: 10000
+        application_answers:
+          $ref: '#/components/schemas/QuestionAnswers'
+        action_group_id:
+          type: integer
+          format: int32
+      required:
+      - creator_profile_id
+      - action_group_id
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    QuestionAnswers:
+      properties: {}
+      additionalProperties:
+        type: object
+      type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CreatorOptInTikTok:
+      properties:
+        creatorId:
+          type: string
+        status:
+          type: string
+          enum:
+          - IN
+          - INVALID
+          - INVITED
+          - NOT_IN
+        profile_image:
+          type: string
+        is_active:
+          type: boolean
+        handle_name:
+          type: string
+        followers_count:
+          type: number
+          format: double
+        display_name:
+          type: string
+        audience:
+          properties:
+            usage:
+              items:
+                properties:
+                  percentage:
+                    type: number
+                    format: double
+                  usage:
+                    type: string
+                type: object
+              type: array
+            locales:
+              items:
+                properties:
+                  percentage:
+                    type: number
+                    format: double
+                  locale_code:
+                    type: string
+                type: object
+              type: array
+            genders:
+              items:
+                properties:
+                  percentage:
+                    type: number
+                    format: double
+                  gender:
+                    type: string
+                type: object
+              type: array
+            device:
+              items:
+                properties:
+                  percentage:
+                    type: number
+                    format: double
+                  device_name:
+                    type: string
+                type: object
+              type: array
+            countries:
+              items:
+                properties:
+                  percentage:
+                    type: number
+                    format: double
+                  country_code:
+                    type: string
+                type: object
+              type: array
+            ages:
+              items:
+                properties:
+                  percentage:
+                    type: number
+                    format: double
+                  age:
+                    type: string
+                type: object
+              type: array
+          type: object
+      required:
+      - profile_image
+      - handle_name
+      type: object
+    InstagramAudienceLocale:
+      properties:
+        percentage:
+          type: number
+          format: double
+        locale_code:
+          type: string
+        end_time:
+          $ref: '#/components/schemas/DateOrTimestamp'
+        count:
+          type: number
+          format: double
+      type: object
+    CreatorOptInRequestSocialMedias:
+      properties:
+        twitter:
+          $ref: '#/components/schemas/CreatorOptInTwitter'
+        tiktok:
+          $ref: '#/components/schemas/CreatorOptInTikTok'
+        pinterest:
+          $ref: '#/components/schemas/CreatorOptInPinterest'
+        facebook:
+          $ref: '#/components/schemas/CreatorOptInFacebook'
+        instagram:
+          $ref: '#/components/schemas/CreatorOptInInstagram'
+      type: object
+    DateOrTimestamp:
+      type: object
+    CreatorOptInFacebook:
+      properties:
+        verified:
+          type: boolean
+        timezone:
+          type: string
+        state:
+          type: string
+        reach:
+          type: number
+          format: double
+        profile_url:
+          type: string
+        profile_type:
+          type: string
+        picture:
+          type: string
+        phone:
+          type: string
+        personal_blog_url:
+          type: string
+        location:
+          type: string
+        locale:
+          type: string
+        likes_count:
+          type: number
+          format: double
+        last_name:
+          type: string
+        handle:
+          type: string
+        gender:
+          type: string
+        full_name:
+          type: string
+        friend_count:
+          type: string
+        following_count:
+          type: number
+          format: double
+        follower_count:
+          type: number
+          format: double
+        first_name:
+          type: string
+        email:
+          type: string
+        currency:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        category:
+          type: string
+        birthday:
+          $ref: '#/components/schemas/DateOrTimestamp'
+        authentic_public_figure:
+          type: boolean
+      required:
+      - profile_url
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

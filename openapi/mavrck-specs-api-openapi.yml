@@ -1,0 +1,335 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Specs API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Specs
+paths:
+  /v1/action-groups/{id}/specs:
+    get:
+      operationId: getSpecs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpecsGetResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Specs
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: title
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: destinationUrl
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: includeCommissions
+        required: false
+        schema:
+          type: boolean
+    post:
+      operationId: postSpecs
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Specs
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpecsPostRequest'
+        required: true
+  /v1/action-groups/{id}/specs/{specId}:
+    put:
+      operationId: updateSpecs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    additionalProperties: true
+                required:
+                - data
+                type: object
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Specs
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: specId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpecsPutRequest'
+        required: true
+    delete:
+      operationId: archiveSpec
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Specs
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: specId
+        required: true
+        schema:
+          type: string
+  /v1/action-groups/{id}/specs/brand-details:
+    get:
+      operationId: getBrandDetails
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Specs
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: link
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: metadataIncluded
+        required: false
+        schema:
+          type: boolean
+          default: true
+components:
+  schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    SpecsPutRequest:
+      properties:
+        destinationUrl:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      type: object
+      additionalProperties: false
+    SpecsGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Spec'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Spec:
+      properties:
+        id:
+          type: number
+          format: double
+        title:
+          type: string
+        destinationUrl:
+          type: string
+        laterInfluenceCampaignId:
+          type: number
+          format: double
+        provider:
+          type: string
+        isDeleted:
+          type: boolean
+        deletedAt:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - title
+      - destinationUrl
+      - laterInfluenceCampaignId
+      - provider
+      - isDeleted
+      - deletedAt
+      type: object
+      additionalProperties: false
+    SpecsPostRequest:
+      properties:
+        destinationUrl:
+          type: string
+        title:
+          type: string
+        laterInfluenceCampaignId:
+          type: number
+          format: double
+        provider:
+          type: string
+      required:
+      - destinationUrl
+      - title
+      - laterInfluenceCampaignId
+      - provider
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

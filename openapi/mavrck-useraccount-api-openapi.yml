@@ -1,0 +1,542 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO User Account API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: UserAccount
+paths:
+  /v1/my-account:
+    get:
+      operationId: getCurrentAccount
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentAdministratorAccount'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - UserAccount
+    put:
+      operationId: updateCurrentAccount
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - UserAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdministratorAccountPutBody'
+        required: true
+  /v1/user-account:
+    post:
+      operationId: createUserAccount
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - UserAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdministratorAccountPostBody'
+        required: true
+  /v1/social-accounts:
+    get:
+      operationId: getInfluencerSocialAccounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalUserSocialAccountsResponse'
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - UserAccount
+      parameters:
+      - in: query
+        name: globalUserId
+        required: false
+        schema:
+          type: number
+          format: double
+components:
+  schemas:
+    AdministratorAccountPostBody:
+      properties:
+        roleId:
+          type: number
+          format: double
+        password:
+          type: string
+        lastName:
+          type: string
+        firstName:
+          type: string
+        email:
+          type: string
+      required:
+      - password
+      - email
+      type: object
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    InstagramAccount:
+      properties:
+        averageComments:
+          type: number
+          format: double
+        averageEngagements:
+          type: number
+          format: double
+        averageLikes:
+          type: number
+          format: double
+        bio:
+          type: string
+        engagementRate:
+          type: number
+          format: double
+        followersCount:
+          type: number
+          format: double
+        followingCount:
+          type: number
+          format: double
+        fullName:
+          type: string
+        handle:
+          type: string
+        id:
+          type: string
+          enum:
+          - number
+        instagramAccessGrant:
+          properties:
+            type:
+              type: string
+            businessIsExpired:
+              type: boolean
+            platformIsExpired:
+              type: boolean
+            isExpired:
+              type: boolean
+          type: object
+        accessGrant:
+          properties:
+            type:
+              type: string
+            isExpired:
+              type: boolean
+          type: object
+        isBusiness:
+          type: boolean
+        isPrivate:
+          type: boolean
+        mediaCount:
+          type: number
+          format: double
+        primaryAccount:
+          type: boolean
+        profilePicture:
+          type: string
+        profileType:
+          type: string
+          enum:
+          - platform
+          - business
+        sponsoredPostRate:
+          type: number
+          format: double
+        website:
+          type: string
+      type: object
+      additionalProperties: false
+    CurrentAdministratorAccount:
+      properties:
+        administratorId:
+          type:
+          - number
+          - 'null'
+          format: double
+        token:
+          type: string
+        status:
+          type: string
+          enum:
+          - APPROVED
+          - PENDING
+          - DELETED
+          - SUSPENDED
+        root:
+          type: boolean
+        roleId:
+          type: number
+          format: double
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        id:
+          type: number
+          format: double
+        first_name:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        configurePaymentProvider:
+          type: boolean
+        community_id:
+          type: string
+      required:
+      - administratorId
+      - token
+      - status
+      - root
+      - roleId
+      - last_name
+      - image
+      - id
+      - first_name
+      - email
+      - configurePaymentProvider
+      - community_id
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GlobalUserSocialAccountsResponse:
+      $ref: '#/components/schemas/GlobalUserSocialAccounts'
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PinterestAccount:
+      properties:
+        averageEngagements:
+          type: number
+          format: double
+        bio:
+          type: string
+        boardsCount:
+          type: number
+          format: double
+        engagementRate:
+          type: number
+          format: double
+        firstName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        followingCount:
+          type: number
+          format: double
+        id:
+          type: object
+        lastName:
+          type: string
+        monthlyViewers:
+          type: number
+          format: double
+        pinsCount:
+          type: number
+          format: double
+        pinterestAccessGrant:
+          properties:
+            isExpired:
+              type: boolean
+          type: object
+        primaryAccount:
+          type: boolean
+        profilePicture:
+          type: string
+        username:
+          type: string
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    FacebookProfile:
+      properties:
+        active:
+          type: boolean
+        available:
+          type: boolean
+        averageComments:
+          type: number
+          format: double
+        averageEngagements:
+          type: number
+          format: double
+        averageLikes:
+          type: number
+          format: double
+        engagementRate:
+          type: number
+          format: double
+        expiresAt:
+          type: string
+        facebookUser:
+          properties:
+            isExpired:
+              type: boolean
+          type: object
+        facebookExternalId:
+          type: string
+        id:
+          type: number
+          format: double
+        link:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+        picture:
+          type: string
+        reach:
+          type: number
+          format: double
+        type:
+          type: string
+      type: object
+      additionalProperties: false
+    GlobalUserSocialAccounts:
+      properties:
+        facebookProfiles:
+          items:
+            $ref: '#/components/schemas/FacebookProfile'
+          type: array
+        instagramAccounts:
+          items:
+            $ref: '#/components/schemas/InstagramAccount'
+          type: array
+        pinterestAccounts:
+          items:
+            $ref: '#/components/schemas/PinterestAccount'
+          type: array
+        twitterAccounts:
+          items:
+            $ref: '#/components/schemas/TwitterAccount'
+          type: array
+      type: object
+      additionalProperties: false
+    TwitterAccount:
+      properties:
+        averageEngagements:
+          type: number
+          format: double
+        averageFavorites:
+          type: number
+          format: double
+        averageRetweets:
+          type: number
+          format: double
+        description:
+          type: string
+        engagementRate:
+          type: number
+          format: double
+        followersCount:
+          type: number
+          format: double
+        followingCount:
+          type: number
+          format: double
+        fullName:
+          type: string
+        handle:
+          type: string
+        id:
+          type: object
+        listedCount:
+          type: number
+          format: double
+        primaryAccount:
+          type: boolean
+        profilePicture:
+          type: string
+        twitterAccessGrant:
+          properties:
+            isExpired:
+              type: boolean
+          type: object
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    AdministratorAccountPutBody:
+      properties:
+        newPassword:
+          type: string
+        lastName:
+          type: string
+        image:
+          type: string
+        firstName:
+          type: string
+        existingPassword:
+          type: string
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

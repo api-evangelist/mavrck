@@ -1,0 +1,201 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Action Group Bulk Scheduled Messages API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: ActionGroupBulkScheduledMessages
+paths:
+  /v1/bulk-messages-schedule:
+    post:
+      operationId: createBulkListMemberScheduledMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupBulkScheduledMessages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkActionGroupScheduleMessagePostBody'
+        required: true
+components:
+  schemas:
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    BulkActionGroupScheduleMessagePostBody:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        subject:
+          type: string
+        templates:
+          items:
+            additionalProperties: true
+          type: array
+        attachments:
+          items:
+            $ref: '#/components/schemas/SendMessageAttachment'
+          type: array
+        html:
+          type: string
+        sendOnDate:
+          type: string
+          format: date-time
+        globalUserIds:
+          additionalProperties: true
+        addTalentManager:
+          type: boolean
+        queryFilter:
+          properties:
+            customStatusId:
+              items:
+                type: number
+                format: double
+              type: array
+            orderProperty:
+              type: string
+            expectedNumberOfInfluencers:
+              type: number
+              format: double
+            excludedGlobalUserIds:
+              items:
+                type: number
+                format: double
+              type: array
+            userFilter:
+              additionalProperties: true
+          required:
+          - expectedNumberOfInfluencers
+          - excludedGlobalUserIds
+          - userFilter
+          type: object
+      required:
+      - actionGroupId
+      - subject
+      - html
+      - sendOnDate
+      - addTalentManager
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SendMessageAttachment:
+      properties:
+        originalName:
+          type: string
+        mimeType:
+          type: string
+        disposition:
+          type: string
+        size:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        buffer:
+          type: string
+        encoding:
+          type: string
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

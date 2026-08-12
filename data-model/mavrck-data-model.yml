@@ -1,0 +1,616 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/_original/mavrck-openapi.json (1071 definitions, 548 paths) and
+  openapi/_original/mavrck-reporting-api.json (17 schemas). Relationships are
+  computed from local $ref links and from `<name>Id` / `<name>Ids` reference
+  fields; nothing here is authored by hand.
+summary:
+  spec_definitions: 1071
+  definitions_referenced_by_operations: 524
+  entities_documented: 36
+  id_convention: >-
+    Numeric surrogate integers on the platform API (`id`, `instanceId`,
+    `campaignId`, `membershipId`) with no type prefixes, plus opaque string GUIDs
+    on the global-user surface (`globalUserId`, and `/v1/global-users/random/guids`).
+    The Reporting API returns string ids (`instanceIds: ["instance_abc"]`).
+    There is no published object-reference page, so no id-prefix table exists to
+    search for.
+  core_spine: >-
+    Instance -> Campaign / ActionGroup -> Candidate / Membership -> GlobalUser.
+    A GlobalUser is the person as Mavrck knows them across every customer; a
+    Membership is that person's relationship to ONE customer instance. Almost
+    every other entity hangs off one of those two.
+  render: null
+entities:
+- name: InfluencerPreview
+  field_count: 6
+  relationships:
+  - kind: belongs_to
+    target: GlobalUser
+    via: globalUserId
+- name: GlobalUser
+  field_count: 73
+  relationships:
+  - kind: has_one
+    target: Membership
+    via: appMembership
+  - kind: has_one
+    target: Blog
+    via: blog
+  - kind: has_one
+    target: FacebookProfile
+    via: facebookProfile
+  - kind: has_one
+    target: Gender
+    via: gender
+  - kind: has_many
+    target: Topic
+    via: influencerTopics
+  - kind: has_one
+    target: InstagramAccount
+    via: instagramAccount
+  - kind: has_one
+    target: InstagramProfile
+    via: instagramProfile
+  - kind: has_one
+    target: LaterInfluencerInfo
+    via: laterInfluencer
+  - kind: has_one
+    target: MavelyUser
+    via: mavelyUser
+  - kind: has_one
+    target: MembershipCostAndPerformance
+    via: membershipCostAndPerformance
+  - kind: has_one
+    target: PinterestAccount
+    via: pinterestAccount
+  - kind: has_many
+    target: PreviewPost
+    via: previewPosts
+  - kind: has_one
+    target: TikTokCreator
+    via: tiktokCreator
+  - kind: has_one
+    target: TwitterAccount
+    via: twitterAccount
+  - kind: has_one
+    target: YoutubeChannel
+    via: youtubeChannel
+  - kind: has_one
+    target: GlobalUserPerformanceMetrics
+    via: globalPerformanceMetrics
+  - kind: has_one
+    target: IncentiveRecommendations
+    via: incentiveRecommendations
+- name: GlobalUserList
+  field_count: 3
+- name: Community
+  field_count: 4
+- name: Membership
+  field_count: 19
+  relationships:
+  - kind: has_one
+    target: MembershipContactInfoDeprecated
+    via: contactInfo
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+- name: ActionGroup
+  field_count: 81
+  relationships:
+  - kind: has_many
+    target: Action
+    via: actions
+  - kind: has_one
+    target: Audience
+    via: audience
+  - kind: has_one
+    target: Campaign
+    via: campaign
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: belongs_to
+    target: GlobalUserListDefinition
+    via: globalUserListDefinitionId
+  - kind: has_one
+    target: Incentive
+    via: incentive
+  - kind: has_many
+    target: Incentive
+    via: incentives
+  - kind: belongs_to
+    target: List
+    via: listId
+  - kind: has_many
+    target: ListDeliverable
+    via: listDeliverables
+  - kind: belongs_to
+    target: Program
+    via: programId
+  - kind: belongs_to
+    target: BudgetReference
+    via: budgetReferenceId
+  - kind: has_many
+    target: ListCustomStatus
+    via: workflowStatuses
+- name: ActionGroupDeprecated
+  field_count: 89
+  relationships:
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: has_one
+    target: AudienceDeprecated
+    via: audience
+  - kind: has_one
+    target: IncentiveDeprecated
+    via: incentive
+  - kind: has_many
+    target: IncentiveDeprecated
+    via: incentives
+  - kind: has_many
+    target: ActionDeprecated
+    via: actions
+  - kind: belongs_to
+    target: List
+    via: listId
+  - kind: has_many
+    target: ListDeliverable
+    via: listDeliverables
+  - kind: has_many
+    target: ListCustomStatusDeprecated
+    via: workflowStatuses
+  - kind: belongs_to
+    target: GlobalUserListDefinition
+    via: globalUserListDefinitionId
+  - kind: belongs_to
+    target: BudgetReference
+    via: budgetReferenceId
+- name: ActionGroupCandidate
+  field_count: 28
+  relationships:
+  - kind: has_one
+    target: GlobalUserDeprecated
+    via: user
+  - kind: has_one
+    target: ListCustomStatusDeprecated
+    via: customStatus
+  - kind: has_one
+    target: ListCustomInfluencerStatusDeprecated
+    via: customInfluencerStatus
+  - kind: has_one
+    target: ListMemberCostAndPerformance
+    via: listMemberCostAndPerformance
+  - kind: belongs_to
+    target: Status
+    via: statusId
+  - kind: belongs_to
+    target: ListMember
+    via: listMemberId
+  - kind: has_many
+    target: ActivationDeprecated
+    via: activations
+- name: Action
+  field_count: 35
+  relationships:
+  - kind: has_one
+    target: ActionGroup
+    via: ActionGroup
+  - kind: belongs_to
+    target: ActionGroup
+    via: actionGroupId
+  - kind: has_one
+    target: Brand
+    via: brand
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: has_one
+    target: ConversionTag
+    via: conversion
+  - kind: has_one
+    target: TrackingLink
+    via: link
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+  - kind: has_one
+    target: NetworkOperation
+    via: networkOperation
+  - kind: has_one
+    target: Product
+    via: product
+  - kind: belongs_to
+    target: Product
+    via: productId
+  - kind: belongs_to
+    target: ReviewForm
+    via: reviewFormId
+  - kind: has_one
+    target: Routing
+    via: routing
+  - kind: has_one
+    target: ReviewForm
+    via: survey
+- name: ActionDeprecated
+  field_count: 34
+  relationships:
+  - kind: belongs_to
+    target: ActionGroup
+    via: actionGroupId
+  - kind: has_one
+    target: RoutingDeprecated
+    via: routing
+  - kind: belongs_to
+    target: ReviewForm
+    via: reviewFormId
+  - kind: belongs_to
+    target: Product
+    via: productId
+  - kind: has_one
+    target: ProductDeprecated
+    via: product
+  - kind: has_many
+    target: ActivationURI
+    via: activations
+  - kind: has_one
+    target: PendingActivationURI
+    via: pendingActivation
+  - kind: has_one
+    target: ConversionTagDeprecated
+    via: conversion
+  - kind: has_one
+    target: BrandDeprecated
+    via: brand
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+- name: Activation
+  field_count: 17
+  relationships:
+  - kind: belongs_to
+    target: Action
+    via: actionId
+  - kind: has_one
+    target: NetworkAccount
+    via: associatedAccount
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: has_one
+    target: ActivationContent
+    via: content
+  - kind: belongs_to
+    target: CreatedByAccount
+    via: createdByAccountId
+  - kind: belongs_to
+    target: GlobalUser
+    via: globalUserId
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+  - kind: belongs_to
+    target: UpdatedByAccount
+    via: updatedByAccountId
+- name: ActivationDeprecated
+  field_count: 30
+  relationships:
+  - kind: belongs_to
+    target: External
+    via: externalId
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+  - kind: belongs_to
+    target: GlobalUser
+    via: globalUserId
+  - kind: belongs_to
+    target: CreatedByAccount
+    via: createdByAccountId
+  - kind: belongs_to
+    target: UpdatedByAccount
+    via: updatedByAccountId
+  - kind: has_one
+    target: ActionDeprecated
+    via: action
+  - kind: has_one
+    target: ActivationContentDeprecated
+    via: content
+  - kind: has_one
+    target: InstagramAccountDeprecated
+    via: instagramAccount
+  - kind: has_one
+    target: FacebookProfileDeprecated
+    via: facebookProfile
+  - kind: has_one
+    target: TwitterAccountDeprecated
+    via: twitterAccount
+  - kind: has_one
+    target: PinterestAccountDeprecated
+    via: pinterestAccount
+  - kind: has_one
+    target: MembershipContactInfoDeprecated
+    via: contactInfo
+  - kind: has_one
+    target: MembershipDeprecated
+    via: membership
+  - kind: has_one
+    target: CampaignDeprecated
+    via: campaign
+  - kind: has_many
+    target: UserQuestionResponse
+    via: surveyResponses
+  - kind: has_one
+    target: ReviewFormResponseDeprecated
+    via: reviewContent
+- name: Incentive
+  field_count: 49
+  relationships:
+  - kind: belongs_to
+    target: ActionGroup
+    via: actionGroupId
+  - kind: belongs_to
+    target: CashPaymentApp
+    via: cashPaymentAppId
+  - kind: has_many
+    target: IncentiveClaim
+    via: claims
+  - kind: belongs_to
+    target: GiftCardEmailTemplate
+    via: giftCardEmailTemplateId
+  - kind: belongs_to
+    target: GiftCardOption
+    via: giftCardOptionId
+  - kind: belongs_to
+    target: Reward
+    via: rewardId
+  - kind: has_one
+    target: IncentiveTermsAndConditions
+    via: termsAndConditions
+  - kind: has_one
+    target: IncentiveUnlockEvent
+    via: unlockEvent
+  - kind: has_one
+    target: MavrckSupportedCurrencies
+    via: valueCurrencyCode
+  - kind: has_one
+    target: MavrckSupportedCurrencies
+    via: costCurrencyCode
+  - kind: has_one
+    target: NullableBonusTierCurrencyCode
+    via: bonusTierCurrencyCode
+  - kind: has_many
+    target: BonusTier
+    via: bonusTiers
+  - kind: belongs_to
+    target: DiscountCode
+    via: discountCodeId
+  - kind: belongs_to
+    target: ShippingCode
+    via: shippingCodeId
+- name: IncentiveClaim
+  field_count: 17
+  relationships:
+  - kind: belongs_to
+    target: GlobalUser
+    via: globalUserId
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+- name: Campaign
+  field_count: 7
+  relationships:
+  - kind: has_one
+    target: Brand
+    via: brand
+  - kind: has_many
+    target: ActionGroup
+    via: actionGroups
+- name: Conversation
+  field_count: 19
+  relationships:
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: has_many
+    target: ListMemberDeprecated
+    via: listMembers
+  - kind: has_many
+    target: MessageRecipient
+    via: participants
+  - kind: has_many
+    target: Message
+    via: messages
+- name: Message
+  field_count: 24
+  relationships:
+  - kind: belongs_to
+    target: Conversation
+    via: conversationId
+  - kind: has_one
+    target: AdministratorDeprecated
+    via: sentBy
+  - kind: has_one
+    target: AdministratorDeprecated
+    via: modifiedBy
+  - kind: has_one
+    target: AdministratorDeprecated
+    via: createdBy
+  - kind: has_many
+    target: MessageRecipient
+    via: recipients
+  - kind: has_many
+    target: Attachment
+    via: attachments
+  - kind: has_many
+    target: ConversationTemplateDeprecated
+    via: templates
+- name: Profile
+  field_count: 16
+  relationships:
+  - kind: belongs_to
+    target: FacebookExternal
+    via: facebookExternalId
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+  - kind: belongs_to
+    target: GlobalUser
+    via: globalUserId
+- name: RewardWin
+  field_count: 56
+  relationships:
+  - kind: belongs_to
+    target: Influencer
+    via: influencerId
+  - kind: has_one
+    target: MembershipContactInfoDeprecated
+    via: contactInfo
+  - kind: has_one
+    target: IncentiveDeprecated
+    via: incentive
+  - kind: has_one
+    target: AdministratorDeprecated
+    via: createdBy
+  - kind: has_one
+    target: AdministratorDeprecated
+    via: lastModifiedBy
+  - kind: has_one
+    target: ActionGroupDeprecated
+    via: actionGroup
+  - kind: has_one
+    target: GlobalUserDeprecated
+    via: user
+  - kind: belongs_to
+    target: CashPaymentApp
+    via: cashPaymentAppId
+  - kind: belongs_to
+    target: GiftCardOption
+    via: giftCardOptionId
+  - kind: belongs_to
+    target: GiftCardEmailTemplate
+    via: giftCardEmailTemplateId
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: has_one
+    target: PaymentsLedger
+    via: mostRecentTransaction
+  - kind: belongs_to
+    target: DiscountCode
+    via: discountCodeId
+  - kind: belongs_to
+    target: DiscountCodeRedeem
+    via: discountCodeRedeemId
+  - kind: belongs_to
+    target: ShippingCode
+    via: shippingCodeId
+  - kind: belongs_to
+    target: ShippingCodeRedeem
+    via: shippingCodeRedeemId
+  - kind: belongs_to
+    target: Incentive
+    via: incentiveId
+  - kind: belongs_to
+    target: Tax
+    via: taxId
+- name: ScheduledNotification
+  field_count: 13
+  relationships:
+  - kind: belongs_to
+    target: Audience
+    via: audienceId
+  - kind: has_one
+    target: AudienceDeprecated
+    via: audience
+  - kind: has_one
+    target: ActionGroupDeprecated
+    via: actionGroup
+- name: Blog
+  field_count: 5
+  relationships:
+  - kind: belongs_to
+    target: GlobalUser
+    via: globalUserId
+- name: DataPointDefinitionDeprecated
+  field_count: 16
+  relationships:
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: has_one
+    target: DataPointDefinitionSetElementDeprecated
+    via: setElements
+- name: PaymentRecipientView
+  field_count: 9
+  relationships:
+  - kind: has_many
+    target: PayableEntity
+    via: payableEntities
+- name: TrackingLink
+  field_count: 26
+  relationships:
+  - kind: has_one
+    target: Action
+    via: action
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: belongs_to
+    target: Conversion
+    via: conversionId
+  - kind: belongs_to
+    target: Domain
+    via: domainId
+  - kind: belongs_to
+    target: Parent
+    via: parentId
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+  - kind: has_one
+    target: MetaInformation
+    via: metaInformation
+- name: Product
+  field_count: 8
+  relationships:
+  - kind: has_one
+    target: BazaarVoiceAppProduct
+    via: bazaarVoiceAppProduct
+  - kind: belongs_to
+    target: Community
+    via: communityId
+  - kind: has_one
+    target: PowerReviewsPage
+    via: powerReviewsPage
+  - kind: has_one
+    target: YotpoAppProduct
+    via: yotpoAppProduct
+- name: ReviewFormResponse
+  field_count: 10
+  relationships:
+  - kind: belongs_to
+    target: GlobalUser
+    via: globalUserId
+  - kind: belongs_to
+    target: Membership
+    via: membershipId
+  - kind: has_many
+    target: QuestionResponse
+    via: questionResponses
+  - kind: has_one
+    target: ReviewForm
+    via: reviewForm
+  - kind: has_one
+    target: Product
+    via: product
+- name: Comment
+  field_count: 5
+  relationships:
+  - kind: has_one
+    target: Administrator
+    via: author
+- name: Topic
+  field_count: 3

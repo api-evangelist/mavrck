@@ -1,0 +1,139 @@
+asyncapi: 2.6.0
+info:
+  title: Mavrck Webhooks
+  version: 1.0.0
+  description: |
+    AsyncAPI description of the Mavrck (Later Influence) outbound webhook
+    surface, derived faithfully from the provider's own published contract:
+    "Workflow Stage Change Event Webhook" 1.0.0, an OpenAPI 3.0.0 document
+    published on SwaggerHub by owner `mavrck` and saved verbatim in this repo at
+    webhooks/mavrck-workflow-stage-change-event-webhook-openapi.json.
+
+    Mavrck POSTs a JSON notification to an HTTPS endpoint the subscriber
+    registers in the platform, whenever an influencer is added to one of the
+    subscriber's campaigns, or moves from one of that campaign's workflow stages
+    to another.
+
+    Authorization is a shared bearer-style `token` carried IN THE BODY of the
+    notification: a 16-character alphanumeric string the subscriber reads from
+    the Mavrck platform and compares on receipt. There is no HMAC signature
+    header, no timestamp, and no replay window — the subscriber's only
+    verification material is a static secret transmitted in the payload of every
+    delivery.
+
+    Retry contract, stated by the provider in the response descriptions of the
+    source document: Mavrck retries on 500 and 502. Mavrck does NOT retry on
+    401, 403, 404 or 405. A 200 is treated as successful delivery.
+
+    Only ONE event type is published. This document does not invent others.
+  contact:
+    name: Later Influence Help Center
+    url: https://help-influence.later.com/hc/en-us
+  termsOfService: https://later.com/terms/
+  x-generated: '2026-08-12'
+  x-method: derived
+  x-source: webhooks/mavrck-workflow-stage-change-event-webhook-openapi.json
+  x-upstream: https://api.swaggerhub.com/apis/mavrck/workflow-stage-change-event-webhook/1.0.0
+defaultContentType: application/json
+servers:
+  subscriber:
+    url: '{subscriberUrl}'
+    protocol: https
+    description: >-
+      The HTTPS endpoint the subscriber registers in the Mavrck platform. Mavrck
+      POSTs each notification to it. The source document uses
+      https://www.example.com/example-path as a placeholder because the real URL
+      is supplied per subscriber.
+    variables:
+      subscriberUrl:
+        description: The subscriber's own HTTPS receiver URL.
+        default: https://www.example.com/example-path
+channels:
+  workflow/stage-change:
+    description: >-
+      Notifies a subscriber when influencers are added to one of their campaigns
+      or moved from one of their campaign's workflow stages to another.
+    publish:
+      operationId: onWorkflowStageChange
+      summary: Receive a workflow stage change notification from Mavrck.
+      bindings:
+        http:
+          type: request
+          method: POST
+      message:
+        $ref: '#/components/messages/WorkflowStageChangeNotification'
+components:
+  messages:
+    WorkflowStageChangeNotification:
+      name: WorkflowStageChangeNotification
+      title: Workflow Stage Change Event
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WorkflowStageChangeNotification'
+  schemas:
+    WorkflowStageChangeNotification:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/WorkflowStageChangeEvent'
+        subscriberId:
+          type: string
+          description: >-
+            Unique ID of the subscriber's webhook. If the receiving endpoint
+            takes multiple instances' events, or multiple applications receive
+            the same instance's events, this value varies.
+        token:
+          type: string
+          description: >-
+            A 16-character alphanumeric string used to authorize requests to the
+            subscriber's application. The subscriber's token is accessible in
+            the Mavrck platform.
+    WorkflowStageChangeEvent:
+      type: object
+      description: Details of the workflow stage change.
+      properties:
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        current:
+          $ref: '#/components/schemas/WorkflowStage'
+        influencer:
+          $ref: '#/components/schemas/Influencer'
+        previous:
+          description: >-
+            The stage the influencer moved from. Null when the influencer was
+            newly added to the campaign rather than moved.
+          oneOf:
+          - $ref: '#/components/schemas/WorkflowStage'
+          - type: 'null'
+    Campaign:
+      type: object
+      description: Details of the campaign in which the workflow stage change occurred.
+      properties:
+        id:
+          type: integer
+          description: Unique ID of the campaign in which the workflow stage change occurred.
+        instanceId:
+          type: integer
+          description: Unique ID of the instance to which the campaign belongs.
+    Influencer:
+      type: object
+      description: Details of the influencer whose workflow stage changed.
+      properties:
+        id:
+          type: integer
+          description: Unique ID of the influencer whose workflow stage changed.
+        membershipId:
+          type: [integer, 'null']
+          description: Unique ID of the relationship between the influencer and your instance.
+    WorkflowStage:
+      type: object
+      description: >-
+        A point in a campaign denoting an influencer's progress towards campaign
+        completion.
+      properties:
+        label:
+          type: string
+          description: Unique, MUTABLE id of a workflow stage — do not key on it.
+        slug:
+          type: string
+          description: Unique, IMMUTABLE id of a workflow stage in a campaign — key on this.

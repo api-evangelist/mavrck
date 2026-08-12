@@ -1,0 +1,307 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Tiktok Activations API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Tiktok Activations
+paths:
+  /v1/tiktok-activations/{tiktokMediaId}:
+    put:
+      operationId: Put
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      parameters:
+      - in: path
+        name: tiktokMediaId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTikTokContentActivationRequestBody'
+        required: true
+      tags:
+      - Tiktok Activations
+components:
+  schemas:
+    TikTokVideoViewsBySource:
+      properties:
+        source:
+          type:
+          - string
+          - 'null'
+        videoViews:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - videoViews
+      type: object
+      additionalProperties: false
+    PutTikTokContentActivationRequestBody:
+      properties:
+        audienceAgeDistribution:
+          items:
+            $ref: '#/components/schemas/TikTokAudienceAgeDistribution'
+          type:
+          - array
+          - 'null'
+        audienceCountriesDistribution:
+          items:
+            $ref: '#/components/schemas/TikTokAudienceCountriesDistribution'
+          type:
+          - array
+          - 'null'
+        audienceGendersDistribution:
+          items:
+            $ref: '#/components/schemas/TikTokAudienceGendersDistribution'
+          type:
+          - array
+          - 'null'
+        audienceInterestDistribution:
+          items:
+            $ref: '#/components/schemas/TikTokAudienceInterestDistribution'
+          type:
+          - array
+          - 'null'
+        caption:
+          type: string
+        comments:
+          type: number
+          format: double
+        commentsOrganic:
+          type: number
+          format: double
+        commentsPaid:
+          type: number
+          format: double
+        engagementCount:
+          type: number
+          format: double
+        impressions:
+          type: number
+          format: double
+        impressionsSource:
+          type: string
+        likes:
+          type: number
+          format: double
+        likesOrganic:
+          type: number
+          format: double
+        likesPaid:
+          type: number
+          format: double
+        reach:
+          type:
+          - number
+          - 'null'
+          format: double
+        shares:
+          type: number
+          format: double
+        sharesOrganic:
+          type: number
+          format: double
+        sharesPaid:
+          type: number
+          format: double
+        link:
+          type: string
+        totalPlayTime:
+          type: number
+          format: double
+        videoCompletionRate:
+          type: number
+          format: double
+        videoViewsBySource:
+          items:
+            $ref: '#/components/schemas/TikTokVideoViewsBySource'
+          type:
+          - array
+          - 'null'
+        videoViews:
+          type: number
+          format: double
+        videoViewsOrganic:
+          type: number
+          format: double
+        videoViewsPaid:
+          type: number
+          format: double
+      required:
+      - comments
+      - likes
+      - shares
+      type: object
+      additionalProperties: false
+    TikTokAudienceCountriesDistribution:
+      properties:
+        country:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - country
+      - percentage
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TikTokAudienceAgeDistribution:
+      properties:
+        age:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - age
+      - percentage
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TikTokAudienceGendersDistribution:
+      properties:
+        gender:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - percentage
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TikTokAudienceInterestDistribution:
+      properties:
+        interestTag:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - interestTag
+      - percentage
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

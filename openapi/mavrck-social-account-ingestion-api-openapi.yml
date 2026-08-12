@@ -1,0 +1,364 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Social Account Ingestion API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Social Account Ingestion
+paths:
+  /v1/social-account-ingestion:
+    post:
+      operationId: Post
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Pick_GlobalUser.id-or-uuid_'
+                type: array
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestData'
+        required: true
+      tags:
+      - Social Account Ingestion
+    patch:
+      operationId: Patch
+      responses:
+        '201':
+          description: created
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestData'
+        required: true
+      tags:
+      - Social Account Ingestion
+components:
+  schemas:
+    MvkBlog:
+      properties:
+        id:
+          type: number
+          format: double
+        url:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - url
+      type: object
+      additionalProperties: false
+    Pick_GlobalUser.id-or-uuid_:
+      properties:
+        id:
+          $ref: '#/components/schemas/GlobalUserId'
+        uuid:
+          type: string
+      required:
+      - id
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    MvkTwitterAccount:
+      properties:
+        id:
+          type: number
+          format: double
+        username:
+          type: string
+        externalId:
+          type: string
+        bio:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        profilePicture:
+          type: string
+        primaryAccount:
+          type: boolean
+        description:
+          type: string
+        verified:
+          type: boolean
+        averageFavorites:
+          type: number
+          format: double
+        averageRetweets:
+          type: number
+          format: double
+      required:
+      - username
+      - externalId
+      type: object
+      additionalProperties: false
+    MvkSocialAccount:
+      properties:
+        id:
+          type: number
+          format: double
+        username:
+          type: string
+        externalId:
+          type: string
+        bio:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        profilePicture:
+          type: string
+        primaryAccount:
+          type: boolean
+      required:
+      - username
+      - externalId
+      type: object
+      additionalProperties: false
+    MvkFacebookProfile:
+      $ref: '#/components/schemas/MvkSocialAccount'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    MvkYoutubeChannel:
+      properties:
+        id:
+          type: number
+          format: double
+        username:
+          type: string
+        externalId:
+          type: string
+        bio:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        profilePicture:
+          type: string
+        primaryAccount:
+          type: boolean
+        userId:
+          type: number
+          format: double
+        videoCount:
+          type: number
+          format: double
+        commentCount:
+          type: number
+          format: double
+        viewCount:
+          type: number
+          format: double
+      required:
+      - username
+      - externalId
+      type: object
+      additionalProperties: false
+    MvkPinterestAccount:
+      properties:
+        id:
+          type: number
+          format: double
+        username:
+          type: string
+        externalId:
+          type: string
+        bio:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        profilePicture:
+          type: string
+        primaryAccount:
+          type: boolean
+        boardsCount:
+          type: number
+          format: double
+        pinsCount:
+          type: number
+          format: double
+        monthlyViewers:
+          type: number
+          format: double
+      required:
+      - username
+      - externalId
+      type: object
+      additionalProperties: false
+    GlobalUserId:
+      type: number
+      format: double
+    MvkInstagramAccount:
+      properties:
+        id:
+          type: number
+          format: double
+        username:
+          type: string
+        externalId:
+          type: string
+        bio:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        profilePicture:
+          type: string
+        primaryAccount:
+          type: boolean
+        averageLikes:
+          type: number
+          format: double
+        mediaCount:
+          type: number
+          format: double
+        averageComments:
+          type: number
+          format: double
+        averageEngagements:
+          type: number
+          format: double
+        engagementRage:
+          type: number
+          format: double
+        sponsoredPostRate:
+          type: number
+          format: double
+        isBusiness:
+          type: boolean
+        isPrivate:
+          type: boolean
+        audienceFraudLevel:
+          $ref: '#/components/schemas/FraudLevel'
+      required:
+      - username
+      - externalId
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Partial_GlobalUser_:
+      properties:
+        id:
+          $ref: '#/components/schemas/GlobalUserId'
+        uuid:
+          type: string
+        instagram:
+          $ref: '#/components/schemas/MvkInstagramAccount'
+        pinterest:
+          $ref: '#/components/schemas/MvkPinterestAccount'
+        youtube:
+          $ref: '#/components/schemas/MvkYoutubeChannel'
+        twitter:
+          $ref: '#/components/schemas/MvkTwitterAccount'
+        facebook:
+          $ref: '#/components/schemas/MvkFacebookProfile'
+        blog:
+          $ref: '#/components/schemas/MvkBlog'
+      type: object
+      description: Make all properties in T optional
+    FraudLevel:
+      enum:
+      - low
+      - medium
+      - high
+      type: string
+    RequestData:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Partial_GlobalUser_'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

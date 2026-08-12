@@ -1,0 +1,68 @@
+overlay: 1.0.0
+info:
+  title: Mavrck Platform API — verified live host and error semantics
+  version: 1.0.0
+  x-generated: '2026-08-12'
+  x-method: generated
+  x-source: >-
+    API Evangelist enhancement over the provider's own harvested document
+    (openapi/_original/mavrck-openapi.json, fetched from
+    https://api.mavrck.co/api-docs on 2026-08-12). The original is never mutated.
+extends: openapi/_original/mavrck-openapi.json
+actions:
+- target: $
+  description: >-
+    The harvested Swagger 2.0 document declares host `app.splashscore.com` and
+    schemes [http, https] — the founding legal entity SplashScore, Inc., which
+    still answers. The document is ALSO served, byte-identical, from the
+    company's current host api.mavrck.co, which is the host the provider's own
+    help centre names ("the legacy v1 API, previously documented under Mavrck at
+    api.mavrck.co"). This overlay adds that host as the primary server and drops
+    the cleartext http scheme, neither of which is safe to assume from the
+    original.
+  update:
+    servers:
+    - url: https://api.mavrck.co/v1
+      description: >-
+        Current production host. Verified live 2026-08-12 — valid Amazon-issued
+        certificate (CN=mavrck.co, expires 2026-12-25), TLSv1.3, and an
+        identical 2 199 890-byte /api-docs response.
+    - url: https://app.splashscore.com/v1
+      description: >-
+        Legacy host declared by the document itself. SplashScore, Inc. is
+        Mavrck's founding corporate name; the host answers the identical API
+        with the identical error envelope (verified 2026-08-12).
+- target: $
+  description: >-
+    Record what the live surface actually returns to an unauthenticated caller,
+    which the document does not state: a 403 with a proprietary {type, error}
+    body, never a 401 challenge.
+  update:
+    x-observed-unauthenticated-response:
+      status: 403
+      content_type: application/json; charset=utf-8
+      body: '{"type":"RESOURCE_FORBIDDEN_ERROR","error":"Access to this resource is forbidden."}'
+      probe: GET https://api.mavrck.co/v1/influencers
+      fetched: '2026-08-12'
+    x-observed-response-headers:
+      server: nginx/1.21.3
+      x-powered-by: Express
+      access-control-allow-origin: '*'
+      rate_limit_headers: none
+      request_id_header: none
+    x-api-evangelist-note: >-
+      This document is served without credentials at
+      https://api.mavrck.co/api-docs and describes the provider's FULL internal
+      surface, not a curated partner API: 140 operations carry an `x-access`
+      role of which 125 are `administrator`, 16 are `root` and 1 is `mvk-s2s`,
+      and 150 carry an `x-handler` naming the internal controller file. Consumers
+      should treat only the operations the provider documents in its help centre
+      as supported.
+- target: $.securityDefinitions.apiKey
+  description: >-
+    The original declares the scheme with no description. State how a key is
+    obtained, since it is not self-serve.
+  update:
+    description: >-
+      Static API key sent in the `api-key` request header. Not self-serve — keys
+      are issued by the Later Influence team via a customer's Account Manager.

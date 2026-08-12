@@ -1,0 +1,174 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Webhooks API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Webhooks
+paths:
+  /webhooks/sendgrid-events:
+    post:
+      operationId: sendgridWebhookEvents
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      parameters:
+      - in: query
+        name: token
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/SendGridEvent'
+              type: array
+        required: true
+      tags:
+      - Webhooks
+components:
+  schemas:
+    SendGridMailerEventStatus:
+      enum:
+      - account_status_change
+      - bounce
+      - click
+      - deferred
+      - delivered
+      - dropped
+      - group_resubscribe
+      - group_unsubscribe
+      - open
+      - processed
+      - spamreport
+      - unsubscribe
+      type: string
+    SendGridEvent:
+      properties:
+        messageId:
+          type: string
+        accountInvitationId:
+          type: string
+        sg_event_id:
+          type: string
+        event:
+          $ref: '#/components/schemas/SendGridMailerEventStatus'
+        timestamp:
+          type: number
+          format: double
+        ip:
+          type: string
+        useragent:
+          type: string
+        reason:
+          type: string
+        status:
+          type: string
+        email:
+          type: string
+      required:
+      - sg_event_id
+      - event
+      - timestamp
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

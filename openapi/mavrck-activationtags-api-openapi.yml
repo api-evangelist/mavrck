@@ -1,0 +1,243 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Activation Tags API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: ActivationTags
+paths:
+  /v1/activation-tags:
+    post:
+      operationId: createTag
+      responses:
+        '200':
+          description: Tag created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationTagPostResponse'
+        '400':
+          description: Missing or Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActivationTags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivationTagPostRequestBody'
+        required: true
+    get:
+      operationId: getTags
+      responses:
+        '200':
+          description: Tags retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationTagsGetResponse'
+        '400':
+          description: Missing or Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActivationTags
+      parameters:
+      - in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 15
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 0
+  /v1/activation-tags/{name}:
+    delete:
+      operationId: deleteTag
+      responses:
+        '200':
+          description: Tag deleted successfully
+        '400':
+          description: Missing or Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActivationTags
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    Pick_ActivationTag.name_:
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    ActivationTagPostResponse:
+      $ref: '#/components/schemas/Pick_ActivationTag.name_'
+    ActivationTagsGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActivationTag'
+          type: array
+        meta:
+          properties:
+            totalCount:
+              type: number
+              format: double
+            offset:
+              type: number
+              format: double
+            limit:
+              type: number
+              format: double
+          required:
+          - totalCount
+          - offset
+          - limit
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActivationTag:
+      properties:
+        communityId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: number
+          format: double
+        name:
+          type: string
+      required:
+      - communityId
+      - createdAt
+      - id
+      - name
+      type: object
+      additionalProperties: false
+    ActivationTagPostRequestBody:
+      $ref: '#/components/schemas/Pick_ActivationTag.name_'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

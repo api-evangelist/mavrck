@@ -1,0 +1,78 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://api.swaggerhub.com/apis/mavrck/workflow-stage-change-event-webhook/1.0.0
+  (published by SwaggerHub owner `mavrck`, saved verbatim alongside this file) +
+  openapi/_original/mavrck-openapi.json
+summary:
+  outbound_events: 1
+  inbound_receivers: 6
+  signature_verification: false
+  note: >-
+    Mavrck publishes exactly ONE outbound webhook contract. The `/webhooks/*`
+    paths inside the platform OpenAPI point the other way — they are endpoints
+    Mavrck EXPOSES to receive callbacks from third parties, not events Mavrck
+    emits. Both directions are catalogued here so the distinction is not lost.
+outbound:
+- name: Workflow Stage Change Event
+  description: >-
+    Notifies a subscriber when influencers are added to one of their campaigns
+    or moved from one of that campaign's workflow stages to another.
+  transport: 'HTTPS POST to a subscriber-registered URL'
+  content_type: application/json
+  contract: webhooks/mavrck-workflow-stage-change-event-webhook-openapi.json
+  asyncapi: asyncapi/mavrck-webhooks-asyncapi.yml
+  spec_created: '2021-10-04'
+  spec_modified: '2021-11-15'
+  authorization:
+    mechanism: shared static token in the request body
+    field: token
+    shape: 16-character alphanumeric string
+    hmac_signature: false
+    timestamp: false
+    replay_protection: false
+    assessment: >-
+      Weakest common webhook auth pattern. There is no signature header for the
+      subscriber to verify, so a receiver can only compare a static secret that
+      Mavrck transmits in plaintext on every delivery. Rotating it requires a
+      change in the platform UI.
+  retry_policy:
+    retries_on: ['500', '502']
+    does_not_retry_on: ['401', '403', '404', '405']
+    success: '200'
+    backoff: undocumented
+    max_attempts: undocumented
+    source: response descriptions in the provider's own published contract
+inbound:
+- path: /webhooks/later/opt-in
+  method: POST
+  spec: openapi/mavrck-laterinfluencer-api-openapi.yml
+  note: Receives opt-in callbacks from the Later platform.
+- path: /webhooks/later/update
+  method: POST
+  spec: openapi/mavrck-laterinfluencer-api-openapi.yml
+- path: /webhooks/later/opt-out
+  method: POST
+  spec: openapi/mavrck-laterinfluencer-api-openapi.yml
+- path: /webhooks/sendgrid-events
+  method: POST
+  spec: openapi/mavrck-webhooks-api-openapi.yml
+  operationId: sendgridWebhookEvents
+  note: Receives SendGrid email event callbacks.
+- path: /v1/shopify-accounts/webhooks/uninstall
+  method: POST
+  spec: openapi/mavrck-shopifyaccount-api-openapi.yml
+- path: /v1/shopify-accounts/webhooks/compliance/shop/redact
+  method: POST
+  spec: openapi/mavrck-shopifyaccount-api-openapi.yml
+  note: >-
+    Shopify mandatory GDPR compliance webhook. Siblings exist for
+    customers/redact and customers/data_request on the same prefix.
+gaps:
+- >-
+  No webhook management API. Subscriptions are configured in the platform UI —
+  there is no create/list/delete webhook operation anywhere in the 687-operation
+  platform surface, so an integration cannot provision its own receiver.
+- >-
+  Only one event type. Campaign, payment, content-approval and reward events —
+  all first-class resources in the REST surface — emit nothing.

@@ -1,0 +1,178 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Yotpo API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Yotpo
+paths:
+  /v1/yotpo-apps:
+    get:
+      operationId: getYotpoApps
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/YotpoAppResponse'
+                type: array
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Yotpo
+    post:
+      operationId: createYotpoApp
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YotpoAppResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Yotpo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/YotpoAppPostRequest'
+        required: true
+components:
+  schemas:
+    YotpoAppPostRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/YotpoAppPostRequestBody'
+      required:
+      - data
+      type: object
+    YotpoAppPostRequestBody:
+      properties:
+        secretKey:
+          type: string
+        name:
+          type: string
+        apiKey:
+          type: string
+      required:
+      - secretKey
+      - name
+      - apiKey
+      type: object
+    YotpoAppResponse:
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        secretKey:
+          type: string
+        apiKey:
+          type: string
+        id:
+          type: number
+          format: double
+      required:
+      - name
+      - createdAt
+      - secretKey
+      - apiKey
+      - id
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

@@ -1,0 +1,178 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO TikTok TTCM API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: TikTok TTCM
+paths:
+  /v1/ttcm/management/queues/purge:
+    post:
+      operationId: purgeTikTokQueue
+      responses:
+        '200':
+          description: Queue purged
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Components.Schemas.PurgeQueueResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - TikTok TTCM
+      parameters:
+      - in: query
+        name: queue
+        required: true
+        schema:
+          type: string
+          enum:
+          - media-binder
+          - media-updater
+          - creator-updater
+  /v1/ttcm/management/queues/stats:
+    get:
+      operationId: getTikTokQueueStats
+      responses:
+        '200':
+          description: Queue stats returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Components.Schemas.QueueStatsResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - TikTok TTCM
+components:
+  schemas:
+    QueueStats:
+      properties:
+        queueUrl:
+          type: string
+        approximateNumberOfMessages:
+          type: number
+          format: double
+        approximateNumberOfMessagesNotVisible:
+          type: number
+          format: double
+        approximateNumberOfMessagesDelayed:
+          type: number
+          format: double
+      required:
+      - queueUrl
+      - approximateNumberOfMessages
+      - approximateNumberOfMessagesNotVisible
+      - approximateNumberOfMessagesDelayed
+      type: object
+      additionalProperties: false
+    Components.Schemas.PurgeQueueResponse:
+      properties:
+        success:
+          type: boolean
+        queueName:
+          type: string
+        message:
+          type: string
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Components.Schemas.QueueStatsResponse:
+      properties:
+        mediaBinderQueue:
+          $ref: '#/components/schemas/QueueStats'
+        mediaUpdaterQueue:
+          $ref: '#/components/schemas/QueueStats'
+        creatorUpdaterQueue:
+          $ref: '#/components/schemas/QueueStats'
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

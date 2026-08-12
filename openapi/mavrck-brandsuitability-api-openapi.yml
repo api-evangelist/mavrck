@@ -1,0 +1,1498 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Brand Suitability API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: BrandSuitability
+paths:
+  /v1/brand-suitability/global-users:
+    get:
+      operationId: getCreatorsWithReports
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCreatorsWithReportsResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: unused for now -- TODO for admin view. *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+  /v1/brand-suitability/global-users/{globalUserId}/reports/{reportId}:
+    get:
+      operationId: getReportById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBrandSuitabilityReportResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Lightbox (polling during generation), Admin DetailView *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+    delete:
+      operationId: deleteReport
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReportResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+  /v1/brand-suitability/global-users/{globalUserId}/report:
+    get:
+      operationId: getLatestReport
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBrandSuitabilityReportResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Lightbox reports'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: campaignId
+        required: false
+        schema:
+          type: string
+  /v1/brand-suitability/global-users/{globalUserId}/reports:
+    get:
+      operationId: getReportsForCreator
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReportsForCreatorResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Admin — DetailView, ReportsSelector *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: campaignId
+        required: false
+        schema:
+          type: string
+    post:
+      operationId: generateReport
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateReportResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Lightbox — generate + refresh buttons, Admin DetailView *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateReportRequest'
+        required: true
+  /v1/brand-suitability/global-users/{globalUserId}/reports/sync:
+    post:
+      operationId: generateReportSync
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateReportResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Admin — DetailView *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateReportRequest'
+        required: true
+  /v1/brand-suitability/global-users/{globalUserId}/research/refresh:
+    put:
+      operationId: refreshCreatorResearch
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatorResearchRecord'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: unused (async version) *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: brandName
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+  /v1/brand-suitability/global-users/{globalUserId}/research/refresh/sync:
+    put:
+      operationId: refreshCreatorResearchSync
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatorResearchRecord'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Admin — DetailView, TableView *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: brandName
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+  /v1/brand-suitability/global-users/{globalUserId}/research:
+    get:
+      operationId: getCreatorResearch
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                required:
+                - data
+                type: object
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Admin — DetailView *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/brand-suitability/global-users/{globalUserId}/research/status:
+    get:
+      operationId: getCreatorResearchStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  hoursUntilStale:
+                    type:
+                    - number
+                    - 'null'
+                    format: double
+                  findingsCount:
+                    type: number
+                    format: double
+                  lastUpdated:
+                    type:
+                    - string
+                    - 'null'
+                  isStale:
+                    type: boolean
+                  exists:
+                    type: boolean
+                required:
+                - hoursUntilStale
+                - findingsCount
+                - lastUpdated
+                - isStale
+                - exists
+                type: object
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/brand-suitability/global-users/{globalUserId}/reports/{reportId}/findings/exclude:
+    put:
+      operationId: updateFindingExclusions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/CreatorResearchRecord'
+                required:
+                - data
+                type: object
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Lightbox — ResearchFindingsTable action bar *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFindingExclusionsRequest'
+        required: true
+  /v1/brand-suitability/stats:
+    get:
+      operationId: getReportStats
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportStatsResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BrandSuitability
+  /v1/brand-suitability/batches:
+    post:
+      operationId: createBatch
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBatchResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Bulk dashboard — create a batch of reports for a set of creators (explicit ids or a search query). *'
+      tags:
+      - BrandSuitability
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBatchRequest'
+        required: true
+    get:
+      operationId: listBatches
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBatchesResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Bulk dashboard — list batches for the community (cached counters; no report reads). *'
+      tags:
+      - BrandSuitability
+  /v1/brand-suitability/batches/{batchId}:
+    get:
+      operationId: getBatch
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDetailResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Bulk dashboard — batch detail: per-creator status table + derived counts. *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: batchId
+        required: true
+        schema:
+          type: string
+  /v1/brand-suitability/batches/{batchId}/creators:
+    post:
+      operationId: addBatchCreators
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCreatorsResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Frontend: Bulk dashboard — add more creators to an existing batch (R4). *'
+      tags:
+      - BrandSuitability
+      parameters:
+      - in: path
+        name: batchId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCreatorsRequest'
+        required: true
+components:
+  schemas:
+    BrandSuitabilityReport:
+      type: object
+      properties: {}
+    BrandSuitabilityReportSummary:
+      properties:
+        totalScore:
+          type: number
+          format: double
+        createdAt:
+          type: string
+        status:
+          $ref: '#/components/schemas/BrandSuitabilityReportStatus'
+        version:
+          type: string
+        communityId:
+          type: string
+        campaignId:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        reportId:
+          type: string
+      required:
+      - createdAt
+      - status
+      - version
+      - communityId
+      - campaignId
+      - globalUserId
+      - reportId
+      type: object
+    AddCreatorsRequest:
+      properties:
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - globalUserIds
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GetCreatorsWithReportsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CreatorWithReports'
+          type: array
+        meta:
+          properties:
+            hasMore:
+              type: boolean
+          required:
+          - hasMore
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+      additionalProperties: false
+    ReportStatsResponse:
+      properties:
+        totalReports:
+          type: number
+          format: double
+        totalCreators:
+          type: number
+          format: double
+        byStatus:
+          properties:
+            PROCESSING:
+              type: number
+              format: double
+            FAILED:
+              type: number
+              format: double
+            COMPLETED:
+              type: number
+              format: double
+          required:
+          - PROCESSING
+          - FAILED
+          - COMPLETED
+          type: object
+        byCampaign:
+          items:
+            properties:
+              reportCount:
+                type: number
+                format: double
+              campaignId:
+                type: string
+            required:
+            - reportCount
+            - campaignId
+            type: object
+          type: array
+        recentFailures:
+          items:
+            properties:
+              createdAt:
+                type: string
+              reason:
+                type: string
+              globalUserId:
+                type: number
+                format: double
+              reportId:
+                type: string
+            required:
+            - createdAt
+            - reason
+            - globalUserId
+            - reportId
+            type: object
+          type: array
+      required:
+      - totalReports
+      - totalCreators
+      - byStatus
+      - byCampaign
+      - recentFailures
+      type: object
+      additionalProperties: false
+    BatchReportItem:
+      properties:
+        overallAssessment:
+          type: string
+        metricRisks:
+          items:
+            $ref: '#/components/schemas/BatchMetricRisk'
+          type: array
+        failureReason:
+          type: string
+        creatorName:
+          type: string
+        dataConfidence:
+          $ref: '#/components/schemas/DataScoreLevelDTO'
+        totalRiskScore:
+          type: number
+          format: double
+        totalScore:
+          type: number
+          format: double
+        progress:
+          $ref: '#/components/schemas/BrandSuitabilityReportProgress'
+        status:
+          $ref: '#/components/schemas/BrandSuitabilityReportStatus'
+        batchId:
+          type: string
+        reportId:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+      required:
+      - status
+      - batchId
+      - reportId
+      - globalUserId
+      type: object
+      additionalProperties: false
+    GenerateReportRequest:
+      properties:
+        campaignId:
+          type: number
+          format: double
+        assessments:
+          items:
+            type: string
+          type: array
+        brandName:
+          type: string
+      type: object
+      additionalProperties: false
+    CreatorResearchRecord:
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        findingsVersion:
+          type: string
+        findings:
+          items:
+            $ref: '#/components/schemas/StoredFinding'
+          type: array
+        metadata:
+          properties:
+            researchModels:
+              items:
+                type: string
+              type: array
+            totalSourcesAnalyzed:
+              type: number
+              format: double
+            queriesExecuted:
+              items:
+                type: string
+              type: array
+            researchDuration:
+              type: number
+              format: double
+          required:
+          - researchModels
+          - totalSourcesAnalyzed
+          - queriesExecuted
+          - researchDuration
+          type: object
+        version:
+          type: number
+          format: double
+      required:
+      - globalUserId
+      - created_at
+      - updated_at
+      - findingsVersion
+      - findings
+      - metadata
+      type: object
+      additionalProperties: false
+    GetBrandSuitabilityReportResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/BrandSuitabilityReport'
+        status:
+          $ref: '#/components/schemas/BrandSuitabilityReportStatus'
+      required:
+      - status
+      type: object
+      additionalProperties: false
+    DataScoreLevelDTO:
+      description: 'Brand Suitability LLM/assessment output DTOs.
+
+        `v0.3 UI:` notes track field consumption by the v0.3 report view. "unused" = not read by v0.3 (may be used by legacy/admin). Audited 2026-06-22.'
+      enum:
+      - HIGH
+      - MEDIUM
+      - LOW
+      - NONE
+      type: string
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    AddCreatorsResponse:
+      properties:
+        batchId:
+          type: string
+      required:
+      - batchId
+      type: object
+      additionalProperties: false
+    DeleteReportResponse:
+      properties:
+        success:
+          type: boolean
+        deletedReportId:
+          type: string
+      required:
+      - success
+      - deletedReportId
+      type: object
+      additionalProperties: false
+    BrandSuitabilityReportProgress:
+      enum:
+      - PENDING
+      - RESEARCHING
+      - ASSESSING
+      type: string
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CreateBatchResponse:
+      properties:
+        batchId:
+          type: string
+        status:
+          $ref: '#/components/schemas/BatchStatus'
+      required:
+      - batchId
+      - status
+      type: object
+      additionalProperties: false
+    ListBatchesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BatchListItem'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    CreatorWithReports:
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        latestReportDate:
+          type: string
+        creatorName:
+          type: string
+      required:
+      - globalUserId
+      - latestReportDate
+      type: object
+      additionalProperties: false
+    BatchSummaryCounts:
+      properties:
+        total:
+          type: number
+          format: double
+        completed:
+          type: number
+          format: double
+        failed:
+          type: number
+          format: double
+        pending:
+          type: number
+          format: double
+      required:
+      - total
+      - completed
+      - failed
+      - pending
+      type: object
+      additionalProperties: false
+    StoredFinding:
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        detailedSummary:
+          type: string
+        keyQuotes:
+          items:
+            type: string
+          type: array
+        sourceDate:
+          type:
+          - string
+          - 'null'
+        dateFound:
+          type: string
+        sentiment:
+          type: string
+          enum:
+          - negative
+          - neutral
+          - positive
+          - ''
+        credibility:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+        relevance:
+          type: number
+          enum:
+          - 0
+          - 1
+          - 2
+        extractedAttributes:
+          $ref: '#/components/schemas/ExtractedAttributes'
+        excluded:
+          type: boolean
+      type: object
+      additionalProperties: false
+    CreateBatchRequest:
+      properties:
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+        queryFilter:
+          additionalProperties: true
+        actionGroupId:
+          type: number
+          format: double
+        campaignId:
+          type: number
+          format: double
+        brandName:
+          type: string
+        assessments:
+          items:
+            type: string
+          type: array
+        label:
+          type: string
+      type: object
+      additionalProperties: false
+    BatchDetailResponse:
+      properties:
+        batchId:
+          type: string
+        status:
+          $ref: '#/components/schemas/BatchStatus'
+        label:
+          type: string
+        communityName:
+          type: string
+        campaignId:
+          type: number
+          format: double
+        campaignTitle:
+          type: string
+        brandName:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        summary:
+          $ref: '#/components/schemas/BatchSummaryCounts'
+        items:
+          items:
+            $ref: '#/components/schemas/BatchReportItem'
+          type: array
+      required:
+      - batchId
+      - status
+      - createdAt
+      - updatedAt
+      - summary
+      - items
+      type: object
+      additionalProperties: false
+    BatchMetricRisk:
+      properties:
+        summary:
+          type: string
+        score:
+          type: number
+          format: double
+        riskScore:
+          type: number
+          format: double
+        metricName:
+          type: string
+        metric:
+          type: string
+      required:
+      - summary
+      - riskScore
+      - metricName
+      - metric
+      type: object
+    BatchListItem:
+      properties:
+        batchId:
+          type: string
+        status:
+          $ref: '#/components/schemas/BatchStatus'
+        label:
+          type: string
+        communityName:
+          type: string
+        campaignId:
+          type: number
+          format: double
+        campaignTitle:
+          type: string
+        brandName:
+          type: string
+        total:
+          type: number
+          format: double
+        completed:
+          type: number
+          format: double
+        failed:
+          type: number
+          format: double
+        skipped:
+          type: number
+          format: double
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - batchId
+      - status
+      - total
+      - completed
+      - failed
+      - skipped
+      - createdAt
+      - updatedAt
+      type: object
+      additionalProperties: false
+    FindingExclusion:
+      properties:
+        id:
+          type: string
+        excluded:
+          type: boolean
+      required:
+      - id
+      - excluded
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    UpdateFindingExclusionsRequest:
+      properties:
+        findings:
+          items:
+            $ref: '#/components/schemas/FindingExclusion'
+          type: array
+      required:
+      - findings
+      type: object
+      additionalProperties: false
+    BatchStatus:
+      enum:
+      - IN_PROGRESS
+      - COMPLETED
+      - PARTIAL_FAILURE
+      - FAILED
+      type: string
+    GenerateReportResponse:
+      properties:
+        reportId:
+          type: string
+        status:
+          $ref: '#/components/schemas/BrandSuitabilityReportStatus'
+        data:
+          $ref: '#/components/schemas/BrandSuitabilityReport'
+      required:
+      - reportId
+      - status
+      type: object
+      additionalProperties: false
+    ExtractedAttributes:
+      properties:
+        names:
+          items:
+            type: string
+          type: array
+        handles:
+          items:
+            type: string
+          type: array
+        urls:
+          items:
+            type: string
+          type: array
+        profession:
+          type:
+          - string
+          - 'null'
+        location:
+          type:
+          - string
+          - 'null'
+        topics:
+          items:
+            type: string
+          type: array
+      required:
+      - names
+      - handles
+      - urls
+      - profession
+      - location
+      - topics
+      type: object
+      additionalProperties: false
+    GetReportsForCreatorResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BrandSuitabilityReportSummary'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    BrandSuitabilityReportStatus:
+      enum:
+      - COMPLETED
+      - PROCESSING
+      - FAILED
+      - NOT_FOUND
+      type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

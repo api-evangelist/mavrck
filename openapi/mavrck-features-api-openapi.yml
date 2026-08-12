@@ -1,0 +1,278 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Features API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Features
+paths:
+  /v1/features:
+    get:
+      operationId: getFeatures
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFeaturesResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Features
+  /v1/features/{featureId}:
+    get:
+      operationId: getFeatureById
+      responses:
+        '200':
+          description: Feature retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFeatureResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Features
+      parameters:
+      - in: path
+        name: featureId
+        required: true
+        schema:
+          type: string
+    patch:
+      operationId: updateFeature
+      responses:
+        '200':
+          description: Feature updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFeatureResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Features
+      parameters:
+      - in: path
+        name: featureId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFeatureRequest'
+        required: true
+components:
+  schemas:
+    InferAttributes_Features_:
+      properties:
+        featureId:
+          type: string
+        label:
+          type: string
+        defaultState:
+          type: object
+        public:
+          type: object
+      type: object
+      description: 'Utility type to extract Attributes of a given Model class.
+
+
+        It returns all instance properties defined in the Model, except:
+
+        - those inherited from Model (intermediate inheritance works),
+
+        - the ones whose type is a function,
+
+        - the ones manually excluded using the second parameter.
+
+        - the ones branded using {@link NonAttribute}
+
+
+        It cannot detect whether something is a getter or not, you should use the `Excluded`
+
+        parameter to exclude getter & setters from the attribute list.'
+    UpdateFeatureResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/InferAttributes_Features_'
+      required:
+      - data
+      type: object
+    GetFeaturesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InferAttributes_Features_'
+          type: array
+        meta:
+          properties:
+            totalCount:
+              type: number
+              format: double
+          required:
+          - totalCount
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    UpdateFeatureRequest:
+      properties:
+        public:
+          type: boolean
+        defaultState:
+          type: boolean
+        label:
+          type: string
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GetFeatureResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/InferAttributes_Features_'
+      required:
+      - data
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

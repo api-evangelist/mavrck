@@ -1,0 +1,233 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Marketer Notifications API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: MarketerNotifications
+paths:
+  /v1/notification-groups:
+    put:
+      operationId: updateNotificationGroups
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - MarketerNotifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNotificationBodyDefinition'
+        required: true
+  /v1/notification-preferences/{actionGroupId}:
+    put:
+      operationId: setNotificationPreferences
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - MarketerNotifications
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetNotificationPreferenceBodyDefinition'
+        required: true
+components:
+  schemas:
+    UpdateNotificationBodyDefinition:
+      properties:
+        data:
+          $ref: '#/components/schemas/NotificationUpdateFields'
+        params:
+          $ref: '#/components/schemas/NotificationQueryFields'
+      required:
+      - data
+      - params
+      type: object
+    NotificationPreferenceFlags:
+      properties:
+        emailTimeframe:
+          $ref: '#/components/schemas/EmailNotificationTimeframe'
+        emailConceptNotifications:
+          type: boolean
+        emailFailedPaymentNotifications:
+          type: boolean
+        emailDraftNotifications:
+          type: boolean
+        emailApplicationNotifications:
+          type: boolean
+        emailConfirmationNotifications:
+          type: boolean
+        emailContentNotifications:
+          type: boolean
+        emailMessageNotifications:
+          type: boolean
+        showConceptNotifications:
+          type: boolean
+        showFailedPaymentNotifications:
+          type: boolean
+        showDraftNotifications:
+          type: boolean
+        showApplicationNotifications:
+          type: boolean
+        showConfirmationNotifications:
+          type: boolean
+        showContentNotifications:
+          type: boolean
+        showMessageNotifications:
+          type: boolean
+      required:
+      - emailTimeframe
+      - emailFailedPaymentNotifications
+      - emailDraftNotifications
+      - emailApplicationNotifications
+      - emailConfirmationNotifications
+      - emailContentNotifications
+      - emailMessageNotifications
+      - showFailedPaymentNotifications
+      - showDraftNotifications
+      - showApplicationNotifications
+      - showConfirmationNotifications
+      - showContentNotifications
+      - showMessageNotifications
+      type: object
+      description: 'tsoa derives request validation from this type, so a non-optional property is a **required** body
+
+        field and a client that omits it gets a 400 `ValidateError`.
+
+
+        That is why the two concept flags are optional and the other twelve are not: later-influence sends
+
+        a fixed payload built from its own defaults object, so making these required would reject every
+
+        preference save from any client older than CMP-1542 — and sapi and later-influence deploy on
+
+        independent cadences. Leaving them out is well defined rather than lossy: the columns are nullable
+
+        with defaults, and `NotificationPreferencesService.upsert` spreads this object into the statement,
+
+        so an absent key keeps the column''s default on insert and its current value on update. An old
+
+        client cannot clobber a preference it does not know about.
+
+
+        Do not make these required until every client sends them.'
+    NotificationQueryFields:
+      properties:
+        notificationTypes:
+          items:
+            $ref: '#/components/schemas/NotificationType'
+          type: array
+        actionGroupId:
+          type: number
+          format: double
+        notificationGroupId:
+          type: string
+      type: object
+    EmailNotificationTimeframe:
+      enum:
+      - TWO_H
+      - FOUR_H
+      - DAILY
+      type: string
+    NotificationUpdateFields:
+      properties:
+        windowIsClosed:
+          type: boolean
+        isUnread:
+          type: boolean
+      type: object
+    NotificationType:
+      enum:
+      - MESSAGE
+      - DRAFT
+      - CONTENT
+      - APPLICATION
+      - CONFIRMATION
+      - FAILED_PAYMENT
+      type: string
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SetNotificationPreferenceBodyDefinition:
+      properties:
+        actionGroupId:
+          type: string
+        data:
+          $ref: '#/components/schemas/NotificationPreferenceFlags'
+      required:
+      - actionGroupId
+      - data
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

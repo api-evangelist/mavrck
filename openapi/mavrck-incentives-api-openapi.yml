@@ -1,0 +1,1353 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Incentives API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Incentives
+paths:
+  /incentives/{incentiveId}/incentive-claims:
+    get:
+      x-handler: incentive_claims/incentive_claim_controller.js
+      tags:
+      - Incentives
+      x-access:
+      - administrator
+      - root
+      operationId: getIncentiveClaims
+      summary: Fetch all of the claims for this incentive.
+      parameters:
+      - name: incentiveId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: excludeWinningClaims
+        in: query
+        required: false
+        description: If the IncentiveClaim has an associated IncentiveWin, then it will not appear in the result set.
+        schema:
+          type: boolean
+      - name: excludeWinningInfluencerClaims
+        in: query
+        required: false
+        description: If an Influencer has an IncentiveWin, then none of their IncentiveClaims will appear in the result set.
+        schema:
+          type: boolean
+      - name: uniqueInfluencers
+        in: query
+        required: false
+        description: Only show one claim per influencer in the result set
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/orderByParam'
+      responses:
+        '200':
+          description: An array of incentive claims.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IncentiveClaimDeprecated'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API key or resource not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /incentives/{incentiveId}/winners:
+    get:
+      x-handler: incentives/incentive_winners_controller.js
+      tags:
+      - Incentives
+      x-access:
+      - administrator
+      - root
+      operationId: getWinners
+      summary: Fetch the winners for this incentive.
+      parameters:
+      - name: incentiveId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: disqualified
+        in: query
+        description: Filter winners based on whether they have been disqualified from this incentive or not.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: An array of incentive winners.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                  data:
+                    items:
+                      $ref: '#/components/schemas/IncentiveWinner'
+                    type: array
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key or resource forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource non-existent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      x-handler: incentives/incentive_winners_controller.js
+      tags:
+      - Incentives
+      operationId: selectWinnersRandom
+      x-access:
+      - administrator
+      - root
+      summary: If the incentive is of a type where there are fewer winners than claims, this will determine the winners.
+      parameters:
+      - name: incentiveId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Empty object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          description: '''VALIDATION_ERROR'', either ''winners_already_selected'', ''action_group_not_expired'', or ''incentive_not_sweepstakes''.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key or resource forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource non-existent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                selectionMethod:
+                  type: string
+                  description: Automatic or manual selection. Defaults to automatic if neither is specified.
+                incentiveClaimIds:
+                  type: array
+                  items:
+                    type: integer
+                excludeWinnersSince:
+                  type:
+                  - string
+                  - boolean
+                  format: date-time
+                  description: Filter winners based on whether they have recently won before since a given date-time.
+  /incentives/{incentiveId}/winners/{id}/disqualification:
+    put:
+      x-handler: incentives/incentive_winner_disqualification_controller.js
+      tags:
+      - Incentives
+      operationId: disqualifyUser
+      x-access:
+      - administrator
+      - root
+      summary: Disqualify an incentive winner.
+      parameters:
+      - name: incentiveId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Incentive winner successfully disqualified.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          description: Incentive winner cannot be disqualified. Occurs if 'reward_already_fulfilled'.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: API Key invalid or access denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Incentive or winner not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                disqualificationReason:
+                  type: string
+                  description: The reason why the influencer is being disqualified as an incentive winner.
+  /incentives/{incentiveId}/winners/{id}/requalification:
+    put:
+      x-handler: incentives/incentive_winner_requalification_controller.js
+      tags:
+      - Incentives
+      operationId: requalifyUser
+      x-access:
+      - administrator
+      - root
+      summary: Requalify a disqualified incentive winner.
+      parameters:
+      - name: incentiveId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Incentive winner successfully requalified.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          description: Incentive winner cannot be requalified. Occurs when no allocated winning slots remain.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: API Key invalid or access denied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Incentive or winner not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/termsandconditions/template:
+    get:
+      operationId: getTermsAndConditionsTemplate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermsAndConditionsTemplate'
+        '400':
+          description: Invalid Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Incentive not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Incentives
+      parameters:
+      - in: query
+        name: type
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: unlockType
+        required: true
+        schema:
+          type: string
+  /v1/incentives/{id}/unlock:
+    post:
+      operationId: unlockIncentive
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Incentives
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncentiveUnlockPostBody'
+        required: true
+  /v1/incentives:
+    get:
+      operationId: getAll
+      responses:
+        '200':
+          description: A list of incentives
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncentivesGetResponse'
+        '400':
+          description: Invalid/missing parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Incentives
+    post:
+      operationId: createIncentive
+      responses:
+        '200':
+          description: Incentive URI
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncentiveURI'
+        '400':
+          description: Invalid/missing parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Incentives
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIncentivePostBody'
+        required: true
+  /v1/incentives/{id}:
+    get:
+      operationId: getById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid/missing parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Incentives
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+    put:
+      operationId: updateIncentive
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Invalid/missing parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Incentives
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIncentivePutBody'
+        required: true
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    BonusTier:
+      description: 'Swagger 2 representation of a tiered bonus entry.
+
+
+        `upperBound` is required for `BOUNDED` tiers and must be omitted for
+
+        `OPEN_ENDED` tiers. The bonus-tier validator enforces that conditional rule.
+
+
+        Validation rules:
+
+        - `bonusTiers` may contain at most 5 tiers.
+
+        - Tiers must be sorted by `lowerBound`.
+
+        - Adjacent tiers must be contiguous.
+
+        - The final tier must be `OPEN_ENDED`.
+
+        - `bonusTierCurrencyCode` is required when `bonusTiers` is non-empty.'
+      properties:
+        type:
+          type: string
+          enum:
+          - BOUNDED
+          - OPEN_ENDED
+        lowerBound:
+          type: number
+          format: double
+          description: Inclusive lower conversion/order bound for this payout tier. Must be non-negative.
+        upperBound:
+          type: number
+          format: double
+          description: Exclusive upper conversion/order bound for a `BOUNDED` tier.
+        bonusAmount:
+          type: number
+          format: double
+          description: Bonus payout amount in `bonusTierCurrencyCode`. Must be positive.
+      required:
+      - type
+      - lowerBound
+      - bonusAmount
+      type: object
+      additionalProperties: false
+    IncentivesGetResponse:
+      properties:
+        meta:
+          properties:
+            totalCount:
+              type: number
+              format: double
+          required:
+          - totalCount
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/Incentive'
+          type: array
+      required:
+      - meta
+      - data
+      type: object
+      additionalProperties: false
+    UpdateIncentivePutBody:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        actionGroupStatus:
+          type: string
+        approximateRetailValue:
+          type: number
+          format: double
+        cashPaymentAppId:
+          type:
+          - number
+          - 'null'
+          format: double
+        claimedDynamicPromoCodes:
+          type: number
+          format: double
+        claimedIncentivesCount:
+          type: number
+          format: double
+        claimedIncentivesInfluencerCount:
+          type: number
+          format: double
+        cost:
+          type: number
+          format: double
+        disqualifiedWinnersCount:
+          type: number
+          format: double
+        incentiveTitle:
+          type: string
+        incentiveStatus:
+          type: string
+        multipleClaims:
+          type: boolean
+        quantity:
+          type: number
+          format: double
+        rewardId:
+          type: string
+        rewardWinType:
+          type: string
+        totalDynamicPromoCodes:
+          type: number
+          format: double
+        type:
+          type: string
+        unlockEvent:
+          $ref: '#/components/schemas/IncentiveUnlockEvent'
+        unlockType:
+          type: string
+        winnersSelectedCount:
+          type: number
+          format: double
+        endDate:
+          type:
+          - string
+          - 'null'
+        startDate:
+          type:
+          - string
+          - 'null'
+        costCurrencyCode:
+          type: string
+        valueCurrencyCode:
+          type: string
+        dynamicPromoCodesList:
+          type: string
+        dynamicPromoCodesToAdd:
+          items:
+            type: string
+          type: array
+        cashPaymentAppProvider:
+          type:
+          - string
+          - 'null'
+        giftCardEmailTemplateId:
+          type:
+          - string
+          - 'null'
+        giftCardOptionId:
+          type:
+          - number
+          - 'null'
+          format: double
+        shopify:
+          type: object
+        bonusTierCurrencyCode:
+          $ref: '#/components/schemas/NullableBonusTierCurrencyCode'
+          description: Currency code used for all tiered bonus amounts. When updated, `bonusTiers` must also be provided.
+        bonusTiers:
+          items:
+            $ref: '#/components/schemas/BonusTier'
+          type:
+          - array
+          - 'null'
+          description: Tiered bonus payout ladder. Must be sorted, contiguous, contain at most 5 tiers, and end with one `OPEN_ENDED` tier.
+      required:
+      - valueCurrencyCode
+      type: object
+      additionalProperties: false
+    CreateIncentivePostBody:
+      properties:
+        incentiveTitle:
+          type: string
+        incentiveStatus:
+          type: string
+        quantity:
+          type: number
+          format: double
+        image:
+          type: string
+        multipleClaims:
+          type: boolean
+        termsAndConditions:
+          $ref: '#/components/schemas/IncentiveTermsAndConditions'
+        dynamicPromoCodesToAdd:
+          items:
+            type: string
+          type: array
+        rewardWinType:
+          $ref: '#/components/schemas/DBRewardWinType'
+        approximateRetailValue:
+          type: number
+          format: double
+        cost:
+          type: number
+          format: double
+        valueCurrencyCode:
+          $ref: '#/components/schemas/MavrckSupportedCurrencies'
+        type:
+          type: string
+        unlockEvent:
+          $ref: '#/components/schemas/IncentiveUnlockEvent'
+        unlockType:
+          type: string
+        cashPaymentAppId:
+          type:
+          - number
+          - 'null'
+          format: double
+        cashPaymentAppProvider:
+          type:
+          - string
+          - 'null'
+        giftCardEmailTemplateId:
+          type:
+          - string
+          - 'null'
+        giftCardOptionId:
+          type:
+          - number
+          - 'null'
+          format: double
+        costCurrencyCode:
+          type: object
+        bonusTierCurrencyCode:
+          $ref: '#/components/schemas/NullableBonusTierCurrencyCode'
+          description: Currency code used for all tiered bonus amounts. Required when `bonusTiers` is non-empty.
+        bonusTiers:
+          items:
+            $ref: '#/components/schemas/BonusTier'
+          type:
+          - array
+          - 'null'
+          description: Tiered bonus payout ladder. Must be sorted, contiguous, contain at most 5 tiers, and end with one `OPEN_ENDED` tier.
+        shopify:
+          type: object
+      required:
+      - incentiveTitle
+      - quantity
+      type: object
+      additionalProperties: false
+    IncentiveUnlockPostBody:
+      properties:
+        claims:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    IncentiveClaimDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the incentive claim.
+        membershipId:
+          type: integer
+          x-access:
+          - administrator
+          - root
+        globalUserId:
+          type: integer
+          x-access:
+          - administrator
+          - root
+        promocode:
+          type: string
+          description: The issuance of a promo code. This is derived either from a static promo code configured as a property of the incentive resource or dynamically from a uploaded list of codes.
+        createdAt:
+          format: date-time
+          type: string
+        profilePictureLink:
+          type: string
+          x-access:
+          - administrator
+          - root
+        firstName:
+          type: string
+          x-access:
+          - administrator
+          - root
+        lastName:
+          type: string
+          x-access:
+          - administrator
+          - root
+        email:
+          type: string
+          x-access:
+          - administrator
+          - root
+        address:
+          type: string
+          x-access:
+          - administrator
+          - root
+        age:
+          type: integer
+          x-access:
+          - administrator
+          - root
+        gender:
+          type: string
+          x-access:
+          - administrator
+          - root
+        facebookFriendCount:
+          type: integer
+          x-access:
+          - administrator
+          - root
+        mostRecentRewardFulfilledAt:
+          type: string
+          format: date-time
+          x-access:
+          - administrator
+          - root
+        engagementCount:
+          type: integer
+        clickCount:
+          type: integer
+        conversionCount:
+          type: integer
+    IncentiveURI:
+      properties:
+        id:
+          type: number
+          format: double
+      required:
+      - id
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    IncentiveWinner:
+      type: object
+      required:
+      - id
+      - isDisqualified
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for an incentive win.
+        winnerGlobalUserId:
+          type: integer
+        winnerMembershipId:
+          type: integer
+        winnerProfilePictureLink:
+          type: string
+        winnerFirstName:
+          type: string
+        winnerLastName:
+          type: string
+        winnerEmail:
+          type: string
+        winnerAddress:
+          type: string
+        winnerAge:
+          type: integer
+        winnerGender:
+          type: string
+        winnerFacebookFriendCount:
+          type: integer
+          description: The friend count of the winner's Facebook account, provided to help identify and disqualify fake profiles.
+        winnerLastRewardWonTitle:
+          type: string
+          description: If this influencer has had one or more rewards fulfilled in the past, this gives the title of the reward most recently fulfilled.
+        winnerLastRewardFulfilledAt:
+          type: string
+          format: date-time
+          description: If this influencer has had one or more rewards fulfilled in the past, this gives the date & time in which the most recent fulfillment occurred.
+        isDisqualified:
+          type: boolean
+          description: Indicates whether this incentive winner has been disqualified.
+        disqualificationReason:
+          type: string
+          description: If a incentive winner has been disqualified, this is the reason why the disqualification occurred.
+        rewardIsFulfilled:
+          type: boolean
+          description: Indicates whether the reward win has been fulfilled. An incentive winner cannot be disqualified if his/her reward has already been fulfilled.
+    IncentiveUnlockEvent:
+      type: string
+      enum:
+      - acceptance
+      - completion
+      - pending_shipment
+      - pending_payment
+    TermsAndConditionsTemplate:
+      properties:
+        customParams:
+          items:
+            type: string
+          type: array
+        template:
+          type: string
+      required:
+      - customParams
+      - template
+      type: object
+    DBRewardWinType:
+      enum:
+      - OTHER
+      - CASH
+      - PRODUCT
+      - PROMO_CODE
+      - GIFT_CARD
+      - SHOPIFY_DISCOUNT
+      type: string
+    MavrckSupportedCurrencies:
+      type: object
+    IncentiveTermsAndConditions:
+      properties:
+        params:
+          additionalProperties: false
+          type: object
+        preview:
+          type: string
+        template:
+          type: string
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Incentive:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        actionGroupStatus:
+          type: string
+        allocatedWinnersCount:
+          type: number
+          format: double
+        approximateRetailValue:
+          type: number
+          format: double
+        cashPaymentAppId:
+          type: number
+          format: double
+        cashPaymentAppProvider:
+          type:
+          - string
+          - 'null'
+        claimedDynamicPromoCodes:
+          type: number
+          format: double
+        claimedIncentivesCount:
+          type: number
+          format: double
+        claimedIncentivesInfluencerCount:
+          type: number
+          format: double
+        claims:
+          items:
+            $ref: '#/components/schemas/IncentiveClaim'
+          type: array
+        contestMetric:
+          type: string
+        cost:
+          type: number
+          format: double
+        disqualifiedWinnersCount:
+          type: number
+          format: double
+        endDate:
+          type:
+          - string
+          - 'null'
+        exclusiveLinkCta:
+          type: string
+        exclusiveLinkUrl:
+          type: string
+        giftCardEmailTemplateId:
+          type: string
+        giftCardOptionId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        incentiveDescription:
+          type: string
+        incentiveStatus:
+          type: string
+        incentiveTitle:
+          type: string
+        multipleClaims:
+          type: boolean
+        numberPointsRequired:
+          type: number
+          format: double
+        printableCoupon:
+          type: string
+        promocode:
+          type: string
+        promocodeTermsAndConditions:
+          type: string
+        quantity:
+          type: number
+          format: double
+        rewardId:
+          type: string
+        rewardWinType:
+          type: string
+        startDate:
+          type:
+          - string
+          - 'null'
+        sweepsRules:
+          type: string
+        sweepstakesUrl:
+          type: string
+        sweepstakesWinnersQty:
+          type: number
+          format: double
+        termsAndConditions:
+          $ref: '#/components/schemas/IncentiveTermsAndConditions'
+        totalDynamicPromoCodes:
+          type: number
+          format: double
+        type:
+          type: string
+        unlockEvent:
+          $ref: '#/components/schemas/IncentiveUnlockEvent'
+        unlockType:
+          type: string
+        winnerSelectionMethod:
+          type: string
+        winnersSelectedCount:
+          type: number
+          format: double
+        valueCurrencyCode:
+          $ref: '#/components/schemas/MavrckSupportedCurrencies'
+        costCurrencyCode:
+          $ref: '#/components/schemas/MavrckSupportedCurrencies'
+        bonusTierCurrencyCode:
+          $ref: '#/components/schemas/NullableBonusTierCurrencyCode'
+          description: Currency code used for all tiered bonus amounts. Required when `bonusTiers` is non-empty.
+        bonusTiers:
+          items:
+            $ref: '#/components/schemas/BonusTier'
+          type:
+          - array
+          - 'null'
+          description: Tiered bonus payout ladder. Must be sorted, contiguous, contain at most 5 tiers, and end with one `OPEN_ENDED` tier.
+        discountCodeId:
+          type: string
+        shippingCodeId:
+          type: string
+        couponActivation:
+          type: string
+      type: object
+      additionalProperties: false
+    NullableBonusTierCurrencyCode:
+      type:
+      - string
+      - 'null'
+      enum:
+      - USD
+      - EUR
+      - GBP
+      - AUD
+      - CAD
+      - null
+    IncentiveClaim:
+      properties:
+        address:
+          type: string
+        age:
+          type: number
+          format: double
+        clickCount:
+          type: number
+          format: double
+        conversionCount:
+          type: number
+          format: double
+        createdAt:
+          type: string
+        email:
+          type: string
+        engagementCount:
+          type: number
+          format: double
+        facebookFriendCount:
+          type: number
+          format: double
+        firstName:
+          type: string
+        gender:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        lastName:
+          type: string
+        membershipId:
+          type: number
+          format: double
+        mostRecentRewardFulfilledAt:
+          type: string
+        profilePictureLink:
+          type: string
+        promocode:
+          type: string
+      type: object
+      additionalProperties: false
+    IdObject:
+      properties:
+        id:
+          type: number
+          format: double
+      required:
+      - id
+      type: object
+      additionalProperties: false
+    EmptyObject:
+      type: object
+      properties: {}
+  parameters:
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
+      schema:
+        type: integer
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
+      schema:
+        type: integer
+    orderByParam:
+      in: query
+      description: Attribute to order by.
+      name: orderBy
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

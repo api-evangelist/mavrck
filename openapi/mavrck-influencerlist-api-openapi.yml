@@ -1,0 +1,206 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Influencer List API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: InfluencerList
+paths:
+  /v1/influencers/performance-list:
+    get:
+      operationId: getInfluencerPerformanceList
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInfluencerPerformanceListResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - InfluencerList
+      parameters:
+      - in: query
+        name: orderBy
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: date
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+components:
+  schemas:
+    GetInfluencerPerformanceListData:
+      properties:
+        zip:
+          type: string
+        currentPointsBalance:
+          type: number
+          format: double
+        totalPoints:
+          type: number
+          format: double
+        street:
+          type: string
+        state:
+          type: string
+        profilePicture:
+          type: string
+        posts:
+          type: number
+          format: double
+        phone:
+          type: string
+        membershipId:
+          type: number
+          format: double
+        lastName:
+          type: string
+        impressions:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+        gender:
+          type: string
+        fullName:
+          type: string
+        firstName:
+          type: string
+        engagementsPerPost:
+          type: number
+          format: double
+        engagements:
+          type: number
+          format: double
+        email:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        birthday:
+          type: string
+        apt:
+          type: string
+        age:
+          type: number
+          format: double
+        activations:
+          type: number
+          format: double
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GetInfluencerPerformanceListResponse:
+      properties:
+        meta:
+          properties:
+            offset:
+              type: number
+              format: double
+            limit:
+              type: number
+              format: double
+            totalCount:
+              type: number
+              format: double
+          required:
+          - totalCount
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/GetInfluencerPerformanceListData'
+          type: array
+      required:
+      - meta
+      - data
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

@@ -1,0 +1,927 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO List Member Deliverables API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: ListMemberDeliverables
+paths:
+  /v1/lists/{listId}/list-member-deliverables:
+    post:
+      operationId: createListMemberDeliverable
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMemberDeliverable'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberDeliverables
+      parameters:
+      - in: path
+        name: listId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMemberDeliverablePostRequest'
+        required: true
+    get:
+      operationId: getListMemberDeliverables
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMemberDeliverableGetResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberDeliverables
+      parameters:
+      - in: path
+        name: listId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: listMemberId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: contentType
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: listCustomStatusId
+        required: false
+        schema:
+          type: number
+          format: double
+  /v1/lists/{listId}/list-member-deliverables/bulk-assign:
+    post:
+      operationId: bulkAssignDeliverables
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMemberDeliverableBulkAssignPostResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberDeliverables
+      parameters:
+      - in: path
+        name: listId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMemberDeliverableBulkAssignPostRequest'
+        required: true
+  /v1/lists/{listId}/list-member-deliverables/bulk-assign-summary:
+    post:
+      operationId: queryBulkAssignSummary
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMemberDeliverableBulkAssignSummaryPostResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberDeliverables
+      parameters:
+      - in: path
+        name: listId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMemberDeliverableBulkAssignSummaryPostRequest'
+        required: true
+  /v1/lists/{listId}/list-member-deliverables/{listMemberDeliverableId}:
+    put:
+      operationId: updateListMemberDeliverable
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberDeliverables
+      parameters:
+      - in: path
+        name: listId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: listMemberDeliverableId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMemberDeliverablePutRequest'
+        required: true
+    delete:
+      operationId: deleteListMemberDeliverable
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberDeliverables
+      parameters:
+      - in: path
+        name: listId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: listMemberDeliverableId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/lists/{listId}/list-member-deliverables/summary:
+    get:
+      operationId: getListMemberDeliverablesSummary
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMemberDeliverablesSummaryGetResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberDeliverables
+      parameters:
+      - in: path
+        name: listId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: listCustomStatusId
+        required: false
+        schema:
+          type: number
+          format: double
+components:
+  schemas:
+    ListMemberDeliverablePutRequest:
+      properties:
+        count:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+        listMemberDeliverableId:
+          type: number
+          format: double
+      required:
+      - count
+      - listId
+      - listMemberDeliverableId
+      type: object
+      additionalProperties: false
+    ListMemberDeliverableGetResponse:
+      properties:
+        deliverables:
+          items:
+            $ref: '#/components/schemas/ListMemberDeliverable'
+          type: array
+      required:
+      - deliverables
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ListMemberDeliverablePostRequest:
+      properties:
+        count:
+          type: number
+          format: double
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
+        listId:
+          type: number
+          format: double
+        listMemberId:
+          type: number
+          format: double
+      required:
+      - count
+      - contentType
+      - listId
+      - listMemberId
+      type: object
+      additionalProperties: false
+    ListMemberDeliverableBulkAssignPostRequest:
+      properties:
+        deliverables:
+          items:
+            properties:
+              contentType:
+                $ref: '#/components/schemas/NetworkSlug'
+              count:
+                type: number
+                format: double
+            required:
+            - contentType
+            - count
+            type: object
+          type: array
+        listId:
+          type: number
+          format: double
+        queryFilter:
+          additionalProperties: true
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - deliverables
+      - listId
+      type: object
+      additionalProperties: false
+    ListMemberDeliverableBulkAssignSummaryPostResponse:
+      properties:
+        summary:
+          properties:
+            youtube_shorts:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            youtube_video:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            video:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            twitter:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            twitch_stream:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            tiktok:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            snapchat_story:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            pinterest:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            linkedin:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            instagram_story:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            instagram_reel:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            instagram:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            image:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            facebook_reel:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            facebook_live:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            facebook_group:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            facebook:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+            blog:
+              properties:
+                listMemberIds:
+                  items:
+                    type: number
+                    format: double
+                  type: array
+                count:
+                  type: number
+                  format: double
+              required:
+              - listMemberIds
+              - count
+              type: object
+          required:
+          - youtube_shorts
+          - youtube_video
+          - video
+          - twitter
+          - twitch_stream
+          - tiktok
+          - snapchat_story
+          - pinterest
+          - linkedin
+          - instagram_story
+          - instagram_reel
+          - instagram
+          - image
+          - facebook_reel
+          - facebook_live
+          - facebook_group
+          - facebook
+          - blog
+          type: object
+      required:
+      - summary
+      type: object
+    ListMemberDeliverable:
+      properties:
+        listMemberId:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        count:
+          type: number
+          format: double
+        contentTypeName:
+          $ref: '#/components/schemas/NetworkName'
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
+      required:
+      - listMemberId
+      - listId
+      - id
+      - count
+      - contentTypeName
+      - contentType
+      type: object
+    NetworkName:
+      type: string
+      enum:
+      - Blog
+      - Facebook
+      - Facebook Group
+      - Facebook Live
+      - Facebook Reel
+      - Image
+      - Instagram
+      - Instagram Reel
+      - Instagram Story
+      - LinkedIn
+      - Pinterest
+      - Snapchat Story
+      - TikTok
+      - Twitch Stream
+      - Twitter
+      - Video
+      - YouTube Video
+      - YouTube Shorts
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NetworkSlug:
+      type: string
+      enum:
+      - blog
+      - facebook
+      - facebook_group
+      - facebook_live
+      - facebook_reel
+      - image
+      - instagram
+      - instagram_reel
+      - instagram_story
+      - linkedin
+      - pinterest
+      - snapchat_story
+      - tiktok
+      - twitch_stream
+      - twitter
+      - video
+      - youtube_video
+      - youtube_shorts
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ListMemberDeliverableBulkAssignSummaryPostRequest:
+      properties:
+        listId:
+          type: number
+          format: double
+        queryFilter:
+          additionalProperties: true
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - listId
+      type: object
+      additionalProperties: false
+    ListMemberDeliverablesSummaryGetResponse:
+      properties:
+        summary:
+          items:
+            properties:
+              count:
+                type: number
+                format: double
+              contentTypeName:
+                type: object
+              contentType:
+                type: object
+            required:
+            - count
+            - contentTypeName
+            - contentType
+            type: object
+          type: array
+      required:
+      - summary
+      type: object
+      additionalProperties: false
+    ListMemberDeliverableBulkAssignPostResponse:
+      properties:
+        completed:
+          properties:
+            listMemberIds:
+              items:
+                type: number
+                format: double
+              type: array
+          required:
+          - listMemberIds
+          type: object
+        failed:
+          items:
+            properties:
+              listMemberIds:
+                items:
+                  type: number
+                  format: double
+                type: array
+              reason:
+                type: string
+            required:
+            - listMemberIds
+            - reason
+            type: object
+          type: array
+      required:
+      - completed
+      - failed
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

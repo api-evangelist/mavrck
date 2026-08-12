@@ -1,0 +1,266 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Products API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Products
+paths:
+  /v1/products:
+    get:
+      operationId: getProducts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBody_Product-Array_'
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Products
+      parameters:
+      - in: query
+        name: title
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: powerReviewsAppId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+  /v1/action-group-reports/products:
+    get:
+      operationId: getProductsUsingToken
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBody_Product-Array_'
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Products
+      parameters:
+      - in: query
+        name: title
+        required: false
+        schema:
+          type: string
+components:
+  schemas:
+    YotpoAppProduct:
+      properties:
+        reviewProductId:
+          type: number
+          format: double
+        youtpoProductId:
+          type: string
+      type: object
+      additionalProperties: false
+    PowerReviewsApp:
+      properties:
+        apiKey:
+          type: string
+        communityId:
+          type: string
+        environment:
+          type: string
+        id:
+          type: number
+          format: double
+        locale:
+          type: string
+        merchantId:
+          type: string
+        name:
+          type: string
+      required:
+      - apiKey
+      - communityId
+      - id
+      - locale
+      - merchantId
+      - name
+      type: object
+      additionalProperties: false
+    ResponseBody_Product-Array_:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Product'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    PowerReviewsPage:
+      properties:
+        PowerReviewsApp:
+          items:
+            $ref: '#/components/schemas/PowerReviewsApp'
+          type: array
+        externalPageId:
+          type: string
+        id:
+          type: number
+          format: double
+        powerReviewsAppId:
+          type: string
+        reviewProductId:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BazaarVoiceAppProduct:
+      properties:
+        reviewProductId:
+          type: number
+          format: double
+        externalBazaarProductId:
+          type: string
+      type: object
+      additionalProperties: false
+    Product:
+      properties:
+        bazaarVoiceAppProduct:
+          $ref: '#/components/schemas/BazaarVoiceAppProduct'
+        communityId:
+          type: string
+        description:
+          type: string
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        powerReviewsPage:
+          $ref: '#/components/schemas/PowerReviewsPage'
+        title:
+          type: string
+        yotpoAppProduct:
+          $ref: '#/components/schemas/YotpoAppProduct'
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

@@ -1,0 +1,297 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Anonymous Comments API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: AnonymousComments
+paths:
+  /v1/action-groups/{actionGroupId}/global-users/{globalUserId}/anonymous-comments:
+    post:
+      operationId: createAnonymousComment
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DBAnonymousComment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - AnonymousComments
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnonymousCommentBody'
+        required: true
+    get:
+      operationId: queryAnonymousComments
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryAnonymousCommentsResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - AnonymousComments
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 15
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 0
+      - in: query
+        name: orderBy
+        required: false
+        schema:
+          type: string
+          default: createdAt
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          default: DESC
+components:
+  schemas:
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    CreateAnonymousCommentBody:
+      properties:
+        text:
+          type: string
+        email:
+          type: string
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+      required:
+      - text
+      - email
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBAnonymousComment:
+      properties:
+        id:
+          type: number
+          format: double
+        text:
+          type: string
+        email:
+          type: string
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        communityId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        actionGroupId:
+          type:
+          - number
+          - 'null'
+          format: double
+        globalUserId:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - text
+      - email
+      - communityId
+      - createdAt
+      type: object
+      additionalProperties: false
+    QueryAnonymousCommentsResult:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DBAnonymousComment'
+          type: array
+        meta:
+          properties:
+            totalCount:
+              type: number
+              format: double
+            limit:
+              type: number
+              format: double
+            offset:
+              type: number
+              format: double
+          required:
+          - totalCount
+          - limit
+          - offset
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

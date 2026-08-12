@@ -1,0 +1,221 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Administration Account Slow Migration API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: AdministrationAccountSlowMigration
+paths:
+  /v1/slow-migration/{username}:
+    get:
+      operationId: getUser
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlowMigrationGetResponse'
+        '400':
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Action group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - AdministrationAccountSlowMigration
+      parameters:
+      - in: path
+        name: username
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: validatePassword
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Action group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - AdministrationAccountSlowMigration
+      parameters:
+      - in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidatePasswordBody'
+        required: true
+components:
+  schemas:
+    ValidatePasswordBody:
+      properties:
+        password:
+          type: string
+      required:
+      - password
+      type: object
+    SlowMigrationGetResponse:
+      properties:
+        requiredActions:
+          items:
+            type: string
+          type: array
+        groups:
+          items:
+            type: string
+          type: array
+        username:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+        lastName:
+          type: string
+        firstName:
+          type: string
+        enabled:
+          type: boolean
+        emailVerified:
+          type: boolean
+        email:
+          type: string
+        attributes:
+          properties: {}
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+      required:
+      - requiredActions
+      - groups
+      - username
+      - roles
+      - lastName
+      - firstName
+      - enabled
+      - emailVerified
+      - email
+      - attributes
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

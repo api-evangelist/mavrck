@@ -1,0 +1,243 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Product API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Product
+paths:
+  /v1/power-reviews-products:
+    post:
+      operationId: createPowerReviewsProduct
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '422':
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PowerReviewsProductRequestBody'
+        required: true
+    put:
+      operationId: editPowerReviewsProduct
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '422':
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PowerReviewsProductRequestBody'
+        required: true
+components:
+  schemas:
+    PowerReviewsProductRequestBody:
+      properties:
+        powerReviewsAppId:
+          type: string
+        externalPageId:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+        title:
+          type: string
+        productId:
+          type: number
+          format: double
+      required:
+      - externalPageId
+      - image
+      - description
+      - title
+      type: object
+    YotpoAppProduct:
+      properties:
+        reviewProductId:
+          type: number
+          format: double
+        youtpoProductId:
+          type: string
+      type: object
+      additionalProperties: false
+    PowerReviewsApp:
+      properties:
+        apiKey:
+          type: string
+        communityId:
+          type: string
+        environment:
+          type: string
+        id:
+          type: number
+          format: double
+        locale:
+          type: string
+        merchantId:
+          type: string
+        name:
+          type: string
+      required:
+      - apiKey
+      - communityId
+      - id
+      - locale
+      - merchantId
+      - name
+      type: object
+      additionalProperties: false
+    PowerReviewsPage:
+      properties:
+        PowerReviewsApp:
+          items:
+            $ref: '#/components/schemas/PowerReviewsApp'
+          type: array
+        externalPageId:
+          type: string
+        id:
+          type: number
+          format: double
+        powerReviewsAppId:
+          type: string
+        reviewProductId:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BazaarVoiceAppProduct:
+      properties:
+        reviewProductId:
+          type: number
+          format: double
+        externalBazaarProductId:
+          type: string
+      type: object
+      additionalProperties: false
+    Product:
+      properties:
+        bazaarVoiceAppProduct:
+          $ref: '#/components/schemas/BazaarVoiceAppProduct'
+        communityId:
+          type: string
+        description:
+          type: string
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        powerReviewsPage:
+          $ref: '#/components/schemas/PowerReviewsPage'
+        title:
+          type: string
+        yotpoAppProduct:
+          $ref: '#/components/schemas/YotpoAppProduct'
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

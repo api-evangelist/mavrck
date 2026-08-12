@@ -1,0 +1,757 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Datapoints API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Datapoints
+paths:
+  /data-point-definitions:
+    get:
+      x-handler: data_points/data_point_definition_controller.js
+      operationId: getDatapoints
+      summary: Retrieve all datapoints restricted by community and various parameters.
+      x-access:
+      - administrator
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/orderByParam'
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: description
+        in: query
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      - name: customSet
+        in: query
+        schema:
+          type: boolean
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: archived
+        in: query
+        schema:
+          type: array
+          items:
+            type: boolean
+      - name: includeActiveActionGroups
+        in: query
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/userFilter'
+      - $ref: '#/components/parameters/q'
+      - name: orderProperty
+        in: query
+        schema:
+          type: string
+          enum:
+          - createdAt
+          - id
+          - age
+          - audienceFakeEngagersLevel
+          - audienceFakeFollowersLevel
+          - audienceFraudLevel
+          - audiencePercentageFemale
+          - audiencePercentage_13_17
+          - audiencePercentage_18_24
+          - audiencePercentage_25_34
+          - audiencePercentage_35_44
+          - audiencePercentage_45_54
+          - audiencePercentage_55_64
+          - audiencePercentage_65_plus
+          - audiencePredominantAgeRange
+          - audiencePredominantCity
+          - audiencePredominantCountry
+          - birthday
+          - city
+          - country
+          - deleted
+          - email
+          - fullName
+          - gender
+          - instagramHandle
+          - lastRefreshedAt
+          - loadSource
+          - nudityLevel
+          - profanityLevel
+          - state
+          - violenceLevel
+          - instagramAccount.globalUserId
+          - instagramAccount.analysisVersion
+          - instagramAccount.audienceFakeCommentersLevel
+          - instagramAccount.audienceFakeCommentersPercentage
+          - instagramAccount.audienceFakeEngagersLevel
+          - instagramAccount.audienceFakeFollowersLevel
+          - instagramAccount.audienceFakeFollowersPercentage
+          - instagramAccount.audienceFakeLikersLevel
+          - instagramAccount.audienceFakeLikersPercentage
+          - instagramAccount.audienceFraudLevel
+          - instagramAccount.audiencePercentageFemale
+          - instagramAccount.audiencePercentage_13_17
+          - instagramAccount.audiencePercentage_18_24
+          - instagramAccount.audiencePercentage_25_34
+          - instagramAccount.audiencePercentage_35_44
+          - instagramAccount.audiencePercentage_45_54
+          - instagramAccount.audiencePercentage_55_64
+          - instagramAccount.audiencePercentage_65_plus
+          - instagramAccount.audiencePredominantAgeRange
+          - instagramAccount.audiencePredominantCity
+          - instagramAccount.audiencePredominantCountry
+          - instagramAccount.averageComments
+          - instagramAccount.averageEngagements
+          - instagramAccount.averageLikes
+          - instagramAccount.bio
+          - instagramAccount.boughtFollowers
+          - instagramAccount.createdAt
+          - instagramAccount.engagementRate
+          - instagramAccount.followersCount
+          - instagramAccount.followingCount
+          - instagramAccount.fullName
+          - instagramAccount.handle
+          - instagramAccount.instagramExternalId
+          - instagramAccount.instagramProfileId
+          - instagramAccount.isBusiness
+          - instagramAccount.isPrivate
+          - instagramAccount.lastAnalyzedAt
+          - instagramAccount.lastAnalyzedFollowersFraudAt
+          - instagramAccount.loadSource
+          - instagramAccount.mediaCount
+          - instagramAccount.nudityLevel
+          - instagramAccount.previewPostsLastUpdatedAt
+          - instagramAccount.profanityLevel
+          - instagramAccount.profilePicture
+          - instagramAccount.profileType
+          - instagramAccount.sourceDetail
+          - instagramAccount.sponsoredPostRate
+          - instagramAccount.topicsLastAnalyzedAt
+          - instagramAccount.updatedAt
+          - instagramAccount.violenceLevel
+          - instagramAccount.website
+          - facebookProfile.id
+          - facebookProfile.averageComments
+          - facebookProfile.averageEngagements
+          - facebookProfile.averageLikes
+          - facebookProfile.engagementRate
+          - facebookProfile.facebookExternalId
+          - facebookProfile.facebookCreator
+          - facebookProfile.link
+          - facebookProfile.name
+          - facebookProfile.picture
+          - facebookProfile.reach
+          - facebookProfile.type
+          - twitterAccount.id
+          - twitterAccount.userId
+          - twitterAccount.handle
+          - twitterAccount.fullName
+          - twitterAccount.profilePicture
+          - twitterAccount.description
+          - twitterAccount.followersCount
+          - twitterAccount.followingCount
+          - twitterAccount.listedCount
+          - twitterAccount.accountCreatedAt
+          - twitterAccount.location
+          - twitterAccount.geoEnabled
+          - twitterAccount.lang
+          - twitterAccount.timeZone
+          - twitterAccount.utcOffset
+          - twitterAccount.verified
+          - twitterAccount.protected
+          - twitterAccount.averageFavorites
+          - twitterAccount.averageRetweets
+          - twitterAccount.averageEngagements
+          - twitterAccount.engagementRate
+          - twitterAccount.primaryAccount
+          - twitterAccount.twitterExternalId
+          - twitterAccount.createdAt
+          - pinterestAccount.id
+          - pinterestAccount.averageEngagements
+          - pinterestAccount.bio
+          - pinterestAccount.boardsCount
+          - pinterestAccount.createdAt
+          - pinterestAccount.engagementRate
+          - pinterestAccount.externalId
+          - pinterestAccount.firstName
+          - pinterestAccount.followersCount
+          - pinterestAccount.followingCount
+          - pinterestAccount.lastName
+          - pinterestAccount.monthlyViewers
+          - pinterestAccount.pinsCount
+          - pinterestAccount.primaryAccount
+          - pinterestAccount.profilePicture
+          - pinterestAccount.updatedAt
+          - pinterestAccount.userId
+          - pinterestAccount.username
+          - blog.id
+          - blog.globalUserId
+          - blog.language
+          - blog.name
+          - blog.platform
+          - blog.url
+          - youtubeChannel.id
+          - youtubeChannel.userId
+          - youtubeChannel.username
+          - youtubeChannel.bio
+          - youtubeChannel.accountCreatedAt
+          - youtubeChannel.profilePicture
+          - youtubeChannel.followersCount
+          - youtubeChannel.videoCount
+          - youtubeChannel.commentCount
+          - youtubeChannel.viewCount
+          - youtubeChannel.primaryAccount
+          - youtubeChannel.youtubeExternalId
+          - youtubeChannel.handle
+          - youtubeChannel.global_user_id
+          - user.stageJoinDate
+      responses:
+        '200':
+          description: An array of datapoints
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                  data:
+                    items:
+                      $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+                    type: array
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - Datapoints
+    post:
+      x-handler: data_points/data_point_definition_controller.js
+      operationId: createDataPointDefinition
+      summary: Create or edit a datapoint definition and any custom set of responses.
+      x-access:
+      - administrator
+      responses:
+        '200':
+          description: Returns the datapoint definition and its set of responses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Resource conflict.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - Datapoints
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+        required: true
+  /data-point-definitions/{id}:
+    get:
+      x-handler: data_points/data_point_definition_controller.js
+      operationId: getDataPointDefinition
+      summary: Retrieve a single data point definition.
+      x-access:
+      - administrator
+      tags:
+      - Datapoints
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A data point.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Scheduled notification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      x-handler: data_points/data_point_definition_controller.js
+      operationId: updateDataPointDefinition
+      summary: Update a data point definition. Data point definitions that have been assigned cannot be updated.
+      x-access:
+      - administrator
+      parameters:
+      - name: id
+        in: path
+        description: Id of data point definition
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Empty object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+        '400':
+          description: Validation error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Scheduled notification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Resource conflict.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - Datapoints
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+        required: true
+    delete:
+      x-handler: data_points/data_point_definition_controller.js
+      operationId: deleteDataPointDefinition
+      summary: Delete the data point definition. Data point definitions that have been assigned cannot be deleted.
+      x-access:
+      - administrator
+      parameters:
+      - name: id
+        in: path
+        description: Id of data point definition
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Empty object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          description: Validation error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Scheduled notification not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - Datapoints
+  /data-point-definitions/bulkUpdate:
+    put:
+      x-handler: data_points/data_point_definition_controller.js
+      operationId: bulkUpdate
+      summary: Updates a specified field to a certain value for a set of a datapoints
+      x-access:
+      - administrator
+      responses:
+        '200':
+          description: Empty object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Datapoint resource not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - Datapoints
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dataPointIds:
+                  description: An array of datapoint id's to be updated
+                  type: array
+                  items:
+                    type: integer
+                dataPointData:
+                  description: 'An object containing the desired fields and desired values as key value pairs. For example: {archived: true}'
+                  type: object
+                  properties:
+                    archived:
+                      type: boolean
+                    mergeTag:
+                      type: boolean
+        description: Id's of datapoints
+        required: true
+components:
+  schemas:
+    DataPointDefinitionSetElementDeprecated:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: Unique identifier for the data point set element.
+          key:
+            type: string
+          displayLabel:
+            type: string
+          markUpDisplayLabel:
+            type: string
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    EmptyObject:
+      type: object
+      properties: {}
+    DataPointDefinitionDeprecated:
+      type: object
+      required:
+      - name
+      - multi
+      - customSet
+      - type
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the data point.
+        key:
+          type: string
+          description: Key for the datapoint
+        name:
+          type: string
+          description: Display name for the data point.
+        description:
+          type: string
+          description: The description of the datapoint definition
+          x-access:
+          - root
+          - administrator
+        multi:
+          type: boolean
+          description: Boolean indicating whether multiple responses are allowed.
+        customSet:
+          type: boolean
+          description: Boolean indicating whether there is a custom set of responses, otherwise it is free-form.
+        type:
+          type: string
+          description: Type of the data point, e.g. string, integer_range.
+        markUpDescription:
+          type: string
+          description: The markup display description for the data point.
+        communityId:
+          type: integer
+          description: The communityId to which this data point definition belongs.
+          x-access:
+          - root
+        createdAt:
+          type: string
+          format: date-time
+          description: Date time data point created.
+          x-access:
+          - root
+          - administrator
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date time data point updated.
+          x-access:
+          - root
+          - administrator
+        mergeTag:
+          type: boolean
+          description: 1 if the data point should be included as a merge tag, 0 otherwise
+        archived:
+          type: boolean
+          description: 1 if the data point is archived, 0 if it is not
+        setElements:
+          $ref: '#/components/schemas/DataPointDefinitionSetElementDeprecated'
+        membersCompleted:
+          type: integer
+          description: The count of members who have completed this data point.
+          x-access:
+          - administrator
+        actionGroups:
+          type: array
+          description: An array of live action groups that this datapoint is a part of
+          x-access:
+          - administrator
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              title:
+                type: string
+  parameters:
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
+      schema:
+        type: integer
+    orderByParam:
+      in: query
+      description: Attribute to order by.
+      name: orderBy
+      schema:
+        type: string
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
+      schema:
+        type: integer
+    q:
+      in: query
+      description: Search parameter.
+      name: q
+      schema:
+        type: string
+    userFilter:
+      in: query
+      description: Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition.
+      name: userFilter
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

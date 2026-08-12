@@ -1,0 +1,34 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  Registry searches on 2026-08-12: registry.npmjs.org search for "mavrck",
+  pypi.org/pypi/mavrck/json, rubygems.org/api/v1/gems/mavrck.json,
+  packagist.org/search.json?q=mavrck, plus the Later Influence help centre and
+  both published OpenAPI documents.
+package_count: 0
+official_count: 0
+packages: []
+note: >-
+  Mavrck / Later Influence ships NO client libraries. Every registry answered
+  cleanly and negatively — npm search returned total 0, PyPI 404, RubyGems 404,
+  and Packagist matched only unrelated "marck-devs/*" packages. Neither
+  published OpenAPI document links an SDK, there is no GitHub organisation
+  linked from any provider property, and the help centre's API article documents
+  raw cURL only. Consumers are expected to generate their own client from the
+  spec or hand-roll HTTP.
+probes:
+- registry: npm
+  query: https://registry.npmjs.org/-/v1/search?text=mavrck
+  status: 200
+  results: 0
+- registry: pypi
+  url: https://pypi.org/pypi/mavrck/json
+  status: 404
+- registry: rubygems
+  url: https://rubygems.org/api/v1/gems/mavrck.json
+  status: 404
+- registry: packagist
+  url: https://packagist.org/search.json?q=mavrck
+  status: 200
+  results: 0
+  note: Matches were all unrelated ("marck-devs/*"), no Mavrck-owned package.

@@ -1,0 +1,183 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO DB Influencer Agreement History Fields API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: DBInfluencerAgreementHistoryFields
+paths:
+  /v1/influencer-agreement:
+    put:
+      operationId: updateIfluencerAgreementHistoryFields
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DBInfluencerAgreementHistoryFields'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - DBInfluencerAgreementHistoryFields
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInfluencerAgreementHistoryFieldsBody'
+        required: true
+components:
+  schemas:
+    DBInfluencerAgreementHistoryFields:
+      properties:
+        updateReason:
+          type:
+          - string
+          - 'null'
+          enum:
+          - GLOBAL_USER_MERGE
+          - null
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        influencerContract:
+          additionalProperties: true
+        influencerContractLevel:
+          type: string
+          enum:
+          - CAMPAIGN
+          - INSTANCE
+        campaignTermsOfUseUrl:
+          type:
+          - string
+          - 'null'
+        termsOfUseUrl:
+          type:
+          - string
+          - 'null'
+        influencerAgreementUrl:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        communityId:
+          type: string
+        actionGroupId:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+      required:
+      - updateReason
+      - updatedAt
+      - createdAt
+      - influencerContract
+      - influencerContractLevel
+      - campaignTermsOfUseUrl
+      - termsOfUseUrl
+      - influencerAgreementUrl
+      - name
+      - communityId
+      - actionGroupId
+      - globalUserId
+      - id
+      type: object
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CreateInfluencerAgreementHistoryFieldsBody:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        communityId:
+          type: string
+        name:
+          type: string
+      required:
+      - actionGroupId
+      - communityId
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

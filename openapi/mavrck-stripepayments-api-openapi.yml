@@ -1,0 +1,669 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Stripe Payments API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: StripePayments
+paths:
+  /v1/stripe/payment-providers/bulk-enable:
+    post:
+      operationId: configureStripeProviderAppToInstances
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigureStripeProviderAppToInstanceResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureStripeProviderAppToInstanceBody'
+        required: true
+  /v1/stripe/accounts/create/{globalUserId}:
+    post:
+      operationId: createStripeConnectedAccount
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: country
+        required: false
+        schema:
+          type: string
+  /v1/stripe/accounts/notification:
+    post:
+      operationId: sendStripeOnboardingReminder
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingReminderRequestBody'
+        required: true
+  /v1/stripe/accounts/{globalUserIds}:
+    get:
+      operationId: getStripeAccountsByGlobalUserIds
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StripeAccountStatusResponse'
+                type: array
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+      parameters:
+      - in: path
+        name: globalUserIds
+        required: true
+        schema:
+          type: string
+  /v1/stripe/accounts/account/{globalUserId}:
+    get:
+      operationId: getStripeAccountByGlobalUserId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StripeAccount'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/stripe/accounts/{globalUserId}/disconnect:
+    delete:
+      operationId: disconnectStripeAccountByGlobalUserId
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: country
+        required: false
+        schema:
+          type: string
+  /v1/stripe/accounts/{globalUserId}/delete:
+    delete:
+      operationId: deleteStripeAccountByGlobalUserId
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: country
+        required: false
+        schema:
+          type: string
+  /v1/exchange-rates/stripe:
+    get:
+      operationId: getStripeExchangeRates
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StripeExchangeRate'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+  /v1/stripe/transfers/{uniqueTransferId}:
+    get:
+      operationId: getStripeTransfer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StripeTransferWithStatusHistoryResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - StripePayments
+      parameters:
+      - in: path
+        name: uniqueTransferId
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    StripeOnboardingStatus:
+      enum:
+      - COMPLETE
+      - NO_ACCOUNT
+      - NOT_STARTED
+      - PENDING
+      - REJECTED
+      - RESTRICTED
+      - RESTRICTED_SOON
+      - STARTED
+      type: string
+    StripeExchangeRate:
+      properties:
+        id:
+          $ref: '#/components/schemas/StripeSupportedCurrencyCodes'
+        rates:
+          properties: {}
+          additionalProperties:
+            type: number
+            format: double
+          type: object
+      required:
+      - id
+      - rates
+      type: object
+      additionalProperties: false
+    StripeConnectAccountInfo:
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      required:
+      - name
+      - email
+      type: object
+      additionalProperties: false
+    StripeAccount:
+      properties:
+        accountId:
+          type: string
+        canDelete:
+          type: boolean
+        capabilities:
+          type: string
+        cashPaymentAppId:
+          type: number
+          format: double
+        country:
+          type:
+          - string
+          - 'null'
+        currencyCode:
+          type: object
+        createdAt:
+          type: string
+        email:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        handleName:
+          type: string
+        id:
+          type: number
+          format: double
+        isActive:
+          type: boolean
+          enum:
+          - true
+        name:
+          type: string
+        note:
+          type: string
+        onboardingStatus:
+          $ref: '#/components/schemas/StripeOnboardingStatus'
+        updatedAt:
+          type: string
+      required:
+      - accountId
+      - canDelete
+      - cashPaymentAppId
+      - createdAt
+      - globalUserId
+      - handleName
+      - id
+      - isActive
+      - onboardingStatus
+      - updatedAt
+      type: object
+      additionalProperties: false
+    OnboardingReminderRequestBody:
+      description: 'Domain types for payment-recipient creator notifications (onboarding reminder + payment
+
+        confirmation). These mirror the Stripe notification payloads but are provider-agnostic: the
+
+        creator only ever sees generic "payment information" copy, while the code refers to the
+
+        internal "payment recipient" concept.'
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        actionGroupId:
+          type: number
+          format: double
+      required:
+      - globalUserId
+      - actionGroupId
+      type: object
+      additionalProperties: false
+    StripeAccountStatusResponse:
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        onboardingStatus:
+          $ref: '#/components/schemas/StripeOnboardingStatus'
+        country:
+          type:
+          - string
+          - 'null'
+        currencyCode:
+          type: object
+      required:
+      - globalUserId
+      - onboardingStatus
+      type: object
+      additionalProperties: false
+    StripeTransferStatusRecord:
+      type: object
+      properties:
+        id:
+          type: number
+          format: double
+        transferId:
+          type: number
+          format: double
+        providerStatusCode:
+          type: string
+        providerStatusMessage:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    ConfigureStripeProviderAppToInstanceResponse:
+      properties:
+        failedInstances:
+          items:
+            $ref: '#/components/schemas/FailedInstanceForEnablingStripeProvider'
+          type: array
+        succesfulInstances:
+          items:
+            type: string
+          type: array
+      required:
+      - failedInstances
+      - succesfulInstances
+      type: object
+      additionalProperties: false
+    FailedInstanceForEnablingStripeProvider:
+      properties:
+        instanceId:
+          type: string
+        error:
+          type: string
+      required:
+      - instanceId
+      - error
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ConfigureStripeProviderAppToInstanceBody:
+      properties:
+        instanceIds:
+          items:
+            type: string
+          type: array
+      required:
+      - instanceIds
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    StripeTransferWithStatusHistoryResponse:
+      properties:
+        instanceId:
+          type: string
+        actionGroupId:
+          type: number
+          format: double
+        stripeConnectAccount:
+          $ref: '#/components/schemas/StripeConnectAccountInfo'
+        statusHistory:
+          items:
+            $ref: '#/components/schemas/StripeTransferStatusRecord'
+          type: array
+      required:
+      - instanceId
+      - actionGroupId
+      - statusHistory
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    StripeSupportedCurrencyCodes:
+      type: string
+      enum:
+      - USD
+      - EUR
+      - GBP
+      - AUD
+      - CAD
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

@@ -1,0 +1,791 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Campaign Performance API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: CampaignPerformance
+paths:
+  /v1/campaign-performance/audience-insights:
+    get:
+      operationId: getAudienceInsights
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignAudienceInsights'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CampaignPerformance
+      parameters:
+      - in: query
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+      x-sharedCipherParameters:
+        actionGroupId: actionGroupId
+  /v1/campaign-performance/audience-insights/aggregate:
+    get:
+      operationId: getAggregatedAudienceInsights
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignAudienceInsights'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Returns aggregated audience insights across multiple campaigns.
+
+        When actionGroupIds are provided, aggregates data for those specific campaigns.
+
+        When actionGroupIds are omitted, aggregates data for all campaigns belonging to the given communityId.
+
+        Filter by date range using the required startDate and endDate (based on post date).'
+      tags:
+      - CampaignPerformance
+      parameters:
+      - in: query
+        name: communityId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: startDate
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: endDate
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: actionGroupIds
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+  /v1/campaign-performance/post-metrics:
+    get:
+      operationId: getPostMetrics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      totalCount:
+                        type: number
+                        format: double
+                      limit:
+                        type: number
+                        format: double
+                      offset:
+                        type: number
+                        format: double
+                    required:
+                    - totalCount
+                    - limit
+                    - offset
+                    type: object
+                  data:
+                    items:
+                      $ref: '#/components/schemas/PostMetric'
+                    type: array
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CampaignPerformance
+      parameters:
+      - in: query
+        name: actionGroupId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 20
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 0
+      - in: query
+        name: orderProperty
+        required: false
+        schema:
+          type: string
+          enum:
+          - impressions
+          - engagements
+          - impressionsEngagementRate
+          - emvValue
+          default: engagements
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: DESC
+      x-sharedCipherParameters:
+        actionGroupId: actionGroupId
+  /v1/campaign-performance/influencers-metrics:
+    get:
+      operationId: getInfluencersMetrics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      totalCount:
+                        type: number
+                        format: double
+                      limit:
+                        type: number
+                        format: double
+                      offset:
+                        type: number
+                        format: double
+                    required:
+                    - totalCount
+                    - limit
+                    - offset
+                    type: object
+                  data:
+                    items:
+                      $ref: '#/components/schemas/TopInfluencerMetrics'
+                    type: array
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CampaignPerformance
+      parameters:
+      - in: query
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 20
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 0
+      - in: query
+        name: orderProperty
+        required: false
+        schema:
+          type: string
+          enum:
+          - impressions
+          - engagements
+          - impressionsEngagementRate
+          - emvValue
+          - roiValue
+          default: engagements
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: DESC
+      x-sharedCipherParameters:
+        actionGroupId: actionGroupId
+  /v1/campaign-performance/influencers-conversions:
+    get:
+      operationId: getInfluencersConversions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      totalCount:
+                        type: number
+                        format: double
+                      limit:
+                        type: number
+                        format: double
+                      offset:
+                        type: number
+                        format: double
+                    required:
+                    - totalCount
+                    - limit
+                    - offset
+                    type: object
+                  data:
+                    items:
+                      $ref: '#/components/schemas/TopInfluencerConversions'
+                    type: array
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CampaignPerformance
+      parameters:
+      - in: query
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 20
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+          default: 0
+      - in: query
+        name: orderProperty
+        required: false
+        schema:
+          type: string
+          enum:
+          - clicks
+          - conversions
+          - conversionsValue
+          default: conversions
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+          default: DESC
+      x-sharedCipherParameters:
+        actionGroupId: actionGroupId
+components:
+  schemas:
+    PostMetric:
+      properties:
+        activationId:
+          type: number
+          format: double
+        impressions:
+          type: number
+          format: double
+        network:
+          type: string
+        ugcPhoto:
+          type: string
+        image:
+          type:
+          - string
+          - 'null'
+        text:
+          type:
+          - string
+          - 'null'
+        postLink:
+          type: string
+        date:
+          type: string
+        engagements:
+          type: number
+          format: double
+        benchmarkAverageEngagements:
+          type: number
+          format: double
+        engagementRate:
+          type: number
+          format: double
+        engagementRateDif:
+          type: number
+          format: double
+        benchmarkEngagementRate:
+          type: number
+          format: double
+        reach:
+          type: number
+          format: double
+        impressionsEngagementRate:
+          type: number
+          format: double
+        emvValue:
+          type: number
+          format: double
+      required:
+      - activationId
+      - impressions
+      - network
+      - ugcPhoto
+      - image
+      - text
+      - postLink
+      - date
+      - engagements
+      - benchmarkAverageEngagements
+      - engagementRate
+      - engagementRateDif
+      - benchmarkEngagementRate
+      - reach
+      - impressionsEngagementRate
+      - emvValue
+      type: object
+      additionalProperties: false
+    TopInfluencerConversions:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        profilePhoto:
+          type:
+          - string
+          - 'null'
+        instagramHandle:
+          type:
+          - string
+          - 'null'
+        igProfilePhoto:
+          type:
+          - string
+          - 'null'
+        facebookAvatar:
+          type:
+          - string
+          - 'null'
+        globalUserId:
+          type: number
+          format: double
+        membershipId:
+          type: number
+          format: double
+        clicks:
+          type: number
+          format: double
+        conversions:
+          type: number
+          format: double
+        conversionsValue:
+          type: number
+          format: double
+      required:
+      - firstName
+      - lastName
+      - profilePhoto
+      - instagramHandle
+      - igProfilePhoto
+      - facebookAvatar
+      - globalUserId
+      - membershipId
+      - clicks
+      - conversions
+      - conversionsValue
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    GenderImpressions:
+      properties:
+        femaleImpressions:
+          type: number
+          format: double
+        maleImpressions:
+          type: number
+          format: double
+        totalImpressions:
+          type: number
+          format: double
+      required:
+      - femaleImpressions
+      - maleImpressions
+      - totalImpressions
+      type: object
+      additionalProperties: false
+    TopInfluencerMetrics:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        profilePhoto:
+          type:
+          - string
+          - 'null'
+        instagramHandle:
+          type:
+          - string
+          - 'null'
+        igProfilePhoto:
+          type:
+          - string
+          - 'null'
+        facebookAvatar:
+          type:
+          - string
+          - 'null'
+        globalUserId:
+          type: number
+          format: double
+        membershipId:
+          type: number
+          format: double
+        impressions:
+          type: number
+          format: double
+        engagements:
+          type: number
+          format: double
+        impressionsEngagementRate:
+          type: number
+          format: double
+        content:
+          type: number
+          format: double
+        emvValue:
+          type: number
+          format: double
+        roiValue:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - firstName
+      - lastName
+      - profilePhoto
+      - instagramHandle
+      - igProfilePhoto
+      - facebookAvatar
+      - globalUserId
+      - membershipId
+      - impressions
+      - engagements
+      - impressionsEngagementRate
+      - content
+      - emvValue
+      type: object
+      additionalProperties: false
+    City:
+      properties:
+        city:
+          type: string
+        cityState:
+          type: string
+        impressions:
+          type: number
+          format: double
+      required:
+      - city
+      - cityState
+      - impressions
+      type: object
+      additionalProperties: false
+    Age:
+      properties:
+        age:
+          type: string
+        percent:
+          type: number
+          format: double
+      required:
+      - age
+      - percent
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CampaignAudienceInsights:
+      properties:
+        age:
+          items:
+            $ref: '#/components/schemas/Age'
+          type: array
+        cities:
+          items:
+            $ref: '#/components/schemas/City'
+          type: array
+        countries:
+          items:
+            $ref: '#/components/schemas/Country'
+          type: array
+        gender:
+          $ref: '#/components/schemas/GenderImpressions'
+        totalAudienceImpressions:
+          type: number
+          format: double
+      required:
+      - age
+      - cities
+      - countries
+      - gender
+      - totalAudienceImpressions
+      type: object
+      additionalProperties: false
+    Country:
+      properties:
+        country:
+          type: string
+        impressions:
+          type: number
+          format: double
+      required:
+      - country
+      - impressions
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

@@ -1,0 +1,33 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Images API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Images
+paths:
+  /v1/image-proxy:
+    get:
+      operationId: proxyImage
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Images
+      parameters:
+      - in: query
+        name: url
+        required: true
+        schema:
+          type: string
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

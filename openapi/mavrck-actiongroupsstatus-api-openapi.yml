@@ -1,0 +1,122 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Action Groups Status API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: ActionGroupsStatus
+paths:
+  /v1/action-groups/statuses:
+    post:
+      operationId: getActionGroupStatuses
+      responses:
+        '200':
+          description: Action group statuses retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupStatusMap'
+        '400':
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupsStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroupStatusQueryRequest'
+        required: true
+components:
+  schemas:
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ActionGroupStatusQueryRequest:
+      properties:
+        actionGroupIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+          description: Array of action group IDs to query (max 100)
+          minItems: 1
+          maxItems: 100
+      required:
+      - actionGroupIds
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActionGroupStatusMap:
+      properties: {}
+      type: object
+      additionalProperties:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

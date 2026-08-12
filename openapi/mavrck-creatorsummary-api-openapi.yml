@@ -1,0 +1,275 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Creator Summary API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: CreatorSummary
+paths:
+  /v1/creator-summary/global-users/{globalUserId}:
+    get:
+      operationId: getCreatorSummary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CachedCreatorSummaryResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Returns the creator''s stored profile summary for display (e.g. the lightbox
+
+        page). Pure read of the `creator-summary` DynamoDB table — does not generate.
+
+        Responds 404 when no summary has been stored yet; call PUT to generate one.'
+      tags:
+      - CreatorSummary
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+    put:
+      operationId: refreshCreatorSummary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CachedCreatorSummaryResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Generates a fresh profile summary for a global user and stores it in the
+
+        `creator-summary` DynamoDB table, replacing any existing copy. Backs the
+
+        "refresh" action on the lightbox page. Grounds on the creator''s own posts
+
+        from our records; pass `research=true` to additionally run a web-research
+
+        pass before writing (off by default).'
+      tags:
+      - CreatorSummary
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: research
+        required: false
+        schema:
+          type: boolean
+components:
+  schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CreatorSummaryDTO:
+      properties:
+        creatorPersona:
+          type: string
+        platformPresence:
+          properties:
+            insights:
+              type: string
+          required:
+          - insights
+          type: object
+        contentFormatBreakdown:
+          properties:
+            formats:
+              items:
+                type: string
+              type: array
+            overview:
+              type:
+              - string
+              - 'null'
+              description: Null when no formats are confirmed, in which case the section is omitted entirely.
+          required:
+          - formats
+          - overview
+          type: object
+        contentStyle:
+          type:
+          - string
+          - 'null'
+          description: Null when the payload carried no posts to describe.
+        contentThemesAndNiches:
+          properties:
+            themes:
+              items:
+                type: string
+              type: array
+            context:
+              type: string
+          required:
+          - themes
+          - context
+          type: object
+        audience:
+          type: string
+        brandPartnerships:
+          type: string
+      required:
+      - creatorPersona
+      - platformPresence
+      - contentFormatBreakdown
+      - contentStyle
+      - contentThemesAndNiches
+      - audience
+      - brandPartnerships
+      type: object
+      additionalProperties: false
+    CachedCreatorSummaryResponse:
+      properties:
+        summary:
+          $ref: '#/components/schemas/CreatorSummaryDTO'
+          description: Structured, per-section summary object.
+        rendered:
+          type: string
+          description: Ready-to-read rendered summary with section headers.
+        wordCount:
+          type: number
+          format: double
+        generatedAt:
+          type: string
+          description: ISO date-time the summary was generated.
+        version:
+          type: number
+          format: double
+          description: Prompt/schema version the summary was generated with.
+        cached:
+          type: boolean
+          description: True when served from the creator-summary table, false when generated on this request.
+      required:
+      - summary
+      - rendered
+      - wordCount
+      - generatedAt
+      - version
+      - cached
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

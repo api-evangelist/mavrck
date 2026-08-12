@@ -1,0 +1,1976 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Conversations API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Conversations
+paths:
+  /conversations/general-folders:
+    get:
+      tags:
+      - Conversations
+      operationId: getGeneralFolders
+      x-handler: conversations/conversation_folders/conversation_folders_controller.js
+      x-access:
+      - administrator
+      summary: Get the General Folders Unread Counts.
+      parameters:
+      - name: keys
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Static General Folders with unread count.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralFolders'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Conversation not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /conversations/dynamic-campaign-folders:
+    get:
+      tags:
+      - Conversations
+      operationId: getCampaignFolders
+      x-handler: conversations/conversation_folders/conversation_folders_controller.js
+      x-access:
+      - administrator
+      summary: Get the General Folders Unread Counts.
+      parameters:
+      - name: keys
+        in: query
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: Collection of conversations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CampaignFolder'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Conversation not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /messages/{id}:
+    get:
+      tags:
+      - Conversations
+      operationId: getMessage
+      x-handler: conversations/message_controller.js
+      x-access:
+      - administrator
+      summary: Retrieve a message by id.
+      parameters:
+      - name: id
+        in: path
+        description: The Id of the message to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: includes
+        in: query
+        description: A comma-separated list of message dimensions to return. If not specified, then return standard dimensions.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieved the message.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /draft:
+    post:
+      tags:
+      - Conversations
+      operationId: createDraft
+      x-handler: conversations/drafts/draft_controller.js
+      x-access:
+      - administrator
+      summary: Send a new message.
+      parameters:
+      - name: replyToMessageId
+        in: query
+        required: false
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OutboundMessage'
+      responses:
+        '200':
+          description: Draft created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversationId:
+                    type: integer
+                  message:
+                    $ref: '#/components/schemas/Message'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /draft/{messageId}:
+    put:
+      tags:
+      - Conversations
+      operationId: updateDraft
+      x-handler: conversations/drafts/draft_controller.js
+      x-access:
+      - administrator
+      summary: Update the draft.
+      parameters:
+      - name: messageId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OutboundMessage'
+      responses:
+        '200':
+          description: Draft updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    $ref: '#/components/schemas/Message'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - Conversations
+      operationId: throwOutDraft
+      x-handler: conversations/drafts/draft_controller.js
+      x-access:
+      - administrator
+      summary: Throw out the draft.
+      parameters:
+      - name: messageId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Draft thrown out successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    $ref: '#/components/schemas/Message'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /sendMessage/{messageId}:
+    put:
+      tags:
+      - Conversations
+      operationId: sendMessage
+      x-handler: conversations/message_send_outbound_controller.js
+      x-access:
+      - administrator
+      summary: Send a message.
+      parameters:
+      - name: messageId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Message sent successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    $ref: '#/components/schemas/Message'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /messages/{messageId}/reply:
+    post:
+      tags:
+      - Conversations
+      operationId: replyToMessage
+      x-handler: conversations/message_reply_controller.js
+      x-access:
+      - administrator
+      summary: Reply to a message.
+      parameters:
+      - name: messageId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/OutboundMessage'
+      responses:
+        '200':
+          description: Message sent successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /conversations:
+    get:
+      tags:
+      - Conversations
+      operationId: getConversations
+      x-handler: conversations/conversation_controller.js
+      x-access:
+      - administrator
+      summary: Retrieve conversations.
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/orderDirection'
+      - name: search
+        in: query
+        description: Search for incentive title or influencer first name, last name, or email, using a trailing wildcard.
+        schema:
+          type: string
+      - name: orderProperty
+        in: query
+        schema:
+          type: string
+          enum:
+          - mostRecentMessageCreatedAt
+      - name: isArchived
+        in: query
+        schema:
+          type: boolean
+      - name: markedAsUnread
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Collection of conversations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ConversationResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conversation'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /find-all-conversations:
+    get:
+      tags:
+      - Conversations
+      operationId: findAllConversations
+      x-handler: conversations/conversation_controller.js
+      x-access:
+      - administrator
+      summary: Retrieve conversations.
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/orderDirection'
+      - name: search
+        in: query
+        description: Search for incentive title or influencer first name, last name, or email, using a trailing wildcard.
+        schema:
+          type: string
+      - name: orderProperty
+        in: query
+        schema:
+          type: string
+          enum:
+          - mostRecentMessageCreatedAt
+      - name: isArchived
+        in: query
+        schema:
+          type: boolean
+      - name: markedAsUnread
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Collection of conversations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ConversationResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conversation'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /count-conversations:
+    get:
+      tags:
+      - Conversations
+      operationId: countConversations
+      x-handler: conversations/conversation_controller.js
+      x-access:
+      - administrator
+      summary: Retrieve conversations.
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/orderDirection'
+      - name: search
+        in: query
+        description: Search for incentive title or influencer first name, last name, or email, using a trailing wildcard.
+        schema:
+          type: string
+      - name: orderProperty
+        in: query
+        schema:
+          type: string
+          enum:
+          - mostRecentMessageCreatedAt
+      - name: isArchived
+        in: query
+        schema:
+          type: boolean
+      - name: markedAsUnread
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Collection of conversations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ConversationResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conversation'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /conversations/{id}:
+    get:
+      tags:
+      - Conversations
+      operationId: getConversation
+      x-handler: conversations/conversation_controller.js
+      x-access:
+      - administrator
+      summary: Retrieve a conversation by id.
+      parameters:
+      - name: id
+        in: path
+        description: The Id of the conversation to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: includes
+        in: query
+        description: A comma-separated list of conversation dimensions to return. If not specified, then return standard dimensions.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Collection of conversations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Conversation not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/conversations/bulk-action/read:
+    post:
+      operationId: bulkMarkConversationsAsRead
+      responses:
+        '201':
+          description: updated
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Conversations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationBulkActionRequestBody'
+        required: true
+  /v1/conversations/bulk-action/unread:
+    post:
+      operationId: bulkMarkConversationsAsUnread
+      responses:
+        '201':
+          description: updated
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Conversations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationBulkActionRequestBody'
+        required: true
+  /v1/conversations/bulk-action/archive:
+    post:
+      operationId: bulkArchiveConversations
+      responses:
+        '201':
+          description: updated
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Conversations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationBulkActionRequestBody'
+        required: true
+  /v1/conversations/bulk-action/unarchive:
+    post:
+      operationId: bulkUnarchiveConversations
+      responses:
+        '201':
+          description: updated
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Conversations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversationBulkActionRequestBody'
+        required: true
+  /v1/inline-images:
+    post:
+      operationId: uploadInlineImage
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadInlineImageResult'
+        '400':
+          description: Invalid Parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Conversations
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+              - file
+  /v1/messages/{messageId}/events:
+    get:
+      operationId: getMessageEvents
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryByMessageResult'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Conversations
+      parameters:
+      - in: path
+        name: messageId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+      - in: query
+        name: orderProperty
+        required: false
+        schema:
+          type: string
+          enum:
+          - occurredAt
+      - in: query
+        name: event
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
+    UploadInlineImageResult:
+      properties:
+        link:
+          type: string
+      required:
+      - link
+      type: object
+      additionalProperties: false
+    GeneralFolders:
+      type: object
+      properties:
+        inbox:
+          type: integer
+        generalInquiries:
+          type: integer
+        draft:
+          type: integer
+        sent:
+          type: integer
+        archived:
+          type: integer
+    WorkflowStatusRequirementDeprecated:
+      type: object
+      properties:
+        satisfied:
+          type: boolean
+        incentiveId:
+          type: number
+        name:
+          type: string
+    MessageRecipient:
+      type: object
+      properties:
+        displayName:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        emailId:
+          type: integer
+        role:
+          type: string
+          enum:
+          - from
+          - to
+          - cc
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ConversationBulkActionRequestBody:
+      properties:
+        conversationIds:
+          items:
+            type: number
+            format: double
+          type: array
+        search:
+          type: string
+      type: object
+      additionalProperties: false
+    Attachment:
+      type: object
+      properties:
+        originalName:
+          type: string
+        encoding:
+          type: string
+        buffer:
+          type: string
+        mimeType:
+          type: string
+        disposition:
+          type: string
+        size:
+          type: integer
+        uri:
+          type: string
+        contentId:
+          type: string
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+        subject:
+          type: string
+        messageIdHeader:
+          type: string
+        conversationId:
+          type: string
+        scheduledFor:
+          type: string
+          format: date-time
+        scheduledMessage:
+          type: object
+          properties:
+            id:
+              type: integer
+            createdAt:
+              type: string
+              format: date-time
+            messageId:
+              type: integer
+            accountId:
+              type: integer
+            communityId:
+              type: string
+            sendAt:
+              type: string
+              format: date-time
+            status:
+              type: string
+            updatedAt:
+              type: string
+              format: date-time
+        inReplyToHeader:
+          type: string
+        status:
+          type: string
+        html:
+          type: string
+        parsedReply:
+          type: string
+        isInbound:
+          type: boolean
+        hasBeenOpened:
+          type: boolean
+        hasBeenDelivered:
+          type: boolean
+        hasBeenBounced:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        sentAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        sentBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        modifiedBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        createdBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageRecipient'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationTemplateDeprecated'
+        draftReply:
+          type: object
+          properties:
+            id:
+              type: integer
+            subject:
+              type: string
+            messageIdHeader:
+              type: string
+            conversationId:
+              type: string
+            scheduledFor:
+              type: string
+              format: date-time
+            scheduledMessage:
+              type: object
+              properties:
+                id:
+                  type: integer
+                createdAt:
+                  type: string
+                  format: date-time
+                messageId:
+                  type: integer
+                accountId:
+                  type: integer
+                communityId:
+                  type: string
+                sendAt:
+                  type: string
+                  format: date-time
+                status:
+                  type: string
+                updatedAt:
+                  type: string
+                  format: date-time
+            inReplyToHeader:
+              type: string
+            status:
+              type: string
+            html:
+              type: string
+            parsedReply:
+              type: string
+            isInbound:
+              type: boolean
+            hasBeenOpened:
+              type: boolean
+            hasBeenDelivered:
+              type: boolean
+            hasBeenBounced:
+              type: boolean
+            createdAt:
+              type: string
+              format: date-time
+            sentAt:
+              type: string
+              format: date-time
+            modifiedAt:
+              type: string
+              format: date-time
+            sentBy:
+              $ref: '#/components/schemas/AdministratorDeprecated'
+            modifiedBy:
+              $ref: '#/components/schemas/AdministratorDeprecated'
+            createdBy:
+              $ref: '#/components/schemas/AdministratorDeprecated'
+            recipients:
+              type: array
+              items:
+                $ref: '#/components/schemas/MessageRecipient'
+            attachments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Attachment'
+            templates:
+              type: array
+              items:
+                $ref: '#/components/schemas/ConversationTemplateDeprecated'
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    InstanceUserMaterializedView:
+      type: object
+      properties:
+        communityId:
+          type: string
+        lifetimeImpressions:
+          type: integer
+        lifetimeClicks:
+          type: integer
+        lifetimeConversions:
+          type: integer
+        lifetimeValue:
+          type: number
+        blogName:
+          type: string
+        facebookFollowersCount:
+          type: integer
+        facebookName:
+          type: string
+        facebookPicture:
+          type: string
+        facebookAverageEngagements:
+          type: integer
+        facebookEngagementRate:
+          type: number
+        globalUserId:
+          type:
+          - integer
+          - string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        fullName:
+          type: string
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          - other
+          - non_bin
+          - describe
+        country:
+          type: string
+          enum:
+          - Afghanistan
+          - Albania
+          - Algeria
+          - American Samoa
+          - Andorra
+          - Angola
+          - Anguilla
+          - Antarctica
+          - Antigua and Barbuda
+          - Argentina
+          - Armenia
+          - Aruba
+          - Australia
+          - Austria
+          - Azerbaijan
+          - Bahrain
+          - Bangladesh
+          - Barbados
+          - Belarus
+          - Belgium
+          - Belize
+          - Benin
+          - Bermuda
+          - Bhutan
+          - Bolivia
+          - Bosnia and Herzegovina
+          - Botswana
+          - Bouvet Island
+          - Brazil
+          - British Indian Ocean Territory
+          - British Virgin Islands
+          - Brunei
+          - Bulgaria
+          - Burkina Faso
+          - Burundi
+          - Cambodia
+          - Cameroon
+          - Canada
+          - Cape Verde
+          - Caribbean Netherlands
+          - Cayman Islands
+          - Central African Republic
+          - Chad
+          - Chile
+          - China
+          - Christmas Island
+          - Cocos (Keeling) Islands
+          - Collectivity of Saint Martin
+          - Colombia
+          - Comoros
+          - Cook Islands
+          - Costa Rica
+          - Côte d'Ivoire
+          - Croatia
+          - Cuba
+          - Curaçao
+          - Cyprus
+          - Czechia
+          - Democratic Republic of the Congo
+          - Denmark
+          - Djibouti
+          - Dominica
+          - Dominican Republic
+          - Ecuador
+          - Egypt
+          - El Salvador
+          - Equatorial Guinea
+          - Eritrea
+          - Estonia
+          - Ethiopia
+          - Falkland Islands (Malvinas)
+          - Faroe Islands
+          - Federated States of Micronesia
+          - Fiji
+          - Finland
+          - France
+          - French Guiana
+          - French Polynesia
+          - French Southern Territories
+          - Gabon
+          - Georgia
+          - Germany
+          - Ghana
+          - Gibraltar
+          - Greece
+          - Greenland
+          - Grenada
+          - Guadeloupe
+          - Guam
+          - Guatemala
+          - Guernsey
+          - Guinea
+          - Guinea-Bissau
+          - Guyana
+          - Haiti
+          - Heard Island and McDonald Islands
+          - Holy See (Vatican City)
+          - Honduras
+          - Hong Kong
+          - Hungary
+          - Iceland
+          - India
+          - Indonesia
+          - Iran
+          - Iraq
+          - Ireland
+          - Isle of Man
+          - Israel
+          - Jamaica
+          - Japan
+          - Italy
+          - Jersey
+          - Jordan
+          - Kazakhstan
+          - Kenya
+          - Kiribati
+          - Kuwait
+          - Kyrgyzstan
+          - Laos
+          - Latvia
+          - Lebanon
+          - Lesotho
+          - Liberia
+          - Libya
+          - Liechtenstein
+          - Lithuania
+          - Luxembourg
+          - Macau
+          - Macedonia (FYROM)
+          - Madagascar
+          - Malawi
+          - Malaysia
+          - Maldives
+          - Mali
+          - Malta
+          - Marshall Islands
+          - Martinique
+          - Mauritania
+          - Mauritius
+          - Mayotte
+          - Mexico
+          - Moldova
+          - Monaco
+          - Mongolia
+          - Montenegro
+          - Montserrat
+          - Morocco
+          - Mozambique
+          - Myanmar (Burma)
+          - Namibia
+          - Nauru
+          - Nepal
+          - Netherlands
+          - New Caledonia
+          - New Zealand
+          - Nicaragua
+          - Niger
+          - Nigeria
+          - Niue
+          - Norfolk Island
+          - North Korea
+          - Northern Mariana Islands
+          - Norway
+          - Oman
+          - Pakistan
+          - Palau
+          - Palestine
+          - Panama
+          - Papua New Guinea
+          - Paraguay
+          - Peru
+          - Philippines
+          - Pitcairn
+          - Poland
+          - Portugal
+          - Puerto Rico
+          - Qatar
+          - Republic of the Congo
+          - Reunion
+          - Romania
+          - Russia
+          - Rwanda
+          - Saint Helena, Ascension and Tristan da Cunha
+          - Saint Kitts and Nevis
+          - Saint Lucia
+          - Saint Pierre and Miquelon
+          - Saint Vincent and the Grenadines
+          - Saint-Barthélemy
+          - Samoa
+          - San Marino
+          - Sao Tome and Principe
+          - Saudi Arabia
+          - Senegal
+          - Serbia
+          - Seychelles
+          - Sierra Leone
+          - Singapore
+          - Sint Maarten (Dutch part)
+          - Slovakia
+          - Slovenia
+          - Solomon Islands
+          - Somalia
+          - South Africa
+          - South Georgia and the South Sandwich Islands
+          - South Korea
+          - South Sudan
+          - Spain
+          - Sri Lanka
+          - Sudan
+          - Suriname
+          - Svalbard and Jan Mayen
+          - Swaziland
+          - Sweden
+          - Switzerland
+          - Syria
+          - Taiwan
+          - Tajikistan
+          - Tanzania
+          - Thailand
+          - The Bahamas
+          - The Gambia
+          - Timor-Leste
+          - Togo
+          - Tokelau
+          - Tonga
+          - Trinidad and Tobago
+          - Tunisia
+          - Turkey
+          - Turkmenistan
+          - Turks and Caicos Islands
+          - Tuvalu
+          - U.S. Virgin Islands
+          - Uganda
+          - Ukraine
+          - United Arab Emirates
+          - United Kingdom
+          - United States Minor Outlying Islands
+          - United States
+          - Uruguay
+          - Uzbekistan
+          - Vanuatu
+          - Venezuela
+          - Vietnam
+          - Wallis and Futuna
+          - Western Sahara
+          - Yemen
+          - Zambia
+          - Zimbabwe
+          - Åland Islands
+        state:
+          type: string
+        city:
+          type: string
+        zip:
+          type: string
+        birthday:
+          type: string
+          format: date
+        phone:
+          type: string
+        audiencePercentage_13_17:
+          type: number
+        audiencePercentage_18_24:
+          type: number
+        audiencePercentage_25_34:
+          type: number
+        audiencePercentage_35_44:
+          type: number
+        audiencePercentage_45_54:
+          type: number
+        audiencePercentage_55_64:
+          type: number
+        audiencePercentage_65_plus:
+          type: number
+        audiencePercentageFemale:
+          type: number
+        audiencePredominantAgeRange:
+          type: string
+        audiencePredominantCountry:
+          type: string
+        audiencePredominantCity:
+          type: string
+        audienceFraudLevel:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+        cpm:
+          type: number
+        cpe:
+          type: number
+        cpp:
+          type: number
+        instagramHandle:
+          type: string
+        instagramFullName:
+          type: string
+        instagramProfilePicture:
+          type: string
+        instagramFollowersCount:
+          type: integer
+        instagramAverageEngagements:
+          type: integer
+        instagramEngagementRate:
+          type: number
+        membershipId:
+          description: id and membershipId are equivalent.
+          type: integer
+        status:
+          type: string
+        pinterestUsername:
+          type: string
+        pinterestFollowersCount:
+          type: integer
+        pinterestMonthlyViewers:
+          type: integer
+        twitterHandle:
+          type: string
+        twitterFollowersCount:
+          type: integer
+        twitterEngagementRate:
+          type: number
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ConversationResponseMetadata:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+        markedAsUnreadCount:
+          type: integer
+    ConversationTemplateDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        category:
+          type: string
+        title:
+          type: string
+        subject:
+          type: string
+        html:
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        lastModifiedBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deliveryMethod:
+          type: string
+        sendOnEvent:
+          type: string
+        sendOnDays:
+          type: integer
+        sendOnTimeframe:
+          type: string
+        sendOnStatusId:
+          type:
+          - integer
+          - 'null'
+        sendOnDate:
+          type: string
+        slug:
+          type: string
+        isArchived:
+          type: boolean
+    ListCustomStatusDeprecated:
+      type: object
+      required:
+      - label
+      properties:
+        id:
+          type: integer
+        label:
+          type: string
+        ctaLabel:
+          type: string
+        auxiliaryLabel:
+          type: string
+        slug:
+          type: string
+        phase:
+          type: string
+        statusOrder:
+          type: integer
+        disabled:
+          type: boolean
+        custom:
+          type: boolean
+        linkedStages:
+          type: array
+          items:
+            type: string
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationTemplateDeprecated'
+        requirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowStatusRequirementDeprecated'
+    QueryByMessageResult:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DBMessageEvent'
+          type: array
+        meta:
+          properties:
+            offset:
+              type: number
+              format: double
+            limit:
+              type: number
+              format: double
+            totalCount:
+              type: number
+              format: double
+          required:
+          - totalCount
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+      additionalProperties: false
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: integer
+        communityId:
+          type: string
+        subject:
+          type: string
+        mostRecentMessageCreatedAt:
+          type: string
+          format: date-time
+        mostRecentMessageParsedReply:
+          type: string
+        mostRecentMessageSenderDisplayName:
+          type: string
+        hasAttachment:
+          type: boolean
+        hasInbound:
+          type: boolean
+        hasOutbound:
+          type: boolean
+        markedAsUnread:
+          type: boolean
+        messageCount:
+          type: integer
+        draftCount:
+          type: integer
+        contextType:
+          type: string
+        contextTitle:
+          type: string
+        contextLink:
+          type: string
+        isArchived:
+          type: boolean
+        listMembers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListMemberDeprecated'
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageRecipient'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ListMemberDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        globalUserId:
+          type: integer
+        listId:
+          type: integer
+        statusId:
+          type: integer
+        statusLocked:
+          type: boolean
+        customStatusId:
+          type: integer
+        customStatus:
+          $ref: '#/components/schemas/ListCustomStatusDeprecated'
+        customInfluencerStatusId:
+          type: integer
+        optedIn:
+          type: boolean
+        optedInDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        postedDate:
+          type: string
+          format: date
+        engagements:
+          type: number
+        concept:
+          type: string
+        quote:
+          type: number
+        participating:
+          type: boolean
+        completed:
+          type: boolean
+        instanceUser:
+          $ref: '#/components/schemas/InstanceUserMaterializedView'
+    CampaignFolder:
+      type: object
+      properties:
+        title:
+          type: string
+        id:
+          type: string
+        unread:
+          type: integer
+    DBMessageEvent:
+      properties:
+        email:
+          type: string
+        status:
+          type: string
+        reason:
+          type: string
+        userAgent:
+          type: string
+        ip:
+          type: string
+        occurredAt:
+          type: string
+          format: date-time
+        event:
+          type: object
+        sgEventId:
+          type: string
+        messageId:
+          type: object
+        id:
+          type: number
+          format: double
+      required:
+      - occurredAt
+      - event
+      - messageId
+      type: object
+    AdministratorDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+          description: The date and time that the assessment was created.
+  parameters:
+    OutboundMessage:
+      name: data
+      in: body
+      required: true
+      schema:
+        type: object
+        required:
+        - html
+        - subject
+        - recipients
+        properties:
+          recipients:
+            type: array
+            items:
+              $ref: '#/components/schemas/MessageRecipient'
+          attachments:
+            type: array
+            items:
+              $ref: '#/components/schemas/Attachment'
+          templates:
+            type: array
+            items:
+              $ref: '#/components/schemas/ConversationTemplateDeprecated'
+          subject:
+            type: string
+          html:
+            type: string
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
+      schema:
+        type: integer
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
+      schema:
+        type: integer
+    orderDirection:
+      in: query
+      description: Select the direction by which the data will be ordered, ascending or descending.
+      name: orderDirection
+      schema:
+        type: string
+        enum:
+        - ASC
+        - DESC
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

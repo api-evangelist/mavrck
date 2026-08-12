@@ -1,0 +1,212 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Global User Merge API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: GlobalUserMerge
+paths:
+  /v1/global-users-merge/search:
+    post:
+      operationId: getGlobalUserMerges
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  targetGlobalUserId:
+                    type: number
+                    format: double
+                  sourceGlobalUserId:
+                    type: number
+                    format: double
+                  sequence:
+                    items:
+                      type: number
+                      format: double
+                    type: array
+                  merges:
+                    items:
+                      properties:
+                        updatedAt:
+                          type: string
+                          format: date-time
+                        toId:
+                          type: number
+                          format: double
+                        status:
+                          type: string
+                        source:
+                          type: string
+                        results:
+                          additionalProperties: true
+                        id:
+                          type: number
+                          format: double
+                        fromId:
+                          type: number
+                          format: double
+                        createdAt:
+                          type: string
+                          format: date-time
+                      required:
+                      - updatedAt
+                      - toId
+                      - status
+                      - source
+                      - results
+                      - id
+                      - fromId
+                      - createdAt
+                      type: object
+                    type: array
+                  error:
+                    type: string
+                required:
+                - targetGlobalUserId
+                - sourceGlobalUserId
+                - sequence
+                - merges
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - GlobalUserMerge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalUserMergeSearchRequest'
+        required: true
+  /v1/global-users-merge:
+    post:
+      operationId: globalUserMerge
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - GlobalUserMerge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalUserMergeRequest'
+        required: true
+components:
+  schemas:
+    GlobalUserMergeSearchRequest:
+      properties:
+        globalUserId:
+          type: number
+          format: double
+      required:
+      - globalUserId
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GlobalUserMergeRequest:
+      properties:
+        source:
+          type: string
+        newId:
+          type: number
+          format: double
+        oldId:
+          type: number
+          format: double
+      required:
+      - newId
+      - oldId
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

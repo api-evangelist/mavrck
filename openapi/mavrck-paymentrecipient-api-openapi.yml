@@ -1,0 +1,699 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Payment Recipient API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: PaymentRecipient
+paths:
+  /v1/payment-recipients:
+    post:
+      operationId: createPaymentRecipient
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecipientView'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentRecipient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRecipientCreateRequest'
+        required: true
+  /v1/payment-recipients/notification:
+    post:
+      operationId: sendPaymentRecipientOnboardingReminder
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentRecipient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingReminderRequestBody'
+        required: true
+  /v1/payment-recipients/{uuid}:
+    get:
+      operationId: getPaymentRecipient
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecipientView'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentRecipient
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+  /v1/payment-recipients/{uuid}/tipalti-payees/iframe-url:
+    get:
+      operationId: getTipaltiPayeeIframeUrl
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TipaltiPayeeIframeUrlResponse'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentRecipient
+      parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+  /v1/payment-recipients/verifications:
+    post:
+      operationId: requestPaymentRecipientVerification
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationCodeResponse'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentRecipient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationCodeRequest'
+        required: true
+  /v1/payment-recipients/verifications/confirm:
+    post:
+      operationId: confirmPaymentRecipientVerification
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecipientView'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentRecipient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationConfirmRequest'
+        required: true
+  /v1/payment-recipients/list-members/{listMemberId}:
+    get:
+      operationId: getPaymentRecipientByListMemberId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentRecipient
+      parameters:
+      - in: path
+        name: listMemberId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/payment-recipients/links/clear:
+    post:
+      operationId: clearPaymentRecipientLinks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecipientLinksMutationResult'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Clears the payment-recipient link from every active campaign membership of
+
+        the given creators (account-level Later Pay disconnect). latergram resolves
+
+        the Later Social account to its creators'' CDS creator_profile_ids and calls
+
+        this so all in-flight campaigns are severed at once; complete/archived
+
+        memberships keep their link.'
+      tags:
+      - PaymentRecipient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClearPaymentRecipientLinksRequest'
+        required: true
+  /v1/payment-recipients/links/propagate:
+    post:
+      operationId: propagatePaymentRecipientLinks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRecipientLinksMutationResult'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Re-links every active campaign membership of the given creators to a newly
+
+        connected recipient (account-level Later Pay reconnect). Ensures a reconnect
+
+        updates all in-flight campaigns, not just the one being viewed.'
+      tags:
+      - PaymentRecipient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropagatePaymentRecipientLinksRequest'
+        required: true
+components:
+  schemas:
+    ClearPaymentRecipientLinksRequest:
+      description: 'Account-level disconnect. latergram expands a Later Social account to its
+
+        creators'' CDS creator_profile_ids and calls this to clear the link from every
+
+        active campaign membership. SAPI resolves each creator_profile_id to a
+
+        global_user_id; a profile that can''t be resolved has no memberships to touch
+
+        and is skipped.
+
+
+        payment_recipient_uuid is optional: when omitted, every live link on the
+
+        payable memberships is cleared (a full account disconnect). When present, only
+
+        links to that specific recipient are cleared — used by the propagate worker''s
+
+        compensating clear to undo links it created for a recipient that was severed
+
+        mid-flight, without touching links to any other recipient.'
+      properties:
+        creator_profile_ids:
+          items:
+            type: string
+          type: array
+        payment_recipient_uuid:
+          type: string
+      required:
+      - creator_profile_ids
+      type: object
+      additionalProperties: false
+    VerificationConfirmRequest:
+      properties:
+        email:
+          type: string
+        clientId:
+          type: string
+        code:
+          type: string
+      required:
+      - email
+      - clientId
+      - code
+      type: object
+      additionalProperties: false
+    OnboardingReminderRequestBody:
+      description: 'Domain types for payment-recipient creator notifications (onboarding reminder + payment
+
+        confirmation). These mirror the Stripe notification payloads but are provider-agnostic: the
+
+        creator only ever sees generic "payment information" copy, while the code refers to the
+
+        internal "payment recipient" concept.'
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        actionGroupId:
+          type: number
+          format: double
+      required:
+      - globalUserId
+      - actionGroupId
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    TipaltiPayeeIframeUrlResponse:
+      properties:
+        url:
+          type: string
+      required:
+      - url
+      type: object
+      additionalProperties: false
+    PropagatePaymentRecipientLinksRequest:
+      description: 'Account-level reconnect. Re-links every active campaign membership of the given
+
+        creators to the newly connected recipient.'
+      properties:
+        creator_profile_ids:
+          items:
+            type: string
+          type: array
+        payment_recipient_uuid:
+          type: string
+      required:
+      - creator_profile_ids
+      - payment_recipient_uuid
+      type: object
+      additionalProperties: false
+    PaymentRecipientView:
+      properties:
+        id:
+          type: number
+          format: double
+        uuid:
+          type: string
+        email:
+          type: string
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        companyName:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        isActive:
+          type: boolean
+        payableEntities:
+          items:
+            $ref: '#/components/schemas/PayableEntity'
+          type: array
+      required:
+      - id
+      - uuid
+      - email
+      - firstName
+      - lastName
+      - companyName
+      - country
+      - isActive
+      - payableEntities
+      type: object
+      additionalProperties: false
+    PayableEntity:
+      properties:
+        id:
+          type: number
+          format: double
+        cashPaymentAppId:
+          type: number
+          format: double
+        providerStatus:
+          $ref: '#/components/schemas/TipaltiProviderStatus'
+        isPayable:
+          type: boolean
+        isActive:
+          type: boolean
+        provider:
+          type: string
+          enum:
+          - TIPALTI
+      required:
+      - id
+      - cashPaymentAppId
+      - providerStatus
+      - isPayable
+      - isActive
+      - provider
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PaymentRecipientLinksMutationResult:
+      description: 'Result of a bulk clear/propagate. `memberships` is how many campaign
+
+        memberships the operation matched (clearable set for clear, active set for
+
+        propagate); `affected` is how many link rows actually changed.'
+      properties:
+        memberships:
+          type: number
+          format: double
+        affected:
+          type: number
+          format: double
+      required:
+      - memberships
+      - affected
+      type: object
+      additionalProperties: false
+    VerificationCodeRequest:
+      properties:
+        email:
+          type: string
+        clientId:
+          type: string
+      required:
+      - email
+      - clientId
+      type: object
+      additionalProperties: false
+    PaymentRecipientCreateRequest:
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        country:
+          type: string
+        include:
+          items:
+            type: string
+            enum:
+            - TIPALTI_PAYEE
+          type: array
+      required:
+      - email
+      type: object
+      additionalProperties: false
+    VerificationCodeResponse:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TipaltiProviderStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - BLOCKED
+      - SUSPENDED
+      - BLOCKED_BY_TIPALTI
+      - INTERNAL_VALUE
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

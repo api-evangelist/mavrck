@@ -1,0 +1,362 @@
+openapi: 3.2.0
+info:
+  title: Later Influence™ Influencer Level API
+  description: "\n# Description\nThe Reporting API enables deep analysis and reporting of marketing campaigns, social media performance, and influencer effectiveness.\nIt provides comprehensive performance insights at multiple levels:\n- Instance Level: Get instance details, overall performance, and performance over time\n- Campaign Level: Retrieve detailed campaign performance metrics\n- Social Network Level: Analyze performance across different social networks and calculate return on investment\n- Influencer Level: Evaluate individual influencer performance\n- Post Level: Access granular performance data for individual posts\n\n# Authentication\nIn order to use the Reporting API, OAuth2 authentication is required. The API uses the client credentials flow for authentication. To obtain an access token:\n\n1. Request the client credentials (client ID and client secret) from the support team.\n2. Make a POST request to the token endpoint: `https://api.mavrck.co/oauth/token`, including your client credentials in the request body.\n\nCurl Example: \n```\ncurl --request POST \\\n  --url 'https://api.mavrck.co/oauth/token' \\\n  --header 'Content-Type: application/json' \\\n  --header 'accept: application/json' \\\n  --data '{\n    \"clientId\": \"<client_id>\",\n    \"clientSecret\": \"<client_secret>\"\n  }'\n```\n\n3. Include the obtained access token in the Authorization header of your API requests:\n\nCurl Example: \n```\ncurl --request GET \\\n  --url 'https://api.mavrck.co/v1/reporting/instance/details' \\\n  --header 'Content-Type: application/json' \\\n  --header 'accept: application/json' \\\n  --header 'Authorization: Bearer **<your_access_token>**' \\\n```\n\nFor security reasons, access tokens have a limited lifespan of 12 hours. You should implement a mechanism to refresh the token when it expires.\n\n# Data Availability\n- Most endpoints return analytics that are current up to the previous day, as several social media platforms apply a 24-hour reporting delay.\n- Data access is limited to the specific account or instances associated with the provided API credentials.\n- Analytics are recorded on a daily basis and appear only when they fall within the selected date-range filters. For example, if a post was published a week ago but receives its first interaction today, that interaction will only be included when today’s date is part of the chosen range.\n\n# Base Filters\nAll endpoints support the following filters:\n- `startDate` (ISO 8601 format, e.g. 2024-01-01)\n- `endDate` (ISO 8601 format, e.g. 2024-01-01). There is a limit of up to 2 years for the selected date range.\n- `instanceIds` array of instance ids. If not provided, all instances associated with the API credentials will be considered.\n- `campaignIds` array of campaign ids, if no campaign ids are provided, all campaigns for the instance will be used\n- `reportingGroupIds` array of reporting group ids, if no reporting group ids are provided, all reporting groups for the instance will be used\n\n# Pagination\n- The pagination is available for endpoints returning large datasets.\n- Use `pageSize` and `pageNumber` query parameters to control the results. For the `pageSize` parameter, the default is 50 and the maximum is 100.\n\n# Versioning\n- API versioning supported through URI path\n\n# Changelog\n\n---\n\n## 2025-11-25 Introduce Multi-instance support\n### Added\n- `GET /instances` API - Retrieve the list of instances accessible by the provided API credentials.\n- `GET /instances/details` API - Get detailed information about the instances associated with the provided API credentials such as `influencersCount`, `campaignsCount`, and other relevant metrics. It is similar to the existing `GET /instance/details` endpoint but supports multiple instances.\n\n### Changed\n- All endpoints now support an `instanceIds` query parameter, allowing you to filter results by specific instance IDs when your credentials have access to multiple instances.\n- `GET /campaigns/performance` response includes a new string field `instanceId`.\n- `GET /post/performance` response includes a new string field `instanceId`.\n\n"
+  version: 1.2.1
+  contact:
+    name: Developer
+    url: https://help-influence.later.com/hc/en-us
+    email: urvash.chheda@later.com
+  termsOfService: https://later.com/terms/
+servers:
+- url: https://api.mavrck.co
+security:
+- JWT: []
+tags:
+- name: Influencer Level
+paths:
+  /v1/reporting/influencer/performance:
+    get:
+      description: Get influencer performance details.
+      operationId: getInfluencerPerformance
+      parameters:
+      - name: startDate
+        required: true
+        in: query
+        description: Start date for the report, YYYY-MM-dd format
+        schema:
+          format: date-time
+          type: string
+      - name: endDate
+        required: true
+        in: query
+        description: End date for the report, YYYY-MM-dd format
+        schema:
+          format: date-time
+          type: string
+      - name: instanceIds
+        required: false
+        in: query
+        description: A list of instance ids. If not provided, all instances associated with the API credentials will be considered.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: campaignIds
+        required: false
+        in: query
+        description: A list of campaign ids (max 50 items)
+        schema:
+          type: array
+          items:
+            type: number
+      - name: reportingGroupIds
+        required: false
+        in: query
+        description: A list of reporting group ids
+        schema:
+          type: array
+          items:
+            type: string
+      - name: pageSize
+        required: false
+        in: query
+        description: Number of items per page
+        schema:
+          default: 50
+          type: number
+      - name: pageNumber
+        required: false
+        in: query
+        description: The page you would like to get data for
+        schema:
+          default: 1
+          type: number
+      - name: sortProperty
+        required: false
+        in: query
+        description: 'sortProperty must be one of the following values: engagements, impressions, engagementRate, estimatedValueGenerated, instagramReach, instagramSaved, instagramShares, instagramViews, instagramTotalInteractions, estimatedContentCost, cpm, cpe, estimatedRoi, postsCount, trackingLinksClicks, trackingLinksConversions, trackingLinksConversionValue, affiliateLinksClicks, affiliateLinksConversions, affiliateLinksConversionRate, affiliateLinksSales, affiliateLinksComissionEarned, affiliateLinksRoi, paidCost'
+        schema:
+          type: string
+      - name: sortDirection
+        required: false
+        in: query
+        description: ASC or DESC
+        schema:
+          default: DESC
+          type: string
+      - name: metrics
+        required: false
+        in: query
+        description: A list of metrics to get the data for. Empty or undefined, to get all the metrics
+        schema:
+          example:
+          - engagements
+          - impressions
+          type: array
+          items:
+            type: string
+            enum:
+            - engagements
+            - impressions
+            - engagementRate
+            - estimatedValueGenerated
+            - estimatedRoi
+            - cpe
+            - cpm
+            - estimatedContentCost
+            - paidCost
+            - postsCount
+            - trackingLinksClicks
+            - trackingLinksConversions
+            - trackingLinksConversionValue
+            - affiliateLinksClicks
+            - affiliateLinksConversions
+            - affiliateLinksConversionRate
+            - affiliateLinksSales
+            - affiliateLinksComissionEarned
+            - affiliateLinksRoi
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ReportingApiResponseDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/InfluencerPerformanceResponseDto'
+      summary: ''
+      tags:
+      - Influencer Level
+components:
+  schemas:
+    ReportingApiResponseDto:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+        meta:
+          type:
+          - object
+          - 'null'
+          description: Metadata containing page information
+          properties:
+            page:
+              type: number
+              example: 1
+            totalPages:
+              type: number
+              example: 10
+      required:
+      - data
+      - meta
+    CreatorDto:
+      type: object
+      properties:
+        globalUserId:
+          type: number
+          description: Global user ID of the creator
+          example: 12345
+        profilePictureUrl:
+          type:
+          - string
+          - 'null'
+          description: Profile picture URL
+          example: https://example.com/profile.jpg
+        fullName:
+          type:
+          - string
+          - 'null'
+          description: Full name of the creator
+          example: John Doe
+        profiles:
+          description: Creator profiles
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatorProfileDto'
+      required:
+      - globalUserId
+      - profiles
+    InfluencerPerformanceResponseDto:
+      type: object
+      properties:
+        creator:
+          description: Creator information
+          allOf:
+          - $ref: '#/components/schemas/CreatorDto'
+        creatorGlobalUserId:
+          type: number
+          description: Global user ID of the creator
+          example: 12345
+        engagements:
+          type:
+          - number
+          - 'null'
+          description: Number of engagements
+          example: 1000
+        impressions:
+          type:
+          - number
+          - 'null'
+          description: Number of impressions
+          example: 10000
+        engagementRate:
+          type:
+          - number
+          - 'null'
+          description: Engagement rate
+          example: 0.1
+        estimatedValueGenerated:
+          type:
+          - number
+          - 'null'
+          description: Estimated value generated
+          example: 5000
+        paidCost:
+          type:
+          - number
+          - 'null'
+          description: Paid cost
+          example: 2000
+        estimatedRoi:
+          type:
+          - number
+          - 'null'
+          description: Estimated ROI
+          example: 2.5
+        cpe:
+          type:
+          - number
+          - 'null'
+          description: Cost per engagement
+          example: 0.5
+        cpm:
+          type:
+          - number
+          - 'null'
+          description: Cost per mille
+          example: 5
+        estimatedContentCost:
+          type:
+          - number
+          - 'null'
+          description: Estimated content cost
+          example: 1000
+        postsCount:
+          type:
+          - number
+          - 'null'
+          description: Number of posts
+          example: 10
+        clicks:
+          type:
+          - number
+          - 'null'
+          description: Number of clicks
+          example: 500
+        conversionValue:
+          type:
+          - number
+          - 'null'
+          description: Conversion value
+          example: 2000
+        trackingLinksClicks:
+          type:
+          - number
+          - 'null'
+          description: Number of tracking link clicks
+          example: 300
+        trackingLinksConversions:
+          type:
+          - number
+          - 'null'
+          description: Number of tracking link conversions
+          example: 50
+        trackingLinksConversionValue:
+          type:
+          - number
+          - 'null'
+          description: Tracking links conversion value
+          example: 1500
+        affiliateLinksClicks:
+          type:
+          - number
+          - 'null'
+          description: Number of affiliate link clicks
+          example: 200
+        affiliateLinksConversions:
+          type:
+          - number
+          - 'null'
+          description: Number of affiliate link conversions
+          example: 30
+        affiliateLinksConversionRate:
+          type:
+          - number
+          - 'null'
+          description: Affiliate links conversion rate
+          example: 0.15
+        affiliateLinksSales:
+          type:
+          - number
+          - 'null'
+          description: Affiliate links sales
+          example: 3000
+        affiliateLinksComissionEarned:
+          type:
+          - number
+          - 'null'
+          description: Affiliate links commission earned
+          example: 300
+        affiliateLinksRoi:
+          type:
+          - number
+          - 'null'
+          description: Affiliate links ROI
+          example: 3
+      required:
+      - creator
+      - creatorGlobalUserId
+    CreatorProfileDto:
+      type: object
+      properties:
+        handleName:
+          type: string
+          description: Handle name of the creator
+          example: johndoe
+        network:
+          type: string
+          description: Social network of the creator
+          example: Instagram
+        fullName:
+          type:
+          - string
+          - 'null'
+          description: Full name of the creator
+          example: John Doe
+        profileImage:
+          type:
+          - string
+          - 'null'
+          description: Profile image URL
+          example: https://example.com/profile.jpg
+        profileLink:
+          type:
+          - string
+          - 'null'
+          description: Profile link
+          example: https://instagram.com/johndoe
+      required:
+      - handleName
+      - network
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT obtained from the OAuth2 token endpoint

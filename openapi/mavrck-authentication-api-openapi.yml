@@ -1,0 +1,1486 @@
+openapi: 3.2.0
+info:
+  title: Mavrck Authentication API
+  version: '1.0'
+  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: mavrck-authentication-api-openapi.yml, mavrck-reporting-api.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+- url: https://api.mavrck.co
+tags:
+- name: Authentication
+paths:
+  /api-key/facebook:
+    post:
+      tags:
+      - Authentication
+      x-handler: auth/facebook_controller.js
+      summary: Pass Facebook access grant information in exchange for a JWT to include in the header of requests.
+      parameters:
+      - name: ^mdp_.+$
+        in: query
+        required: false
+        description: Pass in data points on sign-up, in the format mdp_{data_point_definition_key}
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User info
+          content:
+            application/json:
+              schema:
+                properties:
+                  expiresAt:
+                    type: string
+                    format: date-time
+                  rejection:
+                    $ref: '#/components/schemas/MembershipRejection'
+                  profile:
+                    $ref: '#/components/schemas/Profile'
+                  token:
+                    type: string
+        '400':
+          description: Missing/invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - communityId
+              properties:
+                communityId:
+                  type: string
+                accessToken:
+                  type: string
+                code:
+                  type: string
+                  description: Authorization code from beginning of the OAuth flow.
+                redirectUri:
+                  type: string
+                  description: Redirect URI that facebook should redirect to after authorization. Must match the redirect URI from the first part of the flow.
+                referralSourceDomain:
+                  type: string
+                  description: The domain that the user came from when they logged in for the first time
+                referringURL:
+                  type: string
+                utmSource:
+                  type: string
+                utmMedium:
+                  type: string
+                utmTerm:
+                  type: string
+                utmContent:
+                  type: string
+                utmCampaign:
+                  type: string
+                phone:
+                  type: string
+                abTestVariations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      variation:
+                        type: string
+                facebookPageIds:
+                  type: array
+                  items:
+                    type: string
+                shouldAddPages:
+                  type: boolean
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /auto-login:
+    post:
+      tags:
+      - Authentication
+      x-handler: auth/influencer_auto_login/influencer_auto_login_controller.js
+      summary: Pass encrypted user key in exchange for a JWT to include in the header of requests.
+      responses:
+        '200':
+          description: User info
+          content:
+            application/json:
+              schema:
+                properties:
+                  expiresAt:
+                    type: string
+                    format: date-time
+                  rejection:
+                    $ref: '#/components/schemas/MembershipRejection'
+                  profile:
+                    $ref: '#/components/schemas/Profile'
+                  token:
+                    type: string
+        '400':
+          description: Missing/invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - key
+              properties:
+                key:
+                  type: string
+                  description: Encrypted user key
+                actionGroupId:
+                  type: integer
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /connected-account/instagram-business:
+    post:
+      tags:
+      - Authentication
+      x-handler: auth/instagram_business_controller.js
+      summary: Pass Facebook access grant information in exchange for a JWT to include in the header of requests.
+      x-access:
+      - influencer
+      responses:
+        '200':
+          description: All Instagram Profiles and Facebook Profiles
+          content:
+            application/json:
+              schema:
+                properties:
+                  token:
+                    type: string
+                  instagramProfiles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InstagramConnectionInfo'
+                  facebookProfiles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FacebookProfileDeprecated'
+        '400':
+          description: Missing/invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - communityId
+              properties:
+                communityId:
+                  type: string
+                accessToken:
+                  type: string
+                code:
+                  type: string
+                  description: Authorization code from beginning of the OAuth flow.
+                redirectUri:
+                  type: string
+                  description: Redirect URI that facebook should redirect to after authorization. Must match the redirect URI from the first part of the flow.
+                facebookPageIds:
+                  type: array
+                  items:
+                    type: string
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /email-auth/lookup:
+    post:
+      tags:
+      - Authentication
+      x-handler: email_auth/email_auth_lookup_controller.js
+      summary: Pass an email and check if it needs verification or existing login credentials submitted in order to proceed
+      parameters:
+      - name: ^mdp_.+$
+        in: query
+        required: false
+        description: Pass in data points on sign-up, in the format mdp_{data_point_definition_key}
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Email was found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the next step for the client to perform.
+                    enum:
+                    - userOwnsEmail
+                    - loginCredentialsRequired
+                    - emailVerificationRequestInitiated
+                    - emailOwnedByAnotherUser
+        '400':
+          description: Missing or invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - communityId
+              - email
+              properties:
+                communityId:
+                  type: string
+                email:
+                  type: string
+                actionGroupId:
+                  type: integer
+                referralSourceDomain:
+                  type: string
+                  description: The domain that the user came from when they logged in for the first time
+                redirectUrl:
+                  type: string
+                referringURL:
+                  type: string
+                utmSource:
+                  type: string
+                utmMedium:
+                  type: string
+                utmTerm:
+                  type: string
+                utmContent:
+                  type: string
+                utmCampaign:
+                  type: string
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /email-auth/signup:
+    post:
+      tags:
+      - Authentication
+      x-handler: email_auth/email_auth_signup_controller.js
+      summary: Pass an email verification request key and new password in exchange for a JWT to include in the header of requests.
+      responses:
+        '200':
+          description: User Info.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the next step for the client to perform.
+                    enum:
+                    - loginCredentialsExist
+                    - authenticationRequired
+                    - createLoginCredentialsRequired
+                    - usersDoNotMatch
+                  authenticationOptions:
+                    type: array
+                    description: If authentication is required before proceeding present what types of login are acceptable (facebook or/and email)
+                    items:
+                      type: string
+                      enum:
+                      - facebook
+                      - email
+                  profile:
+                    $ref: '#/components/schemas/Profile'
+                  token:
+                    type: string
+        '400':
+          description: Missing or invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - key
+              - password
+              properties:
+                key:
+                  type: string
+                password:
+                  type: string
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /email-auth/login:
+    post:
+      tags:
+      - Authentication
+      x-handler: email_auth/email_auth_login_controller.js
+      summary: Pass an email and password in exchange for a JWT to include in the header of requests.
+      parameters:
+      - name: ^mdp_.+$
+        in: query
+        required: false
+        description: Pass in data points on sign-up, in the format mdp_{data_point_definition_key}
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User Info.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profile:
+                    $ref: '#/components/schemas/Profile'
+                  token:
+                    type: string
+                  rejection:
+                    $ref: '#/components/schemas/MembershipRejection'
+        '400':
+          description: Missing or invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - communityId
+              - email
+              - password
+              properties:
+                communityId:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /email-auth/forgot-password:
+    post:
+      tags:
+      - Authentication
+      x-handler: email_auth/email_auth_forgot_password_controller.js
+      summary: Initiate a forgot password password request
+      responses:
+        '200':
+          description: Forgot password email sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          description: Missing or invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - communityId
+              - email
+              properties:
+                communityId:
+                  type: string
+                email:
+                  type: string
+                actionGroupId:
+                  type: integer
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /email-auth/reset-password:
+    post:
+      tags:
+      - Authentication
+      x-handler: email_auth/email_auth_reset_password_controller.js
+      summary: Pass an email reset password request key and new password in exchange for a JWT to include in the header of requests.
+      responses:
+        '200':
+          description: User Info.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profile:
+                    $ref: '#/components/schemas/Profile'
+                  token:
+                    type: string
+                  actionGroupId:
+                    type: integer
+        '400':
+          description: Missing or invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - key
+              - password
+              properties:
+                key:
+                  type: string
+                password:
+                  type: string
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /email-verification-request/validate:
+    post:
+      tags:
+      - Authentication
+      x-handler: email_verification_request/email_verification_request_validate_controller.js
+      summary: Validate an email verification request.
+      responses:
+        '200':
+          description: Email verification request is valid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the next step for the client to perform.
+                    enum:
+                    - loginCredentialsExist
+                    - authenticationRequired
+                    - createLoginCredentialsRequired
+                    - usersDoNotMatch
+                  authenticationOptions:
+                    type: array
+                    description: If authentication is required before proceeding present what types of login are acceptable (facebook or/and email)
+                    items:
+                      type: string
+                      enum:
+                      - facebook
+                      - email
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      fullName:
+                        type: string
+                  emailVerificationRequest:
+                    type: object
+                    properties:
+                      actionGroupId:
+                        type: integer
+                      redirectUrl:
+                        type: string
+        '400':
+          description: Missing or invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - key
+              properties:
+                key:
+                  type: string
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /email-verification-request/create:
+    post:
+      tags:
+      - Authentication
+      x-handler: email_verification_request/email_verification_request_controller.js
+      x-access:
+      - influencer
+      summary: Create an Email Verification Request
+      responses:
+        '200':
+          description: request is valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          description: Missing or invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                actionGroupId:
+                  type: integer
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /login-credentials/update:
+    put:
+      tags:
+      - Authentication
+      x-handler: login_credentials/login_credentials_controller.js
+      x-access:
+      - influencer
+      summary: Update existing influencer login credentials.
+      responses:
+        '200':
+          description: User Info.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profile:
+                    $ref: '#/components/schemas/Profile'
+        '400':
+          description: Missing or invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - newPassword
+              properties:
+                oldPassword:
+                  type: string
+                newPassword:
+                  type: string
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /v1/api-key/login:
+    post:
+      operationId: loginAdmin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicAuthPostResponse'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasicAuthPostRequest'
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /v1/auth/facebook/exchange-code-for-token:
+    post:
+      operationId: exchangeCodeForToken
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  accessToken:
+                    type: string
+                  token:
+                    type: string
+                required:
+                - accessToken
+                - token
+                type: object
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'exchangeCodeForToken
+
+
+        Exchange a Facebook access code for a token
+
+        Used as part of the connecting a social profile on the Community App
+
+        FE requires a Facebook access token prior to connecting a social profile in order to fetch the available pages from the FB API
+
+        Because of how we are using satellizer on the FE to manage the OAuth flow,
+
+        we are required to return our own token as part of this response
+
+        This endpoint requires the user to be authenticated and returns the existing api key as the token'
+      tags:
+      - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FacebookAccessCodeExchangeRequest'
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /v1/api-key/swap-app:
+    post:
+      operationId: swapCommunity
+      responses:
+        '200':
+          description: Authorization info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwapAppPostResponse'
+        '400':
+          description: Missing or Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SwapAppRequestBody'
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /v1/reset-password:
+    get:
+      operationId: getResetKey
+      responses:
+        '200':
+          description: Email Sent to Connected Account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing/invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Authentication
+      parameters:
+      - in: query
+        name: email
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: hostname
+        required: false
+        schema:
+          type: string
+      security:
+      - apiKey: []
+    post:
+      operationId: resetPassword
+      responses:
+        '200':
+          description: Password Changed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing/invalid parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostRequestBody'
+        required: true
+      security:
+      - apiKey: []
+    servers:
+    - url: http://app.splashscore.com/v1
+    - url: https://app.splashscore.com/v1
+  /oauth/token:
+    post:
+      description: Generate the OAuth Token to authorize further requests.
+      operationId: getToken
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequestDto'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponseDto'
+        '400':
+          description: Bad request
+        '403':
+          description: Accessing unauthorized instances
+      summary: Generate OAuth Token
+      tags:
+      - Authentication
+      security:
+      - JWT: []
+    servers:
+    - url: https://api.mavrck.co
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
+    SwapAppRequestBody:
+      properties:
+        communityId:
+          type: string
+      required:
+      - communityId
+      type: object
+      additionalProperties: false
+    BasicAuthPostResponse:
+      properties:
+        token:
+          type: string
+        communityId:
+          type: string
+      required:
+      - token
+      - communityId
+      type: object
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PinterestConnectionInfo:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the Pinterest connection flow.
+        handle:
+          type: string
+          description: Client's Pinterest account handle
+        profilePicture:
+          type: string
+          description: Client's Pinterest profile picture
+    FacebookConnectionInfo:
+      $ref: '#/components/schemas/FacebookProfileDeprecated'
+    PostRequestBody:
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        resetKey:
+          type: string
+      required:
+      - email
+      - password
+      - resetKey
+      type: object
+      additionalProperties: false
+    SwapAppPostResponse:
+      properties:
+        token:
+          type: string
+      required:
+      - token
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    InstagramConnectionInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Instagram Profile Id
+        primaryAccount:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the either reconnection flow.
+        platformExpiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the Instagram Platform connection flow.
+        businessExpiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the Instagram Business connection flow.
+        handle:
+          type: string
+          description: Client's Instagram account handle
+        profilePicture:
+          type: string
+          description: Client's Instagram profile picture
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    FacebookAccessCodeExchangeRequest:
+      properties:
+        redirectUri:
+          type: string
+        code:
+          type: string
+      required:
+      - redirectUri
+      - code
+      type: object
+    TikTokConnectionInfo:
+      type: object
+      properties:
+        primaryAccount:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the TikTok connection flow.
+        handle:
+          type: string
+          description: Client's TikTok account handle
+        profilePicture:
+          type: string
+          description: Client's TikTok profile picture
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    BasicAuthPostRequest:
+      properties:
+        password:
+          type: string
+        email:
+          type: string
+      required:
+      - password
+      - email
+      type: object
+    Profile:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        emailIsVerified:
+          type: boolean
+        facebookExternalId:
+          type: string
+        membershipId:
+          type: integer
+        globalUserId:
+          type: integer
+        isNewMember:
+          type: boolean
+        location:
+          type: string
+        becameMemberAt:
+          type: string
+          format: date-time
+        connectedAccounts:
+          type: object
+          properties:
+            facebook:
+              $ref: '#/components/schemas/FacebookConnectionInfo'
+            twitter:
+              $ref: '#/components/schemas/TwitterConnectionInfoDeprecated'
+            instagram:
+              $ref: '#/components/schemas/InstagramConnectionInfo'
+            pinterest:
+              $ref: '#/components/schemas/PinterestConnectionInfo'
+            blog:
+              $ref: '#/components/schemas/Blog'
+            emailAccounts:
+              type: array
+              items:
+                $ref: '#/components/schemas/EmailAccount'
+            tiktok:
+              $ref: '#/components/schemas/TikTokConnectionInfo'
+        connectedAccountsCollection:
+          type: object
+          properties:
+            facebook:
+              type: array
+              items:
+                $ref: '#/components/schemas/FacebookConnectionInfo'
+            instagram:
+              type: array
+              items:
+                $ref: '#/components/schemas/InstagramConnectionInfo'
+            tiktok:
+              type: array
+              items:
+                $ref: '#/components/schemas/TikTokConnectionInfo'
+        referralSlug:
+          type: string
+        referralCount:
+          type: integer
+        loginCredentialsExist:
+          type: boolean
+        memberSelectedEthnicities:
+          type: array
+          items:
+            type: object
+            properties:
+              ethnicGroup:
+                type: string
+              ethnicGroupDescription:
+                type: string
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TwitterConnectionInfoDeprecated:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the Twitter connection flow.
+        handle:
+          type: string
+          description: Client's Twitter account handle
+        profilePicture:
+          type: string
+          description: Client's Twitter profile picture
+    EmailAccount:
+      type: object
+      properties:
+        email:
+          type: string
+    Blog:
+      properties:
+        globalUserId:
+          type:
+          - number
+          - 'null'
+          format: double
+        language:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        platform:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      type: object
+      additionalProperties: false
+    EmptyObject:
+      type: object
+      properties: {}
+    MembershipRejection:
+      type: object
+      description: Passed when an influencer does not meet the entrance criteria for the community.
+      properties:
+        redirectLink:
+          type: string
+        rejectReason:
+          type: string
+        missingCriteria:
+          type: array
+          items:
+            type: string
+    FacebookProfileDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        facebookExternalId:
+          type: string
+        name:
+          type: string
+        link:
+          type: string
+        picture:
+          type: string
+        reach:
+          type: integer
+        averageLikes:
+          type: integer
+        averageComments:
+          type: integer
+        averageEngagements:
+          type: integer
+        engagementRate:
+          type: number
+        type:
+          type: string
+        available:
+          type: boolean
+        active:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+        facebookUser:
+          type: object
+          properties:
+            isExpired:
+              type: boolean
+    TokenRequestDto:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Client ID required to get the JWT token used for authentication
+          example: client_id_123
+        clientSecret:
+          type: string
+          description: Client Secret required to get the JWT token used for authentication
+          example: client_secret_456
+      required:
+      - clientId
+      - clientSecret
+    TokenResponseDto:
+      type: object
+      properties:
+        jwt:
+          type: string
+          description: The JWT token using which the reporting APIs need to be authenticated
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+      required:
+      - jwt
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT obtained from the OAuth2 token endpoint
+x-refined-from:
+- mavrck-authentication-api-openapi.yml
+- mavrck-reporting-api.json

@@ -1,0 +1,1018 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Action Groups API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Action Groups
+paths:
+  /v1/action-groups/{actionGroupId}/participants:
+    get:
+      operationId: getActionGroupParticipants
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryActionGroupParticipantsResponse'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Framework.BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Framework.ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Framework.NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Framework.ServerError'
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: customStatusId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: listMemberId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+      - in: query
+        name: includeCommentsCount
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includePinnedComment
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeInstagramPosts
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: includeTiktokPosts
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: postCount
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: orderProperty
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          enum:
+          - desc
+          - asc
+          - DESC
+          - ASC
+      - in: query
+        name: q
+        required: false
+        schema:
+          type: string
+      tags:
+      - Action Groups
+  /v1/action-groups/{actionGroupId}/global-users/{globalUserId}/activations:
+    post:
+      operationId: Post
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: number
+                format: double
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '422':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostActivationsRequestBody'
+        required: true
+      tags:
+      - Action Groups
+components:
+  schemas:
+    TikTokVideoViewsBySource:
+      properties:
+        source:
+          type:
+          - string
+          - 'null'
+        videoViews:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - videoViews
+      type: object
+      additionalProperties: false
+    PostActivationsRequestBody:
+      properties:
+        audienceAgeDistribution:
+          items:
+            $ref: '#/components/schemas/TikTokAudienceAgeDistribution'
+          type:
+          - array
+          - 'null'
+        audienceCountriesDistribution:
+          items:
+            $ref: '#/components/schemas/TikTokAudienceCountriesDistribution'
+          type:
+          - array
+          - 'null'
+        audienceGendersDistribution:
+          items:
+            $ref: '#/components/schemas/TikTokAudienceGendersDistribution'
+          type:
+          - array
+          - 'null'
+        audienceInterestDistribution:
+          items:
+            $ref: '#/components/schemas/TikTokAudienceInterestDistribution'
+          type:
+          - array
+          - 'null'
+        caption:
+          type: string
+        clicks:
+          type: number
+          format: double
+        comments:
+          type: number
+          format: double
+        commentsOrganic:
+          type: number
+          format: double
+        commentsPaid:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+        externalId:
+          type: string
+        engagementCount:
+          type: number
+          format: double
+        image:
+          type: string
+        impressions:
+          type: number
+          format: double
+        impressionsSource:
+          type: string
+        likes:
+          type: number
+          format: double
+        likesOrganic:
+          type: number
+          format: double
+        likesPaid:
+          type: number
+          format: double
+        link:
+          type: string
+        network:
+          type: string
+        reach:
+          type: number
+          format: double
+        shares:
+          type: number
+          format: double
+        sharesOrganic:
+          type: number
+          format: double
+        sharesPaid:
+          type: number
+          format: double
+        video:
+          type: string
+        videoCompletionRate:
+          type: number
+          format: double
+        totalPlayTime:
+          type: number
+          format: double
+        videoViewsBySource:
+          items:
+            $ref: '#/components/schemas/TikTokVideoViewsBySource'
+          type:
+          - array
+          - 'null'
+        videoViews:
+          type: number
+          format: double
+        videoViewsOrganic:
+          type: number
+          format: double
+        videoViewsPaid:
+          type: number
+          format: double
+        followersAtPostDate:
+          type: number
+          format: double
+      required:
+      - caption
+      - createdAt
+      - externalId
+      - link
+      - network
+      type: object
+      additionalProperties: false
+    ActionGroupParticipantDto:
+      properties:
+        user:
+          $ref: '#/components/schemas/ActionGroupParticipantUserDto'
+        upvotes:
+          type: number
+          format: double
+        totalVotes:
+          type: number
+          format: double
+        statusId:
+          type: number
+          format: double
+        participating:
+          type: boolean
+        optedIn:
+          type: boolean
+        netVotes:
+          type: number
+          format: double
+        listMemberId:
+          type: number
+          format: double
+        listMemberCostAndPerformance:
+          $ref: '#/components/schemas/ActionGroupParticipantCostAndPerformanceDto'
+        tiktokPosts:
+          items:
+            $ref: '#/components/schemas/ActionGroupParticipantTiktokPostDto'
+          type: array
+        instagramPosts:
+          items:
+            $ref: '#/components/schemas/ActionGroupParticipantInstagramPostDto'
+          type: array
+        id:
+          type: number
+          format: double
+        hasConversations:
+          type: boolean
+        globalUserId:
+          type: number
+          format: double
+        downvotes:
+          type: number
+          format: double
+        customStatus:
+          $ref: '#/components/schemas/ActionGroupParticipantCustomStatusDto'
+        completed:
+          type: boolean
+        pinnedComment:
+          type: object
+        commentsCount:
+          type: number
+          format: double
+        assessments:
+          items:
+            $ref: '#/components/schemas/ActionGroupParticipantAssessmentDto'
+          type: array
+        applicationResponses:
+          items:
+            $ref: '#/components/schemas/ActionGroupParticipantApplicationResponseDto'
+          type: array
+      required:
+      - user
+      - upvotes
+      - totalVotes
+      - netVotes
+      - listMemberId
+      - listMemberCostAndPerformance
+      - tiktokPosts
+      - instagramPosts
+      - id
+      - hasConversations
+      - globalUserId
+      - downvotes
+      - customStatus
+      - assessments
+      - applicationResponses
+      type: object
+    ActionGroupParticipantContactInfoDto:
+      properties:
+        zip:
+          type: string
+        street:
+          type: string
+        state:
+          type: string
+        phone:
+          type: string
+        lastName:
+          type: string
+        genderDescription:
+          type: string
+        gender:
+          type: string
+        fullName:
+          type: string
+        firstName:
+          type: string
+        email:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        apt:
+          type: string
+        emailIsVerified:
+          type: boolean
+      required:
+      - zip
+      - street
+      - state
+      - phone
+      - lastName
+      - genderDescription
+      - gender
+      - fullName
+      - firstName
+      type: object
+    TikTokAudienceAgeDistribution:
+      properties:
+        age:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - age
+      - percentage
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActionGroupParticipantMembershipDto:
+      properties:
+        contactInfo:
+          $ref: '#/components/schemas/ActionGroupParticipantContactInfoDto'
+        updatedAt:
+          type: string
+          format: date-time
+        totalImpressions:
+          type: number
+          format: double
+        status:
+          type: string
+        mostRecentActivationDate:
+          type: string
+          format: date-time
+        membershipType:
+          type: string
+        membershipId:
+          type: number
+          format: double
+        lifetimeConversionsValue:
+          type: number
+          format: double
+        lifetimeConversions:
+          type: number
+          format: double
+        lifetimeClicks:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+        blacklisted:
+          type: boolean
+      required:
+      - contactInfo
+      - updatedAt
+      - status
+      - membershipType
+      - membershipId
+      - lifetimeConversionsValue
+      - lifetimeConversions
+      - lifetimeClicks
+      - id
+      - createdAt
+      - blacklisted
+      type: object
+    ActionGroupParticipantInstagramProfileDto:
+      properties:
+        profileType:
+          type: string
+          enum:
+          - platform
+          - business
+        profilePicture:
+          type: string
+        mediaCount:
+          type: number
+          format: double
+        isPrivate:
+          type: boolean
+        isBusiness:
+          type: boolean
+        handle:
+          type: string
+        fullName:
+          type: string
+        followingCount:
+          type: number
+          format: double
+        followersCount:
+          type: number
+          format: double
+        engagementRate:
+          type: number
+          format: double
+        averageLikes:
+          type: number
+          format: double
+        averageEngagements:
+          type: number
+          format: double
+        averageComments:
+          type: number
+          format: double
+      type: object
+    TikTokAudienceGendersDistribution:
+      properties:
+        gender:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - percentage
+      type: object
+      additionalProperties: false
+    ActionGroupParticipantFacebookProfileDto:
+      properties:
+        type:
+          type: string
+          enum:
+          - account
+          - page
+        averageLikes:
+          type: number
+          format: double
+        picture:
+          type: string
+        name:
+          type: string
+        facebookExternalId:
+          type: string
+      required:
+      - type
+      - facebookExternalId
+      type: object
+    Framework.BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ActionGroupParticipantCustomStatusDto:
+      properties:
+        custom:
+          type: boolean
+        linkedStages:
+          items:
+            type: string
+          type: array
+        statusOrder:
+          type: number
+          format: double
+        slug:
+          type: string
+        phase:
+          type: string
+        label:
+          type: string
+        id:
+          type: number
+          format: double
+        disabled:
+          type: boolean
+        ctaLabel:
+          type: string
+        auxiliaryLabel:
+          type: string
+      required:
+      - custom
+      - linkedStages
+      - slug
+      - label
+      - id
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Framework.ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TikTokAudienceInterestDistribution:
+      properties:
+        interestTag:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - interestTag
+      - percentage
+      type: object
+      additionalProperties: false
+    ActionGroupParticipantAssessmentDto:
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        assessorName:
+          type: string
+        assessorEmail:
+          type: string
+        approves:
+          type: boolean
+      required:
+      - createdAt
+      - approves
+      type: object
+    ActionGroupParticipantTiktokProfileDto:
+      properties:
+        status:
+          type: string
+          enum:
+          - IN
+          - INVALID
+          - INVITED
+          - NOT_IN
+        profileImage:
+          type: string
+        isActive:
+          type: boolean
+        handleName:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        followersCount:
+          type: number
+          format: double
+        displayName:
+          type: string
+      type: object
+    ActionGroupParticipantApplicationResponseDto:
+      properties:
+        value:
+          type: string
+        key:
+          type: string
+      required:
+      - value
+      - key
+      type: object
+    QueryActionGroupParticipantsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActionGroupParticipantDto'
+          type: array
+        meta:
+          $ref: '#/components/schemas/QueryActionGroupParticipantMetadata'
+      required:
+      - data
+      - meta
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActionGroupParticipantTiktokPostDto:
+      properties:
+        link:
+          type: string
+        imageUrl:
+          type: string
+      required:
+      - link
+      - imageUrl
+      type: object
+    ActionGroupParticipantTopicDto:
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        id:
+          type: string
+      required:
+      - slug
+      - name
+      - id
+      type: object
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ActionGroupParticipantUserDto:
+      properties:
+        tiktokCreator:
+          $ref: '#/components/schemas/ActionGroupParticipantTiktokProfileDto'
+        instagramAccount:
+          $ref: '#/components/schemas/ActionGroupParticipantInstagramProfileDto'
+        facebookProfile:
+          $ref: '#/components/schemas/ActionGroupParticipantFacebookProfileDto'
+        appMembership:
+          $ref: '#/components/schemas/ActionGroupParticipantMembershipDto'
+        influencerTopics:
+          items:
+            $ref: '#/components/schemas/ActionGroupParticipantTopicDto'
+          type: array
+        state:
+          type: string
+        id:
+          type: number
+          format: double
+        gender:
+          type: string
+        fullName:
+          type: string
+        email:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        birthday:
+          type: string
+        audiencePredominantCountry:
+          type: string
+        audiencePredominantCity:
+          type: string
+        audiencePredominantAgeRange:
+          type: string
+        audiencePercentageFemale:
+          type: number
+          format: double
+        audiencePercentage_65_plus:
+          type: number
+          format: double
+        audiencePercentage_55_64:
+          type: number
+          format: double
+        audiencePercentage_45_54:
+          type: number
+          format: double
+        audiencePercentage_35_44:
+          type: number
+          format: double
+        audiencePercentage_25_34:
+          type: number
+          format: double
+        audiencePercentage_18_24:
+          type: number
+          format: double
+        audiencePercentage_13_17:
+          type: number
+          format: double
+        age:
+          type: number
+          format: double
+      required:
+      - appMembership
+      - influencerTopics
+      - id
+      - email
+      type: object
+    TikTokAudienceCountriesDistribution:
+      properties:
+        country:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - country
+      - percentage
+      type: object
+      additionalProperties: false
+    QueryActionGroupParticipantMetadata:
+      properties:
+        offset:
+          type: number
+          format: double
+        limit:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      required:
+      - offset
+      - limit
+      - totalCount
+      type: object
+    Framework.ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Framework.NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActionGroupParticipantCostAndPerformanceDto:
+      properties:
+        value:
+          type: number
+          format: double
+        rewards:
+          type: number
+          format: double
+        posts:
+          type: number
+          format: double
+        listMemberId:
+          type: number
+          format: double
+        impressions:
+          type: number
+          format: double
+        engagements:
+          type: number
+          format: double
+        cost:
+          type: number
+          format: double
+        conversionValue:
+          type: number
+          format: double
+        conversions:
+          type: number
+          format: double
+        clicks:
+          type: number
+          format: double
+      required:
+      - value
+      - rewards
+      - posts
+      - listMemberId
+      - impressions
+      - engagements
+      - cost
+      - conversionValue
+      - conversions
+      - clicks
+      type: object
+    ActionGroupParticipantInstagramPostDto:
+      properties:
+        link:
+          type: string
+        imageUrl:
+          type: string
+      required:
+      - link
+      - imageUrl
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

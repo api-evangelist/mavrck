@@ -1,0 +1,249 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Polling Queue Management API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Polling Queue Management
+paths:
+  /v1/polling/management/queues/purge:
+    post:
+      operationId: purgePollingQueue
+      responses:
+        '200':
+          description: Queue purge initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurgeQueueResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Purge all messages from a specific polling queue.
+
+        Note: Only one purge operation is allowed per queue every 60 seconds.'
+      tags:
+      - Polling Queue Management
+      parameters:
+      - description: The queue type to purge (instagram, instagram-story, or non-instagram)
+        in: query
+        name: queue
+        required: true
+        schema:
+          type: string
+          enum:
+          - instagram
+          - instagram-story
+          - non-instagram
+  /v1/polling/management/queues/stats:
+    get:
+      operationId: getAllPollingQueueStats
+      responses:
+        '200':
+          description: Queue stats returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllQueueStatsResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Get statistics for all polling queues (Instagram, Instagram Story, Non-Instagram).
+
+        Returns approximate message counts for each queue.'
+      tags:
+      - Polling Queue Management
+  /v1/polling/management/queues/stats/single:
+    get:
+      operationId: getSinglePollingQueueStats
+      responses:
+        '200':
+          description: Queue stats returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueStats'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Get statistics for a specific polling queue.
+      tags:
+      - Polling Queue Management
+      parameters:
+      - description: The queue type to get stats for (instagram, instagram-story, or non-instagram)
+        in: query
+        name: queue
+        required: true
+        schema:
+          type: string
+          enum:
+          - instagram
+          - instagram-story
+          - non-instagram
+components:
+  schemas:
+    AllQueueStatsResponse:
+      properties:
+        queues:
+          properties:
+            nonInstagram:
+              type: object
+            instagramStory:
+              type: object
+            instagram:
+              type: object
+          required:
+          - nonInstagram
+          - instagramStory
+          - instagram
+          type: object
+      required:
+      - queues
+      type: object
+      additionalProperties: false
+    PurgeQueueResponse:
+      properties:
+        queue:
+          $ref: '#/components/schemas/PollingQueueType'
+        queueUrl:
+          type: string
+        success:
+          type: boolean
+        message:
+          type: string
+      required:
+      - queue
+      - queueUrl
+      - success
+      - message
+      type: object
+      additionalProperties: false
+    PollingQueueType:
+      enum:
+      - instagram
+      - instagram-story
+      - non-instagram
+      type: string
+    QueueStats:
+      properties:
+        queueUrl:
+          type: string
+        approximateNumberOfMessages:
+          type: number
+          format: double
+        approximateNumberOfMessagesNotVisible:
+          type: number
+          format: double
+        approximateNumberOfMessagesDelayed:
+          type: number
+          format: double
+      required:
+      - queueUrl
+      - approximateNumberOfMessages
+      - approximateNumberOfMessagesNotVisible
+      - approximateNumberOfMessagesDelayed
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

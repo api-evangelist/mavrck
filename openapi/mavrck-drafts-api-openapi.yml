@@ -1,0 +1,977 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Drafts API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Drafts
+paths:
+  /v1/draft-content:
+    post:
+      operationId: createDraftContent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfluencerDraftContentDto'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminDraftContentPostBody'
+        required: true
+  /v1/draft-content/{draftContentId}:
+    put:
+      operationId: updateDraftContent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: draftContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftContentUpdateBody'
+        required: true
+    delete:
+      operationId: archiveDraftContent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: draftContentId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/draft-content/{draftContentId}/status:
+    put:
+      operationId: updateDraftContentStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: draftContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftContentStatusUpdateBody'
+        required: true
+  /v1/draft-content/{draftContentId}/feedback:
+    put:
+      operationId: updateDraftContentFeedback
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: draftContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/draftContentFeedbackUpdateBody'
+        required: true
+    get:
+      operationId: getDraftContentFeedback
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBody_DraftContentFeedbackEntry-Array_'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: draftContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+  /v1/draft-content/{draftContentId}/comments:
+    post:
+      operationId: createDraftContentComment
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DraftContentCommentPostResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: draftContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftContentCommentPostBody'
+        required: true
+  /v1/draft-content/{draftContentId}/comments/{id}:
+    put:
+      operationId: updateDraftContentComment
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: draftContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftContentCommentPutBody'
+        required: true
+  /v1/draft-content/{draftContentId}/feedback/{id}:
+    delete:
+      operationId: archiveDraftContentFeedback
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: draftContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/influencer-draft-content/{actionGroupId}:
+    get:
+      operationId: getDraftContent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfluencerDraftContentGetResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+    post:
+      operationId: createDraftContent
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InfluencerDraftContentPostBody'
+        required: true
+  /v1/list-member/{listMemberId}/draft-content:
+    get:
+      operationId: getDraftContentForListMember
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfluencerDraftContentGetResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Drafts
+      parameters:
+      - in: path
+        name: listMemberId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: viewedByEmail
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+      - in: query
+        name: orderProperty
+        required: false
+        schema:
+          type: string
+          enum:
+          - createdAt
+components:
+  schemas:
+    DraftContentCommentPostBody:
+      properties:
+        commenterName:
+          type: string
+        text:
+          type: string
+      required:
+      - text
+      type: object
+      additionalProperties: false
+    DraftContentUpdateBody:
+      properties:
+        notes:
+          type: string
+        text:
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/InfluencerDraftContentPostFile'
+          type: array
+        isArchived:
+          type: boolean
+        feedback:
+          type: string
+        draftContentId:
+          type: number
+          format: double
+      required:
+      - draftContentId
+      type: object
+    InfluencerDraftContentPostBody:
+      properties:
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
+        contentUrl:
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/InfluencerDraftContentPostFile'
+          type: array
+        notes:
+          type: string
+        text:
+          type: string
+        threadId:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        campaignId:
+          type: number
+          format: double
+      required:
+      - contentType
+      type: object
+      additionalProperties: false
+    InfluencerDraftContentGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InfluencerDraftContentDto'
+          type: array
+      type: object
+      additionalProperties: false
+    NetworkSlug:
+      type: string
+      enum:
+      - blog
+      - facebook
+      - facebook_group
+      - facebook_live
+      - facebook_reel
+      - image
+      - instagram
+      - instagram_reel
+      - instagram_story
+      - linkedin
+      - pinterest
+      - snapchat_story
+      - tiktok
+      - twitch_stream
+      - twitter
+      - video
+      - youtube_video
+      - youtube_shorts
+    ResponseBody_DraftContentFeedbackEntry-Array_:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DraftContentFeedbackEntry'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Pick_AdministratorAccount.email-or-first_name-or-image-or-last_name_:
+      properties:
+        image:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+      required:
+      - email
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    InfluencerDraftContentPostFile:
+      properties:
+        originalFile:
+          properties:
+            path:
+              type: string
+          required:
+          - path
+          type: object
+        isUploaded:
+          type: boolean
+        lastModified:
+          type: number
+          format: double
+        url:
+          type: string
+        type:
+          type: string
+        size:
+          type: number
+          format: double
+        name:
+          type: string
+        code:
+          type: string
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    AdminDraftContentPostBody:
+      properties:
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
+        contentUrl:
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/InfluencerDraftContentPostFile'
+          type: array
+        notes:
+          type: string
+        text:
+          type: string
+        threadId:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        campaignId:
+          type: number
+          format: double
+        internalComment:
+          type: string
+      required:
+      - contentType
+      - globalUserId
+      - campaignId
+      type: object
+      additionalProperties: false
+    DraftContentStatusUpdateBody:
+      properties:
+        draftContentId:
+          type: number
+          format: double
+        data:
+          properties:
+            status:
+              type: string
+              enum:
+              - rejected
+              - rejected_no_notification
+              - conditionally_approved
+              - approved
+          required:
+          - status
+          type: object
+      required:
+      - draftContentId
+      - data
+      type: object
+      additionalProperties: false
+    DraftContentCommentPutBody:
+      properties:
+        isArchived:
+          type: boolean
+      required:
+      - isArchived
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    InfluencerDraftContentDto:
+      type: object
+      properties: {}
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    draftContentFeedbackUpdateBody:
+      properties:
+        feedback:
+          type: string
+      required:
+      - feedback
+      type: object
+    DraftContentCommentPostResponse:
+      $ref: '#/components/schemas/InfluencerDraftContentComment'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    InfluencerDraftContentComment:
+      properties:
+        accountId:
+          type: number
+          format: double
+        administratorAccount:
+          $ref: '#/components/schemas/Pick_AdministratorAccount.email-or-first_name-or-image-or-last_name_'
+        archivedByAccountId:
+          type: number
+          format: double
+        commenterName:
+          type: string
+        commenterType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        draftContentId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        isArchived:
+          type: boolean
+        text:
+          type: string
+      required:
+      - commenterType
+      - createdAt
+      - draftContentId
+      - id
+      - isArchived
+      - text
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    DraftContentFeedbackEntry:
+      properties:
+        id:
+          type: number
+          format: double
+        draftContentId:
+          type: number
+          format: double
+        accountId:
+          type:
+          - number
+          - 'null'
+          format: double
+        administratorAccount:
+          $ref: '#/components/schemas/Pick_AdministratorAccount.email-or-first_name-or-image-or-last_name_'
+        text:
+          type: string
+        commenterType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      required:
+      - id
+      - draftContentId
+      - accountId
+      - text
+      - commenterType
+      - createdAt
+      - isArchived
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

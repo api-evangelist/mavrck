@@ -1,0 +1,103 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://trust.later.com/ + https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1
+  + openapi/_original/mavrck-openapi.json + live probes of api.mavrck.co on 2026-08-12
+docs: https://trust.later.com/
+summary:
+  conforms_count: 4
+  evaluated: 12
+  note: >-
+    Mavrck is now Later Influence; the compliance programme is published on the
+    parent brand's SafeBase trust centre at trust.later.com, which is the only
+    place either brand publishes named certifications.
+standards:
+- id: rfc9457
+  name: RFC 9457 Problem Details for HTTP APIs
+  conforms: partial
+  evidence: >-
+    POST https://api.mavrck.co/oauth/token returns content-type
+    application/problem+json with a {type, title, detail} body — verified live
+    2026-08-12. It deviates in that `type` is an opaque code (`ANL_00401`)
+    rather than a URI reference, and no `instance` member is emitted. The
+    548-path platform API does NOT use problem details; it returns a
+    proprietary {type, error} object.
+- id: oauth2
+  name: OAuth 2.0 (RFC 6749)
+  conforms: false
+  evidence: >-
+    The Reporting API performs a client-credentials-SHAPED exchange, but the
+    token endpoint accepts an application/json body of clientId/clientSecret
+    rather than the RFC 6749 form-encoded grant_type=client_credentials, returns
+    the token in a `jwt` member rather than `access_token`, and the spec declares
+    the scheme as http/bearer rather than oauth2. No scopes are defined, and
+    /.well-known/oauth-authorization-server 404s on api.mavrck.co.
+- id: oidc
+  name: OpenID Connect Discovery
+  conforms: false
+  evidence: 'GET https://api.mavrck.co/.well-known/openid-configuration -> 404 (2026-08-12).'
+- id: jwt
+  name: JSON Web Token (RFC 7519)
+  conforms: true
+  evidence: >-
+    The Reporting API's published securityScheme declares type http, scheme
+    bearer, bearerFormat JWT, and the documented token exchange returns a `jwt`
+    member used as `Authorization: Bearer <jwt>`.
+- id: openapi
+  name: OpenAPI / Swagger
+  conforms: true
+  evidence: >-
+    Two machine-readable contracts are published without credentials: a
+    Swagger 2.0 document at https://api.mavrck.co/api-docs (548 paths, 687
+    operations, 1071 definitions) and an OpenAPI 3.0.0 document published by
+    SwaggerHub owner `mavrck` at
+    https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1.
+- id: iso27001
+  name: ISO/IEC 27001
+  conforms: true
+  evidence: 'Listed under Compliance on https://trust.later.com/ (fetched 2026-08-12).'
+- id: soc2
+  name: SOC 2 Type 1 and Type 2
+  conforms: true
+  evidence: >-
+    Both SOC 2 Type 1 and SOC 2 Type 2 are listed under Compliance on
+    https://trust.later.com/, with the SOC 2 report available behind an access
+    request (fetched 2026-08-12).
+- id: pagination
+  name: Consistent pagination
+  conforms: false
+  evidence: >-
+    Two incompatible schemes on one host — limit/offset with a {meta, data}
+    envelope on the platform API, pageNumber/pageSize with a {data, pagination}
+    envelope on the Reporting API.
+- id: idempotency
+  name: Idempotent write semantics
+  conforms: false
+  evidence: >-
+    Zero occurrences of "idempoten" anywhere in the 2.2 MB platform spec, no
+    Idempotency-Key header on any of the 687 operations, and no statement in the
+    help centre. The surface includes payment operations (StripePayments,
+    CashPayments, TipaltiTransfers, GiftCards), so this is a material gap.
+- id: rate-limit-headers
+  name: RateLimit header fields (draft-ietf-httpapi-ratelimit-headers)
+  conforms: false
+  evidence: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header on any live response
+    from api.mavrck.co (2026-08-12), and no such header documented in either spec.
+- id: rfc8594
+  name: RFC 8594 Sunset header
+  conforms: false
+  evidence: >-
+    The v1 API is publicly announced as deprecated "within the next 6 months",
+    but no Sunset or Deprecation header is emitted on live responses and only
+    one of 687 operations carries `deprecated: true`.
+- id: gdpr
+  name: GDPR / data-subject request handling
+  conforms: partial
+  evidence: >-
+    The platform API exposes first-class data-subject machinery —
+    POST /v1/data-subject-request, /v1/global-users/{id}/delete-public-summary-record,
+    /v1/global-users/{id}/mark-as-non-contactable and Shopify compliance webhooks
+    for shop/redact, customers/redact and customers/data_request. That is
+    implemented capability, not a published attestation; no GDPR/DPF certification
+    is named on the trust centre.

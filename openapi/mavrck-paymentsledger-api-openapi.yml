@@ -1,0 +1,571 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Payments Ledger API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: PaymentsLedger
+paths:
+  /v1/payments-ledgerV2:
+    get:
+      operationId: getPaymentsLedgerV2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentsLedgerQueryResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentsLedger
+      parameters:
+      - in: query
+        name: fromDate
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: toDate
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: onlyMostRecent
+        required: true
+        schema:
+          type: boolean
+      - in: query
+        name: paymentAccountIds
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+      - in: query
+        name: actionGroupIds
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+      - in: query
+        name: globalUserIds
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+      - in: query
+        name: rewardWinTypes
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: transactionStatuses
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+          - ''
+      - in: query
+        name: orderProperty
+        required: false
+        schema:
+          type: string
+          enum:
+          - paymentAccountTransactionId
+          - transactionDateTime
+          - rewardWinType
+          - recipientFullName
+          - actionGroupTitle
+          - cost
+          - value
+          - transactionStatus
+          - paymentAccountTitle
+      - in: query
+        name: budgetReferenceId
+        required: false
+        schema:
+          type: string
+  /v1/payments-ledgerV2/{rewardWinId}:
+    get:
+      operationId: getMostRecentLedgerRecordForRewardWin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentsLedger
+      parameters:
+      - in: path
+        name: rewardWinId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/payments-ledgerV2/stripe/{rewardWinId}:
+    get:
+      operationId: getMostRecentLedgerRecordForStripeRewardWin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - PaymentsLedger
+      parameters:
+      - in: path
+        name: rewardWinId
+        required: true
+        schema:
+          type: number
+          format: double
+components:
+  schemas:
+    PaymentsLedgerQueryResponse:
+      properties:
+        meta:
+          $ref: '#/components/schemas/PaymentsLedgerMetadata'
+        data:
+          items:
+            $ref: '#/components/schemas/PaymentsLedger'
+          type: array
+      required:
+      - meta
+      - data
+      type: object
+      additionalProperties: false
+    PaymentsLedger:
+      properties:
+        transactionDateTime:
+          type: string
+          format: date-time
+        communityId:
+          type: string
+        paymentAccountType:
+          $ref: '#/components/schemas/PaymentAccountType'
+        actionGroupTitle:
+          type: string
+        transactionDescription:
+          type: string
+        paymentAccountTransactionId:
+          type: number
+          format: double
+        transactionCreatedByEmail:
+          type: string
+        recipientFullName:
+          type:
+          - string
+          - 'null'
+        recipientEmail:
+          type: string
+        providerSearchableTransactionId:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+        cashPaymentProviderStatusMessage:
+          type:
+          - string
+          - 'null'
+        cashPaymentStatusForFailure:
+          type:
+          - string
+          - 'null'
+        cashPaymentProviderStatusCodeForFailure:
+          type:
+          - string
+          - 'null'
+        cashPaymentProviderStatusMessageForFailure:
+          type:
+          - string
+          - 'null'
+        paymentAccountId:
+          type: number
+          format: double
+        rewardWinTitle:
+          type: string
+        rewardWinType:
+          $ref: '#/components/schemas/DBRewardWinType'
+        uniqueTransactionId:
+          type:
+          - string
+          - 'null'
+        actionGroupId:
+          type:
+          - number
+          - 'null'
+          format: double
+        rewardWinId:
+          type:
+          - number
+          - 'null'
+          format: double
+        listMemberId:
+          type:
+          - number
+          - 'null'
+          format: double
+        globalUserId:
+          type:
+          - number
+          - 'null'
+          format: double
+        listId:
+          type:
+          - number
+          - 'null'
+          format: double
+        cashPaymentStatus:
+          type:
+          - string
+          - 'null'
+        cashPaymentProviderStatusCode:
+          type:
+          - string
+          - 'null'
+        transactionStatus:
+          type:
+          - string
+          - 'null'
+        paymentAccountTitle:
+          type:
+          - string
+          - 'null'
+        provider:
+          $ref: '#/components/schemas/PaymentAppProvider'
+        valueCurrencyCode:
+          type:
+          - string
+          - 'null'
+        costCurrencyCode:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - number
+          - 'null'
+          format: double
+        cost:
+          type:
+          - number
+          - 'null'
+          format: double
+        exchangeRate:
+          type:
+          - number
+          - 'null'
+          format: double
+        budgetReferenceId:
+          type:
+          - string
+          - 'null'
+        budgetReferenceIdType:
+          type: object
+        mavelyProfileId:
+          type:
+          - string
+          - 'null'
+        invoiceNumber:
+          type:
+          - string
+          - 'null'
+        taxId:
+          type:
+          - string
+          - 'null'
+        taxLineItems:
+          items:
+            $ref: '#/components/schemas/TaxLineItem'
+          type:
+          - array
+          - 'null'
+      required:
+      - transactionDateTime
+      - communityId
+      - paymentAccountType
+      - actionGroupTitle
+      - transactionDescription
+      - paymentAccountTransactionId
+      - transactionCreatedByEmail
+      - recipientFullName
+      - recipientEmail
+      - providerSearchableTransactionId
+      - externalId
+      - cashPaymentProviderStatusMessage
+      - cashPaymentStatusForFailure
+      - cashPaymentProviderStatusCodeForFailure
+      - cashPaymentProviderStatusMessageForFailure
+      - paymentAccountId
+      - rewardWinTitle
+      - rewardWinType
+      - uniqueTransactionId
+      - actionGroupId
+      - rewardWinId
+      - listMemberId
+      - globalUserId
+      - listId
+      - cashPaymentStatus
+      - cashPaymentProviderStatusCode
+      - transactionStatus
+      - paymentAccountTitle
+      - provider
+      - valueCurrencyCode
+      - costCurrencyCode
+      - value
+      - cost
+      - exchangeRate
+      - budgetReferenceId
+      - budgetReferenceIdType
+      type: object
+      additionalProperties: false
+    TaxLineItemType:
+      type: string
+      enum:
+      - GST
+      - HST
+      - VAT
+      - PST
+      - QST
+      - RST
+    PaymentAppProvider:
+      enum:
+      - PAYPAL
+      - STRIPE
+      - TANGO_CARDS
+      - MAVELY
+      - TIPALTI
+      type: string
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBRewardWinType:
+      enum:
+      - OTHER
+      - CASH
+      - PRODUCT
+      - PROMO_CODE
+      - GIFT_CARD
+      - SHOPIFY_DISCOUNT
+      type: string
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PaymentsLedgerMetadata:
+      properties:
+        totalCount:
+          type: number
+          format: double
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+      required:
+      - totalCount
+      - limit
+      - offset
+      type: object
+      additionalProperties: false
+    TaxLineItem:
+      properties:
+        amount:
+          type: number
+          format: double
+        type:
+          $ref: '#/components/schemas/TaxLineItemType'
+      required:
+      - amount
+      - type
+      type: object
+    PaymentAccountType:
+      enum:
+      - CASH
+      - GIFT_CARD
+      type: string
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

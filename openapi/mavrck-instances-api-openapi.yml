@@ -1,0 +1,270 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Instances API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Instances
+paths:
+  /v1/s4-instance-branding:
+    get:
+      operationId: getInstanceBranding
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S4instanceBrandingResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Instances
+      parameters:
+      - in: query
+        name: hostname
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: brandingId
+        required: false
+        schema:
+          type: string
+  /v1/s4-instance-branding/{brandingId}:
+    post:
+      operationId: updateInstanceBranding
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S4instanceBrandingResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Instances
+      parameters:
+      - in: path
+        name: brandingId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInstanceBrandingBody'
+        required: true
+    delete:
+      operationId: deleteInstanceBranding
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Instances
+      parameters:
+      - in: path
+        name: brandingId
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    UpdateInstanceBrandingBody:
+      properties:
+        title:
+          type:
+          - string
+          - 'null'
+        primaryColor:
+          type:
+          - string
+          - 'null'
+        logoSmall:
+          type:
+          - string
+          - 'null'
+        logoMedium:
+          type:
+          - string
+          - 'null'
+        logoLarge:
+          type:
+          - string
+          - 'null'
+        favicon:
+          type:
+          - string
+          - 'null'
+      required:
+      - title
+      - primaryColor
+      - logoSmall
+      - logoMedium
+      - logoLarge
+      - favicon
+      type: object
+    S4instanceBrandingResponse:
+      $ref: '#/components/schemas/InferAttributes_s4InstanceBranding_'
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    InferAttributes_s4InstanceBranding_:
+      properties:
+        brandingId:
+          type: object
+          properties: {}
+        favicon:
+          type: string
+        logoSmall:
+          type: string
+        logoMedium:
+          type: string
+        logoLarge:
+          type: string
+        primaryColor:
+          type: object
+          properties: {}
+        hoverColor:
+          type: object
+          properties: {}
+        secondaryColor:
+          type: object
+          properties: {}
+        title:
+          type: string
+        customCss:
+          type: string
+        hostname:
+          type: string
+        email:
+          type: object
+          properties: {}
+        webAddress:
+          type: object
+          properties: {}
+      type: object
+      description: 'Utility type to extract Attributes of a given Model class.
+
+
+        It returns all instance properties defined in the Model, except:
+
+        - those inherited from Model (intermediate inheritance works),
+
+        - the ones whose type is a function,
+
+        - the ones manually excluded using the second parameter.
+
+        - the ones branded using {@link NonAttribute}
+
+
+        It cannot detect whether something is a getter or not, you should use the `Excluded`
+
+        parameter to exclude getter & setters from the attribute list.'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

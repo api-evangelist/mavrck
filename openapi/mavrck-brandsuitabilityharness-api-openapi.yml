@@ -1,0 +1,1486 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Brand Suitability Harness API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: BrandSuitabilityHarness
+paths:
+  /v1/brand-suitability/harness/global-users/{globalUserId}/creator-context:
+    get:
+      operationId: harnessCreatorContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Builds a structured creator profile from platform data (social handles, bio, location, etc.) *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+    post:
+      operationId: harnessSaveCreatorContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Builds (or accepts inline) creator context and persists it to DynamoDB, returning the stored record. *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveCreatorContextRequest'
+        required: true
+  /v1/brand-suitability/harness/global-users/{globalUserId}/creator-context/stored:
+    get:
+      operationId: harnessGetStoredCreatorContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Reads the stored creator context record from DynamoDB. *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+    patch:
+      operationId: harnessUpdateCreatorContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Partial-updates the stored creator context fields. *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCreatorContextRequest'
+        required: true
+    delete:
+      operationId: harnessDeleteCreatorContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Deletes the stored creator context record. *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/brand-suitability/harness/brand-context:
+    get:
+      operationId: harnessBrandContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+    post:
+      operationId: harnessSaveBrandContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Builds (or accepts inline) brand context and persists it to DynamoDB, returning the stored record. *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveBrandContextRequest'
+        required: true
+  /v1/brand-suitability/harness/brand-context/stored:
+    get:
+      operationId: harnessGetStoredBrandContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Reads the stored brand context record from DynamoDB. *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+    patch:
+      operationId: harnessUpdateBrandContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Partial-updates the stored brand context fields. *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBrandContextRequest'
+        required: true
+    delete:
+      operationId: harnessDeleteBrandContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: Deletes the stored brand context record. *
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+  /v1/brand-suitability/harness/campaigns/{campaignId}/campaign-context:
+    get:
+      operationId: harnessCampaignContext
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: path
+        name: campaignId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/brand-suitability/harness/research:
+    post:
+      operationId: harnessResearch
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Runs the research pipeline: discovery (search) + enrichment (visit each URL for full page content).
+
+        Provide creatorContext directly (e.g. from prod) to skip the buildCreatorContext step,
+
+        or provide globalUserId to build it from local data. One of the two is required.'
+      tags:
+      - BrandSuitabilityHarness
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResearchRequest'
+        required: true
+  /v1/brand-suitability/harness/verify-sources:
+    post:
+      operationId: harnessVerifySources
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Runs source verification against user-provided sources without running discovery.
+
+        Provide creatorContext directly (e.g. from prod) to skip the buildCreatorContext step,
+
+        or provide globalUserId to build it from local data. One of the two is required.'
+      tags:
+      - BrandSuitabilityHarness
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifySourcesRequest'
+        required: true
+  /v1/brand-suitability/harness/global-users/{globalUserId}/reverify:
+    post:
+      operationId: harnessReverify
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Re-runs verification on existing research from DynamoDB. Skips discovery.
+
+        Loads stored findings and runs pre-filter + LLM verification.
+
+        Provide creatorContext to skip buildCreatorContext, or omit to build from local data.'
+      tags:
+      - BrandSuitabilityHarness
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReverifyRequest'
+        required: true
+  /v1/brand-suitability/harness/assess:
+    post:
+      operationId: harnessAssessMetric
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - BrandSuitabilityHarness
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessMetricRequest'
+        required: true
+  /v1/brand-suitability/harness/assess-full:
+    post:
+      operationId: harnessAssessFull
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessResponse_any.any_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      description: 'Runs the full assessment pipeline (exec) on stored or inline findings without persisting the report.
+
+        Builds missing contexts from local data; inline overrides take precedence. One of creatorContext or globalUserId required.'
+      tags:
+      - BrandSuitabilityHarness
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessFullRequest'
+        required: true
+components:
+  schemas:
+    MetricRelevanceWeights:
+      $ref: '#/components/schemas/Record_AssessmentMetricsEnum.MetricWeight_'
+    Record_AssessmentMetricsEnum.MetricWeight_:
+      properties:
+        brandAuthenticity:
+          $ref: '#/components/schemas/MetricWeight'
+        controversyScandals:
+          $ref: '#/components/schemas/MetricWeight'
+        adultContent:
+          $ref: '#/components/schemas/MetricWeight'
+        vulgarityProfanity:
+          $ref: '#/components/schemas/MetricWeight'
+        brandConflicts:
+          $ref: '#/components/schemas/MetricWeight'
+        politicalContent:
+          $ref: '#/components/schemas/MetricWeight'
+        socialClimate:
+          $ref: '#/components/schemas/MetricWeight'
+        misinformation:
+          $ref: '#/components/schemas/MetricWeight'
+        hateSpeech:
+          $ref: '#/components/schemas/MetricWeight'
+        violenceContent:
+          $ref: '#/components/schemas/MetricWeight'
+        substanceAbuse:
+          $ref: '#/components/schemas/MetricWeight'
+        competitorConflicts:
+          $ref: '#/components/schemas/MetricWeight'
+      type: object
+      description: Construct a type with a set of properties K of type T
+    KnownSocialNetworkDTO:
+      properties:
+        platform:
+          type: string
+        handle:
+          type: string
+        url:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+      required:
+      - platform
+      - handle
+      - url
+      - description
+      type: object
+      additionalProperties: false
+    AssessFullRequest:
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        communityId:
+          type: string
+        campaignId:
+          type: number
+          format: double
+        creatorContext:
+          additionalProperties: false
+          type: object
+        brandContext:
+          additionalProperties: false
+          type: object
+        campaignContext:
+          additionalProperties: false
+          type: object
+        findings:
+          items:
+            $ref: '#/components/schemas/StoredFinding'
+          type: array
+      type: object
+      additionalProperties: false
+    AssessMetricRequest:
+      properties:
+        metric:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        creatorContext:
+          additionalProperties: false
+          type: object
+        findings:
+          items:
+            $ref: '#/components/schemas/StoredFinding'
+          type: array
+      required:
+      - metric
+      type: object
+      additionalProperties: false
+    ReverifyRequest:
+      properties:
+        creatorContext:
+          additionalProperties: false
+          type: object
+      type: object
+      additionalProperties: false
+    MetricWeight:
+      properties:
+        weight:
+          type: number
+          format: double
+        reason:
+          type: string
+      required:
+      - weight
+      - reason
+      type: object
+      additionalProperties: false
+    SaveCreatorContextRequest:
+      properties:
+        input:
+          $ref: '#/components/schemas/PartialCreatorProfile'
+        output:
+          $ref: '#/components/schemas/CreatorContextDTO'
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    VerifySourcesRequest:
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        creatorContext:
+          additionalProperties: false
+          type: object
+        sources:
+          items:
+            properties:
+              credibility:
+                type: string
+                enum:
+                - high
+                - medium
+                - low
+              sentiment:
+                type: string
+                enum:
+                - negative
+                - neutral
+                - positive
+              sourceDate:
+                type:
+                - string
+                - 'null'
+              keyQuotes:
+                items:
+                  type: string
+                type: array
+              detailedSummary:
+                type: string
+              url:
+                type: string
+            required:
+            - url
+            type: object
+          type: array
+      required:
+      - sources
+      type: object
+      additionalProperties: false
+    HarnessResponse_any.any_:
+      properties:
+        input:
+          additionalProperties: true
+        output:
+          additionalProperties: true
+      required:
+      - input
+      - output
+      type: object
+      additionalProperties: false
+    ResearchRequest:
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        creatorContext:
+          additionalProperties: false
+          type: object
+      type: object
+      additionalProperties: false
+    DataScoreLevelDTO:
+      description: 'Brand Suitability LLM/assessment output DTOs.
+
+        `v0.3 UI:` notes track field consumption by the v0.3 report view. "unused" = not read by v0.3 (may be used by legacy/admin). Audited 2026-06-22.'
+      enum:
+      - HIGH
+      - MEDIUM
+      - LOW
+      - NONE
+      type: string
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SaveBrandContextRequest:
+      properties:
+        input:
+          $ref: '#/components/schemas/Record_string.unknown_'
+        output:
+          $ref: '#/components/schemas/BrandContextDTO'
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SocialProfileInfo:
+      properties:
+        username:
+          type:
+          - string
+          - 'null'
+        displayName:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+        bio:
+          type:
+          - string
+          - 'null'
+        followersCount:
+          type:
+          - number
+          - 'null'
+          format: double
+        engagementRate:
+          type:
+          - number
+          - 'null'
+          format: double
+        followingCount:
+          type:
+          - number
+          - 'null'
+          format: double
+        mediaCount:
+          type:
+          - number
+          - 'null'
+          format: double
+        insights:
+          $ref: '#/components/schemas/SocialProfileInsights'
+      required:
+      - username
+      - displayName
+      - url
+      - bio
+      type: object
+      additionalProperties: false
+    Record_string.unknown_:
+      properties: {}
+      type: object
+      description: Construct a type with a set of properties K of type T
+    UpdateBrandContextRequest:
+      properties:
+        patch:
+          $ref: '#/components/schemas/Partial_BrandContextDTO_'
+      required:
+      - patch
+      type: object
+      additionalProperties: false
+    PartialCreatorProfile:
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        location:
+          type:
+          - string
+          - 'null'
+        gender:
+          type:
+          - string
+          - 'null'
+        age:
+          type:
+          - number
+          - 'null'
+          format: double
+        socialProfiles:
+          properties:
+            blog:
+              $ref: '#/components/schemas/SocialProfileInfo'
+            snapchat:
+              $ref: '#/components/schemas/SocialProfileInfo'
+            facebook:
+              $ref: '#/components/schemas/SocialProfileInfo'
+            pinterest:
+              $ref: '#/components/schemas/SocialProfileInfo'
+            youtube:
+              $ref: '#/components/schemas/SocialProfileInfo'
+            twitter:
+              $ref: '#/components/schemas/SocialProfileInfo'
+            tiktok:
+              $ref: '#/components/schemas/SocialProfileInfo'
+            instagram:
+              $ref: '#/components/schemas/SocialProfileInfo'
+          type: object
+      required:
+      - name
+      - firstName
+      - lastName
+      - location
+      - gender
+      - age
+      - socialProfiles
+      type: object
+      additionalProperties: false
+    StoredFinding:
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        detailedSummary:
+          type: string
+        keyQuotes:
+          items:
+            type: string
+          type: array
+        sourceDate:
+          type:
+          - string
+          - 'null'
+        dateFound:
+          type: string
+        sentiment:
+          type: string
+          enum:
+          - negative
+          - neutral
+          - positive
+          - ''
+        credibility:
+          type: string
+          enum:
+          - high
+          - medium
+          - low
+        relevance:
+          type: number
+          enum:
+          - 0
+          - 1
+          - 2
+        extractedAttributes:
+          $ref: '#/components/schemas/ExtractedAttributes'
+        excluded:
+          type: boolean
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SocialProfileInsights:
+      description: 'Later-generated predicted insights computed by the Insights Service and stored on the
+
+        CDS social presence (`platformAttributes.prediction*`). The CDS client types these
+
+        for Instagram and TikTok today.'
+      properties:
+        topics:
+          items:
+            properties:
+              probability:
+                type: number
+                format: double
+              topic:
+                type: string
+            required:
+            - probability
+            - topic
+            type: object
+          type: array
+        accountType:
+          properties:
+            probability:
+              type: number
+              format: double
+            type:
+              type: string
+          required:
+          - probability
+          - type
+          type:
+          - object
+          - 'null'
+        primaryLanguage:
+          properties:
+            confidence:
+              type: number
+              format: double
+            language:
+              type: string
+          required:
+          - confidence
+          - language
+          type:
+          - object
+          - 'null'
+        additionalLanguages:
+          items:
+            properties:
+              proportion:
+                type: number
+                format: double
+              language:
+                type: string
+            required:
+            - proportion
+            - language
+            type: object
+          type: array
+          description: Other languages the content appears in, each with its share of that content.
+      type: object
+      additionalProperties: false
+    DataSourceDTO:
+      properties:
+        attribute:
+          type: string
+          enum:
+          - risk
+          - brandRelevance
+        url:
+          type: string
+        reason:
+          type: string
+      required:
+      - attribute
+      - url
+      - reason
+      type: object
+      additionalProperties: false
+    BrandContextDTO:
+      properties:
+        dataConfidence:
+          $ref: '#/components/schemas/DataConfidenceDTO'
+        brandName:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        industry:
+          type:
+          - string
+          - 'null'
+        targetAudience:
+          type:
+          - string
+          - 'null'
+        brandValues:
+          type:
+          - string
+          - 'null'
+        riskTolerance:
+          $ref: '#/components/schemas/DataScoreLevelDTO'
+        potentialCompetitors:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        metricRelevanceWeights:
+          $ref: '#/components/schemas/MetricRelevanceWeights'
+      required:
+      - dataConfidence
+      - brandName
+      - description
+      - industry
+      - targetAudience
+      - brandValues
+      - riskTolerance
+      - potentialCompetitors
+      - metricRelevanceWeights
+      type: object
+      additionalProperties: false
+    UpdateCreatorContextRequest:
+      properties:
+        patch:
+          $ref: '#/components/schemas/Partial_CreatorContextDTO_'
+      required:
+      - patch
+      type: object
+      additionalProperties: false
+    Partial_CreatorContextDTO_:
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        aliases:
+          items:
+            type: string
+          type: array
+        description:
+          type:
+          - string
+          - 'null'
+        gender:
+          type:
+          - string
+          - 'null'
+        industry:
+          type:
+          - string
+          - 'null'
+        approximateAge:
+          type:
+          - number
+          - 'null'
+          format: double
+        approximateLocation:
+          type:
+          - string
+          - 'null'
+        knownSocialNetworks:
+          items:
+            $ref: '#/components/schemas/KnownSocialNetworkDTO'
+          type: array
+        dataSources:
+          items:
+            $ref: '#/components/schemas/DataSourceDTO'
+          type: array
+      type: object
+      description: Make all properties in T optional
+    DataConfidenceDTO:
+      properties:
+        confidence:
+          $ref: '#/components/schemas/DataScoreLevelDTO'
+        score:
+          type: number
+          format: double
+        reason:
+          type: string
+      required:
+      - confidence
+      - score
+      - reason
+      type: object
+      additionalProperties: false
+    ExtractedAttributes:
+      properties:
+        names:
+          items:
+            type: string
+          type: array
+        handles:
+          items:
+            type: string
+          type: array
+        urls:
+          items:
+            type: string
+          type: array
+        profession:
+          type:
+          - string
+          - 'null'
+        location:
+          type:
+          - string
+          - 'null'
+        topics:
+          items:
+            type: string
+          type: array
+      required:
+      - names
+      - handles
+      - urls
+      - profession
+      - location
+      - topics
+      type: object
+      additionalProperties: false
+    CreatorContextDTO:
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        aliases:
+          items:
+            type: string
+          type: array
+        description:
+          type:
+          - string
+          - 'null'
+        gender:
+          type:
+          - string
+          - 'null'
+        industry:
+          type:
+          - string
+          - 'null'
+        approximateAge:
+          type:
+          - number
+          - 'null'
+          format: double
+        approximateLocation:
+          type:
+          - string
+          - 'null'
+        knownSocialNetworks:
+          items:
+            $ref: '#/components/schemas/KnownSocialNetworkDTO'
+          type: array
+        dataSources:
+          items:
+            $ref: '#/components/schemas/DataSourceDTO'
+          type: array
+      required:
+      - name
+      - aliases
+      - description
+      - gender
+      - industry
+      - approximateAge
+      - approximateLocation
+      - knownSocialNetworks
+      - dataSources
+      type: object
+      additionalProperties: false
+    Partial_BrandContextDTO_:
+      properties:
+        dataConfidence:
+          $ref: '#/components/schemas/DataConfidenceDTO'
+        brandName:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        industry:
+          type:
+          - string
+          - 'null'
+        targetAudience:
+          type:
+          - string
+          - 'null'
+        brandValues:
+          type:
+          - string
+          - 'null'
+        riskTolerance:
+          $ref: '#/components/schemas/DataScoreLevelDTO'
+        potentialCompetitors:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        metricRelevanceWeights:
+          $ref: '#/components/schemas/MetricRelevanceWeights'
+      type: object
+      description: Make all properties in T optional
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

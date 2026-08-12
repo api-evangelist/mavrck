@@ -1,0 +1,206 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1 (info.description) +
+  https://help-influence.later.com/hc/en-us/articles/20462385592087 + derived from
+  openapi/_original/mavrck-openapi.json + live probes of api.mavrck.co 2026-08-12
+docs: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+summary: >-
+  Mavrck runs two surfaces on one host with genuinely different conventions. The
+  platform API is a swagger-node/Express application with limit/offset paging and
+  a `{meta, data}` envelope. The Reporting API is a newer NestJS-style service
+  with pageNumber/pageSize paging, a `{data, pagination}` envelope and RFC 9457
+  problem details. Anything written against one will not work against the other.
+
+authentication:
+  platform_api:
+    style: api-key header
+    header: api-key
+  reporting_api:
+    style: bearer JWT from a client-credentials exchange
+    header: Authorization
+    token_endpoint: https://api.mavrck.co/oauth/token
+  see: authentication/mavrck-authentication.yml
+
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    No Idempotency-Key, X-Idempotency-Key or request-id parameter appears in any
+    of the 687 platform operations or the 11 Reporting operations, and neither the
+    help centre nor the spec descriptions mention retry-safety for writes. Mutating
+    calls (POST /v1/action-groups, POST /v1/incentives/{id}/..., the payment
+    endpoints under StripePayments / CashPayments / TipaltiTransfers) must be
+    assumed NON-idempotent. This is a real gap, not an unchecked box: the surface
+    includes money movement.
+
+pagination:
+  styles: 2
+  variants:
+  - surface: Mavrck Platform API
+    style: limit-offset
+    request_params:
+    - name: limit
+      in: query
+      type: integer
+      description: Maximum number of items to return (shared $ref parameter `limitParam`).
+    - name: offset
+      in: query
+      type: integer
+      description: Number of items to skip (shared $ref parameter `offsetParam`).
+    response_envelope:
+      shape: '{ "meta": {...}, "data": [...] }'
+      schema_ref: openapi/_original/mavrck-openapi.json#/definitions/ResponseMetadata
+      meta_fields:
+      - limit
+      - offset
+      - totalCount
+      - status
+    note: >-
+      `meta.status` is an enum of `success` | `failure` carried INSIDE a 200
+      response — a second, body-level status channel alongside the HTTP status.
+      Agents that branch only on HTTP status will miss body-level failures.
+  - surface: Later Influence Reporting API
+    style: page-number
+    request_params:
+    - name: pageNumber
+      in: query
+      default: 1
+    - name: pageSize
+      in: query
+      default: 50
+      maximum: 100
+    response_envelope:
+      shape: '{ "data": {...}, "pagination": {...} }'
+      pagination_fields:
+      - page
+      - pageSize
+      - totalPages
+      - totalItems
+
+sorting:
+  surface: Later Influence Reporting API
+  params:
+  - name: sortProperty
+    description: >-
+      Enumerated in the parameter description rather than as a schema enum;
+      values include engagements, impressions, engagementRate, impressionsPerPost,
+      estimatedValueGenerated, estimatedRoi, reach, cpe, cpm, firstPostDate,
+      lastPostDate, estimatedContentCost, campaignTitle, postsCount,
+      influencersCount, clicks, trackingLinksClicks, trackingLinksConversions,
+      trackingLinksConversionValue, affiliateLinksClicks, affiliateLinksConversions,
+      affiliateLinksConversionRate, affiliateLinksSales, affiliateLinksComissionEarned,
+      affiliateLinksRoi.
+    machine_readable: false
+    note: >-
+      Because the allowed values live in prose, a generated client cannot
+      validate them. Note also the upstream typo `affiliateLinksComissionEarned`
+      (one m) — it is the wire name and must be spelled that way.
+  - name: sortDirection
+    default: DESC
+    values: [ASC, DESC]
+
+filtering:
+  surface: Later Influence Reporting API
+  base_filters:
+  - name: startDate
+    format: 'ISO 8601 date (YYYY-MM-DD)'
+    required: true
+  - name: endDate
+    format: 'ISO 8601 date (YYYY-MM-DD)'
+    required: true
+    constraint: 'the selected range may not exceed 2 years'
+  - name: instanceIds
+    type: array
+    description: Omit to query every instance the credentials can reach.
+  - name: campaignIds
+    type: array
+    constraint: max 50 items
+  - name: reportingGroupIds
+    type: array
+    deprecated_in_v2: true
+
+field_expansion:
+  supported: false
+  note: No `expand`, `fields` or sparse-fieldset parameter exists on either surface.
+
+metadata:
+  supported: false
+  note: >-
+    No free-form customer `metadata` bag. Extensibility is instead modelled as
+    first-class Datapoints / DataPointDefinition and Custom Analytics resources.
+
+request_tracing:
+  request_id_header: null
+  response_id_header: null
+  evidence: >-
+    Live responses from api.mavrck.co carry only `date`, `content-type`, `server:
+    nginx/1.21.3`, `x-powered-by: Express`, `access-control-allow-origin: *`,
+    `vary` and a weak `etag`. There is no correlation id to quote in a support
+    ticket.
+
+versioning:
+  style: uri-path
+  published_statement: 'API versioning supported through URI path'
+  current:
+  - surface: Mavrck Platform API
+    version: v1
+    base: https://api.mavrck.co/v1
+    note: >-
+      A handful of v2 paths (/v2/marketers/meta/*, /v2/public/campaigns/{id}) and
+      inline versioned sub-resources (/v1/reporting-details/v2/..., /v3/...)
+      coexist inside the same v1 document — version is not consistently a
+      prefix.
+  - surface: Later Influence Reporting API
+    version: v1
+    base: https://api.mavrck.co/v1/reporting
+    successor: https://reporting.api.later.com (v2)
+  see: lifecycle/mavrck-lifecycle.yml
+
+error_envelope:
+  platform_api: '{ "type": "<CODE>", "error": "<message>", "params": [...], "parent": {...} }'
+  reporting_api: 'application/problem+json — { "type", "title", "detail" }'
+  see: errors/mavrck-problem-types.yml
+
+rate_limit_signalling:
+  headers: none
+  status_on_exhaustion: undocumented
+  see: rate-limits/mavrck-rate-limits.yml
+
+content_type:
+  produces:
+  - application/json
+  problem_details: application/problem+json
+  note: >-
+    The platform spec declares a single global `produces: [application/json]`;
+    file-bearing operations (Images, Exports, uploadPolicy) still declare it,
+    so response content types are not reliably described.
+
+cors:
+  access_control_allow_origin: '*'
+  observed: 'live, 2026-08-12, api.mavrck.co'
+  note: >-
+    A wildcard CORS origin on a credentialed API host. Because the platform API
+    authenticates with a static `api-key` header rather than cookies, this does
+    not itself leak data, but it means the spec's own admin operations are
+    reachable from any browser origin that holds a key.
+
+vendor_extensions:
+  observed_in_spec:
+  - name: x-handler
+    description: >-
+      Names the internal source file that implements the operation (e.g.
+      `influencers/influencer_controller.js`). Present on 150 of 687 operations.
+      This is an internal implementation detail the provider has published to
+      the public internet.
+  - name: x-access
+    description: >-
+      Names the role required. Present on 140 of 687 operations, with the
+      vocabulary administrator (125), influencer (22), root (16), shared-cipher
+      (9), anonymous (4), mvk-s2s (1). This is the closest thing the platform
+      API has to a scope vocabulary, and it is machine-readable — see
+      conformance/mavrck-conformance.yml. It is also the clearest signal that
+      this document describes the FULL internal surface, not a curated partner
+      API: `root` and `mvk-s2s` are operator-only roles.
+  - name: x-nullable
+    description: Swagger 2.0 nullability marker, converted on refine.

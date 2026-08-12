@@ -1,0 +1,469 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Content API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Content
+paths:
+  /v1/content:
+    get:
+      operationId: GetContent
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Content
+      parameters:
+      - in: query
+        name: activationIds
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: orderBy
+        required: false
+        schema:
+          type: string
+components:
+  schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ContentMedia:
+      properties:
+        videos:
+          items:
+            properties:
+              duration:
+                type: number
+                format: double
+              size:
+                $ref: '#/components/schemas/ContentMediaSize'
+              url:
+                type: string
+            required:
+            - url
+            type: object
+          type: array
+        images:
+          items:
+            properties:
+              size:
+                $ref: '#/components/schemas/ContentMediaSize'
+              url:
+                type: string
+            required:
+            - url
+            type: object
+          type: array
+      type: object
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ContentMediaSize:
+      properties:
+        unit:
+          type: string
+          enum:
+          - CENTIMETERS
+          - MILLIMETERS
+          - INCHES
+          - PIXELS
+          - PERCENT
+          - POINTS
+        height:
+          type: number
+          format: double
+        width:
+          type: number
+          format: double
+      required:
+      - unit
+      type: object
+    ContentResponse:
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
+        data:
+          items:
+            $ref: '#/components/schemas/Content'
+          type: array
+      required:
+      - meta
+      - data
+      type: object
+    ContentExternalIdentity:
+      properties:
+        alternativeIds:
+          items:
+            $ref: '#/components/schemas/ContentExternalIdentity'
+          type: array
+        type:
+          type: string
+        id:
+          type: string
+      required:
+      - id
+      type: object
+    Content:
+      properties:
+        content:
+          $ref: '#/components/schemas/ContentInfo'
+        binding:
+          properties:
+            source:
+              type: string
+            dateBound:
+              type: number
+              format: double
+            administrator:
+              properties:
+                id:
+                  type: number
+                  format: double
+              required:
+              - id
+              type: object
+            globalUser:
+              properties:
+                membership:
+                  properties:
+                    id:
+                      type: number
+                      format: double
+                  required:
+                  - id
+                  type: object
+                listMember:
+                  properties:
+                    id:
+                      type: number
+                      format: double
+                  required:
+                  - id
+                  type: object
+                id:
+                  type: number
+                  format: double
+              required:
+              - membership
+              - listMember
+              - id
+              type: object
+            campaign:
+              properties:
+                type:
+                  type: string
+                listId:
+                  type: number
+                  format: double
+                title:
+                  type: string
+                id:
+                  type: number
+                  format: double
+              required:
+              - type
+              - id
+              type: object
+            instance:
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+              required:
+              - id
+              type: object
+            id:
+              type: number
+              format: double
+          required:
+          - source
+          - dateBound
+          - campaign
+          - instance
+          - id
+          type: object
+      required:
+      - content
+      - binding
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ContentInfo:
+      properties:
+        dateCreated:
+          type: number
+          format: double
+        urlCanonical:
+          type: string
+        url:
+          type: string
+        text:
+          type: string
+        media:
+          $ref: '#/components/schemas/ContentMedia'
+        engagements:
+          $ref: '#/components/schemas/ContentEngagements'
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - PUBLISHED
+        type:
+          type: string
+        profile:
+          type: object
+        externalId:
+          $ref: '#/components/schemas/ContentExternalIdentity'
+      required:
+      - media
+      - type
+      - profile
+      type: object
+    ContentEngagements:
+      properties:
+        avgWatchTime:
+          type: number
+          format: double
+        videoCompletionRate:
+          type: number
+          format: double
+        videoViewTotalTime:
+          type: number
+          format: double
+        followersAtPostDate:
+          type: number
+          format: double
+        engagements:
+          type: number
+          format: double
+        reach:
+          type: number
+          format: double
+        videoViews:
+          type: number
+          format: double
+        viewsPaid:
+          type: number
+          format: double
+        viewsOrganic:
+          type: number
+          format: double
+        views:
+          type: number
+          format: double
+        swipeUps:
+          type: number
+          format: double
+        replies:
+          type: number
+          format: double
+        clicks:
+          type: number
+          format: double
+        impressions:
+          type: number
+          format: double
+        retweets:
+          type: number
+          format: double
+        saves:
+          type: number
+          format: double
+        sharesPaid:
+          type: number
+          format: double
+        sharesOrganic:
+          type: number
+          format: double
+        shares:
+          type: number
+          format: double
+        commentsPaid:
+          type: number
+          format: double
+        commentsOrganic:
+          type: number
+          format: double
+        comments:
+          type: number
+          format: double
+        favorites:
+          type: number
+          format: double
+        closeUps:
+          type: number
+          format: double
+        likesPaid:
+          type: number
+          format: double
+        likesOrganic:
+          type: number
+          format: double
+        likes:
+          type: number
+          format: double
+        hearts:
+          type: number
+          format: double
+        audienceInterestDistribution:
+          items:
+            additionalProperties: true
+          type:
+          - array
+          - 'null'
+        audienceGendersDistribution:
+          items:
+            additionalProperties: true
+          type:
+          - array
+          - 'null'
+        audienceCountriesDistribution:
+          items:
+            additionalProperties: true
+          type:
+          - array
+          - 'null'
+        audienceAgeDistribution:
+          items:
+            additionalProperties: true
+          type:
+          - array
+          - 'null'
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

@@ -1,0 +1,46 @@
+generated: '2026-08-12'
+method: generated
+source: >-
+  Grounded in the two contracts Mavrck publishes without credentials —
+  openapi/_original/mavrck-reporting-api.json and
+  webhooks/mavrck-workflow-stage-change-event-webhook-openapi.json — plus the
+  refined per-tag specs in openapi/. Every operationId referenced was verified to
+  exist verbatim in openapi/ before the skill was written.
+skills:
+- file: mavrck-pull-campaign-performance.md
+  name: mavrck-pull-campaign-performance
+  title: Pull campaign performance from Later Influence (Mavrck)
+  api: openapi/mavrck-campaign-level-api-openapi.yml
+  operations: [getToken, getAllowedInstances, getCampaignPerformance]
+- file: mavrck-channel-mix-and-roi.md
+  name: mavrck-channel-mix-and-roi
+  title: Channel mix and ROI on Later Influence (Mavrck)
+  api: openapi/mavrck-social-network-level-api-openapi.yml
+  operations: [getToken, getAllowedInstances, getNetworkPerformance, findReturnOfInvestments, getPostPerformance]
+- file: mavrck-receive-workflow-stage-change-webhook.md
+  name: mavrck-receive-workflow-stage-change-webhook
+  title: Receive the Mavrck workflow stage change webhook
+  api: asyncapi/mavrck-webhooks-asyncapi.yml
+  operations: []
+excluded:
+- surface: 'Mavrck Platform API — the 548-path, 687-operation Swagger 2.0 document served without credentials at https://api.mavrck.co/api-docs'
+  reason: >-
+    DELIBERATE OMISSION, not an oversight. This document describes the
+    provider's full internal surface rather than a curated partner API: 125
+    annotated operations require the `administrator` role, 16 require `root` and
+    one requires the internal `mvk-s2s` role, and 150 operations carry an
+    `x-handler` naming the internal controller file that implements them. The
+    surface includes bulk influencer personal data (the `GlobalUser` schema
+    carries 73 fields spanning contact details, social profiles and audience
+    demographics, with list, preview, import and bulk-action operations over it),
+    direct messaging to creators, and money movement (StripePayments,
+    CashPayments, PayPalAccount, TipaltiTransfers, GiftCards). Packaging any of
+    that as agent tooling would hand an autonomous caller a paginated route
+    through other people's personal data and a payment rail. The surface is
+    profiled and catalogued in openapi/ and data-model/ — which is legitimate
+    research — but it is not made executable here.
+- operation: getInfluencerPerformance
+  reason: >-
+    Returns per-creator identifiable records. Legitimate for a customer
+    reporting on their own programme, but not packaged as an unattended agent
+    skill without a named human-review step.

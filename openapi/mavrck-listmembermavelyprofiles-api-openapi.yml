@@ -1,0 +1,231 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO List Member Mavely Profiles API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: ListMemberMavelyProfiles
+paths:
+  /v1/list-member-mavely-profiles:
+    get:
+      operationId: findAllListMemberMavelyProfiles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ListMemberMavelyProfile'
+                type: array
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberMavelyProfiles
+      parameters:
+      - in: query
+        name: mavelyProfileId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: listMemberId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: actionGroupId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: globalUserId
+        required: false
+        schema:
+          type: number
+          format: double
+  /v1/list-members/mavely/profiles:
+    post:
+      operationId: getListMemberMavelyProfiles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ListMemberMavelyProfile'
+                type: array
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberMavelyProfiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MavelyProfilesRequest'
+        required: true
+  /v1/list-members/disconnect/mavely:
+    delete:
+      operationId: deleteListMemberMavelyProfilesByActionGroupId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                required:
+                - success
+                type: object
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ListMemberMavelyProfiles
+      parameters:
+      - in: query
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+components:
+  schemas:
+    MavelyListMember:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+        mavelyProfileId:
+          type: string
+      required:
+      - actionGroupId
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    MavelyProfilesRequest:
+      properties:
+        mavelyListMembers:
+          items:
+            $ref: '#/components/schemas/MavelyListMember'
+          type: array
+      required:
+      - mavelyListMembers
+      type: object
+    ListMemberMavelyProfile:
+      properties:
+        id:
+          type: number
+          format: double
+        listMemberId:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+        actionGroupId:
+          type: number
+          format: double
+        mavelyProfileId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - listMemberId
+      - globalUserId
+      - actionGroupId
+      - mavelyProfileId
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

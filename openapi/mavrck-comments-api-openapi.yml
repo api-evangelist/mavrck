@@ -1,0 +1,499 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Comments API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Comments
+paths:
+  /v1/global-users/{globalUserId}/comments:
+    get:
+      operationId: getGlobalUserComments
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Comment'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/ResponseMeta'
+                required:
+                - data
+                - meta
+                type: object
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Comments
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: actionGroupId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+    post:
+      operationId: createGlobalUserComment
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pick_Comment.id_'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Comments
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalUserCommentPostBody'
+        required: true
+  /v1/global-users/{globalUserId}/comments/{commentId}:
+    patch:
+      operationId: updateGlobalUserComment
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Comments
+      parameters:
+      - in: path
+        name: globalUserId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: commentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalUserCommentPatchBody'
+        required: true
+  /v1/notification_comments:
+    get:
+      operationId: getNotificationComments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBody_NotificationComment-Array_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Comments
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: orderBy
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: resourceType
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: resourceId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: author
+        required: false
+        schema:
+          type: string
+    post:
+      operationId: createNotificationComment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationCommentPostBody'
+        required: true
+components:
+  schemas:
+    Administrator:
+      properties:
+        id:
+          type: number
+          format: double
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          type: string
+      type: object
+      additionalProperties: false
+    ResponseBody_NotificationComment-Array_:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/NotificationComment'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    GlobalUserCommentPatchBody:
+      properties:
+        pinned:
+          type: boolean
+      required:
+      - pinned
+      type: object
+      additionalProperties: false
+    Pick_Comment.id_:
+      properties:
+        id:
+          type: number
+          format: double
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotificationComment:
+      properties:
+        id:
+          type: number
+          format: double
+        occurredAt:
+          type: string
+        author:
+          type: string
+        authorImage:
+          type: string
+        resourceType:
+          type: string
+        resourceId:
+          type: string
+        text:
+          type: string
+      required:
+      - id
+      - occurredAt
+      - resourceType
+      - resourceId
+      - text
+      type: object
+      additionalProperties: false
+    Comment:
+      properties:
+        author:
+          $ref: '#/components/schemas/Administrator'
+        createdAt:
+          type: string
+        id:
+          type: number
+          format: double
+        text:
+          type: string
+        pinned:
+          type: boolean
+      type: object
+      additionalProperties: false
+    IdObject:
+      properties:
+        id:
+          type: number
+          format: double
+      required:
+      - id
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotificationCommentPostBody:
+      $ref: '#/components/schemas/Pick_NotificationComment.text-or-resourceType-or-resourceId_'
+    GlobalUserCommentPostBody:
+      properties:
+        text:
+          type: string
+        resource:
+          properties:
+            type:
+              type: string
+              enum:
+              - ActionGroup
+            id:
+              type: number
+              format: double
+          required:
+          - type
+          - id
+          type: object
+      required:
+      - text
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Pick_NotificationComment.text-or-resourceType-or-resourceId_:
+      properties:
+        text:
+          type: string
+        resourceType:
+          type: string
+        resourceId:
+          type: string
+      required:
+      - text
+      - resourceType
+      - resourceId
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

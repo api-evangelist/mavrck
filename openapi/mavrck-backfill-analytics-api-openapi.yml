@@ -1,0 +1,250 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Backfill Analytics API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Backfill Analytics
+paths:
+  /v1/backfill-analytics/followers-at-post:
+    post:
+      operationId: backfillFollowersAtPost
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackfillFollowersAtPostResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Backfill Analytics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackfillFollowersAtPostRequest'
+        required: true
+  /v1/backfill-analytics/update-content-activation-summary:
+    post:
+      operationId: updateContentActivationSummary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateContentActivationSummaryResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Backfill Analytics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContentActivationSummaryRequest'
+        required: true
+components:
+  schemas:
+    UpdateContentActivationSummaryEntity:
+      properties:
+        activationId:
+          type: number
+          format: double
+      additionalProperties:
+        additionalProperties: true
+      required:
+      - activationId
+      type: object
+    BackfillFollowersAtPostRequest:
+      properties:
+        batchSize:
+          type: number
+          format: double
+        network:
+          type: string
+        endDate:
+          type: string
+        startDate:
+          type: string
+      required:
+      - network
+      - endDate
+      - startDate
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    UpdateContentActivationSummaryRequest:
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/UpdateContentActivationSummaryEntity'
+          type: array
+      required:
+      - entities
+      type: object
+    BackfillFollowersAtPostResponse:
+      properties:
+        message:
+          type: string
+        processedBatches:
+          type: number
+          format: double
+        updatedRecords:
+          type: number
+          format: double
+      required:
+      - message
+      - processedBatches
+      - updatedRecords
+      type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    UpdateContentActivationSummaryResponse:
+      properties:
+        message:
+          type: string
+        errors:
+          items:
+            properties:
+              error:
+                type: string
+              activationId:
+                type: number
+                format: double
+            required:
+            - error
+            type: object
+          type: array
+        skippedEntities:
+          type: number
+          format: double
+        processedEntities:
+          type: number
+          format: double
+        updatedRecords:
+          type: number
+          format: double
+      required:
+      - message
+      - errors
+      - skippedEntities
+      - processedEntities
+      - updatedRecords
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

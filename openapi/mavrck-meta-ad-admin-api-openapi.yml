@@ -1,0 +1,372 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Meta Ad Admin API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Meta Ad Admin
+paths:
+  /v1/admin/meta/system-users/ad-accounts:
+    get:
+      operationId: GetSystemUsersAdAccountsInfo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MetaSystemUsersAdAccountsResponse'
+                type: array
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Meta Ad Admin
+  /v1/admin/meta/backfill/ad-insights:
+    post:
+      operationId: backfillAdAccountInsightsData
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Meta Ad Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackfillMetaAdInsightsJobPayload'
+        required: true
+  /v1/admin/meta/backfill/ad-insights/push:
+    post:
+      operationId: pushAdAccountInsightsData
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Meta Ad Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushMetaAdInsightsJobPayload'
+        required: true
+  /v1/admin/meta/backfill/ads:
+    post:
+      operationId: backfillAdInformationForAdAccount
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Meta Ad Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackfillMetaAdInsightsJobPayload'
+        required: true
+  /v1/admin/meta/backfill/ads/lifetime-insights:
+    post:
+      operationId: backfillLifetimeAdInsights
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Meta Ad Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackfillMetaAdInsightsJobPayload'
+        required: true
+components:
+  schemas:
+    MetaSystemUsersAdAccountsResponse:
+      properties:
+        adAccounts:
+          items:
+            properties:
+              adAccount:
+                properties:
+                  updatedAt:
+                    type: string
+                  createdAt:
+                    type: string
+                  name:
+                    type: string
+                  id:
+                    type: number
+                    format: double
+                required:
+                - updatedAt
+                - createdAt
+                - name
+                - id
+                type: object
+              updatedAt:
+                type: string
+              createdAt:
+                type: string
+              internalStatus:
+                type: string
+              id:
+                type: number
+                format: double
+            required:
+            - adAccount
+            - updatedAt
+            - createdAt
+            - internalStatus
+            - id
+            type: object
+          type: array
+        permissions:
+          $ref: '#/components/schemas/MetaSystemUserPermissions'
+        name:
+          type: string
+        id:
+          type: number
+          format: double
+      required:
+      - adAccounts
+      - permissions
+      - name
+      - id
+      type: object
+    BackfillMetaAdInsightsJobPayload:
+      properties:
+        externalAdIdList:
+          items:
+            type: string
+          type: array
+        backfillOnlyNullEntries:
+          type: boolean
+        batchSize:
+          type: number
+          format: double
+        adAccountIds:
+          items:
+            type: number
+            format: double
+          type: array
+      type: object
+    MetaSystemUserPermissions:
+      properties:
+        data:
+          items:
+            properties:
+              status:
+                type: string
+              permission:
+                type: string
+            required:
+            - status
+            - permission
+            type: object
+          type: array
+      required:
+      - data
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PushMetaAdInsightsJobPayload:
+      properties:
+        endDate:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+      required:
+      - endDate
+      - startDate
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

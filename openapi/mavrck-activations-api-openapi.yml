@@ -1,0 +1,5753 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Activations API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Activations
+paths:
+  /action/{actionId}/activation:
+    post:
+      tags:
+      - Activations
+      x-handler: activations/action_activation_controller.js
+      x-access:
+      - influencer
+      summary: Create an activation when an action is completed by a user.
+      parameters:
+      - name: actionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: productExperience
+        in: query
+        required: false
+        description: Tag this activation with a key denoting the experience/channel in which the user created the activation.
+        schema:
+          type: string
+      - name: utmSource
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: utmMedium
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: utmTerm
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: utmContent
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: utmCampaign
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: iovationIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Activation URIs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActivationURI'
+        '400':
+          description: Action not completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Action already completed by this influencer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Action not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+  /action/{actionId}/activations:
+    get:
+      tags:
+      - Activations
+      operationId: getActionActivations
+      x-handler: activations/action_activation_controller.js
+      x-access:
+      - administrator
+      - root
+      - influencer
+      summary: Retrieve activations for an action.
+      parameters:
+      - $ref: '#/components/parameters/orderByParam'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/approvalStatus'
+      - name: actionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: minStars
+        in: query
+        required: false
+        description: Filter on minimum stars.
+        schema:
+          type: integer
+      - name: myActivations
+        in: query
+        description: As an influencer, select only my activations associated with the action.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Collection of activations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                  data:
+                    items:
+                      $ref: '#/components/schemas/ActivationDeprecated'
+                    type: array
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Action not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /action-groups/{actionGroupId}/activations:
+    get:
+      tags:
+      - Activations
+      operationId: getActionGroupActivations
+      x-handler: activations/action_group_activation_controller.js
+      x-access:
+      - administrator
+      - influencer
+      - shared-cipher
+      x-sharedCipherParameters:
+        actionGroupId: actionGroupId
+      summary: Fetch all activations for an action group
+      parameters:
+      - name: actionGroupId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: globalUserId
+        in: query
+        description: The global user Id to filter the results by.
+        schema:
+          type: integer
+      - name: myActivations
+        in: query
+        description: Flag permitting the influencer to view unapproved and/or-only approved activations
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/postsWithUGC'
+      - $ref: '#/components/parameters/networkParam'
+      - $ref: '#/components/parameters/userFilter'
+      - $ref: '#/components/parameters/orderDirection'
+      - name: orderProperty
+        in: query
+        schema:
+          type: string
+          enum:
+          - postDate
+          - createdAt
+          - engagements
+          - estimatedImpressions
+      - name: networks
+        in: query
+        description: Array of networks
+        schema:
+          type: array
+          items:
+            type: string
+      - name: postDateAfter
+        in: query
+        description: The activation post date is >= this date
+        schema:
+          type: string
+      - name: postDateBefore
+        in: query
+        description: The activation post date is <= this date
+        schema:
+          type: string
+      - name: filterTagIds
+        in: query
+        description: Array of tag ids used for searching activations
+        schema:
+          type: array
+          items:
+            type: number
+      - name: tagQuantifier
+        in: query
+        description: any or all option when searching for filterTagIds
+        schema:
+          type: string
+      - name: shouldExportFilenames
+        in: query
+        description: Whether or not to export the filenames of the activations
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: An array of activations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                  data:
+                    items:
+                      $ref: '#/components/schemas/ActivationDeprecated'
+                    type: array
+        '400':
+          description: Invalid/missing parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /activations:
+    get:
+      tags:
+      - Activations
+      operationId: getActivations
+      x-handler: activations/activation_controller.js
+      x-access:
+      - influencer
+      - administrator
+      summary: Fetch all activations
+      parameters:
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - name: orderProperty
+        in: query
+        schema:
+          type: string
+          enum:
+          - postDate
+          - createdAt
+          - engagements
+          - estimatedImpressions
+      - $ref: '#/components/parameters/orderDirection'
+      - $ref: '#/components/parameters/approvalStatus'
+      - $ref: '#/components/parameters/postsWithUGC'
+      - $ref: '#/components/parameters/networkParam'
+      - $ref: '#/components/parameters/userFilter'
+      - name: networks
+        in: query
+        description: Array of networks
+        schema:
+          type: array
+          items:
+            type: string
+      - name: postDateAfter
+        in: query
+        description: The activation post date is >= this date
+        schema:
+          type: string
+      - name: postDateBefore
+        in: query
+        description: The activation post date is <= this date
+        schema:
+          type: string
+      - name: actionGroupId
+        in: query
+        description: Array of action group ids
+        schema:
+          type: array
+          items:
+            type: number
+      - name: showcaseMode
+        in: query
+        description: It's showcase time!
+        schema:
+          type: boolean
+      - name: globalUserId
+        in: query
+        description: The global user Id to filter the results by.
+        schema:
+          type: integer
+      - name: filterTagIds
+        in: query
+        description: Array of tag ids used For searching activations
+        schema:
+          type: array
+          items:
+            type: number
+      - name: tagQuantifier
+        in: query
+        description: any or all option when searching for filterTagIds
+        schema:
+          type: string
+      - name: shouldExportFilenames
+        in: query
+        description: Whether or not to export the filenames of the activations
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: An array of activations.
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                  data:
+                    items:
+                      $ref: '#/components/schemas/ActivationDeprecated'
+                    type: array
+        '400':
+          description: Invalid/missing parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Activations
+      operationId: createActivation
+      x-access:
+      - administrator
+      x-handler: activations/activation_controller.js
+      summary: Create an activation manually.
+      responses:
+        '200':
+          description: Activation created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationDeprecated'
+        '400':
+          description: Invalid/missing parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Member or action not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - globalUserId
+              - actionId
+              - instagramPostId
+              properties:
+                globalUserId:
+                  type: integer
+                actionId:
+                  type: string
+                instagramPostId:
+                  type: string
+                activation:
+                  $ref: '#/components/schemas/ActivationDeprecated'
+        required: true
+    delete:
+      tags:
+      - Activations
+      operationId: deleteAndExcludeActivation
+      x-access:
+      - administrator
+      x-handler: activations/activation_controller.js
+      summary: Delete this activation and exclude its content from being re-added to the action group
+      parameters:
+      - name: activationId
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: markIncomplete
+        in: query
+        schema:
+          type: boolean
+      - name: trackingStatusId
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Activation deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          description: Invalid/missing parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Activation not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /activations/{id}/:
+    put:
+      tags:
+      - Activations
+      operationId: updateActivation
+      x-handler: activations/activation_controller.js
+      x-access:
+      - administrator
+      summary: Edit an activation.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Activation'
+      responses:
+        '200':
+          description: Activation edited successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationDeprecated'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /action-groups/{actionGroupId}/self-reported-activation-notifications:
+    post:
+      tags:
+      - Activations
+      operationId: selfReportActivationNotification
+      x-handler: activations/self_reported_activations/self_reported_activation_notification_controller.js
+      x-access:
+      - influencer
+      summary: "\n          Report information about an activation or content that could not be\n          programmatically activated directly to the marketer"
+      parameters:
+      - name: actionGroupId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Activation notification reported successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activationId:
+                  type: integer
+                comment:
+                  type: string
+  /actions/{actionId}/manual-activations/{globalUserId}:
+    post:
+      tags:
+      - Activations
+      operationId: createManualActivation
+      x-handler: activations/activation_manual_activate_controller.js
+      x-access:
+      - administrator
+      summary: Create manual activation for action.
+      parameters:
+      - name: actionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: globalUserId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Activation'
+      responses:
+        '200':
+          description: Activation created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationDeprecated'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Message not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/actions/{actionId}/self-reported-activations:
+    post:
+      operationId: selfReportActivation
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivationResponse'
+        '400':
+          description: Validation Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Activations
+      parameters:
+      - in: path
+        name: actionId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LegacySelfReportedActivationBody'
+  /v1/activations/{activationId}/approveApprovalStatus:
+    put:
+      operationId: approveApprovalStatus
+      responses:
+        '200':
+          description: Activation successfully approved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Cannot Approve an Activation that's already Rejected, set to pending first.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Activation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Activations
+      parameters:
+      - in: path
+        name: activationId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/activations/{activationId}/unrejectApprovalStatus:
+    put:
+      operationId: unrejectApprovalStatus
+      responses:
+        '200':
+          description: Activation successfully set back to pending.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Cannot 'Unapprove' an Activation that's already approved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Activation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Activations
+      parameters:
+      - in: path
+        name: activationId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/activations/{activationId}/rejectApprovalStatus:
+    put:
+      operationId: rejectApprovalStatus
+      responses:
+        '200':
+          description: Activation successfully rejected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Cannot reject an Activation that is approved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Activation not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Activations
+      parameters:
+      - in: path
+        name: activationId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/activation/history:
+    get:
+      operationId: getActivationHistory
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBody_ActivationHistoryItem-Array_'
+        '400':
+          description: Invalid Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Invalid API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Activations
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: campaignId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: actionId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: audienceId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: actionTitle
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: actionTypes
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: type
+        required: false
+        schema:
+          type: string
+          enum:
+          - create
+          - amplify
+          - survey
+          - review
+          - follow
+          - view
+          - other
+components:
+  schemas:
+    Administrator:
+      properties:
+        id:
+          type: number
+          format: double
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          type: string
+      type: object
+      additionalProperties: false
+    Question:
+      properties:
+        className:
+          type: string
+        dataPointDefinition:
+          $ref: '#/components/schemas/DataPointDefinition'
+        dataPointDefinitionId:
+          type: number
+          format: double
+        hasResponses:
+          type: boolean
+        hideFromInfluencers:
+          type: boolean
+        id:
+          type: number
+          format: double
+        key:
+          type: string
+        maxResponses:
+          type: number
+          format: double
+        order:
+          type: number
+          format: double
+        questionResponses:
+          items:
+            additionalProperties: false
+            type: object
+          type: array
+        questionText:
+          type: string
+        markUpQuestionText:
+          type: string
+        properties:
+          properties:
+            type:
+              type: string
+            required:
+              type: boolean
+            placeholder:
+              type: string
+            options:
+              items:
+                properties:
+                  value:
+                    type: string
+                  name:
+                    type: string
+                type: object
+              type: array
+            minlength:
+              type: number
+              format: double
+            min:
+              type: number
+              format: double
+            maxlength:
+              type: number
+              format: double
+            maxUploads:
+              type: number
+              format: double
+            max:
+              type: number
+              format: double
+            label:
+              type: string
+            accept:
+              type: string
+          type: object
+        required:
+          type: boolean
+        templateOptions:
+          additionalProperties: false
+          type: object
+        type:
+          type: string
+      type: object
+      additionalProperties: false
+    NetworkAccountDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        reach:
+          type: integer
+        averageEngagements:
+          type: integer
+        engagementRate:
+          type: number
+    YotpoAppProduct:
+      properties:
+        reviewProductId:
+          type: number
+          format: double
+        youtpoProductId:
+          type: string
+      type: object
+      additionalProperties: false
+    AudienceDeprecated:
+      type: object
+      x-access:
+      - root
+      - administrator
+      properties:
+        id:
+          type: integer
+          description: Unique identifier representing a single audience.
+        name:
+          type: string
+          description: Human-readable description of the audience displayed to administrators.
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfluencerDataPointCriteriaDeprecated'
+    ActivationHistoryItem:
+      properties:
+        surveyResponses:
+          type: string
+        profilePicture:
+          type: string
+        posts:
+          type: number
+          format: double
+        networkEngagements:
+          type: string
+        network:
+          type: string
+        membershipType:
+          type: string
+        membershipStatus:
+          type: string
+        membershipId:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+        joinDate:
+          type: string
+          format: date-time
+        fullName:
+          type: string
+        conversionsValue:
+          type: string
+        conversions:
+          type: string
+        contactZip:
+          type: string
+        contactStreetLine2:
+          type: string
+        contactStreet:
+          type: string
+        contactState:
+          type: string
+        contactLastName:
+          type: string
+        contactFirstName:
+          type: string
+        contactPhone:
+          type: string
+        contactEmail:
+          type: string
+        contactCountry:
+          type: string
+        contactCity:
+          type: string
+        clicks:
+          type: string
+        completionDate:
+          type: string
+          format: date-time
+        campaignName:
+          type: string
+        campaignId:
+          type: number
+          format: double
+        audienceName:
+          type: string
+        audienceId:
+          type: number
+          format: double
+        actionType:
+          type: string
+        actionTitle:
+          type: string
+        actionId:
+          type: string
+        actionGroupType:
+          type: string
+        actionGroupId:
+          type: number
+          format: double
+        actionGroupContentType:
+          type: string
+        actionGroupActionMainType:
+          type: number
+          format: double
+      type: object
+    ProductDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id of the product
+        title:
+          type: string
+          description: title of the product
+        description:
+          type: string
+          description: Description of product
+        image:
+          type: string
+          description: product image url
+        communityId:
+          type: string
+          description: instance to which this product belongs
+        bazaarVoiceAppProduct:
+          $ref: '#/components/schemas/BazaarVoiceAppProductDeprecated'
+        powerReviewsPage:
+          $ref: '#/components/schemas/PowerReviewsPageDeprecated'
+        yotpoAppProduct:
+          $ref: '#/components/schemas/YotpoAppProductDeprecated'
+    PinterestAccountDeprecated:
+      type: object
+      properties:
+        id:
+          description: int = mavck-db-id, string = derived-index-id
+          type:
+          - integer
+          - string
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        profilePicture:
+          type: string
+        bio:
+          type: string
+        followersCount:
+          type: integer
+        followingCount:
+          type: integer
+        monthlyViewers:
+          type: integer
+        averageEngagements:
+          type: integer
+        engagementRate:
+          type: number
+        boardsCount:
+          type: integer
+        pinsCount:
+          type: integer
+        pinterestAccessGrant:
+          type: object
+          properties:
+            isExpired:
+              type: boolean
+        primaryAccount:
+          type: boolean
+    PendingActivationURI:
+      type: object
+      properties:
+        id:
+          type: integer
+    ActivationURI:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          description: Unique identifier representing the activation.
+        incentive:
+          $ref: '#/components/schemas/IncentiveDeprecated'
+        points:
+          type: number
+          description: The number of points earned after activating.
+    YoutubeChannelDeprecated:
+      type: object
+      properties:
+        id:
+          description: int = mavck-db-id, string = derived-index-id
+          type:
+          - integer
+          - string
+        username:
+          type: string
+        bio:
+          type: string
+        primaryAccount:
+          type: boolean
+        profilePicture:
+          type: string
+        followersCount:
+          type: integer
+        youtubeExternalId:
+          type: string
+        videoCount:
+          type: integer
+        viewCount:
+          type: integer
+        commentCount:
+          type: integer
+        handle:
+          type: string
+    IncentiveUnlockEvent:
+      type: string
+      enum:
+      - acceptance
+      - completion
+      - pending_shipment
+      - pending_payment
+    RoutingOptionsDeprecated:
+      type: object
+      description: Routing options
+      properties:
+        redirect_url:
+          type: string
+          description: Url the influencer should be redirected to.
+        cta:
+          type: string
+          description: Displayed CTA.
+        mode:
+          type: string
+          description: Routing type.
+    ReviewFormDeprecated:
+      type: object
+      required:
+      - questions
+      properties:
+        id:
+          type: integer
+          description: id of form
+        reviewProductId:
+          type: integer
+        action:
+          $ref: '#/components/schemas/ActionDeprecated'
+        product:
+          $ref: '#/components/schemas/ProductDeprecated'
+        questions:
+          type: array
+          description: Array of form questions
+          items:
+            $ref: '#/components/schemas/QuestionDeprecated'
+        title:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+        incentivized:
+          x-access:
+          - administrator
+          - root
+          type: boolean
+          description: whether the form is incentivized
+        responses:
+          type: array
+          x-access:
+          - administrator
+          - root
+          items:
+            type: object
+            properties:
+              membership:
+                $ref: '#/components/schemas/MembershipDeprecated'
+              questionResponses:
+                type: array
+                items:
+                  type: object
+    InstagramAccountDeprecated:
+      type: object
+      properties:
+        id:
+          description: int = mavck-db-id, string = derived-index-id
+          type:
+          - integer
+          - string
+        handle:
+          type: string
+        fullName:
+          type: string
+        profilePicture:
+          type: string
+        bio:
+          type: string
+        website:
+          type: string
+        followersCount:
+          type: integer
+        followingCount:
+          type: integer
+        mediaCount:
+          type: integer
+        averageLikes:
+          type: integer
+        averageComments:
+          type: integer
+        averageEngagements:
+          type: integer
+        engagementRate:
+          type: number
+        isBusiness:
+          type: boolean
+        isPrivate:
+          type: boolean
+        sponsoredPostRate:
+          type: number
+        primaryAccount:
+          type: boolean
+        profileType:
+          type: string
+          enum:
+          - platform
+          - business
+        instagramAccessGrant:
+          type: object
+          properties:
+            isExpired:
+              type: boolean
+            platformIsExpired:
+              type: boolean
+            businessIsExpired:
+              type: boolean
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ConversionTag:
+      properties:
+        code:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        isActive:
+          type: boolean
+        isConversionValueEnabled:
+          type: boolean
+      required:
+      - id
+      - name
+      - isActive
+      - isConversionValueEnabled
+      type: object
+      additionalProperties: false
+    InfluencerCampaignContentApprovalStatus:
+      type: string
+      enum:
+      - PENDING
+      - APPROVED
+      - REJECTED
+    MavrckSupportedCurrencies:
+      type: object
+    ActionGroupDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier representing a single action group.
+        communityId:
+          type: string
+        communityName:
+          type: string
+        communityImage:
+          type: string
+        type:
+          type: string
+        mainType:
+          type: string
+          description: First action in the group type
+        name:
+          type: string
+          description: Human-readable description of the action group displayed for administrators.
+          x-access:
+          - root
+          - administrator
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        contentType:
+          type: string
+          description: For content action groups, this provides the type of content, which either matches og:image or is derived from internal heuristics.
+        url:
+          type: string
+          description: For content action groups, this contains the url input upon creation.
+        status:
+          type: string
+          description: The state of the action group. One of the set {"LIVE", "PAUSED", "PENDING", "EXPIRED"}.
+          x-access:
+          - root
+          - administrator
+        startDate:
+          format: date-time
+          type: string
+          description: The scheduled time in which the action group will become available to influencers.
+        endDate:
+          format: date-time
+          type:
+          - 'null'
+          - string
+          description: The scheduled time in which the action group will no longer be available to influencers.
+        createdAt:
+          format: date-time
+          type:
+          - 'null'
+          - string
+        notInCommunity:
+          type: boolean
+          x-access:
+          - root
+          - administrator
+          description: Filter this action group if the client specifies channel=community.
+        isAutoCreated:
+          type: boolean
+        isPrimaryReferralActivity:
+          type: boolean
+        multipleActivations:
+          type: boolean
+          description: Indicates whether this action group can be completed multiple times. Only available for photoChallenge.
+        campaign:
+          type: object
+          x-access:
+          - root
+          - administrator
+          properties:
+            id:
+              type: integer
+              description: Unique identifier representing a single campaign.
+            name:
+              type: string
+              description: Name of campaign.
+            description:
+              type: string
+              description: Name of campaign.
+            brand:
+              $ref: '#/components/schemas/BrandDeprecated'
+            hasActivations:
+              type: boolean
+              description: Flag that indicates whether this campaign is associated with any activations.
+            createdAt:
+              format: date-time
+              type: string
+              description: The date and time that the campaign was created.
+        audience:
+          $ref: '#/components/schemas/AudienceDeprecated'
+        incentive:
+          $ref: '#/components/schemas/IncentiveDeprecated'
+        incentives:
+          items:
+            $ref: '#/components/schemas/IncentiveDeprecated'
+          type: array
+        actions:
+          items:
+            $ref: '#/components/schemas/ActionDeprecated'
+          type: array
+        points:
+          type: object
+          properties:
+            min:
+              type: integer
+            max:
+              type: integer
+        hasScheduledNotifications:
+          type: boolean
+          description: Indicates whether the action group is tied to any scheduled notifications. The audience cannot be modified if this is the case.
+        listId:
+          type: integer
+        listDeliverables:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListDeliverable'
+        influencerReviewDeliverable:
+          type: object
+          properties:
+            id:
+              type: integer
+            count:
+              type: integer
+            listId:
+              type: integer
+        workflowStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListCustomStatusDeprecated'
+        locale:
+          type: string
+          description: Formatted according to language codes (https://www.w3schools.com/tags/ref_language_codes.asp)
+        activatedUsersMetrics:
+          type: integer
+        clicksMetrics:
+          type: integer
+        engagementsMetrics:
+          type: integer
+        impressionsMetrics:
+          type: integer
+        conversionsCountMetrics:
+          type: integer
+        conversionsValueMetrics:
+          type: number
+        posts:
+          type: integer
+        engagements:
+          type: integer
+        impressions:
+          type: integer
+        cpe:
+          type: number
+        cpp:
+          type: number
+        cpm:
+          type: number
+        cpa:
+          type: number
+        committedAmount:
+          type: number
+        paidAmount:
+          type: number
+        readyAmount:
+          type: number
+        cost:
+          type: number
+        roiValue:
+          type: number
+        workflowSummary:
+          type: object
+          properties:
+            accepted:
+              type: integer
+            rejected:
+              type: integer
+            candidates:
+              type: integer
+            applicants:
+              type: integer
+            participants:
+              type: integer
+            completed:
+              type: integer
+        requiredHashtag:
+          type: string
+          description: Hashtag for action group (required)
+        ftcHashtag:
+          type: string
+          description: FTC hashtag for an action group.
+        youtubeHashtag:
+          type: string
+          description: YouTube hashtag for an action group.
+        internalDescription:
+          type: string
+          description: Internal description on an action group.
+        activityBudget:
+          type:
+          - 'null'
+          - number
+          description: Total budget for all actions under an action group.
+        numberOfInfluencers:
+          type:
+          - 'null'
+          - integer
+          description: Target number of influencers for all actions under an action group.
+        cpeGoal:
+          type:
+          - number
+          - 'null'
+          description: Cost per engagement goal for a single action group
+        cpmGoal:
+          type:
+          - number
+          - 'null'
+          description: Cost per 1000 impressions goal for a single action group
+        impressionsGoal:
+          type:
+          - number
+          - 'null'
+          description: Impressions goal for a single action group
+        engagementsGoal:
+          type:
+          - number
+          - 'null'
+          description: Engagements goal for a single action group
+        engagementRateGoal:
+          type:
+          - number
+          - 'null'
+          description: Engagement rate goal for a single action group
+        contentDueDate:
+          type:
+          - string
+          - 'null'
+          description: Due date for content on an action group.
+        draftDueDate:
+          type:
+          - string
+          - 'null'
+          description: Due date for drafts on an action group.
+        conceptDueDate:
+          type:
+          - string
+          - 'null'
+          description: Due date for concepts on an action group.
+        primaryNetwork:
+          type: string
+        hasPointsEnabled:
+          type: boolean
+        shareableReportLink:
+          type: string
+        termsOfServiceLink:
+          type: string
+        autoAcceptApplicant:
+          type: boolean
+        globalUserListDefinitionId:
+          type:
+          - integer
+          - 'null'
+        ready:
+          type: number
+        pending:
+          type: number
+        fulfilled:
+          type: number
+        brief:
+          type: string
+        hideOnIcm:
+          type: boolean
+        application:
+          type: object
+          properties:
+            requestBrandedContentPermission:
+              type: boolean
+        community:
+          type: object
+          properties:
+            instagramHandle:
+              type: string
+        isSetupEnabled:
+          type: boolean
+        isCopied:
+          type: boolean
+        hideTemplateUpdateCTA:
+          type: boolean
+        isLaterCreatorExperienceEnabled:
+          type: boolean
+        isMavelyCreatorExperienceEnabled:
+          type: boolean
+        budgetReferenceId:
+          type:
+          - string
+          - 'null'
+        budgetReferenceIdType:
+          type:
+          - string
+          - 'null'
+          enum:
+          - IROF
+          - OPPORTUNITY
+          - null
+        brandSuitabilityGuidelines:
+          type:
+          - string
+          - 'null'
+        publicSummary:
+          type:
+          - string
+          - 'null'
+        version:
+          type: integer
+          description: Version of the action group.
+        lastPolledAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The last time the action group was manually polled for updates.
+    Routing:
+      properties:
+        not_eligible:
+          $ref: '#/components/schemas/RoutingOptions'
+        success:
+          $ref: '#/components/schemas/RoutingOptions'
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ListCustomStatus:
+      properties:
+        templates:
+          items:
+            $ref: '#/components/schemas/ConversationTemplate'
+          type: array
+        statusOrder:
+          type: number
+          format: double
+        slug:
+          type: string
+        phase:
+          type: string
+        linkedStages:
+          items:
+            type: string
+          type: array
+        label:
+          type: string
+        id:
+          type: number
+          format: double
+        enabled:
+          type: boolean
+        disabled:
+          type: boolean
+        custom:
+          type: boolean
+        ctaLabel:
+          type: string
+        auxiliaryLabel:
+          type: string
+        actionGroupId:
+          type: number
+          format: double
+      type: object
+    IncentiveClaim:
+      properties:
+        address:
+          type: string
+        age:
+          type: number
+          format: double
+        clickCount:
+          type: number
+          format: double
+        conversionCount:
+          type: number
+          format: double
+        createdAt:
+          type: string
+        email:
+          type: string
+        engagementCount:
+          type: number
+          format: double
+        facebookFriendCount:
+          type: number
+          format: double
+        firstName:
+          type: string
+        gender:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        lastName:
+          type: string
+        membershipId:
+          type: number
+          format: double
+        mostRecentRewardFulfilledAt:
+          type: string
+        profilePictureLink:
+          type: string
+        promocode:
+          type: string
+      type: object
+      additionalProperties: false
+    DataPointDefinition:
+      properties:
+        actionGroups:
+          items:
+            $ref: '#/components/schemas/DataPointDefinitionActionGroup'
+          type: array
+        archived:
+          type: boolean
+        communityId:
+          type: string
+        createdAt:
+          type: string
+        customSet:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: number
+          format: double
+        key:
+          type: string
+        markUpDescription:
+          type: string
+        mergeTag:
+          type: boolean
+        multi:
+          type: boolean
+        name:
+          type: string
+        setElements:
+          $ref: '#/components/schemas/DataPointDefinitionSetElement'
+        type:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - customSet
+      - id
+      - multi
+      - name
+      - type
+      type: object
+      additionalProperties: false
+    ConversationTemplate:
+      properties:
+        category:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/Administrator'
+        communityId:
+          type: string
+        html:
+          type: string
+        id:
+          type: number
+          format: double
+        isArchived:
+          type: boolean
+        lastModifiedBy:
+          $ref: '#/components/schemas/Administrator'
+        subject:
+          type: string
+        title:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        version:
+          type: number
+          format: double
+      required:
+      - category
+      - createdAt
+      - html
+      - id
+      - isArchived
+      - title
+      - updatedAt
+      type: object
+      additionalProperties: false
+    ConversionTagDeprecated:
+      type: object
+      x-access:
+      - administrator
+      - root
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the conversion tag.
+        name:
+          type: string
+          description: Human-readable name for the conversion tag.
+        code:
+          type: string
+          description: Code to embed in the Clickmeter JavaScript snippet to conduct conversion tracking.
+        type:
+          type: string
+          description: The category this conversion belongs. One of the set {"purchase", "app_download", "sign_up"}.
+        isActive:
+          type: boolean
+          description: Determines if a conversion tag is active or inactive
+        isConversionValueEnabled:
+          type: boolean
+          description: Determines if a conversion tag is active or inactive
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    RoutingDeprecated:
+      type: object
+      description: Routing configuration.
+      properties:
+        success:
+          $ref: '#/components/schemas/RoutingOptionsDeprecated'
+        not_eligible:
+          $ref: '#/components/schemas/RoutingOptionsDeprecated'
+    QuestionResponseDeprecated:
+      type: object
+      properties:
+        question:
+          $ref: '#/components/schemas/QuestionDeprecated'
+        value:
+          type: string
+          description: review question value
+    RoutingOptions:
+      properties:
+        cta:
+          type: string
+        mode:
+          type: string
+        redirect_url:
+          type: string
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActivationDeprecated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier representing a single activation.
+        externalId:
+          type: string
+          description: Instagram external id
+        profilePicture:
+          type: string
+          description: Link to the user's Facebook profile picture using the External Facebook id of the user who created this activation.
+        membershipId:
+          type: integer
+          description: Community membership id of user who created this activation used that can be used for pulling up influencer profiles.
+        globalUserId:
+          type: integer
+        createdByAccountId:
+          type: string
+          description: Id of self-service application user who manually bound or manually entered this activation
+        updatedByAccountId:
+          type: string
+          description: Id of self-service application user who manually updated this activation
+        createdAt:
+          type: string
+          format: date-time
+          description: CREATED AT TIME
+        approvalStatus:
+          type: string
+          description: The Approval status of the activation.
+        points:
+          type: number
+          description: Number of points that the activation grants.
+        isApproved:
+          type: boolean
+          x-access:
+          - root
+          - administrator
+          description: Indicates whether this activation has been approved to be publicly available.
+        selfReported:
+          type: boolean
+        user:
+          type: object
+          properties:
+            id:
+              type:
+              - integer
+              - string
+            fullName:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+            profilePicture:
+              type: string
+            unverified:
+              type: string
+              enum:
+              - hidden
+              - emails
+              - excludes
+            country:
+              type: string
+              enum:
+              - Afghanistan
+              - Albania
+              - Algeria
+              - American Samoa
+              - Andorra
+              - Angola
+              - Anguilla
+              - Antarctica
+              - Antigua and Barbuda
+              - Argentina
+              - Armenia
+              - Aruba
+              - Australia
+              - Austria
+              - Azerbaijan
+              - Bahrain
+              - Bangladesh
+              - Barbados
+              - Belarus
+              - Belgium
+              - Belize
+              - Benin
+              - Bermuda
+              - Bhutan
+              - Bolivia
+              - Bosnia and Herzegovina
+              - Botswana
+              - Bouvet Island
+              - Brazil
+              - British Indian Ocean Territory
+              - British Virgin Islands
+              - Brunei
+              - Bulgaria
+              - Burkina Faso
+              - Burundi
+              - Cambodia
+              - Cameroon
+              - Canada
+              - Cape Verde
+              - Caribbean Netherlands
+              - Cayman Islands
+              - Central African Republic
+              - Chad
+              - Chile
+              - China
+              - Christmas Island
+              - Cocos (Keeling) Islands
+              - Collectivity of Saint Martin
+              - Colombia
+              - Comoros
+              - Cook Islands
+              - Costa Rica
+              - Côte d'Ivoire
+              - Croatia
+              - Cuba
+              - Curaçao
+              - Cyprus
+              - Czechia
+              - Democratic Republic of the Congo
+              - Denmark
+              - Djibouti
+              - Dominica
+              - Dominican Republic
+              - Ecuador
+              - Egypt
+              - El Salvador
+              - Equatorial Guinea
+              - Eritrea
+              - Estonia
+              - Ethiopia
+              - Falkland Islands (Malvinas)
+              - Faroe Islands
+              - Federated States of Micronesia
+              - Fiji
+              - Finland
+              - France
+              - French Guiana
+              - French Polynesia
+              - French Southern Territories
+              - Gabon
+              - Georgia
+              - Germany
+              - Ghana
+              - Gibraltar
+              - Greece
+              - Greenland
+              - Grenada
+              - Guadeloupe
+              - Guam
+              - Guatemala
+              - Guernsey
+              - Guinea
+              - Guinea-Bissau
+              - Guyana
+              - Haiti
+              - Heard Island and McDonald Islands
+              - Holy See (Vatican City)
+              - Honduras
+              - Hong Kong
+              - Hungary
+              - Iceland
+              - India
+              - Indonesia
+              - Iran
+              - Iraq
+              - Ireland
+              - Isle of Man
+              - Israel
+              - Jamaica
+              - Japan
+              - Italy
+              - Jersey
+              - Jordan
+              - Kazakhstan
+              - Kenya
+              - Kiribati
+              - Kuwait
+              - Kyrgyzstan
+              - Laos
+              - Latvia
+              - Lebanon
+              - Lesotho
+              - Liberia
+              - Libya
+              - Liechtenstein
+              - Lithuania
+              - Luxembourg
+              - Macau
+              - Macedonia (FYROM)
+              - Madagascar
+              - Malawi
+              - Malaysia
+              - Maldives
+              - Mali
+              - Malta
+              - Marshall Islands
+              - Martinique
+              - Mauritania
+              - Mauritius
+              - Mayotte
+              - Mexico
+              - Moldova
+              - Monaco
+              - Mongolia
+              - Montenegro
+              - Montserrat
+              - Morocco
+              - Mozambique
+              - Myanmar (Burma)
+              - Namibia
+              - Nauru
+              - Nepal
+              - Netherlands
+              - New Caledonia
+              - New Zealand
+              - Nicaragua
+              - Niger
+              - Nigeria
+              - Niue
+              - Norfolk Island
+              - North Korea
+              - Northern Mariana Islands
+              - Norway
+              - Oman
+              - Pakistan
+              - Palau
+              - Palestine
+              - Panama
+              - Papua New Guinea
+              - Paraguay
+              - Peru
+              - Philippines
+              - Pitcairn
+              - Poland
+              - Portugal
+              - Puerto Rico
+              - Qatar
+              - Republic of the Congo
+              - Reunion
+              - Romania
+              - Russia
+              - Rwanda
+              - Saint Helena, Ascension and Tristan da Cunha
+              - Saint Kitts and Nevis
+              - Saint Lucia
+              - Saint Pierre and Miquelon
+              - Saint Vincent and the Grenadines
+              - Saint-Barthélemy
+              - Samoa
+              - San Marino
+              - Sao Tome and Principe
+              - Saudi Arabia
+              - Senegal
+              - Serbia
+              - Seychelles
+              - Sierra Leone
+              - Singapore
+              - Sint Maarten (Dutch part)
+              - Slovakia
+              - Slovenia
+              - Solomon Islands
+              - Somalia
+              - South Africa
+              - South Georgia and the South Sandwich Islands
+              - South Korea
+              - South Sudan
+              - Spain
+              - Sri Lanka
+              - Sudan
+              - Suriname
+              - Svalbard and Jan Mayen
+              - Swaziland
+              - Sweden
+              - Switzerland
+              - Syria
+              - Taiwan
+              - Tajikistan
+              - Tanzania
+              - Thailand
+              - The Bahamas
+              - The Gambia
+              - Timor-Leste
+              - Togo
+              - Tokelau
+              - Tonga
+              - Trinidad and Tobago
+              - Tunisia
+              - Turkey
+              - Turkmenistan
+              - Turks and Caicos Islands
+              - Tuvalu
+              - U.S. Virgin Islands
+              - Uganda
+              - Ukraine
+              - United Arab Emirates
+              - United Kingdom
+              - United States Minor Outlying Islands
+              - United States
+              - Uruguay
+              - Uzbekistan
+              - Vanuatu
+              - Venezuela
+              - Vietnam
+              - Wallis and Futuna
+              - Western Sahara
+              - Yemen
+              - Zambia
+              - Zimbabwe
+              - Åland Islands
+            state:
+              type: string
+            city:
+              type: string
+            zip:
+              type: string
+            street:
+              type: string
+            apt:
+              type: string
+            phone:
+              type: string
+            age:
+              type: integer
+            gender:
+              type: string
+              enum:
+              - male
+              - female
+              - other
+              - non_bin
+              - describe
+            email:
+              type: string
+            talentManagerEmail:
+              type: string
+            registered:
+              type: boolean
+            birthday:
+              type: string
+              format: date
+            facebookProfile:
+              $ref: '#/components/schemas/FacebookProfileDeprecated'
+            instagramAccount:
+              $ref: '#/components/schemas/InstagramAccountDeprecated'
+            instagramProfile:
+              $ref: '#/components/schemas/InstagramProfileDeprecated'
+            tiktokCreator:
+              $ref: '#/components/schemas/TikTokCreatorDeprecated'
+            twitterAccount:
+              $ref: '#/components/schemas/TwitterAccountDeprecated'
+            pinterestAccount:
+              $ref: '#/components/schemas/PinterestAccountDeprecated'
+            youtubeChannel:
+              $ref: '#/components/schemas/YoutubeChannelDeprecated'
+            blog:
+              $ref: '#/components/schemas/Blog'
+            lists:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  label:
+                    type: string
+            appMembership:
+              $ref: '#/components/schemas/MembershipDeprecated'
+            userContactInfo:
+              type: object
+              properties:
+                updatedAt:
+                  type: string
+                  format: date-time
+                emailIsVerified:
+                  type: boolean
+                referralSlug:
+                  type: string
+                referralCount:
+                  type: string
+                gender:
+                  type: string
+                genderDescription:
+                  type: string
+            influencerTopics:
+              type: array
+              items:
+                $ref: '#/components/schemas/TopicDeprecated'
+            activations:
+              type: integer
+            engagements:
+              type: integer
+            clicksCount:
+              type: integer
+            conversionCount:
+              type: integer
+            conversionValue:
+              type: number
+              format: double
+            rewards:
+              type: integer
+            facebookPostsCount:
+              type: integer
+            instagramPostsCount:
+              type: integer
+            twitterPostsCount:
+              type: integer
+            pinterestPostsCount:
+              type: integer
+            membershipDataPoints:
+              type: array
+              items:
+                type: object
+                properties:
+                  dataPointDefinition:
+                    $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+                  lastEditedBy:
+                    type: string
+                  updatedAt:
+                    type: string
+                    format: date-time
+                  value:
+                    type: array
+                    items:
+                      type: string
+            membershipCostAndPerformance:
+              $ref: '#/components/schemas/MembershipCostAndPerformanceDeprecated'
+            audiencePredominantAgeRange:
+              type: string
+            audiencePredominantCountry:
+              type: string
+            audiencePredominantCity:
+              type: string
+            audiencePercentageFemale:
+              type: number
+            audiencePercentage_13_17:
+              type: number
+            audiencePercentage_18_24:
+              type: number
+            audiencePercentage_25_34:
+              type: number
+            audiencePercentage_35_44:
+              type: number
+            audiencePercentage_45_54:
+              type: number
+            audiencePercentage_55_64:
+              type: number
+            audiencePercentage_65_plus:
+              type: number
+            cpe:
+              type: number
+            cpm:
+              type: number
+            cpp:
+              type: number
+            audienceFraudLevel:
+              type: string
+              enum:
+              - low
+              - medium
+              - high
+            audienceFakeFollowersLevel:
+              type: string
+              enum:
+              - low
+              - medium
+              - high
+            audienceFakeEngagersLevel:
+              type: string
+              enum:
+              - low
+              - medium
+              - high
+            nudityLevel:
+              type: string
+              enum:
+              - low
+              - medium
+              - high
+            violenceLevel:
+              type: string
+              enum:
+              - low
+              - medium
+              - high
+            profanityLevel:
+              type: string
+              enum:
+              - low
+              - medium
+              - high
+            hasPublicSummaryRecord:
+              type: boolean
+        action:
+          $ref: '#/components/schemas/ActionDeprecated'
+        content:
+          $ref: '#/components/schemas/ActivationContentDeprecated'
+        instagramAccount:
+          $ref: '#/components/schemas/InstagramAccountDeprecated'
+        facebookProfile:
+          $ref: '#/components/schemas/FacebookProfileDeprecated'
+        twitterAccount:
+          $ref: '#/components/schemas/TwitterAccountDeprecated'
+        pinterestAccount:
+          $ref: '#/components/schemas/PinterestAccountDeprecated'
+        contactInfo:
+          $ref: '#/components/schemas/MembershipContactInfoDeprecated'
+        membership:
+          $ref: '#/components/schemas/MembershipDeprecated'
+        campaign:
+          $ref: '#/components/schemas/CampaignDeprecated'
+        surveyResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserQuestionResponse'
+        reviewContent:
+          $ref: '#/components/schemas/ReviewFormResponseDeprecated'
+        validation:
+          type: object
+          properties:
+            ftcStatus:
+              type: string
+              enum:
+              - unknown
+              - valid
+              - invalid
+        brandedContentTagIGHandle:
+          type: string
+          description: A business partner that an influencer tagged in their Partnership Ads posts.
+        tikTokHandle:
+          type: string
+          description: TikTok username handle
+        tikTokMetrics:
+          type: object
+        tags:
+          type: array
+          items:
+            type: string
+        exportFilenames:
+          type: array
+          items:
+            type: string
+    Network:
+      properties:
+        clicks:
+          type: boolean
+        comments:
+          type: boolean
+        impressions:
+          type: boolean
+        key:
+          type: string
+        likes:
+          type: boolean
+        reach:
+          type: boolean
+        shares:
+          type: boolean
+      type: object
+      additionalProperties: false
+    NetworkName:
+      type: string
+      enum:
+      - Blog
+      - Facebook
+      - Facebook Group
+      - Facebook Live
+      - Facebook Reel
+      - Image
+      - Instagram
+      - Instagram Reel
+      - Instagram Story
+      - LinkedIn
+      - Pinterest
+      - Snapchat Story
+      - TikTok
+      - Twitch Stream
+      - Twitter
+      - Video
+      - YouTube Video
+      - YouTube Shorts
+    ActionGroup:
+      properties:
+        actions:
+          items:
+            $ref: '#/components/schemas/Action'
+          type: array
+        activatedUsersMetrics:
+          type: number
+          format: double
+        activityBudget:
+          type: number
+          format: double
+        application:
+          properties:
+            requestBrandedContentPermission:
+              type: boolean
+          type: object
+        audience:
+          $ref: '#/components/schemas/Audience'
+        autoAcceptApplicant:
+          type: boolean
+        brief:
+          type: string
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        clicksMetrics:
+          type: number
+          format: double
+        community:
+          properties:
+            instagramHandle:
+              type: string
+          type: object
+        communityId:
+          type: string
+        contentDueDate:
+          type: string
+        contentType:
+          type: string
+        conversionsCountMetrics:
+          type: number
+          format: double
+        conversionsValueMetrics:
+          type: number
+          format: double
+        cost:
+          type: number
+          format: double
+        cpa:
+          type: number
+          format: double
+        cpe:
+          type: number
+          format: double
+        cpeGoal:
+          type: number
+          format: double
+        cpm:
+          type: number
+          format: double
+        cpmGoal:
+          type: number
+          format: double
+        cpp:
+          type: number
+          format: double
+        committedAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        paidAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        readyAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        roiValue:
+          type:
+          - number
+          - 'null'
+          format: double
+        createdAt:
+          type: string
+        description:
+          type: string
+        draftDueDate:
+          type: string
+        conceptDueDate:
+          type: string
+        endDate:
+          type: string
+        engagementRateGoal:
+          type: number
+          format: double
+        engagements:
+          type: number
+          format: double
+        engagementsGoal:
+          type: number
+          format: double
+        engagementsMetrics:
+          type: number
+          format: double
+        ftcHashtag:
+          type: string
+        fulfilled:
+          type: number
+          format: double
+        globalUserListDefinitionId:
+          type: number
+          format: double
+        hasPointsEnabled:
+          type: boolean
+        hasScheduledNotifications:
+          type: boolean
+        hideOnIcm:
+          type: boolean
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        impressions:
+          type: number
+          format: double
+        impressionsGoal:
+          type: number
+          format: double
+        impressionsMetrics:
+          type: number
+          format: double
+        incentive:
+          $ref: '#/components/schemas/Incentive'
+        incentives:
+          items:
+            $ref: '#/components/schemas/Incentive'
+          type: array
+        influencerReviewDeliverable:
+          properties:
+            listId:
+              type: number
+              format: double
+            count:
+              type: number
+              format: double
+            id:
+              type: number
+              format: double
+          type: object
+        internalDescription:
+          type: string
+        isAutoCreated:
+          type: boolean
+        isLaterCreatorExperienceEnabled:
+          type: boolean
+        isPrimaryReferralActivity:
+          type: boolean
+        listId:
+          type: number
+          format: double
+        listDeliverables:
+          items:
+            $ref: '#/components/schemas/ListDeliverable'
+          type: array
+        locale:
+          type: string
+        mainType:
+          type: string
+        multipleActivations:
+          type: boolean
+        name:
+          type: string
+        notInCommunity:
+          type: boolean
+        numberOfInfluencers:
+          type: number
+          format: double
+        openGraphTags:
+          type: string
+        pending:
+          type: number
+          format: double
+        points:
+          properties:
+            max:
+              type: number
+              format: double
+            min:
+              type: number
+              format: double
+          type: object
+        posts:
+          type: number
+          format: double
+        primaryNetwork:
+          type: string
+        programId:
+          type: number
+          format: double
+        ready:
+          type: number
+          format: double
+        requiredHashtag:
+          type: string
+        budgetReferenceId:
+          type:
+          - string
+          - 'null'
+        budgetReferenceIdType:
+          type: object
+        brandSuitabilityGuidelines:
+          type: string
+        shareableReportLink:
+          type: string
+        startDate:
+          type: string
+        status:
+          type: string
+        termsOfServiceLink:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        workflowStatuses:
+          items:
+            $ref: '#/components/schemas/ListCustomStatus'
+          type: array
+        workflowSummary:
+          properties:
+            completed:
+              type: number
+              format: double
+            participants:
+              type: number
+              format: double
+            applicants:
+              type: number
+              format: double
+            candidates:
+              type: number
+              format: double
+            rejected:
+              type: number
+              format: double
+            accepted:
+              type: number
+              format: double
+          type: object
+      required:
+      - communityId
+      - id
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    InfluencerDataPointCriteria:
+      properties:
+        key:
+          type: string
+        value:
+          type: object
+        values:
+          items:
+            type: string
+          type: array
+        minValue:
+          type: number
+          format: double
+        maxValue:
+          type: number
+          format: double
+      required:
+      - key
+      type: object
+      additionalProperties: false
+    TopicDeprecated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The topic ID
+        name:
+          type: string
+          description: The topic name
+        slug:
+          type: string
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    PowerReviewsPage:
+      properties:
+        PowerReviewsApp:
+          items:
+            $ref: '#/components/schemas/PowerReviewsApp'
+          type: array
+        externalPageId:
+          type: string
+        id:
+          type: number
+          format: double
+        powerReviewsAppId:
+          type: string
+        reviewProductId:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ReviewFormResponseDeprecated:
+      type: object
+      properties:
+        globalUserId:
+          type: integer
+        membershipId:
+          type: integer
+          description: Unique Identifier for the membership
+        rating:
+          type: integer
+          description: Review rating
+        reviewCharacterCount:
+          type: integer
+          description: Sum of the character count in the review
+        fullName:
+          type: string
+          description: Name of the influencer
+        profilePic:
+          type: string
+          description: Profile picture of the influencer
+        questionResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionResponseDeprecated'
+        createdAt:
+          type: string
+          format: date-time
+        reviewForm:
+          $ref: '#/components/schemas/ReviewFormDeprecated'
+        product:
+          $ref: '#/components/schemas/ProductDeprecated'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    IncentiveTermsAndConditionsDeprecated:
+      type: object
+      properties:
+        template:
+          x-access:
+          - administrator
+          - root
+          type: string
+        preview:
+          type: string
+        params:
+          x-access:
+          - administrator
+          - root
+          type: object
+    Incentive:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        actionGroupStatus:
+          type: string
+        allocatedWinnersCount:
+          type: number
+          format: double
+        approximateRetailValue:
+          type: number
+          format: double
+        cashPaymentAppId:
+          type: number
+          format: double
+        cashPaymentAppProvider:
+          type:
+          - string
+          - 'null'
+        claimedDynamicPromoCodes:
+          type: number
+          format: double
+        claimedIncentivesCount:
+          type: number
+          format: double
+        claimedIncentivesInfluencerCount:
+          type: number
+          format: double
+        claims:
+          items:
+            $ref: '#/components/schemas/IncentiveClaim'
+          type: array
+        contestMetric:
+          type: string
+        cost:
+          type: number
+          format: double
+        disqualifiedWinnersCount:
+          type: number
+          format: double
+        endDate:
+          type:
+          - string
+          - 'null'
+        exclusiveLinkCta:
+          type: string
+        exclusiveLinkUrl:
+          type: string
+        giftCardEmailTemplateId:
+          type: string
+        giftCardOptionId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        incentiveDescription:
+          type: string
+        incentiveStatus:
+          type: string
+        incentiveTitle:
+          type: string
+        multipleClaims:
+          type: boolean
+        numberPointsRequired:
+          type: number
+          format: double
+        printableCoupon:
+          type: string
+        promocode:
+          type: string
+        promocodeTermsAndConditions:
+          type: string
+        quantity:
+          type: number
+          format: double
+        rewardId:
+          type: string
+        rewardWinType:
+          type: string
+        startDate:
+          type:
+          - string
+          - 'null'
+        sweepsRules:
+          type: string
+        sweepstakesUrl:
+          type: string
+        sweepstakesWinnersQty:
+          type: number
+          format: double
+        termsAndConditions:
+          $ref: '#/components/schemas/IncentiveTermsAndConditions'
+        totalDynamicPromoCodes:
+          type: number
+          format: double
+        type:
+          type: string
+        unlockEvent:
+          $ref: '#/components/schemas/IncentiveUnlockEvent'
+        unlockType:
+          type: string
+        winnerSelectionMethod:
+          type: string
+        winnersSelectedCount:
+          type: number
+          format: double
+        valueCurrencyCode:
+          $ref: '#/components/schemas/MavrckSupportedCurrencies'
+        costCurrencyCode:
+          $ref: '#/components/schemas/MavrckSupportedCurrencies'
+        bonusTierCurrencyCode:
+          $ref: '#/components/schemas/NullableBonusTierCurrencyCode'
+          description: Currency code used for all tiered bonus amounts. Required when `bonusTiers` is non-empty.
+        bonusTiers:
+          items:
+            $ref: '#/components/schemas/BonusTier'
+          type:
+          - array
+          - 'null'
+          description: Tiered bonus payout ladder. Must be sorted, contiguous, contain at most 5 tiers, and end with one `OPEN_ENDED` tier.
+        discountCodeId:
+          type: string
+        shippingCodeId:
+          type: string
+        couponActivation:
+          type: string
+      type: object
+      additionalProperties: false
+    ListDeliverable:
+      properties:
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
+        contentTypeName:
+          $ref: '#/components/schemas/NetworkName'
+        count:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+        updatedBy:
+          type: number
+          format: double
+      required:
+      - contentType
+      - contentTypeName
+      - count
+      - id
+      - listId
+      type: object
+      additionalProperties: false
+    Audience:
+      properties:
+        id:
+          type: number
+          format: double
+        name:
+          type: string
+        criteria:
+          items:
+            $ref: '#/components/schemas/InfluencerDataPointCriteria'
+          type: array
+      required:
+      - id
+      - name
+      - criteria
+      type: object
+      additionalProperties: false
+    Artifact:
+      properties:
+        before:
+          type: string
+        example:
+          type: string
+        hashtag:
+          type: string
+        key:
+          type: string
+        link:
+          $ref: '#/components/schemas/TrackingLink'
+        linkReference:
+          type: string
+        metaInformation:
+          $ref: '#/components/schemas/MetaInformation'
+        placeholder:
+          type: string
+        resourceId:
+          type: string
+        resourceUrl:
+          type: string
+      type: object
+      additionalProperties: false
+    InfluencerDataPointCriteriaDeprecated:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+        value:
+          type:
+          - string
+          - boolean
+          - integer
+        values:
+          type: array
+          items:
+            type: string
+        minValue:
+          type: integer
+        maxValue:
+          type: integer
+    NullableBonusTierCurrencyCode:
+      type:
+      - string
+      - 'null'
+      enum:
+      - USD
+      - EUR
+      - GBP
+      - AUD
+      - CAD
+      - null
+    NetworkOperation:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        network:
+          $ref: '#/components/schemas/Network'
+        artifact:
+          $ref: '#/components/schemas/Artifact'
+      type: object
+      additionalProperties: false
+    YotpoAppProductDeprecated:
+      type: object
+      properties:
+        reviewProductId:
+          type: integer
+          description: Product id assigned by Mavrck
+        yotpoProductId:
+          type: string
+          description: Product id assigned by Yotpo
+    AdministratorDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+          description: The date and time that the assessment was created.
+    FacebookProfileDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        facebookExternalId:
+          type: string
+        name:
+          type: string
+        link:
+          type: string
+        picture:
+          type: string
+        reach:
+          type: integer
+        averageLikes:
+          type: integer
+        averageComments:
+          type: integer
+        averageEngagements:
+          type: integer
+        engagementRate:
+          type: number
+        type:
+          type: string
+        available:
+          type: boolean
+        active:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+        facebookUser:
+          type: object
+          properties:
+            isExpired:
+              type: boolean
+    PowerReviewsApp:
+      properties:
+        apiKey:
+          type: string
+        communityId:
+          type: string
+        environment:
+          type: string
+        id:
+          type: number
+          format: double
+        locale:
+          type: string
+        merchantId:
+          type: string
+        name:
+          type: string
+      required:
+      - apiKey
+      - communityId
+      - id
+      - locale
+      - merchantId
+      - name
+      type: object
+      additionalProperties: false
+    TrackingLink:
+      properties:
+        action:
+          $ref: '#/components/schemas/Action'
+        communityId:
+          type: string
+        conversionId:
+          type: string
+        conversions:
+          type: number
+          format: double
+        conversionsValue:
+          type: number
+          format: double
+        destinationUrl:
+          type: string
+        domain:
+          type: string
+        domainId:
+          type: string
+        id:
+          type: number
+          format: double
+        parentId:
+          type: number
+          format: double
+        isAffiliate:
+          type: boolean
+        isDeleted:
+          type: string
+        lastUpdated:
+          type: string
+        membershipId:
+          type: string
+        metaInformation:
+          $ref: '#/components/schemas/MetaInformation'
+        name:
+          type: string
+        numClicks:
+          type: number
+          format: double
+        providerCode:
+          type: string
+        providerName:
+          type: string
+        shortLink:
+          type: string
+        title:
+          type: string
+        trackingPixelCode:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        isArchived:
+          type: boolean
+        archivedAt:
+          type: string
+          format: date-time
+      required:
+      - isArchived
+      - archivedAt
+      type: object
+      additionalProperties: false
+    InstagramProfileDeprecated:
+      type: object
+      properties:
+        accessGrant:
+          type: object
+          properties:
+            isExpired:
+              type: boolean
+            type:
+              type: string
+              enum:
+              - basic
+              - business
+        averageComments:
+          type: integer
+        averageEngagements:
+          type: integer
+        averageLikes:
+          type: integer
+        audienceFakeCommentersLevel:
+          type: string
+        audienceFakeCommentersPercentage:
+          type: number
+        audienceFakeEngagersLevel:
+          type: string
+        audienceFakeFollowersLevel:
+          type: string
+        audienceFakeFollowersPercentage:
+          type: number
+        audienceFakeLikersLevel:
+          type: string
+        audienceFakeLikersPercentage:
+          type: number
+        audienceFraudLevel:
+          type: string
+        audiencePercentageFemale:
+          type: number
+        audiencePercentage_13_17:
+          type: number
+        audiencePercentage_18_24:
+          type: number
+        audiencePercentage_25_34:
+          type: number
+        audiencePercentage_35_44:
+          type: number
+        audiencePercentage_45_54:
+          type: number
+        audiencePercentage_55_64:
+          type: number
+        audiencePercentage_65_plus:
+          type: number
+        audiencePredominantAgeRange:
+          type: string
+        audiencePredominantCity:
+          type: string
+        audiencePredominantCountry:
+          type: string
+        bio:
+          type: string
+        boughtFollowers:
+          type: boolean
+        engagementRate:
+          type: number
+        id:
+          type: integer
+        isBusiness:
+          type: boolean
+        isPrivate:
+          type: boolean
+        followersCount:
+          type: integer
+        followingCount:
+          type: integer
+        fullName:
+          type: string
+        handle:
+          type: string
+        mediaCount:
+          type: integer
+        nudityLevel:
+          type: string
+        profanityLevel:
+          type: string
+        profilePicture:
+          type: string
+        profileType:
+          type: string
+          enum:
+          - business
+          - platform
+        sponsoredPostRate:
+          type: number
+        website:
+          type: string
+    NetworkSlug:
+      type: string
+      enum:
+      - blog
+      - facebook
+      - facebook_group
+      - facebook_live
+      - facebook_reel
+      - image
+      - instagram
+      - instagram_reel
+      - instagram_story
+      - linkedin
+      - pinterest
+      - snapchat_story
+      - tiktok
+      - twitch_stream
+      - twitter
+      - video
+      - youtube_video
+      - youtube_shorts
+    Links:
+      properties:
+        deep:
+          type: string
+        normal:
+          type: string
+      type: object
+      additionalProperties: false
+    DataPointDefinitionSetElementDeprecated:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: Unique identifier for the data point set element.
+          key:
+            type: string
+          displayLabel:
+            type: string
+          markUpDisplayLabel:
+            type: string
+    InfluencerCampaignContent:
+      properties:
+        views:
+          type: number
+          format: double
+        video:
+          type: string
+        text:
+          type: string
+        shares:
+          type: number
+          format: double
+        reach:
+          type: number
+          format: double
+        postLink:
+          type: string
+        postDate:
+          type: string
+          format: date-time
+        network:
+          type: number
+          format: double
+        likes:
+          type: number
+          format: double
+        isDeleted:
+          type: boolean
+        impressionsSource:
+          type: string
+        image:
+          type: string
+        id:
+          type: number
+          format: double
+        estimatedImpressions:
+          type: number
+          format: double
+        engagements:
+          type: number
+          format: double
+        conversionValue:
+          type: number
+          format: double
+        conversions:
+          type: number
+          format: double
+        comments:
+          type: number
+          format: double
+        clicks:
+          type: number
+          format: double
+        carouselPosts:
+          type: string
+        approvalStatus:
+          $ref: '#/components/schemas/InfluencerCampaignContentApprovalStatus'
+      required:
+      - network
+      - id
+      - engagements
+      - conversionValue
+      - conversions
+      type: object
+    DataPointDefinitionSetElement:
+      items:
+        properties:
+          key:
+            type: string
+          id:
+            type: number
+            format: double
+          markUpDisplayLabel:
+            type: string
+          displayLabel:
+            type: string
+        required:
+        - key
+        - id
+        - displayLabel
+        type: object
+      type: array
+    DataPointDefinitionActionGroup:
+      properties:
+        id:
+          type: number
+          format: double
+        title:
+          type: string
+      type: object
+      additionalProperties: false
+    Action:
+      properties:
+        ActionGroup:
+          $ref: '#/components/schemas/ActionGroup'
+        actionGroupId:
+          type: number
+          format: double
+        actionGroupTitle:
+          type: string
+        actionGroupType:
+          type: string
+        activations:
+          items:
+            properties:
+              id:
+                type: number
+                format: double
+            type: object
+          type: array
+        article:
+          properties:
+            html:
+              type: string
+          type: object
+        brand:
+          $ref: '#/components/schemas/Brand'
+        communityId:
+          type: string
+        conversion:
+          $ref: '#/components/schemas/ConversionTag'
+        conversionAssignedAt:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        image:
+          type: string
+        instructions:
+          type: string
+        label:
+          type: string
+        link:
+          $ref: '#/components/schemas/TrackingLink'
+        linkReference:
+          type: string
+        membershipId:
+          type: number
+          format: double
+        multipleActivations:
+          type: boolean
+        needsModeration:
+          type: boolean
+        networkOperation:
+          $ref: '#/components/schemas/NetworkOperation'
+        pendingActivation:
+          items:
+            properties:
+              id:
+                type: number
+                format: double
+            type: object
+          type: array
+        points:
+          type: number
+          format: double
+        previewContentType:
+          type: string
+        product:
+          $ref: '#/components/schemas/Product'
+        productId:
+          type: number
+          format: double
+        required:
+          type: boolean
+        reviewFormId:
+          type: number
+          format: double
+        routing:
+          $ref: '#/components/schemas/Routing'
+        submit:
+          type: string
+        survey:
+          $ref: '#/components/schemas/ReviewForm'
+        title:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        video:
+          properties:
+            url:
+              type: string
+          type: object
+      required:
+      - type
+      type: object
+      additionalProperties: false
+    ActivationResponse:
+      properties:
+        action:
+          $ref: '#/components/schemas/Action'
+        approvalStatus:
+          type: string
+        contactInfo:
+          $ref: '#/components/schemas/MembershipContactInfoDeprecated'
+        content:
+          $ref: '#/components/schemas/InfluencerCampaignContent'
+        createdAt:
+          type: string
+          format: date-time
+        globalUserId:
+          type: number
+          format: double
+        id:
+          type: string
+        membership:
+          $ref: '#/components/schemas/Membership'
+        membershipId:
+          type: number
+          format: double
+        profilePicture:
+          type: string
+        selfReported:
+          type: boolean
+      required:
+      - action
+      - approvalStatus
+      - contactInfo
+      - content
+      - createdAt
+      - globalUserId
+      - id
+      - membership
+      - membershipId
+      - profilePicture
+      - selfReported
+      type: object
+      additionalProperties: false
+    TikTokCreatorDeprecated:
+      type: object
+      properties:
+        displayName:
+          type: string
+        followersCount:
+          type: integer
+        globalUserId:
+          type: integer
+        handleName:
+          type: string
+        insightsUpdatedAt:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        profileImage:
+          type: string
+        status:
+          type: string
+        tiktokAccessGrant:
+          type: object
+        audiencePredominantAgeRange:
+          type: string
+        audiencePredominantCountry:
+          type: string
+        audiencePredominantDevice:
+          type: string
+        audiencePredominantGender:
+          type: string
+        audiencePredominantLocale:
+          type: string
+    ActionDeprecated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier representing a single action.
+        type:
+          type: string
+          description: A key to specify the type of action.
+        title:
+          type: string
+          description: A concise call to action, grabbing the influencer's attention.
+        label:
+          type: string
+          description: Internal label for action.
+        description:
+          type: string
+          description: An elaboration on the title.
+        image:
+          type: string
+          description: An image to associate with the action.
+        instructions:
+          type: string
+          description: Instructions on how to complete the action
+        linkReference:
+          type: string
+          description: Reference to Link
+        actionGroupId:
+          type: integer
+          x-access:
+          - administrator
+          - root
+          - influencer
+          description: ID of the parent action group.
+        actionGroupType:
+          type: string
+          x-access:
+          - administrator
+          - root
+          description: Type of the parent action group.
+        actionGroupTitle:
+          type: string
+        brandSuitabilityGuidelines:
+          type:
+          - 'null'
+          - string
+          description: Optional guidelines from the parent action group to customize the brand suitability review for this action's campaign.
+        ActionGroup:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Unique identifier representing a single action group.
+            communityId:
+              type: string
+            communityName:
+              type: string
+            communityImage:
+              type: string
+            type:
+              type: string
+            mainType:
+              type: string
+              description: First action in the group type
+            name:
+              type: string
+              description: Human-readable description of the action group displayed for administrators.
+              x-access:
+              - root
+              - administrator
+            title:
+              type: string
+            description:
+              type: string
+            image:
+              type: string
+            contentType:
+              type: string
+              description: For content action groups, this provides the type of content, which either matches og:image or is derived from internal heuristics.
+            url:
+              type: string
+              description: For content action groups, this contains the url input upon creation.
+            status:
+              type: string
+              description: The state of the action group. One of the set {"LIVE", "PAUSED", "PENDING", "EXPIRED"}.
+              x-access:
+              - root
+              - administrator
+            startDate:
+              format: date-time
+              type: string
+              description: The scheduled time in which the action group will become available to influencers.
+            endDate:
+              format: date-time
+              type:
+              - 'null'
+              - string
+              description: The scheduled time in which the action group will no longer be available to influencers.
+            createdAt:
+              format: date-time
+              type:
+              - 'null'
+              - string
+            notInCommunity:
+              type: boolean
+              x-access:
+              - root
+              - administrator
+              description: Filter this action group if the client specifies channel=community.
+            isAutoCreated:
+              type: boolean
+            isPrimaryReferralActivity:
+              type: boolean
+            multipleActivations:
+              type: boolean
+              description: Indicates whether this action group can be completed multiple times. Only available for photoChallenge.
+            campaign:
+              type: object
+              x-access:
+              - root
+              - administrator
+              properties:
+                id:
+                  type: integer
+                  description: Unique identifier representing a single campaign.
+                name:
+                  type: string
+                  description: Name of campaign.
+                description:
+                  type: string
+                  description: Name of campaign.
+                brand:
+                  $ref: '#/components/schemas/BrandDeprecated'
+                hasActivations:
+                  type: boolean
+                  description: Flag that indicates whether this campaign is associated with any activations.
+                createdAt:
+                  format: date-time
+                  type: string
+                  description: The date and time that the campaign was created.
+            audience:
+              $ref: '#/components/schemas/AudienceDeprecated'
+            incentive:
+              $ref: '#/components/schemas/IncentiveDeprecated'
+            incentives:
+              items:
+                $ref: '#/components/schemas/IncentiveDeprecated'
+              type: array
+            points:
+              type: object
+              properties:
+                min:
+                  type: integer
+                max:
+                  type: integer
+            hasScheduledNotifications:
+              type: boolean
+              description: Indicates whether the action group is tied to any scheduled notifications. The audience cannot be modified if this is the case.
+            listId:
+              type: integer
+            listDeliverables:
+              type: array
+              items:
+                $ref: '#/components/schemas/ListDeliverable'
+            influencerReviewDeliverable:
+              type: object
+              properties:
+                id:
+                  type: integer
+                count:
+                  type: integer
+                listId:
+                  type: integer
+            workflowStatuses:
+              type: array
+              items:
+                $ref: '#/components/schemas/ListCustomStatusDeprecated'
+            locale:
+              type: string
+              description: Formatted according to language codes (https://www.w3schools.com/tags/ref_language_codes.asp)
+            activatedUsersMetrics:
+              type: integer
+            clicksMetrics:
+              type: integer
+            engagementsMetrics:
+              type: integer
+            impressionsMetrics:
+              type: integer
+            conversionsCountMetrics:
+              type: integer
+            conversionsValueMetrics:
+              type: number
+            posts:
+              type: integer
+            engagements:
+              type: integer
+            impressions:
+              type: integer
+            cpe:
+              type: number
+            cpp:
+              type: number
+            cpm:
+              type: number
+            cpa:
+              type: number
+            committedAmount:
+              type: number
+            paidAmount:
+              type: number
+            readyAmount:
+              type: number
+            cost:
+              type: number
+            roiValue:
+              type: number
+            workflowSummary:
+              type: object
+              properties:
+                accepted:
+                  type: integer
+                rejected:
+                  type: integer
+                candidates:
+                  type: integer
+                applicants:
+                  type: integer
+                participants:
+                  type: integer
+                completed:
+                  type: integer
+            requiredHashtag:
+              type: string
+              description: Hashtag for action group (required)
+            ftcHashtag:
+              type: string
+              description: FTC hashtag for an action group.
+            youtubeHashtag:
+              type: string
+              description: YouTube hashtag for an action group.
+            internalDescription:
+              type: string
+              description: Internal description on an action group.
+            activityBudget:
+              type:
+              - 'null'
+              - number
+              description: Total budget for all actions under an action group.
+            numberOfInfluencers:
+              type:
+              - 'null'
+              - integer
+              description: Target number of influencers for all actions under an action group.
+            cpeGoal:
+              type:
+              - number
+              - 'null'
+              description: Cost per engagement goal for a single action group
+            cpmGoal:
+              type:
+              - number
+              - 'null'
+              description: Cost per 1000 impressions goal for a single action group
+            impressionsGoal:
+              type:
+              - number
+              - 'null'
+              description: Impressions goal for a single action group
+            engagementsGoal:
+              type:
+              - number
+              - 'null'
+              description: Engagements goal for a single action group
+            engagementRateGoal:
+              type:
+              - number
+              - 'null'
+              description: Engagement rate goal for a single action group
+            contentDueDate:
+              type:
+              - string
+              - 'null'
+              description: Due date for content on an action group.
+            draftDueDate:
+              type:
+              - string
+              - 'null'
+              description: Due date for drafts on an action group.
+            conceptDueDate:
+              type:
+              - string
+              - 'null'
+              description: Due date for concepts on an action group.
+            primaryNetwork:
+              type: string
+            hasPointsEnabled:
+              type: boolean
+            shareableReportLink:
+              type: string
+            termsOfServiceLink:
+              type: string
+            autoAcceptApplicant:
+              type: boolean
+            globalUserListDefinitionId:
+              type:
+              - integer
+              - 'null'
+            ready:
+              type: number
+            pending:
+              type: number
+            fulfilled:
+              type: number
+            brief:
+              type: string
+            hideOnIcm:
+              type: boolean
+            application:
+              type: object
+              properties:
+                requestBrandedContentPermission:
+                  type: boolean
+            community:
+              type: object
+              properties:
+                instagramHandle:
+                  type: string
+            isSetupEnabled:
+              type: boolean
+            isCopied:
+              type: boolean
+            hideTemplateUpdateCTA:
+              type: boolean
+            isLaterCreatorExperienceEnabled:
+              type: boolean
+            isMavelyCreatorExperienceEnabled:
+              type: boolean
+            budgetReferenceId:
+              type:
+              - string
+              - 'null'
+            budgetReferenceIdType:
+              type:
+              - string
+              - 'null'
+              enum:
+              - IROF
+              - OPPORTUNITY
+              - null
+            brandSuitabilityGuidelines:
+              type:
+              - string
+              - 'null'
+            publicSummary:
+              type:
+              - string
+              - 'null'
+            version:
+              type: integer
+              description: Version of the action group.
+            lastPolledAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+              description: The last time the action group was manually polled for updates.
+        routing:
+          $ref: '#/components/schemas/RoutingDeprecated'
+        survey:
+          type: object
+          required:
+          - questions
+          properties:
+            id:
+              type: integer
+              description: id of form
+            reviewProductId:
+              type: integer
+            product:
+              $ref: '#/components/schemas/ProductDeprecated'
+            questions:
+              type: array
+              description: Array of form questions
+              items:
+                $ref: '#/components/schemas/QuestionDeprecated'
+            title:
+              type: string
+            description:
+              type: string
+            url:
+              type: string
+            incentivized:
+              x-access:
+              - administrator
+              - root
+              type: boolean
+              description: whether the form is incentivized
+            responses:
+              type: array
+              x-access:
+              - administrator
+              - root
+              items:
+                type: object
+                properties:
+                  membership:
+                    $ref: '#/components/schemas/MembershipDeprecated'
+                  questionResponses:
+                    type: array
+                    items:
+                      type: object
+        url:
+          type: string
+          description: Url to be visited by influencers.
+        link:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            title:
+              type: string
+            communityId:
+              type: string
+            url:
+              type: string
+            shortLink:
+              type: string
+            trackingPixelCode:
+              type: string
+            conversionId:
+              type: string
+              description: Assign a conversion to track conversions resulting from clicks on this link.
+            domainId:
+              type: string
+            domain:
+              type: string
+            type:
+              type: string
+            numClicks:
+              type: integer
+            lastUpdated:
+              type: string
+            isDeleted:
+              type: string
+            membershipId:
+              type: string
+            conversions:
+              type: integer
+            conversionsValue:
+              type: number
+            providerCode:
+              type: string
+            providerName:
+              type: string
+            isAffiliate:
+              type: boolean
+            destinationUrl:
+              type: string
+              description: A user will ultimately be redirected to this url when someone clicks on the link contained in an artifact on a network.
+            metaInformation:
+              $ref: '#/components/schemas/MetaInformationDeprecated'
+        previewContentType:
+          type: string
+          description: For content activities, this indicates the type of content to be previewed.
+        article:
+          type: object
+          properties:
+            html:
+              type: string
+              description: Article content to be viewed by influencers.
+        video:
+          type: object
+          properties:
+            url:
+              type: string
+              description: Video to be watched by influencers.
+        submit:
+          type: string
+          description: Type of content for influencers to submit
+        reviewFormId:
+          type: integer
+          description: Review Form Id tied to this action
+        productId:
+          type: integer
+          description: Product Id tied to this action
+        product:
+          $ref: '#/components/schemas/ProductDeprecated'
+        activations:
+          description: If the user has created any activations for this action, then they are displayed here.
+          x-access:
+          - influencer
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivationURI'
+        pendingActivation:
+          $ref: '#/components/schemas/PendingActivationURI'
+        conversion:
+          $ref: '#/components/schemas/ConversionTagDeprecated'
+        conversionAssignedAt:
+          format: date-time
+          type: string
+          description: The date time when a conversion tag is assigned to this action.
+          x-access:
+          - administrator
+          - root
+        brand:
+          $ref: '#/components/schemas/BrandDeprecated'
+        points:
+          type: number
+          description: The number of points an activity is worth.
+        needsModeration:
+          type: boolean
+          description: Indicates whether content created for this Action needs to be approved by a Brand Manager.
+        multipleActivations:
+          type: boolean
+          description: Indicates whether this action can be completed multiple times. Only available for photoChallenge.
+        required:
+          type: boolean
+          description: Indicates whether this action is required to be completed.
+        membershipId:
+          type: number
+    ListCustomStatusDeprecated:
+      type: object
+      required:
+      - label
+      properties:
+        id:
+          type: integer
+        label:
+          type: string
+        ctaLabel:
+          type: string
+        auxiliaryLabel:
+          type: string
+        slug:
+          type: string
+        phase:
+          type: string
+        statusOrder:
+          type: integer
+        disabled:
+          type: boolean
+        custom:
+          type: boolean
+        linkedStages:
+          type: array
+          items:
+            type: string
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationTemplateDeprecated'
+        requirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowStatusRequirementDeprecated'
+    ConversationTemplateDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        category:
+          type: string
+        title:
+          type: string
+        subject:
+          type: string
+        html:
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        lastModifiedBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deliveryMethod:
+          type: string
+        sendOnEvent:
+          type: string
+        sendOnDays:
+          type: integer
+        sendOnTimeframe:
+          type: string
+        sendOnStatusId:
+          type:
+          - integer
+          - 'null'
+        sendOnDate:
+          type: string
+        slug:
+          type: string
+        isArchived:
+          type: boolean
+    TwitterAccountDeprecated:
+      type: object
+      properties:
+        id:
+          description: int = mavck-db-id, string = derived-index-id
+          type:
+          - integer
+          - string
+        handle:
+          type: string
+        fullName:
+          type: string
+        profilePicture:
+          type: string
+        description:
+          type: string
+        followersCount:
+          type: integer
+        followingCount:
+          type: integer
+        listedCount:
+          type: integer
+        averageFavorites:
+          type: integer
+        averageRetweets:
+          type: integer
+        averageEngagements:
+          type: integer
+        engagementRate:
+          type: number
+        primaryAccount:
+          type: boolean
+        twitterAccessGrant:
+          type: object
+          properties:
+            isExpired:
+              type: boolean
+    Gender:
+      enum:
+      - describe
+      - female
+      - male
+      - non_bin
+      - other
+      type: string
+    CampaignDeprecated:
+      type: object
+      x-access:
+      - root
+      - administrator
+      properties:
+        id:
+          type: integer
+          description: Unique identifier representing a single campaign.
+        name:
+          type: string
+          description: Name of campaign.
+        description:
+          type: string
+          description: Name of campaign.
+        brand:
+          $ref: '#/components/schemas/BrandDeprecated'
+        actionGroups:
+          type: array
+          description: The action groups for this campaign.
+          items:
+            $ref: '#/components/schemas/ActionGroupDeprecated'
+        hasActivations:
+          type: boolean
+          description: Flag that indicates whether this campaign is associated with any activations.
+        createdAt:
+          format: date-time
+          type: string
+          description: The date and time that the campaign was created.
+    MembershipDeprecated:
+      type: object
+      properties:
+        id:
+          description: id and membershipId are equivalent.
+          type: integer
+        membershipId:
+          description: id and membershipId are equivalent.
+          type: integer
+        status:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        membershipType:
+          type: string
+        blacklisted:
+          type: boolean
+        utmContent:
+          type: string
+        utmCampaign:
+          type: string
+        contactInfo:
+          $ref: '#/components/schemas/MembershipContactInfoDeprecated'
+        pointsCurrentBalance:
+          type: object
+          properties:
+            amount:
+              type: integer
+        totalPoints:
+          type: integer
+        mostRecentActivationDate:
+          type: string
+          format: date
+        totalImpressions:
+          type: number
+        imageUrl:
+          type: string
+        lifetimeClicks:
+          type: integer
+        lifetimeConversions:
+          type: integer
+        lifetimeConversionsValue:
+          type: number
+    Product:
+      properties:
+        bazaarVoiceAppProduct:
+          $ref: '#/components/schemas/BazaarVoiceAppProduct'
+        communityId:
+          type: string
+        description:
+          type: string
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        powerReviewsPage:
+          $ref: '#/components/schemas/PowerReviewsPage'
+        title:
+          type: string
+        yotpoAppProduct:
+          $ref: '#/components/schemas/YotpoAppProduct'
+      type: object
+      additionalProperties: false
+    BrandDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for a brand.
+        name:
+          type: string
+          description: Name of the brand.
+        logo:
+          type: string
+        accentColor:
+          type: string
+        buttonColor:
+          type: string
+        associatedWithCampaign:
+          type: boolean
+          description: A flag indicating whether this brand has been associated with a campaign. If this is true, then this brand cannot be deleted.
+    ActivationContentDeprecated:
+      type: object
+      properties:
+        stars:
+          type: integer
+          description: Number of stars for the activation
+        image:
+          type: string
+        video:
+          type: string
+        postLink:
+          type: string
+        text:
+          type: string
+        privacy:
+          type: string
+        likes:
+          type: integer
+        likesOrganic:
+          type: integer
+          description: Organic-only likes (excludes paid/promoted), from YouTube BrandConnect insights
+        likesPaid:
+          type: integer
+          description: Paid/promoted likes, from YouTube BrandConnect insights
+        comments:
+          type: integer
+        commentsOrganic:
+          type: integer
+          description: Organic-only comments (excludes paid/promoted), from YouTube BrandConnect insights
+        commentsPaid:
+          type: integer
+          description: Paid/promoted comments, from YouTube BrandConnect insights
+        shares:
+          type: integer
+        sharesOrganic:
+          type: integer
+          description: Organic-only shares (excludes paid/promoted), from YouTube BrandConnect insights
+        sharesPaid:
+          type: integer
+          description: Paid/promoted shares, from YouTube BrandConnect insights
+        engagements:
+          type: integer
+        benchmarkAverageEngagements:
+          type: integer
+        avgWatchTime:
+          type: integer
+        follows:
+          type: integer
+        navigation:
+          type: integer
+        navigationSwipeForward:
+          type: integer
+        navigationTapBack:
+          type: integer
+        navigationTapExit:
+          type: integer
+        navigationTapForward:
+          type: integer
+        profileActivity:
+          type: integer
+        profileActivityBioLinkClicked:
+          type: integer
+        profileActivityCall:
+          type: integer
+        profileActivityDirection:
+          type: integer
+        profileActivityEmail:
+          type: integer
+        profileActivityOther:
+          type: integer
+        profileActivityText:
+          type: integer
+        profileVisits:
+          type: integer
+        replies:
+          type: integer
+        saved:
+          type: integer
+        totalInteractions:
+          type: integer
+        videoViewTotalTime:
+          type: integer
+        views:
+          type: integer
+        viewsOrganic:
+          type: integer
+          description: Organic-only views (excludes paid/promoted), from YouTube BrandConnect insights
+        viewsPaid:
+          type: integer
+          description: Paid/promoted views, from YouTube BrandConnect insights
+        reach:
+          type: integer
+        engagementRate:
+          type: number
+        benchmarkEngagementRate:
+          type: number
+        clicks:
+          type: integer
+        estimatedImpressions:
+          type: integer
+        impressionsSource:
+          type: string
+        conversions:
+          type: integer
+        conversionValue:
+          type: number
+        isDeleted:
+          type: boolean
+        network:
+          type: string
+        ytbcLinkState:
+          type: string
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          description: BrandConnect VideoCollaboration link state for a YouTube video (PENDING/ACTIVE/DECLINED). Absent for non-YouTube content or videos not yet linked.
+        postDate:
+          type: string
+          format: date
+        status:
+          type: string
+        carouselPosts:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - savedUrl
+            - type
+            properties:
+              id:
+                type: string
+              savedUrl:
+                type: string
+              type:
+                type: string
+    Blog:
+      properties:
+        globalUserId:
+          type:
+          - number
+          - 'null'
+          format: double
+        language:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        platform:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      type: object
+      additionalProperties: false
+    BonusTier:
+      description: 'Swagger 2 representation of a tiered bonus entry.
+
+
+        `upperBound` is required for `BOUNDED` tiers and must be omitted for
+
+        `OPEN_ENDED` tiers. The bonus-tier validator enforces that conditional rule.
+
+
+        Validation rules:
+
+        - `bonusTiers` may contain at most 5 tiers.
+
+        - Tiers must be sorted by `lowerBound`.
+
+        - Adjacent tiers must be contiguous.
+
+        - The final tier must be `OPEN_ENDED`.
+
+        - `bonusTierCurrencyCode` is required when `bonusTiers` is non-empty.'
+      properties:
+        type:
+          type: string
+          enum:
+          - BOUNDED
+          - OPEN_ENDED
+        lowerBound:
+          type: number
+          format: double
+          description: Inclusive lower conversion/order bound for this payout tier. Must be non-negative.
+        upperBound:
+          type: number
+          format: double
+          description: Exclusive upper conversion/order bound for a `BOUNDED` tier.
+        bonusAmount:
+          type: number
+          format: double
+          description: Bonus payout amount in `bonusTierCurrencyCode`. Must be positive.
+      required:
+      - type
+      - lowerBound
+      - bonusAmount
+      type: object
+      additionalProperties: false
+    WorkflowStatusRequirementDeprecated:
+      type: object
+      properties:
+        satisfied:
+          type: boolean
+        incentiveId:
+          type: number
+        name:
+          type: string
+    QuestionDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The question ID
+        key:
+          type: string
+          description: Unique key of the question
+        type:
+          type: string
+          description: Indicates the HTML tag that is used to dynamically render this question.
+        className:
+          type: string
+          description: Additional classes for fields styling and formatting.
+        questionText:
+          type: string
+          description: The text of the question
+        markUpQuestionText:
+          type: string
+          description: The text of the question with HTML markup
+        questionResponses:
+          x-access:
+          - root
+          - administrator
+          type: array
+          items:
+            type: object
+        maxResponses:
+          type: integer
+          description: Maximum length of responses allowed for this question.
+        hasResponses:
+          x-access:
+          - root
+          - administrator
+          type: boolean
+        templateOptions:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Indicates the data type to be submitted for this question in the form response.
+            label:
+              type: string
+              description: Human-readable label for the question.
+            placeholder:
+              type: string
+              description: Placeholder text to be display in the input field.
+            maxUploads:
+              type: integer
+              description: Maximum uploads for file upload questions
+            accept:
+              type: string
+              description: The accepted file extension types for file upload questions
+            required:
+              type: boolean
+              description: Required value for the question
+            min:
+              type: integer
+              description: Minimum number allowed for a number type
+            max:
+              type: integer
+              description: Maximum number allowed for a number type
+            minlength:
+              type: integer
+              description: Minimum length of string allowed for a text type
+            maxlength:
+              type: integer
+              description: Maximum length of string allowed for a text type
+            options:
+              type: array
+              description: Array of possible options for a radio type
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Text to show for option
+                  value:
+                    type: string
+                    description: Key for option
+        dataPointDefinitionId:
+          type: integer
+          description: Use a data point definition to create a question.
+          x-access:
+          - administrator
+          - root
+        dataPointDefinition:
+          $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+        required:
+          type: boolean
+        order:
+          type: integer
+        hideFromInfluencers:
+          type: boolean
+    ReviewForm:
+      properties:
+        id:
+          type: number
+          format: double
+        reviewProductId:
+          type: number
+          format: double
+        action:
+          $ref: '#/components/schemas/Action'
+        product:
+          $ref: '#/components/schemas/Product'
+        questions:
+          items:
+            $ref: '#/components/schemas/Question'
+          type: array
+        incentivized:
+          type: boolean
+        responses:
+          items:
+            properties:
+              questionResponses:
+                items:
+                  additionalProperties: false
+                  type: object
+                type: array
+              membership:
+                $ref: '#/components/schemas/Membership'
+            type: object
+          type: array
+      type: object
+      additionalProperties: false
+    BazaarVoiceAppProductDeprecated:
+      type: object
+      properties:
+        reviewProductId:
+          type: integer
+          description: Product id assigned by Mavrck
+        externalBazaarProductId:
+          type: string
+          description: Product id assigned by BazaarVoice
+    LegacySelfReportedActivationBody:
+      type: object
+      properties: {}
+    PowerReviewsPageDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id of the product
+        reviewProductId:
+          type: integer
+          description: the power reviews id
+        powerReviewsAppId:
+          type: string
+          description: the product id
+        externalPageId:
+          type: string
+          description: product image url
+        PowerReviewsApp:
+          type: object
+          items:
+            $ref: '#/components/schemas/PowerReviewsAppDeprecated'
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Campaign:
+      properties:
+        id:
+          type: number
+          format: double
+        name:
+          type: string
+        description:
+          type: string
+        brand:
+          $ref: '#/components/schemas/Brand'
+        actionGroups:
+          items:
+            $ref: '#/components/schemas/ActionGroup'
+          type: array
+        hasActivations:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+      - name
+      type: object
+      additionalProperties: false
+    IncentiveClaimDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the incentive claim.
+        membershipId:
+          type: integer
+          x-access:
+          - administrator
+          - root
+        globalUserId:
+          type: integer
+          x-access:
+          - administrator
+          - root
+        promocode:
+          type: string
+          description: The issuance of a promo code. This is derived either from a static promo code configured as a property of the incentive resource or dynamically from a uploaded list of codes.
+        createdAt:
+          format: date-time
+          type: string
+        profilePictureLink:
+          type: string
+          x-access:
+          - administrator
+          - root
+        firstName:
+          type: string
+          x-access:
+          - administrator
+          - root
+        lastName:
+          type: string
+          x-access:
+          - administrator
+          - root
+        email:
+          type: string
+          x-access:
+          - administrator
+          - root
+        address:
+          type: string
+          x-access:
+          - administrator
+          - root
+        age:
+          type: integer
+          x-access:
+          - administrator
+          - root
+        gender:
+          type: string
+          x-access:
+          - administrator
+          - root
+        facebookFriendCount:
+          type: integer
+          x-access:
+          - administrator
+          - root
+        mostRecentRewardFulfilledAt:
+          type: string
+          format: date-time
+          x-access:
+          - administrator
+          - root
+        engagementCount:
+          type: integer
+        clickCount:
+          type: integer
+        conversionCount:
+          type: integer
+    MembershipCostAndPerformanceDeprecated:
+      type: object
+      properties:
+        membershipId:
+          type: integer
+        rewards:
+          type: integer
+        value:
+          type: number
+        cost:
+          type: number
+        activations:
+          type: integer
+        posts:
+          type: integer
+        engagements:
+          type: integer
+        impressions:
+          type: integer
+        clicks:
+          type: integer
+        conversions:
+          type: integer
+        conversionValue:
+          type: number
+        cpm:
+          type: number
+        cpe:
+          type: number
+        cpp:
+          type: number
+        cpa:
+          type: number
+    ResponseBody_ActivationHistoryItem-Array_:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActivationHistoryItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    UserQuestionResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        responseValue:
+          type: string
+        responseType:
+          type: string
+        dataPointDefinition:
+          $ref: '#/components/schemas/DataPointDefinitionDeprecated'
+    Brand:
+      properties:
+        accentColor:
+          type: string
+        buttonColor:
+          type: string
+        id:
+          type: number
+          format: double
+        logo:
+          type: string
+        associatedWithCampaign:
+          type: boolean
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
+      additionalProperties: false
+    Membership:
+      properties:
+        blacklisted:
+          type: boolean
+        contactInfo:
+          $ref: '#/components/schemas/MembershipContactInfoDeprecated'
+        createdAt:
+          type: string
+        id:
+          type: number
+          format: double
+        imageUrl:
+          type: string
+        lifetimeClicks:
+          type: number
+          format: double
+        lifetimeConversions:
+          type: number
+          format: double
+        lifetimeConversionsValue:
+          type: number
+          format: double
+        membershipId:
+          type: number
+          format: double
+        membershipType:
+          type: string
+        mostRecentActivationDate:
+          type: string
+        pointsCurrentBalance:
+          properties:
+            amount:
+              type: number
+              format: double
+          type: object
+        status:
+          type: string
+        totalImpressions:
+          type: number
+          format: double
+        totalPoints:
+          type: number
+          format: double
+        updatedAt:
+          type: string
+        utmCampaign:
+          type: string
+        utmContent:
+          type: string
+        fullName:
+          type: string
+      type: object
+      additionalProperties: false
+    MembershipContactInfoDeprecated:
+      properties:
+        age:
+          type: number
+          format: double
+        apt:
+          type: string
+        birthday:
+          type: object
+        city:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        emailIsVerified:
+          type: boolean
+        firstName:
+          type: string
+        fullName:
+          type: string
+        gender:
+          $ref: '#/components/schemas/Gender'
+        genderDescription:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+        zip:
+          type: string
+        talentManagerEmail:
+          type: string
+      type: object
+      additionalProperties: false
+    BazaarVoiceAppProduct:
+      properties:
+        reviewProductId:
+          type: number
+          format: double
+        externalBazaarProductId:
+          type: string
+      type: object
+      additionalProperties: false
+    IncentiveTermsAndConditions:
+      properties:
+        params:
+          additionalProperties: false
+          type: object
+        preview:
+          type: string
+        template:
+          type: string
+      type: object
+      additionalProperties: false
+    MetaInformation:
+      properties:
+        description:
+          type: string
+        ftcHashtag:
+          type: string
+        image:
+          type: string
+        title:
+          type: string
+      type: object
+      additionalProperties: false
+    MetaInformationDeprecated:
+      type: object
+      description: This information is pulled when an external network parses the link for meta tags.
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        ftcHashtag:
+          type: string
+    IncentiveDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier representing a single incentive.
+        incentiveTitle:
+          type: string
+          description: Short, human-readable description of the incentive displayed for influencers.
+        incentiveDescription:
+          type: string
+          description: An elaboration on the title.
+        image:
+          type: string
+          description: Image to associate with the incentive.
+        quantity:
+          type: integer
+          description: The number of incentives left to claim.
+        sweepstakesWinnersQty:
+          type: integer
+          description: The number of winners for sweepstakes.
+          x-access:
+          - administrator
+        type:
+          type: string
+          description: Incentive type.
+        rewardWinType:
+          type: string
+          description: Reward Win type of this incentive.
+        sweepstakesUrl:
+          type: string
+          description: Sweepstakes Terms link.
+        sweepsRules:
+          type: string
+          description: Toggle on whether a sweepstakes or contest rules are in a link or an uploaded PDF.
+        promocode:
+          type: string
+          description: The static promo code given to distribute to influencers.
+          x-access:
+          - administrator
+        multipleClaims:
+          type: boolean
+          description: Whether this incentive allows for multiple claims.
+        promocodeTermsAndConditions:
+          type: string
+          description: Promocode terms and conditions.
+        exclusiveLinkUrl:
+          type: string
+          description: Url where Influencer can claim incentive.
+        exclusiveLinkCta:
+          type: string
+          description: Button copy to be displayed for Influencer
+        contestMetric:
+          type: string
+          description: For contest type incentives, this determines the metric in which winners are selection (clickCount, conversionCount, or engagementCount).
+        printableCoupon:
+          type: string
+          description: Printable coupon URL
+        rewardId:
+          type: string
+          description: Generated unique identifier of a reward.
+        winnerSelectionMethod:
+          type: string
+          x-access:
+          - administrator
+          - root
+          description: Selection method used for influencer winners.
+        winnersSelectedCount:
+          type: integer
+          x-access:
+          - administrator
+          - root
+          description: For incentives tied to expired action groups, this indicates the number of winners that have already been selected.
+        disqualifiedWinnersCount:
+          type: integer
+          x-access:
+          - administrator
+          - root
+          description: For incentives tied to expired action groups, this indicates the number of winners that have been disqualified.
+        allocatedWinnersCount:
+          type: integer
+          x-access:
+          - administrator
+          - root
+          description: For incentives tied to expired action groups, this indicates the number of winners that were allocated to this incentive.
+        claimedIncentivesInfluencerCount:
+          type: integer
+          x-access:
+          - administrator
+          - root
+          description: This indicates the number of influencers that claimed this incentive.
+        claimedIncentivesCount:
+          type: integer
+          x-access:
+          - administrator
+          - root
+          description: This indicates the number of claims on this incentive.
+        actionGroupId:
+          type: integer
+          description: ID of the parent action group.
+        cashPaymentAppId:
+          type: integer
+          description: ID the associated cash payment app.
+        giftCardOptionId:
+          type: integer
+          description: ID the associated gift card option.
+        giftCardEmailTemplateId:
+          type: string
+          description: ID the associated gift card email template (External Id).
+        actionGroupStatus:
+          type: string
+          description: Lifecycle status of the parent action group.
+        incentiveStatus:
+          type: string
+          description: Status of the incentive, which is relevant for non-activity incentives only.
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncentiveClaimDeprecated'
+        endDate:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        startDate:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        unlockType:
+          type: string
+          description: Method of unlocking the incentive.
+        numberPointsRequired:
+          type: integer
+          description: For points unlocked incentives, the number of points requires to unlock this incentive.
+        approximateRetailValue:
+          type: number
+          description: The Approximate Retail Value of the incentive being rewarded.
+          x-access:
+          - administrator
+        cost:
+          type: number
+          description: The Cost of the incentive being rewarded.
+          x-access:
+          - administrator
+        costCurrencyCode:
+          type: string
+          description: Cost Currency Code.
+          x-access:
+          - administrator
+        valueCurrencyCode:
+          type: string
+          description: Cost Currency Code.
+          x-access:
+          - administrator
+        bonusTierCurrencyCode:
+          type:
+          - string
+          - 'null'
+          enum:
+          - USD
+          - EUR
+          - GBP
+          - AUD
+          - CAD
+          - null
+          description: Currency code used for all tiered bonus amounts. Required when `bonusTiers` is non-empty.
+          x-access:
+          - administrator
+        bonusTiers:
+          type:
+          - array
+          - 'null'
+          description: Tiered bonus payout ladder. Sorted, contiguous, at most 5 tiers, ending with one `OPEN_ENDED` tier.
+          items:
+            $ref: '#/components/schemas/BonusTier'
+          x-access:
+          - administrator
+        termsAndConditions:
+          $ref: '#/components/schemas/IncentiveTermsAndConditionsDeprecated'
+        totalDynamicPromoCodes:
+          type: number
+          description: The total number of dynamic promo codes across all groups for this incentive
+          x-access:
+          - administrator
+        claimedDynamicPromoCodes:
+          type: number
+          description: The number of claimed dynamic promo codes across all groups for this incentive
+          x-access:
+          - administrator
+        unlockEvent:
+          type: string
+          enum:
+          - completion
+          - acceptance
+          - pending_shipment
+          - pending_payment
+        cashPaymentAppProvider:
+          type: string
+          description: Cash Payment App Provider
+        discountCodeId:
+          type: string
+          description: Discount code ID
+        couponActivation:
+          type: string
+          description: Coupon Activation
+    EmptyObject:
+      type: object
+      properties: {}
+    PowerReviewsAppDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id of the power reviews app
+        apiKey:
+          type: string
+          description: the power reviews api key
+        environment:
+          type: string
+          description: the environment of the power reviews app
+        merchantId:
+          type: string
+          description: the merchant id of the power reviews app
+        name:
+          type: string
+          description: the name of the brand that belongs to the power reviews app
+        locale:
+          type: string
+          description: the locale of the power reviews app
+        communityId:
+          type: string
+          description: the community id of the power reviews app
+    DataPointDefinitionDeprecated:
+      type: object
+      required:
+      - name
+      - multi
+      - customSet
+      - type
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the data point.
+        key:
+          type: string
+          description: Key for the datapoint
+        name:
+          type: string
+          description: Display name for the data point.
+        description:
+          type: string
+          description: The description of the datapoint definition
+          x-access:
+          - root
+          - administrator
+        multi:
+          type: boolean
+          description: Boolean indicating whether multiple responses are allowed.
+        customSet:
+          type: boolean
+          description: Boolean indicating whether there is a custom set of responses, otherwise it is free-form.
+        type:
+          type: string
+          description: Type of the data point, e.g. string, integer_range.
+        markUpDescription:
+          type: string
+          description: The markup display description for the data point.
+        communityId:
+          type: integer
+          description: The communityId to which this data point definition belongs.
+          x-access:
+          - root
+        createdAt:
+          type: string
+          format: date-time
+          description: Date time data point created.
+          x-access:
+          - root
+          - administrator
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date time data point updated.
+          x-access:
+          - root
+          - administrator
+        mergeTag:
+          type: boolean
+          description: 1 if the data point should be included as a merge tag, 0 otherwise
+        archived:
+          type: boolean
+          description: 1 if the data point is archived, 0 if it is not
+        setElements:
+          $ref: '#/components/schemas/DataPointDefinitionSetElementDeprecated'
+        membersCompleted:
+          type: integer
+          description: The count of members who have completed this data point.
+          x-access:
+          - administrator
+        actionGroups:
+          type: array
+          description: An array of live action groups that this datapoint is a part of
+          x-access:
+          - administrator
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              title:
+                type: string
+  parameters:
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
+      schema:
+        type: integer
+    orderDirection:
+      in: query
+      description: Select the direction by which the data will be ordered, ascending or descending.
+      name: orderDirection
+      schema:
+        type: string
+        enum:
+        - ASC
+        - DESC
+    Activation:
+      name: data
+      in: body
+      required: true
+      schema:
+        type: object
+        required:
+        - content
+        properties:
+          id:
+            type: integer
+          isApproved:
+            type: boolean
+          selfReported:
+            type: boolean
+          content:
+            type: object
+            properties:
+              likes:
+                type: integer
+              comments:
+                type: integer
+              shares:
+                type: integer
+              clicks:
+                type: integer
+              estimatedImpressions:
+                type: integer
+              conversions:
+                type: integer
+              conversionValue:
+                type: number
+              network:
+                type: string
+              image:
+                type: string
+              video:
+                type: string
+              text:
+                type: string
+              privacy:
+                type: string
+              postLink:
+                type: string
+              views:
+                type: number
+              mediaUpload:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fileUrl:
+                      type: string
+                    caption:
+                      type: string
+          associatedAccount:
+            $ref: '#/components/schemas/NetworkAccountDeprecated'
+    userFilter:
+      in: query
+      description: Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition.
+      name: userFilter
+      schema:
+        type: string
+    networkParam:
+      in: query
+      description: Specifies the network of an Activation.
+      name: network
+      schema:
+        type: string
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
+      schema:
+        type: integer
+    approvalStatus:
+      in: query
+      description: The approval status of an Activation.
+      name: approvalStatus
+      schema:
+        type: string
+    postsWithUGC:
+      in: query
+      description: Specifies whether to get UGC and require an Activation Content Summary or not.
+      name: postsWithUGC
+      schema:
+        type: boolean
+    orderByParam:
+      in: query
+      description: Attribute to order by.
+      name: orderBy
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

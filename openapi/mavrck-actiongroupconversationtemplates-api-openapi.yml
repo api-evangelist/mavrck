@@ -1,0 +1,731 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Action Group Conversation Templates API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: ActionGroupConversationTemplates
+paths:
+  /v1/action-groups/{actionGroupId}/conversation-templates:
+    post:
+      operationId: createActionGroupConversationTemplate
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupConversationTemplatePostResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupConversationTemplates
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroupConversationTemplatePostBody'
+        required: true
+    get:
+      operationId: getActionGroupConversationTemplates
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupConversationTemplatesGetResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupConversationTemplates
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+    delete:
+      operationId: resetActionGroupConversationTemplates
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupConversationTemplates
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/action-groups/{actionGroupId}/conversation-templates/{id}/copy:
+    post:
+      operationId: copyActionGroupConversationTemplate
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupConversationTemplateCopyPostResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupConversationTemplates
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroupConversationTemplateCopyPostBody'
+        required: true
+  /v1/action-groups/{actionGroupId}/conversation-templates/{id}:
+    delete:
+      operationId: deleteActionGroupConversationTemplate
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: {}
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupConversationTemplates
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+    put:
+      operationId: updateActionGroupConversationTemplate
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupConversationTemplates
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroupConversationTemplatePutBody'
+        required: true
+  /v1/action-groups/{actionGroupId}/conversation-templates/reorder:
+    post:
+      operationId: reorderActionGroupConversationTemplates
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionGroupConversationTemplateReorderPutResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupConversationTemplates
+      parameters:
+      - in: path
+        name: actionGroupId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroupConversationTemplateReorderPutBody'
+        required: true
+components:
+  schemas:
+    Administrator:
+      properties:
+        id:
+          type: number
+          format: double
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          type: string
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplatesGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActionGroupConversationTemplate'
+          type: array
+        defaultTemplates:
+          items:
+            $ref: '#/components/schemas/ActionGroupConversationTemplatePostBody'
+          type: array
+      required:
+      - defaultTemplates
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplate:
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        createdByAccountId:
+          type: number
+          format: double
+        deliveryMethod:
+          type: string
+          enum:
+          - manual
+          - automatic
+        disabled:
+          type: boolean
+        html:
+          type: string
+        id:
+          type: number
+          format: double
+        lastModifiedByAccountId:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+        order:
+          type: number
+          format: double
+        version:
+          type: number
+          format: double
+        sendOnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sendOnDays:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnEvent:
+          type:
+          - string
+          - 'null'
+          enum:
+          - due_date
+          - draft_due_date
+          - status_entry
+          - specific_date
+          - draft_needs_revision
+          - concept_due_date
+          - concept_needs_revision
+          - null
+        sendOnStatusId:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnTimeframe:
+          type:
+          - string
+          - 'null'
+          enum:
+          - before
+          - after
+          - null
+        slug:
+          type: string
+        subject:
+          type: string
+        title:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          $ref: '#/components/schemas/Administrator'
+        createdBy:
+          $ref: '#/components/schemas/Administrator'
+        ListCustomStatus:
+          additionalProperties: true
+        ActionGroup:
+          additionalProperties: false
+          type: object
+      required:
+      - html
+      - id
+      - listId
+      - subject
+      - title
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplateCopyPostBody:
+      properties:
+        deliveryMethod:
+          type: string
+          enum:
+          - manual
+          - automatic
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplateCopyPostResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActionGroupConversationTemplate'
+          type: array
+        copy:
+          $ref: '#/components/schemas/ActionGroupConversationTemplate'
+      required:
+      - data
+      - copy
+      type: object
+    ActionGroupConversationTemplatePostBody:
+      properties:
+        deliveryMethod:
+          type: string
+          enum:
+          - manual
+          - automatic
+        disabled:
+          type: boolean
+        html:
+          type: string
+        order:
+          type: number
+          format: double
+        version:
+          type: number
+          format: double
+        sendOnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sendOnDays:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnEvent:
+          type:
+          - string
+          - 'null'
+          enum:
+          - due_date
+          - draft_due_date
+          - status_entry
+          - specific_date
+          - draft_needs_revision
+          - concept_due_date
+          - concept_needs_revision
+          - null
+        sendOnStatusId:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnTimeframe:
+          type:
+          - string
+          - 'null'
+          enum:
+          - before
+          - after
+          - null
+        slug:
+          type: string
+        subject:
+          type: string
+        title:
+          type: string
+      required:
+      - html
+      - subject
+      - title
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplateReorderPutBody:
+      properties:
+        data:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplatePutBody:
+      properties:
+        deliveryMethod:
+          type: string
+          enum:
+          - manual
+          - automatic
+        disabled:
+          type: boolean
+        html:
+          type: string
+        sendOnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sendOnDays:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnEvent:
+          type:
+          - string
+          - 'null'
+          enum:
+          - due_date
+          - draft_due_date
+          - status_entry
+          - specific_date
+          - draft_needs_revision
+          - concept_due_date
+          - concept_needs_revision
+          - null
+        sendOnStatusId:
+          type:
+          - number
+          - 'null'
+          format: double
+        order:
+          type:
+          - number
+          - 'null'
+          format: double
+        version:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnTimeframe:
+          type:
+          - string
+          - 'null'
+          enum:
+          - before
+          - after
+          - null
+        slug:
+          type:
+          - string
+          - 'null'
+        subject:
+          type: string
+        title:
+          type: string
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplatePostResponse:
+      properties:
+        id:
+          type: number
+          format: double
+      required:
+      - id
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplateReorderPutResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActionGroupConversationTemplate'
+          type: array
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

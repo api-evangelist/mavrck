@@ -1,0 +1,720 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Communities API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Communities
+paths:
+  /communities:
+    get:
+      tags:
+      - Communities
+      x-handler: community/community_controller.js
+      x-access:
+      - administrator
+      operationId: getCommunities
+      summary: Query Mavrck communities available to the authenticated administrator.
+      parameters:
+      - name: omitCurrent
+        in: query
+        required: false
+        description: Omit the community that the administrator is currently authenticated into.
+        schema:
+          type: boolean
+      - name: name
+        in: query
+        description: Community name
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: Community Id
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: Administrator account id that can be used to filter the list down to only instances they have access to.
+        schema:
+          type: string
+      - name: includeAll
+        in: query
+        description: Root only parameter for requesting all communities beyond normal access
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/orderByParam'
+      responses:
+        '200':
+          description: An array of Mavrck communities.
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/ResponseMetadata'
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Community'
+                    type: array
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Communities not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Communities
+      x-handler: community/community_controller.js
+      x-access:
+      - root
+      summary: Creates a community.
+      operationId: createCommunity
+      responses:
+        '200':
+          description: URI.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Error, community failed to create
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - communityId
+              - features
+              properties:
+                communityId:
+                  type: string
+                name:
+                  type: string
+                features:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UpdateEntitlementFields'
+        required: true
+  /communities/{id}:
+    get:
+      tags:
+      - Communities
+      operationId: getCommunity
+      x-handler: community/community_controller.js
+      x-access:
+      - root
+      summary: Retrieve a single community.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single community.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Community'
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Session expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Access forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Community not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/communities/{communityId}/accounts/{accountId}:
+    get:
+      operationId: getUserInCommunity
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommunityAdministratorAccount'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Communities
+      parameters:
+      - in: path
+        name: communityId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: updateUserRoleInCommunity
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdObject'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Communities
+      parameters:
+      - in: path
+        name: communityId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountPutBody'
+        required: true
+    delete:
+      operationId: removeAccountFromCommunity
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Communities
+      parameters:
+      - in: path
+        name: communityId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+  /v1/communities/{communityId}/accounts:
+    post:
+      operationId: addAccountToCommunity
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdObject'
+        '400':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Communities
+      parameters:
+      - in: path
+        name: communityId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddToCommunityPostBody'
+        required: true
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    AddToCommunityPostBody:
+      properties:
+        accountId:
+          type: number
+          format: double
+      required:
+      - accountId
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    CommunityAdministratorAccount:
+      properties:
+        email:
+          type: string
+        communityId:
+          type: string
+        id:
+          type: object
+        roleId:
+          type: number
+          format: double
+        firstName:
+          type: string
+        lastName:
+          type: string
+        image:
+          type:
+          - string
+          - 'null'
+      required:
+      - email
+      - communityId
+      - id
+      - roleId
+      type: object
+      additionalProperties: false
+    FeatureId:
+      type: string
+      enum:
+      - ''
+      - add_creator_non_root
+      - add_to_creators_v2
+      - ai_brand_suitability
+      - ai_brand_suitability_bulk_reports
+      - ai_brand_suitability_v02
+      - ai_brand_suitability_v03
+      - ai_brand_suitability_internal
+      - ai_creator_match
+      - amazon_mavely_integration
+      - amplify_content
+      - audience_predominant_city_filter
+      - background_content_export
+      - bazaarvoice_ratings_only
+      - brand_safety
+      - budget_reference_id_required
+      - budget_reference_id_required_fulfillment
+      - campaign_application_embed
+      - campaign_subscription
+      - community
+      - concepts_for_creators
+      - content_module
+      - create_content
+      - creator_refresh_non_root
+      - creator_tax_collection
+      - custom_analytics_reporting
+      - custom_workflow_stages
+      - export_email
+      - facebook_cds_v2
+      - facebook_creator_api
+      - fraud_risk
+      - funds_tracking
+      - global_influencer_performance_data_2
+      - global_influencer_performance_data
+      - ig_paid_media
+      - incentive_advisor_v2
+      - influence_two_admin
+      - influence_two_campaign_content
+      - influence_two_campaign_manage
+      - influence_two_campaign_performance
+      - influence_two_campaign_search
+      - influence_two_campaign_setup
+      - influence_two_campaign_workflow
+      - influence_two_campaigns
+      - influence_two_content
+      - influence_two_dashboard
+      - influence_two_incentives
+      - influence_two_influencers
+      - influence_two_messages
+      - influence_two_reports
+      - influence_two_search_summary
+      - influence_two_search
+      - influence_two_settings
+      - influence_two
+      - instagram_cds_v2
+      - instance_branding
+      - keyword_search_chips
+      - later_360_reports_shareable_link
+      - later_cta
+      - mavely_campaign_experience
+      - mavely_integration
+      - mavely_payments
+      - messages_scheduling
+      - meta_business_integration
+      - meta_post_partnerships
+      - payments_custom_reports
+      - paypal_payments
+      - pinterest_cds_v2
+      - public_campaign_summary
+      - react_migration
+      - remove_creator
+      - reports_module
+      - reports_audience_demographics
+      - search_account_type_dropdown
+      - search_creator_card_grid_view
+      - search_filter_redesign
+      - search_later_influencers
+      - search_non_registered
+      - search_query_tuning
+      - search_refactor_query_builder
+      - search_relevance_tuning
+      - search_onsocial_relevance
+      - self_serve_users
+      - shareable_links
+      - shopify_discount_creation
+      - show_search_count
+      - stripe_international_payments
+      - stripe_payments
+      - submit_review
+      - submit_survey
+      - threaded_influencer_feedback
+      - tipalti_payments_usd
+      - tiktok_paid_media
+      - use_new_opensearch_index
+      - webhook_setup
+      - ytbc_deal_reporting_enabled
+    UpdateAccountPutBody:
+      properties:
+        newRoleId:
+          type: number
+          format: double
+      required:
+      - newRoleId
+      type: object
+      additionalProperties: false
+    UpdateEntitlementFields:
+      properties:
+        communityId:
+          type: string
+        label:
+          type: string
+        featureId:
+          $ref: '#/components/schemas/FeatureId'
+        featureEnabled:
+          type: boolean
+      required:
+      - featureId
+      - featureEnabled
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    IdObject:
+      properties:
+        id:
+          type: number
+          format: double
+      required:
+      - id
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Community:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        logo:
+          type: string
+        retired:
+          type: boolean
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  parameters:
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
+      schema:
+        type: integer
+    orderByParam:
+      in: query
+      description: Attribute to order by.
+      name: orderBy
+      schema:
+        type: string
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
+      schema:
+        type: integer
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

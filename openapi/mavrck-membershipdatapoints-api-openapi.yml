@@ -1,0 +1,292 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Membership Data Points API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: MembershipDataPoints
+paths:
+  /v1/membership-data-points:
+    get:
+      operationId: getMembershipDataPoints
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MembershipDataPointWithDefinitions'
+                type: array
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - MembershipDataPoints
+      parameters:
+      - in: query
+        name: dataPoints
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: globalUserId
+        required: false
+        schema:
+          type: number
+          format: double
+  /v1/membership-data-point/{membershipId}/{dataPointDefinitionId}:
+    put:
+      operationId: updateDataPoint
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - MembershipDataPoints
+      parameters:
+      - in: path
+        name: membershipId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: dataPointDefinitionId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMembershipDataPointBody'
+        required: true
+components:
+  schemas:
+    UpdateMembershipDataPointBody:
+      properties:
+        value:
+          items:
+            type: string
+          type: array
+      required:
+      - value
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    MembershipDataPointWithDefinitions:
+      properties:
+        lastEditedByAccountId:
+          type: number
+          format: double
+        isConfirmedByMember:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        dataPointDefinitionId:
+          type: number
+          format: double
+        membershipId:
+          type: number
+          format: double
+        value:
+          type: string
+        id:
+          type: number
+          format: double
+        dataPointDefinition:
+          $ref: '#/components/schemas/DBDataPointDefinition'
+      required:
+      - lastEditedByAccountId
+      - isConfirmedByMember
+      - updatedAt
+      - createdAt
+      - dataPointDefinitionId
+      - membershipId
+      - value
+      - id
+      - dataPointDefinition
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBDataPointDefinition:
+      properties:
+        archived:
+          type: boolean
+        mergeTag:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        communityId:
+          type: string
+        type:
+          type: string
+        customSet:
+          type: boolean
+        markUpDescription:
+          type:
+          - string
+          - 'null'
+        multi:
+          type: boolean
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        key:
+          type:
+          - string
+          - 'null'
+        id:
+          type: number
+          format: double
+      required:
+      - archived
+      - mergeTag
+      - updatedAt
+      - createdAt
+      - communityId
+      - type
+      - customSet
+      - multi
+      - description
+      - name
+      - key
+      - id
+      type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

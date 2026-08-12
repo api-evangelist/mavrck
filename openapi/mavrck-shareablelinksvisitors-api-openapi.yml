@@ -1,0 +1,241 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Shareable Links Visitors API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: ShareableLinksVisitors
+paths:
+  /v1/shareable-links/visitors:
+    post:
+      operationId: createShareableLinksVisitor
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ShareableLinksVisitors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateShareableLinksVisitorBody'
+        required: true
+    get:
+      operationId: getShareableLinksVisitors
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareableLinksVisitorsListResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ShareableLinksVisitors
+      parameters:
+      - in: query
+        name: sharedCipherId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: actionGroupId
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: dashboardType
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: fromDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: toDate
+        required: false
+        schema:
+          type: string
+          format: date-time
+components:
+  schemas:
+    CreateShareableLinksVisitorBody:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        cipher:
+          type: string
+        dashboardType:
+          type:
+          - string
+          - 'null'
+      required:
+      - firstName
+      - lastName
+      - email
+      - cipher
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ShareableLinksVisitorResponse:
+      properties:
+        id:
+          type: number
+          format: double
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        sharedCipherId:
+          type: number
+          format: double
+        communityId:
+          type:
+          - string
+          - 'null'
+        actionGroupId:
+          type:
+          - number
+          - 'null'
+          format: double
+        dashboardType:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - firstName
+      - lastName
+      - email
+      - sharedCipherId
+      - communityId
+      - actionGroupId
+      - dashboardType
+      - createdAt
+      - updatedAt
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ShareableLinksVisitorsListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ShareableLinksVisitorResponse'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

@@ -1,0 +1,759 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Action Group Scheduled Messages API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: ActionGroupScheduledMessages
+paths:
+  /v1/messages-scheduling:
+    post:
+      operationId: createListMemberScheduledMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DBScheduledMessage'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupScheduledMessages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroupScheduledMessagePostBody'
+        required: true
+    put:
+      operationId: editListMemberScheduledMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DBScheduledMessage'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupScheduledMessages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroupScheduledMessagePutBody'
+        required: true
+  /v1/messages-scheduling/schedule-reply:
+    post:
+      operationId: replyListMemberScheduledMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledReplyMessageResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupScheduledMessages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduledReplyMessagePostBody'
+        required: true
+  /v1/messages-scheduling/send-now:
+    post:
+      operationId: sendScheduledMessageNow
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DBMessage'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - ActionGroupScheduledMessages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionGroupScheduledMessageSendNowBody'
+        required: true
+components:
+  schemas:
+    ActionGroupScheduledMessageSendNowBody:
+      properties:
+        messageId:
+          type: number
+          format: double
+        scheduledMessageId:
+          type: number
+          format: double
+        actionGroupId:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+      required:
+      - messageId
+      - scheduledMessageId
+      type: object
+      additionalProperties: false
+    MessageAttachment:
+      properties:
+        originalName:
+          type: string
+        mimeType:
+          type: string
+        disposition:
+          type: string
+        size:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        encoding:
+          type: string
+        buffer:
+          type: string
+      required:
+      - originalName
+      - mimeType
+      - disposition
+      - size
+      - index
+      - encoding
+      - buffer
+      type: object
+      additionalProperties: false
+    CannedResponse:
+      properties:
+        id:
+          type:
+          - number
+          - 'null'
+          format: double
+        category:
+          type: string
+          enum:
+          - CANNED
+        title:
+          type: string
+        subject:
+          type: string
+        html:
+          type: string
+        createdBy:
+          properties:
+            image:
+              type: string
+            last_name:
+              type: string
+            first_name:
+              type: string
+            email:
+              type: string
+            id:
+              type:
+              - number
+              - 'null'
+              format: double
+          type: object
+        lastModifiedBy:
+          properties:
+            image:
+              type: string
+            last_name:
+              type: string
+            first_name:
+              type: string
+            email:
+              type: string
+            id:
+              type:
+              - number
+              - 'null'
+              format: double
+          type: object
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        isArchived:
+          type: boolean
+      required:
+      - id
+      - category
+      - title
+      - subject
+      - html
+      - createdAt
+      - isArchived
+      type: object
+      additionalProperties: false
+    SendMessageRecipient:
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+        influencer:
+          $ref: '#/components/schemas/SendMessageInfluencer'
+      type: object
+      additionalProperties: false
+    ActionGroupScheduledMessagePutBody:
+      properties:
+        sendOnDate:
+          type: string
+          format: date-time
+        scheduleId:
+          type: number
+          format: double
+        messageId:
+          type: number
+          format: double
+        conversationId:
+          type: number
+          format: double
+      required:
+      - sendOnDate
+      - scheduleId
+      - messageId
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ActionGroupScheduledMessagePostBody:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        attachments:
+          items:
+            $ref: '#/components/schemas/SendMessageAttachment'
+          type: array
+        globalUserId:
+          type: number
+          format: double
+        html:
+          type: string
+        recipients:
+          items:
+            $ref: '#/components/schemas/SendMessageRecipient'
+          type: array
+        subject:
+          type: string
+        templates:
+          items:
+            additionalProperties: true
+          type: array
+        sendOnDate:
+          type: string
+          format: date-time
+      required:
+      - actionGroupId
+      - globalUserId
+      - html
+      - subject
+      - sendOnDate
+      type: object
+      additionalProperties: false
+    DBScheduledMessage:
+      properties:
+        accountId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        communityId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        messageId:
+          type: number
+          format: double
+        sendAt:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ScheduledMessageStatus'
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        conversationId:
+          type: number
+          format: double
+        message:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - accountId
+      - id
+      - communityId
+      - createdAt
+      - messageId
+      - sendAt
+      - status
+      - updatedAt
+      type: object
+      additionalProperties: false
+    ScheduledMessageStatus:
+      enum:
+      - PENDING
+      - ERROR
+      - FAILED
+      - SENT
+      type: string
+    ScheduledReplyMessageResponse:
+      properties:
+        message:
+          type: object
+          properties:
+            recipients:
+              items:
+                properties:
+                  influencer:
+                    properties:
+                      email:
+                        type: string
+                      lastName:
+                        type: string
+                      firstName:
+                        type: string
+                      profilePic:
+                        type: string
+                      globalUserId:
+                        type: number
+                        format: double
+                      id:
+                        type:
+                        - number
+                        - 'null'
+                        format: double
+                      actionGroupId:
+                        type: number
+                        format: double
+                    type: object
+                  role:
+                    type: string
+                  displayName:
+                    type:
+                    - string
+                    - 'null'
+                  emailId:
+                    type: number
+                    format: double
+                  email:
+                    type: string
+                type: object
+              type: array
+            subject:
+              type: string
+            html:
+              type: string
+            attachments:
+              items:
+                $ref: '#/components/schemas/MessageAttachment'
+              type: array
+            templates:
+              items:
+                $ref: '#/components/schemas/CannedResponse'
+              type: array
+            actionGroupId:
+              type: number
+              format: double
+            messageId:
+              type: number
+              format: double
+            globalUserId:
+              type: number
+              format: double
+            sendOnDate:
+              type: string
+              format: date-time
+        scheduledMessageId:
+          type: number
+          format: double
+      required:
+      - message
+      - scheduledMessageId
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBMessageRecipientView:
+      properties:
+        id:
+          type: number
+          format: double
+        email:
+          type: string
+        emailId:
+          type: number
+          format: double
+        messageId:
+          type: number
+          format: double
+        role:
+          type: string
+          enum:
+          - from
+          - to
+          - cc
+        displayName:
+          type: string
+      required:
+      - id
+      - email
+      - emailId
+      - messageId
+      - role
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBMessage:
+      properties:
+        recipients:
+          items:
+            $ref: '#/components/schemas/DBMessageRecipientView'
+          type: array
+        hasBeenOpened:
+          type: boolean
+        hasBeenBounced:
+          type: boolean
+        hasBeenDelivered:
+          type: boolean
+        modifiedByAccountId:
+          type: number
+          format: double
+        createdByAccountId:
+          type: number
+          format: double
+        sentByAccountId:
+          type: number
+          format: double
+        modifiedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        sentAt:
+          type: string
+          format: date-time
+        conversationId:
+          type: number
+          format: double
+        parsedReply:
+          type: string
+        html:
+          type: string
+        isInbound:
+          type: boolean
+        inReplyToHeader:
+          type: string
+        status:
+          type: string
+          enum:
+          - ARCHIVED
+          - DRAFT
+          - LIVE
+          - SCHEDULED
+        messageIdHeader:
+          type: string
+        subject:
+          type: string
+        id:
+          type: number
+          format: double
+      required:
+      - conversationId
+      - parsedReply
+      - html
+      - isInbound
+      - inReplyToHeader
+      - subject
+      - id
+      type: object
+    SendMessageInfluencer:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        profilePic:
+          type: string
+      type: object
+      additionalProperties: false
+    ScheduledReplyMessagePostBody:
+      properties:
+        recipients:
+          items:
+            properties:
+              influencer:
+                properties:
+                  email:
+                    type: string
+                  lastName:
+                    type: string
+                  firstName:
+                    type: string
+                  profilePic:
+                    type: string
+                  globalUserId:
+                    type: number
+                    format: double
+                  id:
+                    type:
+                    - number
+                    - 'null'
+                    format: double
+                  actionGroupId:
+                    type: number
+                    format: double
+                type: object
+              role:
+                type: string
+              displayName:
+                type:
+                - string
+                - 'null'
+              emailId:
+                type: number
+                format: double
+              email:
+                type: string
+            type: object
+          type: array
+        subject:
+          type: string
+        html:
+          type: string
+        attachments:
+          items:
+            $ref: '#/components/schemas/MessageAttachment'
+          type: array
+        templates:
+          items:
+            $ref: '#/components/schemas/CannedResponse'
+          type: array
+        actionGroupId:
+          type: number
+          format: double
+        messageId:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+        sendOnDate:
+          type: string
+          format: date-time
+      required:
+      - subject
+      - html
+      type: object
+      additionalProperties: false
+    SendMessageAttachment:
+      properties:
+        originalName:
+          type: string
+        mimeType:
+          type: string
+        disposition:
+          type: string
+        size:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        buffer:
+          type: string
+        encoding:
+          type: string
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

@@ -1,0 +1,270 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Administrator Accounts API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: AdministratorAccounts
+paths:
+  /v1/administrator_accounts:
+    get:
+      operationId: getAdministratorAccounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBody_AdministratorAccount-Array_'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - AdministratorAccounts
+      parameters:
+      - in: query
+        name: email
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: excludeRootAccounts
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+  /v1/administrator_accounts/{username}:
+    get:
+      operationId: getAdministratorAccount
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdministratorAccountGetResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - AdministratorAccounts
+      parameters:
+      - in: path
+        name: username
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: validateAdministratorAccount
+      responses:
+        '200':
+          description: ''
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - AdministratorAccounts
+      parameters:
+      - in: path
+        name: username
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidatePasswordBody'
+        required: true
+components:
+  schemas:
+    ValidatePasswordBody:
+      properties:
+        password:
+          type: string
+      required:
+      - password
+      type: object
+    AdministratorAccount:
+      properties:
+        email:
+          type: string
+        first_name:
+          type: string
+        id:
+          type: object
+        image:
+          type:
+          - string
+          - 'null'
+        last_name:
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/Role'
+          type: array
+          x-deprecated: true
+        communityRoles:
+          items:
+            $ref: '#/components/schemas/CommunityRole'
+          type: array
+      required:
+      - email
+      - id
+      type: object
+      additionalProperties: false
+    AdministratorAccountGetResponse:
+      properties:
+        lastName:
+          type: string
+        firstName:
+          type: string
+        email:
+          type: string
+        attributes:
+          properties: {}
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+      required:
+      - lastName
+      - firstName
+      - email
+      - attributes
+      type: object
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CommunityRole:
+      properties:
+        roleId:
+          type: number
+          format: double
+        communityId:
+          type: string
+      required:
+      - roleId
+      - communityId
+      type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ResponseBody_AdministratorAccount-Array_:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AdministratorAccount'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    Role:
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+        description:
+          type: string
+      required:
+      - name
+      - id
+      - description
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

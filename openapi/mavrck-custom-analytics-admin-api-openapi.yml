@@ -1,0 +1,561 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Custom Analytics Admin API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Custom Analytics Admin
+paths:
+  /v1/admin/custom-analytics/configs:
+    get:
+      operationId: listCustomAnalyticsConfigs
+      responses:
+        '200':
+          description: Configs retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAnalyticsConfigsListResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Custom Analytics Admin
+      parameters:
+      - in: query
+        name: communityId
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: dashboardType
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+    post:
+      operationId: createCustomAnalyticsConfig
+      responses:
+        '201':
+          description: Config created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAnalyticsConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Custom Analytics Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomAnalyticsConfigRequest'
+        required: true
+  /v1/admin/custom-analytics/configs/{id}:
+    get:
+      operationId: getCustomAnalyticsConfigById
+      responses:
+        '200':
+          description: Config retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAnalyticsConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Custom Analytics Admin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+    put:
+      operationId: updateCustomAnalyticsConfig
+      responses:
+        '200':
+          description: Config updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAnalyticsConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Custom Analytics Admin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomAnalyticsConfigRequest'
+        required: true
+    delete:
+      operationId: deleteCustomAnalyticsConfig
+      responses:
+        '204':
+          description: Config deleted successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Custom Analytics Admin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/admin/custom-analytics/configs/community/{communityId}/dashboard-type/{dashboardType}:
+    get:
+      operationId: getCustomAnalyticsConfigByCommunityAndType
+      responses:
+        '200':
+          description: Config retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAnalyticsConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Custom Analytics Admin
+      parameters:
+      - in: path
+        name: communityId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: dashboardType
+        required: true
+        schema:
+          type: string
+  /v1/admin/custom-analytics/configs/default/dashboard-type/{dashboardType}:
+    get:
+      operationId: getDefaultCustomAnalyticsConfigByType
+      responses:
+        '200':
+          description: Default template config retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAnalyticsConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Custom Analytics Admin
+      parameters:
+      - in: path
+        name: dashboardType
+        required: true
+        schema:
+          type: string
+components:
+  schemas:
+    CustomAnalyticsConfigResponse:
+      properties:
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        roleIds:
+          items:
+            type: number
+            format: double
+          type: array
+        prefersDark:
+          type:
+          - string
+          - 'null'
+        themeId:
+          type:
+          - string
+          - 'null'
+        filters:
+          type:
+          - string
+          - 'null'
+        userAttributes:
+          properties:
+            brand_id:
+              items:
+                type: string
+              type: array
+            instance_id:
+              items:
+                type: string
+              type: array
+          type:
+          - object
+          - 'null'
+        isDefault:
+          type: boolean
+        externalDashboardId:
+          type: string
+        dashboardType:
+          type: string
+        communityId:
+          type:
+          - string
+          - 'null'
+          description: 'The community this config applies to.
+
+            If null, this is a default template that applies to any community
+
+            without a community-specific override.'
+        id:
+          type: number
+          format: double
+      required:
+      - updatedAt
+      - createdAt
+      - isDefault
+      - externalDashboardId
+      - dashboardType
+      - communityId
+      - id
+      type: object
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    CustomAnalyticsConfigsListResponse:
+      properties:
+        meta:
+          properties:
+            total:
+              type: number
+              format: double
+          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/CustomAnalyticsConfigResponse'
+          type: array
+      required:
+      - data
+      type: object
+    UpdateCustomAnalyticsConfigRequest:
+      properties:
+        roleIds:
+          items:
+            type: number
+            format: double
+          type: array
+          description: 'Optional array of role IDs that can access this config.
+
+            If provided, replaces all existing role associations.
+
+            If empty array, clears all role restrictions (accessible to anyone with root/administrator/contributor roles).
+
+            If undefined, role associations remain unchanged.'
+        prefersDark:
+          type: string
+        themeId:
+          type: string
+        filters:
+          type: string
+        userAttributes:
+          properties:
+            brand_id:
+              items:
+                type: string
+              type: array
+            instance_id:
+              items:
+                type: string
+              type: array
+          type: object
+        externalDashboardId:
+          type: string
+        dashboardType:
+          type: string
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CreateCustomAnalyticsConfigRequest:
+      properties:
+        roleIds:
+          items:
+            type: number
+            format: double
+          type: array
+          description: 'Optional array of role IDs that can access this config.
+
+            If not provided or empty, the config is accessible to anyone with root/administrator/contributor roles (no role restrictions).'
+        prefersDark:
+          type: string
+        themeId:
+          type: string
+        filters:
+          type: string
+        userAttributes:
+          properties:
+            brand_id:
+              items:
+                type: string
+              type: array
+            instance_id:
+              items:
+                type: string
+              type: array
+          type: object
+        externalDashboardId:
+          type: string
+        dashboardType:
+          type: string
+        communityId:
+          type:
+          - string
+          - 'null'
+          description: 'The community this config applies to.
+
+            If null or omitted, creates a default template for the given dashboardType.
+
+            Default templates apply to any community that doesn''t have a community-specific override.'
+      required:
+      - externalDashboardId
+      - dashboardType
+      type: object
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

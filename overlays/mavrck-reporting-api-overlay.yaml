@@ -1,0 +1,105 @@
+overlay: 1.0.0
+info:
+  title: Later Influence Reporting API v1 — deprecation, problem details, sort vocabulary
+  version: 1.0.0
+  x-generated: '2026-08-12'
+  x-method: generated
+  x-source: >-
+    API Evangelist enhancement over the provider's own published document
+    (openapi/_original/mavrck-reporting-api.json, fetched from
+    https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1 on 2026-08-12).
+extends: openapi/_original/mavrck-reporting-api.json
+actions:
+- target: $
+  description: >-
+    The provider has publicly announced this version's deprecation in its help
+    centre but has not marked it in the contract, and emits no RFC 8594 Sunset
+    header. Surface it where a machine will see it.
+  update:
+    x-lifecycle:
+      status: deprecated
+      announced_in: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+      announcement_last_updated: '2026-04-15'
+      statement: >-
+        "The v1 API will be deprecated within the next 6 months. We will
+        communicate a firm migration date in advance."
+      firm_sunset_date: null
+      sunset_header_emitted: false
+      successor_base_url: https://reporting.api.later.com
+      successor_version: v2
+      migration_map: lifecycle/mavrck-lifecycle.yml
+- target: $.paths['/oauth/token'].post.responses
+  description: >-
+    Record the error body observed live. The contract lists 400 and 403 for this
+    operation, but a wrong clientId/clientSecret actually returns 401 with
+    application/problem+json — a status the contract does not declare at all.
+  update:
+    '401':
+      description: >-
+        Invalid client credentials. Observed live 2026-08-12; NOT declared in the
+        provider's contract, which lists only 200, 400 and 403.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: >-
+                  Mavrck-internal error code, e.g. ANL_00401. RFC 9457 expects a
+                  URI reference here; this is an opaque code.
+              title:
+                type: string
+              detail:
+                type: string
+          example:
+            type: ANL_00401
+            title: Invalid Client Credentials
+            detail: The client ID or client secret is incorrect.
+- target: $
+  description: >-
+    The published token lifetime disagrees between the two provider sources.
+    Record both rather than picking one silently.
+  update:
+    x-token-lifetime:
+      spec_says: 12 hours
+      help_centre_says: 24 hours
+      guidance: >-
+        Treat 12 hours as the safe assumption and refresh on any 401. Documented
+        token error codes are INVALID_CLIENT_CREDENTIALS, CLIENT_DISABLED and
+        NO_ACCESSIBLE_INSTANCES.
+- target: $
+  description: >-
+    `sortProperty` is validated server-side against a fixed list that the
+    contract only states in prose, so no generated client can check it. Lift it
+    into a machine-readable enum.
+  update:
+    x-sort-properties:
+    - engagements
+    - impressions
+    - engagementRate
+    - impressionsPerPost
+    - estimatedValueGenerated
+    - estimatedRoi
+    - reach
+    - cpe
+    - cpm
+    - firstPostDate
+    - lastPostDate
+    - estimatedContentCost
+    - campaignTitle
+    - postsCount
+    - influencersCount
+    - clicks
+    - trackingLinksClicks
+    - trackingLinksConversions
+    - trackingLinksConversionValue
+    - affiliateLinksClicks
+    - affiliateLinksConversions
+    - affiliateLinksConversionRate
+    - affiliateLinksSales
+    - affiliateLinksComissionEarned
+    - affiliateLinksRoi
+    x-sort-properties-note: >-
+      `affiliateLinksComissionEarned` is misspelled upstream (one m). It is the
+      wire name and must be sent exactly as written.

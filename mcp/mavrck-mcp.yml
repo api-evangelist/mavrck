@@ -1,0 +1,120 @@
+generated: '2026-08-12'
+method: derived
+status: candidate
+source: >-
+  openapi/mavrck-instance-level-api-openapi.yml,
+  openapi/mavrck-campaign-level-api-openapi.yml,
+  openapi/mavrck-social-network-level-api-openapi.yml,
+  openapi/mavrck-influencer-level-api-openapi.yml,
+  openapi/mavrck-post-level-api-openapi.yml,
+  openapi/mavrck-authentication-api-openapi.yml
+search:
+  official_server_found: false
+  probed:
+  - url: https://api.mavrck.co/.well-known/oauth-protected-resource
+    status: 404
+  - url: https://api.mavrck.co/.well-known/oauth-authorization-server
+    status: 404
+  - url: https://api.mavrck.co/graphql
+    status: 403
+    note: >-
+      Present in the routing table but forbidden without credentials, and no
+      GraphQL surface is named in either published spec or in the help centre.
+      No introspection was possible; nothing is asserted about it.
+  - url: https://www.mavrck.co/.well-known/ai-plugin.json
+    status: 200
+    note: SPA catch-all HTML, not a document.
+  searches:
+  - 'Web search for a Mavrck / Later Influence MCP server — no first-party or community server found.'
+note: >-
+  Mavrck publishes NO MCP server. The tools below are a CANDIDATE mapping
+  derived only from the Later Influence Reporting API — the smaller, documented,
+  read-only surface — because it is the part of Mavrck an agent could safely
+  use. The 687-operation platform API is deliberately NOT mapped: 125 of its
+  annotated operations are `administrator`-scoped, 16 are `root`, and it exposes
+  bulk influencer PII (GlobalUser carries 73 fields including contact and
+  audience-demographic data) plus payment movement. Packaging that as agent
+  tooling would be irresponsible; the omission is deliberate, not an oversight.
+  Every inputSchema below is inherited verbatim from the named operation's
+  published parameters — nothing is invented.
+server:
+  url: null
+  transport: null
+  auth: >-
+    Would inherit the Reporting API's client-credentials exchange: POST
+    https://api.mavrck.co/oauth/token with {clientId, clientSecret}, then
+    Authorization: Bearer <jwt>.
+tools:
+- name: list_instances
+  description: List the Later Influence instances (workspaces) the credentials can reach.
+  rest: getAllowedInstances
+  method: GET
+  path: /v1/reporting/instances
+  spec: openapi/mavrck-instance-level-api-openapi.yml
+  read_only: true
+- name: get_instance_details
+  description: >-
+    Get detail about an instance and its campaigns — influencer counts, campaign
+    counts and related metrics.
+  rest: getInfoAboutInstanceAndCampaigns
+  method: GET
+  path: /v1/reporting/instance/details
+  spec: openapi/mavrck-instance-level-api-openapi.yml
+  read_only: true
+- name: get_instance_performance
+  description: Workspace-level KPI rollup for a date range.
+  rest: getInstancePerformance
+  method: GET
+  path: /v1/reporting/instance/performance
+  spec: openapi/mavrck-instance-level-api-openapi.yml
+  read_only: true
+- name: get_performance_over_time
+  description: Time-series performance for an instance across a date range.
+  rest: getPerformanceOverTime
+  method: GET
+  path: /v1/reporting/instance/performance-over-time
+  spec: openapi/mavrck-instance-level-api-openapi.yml
+  read_only: true
+- name: get_campaign_performance
+  description: >-
+    Campaign-level metrics — engagements, impressions, estimated ROI, tracking
+    and affiliate link conversions — sortable and paginated.
+  rest: getCampaignPerformance
+  method: GET
+  path: /v1/reporting/campaign/performance
+  spec: openapi/mavrck-campaign-level-api-openapi.yml
+  read_only: true
+- name: get_network_performance
+  description: Performance broken down by social network (channel mix).
+  rest: getNetworkPerformance
+  method: GET
+  path: /v1/reporting/network/performance
+  spec: openapi/mavrck-social-network-level-api-openapi.yml
+  read_only: true
+- name: get_network_roi
+  description: Return-on-investment breakdown by social network.
+  rest: findReturnOfInvestments
+  method: GET
+  path: /v1/reporting/network/return-on-investment
+  spec: openapi/mavrck-social-network-level-api-openapi.yml
+  read_only: true
+- name: get_post_performance
+  description: Post-level content analytics for a date range.
+  rest: getPostPerformance
+  method: GET
+  path: /v1/reporting/post/performance
+  spec: openapi/mavrck-post-level-api-openapi.yml
+  read_only: true
+excluded:
+- tool: get_influencer_performance
+  rest: getInfluencerPerformance
+  reason: >-
+    Returns per-creator records (CreatorDto / CreatorProfileDto) — identifiable
+    people. Legitimate for a customer analysing their own programme, but it is
+    not packaged as an agent tool here without a named human-review step. See
+    the PII posture in skills/_index.yml.
+- surface: Mavrck Platform API (687 operations)
+  reason: >-
+    Administrator- and root-scoped internal surface including bulk influencer
+    PII, messaging, and payment movement (StripePayments, CashPayments,
+    TipaltiTransfers, GiftCards). Deliberately not exposed as tools.

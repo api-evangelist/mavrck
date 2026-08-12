@@ -1,4 +1,4 @@
-generated: '2026-07-20'
+generated: '2026-08-12'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -7,6 +7,16 @@ hosts:
   tls_cert_error: '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has
     expired (_ssl.c:1082)'
   hsts: null
+- host: app.splashscore.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 25 23:59:59 2026 GMT
+  hsts: null
+- host: api.mavrck.co
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 25 23:59:59 2026 GMT
+  hsts: null
 domains:
 - domain: mavrck.co
   dnssec: false
@@ -14,3 +24,8 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: none
+- domain: splashscore.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: false

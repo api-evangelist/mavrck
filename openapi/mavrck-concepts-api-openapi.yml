@@ -1,0 +1,910 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Concepts API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: Concepts
+paths:
+  /v1/concept-content/{conceptContentId}/comments:
+    post:
+      operationId: createConceptContentComment
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConceptContentCommentPostResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConceptContentCommentPostBody'
+        required: true
+  /v1/concept-content/{conceptContentId}/comments/{id}:
+    put:
+      operationId: updateConceptContentComment
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConceptContentCommentPutBody'
+        required: true
+  /v1/concept-content/{conceptContentId}/status:
+    put:
+      operationId: updateConceptContentStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConceptContentStatusUpdateBody'
+        required: true
+  /v1/concept-content/{conceptContentId}/feedback:
+    put:
+      operationId: updateConceptContentFeedback
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConceptContentFeedbackUpdateBody'
+        required: true
+    get:
+      operationId: getConceptContentFeedback
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBody_ConceptContentFeedbackEntry-Array_'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+          format: double
+  /v1/concept-content/{conceptContentId}/feedback/{id}:
+    delete:
+      operationId: archiveConceptContentFeedback
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/concept-content:
+    post:
+      operationId: createConceptContent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfluencerConceptContentDto'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminConceptContentPostBody'
+        required: true
+  /v1/concept-content/{conceptContentId}:
+    put:
+      operationId: updateConceptContent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConceptContentUpdateBody'
+        required: true
+    delete:
+      operationId: archiveConceptContent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+  /v1/concept-content/{conceptContentId}/view:
+    post:
+      operationId: createConceptContentViewed
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConceptViewed'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: conceptContentId
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConceptContentViewed'
+        required: true
+  /v1/list-member/{listMemberId}/concept-content:
+    get:
+      operationId: getConceptContentForListMember
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfluencerConceptContentGetResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '403':
+          description: Access Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Concepts
+      parameters:
+      - in: path
+        name: listMemberId
+        required: true
+        schema:
+          type: number
+          format: double
+      - in: query
+        name: viewedByEmail
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: orderDirection
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+      - in: query
+        name: orderProperty
+        required: false
+        schema:
+          type: string
+          enum:
+          - createdAt
+components:
+  schemas:
+    ConceptContentStatusUpdateBody:
+      description: 'The status a reviewer may set. Excludes `pending` — that is the submitted/awaiting state
+
+        seeded on submission, not a reviewer action (mirrors drafts). The path param is authoritative,
+
+        so the body carries only the status (no redundant id / envelope).'
+      properties:
+        status:
+          type: string
+          enum:
+          - approved
+          - conditionally_approved
+          - rejected
+          - rejected_no_notification
+      required:
+      - status
+      type: object
+      additionalProperties: false
+    CreateConceptContentViewed:
+      properties:
+        email:
+          type: string
+      required:
+      - email
+      type: object
+      additionalProperties: false
+    ConceptContentCommentPutBody:
+      properties:
+        isArchived:
+          type: boolean
+      required:
+      - isArchived
+      type: object
+      additionalProperties: false
+    ResponseBody_ConceptContentFeedbackEntry-Array_:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ConceptContentFeedbackEntry'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Pick_AdministratorAccountDomain.email-or-first_name-or-image-or-last_name_:
+      properties:
+        image:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+      required:
+      - email
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    AdministratorAccountView:
+      $ref: '#/components/schemas/Pick_AdministratorAccountDomain.email-or-first_name-or-image-or-last_name_'
+    InfluencerConceptContentGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InfluencerConceptContentDto'
+          type: array
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    InfluencerConceptContentDto:
+      type: object
+      properties: {}
+    ConceptContentCommentEntry:
+      properties:
+        id:
+          type: number
+          format: double
+        conceptId:
+          type: number
+          format: double
+        accountId:
+          type:
+          - number
+          - 'null'
+          format: double
+        administratorAccount:
+          $ref: '#/components/schemas/AdministratorAccountView'
+        commenterName:
+          type:
+          - string
+          - 'null'
+        commenterType:
+          type: string
+        text:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      required:
+      - id
+      - conceptId
+      - accountId
+      - commenterName
+      - commenterType
+      - text
+      - createdAt
+      - isArchived
+      type: object
+      additionalProperties: false
+    ConceptContentFeedbackEntry:
+      properties:
+        id:
+          type: number
+          format: double
+        conceptId:
+          type: number
+          format: double
+        accountId:
+          type:
+          - number
+          - 'null'
+          format: double
+        administratorAccount:
+          $ref: '#/components/schemas/AdministratorAccountView'
+        text:
+          type: string
+        commenterType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      required:
+      - id
+      - conceptId
+      - accountId
+      - text
+      - commenterType
+      - createdAt
+      - isArchived
+      type: object
+      additionalProperties: false
+    ConceptViewed:
+      properties:
+        email:
+          type: string
+        conceptId:
+          type: number
+          format: double
+        viewedAt:
+          type: string
+          format: date-time
+      required:
+      - email
+      - conceptId
+      - viewedAt
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    ConceptContentCommentPostBody:
+      properties:
+        commenterName:
+          type: string
+        text:
+          type: string
+      required:
+      - text
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    AdminConceptContentPostBody:
+      properties:
+        contentType:
+          type: string
+        contentUrl:
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/InfluencerConceptContentPostFile'
+          type: array
+        notes:
+          type: string
+        text:
+          type: string
+        threadId:
+          type: string
+        globalUserId:
+          type: number
+          format: double
+        campaignId:
+          type: number
+          format: double
+      required:
+      - globalUserId
+      - campaignId
+      type: object
+      additionalProperties: false
+    ConceptContentUpdateBody:
+      properties:
+        isArchived:
+          type: boolean
+        files:
+          items:
+            $ref: '#/components/schemas/InfluencerConceptContentPostFile'
+          type: array
+        text:
+          type: string
+        notes:
+          type: string
+        contentUrl:
+          type: string
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ConceptContentFeedbackUpdateBody:
+      properties:
+        feedback:
+          type: string
+      required:
+      - feedback
+      type: object
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ConceptContentCommentPostResponse:
+      $ref: '#/components/schemas/ConceptContentCommentEntry'
+    InfluencerConceptContentPostFile:
+      properties:
+        originalFile:
+          properties:
+            path:
+              type: string
+          required:
+          - path
+          type: object
+        isUploaded:
+          type: boolean
+        lastModified:
+          type: number
+          format: double
+        url:
+          type: string
+        type:
+          type: string
+        size:
+          type: number
+          format: double
+        name:
+          type: string
+        code:
+          type: string
+      type: object
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

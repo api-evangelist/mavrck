@@ -1,0 +1,309 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Marketer Filter Preferences API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: MarketerFilterPreferences
+paths:
+  /v1/marketer-filter-preferences:
+    get:
+      operationId: getMarketerFilterPreferences
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    $ref: '#/components/schemas/MarketerFiltersItem'
+                  type: array
+                type: array
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - MarketerFilterPreferences
+      parameters:
+      - in: query
+        name: communityId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: s4AccountId
+        required: true
+        schema:
+          type: number
+          format: double
+    put:
+      operationId: setMarketerFilterPreferences
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - MarketerFilterPreferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarketerFilterPreferenceBody'
+        required: true
+components:
+  schemas:
+    MarketerFiltersItem:
+      properties:
+        filters:
+          properties:
+            reportsFilters:
+              $ref: '#/components/schemas/ReportsFilters'
+            actionGroupIds:
+              items:
+                type: number
+                format: double
+              type: array
+            sortDirection:
+              type: string
+            sortColumn:
+              type: string
+            fromDate:
+              type: string
+            toDate:
+              type: string
+          type: object
+      required:
+      - filters
+      type: object
+      additionalProperties: false
+    ReportingGranularity:
+      type: string
+      enum:
+      - year
+      - quarter
+      - month
+      - week
+      - day
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ReportsFilters:
+      properties:
+        campaignsActiveView:
+          type: string
+        campaignsSortModel:
+          $ref: '#/components/schemas/ReportsTableSortModel'
+        campaignsVisibleColumns:
+          items:
+            type: string
+          type: array
+        campaignsGallerySortModel:
+          $ref: '#/components/schemas/ReportsTableSortModel'
+        campaignsGalleryVisibleColumns:
+          items:
+            type: string
+          type: array
+        networksSortModel:
+          $ref: '#/components/schemas/ReportsTableSortModel'
+        networksVisibleColumns:
+          items:
+            type: string
+          type: array
+        topContentActiveView:
+          type: string
+        topContentSortBy:
+          type: string
+        topContentSortModel:
+          $ref: '#/components/schemas/ReportsTableSortModel'
+        topContentVisibleColumns:
+          items:
+            type: string
+          type: array
+        topPerformersActiveView:
+          type: string
+        topPerformersSortModel:
+          $ref: '#/components/schemas/ReportsTableSortModel'
+        topPerformersSortBy:
+          type: string
+        topPerformersVisibleColumns:
+          items:
+            type: string
+          type: array
+        trendsOverTimeGranularity:
+          $ref: '#/components/schemas/ReportingGranularity'
+        trendsOverTimeVisibleMetrics:
+          items:
+            type: string
+          type: array
+        network:
+          type: string
+        mediaType:
+          type: string
+        contentDateType:
+          type: string
+        mavelyIntegrationFeatureFlag:
+          type: boolean
+        instagramPaidMediaFeatureFlag:
+          type: boolean
+        tiktokPaidMediaFeatureFlag:
+          type: boolean
+      type: object
+      additionalProperties: false
+    ReportsTableSortModel:
+      properties:
+        id:
+          type: string
+        desc:
+          type: boolean
+      required:
+      - id
+      - desc
+      type: object
+      additionalProperties: false
+    MarketerFilterPreferenceBody:
+      properties:
+        filters:
+          properties:
+            reportsFilters:
+              $ref: '#/components/schemas/ReportsFilters'
+            actionGroupIds:
+              items:
+                type: number
+                format: double
+              type: array
+            sortDirection:
+              type: string
+            sortColumn:
+              type: string
+            fromDate:
+              type: string
+            toDate:
+              type: string
+          type: object
+        communityId:
+          type: string
+        s4AccountId:
+          type: number
+          format: double
+      required:
+      - filters
+      - communityId
+      - s4AccountId
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header

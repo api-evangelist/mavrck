@@ -1,0 +1,459 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  description: Identify your most influential customers and activate them to drive more conversions on social.
+  title: MAVRCK.IO Cash Payments API
+servers:
+- url: http://app.splashscore.com/v1
+- url: https://app.splashscore.com/v1
+security:
+- apiKey: []
+tags:
+- name: CashPayments
+paths:
+  /v1/cash-payment-apps:
+    get:
+      operationId: getCashPaymentApps
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Partial_CashPaymentAppResponse_'
+                    type: array
+                required:
+                - data
+                type: object
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CashPayments
+      parameters:
+      - in: query
+        name: checkEnabledProvider
+        required: false
+        schema:
+          type: boolean
+          default: false
+    post:
+      operationId: createCashPaymentApp
+      responses:
+        '201':
+          description: OK
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CashPayments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCashPaymentAppBody'
+        required: true
+  /v1/cash-payment-apps/{id}:
+    get:
+      operationId: getCashPaymentApp
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Partial_CashPaymentAppResponse_'
+                required:
+                - data
+                type: object
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CashPayments
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+    patch:
+      operationId: updateCashPaymentApp
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashPaymentAppUpdateResponse'
+        '400':
+          description: Missing Parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateErrorJSON'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '404':
+          description: The resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - CashPayments
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: number
+          format: double
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CashPaymentAppUpdatePayload'
+        required: true
+components:
+  schemas:
+    Partial_CashPaymentAppResponse_:
+      properties:
+        id:
+          type: number
+          format: double
+        provider:
+          type: string
+        identifier:
+          type: string
+        secretKey:
+          type: string
+        environment:
+          type:
+          - string
+          - 'null'
+        accessToken:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        internalIdentifierCode:
+          type:
+          - string
+          - 'null'
+        externalDescription:
+          type:
+          - string
+          - 'null'
+        includeFeesInTransactions:
+          type: boolean
+        paymentAccount:
+          properties:
+            cashPaymentApp:
+              properties:
+                includeFeesInTransactions:
+                  type: boolean
+                externalDescription:
+                  type:
+                  - string
+                  - 'null'
+                internalIdentifierCode:
+                  type:
+                  - string
+                  - 'null'
+                updatedAt:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+                createdAt:
+                  type:
+                  - string
+                  - 'null'
+                  format: date-time
+                accessToken:
+                  type:
+                  - string
+                  - 'null'
+                environment:
+                  type:
+                  - string
+                  - 'null'
+                secretKey:
+                  type: string
+                identifier:
+                  type: string
+                provider:
+                  type: string
+                id:
+                  type: number
+                  format: double
+              required:
+              - includeFeesInTransactions
+              - externalDescription
+              - internalIdentifierCode
+              - updatedAt
+              - createdAt
+              - accessToken
+              - environment
+              - secretKey
+              - identifier
+              - provider
+              - id
+              type: object
+            updatedAt:
+              type: string
+              format: date-time
+            createdAt:
+              type: string
+              format: date-time
+            cashPaymentAppId:
+              type:
+              - number
+              - 'null'
+              format: double
+            accountType:
+              type:
+              - string
+              - 'null'
+            description:
+              type: string
+            balance:
+              type: number
+              format: double
+            communityId:
+              type: string
+            id:
+              type: number
+              format: double
+          required:
+          - updatedAt
+          - createdAt
+          - cashPaymentAppId
+          - accountType
+          - description
+          - balance
+          - communityId
+          - id
+          type: object
+      type: object
+      description: Make all properties in T optional
+    ProviderEnvironment:
+      enum:
+      - LIVE
+      - SANDBOX
+      type: string
+    DBCashPaymentAppProvider:
+      enum:
+      - PAYPAL
+      - STRIPE
+      - MAVELY
+      - TIPALTI
+      type: string
+    CreateCashPaymentAppBody:
+      properties:
+        tipaltiPayerEntityId:
+          type:
+          - string
+          - 'null'
+          description: Passed through to Payment Service only; not stored in SAPI
+        iframeMasterKey:
+          type:
+          - string
+          - 'null'
+          description: Passed through to Payment Service only; not stored in SAPI
+        internalIdentifierCode:
+          type:
+          - string
+          - 'null'
+        s4AccountIdsToGiveAdminAccess:
+          items:
+            type: number
+            format: double
+          type: array
+        secretKey:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DBCashPaymentAppProvider'
+        identifier:
+          type: string
+        environment:
+          $ref: '#/components/schemas/ProviderEnvironment'
+        description:
+          type: string
+        additionalCommunityIds:
+          items:
+            type: string
+          type: array
+      required:
+      - s4AccountIdsToGiveAdminAccess
+      - secretKey
+      - provider
+      - identifier
+      - environment
+      - description
+      - additionalCommunityIds
+      type: object
+    CashPaymentAppUpdateResponse:
+      type: object
+      properties: {}
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CashPaymentAppUpdatePayload:
+      type: object
+      properties: {}
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api-key
+      in: header
