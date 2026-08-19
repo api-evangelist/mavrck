@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Administration Account Slow Migration API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AdministrationAccountSlowMigration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getUser",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/slow-migration/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "validatePassword",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/slow-migration/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

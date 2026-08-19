@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Community Metrics API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CommunityMetrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve community metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/community-metrics"
+          },
+          "docs": "Retrieve community metrics"
+        },
+        {
+          "info": {
+            "name": "Enable a single metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/community-metrics/:metricId",
+            "params": [
+              {
+                "name": "metricId",
+                "value": "",
+                "type": "path",
+                "description": "Metric Id"
+              }
+            ]
+          },
+          "docs": "Enable a single metric"
+        },
+        {
+          "info": {
+            "name": "Disable a single metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/community-metrics/:metricId",
+            "params": [
+              {
+                "name": "metricId",
+                "value": "",
+                "type": "path",
+                "description": "Metric Id"
+              }
+            ]
+          },
+          "docs": "Disable a single metric"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

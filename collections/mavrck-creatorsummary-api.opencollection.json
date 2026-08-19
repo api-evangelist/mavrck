@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Creator Summary API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CreatorSummary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCreatorSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/creator-summary/global-users/:globalUserId",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the creator's stored profile summary for display (e.g. the lightbox\npage). Pure read of the `creator-summary` DynamoDB table — does not generate.\nResponds 404 when no summary has been stored yet; call PUT to generate one."
+        },
+        {
+          "info": {
+            "name": "refreshCreatorSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/creator-summary/global-users/:globalUserId",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "research",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Generates a fresh profile summary for a global user and stores it in the\n`creator-summary` DynamoDB table, replacing any existing copy. Backs the\n\"refresh\" action on the lightbox page. Grounds on the creator's own posts\nfrom our records; pass `research=true` to additionally run a web-research\npass before writing (off by default)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

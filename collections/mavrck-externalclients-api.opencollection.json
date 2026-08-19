@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO External Clients API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ExternalClients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getAllExternalClients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/admin/external-clients",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "query",
+                "description": "Optional client ID to filter results"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (default: 1)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (default: 20, max: 100)"
+              }
+            ]
+          },
+          "docs": "Get all clients with their instances, or filter by clientId.\nIncludes deleted clients and separates active/inactive instances."
+        },
+        {
+          "info": {
+            "name": "createExternalClient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/admin/external-clients",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new external client"
+        },
+        {
+          "info": {
+            "name": "regenerateExternalClientSecret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/admin/external-clients/:clientId/secrets",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the client"
+              }
+            ]
+          },
+          "docs": "Regenerate the client secret"
+        },
+        {
+          "info": {
+            "name": "deleteExternalClient",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/admin/external-clients/:clientId",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the client"
+              }
+            ]
+          },
+          "docs": "Soft delete a client and all associated instances"
+        },
+        {
+          "info": {
+            "name": "associateExternalClientInstances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/admin/external-clients/:clientId/instances",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the client"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associate instances to a client"
+        },
+        {
+          "info": {
+            "name": "deleteExternalClientInstance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/admin/external-clients/:clientId/instances/:instanceId",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the client"
+              },
+              {
+                "name": "instanceId",
+                "value": "",
+                "type": "path",
+                "description": "The instance ID to remove"
+              }
+            ]
+          },
+          "docs": "Soft delete a client instance association"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Later Influencer API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LaterInfluencer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCampaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "communityIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getCampaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getYtbcCampaignCode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/ytbc-campaign-code",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateCampaignMembership",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/members",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "declineCampaignInvitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/decline-invitation",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getDrafts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/drafts",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "threadId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "submitDraft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/drafts",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteDraft",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/drafts/:draftId",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "draftId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getConcepts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/concepts",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "threadId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "submitConcept",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/concepts",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteConcept",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/concepts/:conceptId",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "conceptId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getApplicationAnswers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/application-answers",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "setApplicationAnswers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/application-answers",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "upsertPaymentRecipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/payment-recipient",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "createFileUploadPolicy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/file-upload-policies",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getURLMetadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/url-metadata",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "s3Upload",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "s3Directory",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getNetworks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/networks",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "submitContent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/content",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getContentPreview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/content-preview",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getReviewableProducts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/products",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "searchTerm",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "authenticateEmail",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/auth/email",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "authenticateFacebook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/auth/facebook",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "registerTikTokCreator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/oauth/tiktok",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getTikTokInviteLink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/tiktok-invite-links",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createTikTokInviteLink",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/tiktok-invite-links",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getProductReviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/products/:productId/reviews",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "submitProductReview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/products/:productId/reviews",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getSettings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/settings",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateSettings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/settings",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "exportData",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "isExport",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getStripeOnboardingLink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/payment-providers/stripe/onboarding-link",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "redirectUrl",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getStripeDashboardLink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/payment-providers/stripe/dashboard-link",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getStripeAccounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/payment-providers/stripe/accounts",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "deleteStripeConnectedAccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/payment-providers/stripe/accounts",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "deleteStripeConnectedAccount\nIf a Stripe account is connected and has no transactions, delete the account.\nParts of the UI expect a stripe account to exist, so if the account is deleted, create a new one,\nwhich allows users to re-do stripe onboarding."
+        },
+        {
+          "info": {
+            "name": "getBrands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/brands",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getInfluencerStatuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/influencer-statuses",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "setInfluencerStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/influencer-status-reports",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getExternalPlatformConnections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/connections",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "connectExternalPlatform",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/connections",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getLinks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:campaignId/links",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getSurvey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/surveys/:surveyId",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "surveyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "submitSurveyAnswers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/surveys/:surveyId/answers",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "surveyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getInfluencerPostPartnershipRequests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:actionGroupId/post-partnership-requests",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateInfluencerPostPartnershipRequest",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:actionGroupId/post-partnership-requests/:requestId",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getInfluenerPostPartnershipSponsor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/later-influencers/:influencerIdOrCreatorId/campaigns/:actionGroupId/post-partnership-sponsor",
+            "params": [
+              {
+                "name": "influencerIdOrCreatorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

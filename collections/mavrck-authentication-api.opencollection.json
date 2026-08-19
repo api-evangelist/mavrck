@@ -1,0 +1,401 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mavrck Authentication API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Pass Facebook access grant information in exchange for a JWT to include in the header of requests.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/api-key/facebook",
+            "params": [
+              {
+                "name": "^mdp_.+$",
+                "value": "",
+                "type": "query",
+                "description": "Pass in data points on sign-up, in the format mdp_{data_point_definition_key}"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pass Facebook access grant information in exchange for a JWT to include in the header of requests."
+        },
+        {
+          "info": {
+            "name": "Pass encrypted user key in exchange for a JWT to include in the header of requests.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/auto-login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pass encrypted user key in exchange for a JWT to include in the header of requests."
+        },
+        {
+          "info": {
+            "name": "Pass Facebook access grant information in exchange for a JWT to include in the header of requests.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/connected-account/instagram-business",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pass Facebook access grant information in exchange for a JWT to include in the header of requests."
+        },
+        {
+          "info": {
+            "name": "Pass an email and check if it needs verification or existing login credentials submitted in order to proceed",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/email-auth/lookup",
+            "params": [
+              {
+                "name": "^mdp_.+$",
+                "value": "",
+                "type": "query",
+                "description": "Pass in data points on sign-up, in the format mdp_{data_point_definition_key}"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pass an email and check if it needs verification or existing login credentials submitted in order to proceed"
+        },
+        {
+          "info": {
+            "name": "Pass an email verification request key and new password in exchange for a JWT to include in the header of requests.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/email-auth/signup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pass an email verification request key and new password in exchange for a JWT to include in the header of requests."
+        },
+        {
+          "info": {
+            "name": "Pass an email and password in exchange for a JWT to include in the header of requests.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/email-auth/login",
+            "params": [
+              {
+                "name": "^mdp_.+$",
+                "value": "",
+                "type": "query",
+                "description": "Pass in data points on sign-up, in the format mdp_{data_point_definition_key}"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pass an email and password in exchange for a JWT to include in the header of requests."
+        },
+        {
+          "info": {
+            "name": "Initiate a forgot password password request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/email-auth/forgot-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Initiate a forgot password password request"
+        },
+        {
+          "info": {
+            "name": "Pass an email reset password request key and new password in exchange for a JWT to include in the header of requests.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/email-auth/reset-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pass an email reset password request key and new password in exchange for a JWT to include in the header of requests."
+        },
+        {
+          "info": {
+            "name": "Validate an email verification request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/email-verification-request/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Validate an email verification request."
+        },
+        {
+          "info": {
+            "name": "Create an Email Verification Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/email-verification-request/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an Email Verification Request"
+        },
+        {
+          "info": {
+            "name": "Update existing influencer login credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/login-credentials/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update existing influencer login credentials."
+        },
+        {
+          "info": {
+            "name": "loginAdmin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/api-key/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "exchangeCodeForToken",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/auth/facebook/exchange-code-for-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "exchangeCodeForToken\n\nExchange a Facebook access code for a token\nUsed as part of the connecting a social profile on the Community App\nFE requires a Facebook access token prior to connecting a social profile in order to fetch the available pages from the FB API\nBecause of how we are using satellizer on the FE to manage the OAuth flow,\nwe are required to return our own token as part of this response\nThis endpoint requires the user to be authenticated and returns the existing api key as the token"
+        },
+        {
+          "info": {
+            "name": "swapCommunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/api-key/swap-app",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getResetKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reset-password",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "resetPassword",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/reset-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api-key",
+              "value": "{{api-key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Generate OAuth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/oauth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate the OAuth Token to authorize further requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

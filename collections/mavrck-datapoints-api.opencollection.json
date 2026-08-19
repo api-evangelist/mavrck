@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Datapoints API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datapoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all datapoints restricted by community and various parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/data-point-definitions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute to order by."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "customSet",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeActiveActionGroups",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userFilter",
+                "value": "",
+                "type": "query",
+                "description": "Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search parameter."
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all datapoints restricted by community and various parameters."
+        },
+        {
+          "info": {
+            "name": "Create or edit a datapoint definition and any custom set of responses.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/data-point-definitions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or edit a datapoint definition and any custom set of responses."
+        },
+        {
+          "info": {
+            "name": "Retrieve a single data point definition.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/data-point-definitions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single data point definition."
+        },
+        {
+          "info": {
+            "name": "Update a data point definition. Data point definitions that have been assigned cannot be updated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/data-point-definitions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of data point definition"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a data point definition. Data point definitions that have been assigned cannot be updated."
+        },
+        {
+          "info": {
+            "name": "Delete the data point definition. Data point definitions that have been assigned cannot be deleted.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/data-point-definitions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of data point definition"
+              }
+            ]
+          },
+          "docs": "Delete the data point definition. Data point definitions that have been assigned cannot be deleted."
+        },
+        {
+          "info": {
+            "name": "Updates a specified field to a certain value for a set of a datapoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/data-point-definitions/bulkUpdate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specified field to a certain value for a set of a datapoints"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Comments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getGlobalUserComments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/comments",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createGlobalUserComment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/comments",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "updateGlobalUserComment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/comments/:commentId",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "commentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getNotificationComments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/notification_comments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "author",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createNotificationComment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/notification_comments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

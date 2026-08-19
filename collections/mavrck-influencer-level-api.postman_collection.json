@@ -1,0 +1,266 @@
+{
+  "item": [
+    {
+      "id": "4aec712e-99fd-49f9-ad10-54979d825711",
+      "name": "Influencer Level",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b548fab0-ef2b-4ceb-8ae6-6d5bae55c454",
+          "name": "get Influencer Performance",
+          "request": {
+            "name": "get Influencer Performance",
+            "description": {
+              "content": "Get influencer performance details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "reporting",
+                "influencer",
+                "performance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) Start date for the report, YYYY-MM-dd format"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) End date for the report, YYYY-MM-dd format"
+                },
+                {
+                  "disabled": false,
+                  "key": "instanceIds",
+                  "value": "<string>",
+                  "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+                },
+                {
+                  "disabled": false,
+                  "key": "instanceIds",
+                  "value": "<string>",
+                  "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+                },
+                {
+                  "disabled": false,
+                  "key": "campaignIds",
+                  "value": "<number>",
+                  "description": "A list of campaign ids (max 50 items)"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaignIds",
+                  "value": "<number>",
+                  "description": "A list of campaign ids (max 50 items)"
+                },
+                {
+                  "disabled": false,
+                  "key": "reportingGroupIds",
+                  "value": "<string>",
+                  "description": "A list of reporting group ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "reportingGroupIds",
+                  "value": "<string>",
+                  "description": "A list of reporting group ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1",
+                  "description": "The page you would like to get data for"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortProperty",
+                  "value": "<string>",
+                  "description": "sortProperty must be one of the following values: engagements, impressions, engagementRate, estimatedValueGenerated, instagramReach, instagramSaved, instagramShares, instagramViews, instagramTotalInteractions, estimatedContentCost, cpm, cpe, estimatedRoi, postsCount, trackingLinksClicks, trackingLinksConversions, trackingLinksConversionValue, affiliateLinksClicks, affiliateLinksConversions, affiliateLinksConversionRate, affiliateLinksSales, affiliateLinksComissionEarned, affiliateLinksRoi, paidCost"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortDirection",
+                  "value": "DESC",
+                  "description": "ASC or DESC"
+                },
+                {
+                  "disabled": false,
+                  "key": "metrics",
+                  "value": "<string>",
+                  "description": "A list of metrics to get the data for. Empty or undefined, to get all the metrics"
+                },
+                {
+                  "disabled": false,
+                  "key": "metrics",
+                  "value": "<string>",
+                  "description": "A list of metrics to get the data for. Empty or undefined, to get all the metrics"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1e1fa5b-8758-4b6e-8e3c-a13f4b317b1e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reporting",
+                    "influencer",
+                    "performance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "instanceIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instanceIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "campaignIds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "campaignIds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "reportingGroupIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reportingGroupIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "sortProperty",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDirection",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "impressions"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mavrck.co",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7a836b55-5d4c-48d1-bb56-c52d6cd4b606",
+    "name": "Later Influence™ Influencer Level API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Description\nThe Reporting API enables deep analysis and reporting of marketing campaigns, social media performance, and influencer effectiveness.\nIt provides comprehensive performance insights at multiple levels:\n- Instance Level: Get instance details, overall performance, and performance over time\n- Campaign Level: Retrieve detailed campaign performance metrics\n- Social Network Level: Analyze performance across different social networks and calculate return on investment\n- Influencer Level: Evaluate individual influencer performance\n- Post Level: Access granular performance data for individual posts\n\n# Authentication\nIn order to use the Reporting API, OAuth2 authentication is required. The API uses the client credentials flow for authentication. To obtain an access token:\n\n1. Request the client credentials (client ID and client secret) from the support team.\n2. Make a POST request to the token endpoint: `https://api.mavrck.co/oauth/token`, including your client credentials in the request body.\n\nCurl Example: \n```\ncurl --request POST \\\n  --url 'https://api.mavrck.co/oauth/token' \\\n  --header 'Content-Type: application/json' \\\n  --header 'accept: application/json' \\\n  --data '{\n    \"clientId\": \"<client_id>\",\n    \"clientSecret\": \"<client_secret>\"\n  }'\n```\n\n3. Include the obtained access token in the Authorization header of your API requests:\n\nCurl Example: \n```\ncurl --request GET \\\n  --url 'https://api.mavrck.co/v1/reporting/instance/details' \\\n  --header 'Content-Type: application/json' \\\n  --header 'accept: application/json' \\\n  --header 'Authorization: Bearer **<your_access_token>**' \\\n```\n\nFor security reasons, access tokens have a limited lifespan of 12 hours. You should implement a mechanism to refresh the token when it expires.\n\n# Data Availability\n- Most endpoints return analytics that are current up to the previous day, as several social media platforms apply a 24-hour reporting delay.\n- Data access is limited to the specific account or instances associated with the provided API credentials.\n- Analytics are recorded on a daily basis and appear only when they fall within the selected date-range filters. For example, if a post was published a week ago but receives its first interaction today, that interaction will only be included when today’s date is part of the chosen range.\n\n# Base Filters\nAll endpoints support the following filters:\n- `startDate` (ISO 8601 format, e.g. 2024-01-01)\n- `endDate` (ISO 8601 format, e.g. 2024-01-01). There is a limit of up to 2 years for the selected date range.\n- `instanceIds` array of instance ids. If not provided, all instances associated with the API credentials will be considered.\n- `campaignIds` array of campaign ids, if no campaign ids are provided, all campaigns for the instance will be used\n- `reportingGroupIds` array of reporting group ids, if no reporting group ids are provided, all reporting groups for the instance will be used\n\n# Pagination\n- The pagination is available for endpoints returning large datasets.\n- Use `pageSize` and `pageNumber` query parameters to control the results. For the `pageSize` parameter, the default is 50 and the maximum is 100.\n\n# Versioning\n- API versioning supported through URI path\n\n# Changelog\n\n---\n\n## 2025-11-25 Introduce Multi-instance support\n### Added\n- `GET /instances` API - Retrieve the list of instances accessible by the provided API credentials.\n- `GET /instances/details` API - Get detailed information about the instances associated with the provided API credentials such as `influencersCount`, `campaignsCount`, and other relevant metrics. It is similar to the existing `GET /instance/details` endpoint but supports multiple instances.\n\n### Changed\n- All endpoints now support an `instanceIds` query parameter, allowing you to filter results by specific instance IDs when your credentials have access to multiple instances.\n- `GET /campaigns/performance` response includes a new string field `instanceId`.\n- `GET /post/performance` response includes a new string field `instanceId`.\n\n\n\nContact Support:\n Name: Developer\n Email: urvash.chheda@later.com",
+      "type": "text/plain"
+    }
+  }
+}

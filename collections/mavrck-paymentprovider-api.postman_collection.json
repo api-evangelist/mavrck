@@ -1,0 +1,608 @@
+{
+  "item": [
+    {
+      "id": "bc068f85-6203-40c2-98a9-c2ff91ce34b4",
+      "name": "PaymentProvider",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b21b0792-4866-4faf-9b07-a609fb26ddfc",
+          "name": "get Instance Payment Provider Apps",
+          "request": {
+            "name": "get Instance Payment Provider Apps",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "payment-providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a25f9dc-3c9c-4a1c-bcb4-e57774004311",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payment-providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"externalDescription\": \"string\",\n    \"internalIdentifierCode\": \"string\",\n    \"provider\": \"string\"\n  },\n  {\n    \"externalDescription\": \"string\",\n    \"internalIdentifierCode\": null,\n    \"provider\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00c40e5b-2a61-445f-90b8-c7a4574ec568",
+              "name": "Missing Parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payment-providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"key_0\": 9160,\n      \"key_1\": 5015,\n      \"key_2\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3bb27bb-8e14-4989-8c20-a6f16621302c",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payment-providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 2563,\n      \"key_1\": false,\n      \"key_2\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93356123-8841-463e-a04e-693f9e3bf1b1",
+              "name": "The resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payment-providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 2063\n    },\n    \"key_2\": {\n      \"key_0\": false,\n      \"key_1\": 7201.777435654942\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "535e0a5e-d116-4202-92ab-a15f28dd08fd",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payment-providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 7454\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9764f2e3-9364-4a7d-839d-f16e93e19af5",
+          "name": "configure Mavrck Provider App To Instance",
+          "request": {
+            "name": "configure Mavrck Provider App To Instance",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "mvk-payment-provider"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appType\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"communityId\": \"<string>\",\n  \"currencyCode\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "acd04a34-c8e5-4cbf-888c-c02550c8de39",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mvk-payment-provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appType\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"communityId\": \"<string>\",\n  \"currencyCode\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalDescription\": \"string\",\n  \"internalIdentifierCode\": null,\n  \"provider\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d19327b9-354e-4fa5-9c43-5919b473adba",
+              "name": "Missing Parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mvk-payment-provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appType\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"communityId\": \"<string>\",\n  \"currencyCode\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"key_0\": 9160,\n      \"key_1\": 5015,\n      \"key_2\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c65f1dd-716e-4944-bc5c-3e52dfcf2e33",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mvk-payment-provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appType\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"communityId\": \"<string>\",\n  \"currencyCode\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 2563,\n      \"key_1\": false,\n      \"key_2\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48837379-813b-4544-8ec4-e235bb19a98b",
+              "name": "The resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mvk-payment-provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appType\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"communityId\": \"<string>\",\n  \"currencyCode\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 2063\n    },\n    \"key_2\": {\n      \"key_0\": false,\n      \"key_1\": 7201.777435654942\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d7ec892-4371-4f2c-9bf3-92f1ad4ee997",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "mvk-payment-provider"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appType\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"communityId\": \"<string>\",\n  \"currencyCode\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 7454\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://app.splashscore.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9ee3af76-a16d-4d5b-9577-bfc3aa34432b",
+    "name": "MAVRCK.IO Payment Provider API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Identify your most influential customers and activate them to drive more conversions on social.",
+      "type": "text/plain"
+    }
+  }
+}

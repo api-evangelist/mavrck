@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Global User Audience API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GlobalUserAudience",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve possible cities to search for",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/audience-city-options",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve possible cities to search for"
+        },
+        {
+          "info": {
+            "name": "Retrieve cities of the user's audience.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/global-users/:globalUserId/audience-cities",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              }
+            ]
+          },
+          "docs": "Retrieve cities of the user's audience."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

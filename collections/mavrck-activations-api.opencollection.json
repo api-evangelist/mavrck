@@ -1,0 +1,589 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Activations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an activation when an action is completed by a user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action/:actionId/activation",
+            "params": [
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "productExperience",
+                "value": "",
+                "type": "query",
+                "description": "Tag this activation with a key denoting the experience/channel in which the user created the activation."
+              },
+              {
+                "name": "utmSource",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "utmMedium",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "utmTerm",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "utmContent",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "utmCampaign",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "iovationIdentifier",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an activation when an action is completed by a user."
+        },
+        {
+          "info": {
+            "name": "Retrieve activations for an action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action/:actionId/activations",
+            "params": [
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute to order by."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "approvalStatus",
+                "value": "",
+                "type": "query",
+                "description": "The approval status of an Activation."
+              },
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "minStars",
+                "value": "",
+                "type": "query",
+                "description": "Filter on minimum stars."
+              },
+              {
+                "name": "myActivations",
+                "value": "",
+                "type": "query",
+                "description": "As an influencer, select only my activations associated with the action."
+              }
+            ]
+          },
+          "docs": "Retrieve activations for an action."
+        },
+        {
+          "info": {
+            "name": "Fetch all activations for an action group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/activations",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "query",
+                "description": "The global user Id to filter the results by."
+              },
+              {
+                "name": "myActivations",
+                "value": "",
+                "type": "query",
+                "description": "Flag permitting the influencer to view unapproved and/or-only approved activations"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "postsWithUGC",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether to get UGC and require an Activation Content Summary or not."
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the network of an Activation."
+              },
+              {
+                "name": "userFilter",
+                "value": "",
+                "type": "query",
+                "description": "Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "networks",
+                "value": "",
+                "type": "query",
+                "description": "Array of networks"
+              },
+              {
+                "name": "postDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "The activation post date is >= this date"
+              },
+              {
+                "name": "postDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "The activation post date is <= this date"
+              },
+              {
+                "name": "filterTagIds",
+                "value": "",
+                "type": "query",
+                "description": "Array of tag ids used for searching activations"
+              },
+              {
+                "name": "tagQuantifier",
+                "value": "",
+                "type": "query",
+                "description": "any or all option when searching for filterTagIds"
+              },
+              {
+                "name": "shouldExportFilenames",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to export the filenames of the activations"
+              }
+            ]
+          },
+          "docs": "Fetch all activations for an action group"
+        },
+        {
+          "info": {
+            "name": "Fetch all activations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/activations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "approvalStatus",
+                "value": "",
+                "type": "query",
+                "description": "The approval status of an Activation."
+              },
+              {
+                "name": "postsWithUGC",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether to get UGC and require an Activation Content Summary or not."
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the network of an Activation."
+              },
+              {
+                "name": "userFilter",
+                "value": "",
+                "type": "query",
+                "description": "Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition."
+              },
+              {
+                "name": "networks",
+                "value": "",
+                "type": "query",
+                "description": "Array of networks"
+              },
+              {
+                "name": "postDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "The activation post date is >= this date"
+              },
+              {
+                "name": "postDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "The activation post date is <= this date"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query",
+                "description": "Array of action group ids"
+              },
+              {
+                "name": "showcaseMode",
+                "value": "",
+                "type": "query",
+                "description": "It's showcase time!"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "query",
+                "description": "The global user Id to filter the results by."
+              },
+              {
+                "name": "filterTagIds",
+                "value": "",
+                "type": "query",
+                "description": "Array of tag ids used For searching activations"
+              },
+              {
+                "name": "tagQuantifier",
+                "value": "",
+                "type": "query",
+                "description": "any or all option when searching for filterTagIds"
+              },
+              {
+                "name": "shouldExportFilenames",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to export the filenames of the activations"
+              }
+            ]
+          },
+          "docs": "Fetch all activations"
+        },
+        {
+          "info": {
+            "name": "Create an activation manually.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/activations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an activation manually."
+        },
+        {
+          "info": {
+            "name": "Delete this activation and exclude its content from being re-added to the action group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/activations",
+            "params": [
+              {
+                "name": "activationId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "markIncomplete",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "trackingStatusId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete this activation and exclude its content from being re-added to the action group"
+        },
+        {
+          "info": {
+            "name": "Edit an activation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/activations/:id/",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Edit an activation."
+        },
+        {
+          "info": {
+            "name": "\n          Report information about an activation or content that could not be\n          programmatically activated directly to the marketer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/self-reported-activation-notifications",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\n          Report information about an activation or content that could not be\n          programmatically activated directly to the marketer"
+        },
+        {
+          "info": {
+            "name": "Create manual activation for action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/actions/:actionId/manual-activations/:globalUserId",
+            "params": [
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create manual activation for action."
+        },
+        {
+          "info": {
+            "name": "selfReportActivation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/actions/:actionId/self-reported-activations",
+            "params": [
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "approveApprovalStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/activations/:activationId/approveApprovalStatus",
+            "params": [
+              {
+                "name": "activationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "unrejectApprovalStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/activations/:activationId/unrejectApprovalStatus",
+            "params": [
+              {
+                "name": "activationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "rejectApprovalStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/activations/:activationId/rejectApprovalStatus",
+            "params": [
+              {
+                "name": "activationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getActivationHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/activation/history",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "audienceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionTitle",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

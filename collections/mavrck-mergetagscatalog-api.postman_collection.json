@@ -1,0 +1,416 @@
+{
+  "item": [
+    {
+      "id": "52f39828-ff00-40d2-b031-65ab650a36e2",
+      "name": "MergeTagsCatalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "36c47f0b-b900-407d-87da-3cfcfa6c5967",
+          "name": "get Merge Tags Catalog",
+          "request": {
+            "name": "get Merge Tags Catalog",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "communities",
+                ":communityId",
+                "campaigns",
+                ":campaignId",
+                "merge-tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "communityId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<double>",
+                  "key": "campaignId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fcedbceb-b7dd-4407-a3b6-6612f0068d24",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "communities",
+                    ":communityId",
+                    "campaigns",
+                    ":campaignId",
+                    "merge-tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "communityId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "campaignId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"groups\": [\n    {\n      \"tags\": [\n        {\n          \"kind\": \"link\",\n          \"key\": \"string\",\n          \"subtitleI18nKey\": \"string\",\n          \"subtitle\": \"string\",\n          \"titleI18nKey\": \"string\",\n          \"title\": \"string\"\n        },\n        {\n          \"kind\": \"data\",\n          \"key\": \"string\",\n          \"subtitleI18nKey\": \"string\",\n          \"subtitle\": \"string\",\n          \"titleI18nKey\": \"string\",\n          \"title\": \"string\"\n        }\n      ],\n      \"titleI18nKey\": \"string\",\n      \"key\": \"string\",\n      \"emptyTextI18nKey\": \"string\"\n    },\n    {\n      \"tags\": [\n        {\n          \"kind\": \"data\",\n          \"key\": \"string\",\n          \"subtitleI18nKey\": \"string\",\n          \"subtitle\": \"string\",\n          \"titleI18nKey\": \"string\",\n          \"title\": \"string\"\n        },\n        {\n          \"kind\": \"link\",\n          \"key\": \"string\",\n          \"subtitleI18nKey\": \"string\",\n          \"subtitle\": \"string\",\n          \"titleI18nKey\": \"string\",\n          \"title\": \"string\"\n        }\n      ],\n      \"titleI18nKey\": \"string\",\n      \"key\": \"string\",\n      \"emptyTextI18nKey\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45b3e170-0a70-4834-b8d2-e7e761bd1ee4",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "communities",
+                    ":communityId",
+                    "campaigns",
+                    ":campaignId",
+                    "merge-tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "communityId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "campaignId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 432\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f460473c-aded-4426-94c0-03b39bb530e4",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "communities",
+                    ":communityId",
+                    "campaigns",
+                    ":campaignId",
+                    "merge-tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "communityId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "campaignId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": 8920\n    },\n    \"key_1\": {\n      \"key_0\": false,\n      \"key_1\": \"string\"\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "365fa77f-8ad6-4ff9-81fd-7b45d4d11537",
+              "name": "Campaign not found in this community",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "communities",
+                    ":communityId",
+                    "campaigns",
+                    ":campaignId",
+                    "merge-tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "communityId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "campaignId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": true,\n      \"key_1\": true\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5226\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76d28b3a-26dd-498a-9731-7eacb8f0ed9a",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "communities",
+                    ":communityId",
+                    "campaigns",
+                    ":campaignId",
+                    "merge-tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "communityId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "campaignId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 4100,\n      \"key_1\": 8817,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\"\n    },\n    \"key_2\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": 8462\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://app.splashscore.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "91b95792-5f2c-4de9-8ac3-ba8520deef59",
+    "name": "MAVRCK.IO Merge Tags Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Identify your most influential customers and activate them to drive more conversions on social.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Campaign Performance API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CampaignPerformance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getAudienceInsights",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/campaign-performance/audience-insights",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getAggregatedAudienceInsights",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/campaign-performance/audience-insights/aggregate",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionGroupIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns aggregated audience insights across multiple campaigns.\nWhen actionGroupIds are provided, aggregates data for those specific campaigns.\nWhen actionGroupIds are omitted, aggregates data for all campaigns belonging to the given communityId.\nFilter by date range using the required startDate and endDate (based on post date)."
+        },
+        {
+          "info": {
+            "name": "getPostMetrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/campaign-performance/post-metrics",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getInfluencersMetrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/campaign-performance/influencers-metrics",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getInfluencersConversions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/campaign-performance/influencers-conversions",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

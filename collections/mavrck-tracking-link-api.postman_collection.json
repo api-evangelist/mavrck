@@ -1,0 +1,506 @@
+{
+  "item": [
+    {
+      "id": "5e5701df-62fd-408d-b663-ebcaffb262d4",
+      "name": "Tracking Link",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a695db30-1339-4c94-8377-757a874c3020",
+          "name": "Retrieve a tracking link for an action.",
+          "request": {
+            "name": "Retrieve a tracking link for an action.",
+            "description": {},
+            "url": {
+              "path": [
+                "action",
+                ":id",
+                "link"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "photo",
+                  "value": "<string>",
+                  "description": "A link to user's photo"
+                },
+                {
+                  "disabled": false,
+                  "key": "referrer",
+                  "value": "<string>",
+                  "description": "Referrer"
+                },
+                {
+                  "disabled": false,
+                  "key": "^utm_.+$",
+                  "value": "<string>",
+                  "description": "Utm variables"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the action."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9af862bd-512e-44f4-aa14-3fb68b7b01de",
+              "name": "A tracking link",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    ":id",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "photo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referrer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "^utm_.+$",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"slug\": \"string\",\n  \"url\": \"string\",\n  \"conversionCount\": 9426\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "462506d9-086f-451b-bb17-dee8a4d83786",
+              "name": "Invalid parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    ":id",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "photo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referrer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "^utm_.+$",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"keys\": [\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "744254be-843f-48db-bf27-2941f87f7cda",
+              "name": "Session expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    ":id",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "photo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referrer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "^utm_.+$",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caab6031-c09b-4c5a-9ce5-40ba88ccb179",
+              "name": "Invalid API Key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    ":id",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "photo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referrer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "^utm_.+$",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "318f8d11-221e-4d63-8b65-9db5121d32d4",
+              "name": "Action not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    ":id",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "photo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referrer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "^utm_.+$",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fec67e52-0419-452e-a9b0-adf9df054afb",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "action",
+                    ":id",
+                    "link"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "photo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referrer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "^utm_.+$",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://app.splashscore.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3c6d3f5a-e3a1-4e51-aa7d-93b8110c290e",
+    "name": "MAVRCK.IO Tracking Link API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Identify your most influential customers and activate them to drive more conversions on social.",
+      "type": "text/plain"
+    }
+  }
+}

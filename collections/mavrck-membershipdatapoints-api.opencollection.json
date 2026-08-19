@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Membership Data Points API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MembershipDataPoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getMembershipDataPoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/membership-data-points",
+            "params": [
+              {
+                "name": "dataPoints",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateDataPoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/membership-data-point/:membershipId/:dataPointDefinitionId",
+            "params": [
+              {
+                "name": "membershipId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "dataPointDefinitionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

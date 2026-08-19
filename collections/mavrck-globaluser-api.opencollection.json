@@ -1,0 +1,524 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Global User API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GlobalUser",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "retrieveCurrentUser",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users/me"
+          }
+        },
+        {
+          "info": {
+            "name": "get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "index",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isPublic",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateGlobalUserSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Influencer Index creator's contact info."
+        },
+        {
+          "info": {
+            "name": "getGlobalUsers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "useSearchWithOpenAI",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "retrieveIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "globalUserIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "prompt",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This endpoint point is also used by other microservices ike export-service\nretrieveIds is a boolean, see https://github.com/latermedia/export-service/blob/0bf2bf7ab022e718697872cd9de5a6fe05aab2fb/worker/src/main/kotlin/co/mavrck/exportservice/worker/Sapi.kt#L71\nglobalUserIds in queryParams is a string: \"3704000,13704570,13704663\", but it's used as an array of number in the code"
+        },
+        {
+          "info": {
+            "name": "addNewInfluencer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/global-users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new creator using CDS-first lookup.\nReturns the global user ID and action (CREATED or CONFLICT) if the creator was added successfully.\nReturns an error if the creator could not be added."
+        },
+        {
+          "info": {
+            "name": "previewAddCreator",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/global-users/preview",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Preview CDS-first creator lookup without side effects.\nReturns what action would be taken if the creator were to be added."
+        },
+        {
+          "info": {
+            "name": "refreshAudienceDemographics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/audience-demographics/latest",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getAudienceDemographics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/audience-demographics",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "markPublic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/public-users",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "markPrivate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/public-users",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "enqueueCreatorRefresh",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/creator-refresh",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "makeBrandSafetyRequest",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/brand-safety-request",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getBrandSuitabilityReport",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/brand-suitability",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "brandName",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "generateBrandSuitabilityReport",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/brand-suitability",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getAllSocialProfiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/all-social-profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getInconsistencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/inconsistencies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "repair",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/repair",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getRandomGlobalUsers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users/random/guids",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "markAsNonContactable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/mark-as-non-contactable",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "deletePublicSummaryRecord",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/delete-public-summary-record",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getGlobalUserAudienceCountries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/audience-countries",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "importInfluencers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/import-influencers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "fetchContent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/content",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "socialNetwork",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "discover",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "reindexUser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/:globalUserId/reindex",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "bulkActions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/global-users/bulk-actions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getQueryTotal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/global-users-total"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Actions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/actions",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an action."
+        },
+        {
+          "info": {
+            "name": "Retrieve an individual action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the action."
+              }
+            ]
+          },
+          "docs": "Retrieve an individual action."
+        },
+        {
+          "info": {
+            "name": "Update an action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/action/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an action."
+        },
+        {
+          "info": {
+            "name": "Delete an action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/action/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action"
+              }
+            ]
+          },
+          "docs": "Delete an action."
+        },
+        {
+          "info": {
+            "name": "Create a Referral Action for an existing Activity.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/referral-actions",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a Referral Action for an existing Activity."
+        },
+        {
+          "info": {
+            "name": "Create a Referral Action for an existing Activity.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/referral-actions",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a Referral Action for an existing Activity."
+        },
+        {
+          "info": {
+            "name": "hideTemplateUpdateCTA",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/action-groups/:actionGroupId/template-update-cta",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getActionTeaserById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/action-teasers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

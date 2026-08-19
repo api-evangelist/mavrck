@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Later Influence™ Campaign Level API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Campaign Level",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCampaignPerformance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mavrck.co/v1/reporting/campaign/performance",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "instanceIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of campaign ids (max 50 items)"
+              },
+              {
+                "name": "reportingGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of reporting group ids"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page you would like to get data for"
+              },
+              {
+                "name": "sortProperty",
+                "value": "",
+                "type": "query",
+                "description": "sortProperty must be one of the following values: engagements, impressions, engagementRate, impressionsPerPost, estimatedValueGenerated, estimatedRoi, reach, cpe, cpm, firstPostDate, lastPostDate, estimatedContentCost, campaignTitle, postsCount, influencersCount, clicks, trackingLinksClicks, trackingLinksConversions, trackingLinksConversionValue, affiliateLinksClicks, affiliateLinksConversions, affiliateLinksConversionRate, affiliateLinksSales, affiliateLinksComissionEarned, affiliateLinksRoi"
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query",
+                "description": "ASC or DESC"
+              }
+            ]
+          },
+          "docs": "Get campaign performance details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

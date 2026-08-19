@@ -1,0 +1,373 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Brand Suitability API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BrandSuitability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getCreatorsWithReports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Frontend: unused for now -- TODO for admin view. *"
+        },
+        {
+          "info": {
+            "name": "getReportById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/reports/:reportId",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Frontend: Lightbox (polling during generation), Admin DetailView *"
+        },
+        {
+          "info": {
+            "name": "deleteReport",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/reports/:reportId",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getLatestReport",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/report",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Frontend: Lightbox reports"
+        },
+        {
+          "info": {
+            "name": "getReportsForCreator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/reports",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Frontend: Admin — DetailView, ReportsSelector *"
+        },
+        {
+          "info": {
+            "name": "generateReport",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/reports",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Frontend: Lightbox — generate + refresh buttons, Admin DetailView *"
+        },
+        {
+          "info": {
+            "name": "generateReportSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/reports/sync",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Frontend: Admin — DetailView *"
+        },
+        {
+          "info": {
+            "name": "refreshCreatorResearch",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/research/refresh",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "brandName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Frontend: unused (async version) *"
+        },
+        {
+          "info": {
+            "name": "refreshCreatorResearchSync",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/research/refresh/sync",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "brandName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Frontend: Admin — DetailView, TableView *"
+        },
+        {
+          "info": {
+            "name": "getCreatorResearch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/research",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Frontend: Admin — DetailView *"
+        },
+        {
+          "info": {
+            "name": "getCreatorResearchStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/research/status",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateFindingExclusions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/global-users/:globalUserId/reports/:reportId/findings/exclude",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Frontend: Lightbox — ResearchFindingsTable action bar *"
+        },
+        {
+          "info": {
+            "name": "getReportStats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/stats"
+          }
+        },
+        {
+          "info": {
+            "name": "listBatches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/batches"
+          },
+          "docs": "Frontend: Bulk dashboard — list batches for the community (cached counters; no report reads). *"
+        },
+        {
+          "info": {
+            "name": "createBatch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/batches",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Frontend: Bulk dashboard — create a batch of reports for a set of creators (explicit ids or a search query). *"
+        },
+        {
+          "info": {
+            "name": "getBatch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/batches/:batchId",
+            "params": [
+              {
+                "name": "batchId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Frontend: Bulk dashboard — batch detail: per-creator status table + derived counts. *"
+        },
+        {
+          "info": {
+            "name": "addBatchCreators",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/batches/:batchId/creators",
+            "params": [
+              {
+                "name": "batchId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Frontend: Bulk dashboard — add more creators to an existing batch (R4). *"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

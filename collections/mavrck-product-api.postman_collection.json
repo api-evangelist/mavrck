@@ -1,0 +1,557 @@
+{
+  "item": [
+    {
+      "id": "50bab4cd-4cd8-465c-8a21-45c5dfa7c55d",
+      "name": "Product",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8eae3467-0d6f-41b2-891b-79c133435971",
+          "name": "create Power Reviews Product",
+          "request": {
+            "name": "create Power Reviews Product",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "power-reviews-products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7391cfa0-b514-4efa-94a3-502820ad0918",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "power-reviews-products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bazaarVoiceAppProduct\": {\n    \"reviewProductId\": 6398.132486334422,\n    \"externalBazaarProductId\": \"string\"\n  },\n  \"communityId\": \"string\",\n  \"description\": \"string\",\n  \"id\": 5503.885509283598,\n  \"image\": \"string\",\n  \"powerReviewsPage\": {\n    \"PowerReviewsApp\": [\n      {\n        \"apiKey\": \"string\",\n        \"communityId\": \"string\",\n        \"id\": 9297.30719693164,\n        \"locale\": \"string\",\n        \"merchantId\": \"string\",\n        \"name\": \"string\",\n        \"environment\": \"string\"\n      },\n      {\n        \"apiKey\": \"string\",\n        \"communityId\": \"string\",\n        \"id\": 7032.080059839712,\n        \"locale\": \"string\",\n        \"merchantId\": \"string\",\n        \"name\": \"string\",\n        \"environment\": \"string\"\n      }\n    ],\n    \"externalPageId\": \"string\",\n    \"id\": 8618.38253395696,\n    \"powerReviewsAppId\": \"string\",\n    \"reviewProductId\": 6884.838224648274\n  },\n  \"title\": \"string\",\n  \"yotpoAppProduct\": {\n    \"reviewProductId\": 1589.9746857019525,\n    \"youtpoProductId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49446350-9f8d-4979-95ea-da9443f6d138",
+              "name": "Invalid API Key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "power-reviews-products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": true,\n      \"key_1\": true\n    },\n    \"key_1\": {\n      \"key_0\": false,\n      \"key_1\": true,\n      \"key_2\": 1686\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c530e4a-abdb-4c34-bbd2-d1ee95f2e366",
+              "name": "Invalid Parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "power-reviews-products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 1975\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c930bfaa-3602-4919-a076-c8c8618d48a9",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "power-reviews-products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": true\n    },\n    \"key_1\": {\n      \"key_0\": 534,\n      \"key_1\": 2988,\n      \"key_2\": 8122.173893325136\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff413572-73f0-436a-a6eb-9634c755170b",
+          "name": "edit Power Reviews Product",
+          "request": {
+            "name": "edit Power Reviews Product",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "power-reviews-products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d24028fa-e705-4268-b6ce-93f0b1cb4c3c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "power-reviews-products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30bb7c94-ef2b-4a1b-bd3e-1fc1df345736",
+              "name": "Invalid API Key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "power-reviews-products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": true,\n      \"key_1\": true\n    },\n    \"key_1\": {\n      \"key_0\": false,\n      \"key_1\": true,\n      \"key_2\": 1686\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f27e3c03-3aa9-4be1-a04a-a2b43bdbf0cc",
+              "name": "Invalid Parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "power-reviews-products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 1975\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a38aee5-eb65-4801-aae2-3e8a548580e1",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "power-reviews-products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalPageId\": \"<string>\",\n  \"image\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"powerReviewsAppId\": \"<string>\",\n  \"productId\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": true\n    },\n    \"key_1\": {\n      \"key_0\": 534,\n      \"key_1\": 2988,\n      \"key_2\": 8122.173893325136\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://app.splashscore.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6c2a121d-ce4e-4cfb-b1d3-fc9e117150ef",
+    "name": "MAVRCK.IO Product API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Identify your most influential customers and activate them to drive more conversions on social.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,872 @@
+{
+  "item": [
+    {
+      "id": "6314ad35-f205-4323-945c-cded7a17d0f4",
+      "name": "GlobalUsers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1ab9b325-27d8-40fc-a3bb-42e9445e7085",
+          "name": "Retrieve all lists associated with this global user.",
+          "request": {
+            "name": "Retrieve all lists associated with this global user.",
+            "description": {},
+            "url": {
+              "path": [
+                "global-user",
+                ":globalUserId",
+                "lists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "isArchived",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Attribute to order by."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of items to skip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "globalUserId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46dfae28-598f-431b-a85f-e1538f150adb",
+              "name": "A collection of lists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-user",
+                    ":globalUserId",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "globalUserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 5667.272392180699,\n    \"offset\": 5489.189161525446,\n    \"status\": \"failure\",\n    \"totalCount\": 9732.477118428842\n  },\n  \"data\": [\n    {\n      \"label\": \"string\",\n      \"id\": 6158,\n      \"createdAt\": \"1967-05-27T01:52:02.087Z\"\n    },\n    {\n      \"label\": \"string\",\n      \"id\": 6067,\n      \"createdAt\": \"1962-11-18T11:08:56.100Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11690b43-6216-4917-9eb5-dd5e62947d05",
+              "name": "Missing or invalid parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-user",
+                    ":globalUserId",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "globalUserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"keys\": [\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc6c1d04-414a-4ea0-9430-5548c959aa22",
+              "name": "Session expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-user",
+                    ":globalUserId",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "globalUserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfd01e52-fd6c-4472-9a96-ee59635fc344",
+              "name": "Access forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-user",
+                    ":globalUserId",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "globalUserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e02c1f7c-ff8c-44ca-8400-3d1c0c71491e",
+              "name": "Action not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-user",
+                    ":globalUserId",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "globalUserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "023c371a-8ab9-4b9e-822e-4f2d4164ab15",
+              "name": "Server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-user",
+                    ":globalUserId",
+                    "lists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isArchived",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "globalUserId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23519b0a-126a-43ea-bfc4-173f3c4f0df6",
+          "name": "Retrieve summary of global users.",
+          "request": {
+            "name": "Retrieve summary of global users.",
+            "description": {},
+            "url": {
+              "path": [
+                "global-users",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "userFilter",
+                  "value": "<string>",
+                  "description": "Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "searchKeywords",
+                  "value": "<string>",
+                  "description": "Search keyword chips to specify search intent. JSON-stringified array of strings."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cea926ee-04b6-4350-b991-33996c7dfe5c",
+              "name": "A summary of global users data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-users",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeywords",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"avg_metrics\": {\n    \"members\": 2464,\n    \"totalReach\": 7909.579505049512,\n    \"averageFollowers\": 6864.700831381778,\n    \"averageEngagementRate\": 6426.8955639206715\n  },\n  \"top_influencers\": [\n    {\n      \"id\": \"string\",\n      \"fullName\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"profilePicture\": \"string\",\n      \"unverified\": \"emails\",\n      \"country\": \"British Indian Ocean Territory\",\n      \"state\": \"string\",\n      \"city\": \"string\",\n      \"zip\": \"string\",\n      \"street\": \"string\",\n      \"apt\": \"string\",\n      \"phone\": \"string\",\n      \"age\": 4618,\n      \"gender\": \"describe\",\n      \"email\": \"string\",\n      \"talentManagerEmail\": \"string\",\n      \"registered\": false,\n      \"birthday\": \"1974-06-24\",\n      \"facebookProfile\": {\n        \"id\": 697,\n        \"facebookExternalId\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"string\",\n        \"picture\": \"string\",\n        \"reach\": 5357,\n        \"averageLikes\": 9168,\n        \"averageComments\": 5463,\n        \"averageEngagements\": 7734,\n        \"engagementRate\": 6832.39116093461,\n        \"type\": \"string\",\n        \"available\": false,\n        \"active\": true,\n        \"expiresAt\": \"1957-12-30T21:40:44.064Z\",\n        \"facebookUser\": {\n          \"isExpired\": false\n        }\n      },\n      \"instagramAccount\": {\n        \"id\": 128,\n        \"handle\": \"string\",\n        \"fullName\": \"string\",\n        \"profilePicture\": \"string\",\n        \"bio\": \"string\",\n        \"website\": \"string\",\n        \"followersCount\": 5728,\n        \"followingCount\": 3682,\n        \"mediaCount\": 2286,\n        \"averageLikes\": 1757,\n        \"averageComments\": 2189,\n        \"averageEngagements\": 8065,\n        \"engagementRate\": 9647.68805115923,\n        \"isBusiness\": true,\n        \"isPrivate\": false,\n        \"sponsoredPostRate\": 5420.5193472612045,\n        \"primaryAccount\": true,\n        \"profileType\": \"platform\",\n        \"instagramAccessGrant\": {\n          \"isExpired\": true,\n          \"platformIsExpired\": false,\n          \"businessIsExpired\": true\n        }\n      },\n      \"instagramProfile\": {\n        \"accessGrant\": {\n          \"isExpired\": false,\n          \"type\": \"basic\"\n        },\n        \"averageComments\": 2618,\n        \"averageEngagements\": 9925,\n        \"averageLikes\": 8668,\n        \"audienceFakeCommentersLevel\": \"string\",\n        \"audienceFakeCommentersPercentage\": 4225.084617895418,\n        \"audienceFakeEngagersLevel\": \"string\",\n        \"audienceFakeFollowersLevel\": \"string\",\n        \"audienceFakeFollowersPercentage\": 634.8376337246787,\n        \"audienceFakeLikersLevel\": \"string\",\n        \"audienceFakeLikersPercentage\": 2014.4769497691473,\n        \"audienceFraudLevel\": \"string\",\n        \"audiencePercentageFemale\": 1648.0146118075888,\n        \"audiencePercentage_13_17\": 2609.2972804832793,\n        \"audiencePercentage_18_24\": 1498.5843109866892,\n        \"audiencePercentage_25_34\": 3133.450653694063,\n        \"audiencePercentage_35_44\": 3387.6606930779485,\n        \"audiencePercentage_45_54\": 1101.463811173895,\n        \"audiencePercentage_55_64\": 1218.6030569348673,\n        \"audiencePercentage_65_plus\": 4109.360915835636,\n        \"audiencePredominantAgeRange\": \"string\",\n        \"audiencePredominantCity\": \"string\",\n        \"audiencePredominantCountry\": \"string\",\n        \"bio\": \"string\",\n        \"boughtFollowers\": false,\n        \"engagementRate\": 4502.967629150137,\n        \"id\": 6922,\n        \"isBusiness\": true,\n        \"isPrivate\": false,\n        \"followersCount\": 6382,\n        \"followingCount\": 8929,\n        \"fullName\": \"string\",\n        \"handle\": \"string\",\n        \"mediaCount\": 9913,\n        \"nudityLevel\": \"string\",\n        \"profanityLevel\": \"string\",\n        \"profilePicture\": \"string\",\n        \"profileType\": \"business\",\n        \"sponsoredPostRate\": 9600.738219570529,\n        \"website\": \"string\"\n      },\n      \"tiktokCreator\": {\n        \"displayName\": \"string\",\n        \"followersCount\": 94,\n        \"globalUserId\": 3173,\n        \"handleName\": \"string\",\n        \"insightsUpdatedAt\": \"1971-08-26T14:55:34.812Z\",\n        \"isActive\": true,\n        \"profileImage\": \"string\",\n        \"status\": \"string\",\n        \"tiktokAccessGrant\": {},\n        \"audiencePredominantAgeRange\": \"string\",\n        \"audiencePredominantCountry\": \"string\",\n        \"audiencePredominantDevice\": \"string\",\n        \"audiencePredominantGender\": \"string\",\n        \"audiencePredominantLocale\": \"string\"\n      },\n      \"twitterAccount\": {\n        \"id\": \"string\",\n        \"handle\": \"string\",\n        \"fullName\": \"string\",\n        \"profilePicture\": \"string\",\n        \"description\": \"string\",\n        \"followersCount\": 6872,\n        \"followingCount\": 8971,\n        \"listedCount\": 5543,\n        \"averageFavorites\": 800,\n        \"averageRetweets\": 8609,\n        \"averageEngagements\": 3783,\n        \"engagementRate\": 5658.705514231887,\n        \"primaryAccount\": true,\n        \"twitterAccessGrant\": {\n          \"isExpired\": true\n        }\n      },\n      \"pinterestAccount\": {\n        \"id\": 5011,\n        \"username\": \"string\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"profilePicture\": \"string\",\n        \"bio\": \"string\",\n        \"followersCount\": 3893,\n        \"followingCount\": 8316,\n        \"monthlyViewers\": 5716,\n        \"averageEngagements\": 2025,\n        \"engagementRate\": 1343.755586180846,\n        \"boardsCount\": 820,\n        \"pinsCount\": 5150,\n        \"pinterestAccessGrant\": {\n          \"isExpired\": false\n        },\n        \"primaryAccount\": false\n      },\n      \"youtubeChannel\": {\n        \"id\": \"string\",\n        \"username\": \"string\",\n        \"bio\": \"string\",\n        \"primaryAccount\": false,\n        \"profilePicture\": \"string\",\n        \"followersCount\": 815,\n        \"youtubeExternalId\": \"string\",\n        \"videoCount\": 9487,\n        \"viewCount\": 2209,\n        \"commentCount\": 8985,\n        \"handle\": \"string\"\n      },\n      \"blog\": {\n        \"globalUserId\": null,\n        \"language\": null,\n        \"name\": null,\n        \"platform\": null,\n        \"url\": \"string\"\n      },\n      \"lists\": [\n        {\n          \"id\": 5581,\n          \"label\": \"string\"\n        },\n        {\n          \"id\": 5988,\n          \"label\": \"string\"\n        }\n      ],\n      \"appMembership\": {\n        \"id\": 3644,\n        \"membershipId\": 3260,\n        \"status\": \"string\",\n        \"createdAt\": \"2016-12-05T09:03:57.006Z\",\n        \"updatedAt\": \"2020-04-20T06:29:10.009Z\",\n        \"membershipType\": \"string\",\n        \"blacklisted\": true,\n        \"utmContent\": \"string\",\n        \"utmCampaign\": \"string\",\n        \"contactInfo\": {\n          \"age\": 4486.743391189049,\n          \"apt\": \"string\",\n          \"birthday\": {},\n          \"city\": \"string\",\n          \"country\": \"string\",\n          \"email\": \"string\",\n          \"emailIsVerified\": true,\n          \"firstName\": \"string\",\n          \"fullName\": \"string\",\n          \"gender\": \"describe\",\n          \"genderDescription\": \"string\",\n          \"lastName\": \"string\",\n          \"phone\": \"string\",\n          \"state\": \"string\",\n          \"street\": \"string\",\n          \"zip\": \"string\",\n          \"talentManagerEmail\": \"string\"\n        },\n        \"pointsCurrentBalance\": {\n          \"amount\": 8698\n        },\n        \"totalPoints\": 9912,\n        \"mostRecentActivationDate\": \"1959-06-06\",\n        \"totalImpressions\": 3515.2449116779662,\n        \"imageUrl\": \"string\",\n        \"lifetimeClicks\": 3628,\n        \"lifetimeConversions\": 6823,\n        \"lifetimeConversionsValue\": 1478.9899390083995\n      },\n      \"userContactInfo\": {\n        \"updatedAt\": \"2011-02-09T18:23:23.763Z\",\n        \"emailIsVerified\": false,\n        \"referralSlug\": \"string\",\n        \"referralCount\": \"string\",\n        \"gender\": \"string\",\n        \"genderDescription\": \"string\"\n      },\n      \"influencerTopics\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"slug\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"slug\": \"string\"\n        }\n      ],\n      \"previewPosts\": [\n        {\n          \"id\": 6068,\n          \"postId\": \"string\",\n          \"network\": \"string\",\n          \"likes\": 9202,\n          \"comments\": 5119,\n          \"views\": 431,\n          \"shares\": 2852,\n          \"caption\": \"string\",\n          \"imageUrl\": \"string\",\n          \"link\": \"string\",\n          \"isSponsored\": true,\n          \"mentions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"activation\": {\n            \"id\": \"string\",\n            \"externalId\": \"string\",\n            \"profilePicture\": \"string\",\n            \"membershipId\": 5200,\n            \"globalUserId\": 8,\n            \"createdByAccountId\": \"string\",\n            \"updatedByAccountId\": \"string\",\n            \"createdAt\": \"1960-04-05T14:51:58.598Z\",\n            \"approvalStatus\": \"string\",\n            \"points\": 1904.5197245492861,\n            \"isApproved\": false,\n            \"selfReported\": true,\n            \"user\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fullName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profilePicture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unverified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"city\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"zip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"street\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phone\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"age\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"gender\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"talentManagerEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registered\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"birthday\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebookProfile\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramProfile\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tiktokCreator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitterAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinterestAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"youtubeChannel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"blog\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lists\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appMembership\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"userContactInfo\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"influencerTopics\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"activations\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"engagements\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"clicksCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"conversionCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"conversionValue\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rewards\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebookPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitterPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinterestPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"membershipDataPoints\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"membershipCostAndPerformance\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantAgeRange\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantCountry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantCity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentageFemale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_13_17\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_18_24\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_25_34\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_35_44\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_45_54\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_55_64\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_65_plus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpe\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpm\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFraudLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFakeFollowersLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFakeEngagersLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nudityLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"violenceLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profanityLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hasPublicSummaryRecord\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"action\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instagramAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"facebookProfile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"twitterAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pinterestAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"membership\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"campaign\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"surveyResponses\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"reviewContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"validation\": {\n              \"ftcStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"brandedContentTagIGHandle\": \"string\",\n            \"tikTokHandle\": \"string\",\n            \"tikTokMetrics\": {},\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exportFilenames\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"postedTime\": \"2005-08-12T06:53:39.604Z\",\n          \"visualSafeSearch\": {\n            \"adult\": \"string\",\n            \"racy\": \"string\",\n            \"medical\": \"string\",\n            \"spoof\": \"string\",\n            \"violence\": \"string\"\n          },\n          \"textSafeSearch\": {\n            \"profanityWordCount\": 9911\n          }\n        },\n        {\n          \"id\": 245,\n          \"postId\": \"string\",\n          \"network\": \"string\",\n          \"likes\": 7172,\n          \"comments\": 6296,\n          \"views\": 1171,\n          \"shares\": 5559,\n          \"caption\": \"string\",\n          \"imageUrl\": \"string\",\n          \"link\": \"string\",\n          \"isSponsored\": false,\n          \"mentions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"activation\": {\n            \"id\": \"string\",\n            \"externalId\": \"string\",\n            \"profilePicture\": \"string\",\n            \"membershipId\": 5452,\n            \"globalUserId\": 4066,\n            \"createdByAccountId\": \"string\",\n            \"updatedByAccountId\": \"string\",\n            \"createdAt\": \"1973-10-21T09:38:22.101Z\",\n            \"approvalStatus\": \"string\",\n            \"points\": 3731.5496870403877,\n            \"isApproved\": false,\n            \"selfReported\": true,\n            \"user\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fullName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profilePicture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unverified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"city\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"zip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"street\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phone\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"age\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"gender\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"talentManagerEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registered\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"birthday\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebookProfile\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramProfile\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tiktokCreator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitterAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinterestAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"youtubeChannel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"blog\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lists\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appMembership\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"userContactInfo\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"influencerTopics\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"activations\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"engagements\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"clicksCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"conversionCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"conversionValue\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rewards\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebookPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitterPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinterestPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"membershipDataPoints\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"membershipCostAndPerformance\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantAgeRange\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantCountry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantCity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentageFemale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_13_17\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_18_24\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_25_34\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_35_44\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_45_54\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_55_64\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_65_plus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpe\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpm\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFraudLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFakeFollowersLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFakeEngagersLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nudityLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"violenceLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profanityLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hasPublicSummaryRecord\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"action\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instagramAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"facebookProfile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"twitterAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pinterestAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"membership\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"campaign\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"surveyResponses\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"reviewContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"validation\": {\n              \"ftcStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"brandedContentTagIGHandle\": \"string\",\n            \"tikTokHandle\": \"string\",\n            \"tikTokMetrics\": {},\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exportFilenames\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"postedTime\": \"2003-07-29T08:35:10.563Z\",\n          \"visualSafeSearch\": {\n            \"adult\": \"string\",\n            \"racy\": \"string\",\n            \"medical\": \"string\",\n            \"spoof\": \"string\",\n            \"violence\": \"string\"\n          },\n          \"textSafeSearch\": {\n            \"profanityWordCount\": 9178\n          }\n        }\n      ],\n      \"activations\": 2134,\n      \"engagements\": 8585,\n      \"clicksCount\": 8725,\n      \"conversionCount\": 2577,\n      \"conversionValue\": 1024.632809130722,\n      \"rewards\": 2283,\n      \"facebookPostsCount\": 276,\n      \"instagramPostsCount\": 5436,\n      \"twitterPostsCount\": 7509,\n      \"pinterestPostsCount\": 1840,\n      \"membershipDataPoints\": [\n        {\n          \"dataPointDefinition\": {\n            \"name\": \"string\",\n            \"multi\": true,\n            \"customSet\": false,\n            \"type\": \"string\",\n            \"id\": 6027,\n            \"key\": \"string\",\n            \"description\": \"string\",\n            \"markUpDescription\": \"string\",\n            \"communityId\": 9687,\n            \"createdAt\": \"2011-12-14T14:28:01.469Z\",\n            \"updatedAt\": \"2019-04-26T13:06:54.347Z\",\n            \"mergeTag\": true,\n            \"archived\": true,\n            \"setElements\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"membersCompleted\": 4137,\n            \"actionGroups\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"lastEditedBy\": \"string\",\n          \"updatedAt\": \"1999-11-23T14:01:14.034Z\",\n          \"value\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"dataPointDefinition\": {\n            \"name\": \"string\",\n            \"multi\": false,\n            \"customSet\": false,\n            \"type\": \"string\",\n            \"id\": 2333,\n            \"key\": \"string\",\n            \"description\": \"string\",\n            \"markUpDescription\": \"string\",\n            \"communityId\": 2455,\n            \"createdAt\": \"2017-04-29T22:20:21.276Z\",\n            \"updatedAt\": \"1991-06-27T15:43:45.171Z\",\n            \"mergeTag\": true,\n            \"archived\": false,\n            \"setElements\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"membersCompleted\": 8017,\n            \"actionGroups\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"lastEditedBy\": \"string\",\n          \"updatedAt\": \"2010-12-20T02:34:08.870Z\",\n          \"value\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"membershipCostAndPerformance\": {\n        \"membershipId\": 4087,\n        \"rewards\": 4365,\n        \"value\": 3794.189862227598,\n        \"cost\": 9531.964878663819,\n        \"activations\": 3911,\n        \"posts\": 3691,\n        \"engagements\": 4029,\n        \"impressions\": 8023,\n        \"clicks\": 5990,\n        \"conversions\": 8403,\n        \"conversionValue\": 3324.2528889749356,\n        \"cpm\": 1461.5202164720963,\n        \"cpe\": 1091.8081187963369,\n        \"cpp\": 8478.338151823582,\n        \"cpa\": 5830.548035603039\n      },\n      \"audiencePredominantAgeRange\": \"string\",\n      \"audiencePredominantCountry\": \"string\",\n      \"audiencePredominantCity\": \"string\",\n      \"audiencePercentageFemale\": 6017.687826258396,\n      \"audiencePercentage_13_17\": 7562.8629000844485,\n      \"audiencePercentage_18_24\": 2460.7493381152613,\n      \"audiencePercentage_25_34\": 6748.906907411631,\n      \"audiencePercentage_35_44\": 6589.836213776553,\n      \"audiencePercentage_45_54\": 6585.782503760591,\n      \"audiencePercentage_55_64\": 6698.419748957972,\n      \"audiencePercentage_65_plus\": 2573.3705000542573,\n      \"cpe\": 7632.872271472616,\n      \"cpm\": 7456.529366896187,\n      \"cpp\": 3164.952098272881,\n      \"audienceFraudLevel\": \"low\",\n      \"audienceFakeFollowersLevel\": \"medium\",\n      \"audienceFakeEngagersLevel\": \"medium\",\n      \"nudityLevel\": \"high\",\n      \"violenceLevel\": \"high\",\n      \"profanityLevel\": \"medium\",\n      \"hasPublicSummaryRecord\": false\n    },\n    {\n      \"id\": \"string\",\n      \"fullName\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"profilePicture\": \"string\",\n      \"unverified\": \"hidden\",\n      \"country\": \"Turkmenistan\",\n      \"state\": \"string\",\n      \"city\": \"string\",\n      \"zip\": \"string\",\n      \"street\": \"string\",\n      \"apt\": \"string\",\n      \"phone\": \"string\",\n      \"age\": 800,\n      \"gender\": \"describe\",\n      \"email\": \"string\",\n      \"talentManagerEmail\": \"string\",\n      \"registered\": false,\n      \"birthday\": \"2001-08-21\",\n      \"facebookProfile\": {\n        \"id\": 9986,\n        \"facebookExternalId\": \"string\",\n        \"name\": \"string\",\n        \"link\": \"string\",\n        \"picture\": \"string\",\n        \"reach\": 8831,\n        \"averageLikes\": 1563,\n        \"averageComments\": 9830,\n        \"averageEngagements\": 8564,\n        \"engagementRate\": 2711.219519191791,\n        \"type\": \"string\",\n        \"available\": false,\n        \"active\": false,\n        \"expiresAt\": \"2006-12-13T02:29:30.178Z\",\n        \"facebookUser\": {\n          \"isExpired\": false\n        }\n      },\n      \"instagramAccount\": {\n        \"id\": 2323,\n        \"handle\": \"string\",\n        \"fullName\": \"string\",\n        \"profilePicture\": \"string\",\n        \"bio\": \"string\",\n        \"website\": \"string\",\n        \"followersCount\": 4132,\n        \"followingCount\": 9546,\n        \"mediaCount\": 8409,\n        \"averageLikes\": 4225,\n        \"averageComments\": 777,\n        \"averageEngagements\": 4797,\n        \"engagementRate\": 7897.232518350895,\n        \"isBusiness\": true,\n        \"isPrivate\": false,\n        \"sponsoredPostRate\": 5773.426892130113,\n        \"primaryAccount\": true,\n        \"profileType\": \"platform\",\n        \"instagramAccessGrant\": {\n          \"isExpired\": true,\n          \"platformIsExpired\": false,\n          \"businessIsExpired\": true\n        }\n      },\n      \"instagramProfile\": {\n        \"accessGrant\": {\n          \"isExpired\": false,\n          \"type\": \"business\"\n        },\n        \"averageComments\": 1652,\n        \"averageEngagements\": 4380,\n        \"averageLikes\": 1184,\n        \"audienceFakeCommentersLevel\": \"string\",\n        \"audienceFakeCommentersPercentage\": 4965.268017962668,\n        \"audienceFakeEngagersLevel\": \"string\",\n        \"audienceFakeFollowersLevel\": \"string\",\n        \"audienceFakeFollowersPercentage\": 3625.705737113677,\n        \"audienceFakeLikersLevel\": \"string\",\n        \"audienceFakeLikersPercentage\": 7937.725933745452,\n        \"audienceFraudLevel\": \"string\",\n        \"audiencePercentageFemale\": 9756.166269905174,\n        \"audiencePercentage_13_17\": 8255.928413890702,\n        \"audiencePercentage_18_24\": 3329.7649086680503,\n        \"audiencePercentage_25_34\": 6700.745379071052,\n        \"audiencePercentage_35_44\": 5339.701910942296,\n        \"audiencePercentage_45_54\": 5393.318347936448,\n        \"audiencePercentage_55_64\": 2169.990934434902,\n        \"audiencePercentage_65_plus\": 8354.436186690245,\n        \"audiencePredominantAgeRange\": \"string\",\n        \"audiencePredominantCity\": \"string\",\n        \"audiencePredominantCountry\": \"string\",\n        \"bio\": \"string\",\n        \"boughtFollowers\": false,\n        \"engagementRate\": 4496.325409049752,\n        \"id\": 9752,\n        \"isBusiness\": true,\n        \"isPrivate\": false,\n        \"followersCount\": 1224,\n        \"followingCount\": 9751,\n        \"fullName\": \"string\",\n        \"handle\": \"string\",\n        \"mediaCount\": 9043,\n        \"nudityLevel\": \"string\",\n        \"profanityLevel\": \"string\",\n        \"profilePicture\": \"string\",\n        \"profileType\": \"business\",\n        \"sponsoredPostRate\": 5720.807402305202,\n        \"website\": \"string\"\n      },\n      \"tiktokCreator\": {\n        \"displayName\": \"string\",\n        \"followersCount\": 2942,\n        \"globalUserId\": 634,\n        \"handleName\": \"string\",\n        \"insightsUpdatedAt\": \"1986-02-21T15:27:28.191Z\",\n        \"isActive\": false,\n        \"profileImage\": \"string\",\n        \"status\": \"string\",\n        \"tiktokAccessGrant\": {},\n        \"audiencePredominantAgeRange\": \"string\",\n        \"audiencePredominantCountry\": \"string\",\n        \"audiencePredominantDevice\": \"string\",\n        \"audiencePredominantGender\": \"string\",\n        \"audiencePredominantLocale\": \"string\"\n      },\n      \"twitterAccount\": {\n        \"id\": \"string\",\n        \"handle\": \"string\",\n        \"fullName\": \"string\",\n        \"profilePicture\": \"string\",\n        \"description\": \"string\",\n        \"followersCount\": 4253,\n        \"followingCount\": 7784,\n        \"listedCount\": 467,\n        \"averageFavorites\": 2984,\n        \"averageRetweets\": 9912,\n        \"averageEngagements\": 6657,\n        \"engagementRate\": 8340.73793581422,\n        \"primaryAccount\": false,\n        \"twitterAccessGrant\": {\n          \"isExpired\": false\n        }\n      },\n      \"pinterestAccount\": {\n        \"id\": 7353,\n        \"username\": \"string\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"profilePicture\": \"string\",\n        \"bio\": \"string\",\n        \"followersCount\": 9113,\n        \"followingCount\": 1839,\n        \"monthlyViewers\": 5651,\n        \"averageEngagements\": 2566,\n        \"engagementRate\": 3434.915977571532,\n        \"boardsCount\": 3903,\n        \"pinsCount\": 8732,\n        \"pinterestAccessGrant\": {\n          \"isExpired\": true\n        },\n        \"primaryAccount\": true\n      },\n      \"youtubeChannel\": {\n        \"id\": \"string\",\n        \"username\": \"string\",\n        \"bio\": \"string\",\n        \"primaryAccount\": false,\n        \"profilePicture\": \"string\",\n        \"followersCount\": 310,\n        \"youtubeExternalId\": \"string\",\n        \"videoCount\": 5768,\n        \"viewCount\": 9694,\n        \"commentCount\": 7124,\n        \"handle\": \"string\"\n      },\n      \"blog\": {\n        \"globalUserId\": 1236.989589033487,\n        \"language\": null,\n        \"name\": \"string\",\n        \"platform\": null,\n        \"url\": \"string\"\n      },\n      \"lists\": [\n        {\n          \"id\": 4259,\n          \"label\": \"string\"\n        },\n        {\n          \"id\": 8195,\n          \"label\": \"string\"\n        }\n      ],\n      \"appMembership\": {\n        \"id\": 4261,\n        \"membershipId\": 9998,\n        \"status\": \"string\",\n        \"createdAt\": \"2004-06-06T11:00:41.746Z\",\n        \"updatedAt\": \"1959-03-22T18:56:33.712Z\",\n        \"membershipType\": \"string\",\n        \"blacklisted\": false,\n        \"utmContent\": \"string\",\n        \"utmCampaign\": \"string\",\n        \"contactInfo\": {\n          \"age\": 6327.713768972643,\n          \"apt\": \"string\",\n          \"birthday\": {},\n          \"city\": \"string\",\n          \"country\": \"string\",\n          \"email\": \"string\",\n          \"emailIsVerified\": true,\n          \"firstName\": \"string\",\n          \"fullName\": \"string\",\n          \"gender\": \"other\",\n          \"genderDescription\": \"string\",\n          \"lastName\": \"string\",\n          \"phone\": \"string\",\n          \"state\": \"string\",\n          \"street\": \"string\",\n          \"zip\": \"string\",\n          \"talentManagerEmail\": \"string\"\n        },\n        \"pointsCurrentBalance\": {\n          \"amount\": 6009\n        },\n        \"totalPoints\": 2355,\n        \"mostRecentActivationDate\": \"1957-01-12\",\n        \"totalImpressions\": 8758.30699786214,\n        \"imageUrl\": \"string\",\n        \"lifetimeClicks\": 397,\n        \"lifetimeConversions\": 5838,\n        \"lifetimeConversionsValue\": 8087.29879145691\n      },\n      \"userContactInfo\": {\n        \"updatedAt\": \"1999-07-31T04:19:40.269Z\",\n        \"emailIsVerified\": true,\n        \"referralSlug\": \"string\",\n        \"referralCount\": \"string\",\n        \"gender\": \"string\",\n        \"genderDescription\": \"string\"\n      },\n      \"influencerTopics\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"slug\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"slug\": \"string\"\n        }\n      ],\n      \"previewPosts\": [\n        {\n          \"id\": 9665,\n          \"postId\": \"string\",\n          \"network\": \"string\",\n          \"likes\": 7344,\n          \"comments\": 8012,\n          \"views\": 9794,\n          \"shares\": 6062,\n          \"caption\": \"string\",\n          \"imageUrl\": \"string\",\n          \"link\": \"string\",\n          \"isSponsored\": true,\n          \"mentions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"activation\": {\n            \"id\": \"string\",\n            \"externalId\": \"string\",\n            \"profilePicture\": \"string\",\n            \"membershipId\": 5408,\n            \"globalUserId\": 6361,\n            \"createdByAccountId\": \"string\",\n            \"updatedByAccountId\": \"string\",\n            \"createdAt\": \"2006-09-09T10:24:07.983Z\",\n            \"approvalStatus\": \"string\",\n            \"points\": 2936.2153240448783,\n            \"isApproved\": false,\n            \"selfReported\": true,\n            \"user\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fullName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profilePicture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unverified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"city\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"zip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"street\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phone\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"age\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"gender\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"talentManagerEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registered\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"birthday\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebookProfile\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramProfile\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tiktokCreator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitterAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinterestAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"youtubeChannel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"blog\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lists\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appMembership\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"userContactInfo\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"influencerTopics\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"activations\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"engagements\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"clicksCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"conversionCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"conversionValue\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rewards\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebookPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitterPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinterestPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"membershipDataPoints\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"membershipCostAndPerformance\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantAgeRange\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantCountry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantCity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentageFemale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_13_17\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_18_24\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_25_34\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_35_44\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_45_54\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_55_64\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_65_plus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpe\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpm\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFraudLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFakeFollowersLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFakeEngagersLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nudityLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"violenceLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profanityLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hasPublicSummaryRecord\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"action\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instagramAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"facebookProfile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"twitterAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pinterestAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"membership\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"campaign\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"surveyResponses\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"reviewContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"validation\": {\n              \"ftcStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"brandedContentTagIGHandle\": \"string\",\n            \"tikTokHandle\": \"string\",\n            \"tikTokMetrics\": {},\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exportFilenames\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"postedTime\": \"1958-12-23T02:21:57.864Z\",\n          \"visualSafeSearch\": {\n            \"adult\": \"string\",\n            \"racy\": \"string\",\n            \"medical\": \"string\",\n            \"spoof\": \"string\",\n            \"violence\": \"string\"\n          },\n          \"textSafeSearch\": {\n            \"profanityWordCount\": 8960\n          }\n        },\n        {\n          \"id\": 6410,\n          \"postId\": \"string\",\n          \"network\": \"string\",\n          \"likes\": 9442,\n          \"comments\": 7217,\n          \"views\": 7881,\n          \"shares\": 7352,\n          \"caption\": \"string\",\n          \"imageUrl\": \"string\",\n          \"link\": \"string\",\n          \"isSponsored\": false,\n          \"mentions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"activation\": {\n            \"id\": \"string\",\n            \"externalId\": \"string\",\n            \"profilePicture\": \"string\",\n            \"membershipId\": 6136,\n            \"globalUserId\": 1399,\n            \"createdByAccountId\": \"string\",\n            \"updatedByAccountId\": \"string\",\n            \"createdAt\": \"1998-02-20T23:51:37.485Z\",\n            \"approvalStatus\": \"string\",\n            \"points\": 2341.287920381322,\n            \"isApproved\": true,\n            \"selfReported\": true,\n            \"user\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fullName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lastName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profilePicture\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unverified\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"country\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"city\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"zip\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"street\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"apt\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"phone\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"age\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"gender\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"email\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"talentManagerEmail\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"registered\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"birthday\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebookProfile\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramProfile\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tiktokCreator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitterAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinterestAccount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"youtubeChannel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"blog\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"lists\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appMembership\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"userContactInfo\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"influencerTopics\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"activations\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"engagements\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"clicksCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"conversionCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"conversionValue\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rewards\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"facebookPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"instagramPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"twitterPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pinterestPostsCount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"membershipDataPoints\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"membershipCostAndPerformance\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantAgeRange\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantCountry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePredominantCity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentageFemale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_13_17\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_18_24\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_25_34\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_35_44\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_45_54\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_55_64\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audiencePercentage_65_plus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpe\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpm\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cpp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFraudLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFakeFollowersLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"audienceFakeEngagersLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"nudityLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"violenceLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profanityLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hasPublicSummaryRecord\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"action\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instagramAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"facebookProfile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"twitterAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pinterestAccount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"membership\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"campaign\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"surveyResponses\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"reviewContent\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"validation\": {\n              \"ftcStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"brandedContentTagIGHandle\": \"string\",\n            \"tikTokHandle\": \"string\",\n            \"tikTokMetrics\": {},\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exportFilenames\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"postedTime\": \"2001-09-05T15:28:39.513Z\",\n          \"visualSafeSearch\": {\n            \"adult\": \"string\",\n            \"racy\": \"string\",\n            \"medical\": \"string\",\n            \"spoof\": \"string\",\n            \"violence\": \"string\"\n          },\n          \"textSafeSearch\": {\n            \"profanityWordCount\": 2269\n          }\n        }\n      ],\n      \"activations\": 8604,\n      \"engagements\": 6954,\n      \"clicksCount\": 3949,\n      \"conversionCount\": 9819,\n      \"conversionValue\": 8012.668320643993,\n      \"rewards\": 5403,\n      \"facebookPostsCount\": 1892,\n      \"instagramPostsCount\": 9899,\n      \"twitterPostsCount\": 597,\n      \"pinterestPostsCount\": 6516,\n      \"membershipDataPoints\": [\n        {\n          \"dataPointDefinition\": {\n            \"name\": \"string\",\n            \"multi\": true,\n            \"customSet\": false,\n            \"type\": \"string\",\n            \"id\": 4412,\n            \"key\": \"string\",\n            \"description\": \"string\",\n            \"markUpDescription\": \"string\",\n            \"communityId\": 967,\n            \"createdAt\": \"2012-02-17T05:48:50.963Z\",\n            \"updatedAt\": \"2005-02-03T12:43:00.015Z\",\n            \"mergeTag\": true,\n            \"archived\": false,\n            \"setElements\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"membersCompleted\": 9092,\n            \"actionGroups\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"lastEditedBy\": \"string\",\n          \"updatedAt\": \"2005-02-04T03:29:21.089Z\",\n          \"value\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"dataPointDefinition\": {\n            \"name\": \"string\",\n            \"multi\": false,\n            \"customSet\": false,\n            \"type\": \"string\",\n            \"id\": 9383,\n            \"key\": \"string\",\n            \"description\": \"string\",\n            \"markUpDescription\": \"string\",\n            \"communityId\": 8427,\n            \"createdAt\": \"2020-02-12T13:18:14.963Z\",\n            \"updatedAt\": \"1959-06-18T10:07:24.611Z\",\n            \"mergeTag\": false,\n            \"archived\": true,\n            \"setElements\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"membersCompleted\": 8413,\n            \"actionGroups\": [\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"id\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          \"lastEditedBy\": \"string\",\n          \"updatedAt\": \"1950-07-27T15:54:16.483Z\",\n          \"value\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"membershipCostAndPerformance\": {\n        \"membershipId\": 3928,\n        \"rewards\": 5624,\n        \"value\": 6989.86844202998,\n        \"cost\": 4347.184807314575,\n        \"activations\": 9854,\n        \"posts\": 6837,\n        \"engagements\": 4735,\n        \"impressions\": 7825,\n        \"clicks\": 3630,\n        \"conversions\": 1171,\n        \"conversionValue\": 6892.549090012551,\n        \"cpm\": 8327.043763334084,\n        \"cpe\": 7712.885361557817,\n        \"cpp\": 2723.8147950068615,\n        \"cpa\": 6765.893819750622\n      },\n      \"audiencePredominantAgeRange\": \"string\",\n      \"audiencePredominantCountry\": \"string\",\n      \"audiencePredominantCity\": \"string\",\n      \"audiencePercentageFemale\": 8003.431462959338,\n      \"audiencePercentage_13_17\": 9954.974851827168,\n      \"audiencePercentage_18_24\": 2909.915385503901,\n      \"audiencePercentage_25_34\": 776.6516914197208,\n      \"audiencePercentage_35_44\": 6185.230682192598,\n      \"audiencePercentage_45_54\": 4542.064027805037,\n      \"audiencePercentage_55_64\": 3119.734031871989,\n      \"audiencePercentage_65_plus\": 5393.363204763382,\n      \"cpe\": 3366.1086731011746,\n      \"cpm\": 2128.2332235838007,\n      \"cpp\": 304.0398827329926,\n      \"audienceFraudLevel\": \"medium\",\n      \"audienceFakeFollowersLevel\": \"low\",\n      \"audienceFakeEngagersLevel\": \"high\",\n      \"nudityLevel\": \"high\",\n      \"violenceLevel\": \"medium\",\n      \"profanityLevel\": \"high\",\n      \"hasPublicSummaryRecord\": true\n    }\n  ],\n  \"topics\": [\n    {\n      \"display\": \"string\",\n      \"value\": 2248.270737845565\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 7556.693944127712\n    }\n  ],\n  \"gender_age\": [\n    {\n      \"display\": \"string\",\n      \"value\": 9695.986394008289\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 6778.643998449387\n    }\n  ],\n  \"country\": [\n    {\n      \"display\": \"string\",\n      \"value\": 6560.046734714918\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 7244.516597744507\n    }\n  ],\n  \"audience_gender\": [\n    {\n      \"display\": \"string\",\n      \"value\": 702.7542085388483\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 5610.839538477347\n    }\n  ],\n  \"fraud_levels\": [\n    {\n      \"display\": \"string\",\n      \"value\": 6110.383005867094\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 7805.188404940555\n    }\n  ],\n  \"audience_country\": [\n    {\n      \"display\": \"string\",\n      \"value\": 5762.342916499531\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 4947.28485681061\n    }\n  ],\n  \"audience_city\": [\n    {\n      \"display\": \"string\",\n      \"value\": 8229.061459769158\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 3910.3094779505764\n    }\n  ],\n  \"audience_age\": [\n    {\n      \"display\": \"string\",\n      \"value\": 4216.253170010977\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 7379.380760314243\n    }\n  ],\n  \"reach\": [\n    {\n      \"display\": \"string\",\n      \"value\": 9145.840174052844\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 8120.457696099732\n    }\n  ],\n  \"top_hashtags\": [\n    {\n      \"display\": \"string\",\n      \"value\": 9477.35326218317\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 5204.447116100188\n    }\n  ],\n  \"DemographicsPro_Audience_Age_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 8688.386964368243\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 3492.2214764423443\n    }\n  ],\n  \"DemographicsPro_Audience_BrandInfluences_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 9673.497887245268\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 3591.6231658609877\n    }\n  ],\n  \"DemographicsPro_Audience_City_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 2001.417071755992\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 1577.2432289081285\n    }\n  ],\n  \"DemographicsPro_Audience_Country_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 5342.933644286933\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 9722.434819575667\n    }\n  ],\n  \"DemographicsPro_Audience_EducationOrganization_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 3078.9763578204675\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 5400.937070584761\n    }\n  ],\n  \"DemographicsPro_Audience_EducationStatus_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 1470.5843085160775\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 2033.9172146842998\n    }\n  ],\n  \"DemographicsPro_Audience_Employer_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 366.4214552084466\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 1656.2608513592636\n    }\n  ],\n  \"DemographicsPro_Audience_Favorite_MusicBands_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 7023.341234263408\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 8485.857274634503\n    }\n  ],\n  \"DemographicsPro_Audience_Favorite_MusicGenre_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 6522.705383174775\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 8327.619372943755\n    }\n  ],\n  \"DemographicsPro_Audience_Favorite_MusicSoloArtist_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 8133.438193094003\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 7731.866544601752\n    }\n  ],\n  \"DemographicsPro_Audience_Gender_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 5330.507339614583\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 4469.871464845632\n    }\n  ],\n  \"DemographicsPro_Audience_Industry_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 2532.89990163176\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 3567.058704884647\n    }\n  ],\n  \"DemographicsPro_Audience_Language_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 8375.23447290758\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 7377.815808199183\n    }\n  ],\n  \"DemographicsPro_Audience_LikesAndInterests_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 7492.809467394688\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 5757.550282053457\n    }\n  ],\n  \"DemographicsPro_Audience_MaritalStatus_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 8331.880620199914\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 9055.823119071052\n    }\n  ],\n  \"DemographicsPro_Audience_ParentalStatus_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 1686.4778617974375\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 3946.196076298808\n    }\n  ],\n  \"DemographicsPro_Audience_MediaInfluences_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 7951.154878127378\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 9236.883474963282\n    }\n  ],\n  \"DemographicsPro_Audience_Occupation_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 8468.470066043483\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 5364.73148217417\n    }\n  ],\n  \"DemographicsPro_Audience_PeopleInfluences_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 2744.160293241571\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 2772.458075123818\n    }\n  ],\n  \"DemographicsPro_Audience_PersonalIncome_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 5883.956067515886\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 9294.764524404198\n    }\n  ],\n  \"DemographicsPro_Audience_Race_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 8843.689617002736\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 4811.31089291291\n    }\n  ],\n  \"DemographicsPro_Audience_SportTeamSupported_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 94.38948129043668\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 8036.383183247048\n    }\n  ],\n  \"DemographicsPro_Audience_SportsFollowed_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 2428.1997505211507\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 3775.9272164487165\n    }\n  ],\n  \"DemographicsPro_Audience_State_Max\": [\n    {\n      \"display\": \"string\",\n      \"value\": 4444.527935586916\n    },\n    {\n      \"display\": \"string\",\n      \"value\": 7151.301018647461\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44766203-c031-4dc5-bc21-630a08369158",
+              "name": "Missing or invalid parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-users",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeywords",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec2b5b6d-5357-40d7-99ae-692de9ba6f1f",
+              "name": "Session expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-users",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeywords",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac618f95-0398-4ea5-84f8-77b64af71573",
+              "name": "Access forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-users",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeywords",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "627404f7-c2f2-4d4e-806f-54baff3ff083",
+              "name": "Server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "global-users",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchKeywords",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://app.splashscore.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "304397f1-cd12-4b6a-af92-6439d198af08",
+    "name": "MAVRCK.IO Global Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Identify your most influential customers and activate them to drive more conversions on social.",
+      "type": "text/plain"
+    }
+  }
+}

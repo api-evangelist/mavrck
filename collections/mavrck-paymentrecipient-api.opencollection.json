@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Payment Recipient API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PaymentRecipient",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "createPaymentRecipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sendPaymentRecipientOnboardingReminder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients/notification",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getPaymentRecipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getTipaltiPayeeIframeUrl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients/:uuid/tipalti-payees/iframe-url",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "requestPaymentRecipientVerification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients/verifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "confirmPaymentRecipientVerification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients/verifications/confirm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getPaymentRecipientByListMemberId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients/list-members/:listMemberId",
+            "params": [
+              {
+                "name": "listMemberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "clearPaymentRecipientLinks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients/links/clear",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Clears the payment-recipient link from every active campaign membership of\nthe given creators (account-level Later Pay disconnect). latergram resolves\nthe Later Social account to its creators' CDS creator_profile_ids and calls\nthis so all in-flight campaigns are severed at once; complete/archived\nmemberships keep their link."
+        },
+        {
+          "info": {
+            "name": "propagatePaymentRecipientLinks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/payment-recipients/links/propagate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-links every active campaign membership of the given creators to a newly\nconnected recipient (account-level Later Pay reconnect). Ensures a reconnect\nupdates all in-flight campaigns, not just the one being viewed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

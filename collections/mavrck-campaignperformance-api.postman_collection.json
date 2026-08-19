@@ -1,0 +1,1939 @@
+{
+  "item": [
+    {
+      "id": "e902cd76-e660-4ca2-a884-23cc39c59e34",
+      "name": "CampaignPerformance",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "01918ca5-812a-46dc-a5e5-a34febe6aa09",
+          "name": "get Audience Insights",
+          "request": {
+            "name": "get Audience Insights",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "campaign-performance",
+                "audience-insights"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "actionGroupId",
+                  "value": "<double>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "communityId",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e07dd17b-e82b-48d3-87a8-0705c21114a7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"age\": [\n    {\n      \"age\": \"string\",\n      \"percent\": 8356.428644389569\n    },\n    {\n      \"age\": \"string\",\n      \"percent\": 2530.379119427829\n    }\n  ],\n  \"cities\": [\n    {\n      \"city\": \"string\",\n      \"cityState\": \"string\",\n      \"impressions\": 2237.7389054286514\n    },\n    {\n      \"city\": \"string\",\n      \"cityState\": \"string\",\n      \"impressions\": 7872.014404484896\n    }\n  ],\n  \"countries\": [\n    {\n      \"country\": \"string\",\n      \"impressions\": 9913.625726313652\n    },\n    {\n      \"country\": \"string\",\n      \"impressions\": 9401.472578275783\n    }\n  ],\n  \"gender\": {\n    \"femaleImpressions\": 5603.353457989204,\n    \"maleImpressions\": 897.6049664470187,\n    \"totalImpressions\": 5271.431153655855\n  },\n  \"totalAudienceImpressions\": 9970.957754938177\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "307b072c-f8db-4af2-af8c-6b565477ebd2",
+              "name": "Missing Parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"key_0\": false,\n      \"key_1\": false,\n      \"key_2\": \"string\"\n    },\n    \"key_2\": {\n      \"key_0\": true\n    },\n    \"key_3\": {\n      \"key_0\": 2795,\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cff60aa-052c-4bbd-9ad0-bf69d8a6d75a",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac4dfbb1-0e2d-4a11-bb4b-a3e9afe56492",
+              "name": "The resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92ace046-8101-487f-94c7-59d3be748330",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 6841.588340765656,\n      \"key_1\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d470439-2c48-444b-93b5-ff361d545012",
+          "name": "get Aggregated Audience Insights",
+          "request": {
+            "name": "get Aggregated Audience Insights",
+            "description": {
+              "content": "Returns aggregated audience insights across multiple campaigns.\nWhen actionGroupIds are provided, aggregates data for those specific campaigns.\nWhen actionGroupIds are omitted, aggregates data for all campaigns belonging to the given communityId.\nFilter by date range using the required startDate and endDate (based on post date).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "campaign-performance",
+                "audience-insights",
+                "aggregate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "communityId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "actionGroupIds",
+                  "value": "<double>"
+                },
+                {
+                  "disabled": false,
+                  "key": "actionGroupIds",
+                  "value": "<double>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "150a9f37-3ff4-43b6-abf7-67af671d2f74",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"age\": [\n    {\n      \"age\": \"string\",\n      \"percent\": 5357.9530544232\n    },\n    {\n      \"age\": \"string\",\n      \"percent\": 5714.079368634773\n    }\n  ],\n  \"cities\": [\n    {\n      \"city\": \"string\",\n      \"cityState\": \"string\",\n      \"impressions\": 6974.4132227089285\n    },\n    {\n      \"city\": \"string\",\n      \"cityState\": \"string\",\n      \"impressions\": 9201.842407776372\n    }\n  ],\n  \"countries\": [\n    {\n      \"country\": \"string\",\n      \"impressions\": 5212.221467579187\n    },\n    {\n      \"country\": \"string\",\n      \"impressions\": 1468.9581742427827\n    }\n  ],\n  \"gender\": {\n    \"femaleImpressions\": 7232.47138229064,\n    \"maleImpressions\": 5693.43646636659,\n    \"totalImpressions\": 6647.592435486338\n  },\n  \"totalAudienceImpressions\": 8330.141081991133\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c2d3d0c-235c-42c6-8a6d-63c2b2a374cc",
+              "name": "Missing Parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false\n    },\n    \"key_1\": {\n      \"key_0\": false,\n      \"key_1\": false,\n      \"key_2\": \"string\"\n    },\n    \"key_2\": {\n      \"key_0\": true\n    },\n    \"key_3\": {\n      \"key_0\": 2795,\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1061116f-f6ea-4901-aab2-8c815f3a5ce6",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77e201c9-4ed7-443e-9097-ed8d95af717f",
+              "name": "The resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "815170c6-cd27-493f-ac1f-d9800fe8c440",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "audience-insights",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "communityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "actionGroupIds",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 6841.588340765656,\n      \"key_1\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8bfe5c3-3333-4c11-a36e-9c03cf6d4669",
+          "name": "get Post Metrics",
+          "request": {
+            "name": "get Post Metrics",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "campaign-performance",
+                "post-metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "actionGroupId",
+                  "value": "<double>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderProperty",
+                  "value": "engagements"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderDirection",
+                  "value": "DESC"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f206166a-1d07-4b08-8c4a-a84f95abc832",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "post-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"activationId\": 569.3138873575742,\n      \"impressions\": 8899.817010080344,\n      \"network\": \"string\",\n      \"ugcPhoto\": \"string\",\n      \"image\": \"string\",\n      \"text\": \"string\",\n      \"postLink\": \"string\",\n      \"date\": \"string\",\n      \"engagements\": 9650.24063225947,\n      \"benchmarkAverageEngagements\": 1559.7498406160714,\n      \"engagementRate\": 8849.771277010086,\n      \"engagementRateDif\": 8766.679216956496,\n      \"benchmarkEngagementRate\": 8400.40694588037,\n      \"reach\": 9369.325001712097,\n      \"impressionsEngagementRate\": 5801.4978552800685,\n      \"emvValue\": 4676.378639947021\n    },\n    {\n      \"activationId\": 742.4105126747693,\n      \"impressions\": 7153.512862104596,\n      \"network\": \"string\",\n      \"ugcPhoto\": \"string\",\n      \"image\": \"string\",\n      \"text\": \"string\",\n      \"postLink\": \"string\",\n      \"date\": \"string\",\n      \"engagements\": 1725.91248614411,\n      \"benchmarkAverageEngagements\": 3043.511027026704,\n      \"engagementRate\": 2068.527742688059,\n      \"engagementRateDif\": 4529.179271723293,\n      \"benchmarkEngagementRate\": 2084.8700281391675,\n      \"reach\": 4916.390977042023,\n      \"impressionsEngagementRate\": 5054.372627674966,\n      \"emvValue\": 1489.3938250908934\n    }\n  ],\n  \"meta\": {\n    \"totalCount\": 2209.8530500063853,\n    \"limit\": 591.0966597651834,\n    \"offset\": 8587.941974420532\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3e6f41e-dbb6-445a-b02e-c0a9b50a3b83",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "post-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Bad Request\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 2609,\n      \"key_1\": 7008,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 9235.491280968916,\n      \"key_1\": \"string\",\n      \"key_2\": 9471.455232338778,\n      \"key_3\": 1236.9048457873698\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ca13ba1-8c0b-4fa1-8eb4-7dac0911d255",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "post-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14b3bd68-265f-4683-94b7-49080e160a04",
+              "name": "The resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "post-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57299f07-beb2-46cf-a3df-48a96ccbdb9f",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "post-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 6841.588340765656,\n      \"key_1\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ecb0632-eed4-4292-a625-8bc89ef98a0c",
+          "name": "get Influencers Metrics",
+          "request": {
+            "name": "get Influencers Metrics",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "campaign-performance",
+                "influencers-metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "actionGroupId",
+                  "value": "<double>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderProperty",
+                  "value": "engagements"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderDirection",
+                  "value": "DESC"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4dbc0be-d641-4e14-bd7b-025e72bc97d0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"profilePhoto\": \"string\",\n      \"instagramHandle\": \"string\",\n      \"igProfilePhoto\": null,\n      \"facebookAvatar\": \"string\",\n      \"globalUserId\": 8312.240154161122,\n      \"membershipId\": 1656.3265118104953,\n      \"impressions\": 1998.2855473025118,\n      \"engagements\": 4759.526066290642,\n      \"impressionsEngagementRate\": 5257.6762668245665,\n      \"content\": 6193.715909838906,\n      \"emvValue\": 4886.333383267617,\n      \"roiValue\": 7084.508458904228\n    },\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"profilePhoto\": null,\n      \"instagramHandle\": \"string\",\n      \"igProfilePhoto\": null,\n      \"facebookAvatar\": null,\n      \"globalUserId\": 326.52764251612786,\n      \"membershipId\": 8990.90489807107,\n      \"impressions\": 8209.993480127496,\n      \"engagements\": 3699.7642870780655,\n      \"impressionsEngagementRate\": 9696.07646326242,\n      \"content\": 1239.4769331093137,\n      \"emvValue\": 4725.118775392626,\n      \"roiValue\": 2181.8035894345257\n    }\n  ],\n  \"meta\": {\n    \"totalCount\": 6095.848688053426,\n    \"limit\": 1644.9081805626465,\n    \"offset\": 3013.5969057781663\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc12cab5-f318-4fab-8653-f17dbc5bc92d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Bad Request\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 2609,\n      \"key_1\": 7008,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 9235.491280968916,\n      \"key_1\": \"string\",\n      \"key_2\": 9471.455232338778,\n      \"key_3\": 1236.9048457873698\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbf6b6f5-5da6-4278-9be2-bdc3dd4f5b26",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "310515ad-a30c-40a3-99a5-2a099aa9c235",
+              "name": "The resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e976169-8976-4c83-abd2-2a9b879a9c0c",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "engagements"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 6841.588340765656,\n      \"key_1\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e7db233-a276-42d2-bd4d-44191268346e",
+          "name": "get Influencers Conversions",
+          "request": {
+            "name": "get Influencers Conversions",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "campaign-performance",
+                "influencers-conversions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "actionGroupId",
+                  "value": "<double>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderProperty",
+                  "value": "conversions"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderDirection",
+                  "value": "DESC"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73fea2b1-a81d-49fc-8706-4a3ca5bc9735",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-conversions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "conversions"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"profilePhoto\": \"string\",\n      \"instagramHandle\": null,\n      \"igProfilePhoto\": null,\n      \"facebookAvatar\": \"string\",\n      \"globalUserId\": 8660.422364222111,\n      \"membershipId\": 404.39520593541056,\n      \"clicks\": 5003.954130370064,\n      \"conversions\": 8425.682837074271,\n      \"conversionsValue\": 4494.576429002889\n    },\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"profilePhoto\": \"string\",\n      \"instagramHandle\": \"string\",\n      \"igProfilePhoto\": null,\n      \"facebookAvatar\": \"string\",\n      \"globalUserId\": 993.1039679554355,\n      \"membershipId\": 8179.311585591971,\n      \"clicks\": 9671.548725554067,\n      \"conversions\": 3826.954495760635,\n      \"conversionsValue\": 3676.609239160451\n    }\n  ],\n  \"meta\": {\n    \"totalCount\": 747.5493504488495,\n    \"limit\": 4571.688018364908,\n    \"offset\": 2211.9291161462606\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3facefff-0d5d-4ab1-a695-78bffbb3fe26",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-conversions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "conversions"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Bad Request\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 2609,\n      \"key_1\": 7008,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 9235.491280968916,\n      \"key_1\": \"string\",\n      \"key_2\": 9471.455232338778,\n      \"key_3\": 1236.9048457873698\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d83a33f-a5d4-48c4-95fa-bfcfd2561cd0",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-conversions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "conversions"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87c08c30-fa2f-49ee-8639-2b0ab7ff697a",
+              "name": "The resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-conversions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "conversions"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4651ca1a-3aaa-4b8f-a9c5-e7d3ad79cbf1",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "campaign-performance",
+                    "influencers-conversions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "actionGroupId",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "orderProperty",
+                      "value": "conversions"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "DESC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": 6841.588340765656,\n      \"key_1\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://app.splashscore.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c1d60384-ca47-40a1-9a44-9a151a6ad8cd",
+    "name": "MAVRCK.IO Campaign Performance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Identify your most influential customers and activate them to drive more conversions on social.",
+      "type": "text/plain"
+    }
+  }
+}

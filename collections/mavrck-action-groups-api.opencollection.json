@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Action Groups API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Action Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getActionGroupParticipants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/action-groups/:actionGroupId/participants",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "customStatusId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "listMemberId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCommentsCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includePinnedComment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInstagramPosts",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeTiktokPosts",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "postCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Post",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/action-groups/:actionGroupId/global-users/:globalUserId/activations",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

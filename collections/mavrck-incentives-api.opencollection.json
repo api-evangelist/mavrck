@@ -1,0 +1,281 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Incentives API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incentives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch all of the claims for this incentive.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/incentives/:incentiveId/incentive-claims",
+            "params": [
+              {
+                "name": "incentiveId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "excludeWinningClaims",
+                "value": "",
+                "type": "query",
+                "description": "If the IncentiveClaim has an associated IncentiveWin, then it will not appear in the result set."
+              },
+              {
+                "name": "excludeWinningInfluencerClaims",
+                "value": "",
+                "type": "query",
+                "description": "If an Influencer has an IncentiveWin, then none of their IncentiveClaims will appear in the result set."
+              },
+              {
+                "name": "uniqueInfluencers",
+                "value": "",
+                "type": "query",
+                "description": "Only show one claim per influencer in the result set"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute to order by."
+              }
+            ]
+          },
+          "docs": "Fetch all of the claims for this incentive."
+        },
+        {
+          "info": {
+            "name": "Fetch the winners for this incentive.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/incentives/:incentiveId/winners",
+            "params": [
+              {
+                "name": "incentiveId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "disqualified",
+                "value": "",
+                "type": "query",
+                "description": "Filter winners based on whether they have been disqualified from this incentive or not."
+              }
+            ]
+          },
+          "docs": "Fetch the winners for this incentive."
+        },
+        {
+          "info": {
+            "name": "If the incentive is of a type where there are fewer winners than claims, this will determine the winners.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/incentives/:incentiveId/winners",
+            "params": [
+              {
+                "name": "incentiveId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If the incentive is of a type where there are fewer winners than claims, this will determine the winners."
+        },
+        {
+          "info": {
+            "name": "Disqualify an incentive winner.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/incentives/:incentiveId/winners/:id/disqualification",
+            "params": [
+              {
+                "name": "incentiveId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disqualify an incentive winner."
+        },
+        {
+          "info": {
+            "name": "Requalify a disqualified incentive winner.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/incentives/:incentiveId/winners/:id/requalification",
+            "params": [
+              {
+                "name": "incentiveId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Requalify a disqualified incentive winner."
+        },
+        {
+          "info": {
+            "name": "getTermsAndConditionsTemplate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/termsandconditions/template",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unlockType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "unlockIncentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/incentives/:id/unlock",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getAll",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/incentives"
+          }
+        },
+        {
+          "info": {
+            "name": "createIncentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/incentives",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/incentives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateIncentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/incentives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

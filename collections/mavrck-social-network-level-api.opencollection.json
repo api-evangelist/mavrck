@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Later Influence™ Social Network Level API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Social Network Level",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getNetworkPerformance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mavrck.co/v1/reporting/network/performance",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "instanceIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of campaign ids (max 50 items)"
+              },
+              {
+                "name": "reportingGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of reporting group ids"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page you would like to get data for"
+              },
+              {
+                "name": "sortProperty",
+                "value": "",
+                "type": "query",
+                "description": "sortProperty must be one of the following values: engagements, impressions, engagementRate, impressionsPerPosts, engagementsPerPosts, postsCount"
+              },
+              {
+                "name": "sortDirection",
+                "value": "",
+                "type": "query",
+                "description": "ASC or DESC"
+              }
+            ]
+          },
+          "docs": "Get social networks performance details."
+        },
+        {
+          "info": {
+            "name": "findReturnOfInvestments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mavrck.co/v1/reporting/network/return-on-investment",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "instanceIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of campaign ids (max 50 items)"
+              },
+              {
+                "name": "reportingGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of reporting group ids"
+              }
+            ]
+          },
+          "docs": "Get social networks return on investment details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

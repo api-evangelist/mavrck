@@ -1,0 +1,3884 @@
+{
+  "item": [
+    {
+      "id": "2e9d1ad1-71bf-4b51-a59d-05e5103c8ce6",
+      "name": "Incentives",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4329615-08b4-4c8b-9d59-d730fc81c759",
+          "name": "Fetch all of the claims for this incentive.",
+          "request": {
+            "name": "Fetch all of the claims for this incentive.",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives",
+                ":incentiveId",
+                "incentive-claims"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "excludeWinningClaims",
+                  "value": "<boolean>",
+                  "description": "If the IncentiveClaim has an associated IncentiveWin, then it will not appear in the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeWinningInfluencerClaims",
+                  "value": "<boolean>",
+                  "description": "If an Influencer has an IncentiveWin, then none of their IncentiveClaims will appear in the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "uniqueInfluencers",
+                  "value": "<boolean>",
+                  "description": "Only show one claim per influencer in the result set"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Attribute to order by."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "incentiveId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6903fbf-f118-4ec1-aded-d3198ce7e79d",
+              "name": "An array of incentive claims.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "incentive-claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeWinningClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "excludeWinningInfluencerClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uniqueInfluencers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 439.156868351539,\n    \"offset\": 9508.760135231385,\n    \"status\": \"success\",\n    \"totalCount\": 2011.7898935248902\n  },\n  \"data\": [\n    {\n      \"id\": 9127,\n      \"membershipId\": 2220,\n      \"globalUserId\": 5454,\n      \"promocode\": \"string\",\n      \"createdAt\": \"2014-02-12T21:04:10.603Z\",\n      \"profilePictureLink\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"address\": \"string\",\n      \"age\": 8499,\n      \"gender\": \"string\",\n      \"facebookFriendCount\": 8772,\n      \"mostRecentRewardFulfilledAt\": \"1984-12-29T00:13:00.523Z\",\n      \"engagementCount\": 5445,\n      \"clickCount\": 1026,\n      \"conversionCount\": 9054\n    },\n    {\n      \"id\": 5622,\n      \"membershipId\": 421,\n      \"globalUserId\": 971,\n      \"promocode\": \"string\",\n      \"createdAt\": \"1990-11-27T23:00:35.324Z\",\n      \"profilePictureLink\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"address\": \"string\",\n      \"age\": 5401,\n      \"gender\": \"string\",\n      \"facebookFriendCount\": 5808,\n      \"mostRecentRewardFulfilledAt\": \"1973-05-21T23:30:53.664Z\",\n      \"engagementCount\": 4996,\n      \"clickCount\": 3386,\n      \"conversionCount\": 908\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caaee807-4a61-47ba-bbc5-1f572652ab4f",
+              "name": "Session expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "incentive-claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeWinningClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "excludeWinningInfluencerClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uniqueInfluencers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"keys\": [\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54971644-65c6-4fc5-a698-85ee8a4a3d31",
+              "name": "Invalid API key or resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "incentive-claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeWinningClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "excludeWinningInfluencerClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uniqueInfluencers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "535d331b-5408-4c7f-9739-dadece699e34",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "incentive-claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeWinningClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "excludeWinningInfluencerClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uniqueInfluencers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82680f5f-fa3d-43c6-99f2-5f54d25a4b0d",
+              "name": "Server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "incentive-claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "excludeWinningClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "excludeWinningInfluencerClaims",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uniqueInfluencers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f9ee506-1850-4ea6-ad3b-bb3bd1c2a166",
+          "name": "Fetch the winners for this incentive.",
+          "request": {
+            "name": "Fetch the winners for this incentive.",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives",
+                ":incentiveId",
+                "winners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "disqualified",
+                  "value": "<boolean>",
+                  "description": "Filter winners based on whether they have been disqualified from this incentive or not."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "incentiveId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53927662-5816-4f01-90e8-4e784a05a299",
+              "name": "An array of incentive winners.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disqualified",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"limit\": 5549.012507867631,\n    \"offset\": 3100.2226311276427,\n    \"status\": \"success\",\n    \"totalCount\": 2514.2362630848224\n  },\n  \"data\": [\n    {\n      \"id\": 3571,\n      \"isDisqualified\": true,\n      \"winnerGlobalUserId\": 2992,\n      \"winnerMembershipId\": 9081,\n      \"winnerProfilePictureLink\": \"string\",\n      \"winnerFirstName\": \"string\",\n      \"winnerLastName\": \"string\",\n      \"winnerEmail\": \"string\",\n      \"winnerAddress\": \"string\",\n      \"winnerAge\": 4063,\n      \"winnerGender\": \"string\",\n      \"winnerFacebookFriendCount\": 8324,\n      \"winnerLastRewardWonTitle\": \"string\",\n      \"winnerLastRewardFulfilledAt\": \"1995-12-20T10:28:32.939Z\",\n      \"disqualificationReason\": \"string\",\n      \"rewardIsFulfilled\": false\n    },\n    {\n      \"id\": 3488,\n      \"isDisqualified\": false,\n      \"winnerGlobalUserId\": 3061,\n      \"winnerMembershipId\": 3087,\n      \"winnerProfilePictureLink\": \"string\",\n      \"winnerFirstName\": \"string\",\n      \"winnerLastName\": \"string\",\n      \"winnerEmail\": \"string\",\n      \"winnerAddress\": \"string\",\n      \"winnerAge\": 1534,\n      \"winnerGender\": \"string\",\n      \"winnerFacebookFriendCount\": 8391,\n      \"winnerLastRewardWonTitle\": \"string\",\n      \"winnerLastRewardFulfilledAt\": \"2014-05-16T12:48:24.956Z\",\n      \"disqualificationReason\": \"string\",\n      \"rewardIsFulfilled\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc669340-3791-4b75-af2b-dfc10c5f6922",
+              "name": "Session expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disqualified",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7982b635-11e5-49b0-8b68-aeeeb4b7c3c1",
+              "name": "Invalid API Key or resource forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disqualified",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4ba2795-c298-4eaa-97f9-ea1d8bda2b49",
+              "name": "Resource non-existent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disqualified",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a70db5f5-13f6-4616-a739-6e222bab8af9",
+              "name": "Server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "disqualified",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98ae8e29-a363-4a5e-9c9a-78a8c3105dc1",
+          "name": "If the incentive is of a type where there are fewer winners than claims, this will determine the winners.",
+          "request": {
+            "name": "If the incentive is of a type where there are fewer winners than claims, this will determine the winners.",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives",
+                ":incentiveId",
+                "winners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "incentiveId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"selectionMethod\": \"<string>\",\n  \"incentiveClaimIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"excludeWinnersSince\": \"<string,boolean-date-time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8233b406-8ced-4655-abfa-57256fdf8f96",
+              "name": "Empty object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selectionMethod\": \"<string>\",\n  \"incentiveClaimIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"excludeWinnersSince\": \"<string,boolean-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bc2864a-60a5-4b33-b5a6-4054c741122b",
+              "name": "'VALIDATION_ERROR', either 'winners_already_selected', 'action_group_not_expired', or 'incentive_not_sweepstakes'.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selectionMethod\": \"<string>\",\n  \"incentiveClaimIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"excludeWinnersSince\": \"<string,boolean-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cfa2693-f2a0-4a1d-a6f1-f881a2f814f1",
+              "name": "Session expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selectionMethod\": \"<string>\",\n  \"incentiveClaimIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"excludeWinnersSince\": \"<string,boolean-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5451242d-f2d9-4263-936d-ab8105b01449",
+              "name": "Invalid API Key or resource forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selectionMethod\": \"<string>\",\n  \"incentiveClaimIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"excludeWinnersSince\": \"<string,boolean-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac794bf1-9710-4763-bfd0-8f6250d6eae0",
+              "name": "Resource non-existent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selectionMethod\": \"<string>\",\n  \"incentiveClaimIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"excludeWinnersSince\": \"<string,boolean-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5da38127-08a8-46e4-9b28-36352e05c9ec",
+              "name": "Server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"selectionMethod\": \"<string>\",\n  \"incentiveClaimIds\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"excludeWinnersSince\": \"<string,boolean-date-time>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af477b99-cb64-4aa4-8627-ccc858da2184",
+          "name": "Disqualify an incentive winner.",
+          "request": {
+            "name": "Disqualify an incentive winner.",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives",
+                ":incentiveId",
+                "winners",
+                ":id",
+                "disqualification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "incentiveId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"disqualificationReason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a965ec4d-25cb-4640-bcb3-0cbd1c02316d",
+              "name": "Incentive winner successfully disqualified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "disqualification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disqualificationReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa2a0233-26e5-4b49-ba21-0547b06f33e5",
+              "name": "Incentive winner cannot be disqualified. Occurs if 'reward_already_fulfilled'.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "disqualification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disqualificationReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59d863cf-c40a-46fd-a47d-907f42abd040",
+              "name": "Session expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "disqualification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disqualificationReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cde3a5f-0575-49f2-ab9c-d62568087641",
+              "name": "API Key invalid or access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "disqualification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disqualificationReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72ffb7bd-6536-4792-85a1-ecdecc266503",
+              "name": "Incentive or winner not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "disqualification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disqualificationReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba9a7af2-9037-41fa-9753-6dae5ee23a0f",
+              "name": "Server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "disqualification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disqualificationReason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "670fd23c-d6ec-4a75-9b88-a16ce08cee68",
+          "name": "Requalify a disqualified incentive winner.",
+          "request": {
+            "name": "Requalify a disqualified incentive winner.",
+            "description": {},
+            "url": {
+              "path": [
+                "incentives",
+                ":incentiveId",
+                "winners",
+                ":id",
+                "requalification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "incentiveId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32f98b3f-37af-4d48-ac3c-e1bd8f2a6929",
+              "name": "Incentive winner successfully requalified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "requalification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b1d0879-2c38-4c18-91dc-929e36b7929b",
+              "name": "Incentive winner cannot be requalified. Occurs when no allocated winning slots remain.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "requalification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a3088c6-e1ac-4421-9a7e-280a23db435a",
+              "name": "Session expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "requalification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f448f21-b1ee-45ad-910e-32568f3b35cf",
+              "name": "API Key invalid or access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "requalification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bd468ff-e067-4422-9a40-53da137cd0ee",
+              "name": "Incentive or winner not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "requalification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "515f5030-b878-4186-9a5a-4077cb5eb04f",
+              "name": "Server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "incentives",
+                    ":incentiveId",
+                    "winners",
+                    ":id",
+                    "requalification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "incentiveId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"error\": \"string\",\n  \"params\": [\n    \"string\",\n    \"string\"\n  ],\n  \"artifactLinks\": {\n    \"normal\": \"string\",\n    \"deep\": \"string\"\n  },\n  \"parent\": {\n    \"type\": \"string\",\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79ebdcc2-8f8e-4160-b37b-06605b9702e4",
+          "name": "get Terms And Conditions Template",
+          "request": {
+            "name": "get Terms And Conditions Template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "termsandconditions",
+                "template"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "unlockType",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f7e9d89-29aa-47fb-a283-0a7cf355d50a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "termsandconditions",
+                    "template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unlockType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customParams\": [\n    \"string\",\n    \"string\"\n  ],\n  \"template\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc58dc2f-6bc4-48a0-a4b4-24973524dff3",
+              "name": "Invalid Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "termsandconditions",
+                    "template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unlockType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a9f4dee-5401-402b-bcd0-62b386a4e390",
+              "name": "Invalid API Key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "termsandconditions",
+                    "template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unlockType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 6024.244632668192,\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": false\n    },\n    \"key_2\": {\n      \"key_0\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb0ceda9-d511-4a85-b16a-d4490062f93c",
+              "name": "Incentive not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "termsandconditions",
+                    "template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unlockType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 458.19466537277196\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8b35519-093a-4139-87a8-2b70abf861bc",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "termsandconditions",
+                    "template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unlockType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": 9945.10784430386,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65ebf246-a319-4f7a-8b46-d30302091026",
+          "name": "unlock Incentive",
+          "request": {
+            "name": "unlock Incentive",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "incentives",
+                ":id",
+                "unlock"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<double>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claims\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "922850b7-9a25-406a-8c73-8c643a9e6af6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id",
+                    "unlock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8559.38809409006\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdae6de1-9869-4231-85eb-d7f709857fce",
+              "name": "Missing Parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id",
+                    "unlock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd25280d-c0ae-4bd9-9599-a1e59864657d",
+              "name": "Access forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id",
+                    "unlock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 6024.244632668192,\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": false\n    },\n    \"key_2\": {\n      \"key_0\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60ddb450-f583-4f51-9d00-827c2fe25cac",
+              "name": "The resource does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id",
+                    "unlock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Resource Not Found\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 458.19466537277196\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2df6b160-c2ca-4adf-858b-ea79ade727b8",
+              "name": "Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id",
+                    "unlock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": 9945.10784430386,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac7148c1-af23-45ba-a46d-c69f8bdaf082",
+          "name": "get All",
+          "request": {
+            "name": "get All",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "incentives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e20b6d02-dbb5-4e5e-a390-2b2782a02eb9",
+              "name": "A list of incentives",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"totalCount\": 5085.252551372279\n  },\n  \"data\": [\n    {\n      \"actionGroupId\": 6766.298236679174,\n      \"actionGroupStatus\": \"string\",\n      \"allocatedWinnersCount\": 4296.903525783191,\n      \"approximateRetailValue\": 4204.638454022118,\n      \"cashPaymentAppId\": 1992.317036823097,\n      \"cashPaymentAppProvider\": null,\n      \"claimedDynamicPromoCodes\": 8425.018099859024,\n      \"claimedIncentivesCount\": 9705.898735194218,\n      \"claimedIncentivesInfluencerCount\": 928.2119619283691,\n      \"claims\": [\n        {\n          \"address\": \"string\",\n          \"age\": 765.777763988772,\n          \"clickCount\": 2433.0169876057817,\n          \"conversionCount\": 4924.866385545543,\n          \"createdAt\": \"string\",\n          \"email\": \"string\",\n          \"engagementCount\": 7516.456354067388,\n          \"facebookFriendCount\": 9886.242431769357,\n          \"firstName\": \"string\",\n          \"gender\": \"string\",\n          \"globalUserId\": 5849.278687289636,\n          \"id\": 3550.277379219198,\n          \"lastName\": \"string\",\n          \"membershipId\": 4759.3594109197975,\n          \"mostRecentRewardFulfilledAt\": \"string\",\n          \"profilePictureLink\": \"string\",\n          \"promocode\": \"string\"\n        },\n        {\n          \"address\": \"string\",\n          \"age\": 5770.444955802052,\n          \"clickCount\": 5235.983881887878,\n          \"conversionCount\": 8581.418169116967,\n          \"createdAt\": \"string\",\n          \"email\": \"string\",\n          \"engagementCount\": 6865.566144815499,\n          \"facebookFriendCount\": 5675.553607154225,\n          \"firstName\": \"string\",\n          \"gender\": \"string\",\n          \"globalUserId\": 3229.8552292186055,\n          \"id\": 4526.764126011982,\n          \"lastName\": \"string\",\n          \"membershipId\": 8567.72566136443,\n          \"mostRecentRewardFulfilledAt\": \"string\",\n          \"profilePictureLink\": \"string\",\n          \"promocode\": \"string\"\n        }\n      ],\n      \"contestMetric\": \"string\",\n      \"cost\": 4052.68424269841,\n      \"disqualifiedWinnersCount\": 1254.2659978575389,\n      \"endDate\": \"string\",\n      \"exclusiveLinkCta\": \"string\",\n      \"exclusiveLinkUrl\": \"string\",\n      \"giftCardEmailTemplateId\": \"string\",\n      \"giftCardOptionId\": 8654.115675678304,\n      \"id\": 5666.3903045007655,\n      \"image\": \"string\",\n      \"incentiveDescription\": \"string\",\n      \"incentiveStatus\": \"string\",\n      \"incentiveTitle\": \"string\",\n      \"multipleClaims\": true,\n      \"numberPointsRequired\": 9545.84770175289,\n      \"printableCoupon\": \"string\",\n      \"promocode\": \"string\",\n      \"promocodeTermsAndConditions\": \"string\",\n      \"quantity\": 3652.621084007087,\n      \"rewardId\": \"string\",\n      \"rewardWinType\": \"string\",\n      \"startDate\": null,\n      \"sweepsRules\": \"string\",\n      \"sweepstakesUrl\": \"string\",\n      \"sweepstakesWinnersQty\": 1646.5972757178615,\n      \"termsAndConditions\": {\n        \"params\": {},\n        \"preview\": \"string\",\n        \"template\": \"string\"\n      },\n      \"totalDynamicPromoCodes\": 9421.82794667222,\n      \"type\": \"string\",\n      \"unlockEvent\": \"pending_shipment\",\n      \"unlockType\": \"string\",\n      \"winnerSelectionMethod\": \"string\",\n      \"winnersSelectedCount\": 8074.001780427709,\n      \"valueCurrencyCode\": {},\n      \"costCurrencyCode\": {},\n      \"bonusTierCurrencyCode\": \"USD\",\n      \"bonusTiers\": [\n        \"\",\n        \"\"\n      ],\n      \"discountCodeId\": \"string\",\n      \"shippingCodeId\": \"string\",\n      \"couponActivation\": \"string\"\n    },\n    {\n      \"actionGroupId\": 5551.633701233179,\n      \"actionGroupStatus\": \"string\",\n      \"allocatedWinnersCount\": 1324.8096520117547,\n      \"approximateRetailValue\": 681.5163498195842,\n      \"cashPaymentAppId\": 7555.573474517778,\n      \"cashPaymentAppProvider\": null,\n      \"claimedDynamicPromoCodes\": 3309.5016304028045,\n      \"claimedIncentivesCount\": 8318.132494558018,\n      \"claimedIncentivesInfluencerCount\": 1852.1218062219025,\n      \"claims\": [\n        {\n          \"address\": \"string\",\n          \"age\": 5684.941959955093,\n          \"clickCount\": 5610.4286411974,\n          \"conversionCount\": 3613.501772026848,\n          \"createdAt\": \"string\",\n          \"email\": \"string\",\n          \"engagementCount\": 418.85280882692723,\n          \"facebookFriendCount\": 205.70473825364923,\n          \"firstName\": \"string\",\n          \"gender\": \"string\",\n          \"globalUserId\": 4249.908397077689,\n          \"id\": 7353.3981688541,\n          \"lastName\": \"string\",\n          \"membershipId\": 6185.570993902012,\n          \"mostRecentRewardFulfilledAt\": \"string\",\n          \"profilePictureLink\": \"string\",\n          \"promocode\": \"string\"\n        },\n        {\n          \"address\": \"string\",\n          \"age\": 9562.143609162094,\n          \"clickCount\": 9586.823001925512,\n          \"conversionCount\": 2449.701759932078,\n          \"createdAt\": \"string\",\n          \"email\": \"string\",\n          \"engagementCount\": 355.74824175021223,\n          \"facebookFriendCount\": 3935.844939764801,\n          \"firstName\": \"string\",\n          \"gender\": \"string\",\n          \"globalUserId\": 756.4158842201873,\n          \"id\": 6662.3405367375435,\n          \"lastName\": \"string\",\n          \"membershipId\": 6788.98564879304,\n          \"mostRecentRewardFulfilledAt\": \"string\",\n          \"profilePictureLink\": \"string\",\n          \"promocode\": \"string\"\n        }\n      ],\n      \"contestMetric\": \"string\",\n      \"cost\": 5775.62917551893,\n      \"disqualifiedWinnersCount\": 5782.819586189908,\n      \"endDate\": null,\n      \"exclusiveLinkCta\": \"string\",\n      \"exclusiveLinkUrl\": \"string\",\n      \"giftCardEmailTemplateId\": \"string\",\n      \"giftCardOptionId\": 3533.0344329175646,\n      \"id\": 2398.4646972351566,\n      \"image\": \"string\",\n      \"incentiveDescription\": \"string\",\n      \"incentiveStatus\": \"string\",\n      \"incentiveTitle\": \"string\",\n      \"multipleClaims\": true,\n      \"numberPointsRequired\": 313.54677824988795,\n      \"printableCoupon\": \"string\",\n      \"promocode\": \"string\",\n      \"promocodeTermsAndConditions\": \"string\",\n      \"quantity\": 1769.5793101443746,\n      \"rewardId\": \"string\",\n      \"rewardWinType\": \"string\",\n      \"startDate\": null,\n      \"sweepsRules\": \"string\",\n      \"sweepstakesUrl\": \"string\",\n      \"sweepstakesWinnersQty\": 9377.112128302551,\n      \"termsAndConditions\": {\n        \"params\": {},\n        \"preview\": \"string\",\n        \"template\": \"string\"\n      },\n      \"totalDynamicPromoCodes\": 2570.9026309949536,\n      \"type\": \"string\",\n      \"unlockEvent\": \"acceptance\",\n      \"unlockType\": \"string\",\n      \"winnerSelectionMethod\": \"string\",\n      \"winnersSelectedCount\": 8547.201753555308,\n      \"valueCurrencyCode\": {},\n      \"costCurrencyCode\": {},\n      \"bonusTierCurrencyCode\": \"EUR\",\n      \"bonusTiers\": null,\n      \"discountCodeId\": \"string\",\n      \"shippingCodeId\": \"string\",\n      \"couponActivation\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85609f38-b91b-437e-a098-2c86e55db1cf",
+              "name": "Invalid/missing parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "912a6354-194d-4161-9f16-69675d97df2e",
+              "name": "Invalid API Key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 6024.244632668192,\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": false\n    },\n    \"key_2\": {\n      \"key_0\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42cbb6b5-acff-45a4-bfa5-eb48de841a60",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": 9945.10784430386,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb7e920f-e8a4-4c06-9ead-f8d980285090",
+          "name": "create Incentive",
+          "request": {
+            "name": "create Incentive",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "incentives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"incentiveTitle\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"incentiveStatus\": \"<string>\",\n  \"image\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"termsAndConditions\": {\n    \"params\": {},\n    \"preview\": \"<string>\",\n    \"template\": \"<string>\"\n  },\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rewardWinType\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"valueCurrencyCode\": \"<object>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"costCurrencyCode\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\",\n  \"shopify\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "914d8b97-ad28-4999-bfb9-451ca415f2fd",
+              "name": "Incentive URI",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"incentiveTitle\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"incentiveStatus\": \"<string>\",\n  \"image\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"termsAndConditions\": {\n    \"params\": {},\n    \"preview\": \"<string>\",\n    \"template\": \"<string>\"\n  },\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rewardWinType\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"valueCurrencyCode\": \"<object>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"costCurrencyCode\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\",\n  \"shopify\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8559.38809409006\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "482c1924-5185-485a-aaea-02ff34a1cc6f",
+              "name": "Invalid/missing parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"incentiveTitle\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"incentiveStatus\": \"<string>\",\n  \"image\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"termsAndConditions\": {\n    \"params\": {},\n    \"preview\": \"<string>\",\n    \"template\": \"<string>\"\n  },\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rewardWinType\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"valueCurrencyCode\": \"<object>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"costCurrencyCode\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\",\n  \"shopify\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbebe7f2-2d6e-4980-8e65-1f6eba835d34",
+              "name": "Invalid API Key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"incentiveTitle\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"incentiveStatus\": \"<string>\",\n  \"image\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"termsAndConditions\": {\n    \"params\": {},\n    \"preview\": \"<string>\",\n    \"template\": \"<string>\"\n  },\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rewardWinType\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"valueCurrencyCode\": \"<object>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"costCurrencyCode\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\",\n  \"shopify\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 6024.244632668192,\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": false\n    },\n    \"key_2\": {\n      \"key_0\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fb3d989-9c0d-4c81-b55e-156ab29b778e",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"incentiveTitle\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"incentiveStatus\": \"<string>\",\n  \"image\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"termsAndConditions\": {\n    \"params\": {},\n    \"preview\": \"<string>\",\n    \"template\": \"<string>\"\n  },\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rewardWinType\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"valueCurrencyCode\": \"<object>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"costCurrencyCode\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\",\n  \"shopify\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": 9945.10784430386,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f41da7f-7a94-4270-86b6-fe237d63dd19",
+          "name": "get By Id",
+          "request": {
+            "name": "get By Id",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "incentives",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<double>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63b1af8c-030d-4e57-8620-7821d96f04c9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b9a9cc7-5811-40ca-9919-e8fe3018cdb4",
+              "name": "Invalid/missing parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af901b45-6855-4fec-87e4-673f2d6117ee",
+              "name": "Invalid API Key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 6024.244632668192,\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": false\n    },\n    \"key_2\": {\n      \"key_0\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c30e824b-0e8b-41b6-a3a4-a7aac4b50e99",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": 9945.10784430386,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00c64551-d53f-4fef-abce-83a86271e127",
+          "name": "update Incentive",
+          "request": {
+            "name": "update Incentive",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "incentives",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<double>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"valueCurrencyCode\": \"<string>\",\n  \"actionGroupId\": \"<double>\",\n  \"actionGroupStatus\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"claimedDynamicPromoCodes\": \"<double>\",\n  \"claimedIncentivesCount\": \"<double>\",\n  \"claimedIncentivesInfluencerCount\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"disqualifiedWinnersCount\": \"<double>\",\n  \"incentiveTitle\": \"<string>\",\n  \"incentiveStatus\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"quantity\": \"<double>\",\n  \"rewardId\": \"<string>\",\n  \"rewardWinType\": \"<string>\",\n  \"totalDynamicPromoCodes\": \"<double>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"winnersSelectedCount\": \"<double>\",\n  \"endDate\": \"<string,null>\",\n  \"startDate\": \"<string,null>\",\n  \"costCurrencyCode\": \"<string>\",\n  \"dynamicPromoCodesList\": \"<string>\",\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"shopify\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a9a01bb2-17f6-4d1f-aa98-2522d119af05",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"valueCurrencyCode\": \"<string>\",\n  \"actionGroupId\": \"<double>\",\n  \"actionGroupStatus\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"claimedDynamicPromoCodes\": \"<double>\",\n  \"claimedIncentivesCount\": \"<double>\",\n  \"claimedIncentivesInfluencerCount\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"disqualifiedWinnersCount\": \"<double>\",\n  \"incentiveTitle\": \"<string>\",\n  \"incentiveStatus\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"quantity\": \"<double>\",\n  \"rewardId\": \"<string>\",\n  \"rewardWinType\": \"<string>\",\n  \"totalDynamicPromoCodes\": \"<double>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"winnersSelectedCount\": \"<double>\",\n  \"endDate\": \"<string,null>\",\n  \"startDate\": \"<string,null>\",\n  \"costCurrencyCode\": \"<string>\",\n  \"dynamicPromoCodesList\": \"<string>\",\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"shopify\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4292706d-2570-422f-a8ed-608f2cc8e0bc",
+              "name": "Invalid/missing parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"valueCurrencyCode\": \"<string>\",\n  \"actionGroupId\": \"<double>\",\n  \"actionGroupStatus\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"claimedDynamicPromoCodes\": \"<double>\",\n  \"claimedIncentivesCount\": \"<double>\",\n  \"claimedIncentivesInfluencerCount\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"disqualifiedWinnersCount\": \"<double>\",\n  \"incentiveTitle\": \"<string>\",\n  \"incentiveStatus\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"quantity\": \"<double>\",\n  \"rewardId\": \"<string>\",\n  \"rewardWinType\": \"<string>\",\n  \"totalDynamicPromoCodes\": \"<double>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"winnersSelectedCount\": \"<double>\",\n  \"endDate\": \"<string,null>\",\n  \"startDate\": \"<string,null>\",\n  \"costCurrencyCode\": \"<string>\",\n  \"dynamicPromoCodesList\": \"<string>\",\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"shopify\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    \"key_2\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80004556-0bef-4513-82df-5fbc033c2132",
+              "name": "Invalid API Key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"valueCurrencyCode\": \"<string>\",\n  \"actionGroupId\": \"<double>\",\n  \"actionGroupStatus\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"claimedDynamicPromoCodes\": \"<double>\",\n  \"claimedIncentivesCount\": \"<double>\",\n  \"claimedIncentivesInfluencerCount\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"disqualifiedWinnersCount\": \"<double>\",\n  \"incentiveTitle\": \"<string>\",\n  \"incentiveStatus\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"quantity\": \"<double>\",\n  \"rewardId\": \"<string>\",\n  \"rewardWinType\": \"<string>\",\n  \"totalDynamicPromoCodes\": \"<double>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"winnersSelectedCount\": \"<double>\",\n  \"endDate\": \"<string,null>\",\n  \"startDate\": \"<string,null>\",\n  \"costCurrencyCode\": \"<string>\",\n  \"dynamicPromoCodesList\": \"<string>\",\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"shopify\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access Forbidden\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": 6024.244632668192,\n      \"key_1\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": false\n    },\n    \"key_2\": {\n      \"key_0\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "069c12da-2a4c-4574-9f29-b7ca95d5952f",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "incentives",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<double>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"valueCurrencyCode\": \"<string>\",\n  \"actionGroupId\": \"<double>\",\n  \"actionGroupStatus\": \"<string>\",\n  \"approximateRetailValue\": \"<double>\",\n  \"cashPaymentAppId\": \"<number,null-double>\",\n  \"claimedDynamicPromoCodes\": \"<double>\",\n  \"claimedIncentivesCount\": \"<double>\",\n  \"claimedIncentivesInfluencerCount\": \"<double>\",\n  \"cost\": \"<double>\",\n  \"disqualifiedWinnersCount\": \"<double>\",\n  \"incentiveTitle\": \"<string>\",\n  \"incentiveStatus\": \"<string>\",\n  \"multipleClaims\": \"<boolean>\",\n  \"quantity\": \"<double>\",\n  \"rewardId\": \"<string>\",\n  \"rewardWinType\": \"<string>\",\n  \"totalDynamicPromoCodes\": \"<double>\",\n  \"type\": \"<string>\",\n  \"unlockEvent\": \"<string>\",\n  \"unlockType\": \"<string>\",\n  \"winnersSelectedCount\": \"<double>\",\n  \"endDate\": \"<string,null>\",\n  \"startDate\": \"<string,null>\",\n  \"costCurrencyCode\": \"<string>\",\n  \"dynamicPromoCodesList\": \"<string>\",\n  \"dynamicPromoCodesToAdd\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cashPaymentAppProvider\": \"<string,null>\",\n  \"giftCardEmailTemplateId\": \"<string,null>\",\n  \"giftCardOptionId\": \"<number,null-double>\",\n  \"shopify\": \"<object>\",\n  \"bonusTierCurrencyCode\": \"<string,null>\",\n  \"bonusTiers\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Server Error\",\n  \"details\": {\n    \"key_0\": {\n      \"key_0\": false,\n      \"key_1\": 9945.10784430386,\n      \"key_2\": \"string\"\n    },\n    \"key_1\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://app.splashscore.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9004c560-1fda-4c58-bd39-29aa2b1a081e",
+    "name": "MAVRCK.IO Incentives API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Identify your most influential customers and activate them to drive more conversions on social.",
+      "type": "text/plain"
+    }
+  }
+}

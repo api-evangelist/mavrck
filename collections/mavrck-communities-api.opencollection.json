@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Communities API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Communities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query Mavrck communities available to the authenticated administrator.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/communities",
+            "params": [
+              {
+                "name": "omitCurrent",
+                "value": "",
+                "type": "query",
+                "description": "Omit the community that the administrator is currently authenticated into."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Community name"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Community Id"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Administrator account id that can be used to filter the list down to only instances they have access to."
+              },
+              {
+                "name": "includeAll",
+                "value": "",
+                "type": "query",
+                "description": "Root only parameter for requesting all communities beyond normal access"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute to order by."
+              }
+            ]
+          },
+          "docs": "Query Mavrck communities available to the authenticated administrator."
+        },
+        {
+          "info": {
+            "name": "Creates a community.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/communities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a community."
+        },
+        {
+          "info": {
+            "name": "Retrieve a single community.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/communities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single community."
+        },
+        {
+          "info": {
+            "name": "getUserInCommunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/communities/:communityId/accounts/:accountId",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateUserRoleInCommunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/communities/:communityId/accounts/:accountId",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "removeAccountFromCommunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/communities/:communityId/accounts/:accountId",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "addAccountToCommunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/communities/:communityId/accounts",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

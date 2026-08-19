@@ -1,0 +1,439 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Reward Wins API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RewardWins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all reward wins for an influencer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/influencers/:influencerId/reward-wins",
+            "params": [
+              {
+                "name": "influencerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "isFulfilled",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute to order by."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              }
+            ]
+          },
+          "docs": "Retrieve all reward wins for an influencer."
+        },
+        {
+          "info": {
+            "name": "bulkFulfillRewardWinsObjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/fulfill-objects/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkFulfillRewardWinsObjectsWithParams",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/fulfill-objects-with-params/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkUnfulfillRewardWinsObjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/unfulfill-objects/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkUpdateRewardWinsObjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/update-objects/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkUnarchiveRewardWinsObjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/unarchive-objects/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkUpdateRewardWinsFilterValue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/update-filter/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkUnarchiveRewardWinsFilterValue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/unarchive-filter/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getAllRewardWins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins",
+            "params": [
+              {
+                "name": "fulfillmentStatus",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userFilterData",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "excludedRewardWinIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includedRewardWinIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "daysReady",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "globalUserIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderField",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeListMember",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateRewardWin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "fulfillRewardWin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/:id/fulfillment",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "unfulfillRewardWin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/:id/unfulfillment",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "reverseRewardWin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/:id/reversal",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "voidTipaltiPayment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/:id/void-payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "unarchiveRewardWin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/:id/unarchival",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reward-wins/dashboard/summary",
+            "params": [
+              {
+                "name": "fulfillmentStatus",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userFilterData",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "excludedRewardWinIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includedRewardWinIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "daysReady",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderField",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

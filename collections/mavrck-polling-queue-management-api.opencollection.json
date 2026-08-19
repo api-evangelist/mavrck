@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Polling Queue Management API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Polling Queue Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "purgePollingQueue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/polling/management/queues/purge",
+            "params": [
+              {
+                "name": "queue",
+                "value": "",
+                "type": "query",
+                "description": "The queue type to purge (instagram, instagram-story, or non-instagram)"
+              }
+            ]
+          },
+          "docs": "Purge all messages from a specific polling queue.\nNote: Only one purge operation is allowed per queue every 60 seconds."
+        },
+        {
+          "info": {
+            "name": "getAllPollingQueueStats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/polling/management/queues/stats"
+          },
+          "docs": "Get statistics for all polling queues (Instagram, Instagram Story, Non-Instagram).\nReturns approximate message counts for each queue."
+        },
+        {
+          "info": {
+            "name": "getSinglePollingQueueStats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/polling/management/queues/stats/single",
+            "params": [
+              {
+                "name": "queue",
+                "value": "",
+                "type": "query",
+                "description": "The queue type to get stats for (instagram, instagram-story, or non-instagram)"
+              }
+            ]
+          },
+          "docs": "Get statistics for a specific polling queue."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

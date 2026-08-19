@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Influencer Contract Campaign Templates API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "InfluencerContractCampaignTemplates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get influencer contract template for this action group, referred to as a campaign client-side.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:campaignId/influencer-contract-templates",
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get influencer contract template for this action group, referred to as a campaign client-side."
+        },
+        {
+          "info": {
+            "name": "Create an influencer contract template for this campaign.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:campaignId/influencer-contract-templates",
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create an influencer contract template for this campaign."
+        },
+        {
+          "info": {
+            "name": "Generate a contract for this campaign, and update this campaign's template if necessary.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/action-groups/:campaignId/influencer-contract-templates/:id",
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Generate a contract for this campaign, and update this campaign's template if necessary."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

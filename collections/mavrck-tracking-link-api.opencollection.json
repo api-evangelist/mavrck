@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Tracking Link API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking Link",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a tracking link for an action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action/:id/link",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the action."
+              },
+              {
+                "name": "photo",
+                "value": "",
+                "type": "query",
+                "description": "A link to user's photo"
+              },
+              {
+                "name": "referrer",
+                "value": "",
+                "type": "query",
+                "description": "Referrer"
+              },
+              {
+                "name": "^utm_.+$",
+                "value": "",
+                "type": "query",
+                "description": "Utm variables"
+              }
+            ]
+          },
+          "docs": "Retrieve a tracking link for an action."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

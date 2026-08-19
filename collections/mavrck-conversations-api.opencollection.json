@@ -1,0 +1,488 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Conversations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the General Folders Unread Counts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/conversations/general-folders",
+            "params": [
+              {
+                "name": "keys",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the General Folders Unread Counts."
+        },
+        {
+          "info": {
+            "name": "Get the General Folders Unread Counts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/conversations/dynamic-campaign-folders",
+            "params": [
+              {
+                "name": "keys",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              }
+            ]
+          },
+          "docs": "Get the General Folders Unread Counts."
+        },
+        {
+          "info": {
+            "name": "Retrieve a message by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/messages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the message to retrieve."
+              },
+              {
+                "name": "includes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of message dimensions to return. If not specified, then return standard dimensions."
+              }
+            ]
+          },
+          "docs": "Retrieve a message by id."
+        },
+        {
+          "info": {
+            "name": "Send a new message.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/draft",
+            "params": [
+              {
+                "name": "replyToMessageId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Send a new message."
+        },
+        {
+          "info": {
+            "name": "Update the draft.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/draft/:messageId",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the draft."
+        },
+        {
+          "info": {
+            "name": "Throw out the draft.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/draft/:messageId",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Throw out the draft."
+        },
+        {
+          "info": {
+            "name": "Send a message.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/sendMessage/:messageId",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Send a message."
+        },
+        {
+          "info": {
+            "name": "Reply to a message.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/messages/:messageId/reply",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reply to a message."
+        },
+        {
+          "info": {
+            "name": "Retrieve conversations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/conversations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search for incentive title or influencer first name, last name, or email, using a trailing wildcard."
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "markedAsUnread",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve conversations."
+        },
+        {
+          "info": {
+            "name": "Retrieve conversations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/find-all-conversations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search for incentive title or influencer first name, last name, or email, using a trailing wildcard."
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "markedAsUnread",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve conversations."
+        },
+        {
+          "info": {
+            "name": "Retrieve conversations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/count-conversations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search for incentive title or influencer first name, last name, or email, using a trailing wildcard."
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "markedAsUnread",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve conversations."
+        },
+        {
+          "info": {
+            "name": "Retrieve a conversation by id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/conversations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Id of the conversation to retrieve."
+              },
+              {
+                "name": "includes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of conversation dimensions to return. If not specified, then return standard dimensions."
+              }
+            ]
+          },
+          "docs": "Retrieve a conversation by id."
+        },
+        {
+          "info": {
+            "name": "bulkMarkConversationsAsRead",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/conversations/bulk-action/read",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkMarkConversationsAsUnread",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/conversations/bulk-action/unread",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkArchiveConversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/conversations/bulk-action/archive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkUnarchiveConversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/conversations/bulk-action/unarchive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "uploadInlineImage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/inline-images",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getMessageEvents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/messages/:messageId/events",
+            "params": [
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

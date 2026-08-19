@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Facebook Profiles API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FacebookProfiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Facebook profiles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/facebook-profiles"
+          },
+          "docs": "Retrieve Facebook profiles."
+        },
+        {
+          "info": {
+            "name": "Designate a Facebook profile as active.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/facebook-profiles/:facebookProfileId/active",
+            "params": [
+              {
+                "name": "facebookProfileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Designate a Facebook profile as active."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

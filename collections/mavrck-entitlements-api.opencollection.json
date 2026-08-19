@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Entitlements API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entitlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getEntitlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/entitlements",
+            "params": [
+              {
+                "name": "featureIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateEntitlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/entitlements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkUpdateEntitlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/entitlements/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk enable/disable a feature flag for many communities in a single operation.\nReplaces the frontend pattern of firing N sequential PUT /v1/entitlements calls.\n\nAccepts three targeting modes (see BulkUpdateEntitlementsRequest):\n- allCommunities: updates every community + flips features.default_state\n- groups: backend resolves to matching community IDs (e.g. all omni instances)\n- communityIds: explicit list"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

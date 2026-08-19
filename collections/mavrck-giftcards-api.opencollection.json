@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Gift Cards API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GiftCards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getEmailTemplates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/gift-cards/email-templates"
+          }
+        },
+        {
+          "info": {
+            "name": "getGiftCardBalance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/gift-cards/balance"
+          }
+        },
+        {
+          "info": {
+            "name": "getGiftCardOptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/gift-cards/options"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

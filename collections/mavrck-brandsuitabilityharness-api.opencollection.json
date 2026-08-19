@@ -1,0 +1,319 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Brand Suitability Harness API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BrandSuitabilityHarness",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "harnessCreatorContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/global-users/:globalUserId/creator-context",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Builds a structured creator profile from platform data (social handles, bio, location, etc.) *"
+        },
+        {
+          "info": {
+            "name": "harnessSaveCreatorContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/global-users/:globalUserId/creator-context",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Builds (or accepts inline) creator context and persists it to DynamoDB, returning the stored record. *"
+        },
+        {
+          "info": {
+            "name": "harnessGetStoredCreatorContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/global-users/:globalUserId/creator-context/stored",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reads the stored creator context record from DynamoDB. *"
+        },
+        {
+          "info": {
+            "name": "harnessUpdateCreatorContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/global-users/:globalUserId/creator-context/stored",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partial-updates the stored creator context fields. *"
+        },
+        {
+          "info": {
+            "name": "harnessDeleteCreatorContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/global-users/:globalUserId/creator-context/stored",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the stored creator context record. *"
+        },
+        {
+          "info": {
+            "name": "harnessBrandContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/brand-context",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "harnessSaveBrandContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/brand-context",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Builds (or accepts inline) brand context and persists it to DynamoDB, returning the stored record. *"
+        },
+        {
+          "info": {
+            "name": "harnessGetStoredBrandContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/brand-context/stored",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Reads the stored brand context record from DynamoDB. *"
+        },
+        {
+          "info": {
+            "name": "harnessUpdateBrandContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/brand-context/stored",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partial-updates the stored brand context fields. *"
+        },
+        {
+          "info": {
+            "name": "harnessDeleteBrandContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/brand-context/stored",
+            "params": [
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes the stored brand context record. *"
+        },
+        {
+          "info": {
+            "name": "harnessCampaignContext",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/campaigns/:campaignId/campaign-context",
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "harnessResearch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/research",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the research pipeline: discovery (search) + enrichment (visit each URL for full page content).\nProvide creatorContext directly (e.g. from prod) to skip the buildCreatorContext step,\nor provide globalUserId to build it from local data. One of the two is required."
+        },
+        {
+          "info": {
+            "name": "harnessVerifySources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/verify-sources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs source verification against user-provided sources without running discovery.\nProvide creatorContext directly (e.g. from prod) to skip the buildCreatorContext step,\nor provide globalUserId to build it from local data. One of the two is required."
+        },
+        {
+          "info": {
+            "name": "harnessReverify",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/global-users/:globalUserId/reverify",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-runs verification on existing research from DynamoDB. Skips discovery.\nLoads stored findings and runs pre-filter + LLM verification.\nProvide creatorContext to skip buildCreatorContext, or omit to build from local data."
+        },
+        {
+          "info": {
+            "name": "harnessAssessMetric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/assess",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "harnessAssessFull",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/brand-suitability/harness/assess-full",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs the full assessment pipeline (exec) on stored or inline findings without persisting the report.\nBuilds missing contexts from local data; inline overrides take precedence. One of creatorContext or globalUserId required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Shareable Links Visitors API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ShareableLinksVisitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getShareableLinksVisitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/shareable-links/visitors",
+            "params": [
+              {
+                "name": "sharedCipherId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dashboardType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createShareableLinksVisitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/shareable-links/visitors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

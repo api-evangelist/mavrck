@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Payments Ledger API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PaymentsLedger",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getPaymentsLedgerV2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/payments-ledgerV2",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "onlyMostRecent",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paymentAccountIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionGroupIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "globalUserIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "rewardWinTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transactionStatuses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "budgetReferenceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getMostRecentLedgerRecordForRewardWin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/payments-ledgerV2/:rewardWinId",
+            "params": [
+              {
+                "name": "rewardWinId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getMostRecentLedgerRecordForStripeRewardWin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/payments-ledgerV2/stripe/:rewardWinId",
+            "params": [
+              {
+                "name": "rewardWinId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

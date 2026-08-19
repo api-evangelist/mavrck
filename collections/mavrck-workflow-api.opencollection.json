@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Workflow API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflow",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve performance forecast for an action group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/workflow/:actionGroupId/workflow-performance-forecast",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve performance forecast for an action group."
+        },
+        {
+          "info": {
+            "name": "Promote global userIds to list members and set their status to the initial workflow stage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/workflow/promote-initial",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Promote global userIds to list members and set their status to the initial workflow stage"
+        },
+        {
+          "info": {
+            "name": "Promote a List Member to their next status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/workflow/:listMemberId/promote",
+            "params": [
+              {
+                "name": "listMemberId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Promote a List Member to their next status."
+        },
+        {
+          "info": {
+            "name": "Get intial workflow status with automation rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/workflow/:activityId/get-initial-status-automation-rules",
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expectedNumberOfInfluencers",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get intial workflow status with automation rules"
+        },
+        {
+          "info": {
+            "name": "Promote many List Members to their next status.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/workflow/bulk-promote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Promote many List Members to their next status."
+        },
+        {
+          "info": {
+            "name": "Drop a List Member.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/workflow/:listMemberId/drop",
+            "params": [
+              {
+                "name": "listMemberId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Drop a List Member."
+        },
+        {
+          "info": {
+            "name": "Drop many List Members.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/workflow/bulk-drop",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Drop many List Members."
+        },
+        {
+          "info": {
+            "name": "Retrieve workflow status summary.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/workflow/:id/status-summary",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of Worklfow/List"
+              }
+            ]
+          },
+          "docs": "Retrieve workflow status summary."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

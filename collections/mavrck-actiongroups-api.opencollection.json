@@ -1,0 +1,545 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Action Groups API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ActionGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an action.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/re-order-actions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accepts an ordered list of action ids"
+        },
+        {
+          "info": {
+            "name": "Retrieve an individual action group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              },
+              {
+                "name": "hasActivated",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return already activated actions in the action group."
+              },
+              {
+                "name": "simple",
+                "value": "",
+                "type": "query",
+                "description": "If true, then do not include associated data."
+              }
+            ]
+          },
+          "docs": "Retrieve an individual action group."
+        },
+        {
+          "info": {
+            "name": "Update an action group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/action-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an action group."
+        },
+        {
+          "info": {
+            "name": "Delete an action group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/action-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an action group."
+        },
+        {
+          "info": {
+            "name": "Unarchive/Restore an action group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/unarchive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              }
+            ]
+          },
+          "docs": "Unarchive/Restore an action group"
+        },
+        {
+          "info": {
+            "name": "Retrieve all action groups.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search for action group title."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "CSV of desired statuses (e.g. status=LIVE,PAUSED)"
+              },
+              {
+                "name": "sortable",
+                "value": "",
+                "type": "query",
+                "description": "Whether an action group is available to be sorted."
+              },
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query",
+                "description": "Campaign Id"
+              },
+              {
+                "name": "audienceId",
+                "value": "",
+                "type": "query",
+                "description": "Audience Id"
+              },
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hasActivated",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return already activated actions in the action group."
+              },
+              {
+                "name": "eligibleToAddInfluencers",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return only action groups that have an application."
+              },
+              {
+                "name": "actionsNotIncluded",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return action groups without actions included."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Allows the client to indicate their channel, in order to filter irrelevant resources."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeExportData",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return action groups with the incentives summary and all affiliate data included. Used for the export."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of action group ids."
+              },
+              {
+                "name": "simple",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, this will only return action group attributes. Only usable by administrators and other mvk services."
+              },
+              {
+                "name": "communityIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all action groups."
+        },
+        {
+          "info": {
+            "name": "Create an action group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an action group."
+        },
+        {
+          "info": {
+            "name": "getActionGroupCandidateConversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/candidates/:globalUserId/conversations",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isArchived",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "markedAsUnread",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Update subscriber settings for a campaign for an authenticated account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/account/action-groups/:id/subscriber-settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update subscriber settings for a campaign for an authenticated account."
+        },
+        {
+          "info": {
+            "name": "Send a message to specified action group candidates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/bulk-message",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a message to specified action group candidates."
+        },
+        {
+          "info": {
+            "name": "Send a message to specified List Member.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/list-members/:globalUserId",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Send a message to specified List Member."
+        },
+        {
+          "info": {
+            "name": "If necessary, return campaign setup alert to marketer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/setup-alerts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "alert",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "If necessary, return campaign setup alert to marketer."
+        },
+        {
+          "info": {
+            "name": "Retrieve a summary of list member counts through the workflow stages.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/workflow-status-summary",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              }
+            ]
+          },
+          "docs": "Retrieve a summary of list member counts through the workflow stages."
+        },
+        {
+          "info": {
+            "name": "getSubscriberSettings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/action-groups/:id/subscriber-settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "copyActionGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/action-groups/:id/copies",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "getActionGroupTeaserById",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/action-group-teaser/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "assignIncentiveToActionGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/action-groups/:actionGroupId/incentives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "unassignIncentiveFromActionGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/action-groups/:actionGroupId/incentives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

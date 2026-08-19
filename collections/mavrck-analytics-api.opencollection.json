@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Analytics API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GetInfluencerIncentiveCosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/influencer-incentive-info",
+            "params": [
+              {
+                "name": "rewardWinIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "listMemberIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetEnrichCampaignsData",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/campaign-details",
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetCreatorsEnrichment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/creators-enrichment",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetCreatorDetails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/v2/creators-enrichment",
+            "params": [
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getCreatorDetailsMultiCommunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/v3/creators-enrichment",
+            "params": [
+              {
+                "name": "globalUserIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetContentEnrichment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/content-enrichment",
+            "params": [
+              {
+                "name": "activationId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "communityId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeAdditionalCreatorProfileInfo",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GetContentEnrichmentV2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/v2/content-enrichment",
+            "params": [
+              {
+                "name": "activationIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeAdditionalCreatorProfileInfo",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "backfillAnalyticsServiceData",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/backfill",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "backfillAnalyticsServiceData",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/backfill-cost",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GetCampaignReviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/reporting-details/reviews",
+            "params": [
+              {
+                "name": "campaignId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupBy",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

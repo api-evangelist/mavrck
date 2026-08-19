@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Later Influence™ Instance Level API",
+    "version": "1.2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instance Level",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getAllowedInstances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mavrck.co/v1/reporting/instances"
+          },
+          "docs": "Get all instances accessible by the provided API credentials"
+        },
+        {
+          "info": {
+            "name": "getInfoAboutInstanceAndCampaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mavrck.co/v1/reporting/instance/details"
+          },
+          "docs": "Get details for associated instance available for the provided API credentials. If the credentials have access to multiple instances, the first one will be returned, consider using `GET /instances/details` to get details for all instances."
+        },
+        {
+          "info": {
+            "name": "getInfoAboutMultipleInstancesAndCampaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mavrck.co/v1/reporting/instances/details"
+          },
+          "docs": "Get details for all the associated instances available for the provided API credentials"
+        },
+        {
+          "info": {
+            "name": "getInstancePerformance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mavrck.co/v1/reporting/instance/performance",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "instanceIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of campaign ids (max 50 items)"
+              },
+              {
+                "name": "reportingGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of reporting group ids"
+              }
+            ]
+          },
+          "docs": "Get instance performance details."
+        },
+        {
+          "info": {
+            "name": "getPerformanceOverTime",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mavrck.co/v1/reporting/instance/performance-over-time",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for the report, YYYY-MM-dd format"
+              },
+              {
+                "name": "instanceIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+              },
+              {
+                "name": "campaignIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of campaign ids (max 50 items)"
+              },
+              {
+                "name": "reportingGroupIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of reporting group ids"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The page you would like to get data for"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get instance performance details over time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

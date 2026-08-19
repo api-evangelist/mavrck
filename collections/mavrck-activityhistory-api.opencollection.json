@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Activity History API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ActivityHistory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a history.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/activity-history/:globalUserId",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the activity to filter the result set by."
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the influencer to filter the result set by."
+              },
+              {
+                "name": "eventTypes",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of event types to return. If not specified, then return default event types."
+              },
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "query",
+                "description": "A conversation's unique identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a history."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

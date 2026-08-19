@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Notifications API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all scheduled notifications in a list format.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/scheduled-notifications",
+            "params": [
+              {
+                "name": "notificationDefinitionKeys",
+                "value": "",
+                "type": "query",
+                "description": "Select only scheduled notifications associated with these specified notification definition keys."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute to order by."
+              },
+              {
+                "name": "sent",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "beforeSendTime",
+                "value": "",
+                "type": "query",
+                "description": "Select only notifications scheduled to be sent prior to this date-time."
+              }
+            ]
+          },
+          "docs": "Retrieve all scheduled notifications in a list format."
+        },
+        {
+          "info": {
+            "name": "Create a scheduled notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/scheduled-notifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a scheduled notification"
+        },
+        {
+          "info": {
+            "name": "Retrieve a single scheduled notification.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/scheduled-notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single scheduled notification."
+        },
+        {
+          "info": {
+            "name": "Update a scheduled notification. Notifications that have already been sent cannot be updated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/scheduled-notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of scheduled notification"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a scheduled notification. Notifications that have already been sent cannot be updated."
+        },
+        {
+          "info": {
+            "name": "Delete the specified scheduled notification. Notifications that have already been sent cannot be deleted.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/scheduled-notifications/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of scheduled notification"
+              }
+            ]
+          },
+          "docs": "Delete the specified scheduled notification. Notifications that have already been sent cannot be deleted."
+        },
+        {
+          "info": {
+            "name": "Approve a scheduled notification to be sent.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/scheduled-notifications/:id/approval",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of scheduled notification"
+              }
+            ]
+          },
+          "docs": "Approve a scheduled notification to be sent."
+        },
+        {
+          "info": {
+            "name": "Unapprove a scheduled notification to not be sent.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/scheduled-notifications/:id/unapproval",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of scheduled notification"
+              }
+            ]
+          },
+          "docs": "Unapprove a scheduled notification to not be sent."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

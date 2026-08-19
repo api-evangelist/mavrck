@@ -1,0 +1,314 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Global User Lists API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GlobalUserLists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add candidates of an action group to a global user list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/candidates/global-user-lists/:globalUserListId/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the action group that influencers are candidates of."
+              },
+              {
+                "name": "globalUserListId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add candidates of an action group to a global user list."
+        },
+        {
+          "info": {
+            "name": "Move candidates of an action group from one global user list to another.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/candidates/global-user-lists/:globalUserListId/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the action group that influencers are candidates of."
+              },
+              {
+                "name": "globalUserListId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move candidates of an action group from one global user list to another."
+        },
+        {
+          "info": {
+            "name": "Remove candidates of an action group from global user lists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/candidates/global-user-lists/members/remove",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the action group that influencers are candidates of."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove candidates of an action group from global user lists."
+        },
+        {
+          "info": {
+            "name": "Retrieve global user lists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/global-user-lists",
+            "params": [
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute to order by."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isArchived",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve global user lists."
+        },
+        {
+          "info": {
+            "name": "Create a global user list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/global-user-lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a global user list."
+        },
+        {
+          "info": {
+            "name": "Retrieve a single global user list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/global-user-lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single global user list."
+        },
+        {
+          "info": {
+            "name": "Update a global user list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/global-user-lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a global user list."
+        },
+        {
+          "info": {
+            "name": "Delete a global user list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/global-user-lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a global user list."
+        },
+        {
+          "info": {
+            "name": "Archive a global user list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/global-user-lists/:id/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive a global user list."
+        },
+        {
+          "info": {
+            "name": "Unarchive a global user list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/global-user-lists/:id/unarchive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unarchive a global user list."
+        },
+        {
+          "info": {
+            "name": "Add members to a global user list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/global-user-lists/:globalUserListId/members",
+            "params": [
+              {
+                "name": "globalUserListId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add members to a global user list."
+        },
+        {
+          "info": {
+            "name": "Move members from one global user list to another.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/global-user-lists/:globalUserListId/members",
+            "params": [
+              {
+                "name": "globalUserListId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move members from one global user list to another."
+        },
+        {
+          "info": {
+            "name": "Remove members from global user lists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/global-user-lists/members-remove",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove members from global user lists."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

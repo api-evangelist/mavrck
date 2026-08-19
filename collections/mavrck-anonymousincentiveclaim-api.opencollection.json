@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Anonymous Incentive Claim API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AnonymousIncentiveClaim",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Claim an incentive anonymously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/anonymous-incentive-claim",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Claim an incentive anonymously"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

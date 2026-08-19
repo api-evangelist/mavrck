@@ -1,0 +1,647 @@
+{
+  "item": [
+    {
+      "id": "211eb8f8-eadd-4d2e-8c8a-b49dd7e97ddd",
+      "name": "Instance Level",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94b2b66b-a8ea-4da9-8a48-d9562e7e2f18",
+          "name": "get Allowed Instances",
+          "request": {
+            "name": "get Allowed Instances",
+            "description": {
+              "content": "Get all instances accessible by the provided API credentials",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "reporting",
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b05cabf-8bd9-443c-984d-6a13016eba3e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reporting",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"instanceIds\": [\n      \"instance_123\",\n      \"instance_456\"\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"totalPages\": 10\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e2c4f56-482f-4ead-88bf-3c34df904cbc",
+          "name": "get Info About Instance And Campaigns",
+          "request": {
+            "name": "get Info About Instance And Campaigns",
+            "description": {
+              "content": "Get details for associated instance available for the provided API credentials. If the credentials have access to multiple instances, the first one will be returned, consider using `GET /instances/details` to get details for all instances.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "reporting",
+                "instance",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "204da1e6-a247-4ac6-aeb4-0c070ee4e1a1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reporting",
+                    "instance",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"instance_123\",\n    \"campaignsCount\": 5,\n    \"influencersCount\": 10,\n    \"campaigns\": [\n      {\n        \"id\": 49761,\n        \"title\": \"demo campaign 1\",\n        \"description\": \"\",\n        \"status\": \"LIVE\",\n        \"startDate\": \"2023-06-06T06:52:00.000Z\"\n      },\n      {\n        \"id\": 49762,\n        \"title\": \"demo campaign 2\",\n        \"description\": null,\n        \"status\": \"LIVE\",\n        \"startDate\": \"2023-06-07T06:29:00.000Z\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"totalPages\": 10\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05204559-3425-4fc8-a99a-b52642686e9c",
+          "name": "get Info About Multiple Instances And Campaigns",
+          "request": {
+            "name": "get Info About Multiple Instances And Campaigns",
+            "description": {
+              "content": "Get details for all the associated instances available for the provided API credentials",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "reporting",
+                "instances",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ef8be43-7a29-4ebb-98a3-d5d8759836b9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reporting",
+                    "instances",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81b281aa-3064-4077-b494-3286790afb5f",
+          "name": "get Instance Performance",
+          "request": {
+            "name": "get Instance Performance",
+            "description": {
+              "content": "Get instance performance details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "reporting",
+                "instance",
+                "performance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) Start date for the report, YYYY-MM-dd format"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) End date for the report, YYYY-MM-dd format"
+                },
+                {
+                  "disabled": false,
+                  "key": "instanceIds",
+                  "value": "<string>",
+                  "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+                },
+                {
+                  "disabled": false,
+                  "key": "instanceIds",
+                  "value": "<string>",
+                  "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+                },
+                {
+                  "disabled": false,
+                  "key": "campaignIds",
+                  "value": "<number>",
+                  "description": "A list of campaign ids (max 50 items)"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaignIds",
+                  "value": "<number>",
+                  "description": "A list of campaign ids (max 50 items)"
+                },
+                {
+                  "disabled": false,
+                  "key": "reportingGroupIds",
+                  "value": "<string>",
+                  "description": "A list of reporting group ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "reportingGroupIds",
+                  "value": "<string>",
+                  "description": "A list of reporting group ids"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "950b8c22-fecf-4a1c-8853-bd28785d8e2d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reporting",
+                    "instance",
+                    "performance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "instanceIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instanceIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "campaignIds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "campaignIds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "reportingGroupIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reportingGroupIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"engagements\": 1000,\n    \"impressions\": 10000,\n    \"engagementRate\": 0.1,\n    \"postsCount\": 50,\n    \"valueGenerated\": 5000,\n    \"returnOnInvestment\": 2.5,\n    \"estimatedContentCost\": 2000,\n    \"campaignsCost\": 3000,\n    \"conversionValue\": 7500\n  },\n  \"meta\": {\n    \"page\": 1,\n    \"totalPages\": 10\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "804bfba2-e7d6-4bc9-9799-3d9ae33a72b5",
+          "name": "get Performance Over Time",
+          "request": {
+            "name": "get Performance Over Time",
+            "description": {
+              "content": "Get instance performance details over time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "reporting",
+                "instance",
+                "performance-over-time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) Start date for the report, YYYY-MM-dd format"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) End date for the report, YYYY-MM-dd format"
+                },
+                {
+                  "disabled": false,
+                  "key": "instanceIds",
+                  "value": "<string>",
+                  "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+                },
+                {
+                  "disabled": false,
+                  "key": "instanceIds",
+                  "value": "<string>",
+                  "description": "A list of instance ids. If not provided, all instances associated with the API credentials will be considered."
+                },
+                {
+                  "disabled": false,
+                  "key": "campaignIds",
+                  "value": "<number>",
+                  "description": "A list of campaign ids (max 50 items)"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaignIds",
+                  "value": "<number>",
+                  "description": "A list of campaign ids (max 50 items)"
+                },
+                {
+                  "disabled": false,
+                  "key": "reportingGroupIds",
+                  "value": "<string>",
+                  "description": "A list of reporting group ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "reportingGroupIds",
+                  "value": "<string>",
+                  "description": "A list of reporting group ids"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1",
+                  "description": "The page you would like to get data for"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "month"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "269e4a1f-45bc-45de-a647-2b6397472d17",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reporting",
+                    "instance",
+                    "performance-over-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "instanceIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instanceIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "campaignIds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "campaignIds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "reportingGroupIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reportingGroupIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "month"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mavrck.co",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c0b40229-f898-4440-98f3-480ca726c16e",
+    "name": "Later Influence™ Instance Level API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n# Description\nThe Reporting API enables deep analysis and reporting of marketing campaigns, social media performance, and influencer effectiveness.\nIt provides comprehensive performance insights at multiple levels:\n- Instance Level: Get instance details, overall performance, and performance over time\n- Campaign Level: Retrieve detailed campaign performance metrics\n- Social Network Level: Analyze performance across different social networks and calculate return on investment\n- Influencer Level: Evaluate individual influencer performance\n- Post Level: Access granular performance data for individual posts\n\n# Authentication\nIn order to use the Reporting API, OAuth2 authentication is required. The API uses the client credentials flow for authentication. To obtain an access token:\n\n1. Request the client credentials (client ID and client secret) from the support team.\n2. Make a POST request to the token endpoint: `https://api.mavrck.co/oauth/token`, including your client credentials in the request body.\n\nCurl Example: \n```\ncurl --request POST \\\n  --url 'https://api.mavrck.co/oauth/token' \\\n  --header 'Content-Type: application/json' \\\n  --header 'accept: application/json' \\\n  --data '{\n    \"clientId\": \"<client_id>\",\n    \"clientSecret\": \"<client_secret>\"\n  }'\n```\n\n3. Include the obtained access token in the Authorization header of your API requests:\n\nCurl Example: \n```\ncurl --request GET \\\n  --url 'https://api.mavrck.co/v1/reporting/instance/details' \\\n  --header 'Content-Type: application/json' \\\n  --header 'accept: application/json' \\\n  --header 'Authorization: Bearer **<your_access_token>**' \\\n```\n\nFor security reasons, access tokens have a limited lifespan of 12 hours. You should implement a mechanism to refresh the token when it expires.\n\n# Data Availability\n- Most endpoints return analytics that are current up to the previous day, as several social media platforms apply a 24-hour reporting delay.\n- Data access is limited to the specific account or instances associated with the provided API credentials.\n- Analytics are recorded on a daily basis and appear only when they fall within the selected date-range filters. For example, if a post was published a week ago but receives its first interaction today, that interaction will only be included when today’s date is part of the chosen range.\n\n# Base Filters\nAll endpoints support the following filters:\n- `startDate` (ISO 8601 format, e.g. 2024-01-01)\n- `endDate` (ISO 8601 format, e.g. 2024-01-01). There is a limit of up to 2 years for the selected date range.\n- `instanceIds` array of instance ids. If not provided, all instances associated with the API credentials will be considered.\n- `campaignIds` array of campaign ids, if no campaign ids are provided, all campaigns for the instance will be used\n- `reportingGroupIds` array of reporting group ids, if no reporting group ids are provided, all reporting groups for the instance will be used\n\n# Pagination\n- The pagination is available for endpoints returning large datasets.\n- Use `pageSize` and `pageNumber` query parameters to control the results. For the `pageSize` parameter, the default is 50 and the maximum is 100.\n\n# Versioning\n- API versioning supported through URI path\n\n# Changelog\n\n---\n\n## 2025-11-25 Introduce Multi-instance support\n### Added\n- `GET /instances` API - Retrieve the list of instances accessible by the provided API credentials.\n- `GET /instances/details` API - Get detailed information about the instances associated with the provided API credentials such as `influencersCount`, `campaignsCount`, and other relevant metrics. It is similar to the existing `GET /instance/details` endpoint but supports multiple instances.\n\n### Changed\n- All endpoints now support an `instanceIds` query parameter, allowing you to filter results by specific instance IDs when your credentials have access to multiple instances.\n- `GET /campaigns/performance` response includes a new string field `instanceId`.\n- `GET /post/performance` response includes a new string field `instanceId`.\n\n\n\nContact Support:\n Name: Developer\n Email: urvash.chheda@later.com",
+      "type": "text/plain"
+    }
+  }
+}

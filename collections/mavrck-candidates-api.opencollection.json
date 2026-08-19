@@ -1,0 +1,329 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Candidates API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Candidates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an assessment for an influencer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/candidates/:globalUserId/assessment",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an assessment for an influencer."
+        },
+        {
+          "info": {
+            "name": "Update an assessment for an influencer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/candidates/:globalUserId/assessment",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an assessment for an influencer."
+        },
+        {
+          "info": {
+            "name": "Delete an assessment for an influencer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/candidates/:globalUserId/assessment",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "assessorEmail",
+                "value": "",
+                "type": "query",
+                "description": "Email of the assessor whose assessment should be deleted. Scopes the deletion to the calling reviewer so concurrent reviewers' assessments are not affected."
+              },
+              {
+                "name": "assessorName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the assessor whose assessment should be deleted."
+              }
+            ]
+          },
+          "docs": "Delete an assessment for an influencer."
+        },
+        {
+          "info": {
+            "name": "Retrieve all action group candidates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/candidates",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              },
+              {
+                "name": "options",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Select the direction by which the data will be ordered, ascending or descending."
+              },
+              {
+                "name": "userFilter",
+                "value": "",
+                "type": "query",
+                "description": "Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search parameter."
+              },
+              {
+                "name": "statusId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "customStatusId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "customInfluencerStatusId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dueDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "completed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "optedIn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "participating",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeInstagramPosts",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeViewed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeCommentsCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeDraftComments",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "assessorEmail",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orderProperty",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all action group candidates."
+        },
+        {
+          "info": {
+            "name": "Update the status of candidates.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/action-groups/:id/candidates",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status of candidates."
+        },
+        {
+          "info": {
+            "name": "Retrieve a candidate of an action group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/candidates/:globalUserId",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path",
+                "description": "ID of action group"
+              },
+              {
+                "name": "globalUserId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the global user"
+              }
+            ]
+          },
+          "docs": "Retrieve a candidate of an action group."
+        },
+        {
+          "info": {
+            "name": "Opt-in candidates in bulk.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/bulk-opt-in",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Opt-in candidates in bulk."
+        },
+        {
+          "info": {
+            "name": "Confirm participation/non-participation in an action group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/action-groups/:actionGroupId/confirm-participation",
+            "params": [
+              {
+                "name": "actionGroupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirm participation/non-participation in an action group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

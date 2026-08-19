@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO TikTok TTCM API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TikTok TTCM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "purgeTikTokQueue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/ttcm/management/queues/purge",
+            "params": [
+              {
+                "name": "queue",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getTikTokQueueStats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/ttcm/management/queues/stats"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Snapchat Content API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SnapchatContent",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "triggerSnapchatContentRefreshJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/snapchat-content-refresh-jobs"
+          }
+        },
+        {
+          "info": {
+            "name": "refreshContentForProfile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/snapchat-content-refresh-jobs/:creatorProfileId",
+            "params": [
+              {
+                "name": "creatorProfileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

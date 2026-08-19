@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO Influencer Contract Community Templates API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "InfluencerContractCommunityTemplates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get influencer contract template for this community.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/influencer-contract-templates"
+          },
+          "docs": "Get influencer contract template for this community."
+        },
+        {
+          "info": {
+            "name": "Update this community's influencer contract template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/influencer-contract-templates/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update this community's influencer contract template"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

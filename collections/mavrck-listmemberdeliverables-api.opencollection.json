@@ -1,0 +1,191 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MAVRCK.IO List Member Deliverables API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api-key",
+      "value": "{{api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ListMemberDeliverables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getListMemberDeliverables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/lists/:listId/list-member-deliverables",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "listMemberId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "contentType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "listCustomStatusId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createListMemberDeliverable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/lists/:listId/list-member-deliverables",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "bulkAssignDeliverables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/lists/:listId/list-member-deliverables/bulk-assign",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "queryBulkAssignSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://app.splashscore.com/v1/v1/lists/:listId/list-member-deliverables/bulk-assign-summary",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "updateListMemberDeliverable",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://app.splashscore.com/v1/v1/lists/:listId/list-member-deliverables/:listMemberDeliverableId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "listMemberDeliverableId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "deleteListMemberDeliverable",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://app.splashscore.com/v1/v1/lists/:listId/list-member-deliverables/:listMemberDeliverableId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "listMemberDeliverableId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getListMemberDeliverablesSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://app.splashscore.com/v1/v1/lists/:listId/list-member-deliverables/summary",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "listCustomStatusId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
