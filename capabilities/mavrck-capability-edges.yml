@@ -1,0 +1,191 @@
+slug: mavrck
+provider: Mavrck
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 17
+edges:
+- tag: DataSubjectRequest
+  spec_file: mavrck-datasubjectrequest-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.88
+  evidence: POST /data-subject-request/ create 'Creates or updates a data subject request'
+  reason: Explicitly handles data subject requests, the GDPR/CCPA privacy rights mechanism, which is squarely
+    privacy and data protection management.
+- tag: ActionGroups
+  spec_file: mavrck-actiongroups-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.8
+  evidence: POST /action-groups createActionGroup "Create an action group."; GET /action-groups/{id}/setup-alerts
+    "If necessary, return campaign setup alert to marketer."; POST /action-groups/{actionGroupId}/bulk-message
+    "Send a message to specified action group candidates."
+  reason: Full lifecycle of influencer/advocacy campaigns ('action groups') including creation, subscriber
+    settings, candidate messaging and marketer setup alerts — social campaign management, i.e. Digital
+    Marketing Management.
+- tag: MembershipPurchases
+  spec_file: mavrck-membershippurchases-api-openapi.yml
+  capability_id: BC-420.40
+  capability_id_l1: BC-420
+  capability_name: Loyalty & Retention Management
+  confidence: 0.8
+  evidence: POST /v1/membership-points-for-purchase  awardPointsForPurchase (PostMembershipPurchaseBody)
+  reason: Awarding member points for a recorded purchase is loyalty programme point accrual, i.e. loyalty/retention
+    management for the brand's advocate community.
+- tag: LaterInfluencer
+  spec_file: mavrck-laterinfluencer-api-openapi.yml
+  capability_id: BC-400
+  capability_id_l1: BC-400
+  capability_name: Marketing Management
+  confidence: 0.78
+  evidence: GET /v1/later-influencers/{influencerIdOrCreatorId}/campaigns; POST .../campaigns/{campaignId}/drafts  submitDraft;
+    POST .../concepts  submitConcept; POST .../decline-invitation  declineCampaignInvitation
+  reason: 'Creator-side surface for influencer marketing campaigns: campaign membership/invitations, content
+    concept and draft submission, incentives. This plainly realises Marketing Management, but the evidence
+    straddles digital/social campaign execution (BC-400.60) and influencer content production (BC-400.70),
+    so no L2 is asserted.'
+- tag: Activations
+  spec_file: mavrck-activations-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: POST /action/{actionId}/activation  Create an activation when an action is completed by a
+    user.; PUT /v1/activations/{activationId}/approveApprovalStatus
+  reason: Activations record influencer/advocate campaign participation and the approval of the resulting
+    social content — execution and content approval of social marketing campaigns, which sits under digital
+    marketing management.
+- tag: Campaigns
+  spec_file: mavrck-campaigns-api-openapi.yml
+  capability_id: BC-400
+  capability_id_l1: BC-400
+  capability_name: Marketing Management
+  confidence: 0.75
+  evidence: GET /v1/campaigns getAllCampaigns, POST /v1/campaigns createCampaign; schemas Campaign, Audience,
+    Incentive, ListDeliverable, ConversionTag
+  reason: CRUD over influencer marketing campaigns with audiences, incentives, deliverables and conversion
+    tags — clearly Marketing Management; ambiguous between demand generation and digital/social marketing
+    sub-capabilities, so L1 only.
+- tag: ExternalClients
+  spec_file: mavrck-externalclients-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.72
+  evidence: POST /v1/admin/external-clients/{clientId}/secrets  regenerateExternalClientSecret
+  reason: Creates, lists and deletes external API client registrations and regenerates their client secrets,
+    associating them with instances — issuance and stewardship of API/developer credentials for third-party
+    integrators.
+- tag: InfluencerCampaign
+  spec_file: mavrck-influencercampaign-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.72
+  evidence: GET /v1/influencer-campaign-history getInfluencerCampaignHistory; GET /v1/influencer-campaign/{actionGroupId}
+    getInfluencerCampaign
+  reason: Operations retrieve influencer campaigns and their history for a social influencer marketing
+    platform, which is social/digital marketing campaign management rather than any content-production
+    capability.
+- tag: ReferralProgram
+  spec_file: mavrck-referralprogram-api-openapi.yml
+  capability_id: BC-420.40
+  capability_id_l1: BC-420
+  capability_name: Loyalty & Retention Management
+  confidence: 0.72
+  evidence: '''Retrieve a community''s referral program activity'' / ''Update a community''s referral
+    program incentives'' with schemas IncentiveDeprecated, IncentiveClaimDeprecated'
+  reason: Manages referral programme activity and incentive terms/claims for a brand community — clearly
+    referral/advocacy programme administration, which sits under Loyalty & Retention Management.
+- tag: Action Groups
+  spec_file: mavrck-action-groups-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: GET /v1/action-groups/{actionGroupId}/participants getActionGroupParticipants; schemas ActionGroupParticipantTiktokProfileDto,
+    TikTokAudienceGendersDistribution, ActionGroupParticipantCostAndPerformanceDto, PostActivationsRequestBody
+  reason: The operations manage participants and activations in an influencer campaign ('action group')
+    with social-platform profile, audience and cost/performance data — social/influencer campaign execution,
+    which is Digital Marketing Management.
+- tag: Actions
+  spec_file: mavrck-actions-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: POST /action-groups/{actionGroupId}/actions  createAction  Create an action.; POST /action-groups/{actionGroupId}/referral-actions  createReferralAction
+  reason: Actions are the tasks creators perform inside an influencer campaign (including referral actions,
+    incentives and conversation templates), i.e. configuration of social/advocacy marketing campaign mechanics
+    rather than any generic technical object.
+- tag: Budgets
+  spec_file: mavrck-budgets-api-openapi.yml
+  capability_id: BC-400.50
+  capability_id_l1: BC-400
+  capability_name: Marketing Operations Management
+  confidence: 0.7
+  evidence: GET /v1/budgets/community  getCommunityBudgets; POST /v1/budgets  createBudget
+  reason: Creation and reporting of budgets for influencer/action-group campaign spend — marketing budget
+    administration, which sits in Marketing Operations Management.
+- tag: Campaign Level
+  spec_file: mavrck-campaign-level-api-openapi.yml
+  capability_id: BC-400.50
+  capability_id_l1: BC-400
+  capability_name: Marketing Operations Management
+  confidence: 0.7
+  evidence: GET /v1/reporting/campaign/performance  getCampaignPerformance; 'deep analysis and reporting
+    of marketing campaigns, social media performance, and influencer effectiveness'
+  reason: Campaign performance reporting for marketing/influencer campaigns — marketing measurement within
+    Marketing Operations Management.
+- tag: CampaignPerformance
+  spec_file: mavrck-campaignperformance-api-openapi.yml
+  capability_id: BC-400.50
+  capability_id_l1: BC-400
+  capability_name: Marketing Operations Management
+  confidence: 0.7
+  evidence: GET /v1/campaign-performance/influencers-metrics  getInfluencersMetrics; GET /v1/campaign-performance/audience-insights
+  reason: Delivers campaign post, influencer and audience performance metrics and conversions — marketing
+    campaign measurement and reporting.
+- tag: Influencer Level
+  spec_file: mavrck-influencer-level-api-openapi.yml
+  capability_id: BC-400.50
+  capability_id_l1: BC-400
+  capability_name: Marketing Operations Management
+  confidence: 0.7
+  evidence: '"The Reporting API enables deep analysis and reporting of marketing campaigns, social media
+    performance, and influencer effectiveness"; GET /v1/reporting/influencer/performance getInfluencerPerformance'
+  reason: Campaign and influencer performance measurement and reporting is marketing measurement/operations.
+    The description explicitly frames it as reporting on marketing campaigns and influencer effectiveness.
+- tag: Instance Level
+  spec_file: mavrck-instance-level-api-openapi.yml
+  capability_id: BC-400.50
+  capability_id_l1: BC-400
+  capability_name: Marketing Operations Management
+  confidence: 0.7
+  evidence: '"The Reporting API enables deep analysis and reporting of marketing campaigns, social media
+    performance, and influencer effectiveness"; getInstancePerformance; getPerformanceOverTime'
+  reason: Instance-level reporting delivers marketing campaign and social performance measurement, which
+    sits in marketing operations/measurement; 'Instance' itself is a tenant scope, not a business object.
+- tag: Social Network Level
+  spec_file: mavrck-social-network-level-api-openapi.yml
+  capability_id: BC-400.50
+  capability_id_l1: BC-400
+  capability_name: Marketing Operations Management
+  confidence: 0.7
+  evidence: '"GET /v1/reporting/network/performance getNetworkPerformance", "findReturnOfInvestments";
+    description: "deep analysis and reporting of marketing campaigns, social media performance, and influencer
+    effectiveness"'
+  reason: Reporting/ROI analytics over influencer marketing campaigns by social network — marketing measurement
+    rather than any media-production capability. L2 assigned to marketing operations measurement, though
+    digital marketing analytics is a near alternative, hence moderate confidence.
