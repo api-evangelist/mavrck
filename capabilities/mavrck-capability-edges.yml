@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 17
+edge_count: 27
 edges:
 - tag: DataSubjectRequest
   spec_file: mavrck-data-subject-request-api-openapi.yml
@@ -79,6 +79,18 @@ edges:
   reason: CRUD over influencer marketing campaigns with audiences, incentives, deliverables and conversion
     tags — clearly Marketing Management; ambiguous between demand generation and digital/social marketing
     sub-capabilities, so L1 only.
+- tag: Drafts
+  spec_file: mavrck-drafts-api-openapi.yml
+  capability_id: BC-400.70
+  capability_id_l1: BC-400
+  capability_name: Content Marketing Management
+  confidence: 0.72
+  evidence: POST /v1/draft-content createDraftContent; PUT /v1/draft-content/{draftContentId}/status updateDraftContentStatus;
+    PUT .../feedback updateDraftContentFeedback; POST .../comments createDraftContentComment
+  reason: Full draft-content lifecycle with status transitions, feedback and comments between brand admins
+    and influencers — content production, review and approval workflow, i.e. Content Marketing Management.
+    Some chance a reviewer would file this under broader campaign/content operations, so not top confidence.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: ExternalClients
   spec_file: mavrck-external-clients-api-openapi.yml
   reanchored_from: mavrck-externalclients-api-openapi.yml
@@ -133,6 +145,18 @@ edges:
   reason: Actions are the tasks creators perform inside an influencer campaign (including referral actions,
     incentives and conversation templates), i.e. configuration of social/advocacy marketing campaign mechanics
     rather than any generic technical object.
+- tag: Analytics
+  spec_file: mavrck-analytics-api-openapi.yml
+  capability_id: BC-400.50
+  capability_id_l1: BC-400
+  capability_name: Marketing Operations Management
+  confidence: 0.7
+  evidence: GET /v1/reporting-details/campaign-details GetEnrichCampaignsData; GET /v1/reporting-details/influencer-incentive-info
+    GetInfluencerIncentiveCosts; GET /v1/reporting-details/reviews GetCampaignReviews
+  reason: Campaign, creator and content reporting plus incentive cost reporting — marketing measurement
+    and campaign performance analytics, i.e. marketing operations measurement. Could alternatively be
+    read as general analytics/BI, hence 0.7.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Budgets
   spec_file: mavrck-budgets-api-openapi.yml
   capability_id: BC-400.50
@@ -161,6 +185,53 @@ edges:
   evidence: GET /v1/campaign-performance/influencers-metrics  getInfluencersMetrics; GET /v1/campaign-performance/audience-insights
   reason: Delivers campaign post, influencer and audience performance metrics and conversions — marketing
     campaign measurement and reporting.
+- tag: Concepts
+  spec_file: mavrck-concepts-api-openapi.yml
+  capability_id: BC-400.70
+  capability_id_l1: BC-400
+  capability_name: Content Marketing Management
+  confidence: 0.7
+  evidence: POST /v1/concept-content createConceptContent; PUT /v1/concept-content/{conceptContentId}/status
+    updateConceptContentStatus; PUT .../feedback updateConceptContentFeedback; schema InfluencerConceptContentDto
+  reason: Creation, review, status approval and feedback/commenting on influencer content concepts — the
+    content production and approval workflow the vendor describes as 'content workflows'. Best fits Content
+    Marketing Management (editorial planning and content production).
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Custom Analytics Admin
+  spec_file: mavrck-custom-analytics-admin-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: GET /v1/admin/custom-analytics/configs listCustomAnalyticsConfigs; getCustomAnalyticsConfigByCommunityAndType;
+    schema CustomAnalyticsConfigResponse with dashboardType
+  reason: Administration of analytics dashboard configurations per community/dashboard type — delivery
+    and configuration of BI/reporting. Mapped to Analytics & BI Management; it is partly admin configuration,
+    so confidence is moderate.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Custom Analytics Controller
+  spec_file: mavrck-custom-analytics-controller-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: GET /v1/custom-analytics/omni-analytics/embed-dashboard getOmniAnalyticsDashboard; GET /v1/custom-analytics/dashboard-types;
+    schemas DashboardTypesResponse, EmbedUrlResponse
+  reason: Serves embedded analytics dashboards and dashboard type listings — analytics/BI delivery to
+    users. Small surface, so moderate confidence.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: Entitlements
+  spec_file: mavrck-entitlements-api-openapi.yml
+  capability_id: BC-4240
+  capability_id_l1: BC-4240
+  capability_name: Subscription Lifecycle Management
+  confidence: 0.7
+  evidence: GET /v1/entitlements getEntitlements; PUT /v1/entitlements/bulk bulkUpdateEntitlements; schemas
+    FeatureId, EntitlementGroup
+  reason: Operations administer feature entitlements per customer/instance, which sits in the subscription
+    entitlement lifecycle. L2 left null because the surface could be plan/entitlement design or runtime
+    enforcement.
+  recovered_from: sweep-20260828T235257Z-edges.json
 - tag: Influencer Level
   spec_file: mavrck-influencer-level-api-openapi.yml
   capability_id: BC-400.50
@@ -181,6 +252,52 @@ edges:
     performance, and influencer effectiveness"; getInstancePerformance; getPerformanceOverTime'
   reason: Instance-level reporting delivers marketing campaign and social performance measurement, which
     sits in marketing operations/measurement; 'Instance' itself is a tenant scope, not a business object.
+- tag: Instances
+  spec_file: mavrck-instances-api-openapi.yml
+  capability_id: BC-4230.20
+  capability_id_l1: BC-4230
+  capability_name: Tenant Configuration Management
+  confidence: 0.7
+  evidence: getInstanceBranding / updateInstanceBranding / deleteInstanceBranding; schema S4instanceBrandingResponse,
+    UpdateInstanceBrandingBody
+  reason: CRUD over per-instance branding settings is per-tenant configuration/branding above the shared
+    product baseline, not corporate brand management. Operations are explicit about 'instance-branding'.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: ListDeliverables
+  spec_file: mavrck-listdeliverables-api-openapi.yml
+  capability_id: BC-400
+  capability_id_l1: BC-400
+  capability_name: Marketing Management
+  confidence: 0.7
+  evidence: POST /v1/lists/{listId}/list-deliverables  createListDeliverable ; schemas ListDeliverable,
+    NetworkName, NetworkSlug
+  reason: Defines required content deliverables per social network for an influencer campaign list — marketing
+    campaign execution. Sub-capability (content vs digital marketing) not determinable from the operations.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: ListMemberDeliverables
+  spec_file: mavrck-listmemberdeliverables-api-openapi.yml
+  capability_id: BC-400
+  capability_id_l1: BC-400
+  capability_name: Marketing Management
+  confidence: 0.7
+  evidence: POST /v1/lists/{listId}/list-member-deliverables/bulk-assign  bulkAssignDeliverables ; schema
+    ListMemberDeliverablesSummaryGetResponse
+  reason: Assigning and tracking per-influencer content deliverables within a campaign list is influencer
+    marketing campaign execution. L1 only, as the evidence does not pin content vs digital marketing.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: PaymentAccount
+  spec_file: mavrck-payment-account-api-openapi.yml
+  capability_id: BC-200
+  capability_id_l1: BC-200
+  capability_name: Financial Management
+  confidence: 0.7
+  evidence: POST /v1/payment-accounts/{paymentAccountId}/transactions recordAccountingTransaction; schemas
+    AccountingTransactionType, TaxLineItem, PaymentAccountNetDeposits
+  reason: Manages funding/payment accounts, records accounting transactions with tax line items, and tracks
+    net deposits and supported currencies — financial accounting operations. Left at L1 because the surface
+    straddles ledger posting, payables and cash/currency management without one clearly dominant sub-capability.
+  recovered_from: sweep-20260828T235257Z-edges.json
+  reanchored_from: mavrck-paymentaccount-api-openapi.yml
 - tag: Social Network Level
   spec_file: mavrck-social-network-level-api-openapi.yml
   capability_id: BC-400.50
