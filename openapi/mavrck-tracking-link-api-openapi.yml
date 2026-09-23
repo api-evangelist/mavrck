@@ -16,7 +16,7 @@ paths:
       x-handler: tracking_links/tracking_link_controller.js
       x-access:
       - influencer
-      summary: Retrieve a tracking link for an action.
+      summary: Retrieve a tracking link for an action
       operationId: getActionTrackingLink
       parameters:
       - name: id
@@ -91,6 +91,18 @@ paths:
       - Tracking Link
 components:
   schemas:
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
     Error:
       type: object
       properties:
@@ -122,18 +134,6 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
   securitySchemes:
     apiKey:
       type: apiKey

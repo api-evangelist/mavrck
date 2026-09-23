@@ -154,6 +154,8 @@ paths:
         required: false
         schema:
           type: string
+      summary: Get payments ledger V2
+      x-summary-source: derived
   /v1/payments-ledgerV2/{rewardWinId}:
     get:
       operationId: getMostRecentLedgerRecordForRewardWin
@@ -197,6 +199,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get most recent ledger record for reward win
+      x-summary-source: derived
   /v1/payments-ledgerV2/stripe/{rewardWinId}:
     get:
       operationId: getMostRecentLedgerRecordForStripeRewardWin
@@ -240,8 +244,27 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get most recent ledger record for stripe reward win
+      x-summary-source: derived
 components:
   schemas:
+    PaymentsLedgerMetadata:
+      properties:
+        totalCount:
+          type: number
+          format: double
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+      required:
+      - totalCount
+      - limit
+      - offset
+      type: object
+      additionalProperties: false
     PaymentsLedgerQueryResponse:
       properties:
         meta:
@@ -253,6 +276,47 @@ components:
       required:
       - meta
       - data
+      type: object
+      additionalProperties: false
+    TaxLineItemType:
+      type: string
+      enum:
+      - GST
+      - HST
+      - VAT
+      - PST
+      - QST
+      - RST
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     PaymentsLedger:
@@ -441,23 +505,26 @@ components:
       - budgetReferenceIdType
       type: object
       additionalProperties: false
-    TaxLineItemType:
-      type: string
+    DBRewardWinType:
       enum:
-      - GST
-      - HST
-      - VAT
-      - PST
-      - QST
-      - RST
-    PaymentAppProvider:
-      enum:
-      - PAYPAL
-      - STRIPE
-      - TANGO_CARDS
-      - MAVELY
-      - TIPALTI
+      - OTHER
+      - CASH
+      - PRODUCT
+      - PROMO_CODE
+      - GIFT_CARD
+      - SHOPIFY_DISCOUNT
       type: string
+    TaxLineItem:
+      properties:
+        amount:
+          type: number
+          format: double
+        type:
+          $ref: '#/components/schemas/TaxLineItemType'
+      required:
+      - amount
+      - type
+      type: object
     ForbiddenError:
       properties:
         message:
@@ -474,14 +541,18 @@ components:
       - details
       type: object
       additionalProperties: false
-    DBRewardWinType:
+    PaymentAppProvider:
       enum:
-      - OTHER
+      - PAYPAL
+      - STRIPE
+      - TANGO_CARDS
+      - MAVELY
+      - TIPALTI
+      type: string
+    PaymentAccountType:
+      enum:
       - CASH
-      - PRODUCT
-      - PROMO_CODE
       - GIFT_CARD
-      - SHOPIFY_DISCOUNT
       type: string
     ServerError:
       properties:
@@ -489,71 +560,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    PaymentsLedgerMetadata:
-      properties:
-        totalCount:
-          type: number
-          format: double
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-      required:
-      - totalCount
-      - limit
-      - offset
-      type: object
-      additionalProperties: false
-    TaxLineItem:
-      properties:
-        amount:
-          type: number
-          format: double
-        type:
-          $ref: '#/components/schemas/TaxLineItemType'
-      required:
-      - amount
-      - type
-      type: object
-    PaymentAccountType:
-      enum:
-      - CASH
-      - GIFT_CARD
-      type: string
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
         details:
           properties: {}
           additionalProperties:

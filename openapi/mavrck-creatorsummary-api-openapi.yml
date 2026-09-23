@@ -59,6 +59,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get creator summary
+      x-summary-source: derived
     put:
       operationId: refreshCreatorSummary
       responses:
@@ -115,56 +117,10 @@ paths:
         required: false
         schema:
           type: boolean
+      summary: Refresh creator summary
+      x-summary-source: derived
 components:
   schemas:
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     CreatorSummaryDTO:
       properties:
         creatorPersona:
@@ -222,6 +178,38 @@ components:
       - brandPartnerships
       type: object
       additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     CachedCreatorSummaryResponse:
       properties:
         summary:
@@ -252,12 +240,28 @@ components:
       - cached
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:

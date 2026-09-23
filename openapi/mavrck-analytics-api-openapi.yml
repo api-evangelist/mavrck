@@ -82,6 +82,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get influencer incentive costs
+      x-summary-source: derived
   /v1/reporting-details/campaign-details:
     get:
       operationId: GetEnrichCampaignsData
@@ -129,6 +131,8 @@ paths:
           items:
             type: number
             format: double
+      summary: Get enrich campaigns data
+      x-summary-source: derived
   /v1/reporting-details/creators-enrichment:
     get:
       operationId: GetCreatorsEnrichment
@@ -181,6 +185,8 @@ paths:
         required: true
         schema:
           type: string
+      summary: Get creators enrichment
+      x-summary-source: derived
   /v1/reporting-details/v2/creators-enrichment:
     get:
       operationId: GetCreatorDetails
@@ -233,6 +239,8 @@ paths:
         required: true
         schema:
           type: string
+      summary: Get creator details
+      x-summary-source: derived
   /v1/reporting-details/v3/creators-enrichment:
     get:
       operationId: getCreatorDetailsMultiCommunity
@@ -280,6 +288,8 @@ paths:
           items:
             type: number
             format: double
+      summary: Get creator details multi community
+      x-summary-source: derived
   /v1/reporting-details/content-enrichment:
     get:
       operationId: GetContentEnrichment
@@ -338,6 +348,8 @@ paths:
         schema:
           type: boolean
           default: true
+      summary: Get content enrichment
+      x-summary-source: derived
   /v1/reporting-details/v2/content-enrichment:
     get:
       operationId: GetContentEnrichmentV2
@@ -391,6 +403,8 @@ paths:
         schema:
           type: boolean
           default: true
+      summary: Get content enrichment V2
+      x-summary-source: derived
   /v1/reporting-details/backfill:
     post:
       operationId: backfillAnalyticsServiceData
@@ -429,6 +443,8 @@ paths:
             schema:
               $ref: '#/components/schemas/BackfillAnalyticsDataEntryPointJobPayload'
         required: true
+      summary: Backfill analytics service data
+      x-summary-source: derived
   /v1/reporting-details/backfill-cost:
     post:
       operationId: backfillAnalyticsServiceData
@@ -467,6 +483,8 @@ paths:
             schema:
               $ref: '#/components/schemas/BackfillAnalyticsCostDataJobPayload'
         required: true
+      summary: Backfill analytics service data
+      x-summary-source: derived
   /v1/reporting-details/reviews:
     get:
       operationId: GetCampaignReviews
@@ -520,8 +538,220 @@ paths:
         schema:
           type: string
           default: TOTAL
+      summary: Get campaign reviews
+      x-summary-source: derived
 components:
   schemas:
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ContentEngagements:
+      properties:
+        avgWatchTime:
+          type: number
+          format: double
+        videoCompletionRate:
+          type: number
+          format: double
+        videoViewTotalTime:
+          type: number
+          format: double
+        followersAtPostDate:
+          type: number
+          format: double
+        engagements:
+          type: number
+          format: double
+        reach:
+          type: number
+          format: double
+        videoViews:
+          type: number
+          format: double
+        viewsPaid:
+          type: number
+          format: double
+        viewsOrganic:
+          type: number
+          format: double
+        views:
+          type: number
+          format: double
+        swipeUps:
+          type: number
+          format: double
+        replies:
+          type: number
+          format: double
+        clicks:
+          type: number
+          format: double
+        impressions:
+          type: number
+          format: double
+        retweets:
+          type: number
+          format: double
+        saves:
+          type: number
+          format: double
+        sharesPaid:
+          type: number
+          format: double
+        sharesOrganic:
+          type: number
+          format: double
+        shares:
+          type: number
+          format: double
+        commentsPaid:
+          type: number
+          format: double
+        commentsOrganic:
+          type: number
+          format: double
+        comments:
+          type: number
+          format: double
+        favorites:
+          type: number
+          format: double
+        closeUps:
+          type: number
+          format: double
+        likesPaid:
+          type: number
+          format: double
+        likesOrganic:
+          type: number
+          format: double
+        likes:
+          type: number
+          format: double
+        hearts:
+          type: number
+          format: double
+        audienceInterestDistribution:
+          items:
+            additionalProperties: true
+          type:
+          - array
+          - 'null'
+        audienceGendersDistribution:
+          items:
+            additionalProperties: true
+          type:
+          - array
+          - 'null'
+        audienceCountriesDistribution:
+          items:
+            additionalProperties: true
+          type:
+          - array
+          - 'null'
+        audienceAgeDistribution:
+          items:
+            additionalProperties: true
+          type:
+          - array
+          - 'null'
+      type: object
+    EnrichedContentData:
+      properties:
+        network:
+          $ref: '#/components/schemas/ActivationContentNetwork'
+        content:
+          $ref: '#/components/schemas/ContentInfo'
+        activationId:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+      required:
+      - network
+      - content
+      - activationId
+      - globalUserId
+      type: object
+    TopPerformer:
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        profilePictureUrl:
+          type: string
+        fullName:
+          type: string
+        profiles:
+          items:
+            $ref: '#/components/schemas/CreatorProfile'
+          type: array
+      required:
+      - globalUserId
+      - profilePictureUrl
+      - fullName
+      - profiles
+      type: object
+      additionalProperties: false
+    CreatorProfile:
+      properties:
+        network:
+          type: string
+        handleName:
+          type: string
+        profileLink:
+          type: string
+        profileImage:
+          type: string
+        fullName:
+          type: string
+      required:
+      - network
+      - handleName
+      - profileLink
+      - profileImage
+      type: object
+      additionalProperties: false
+    EnrichedCreatorsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TopPerformer'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
     ActivationContentNetwork:
       type: string
       enum:
@@ -544,81 +774,6 @@ components:
       - youtube_video
       - youtube_shorts
       - video
-    EnrichedCampaignData:
-      properties:
-        instanceId:
-          type: string
-        status:
-          type: string
-        internalDescription:
-          type: string
-        contentDueDate:
-          type: string
-          format: date-time
-        description:
-          type: string
-        title:
-          type: string
-        endDate:
-          type: string
-          format: date-time
-        startDate:
-          type: string
-          format: date-time
-        campaignId:
-          type: number
-          format: double
-      required:
-      - campaignId
-      type: object
-    InfluencerIncentiveDetailsResponse:
-      type: object
-      properties: {}
-    EnrichedCreatorsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TopPerformer'
-          type: array
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    CreatorProfile:
-      properties:
-        network:
-          type: string
-        handleName:
-          type: string
-        profileLink:
-          type: string
-        profileImage:
-          type: string
-        fullName:
-          type: string
-      required:
-      - network
-      - handleName
-      - profileLink
-      - profileImage
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ContentInfo:
       properties:
         dateCreated:
@@ -650,126 +805,6 @@ components:
       - type
       - profile
       type: object
-    EnrichedCampaignsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/EnrichedCampaignData'
-          type: array
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    EnrichedContentResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/EnrichedContentData'
-          type: array
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    ContentMediaSize:
-      properties:
-        unit:
-          type: string
-          enum:
-          - CENTIMETERS
-          - MILLIMETERS
-          - INCHES
-          - PIXELS
-          - PERCENT
-          - POINTS
-        height:
-          type: number
-          format: double
-        width:
-          type: number
-          format: double
-      required:
-      - unit
-      type: object
-    EnrichedContentData:
-      properties:
-        network:
-          $ref: '#/components/schemas/ActivationContentNetwork'
-        content:
-          $ref: '#/components/schemas/ContentInfo'
-        activationId:
-          type: number
-          format: double
-        globalUserId:
-          type: number
-          format: double
-      required:
-      - network
-      - content
-      - activationId
-      - globalUserId
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    TopPerformer:
-      properties:
-        globalUserId:
-          type: number
-          format: double
-        profilePictureUrl:
-          type: string
-        fullName:
-          type: string
-        profiles:
-          items:
-            $ref: '#/components/schemas/CreatorProfile'
-          type: array
-      required:
-      - globalUserId
-      - profilePictureUrl
-      - fullName
-      - profiles
-      type: object
-      additionalProperties: false
-    ContentReportResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ContentReport'
-          type: array
-      required:
-      - data
-      type: object
-      additionalProperties: false
     ContentMedia:
       properties:
         videos:
@@ -798,6 +833,117 @@ components:
             type: object
           type: array
       type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BackfillAnalyticsCostDataJobPayload:
+      properties:
+        preferedChunkSize:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        limit:
+          type: number
+          format: double
+        listMemberIds:
+          items:
+            type: number
+            format: double
+          type: array
+        actionGroupIds:
+          items:
+            type: number
+            format: double
+          type: array
+        communityIds:
+          items:
+            type: string
+          type: array
+      type: object
+    BackfillAnalyticsDataEntryPointJobPayload:
+      properties:
+        delayBetweenAnalyticsServiceRequests:
+          type: number
+          format: double
+        activationIdsPerAnalyticsServiceRequest:
+          type: number
+          format: double
+        activationIdsPerJob:
+          type: number
+          format: double
+        activationIds:
+          items:
+            type: number
+            format: double
+          type: array
+        actionGroupIds:
+          items:
+            type: number
+            format: double
+          type: array
+        communityIds:
+          items:
+            type: string
+          type: array
+        periodEnd:
+          type: string
+        periodStart:
+          type: string
+      type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ContentReportResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ContentReport'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    InfluencerIncentiveDetailsResponse:
+      type: object
+      properties: {}
+    EnrichedContentResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/EnrichedContentData'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
     ContentReport:
       properties:
         dateGroup:
@@ -1049,133 +1195,43 @@ components:
       - dateGroup
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    EnrichedCampaignData:
       properties:
-        message:
+        instanceId:
           type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        status:
+          type: string
+        internalDescription:
+          type: string
+        contentDueDate:
+          type: string
+          format: date-time
+        description:
+          type: string
+        title:
+          type: string
+        endDate:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+        campaignId:
+          type: number
+          format: double
       required:
-      - message
-      - details
+      - campaignId
+      type: object
+    EnrichedCreatorsResponseV3:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TopPerformer'
+          type: array
+      required:
+      - data
       type: object
       additionalProperties: false
-    ContentEngagements:
-      properties:
-        avgWatchTime:
-          type: number
-          format: double
-        videoCompletionRate:
-          type: number
-          format: double
-        videoViewTotalTime:
-          type: number
-          format: double
-        followersAtPostDate:
-          type: number
-          format: double
-        engagements:
-          type: number
-          format: double
-        reach:
-          type: number
-          format: double
-        videoViews:
-          type: number
-          format: double
-        viewsPaid:
-          type: number
-          format: double
-        viewsOrganic:
-          type: number
-          format: double
-        views:
-          type: number
-          format: double
-        swipeUps:
-          type: number
-          format: double
-        replies:
-          type: number
-          format: double
-        clicks:
-          type: number
-          format: double
-        impressions:
-          type: number
-          format: double
-        retweets:
-          type: number
-          format: double
-        saves:
-          type: number
-          format: double
-        sharesPaid:
-          type: number
-          format: double
-        sharesOrganic:
-          type: number
-          format: double
-        shares:
-          type: number
-          format: double
-        commentsPaid:
-          type: number
-          format: double
-        commentsOrganic:
-          type: number
-          format: double
-        comments:
-          type: number
-          format: double
-        favorites:
-          type: number
-          format: double
-        closeUps:
-          type: number
-          format: double
-        likesPaid:
-          type: number
-          format: double
-        likesOrganic:
-          type: number
-          format: double
-        likes:
-          type: number
-          format: double
-        hearts:
-          type: number
-          format: double
-        audienceInterestDistribution:
-          items:
-            additionalProperties: true
-          type:
-          - array
-          - 'null'
-        audienceGendersDistribution:
-          items:
-            additionalProperties: true
-          type:
-          - array
-          - 'null'
-        audienceCountriesDistribution:
-          items:
-            additionalProperties: true
-          type:
-          - array
-          - 'null'
-        audienceAgeDistribution:
-          items:
-            additionalProperties: true
-          type:
-          - array
-          - 'null'
-      type: object
     ContentExternalIdentity:
       properties:
         alternativeIds:
@@ -1189,67 +1245,31 @@ components:
       required:
       - id
       type: object
-    BackfillAnalyticsCostDataJobPayload:
+    ContentMediaSize:
       properties:
-        preferedChunkSize:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        limit:
-          type: number
-          format: double
-        listMemberIds:
-          items:
-            type: number
-            format: double
-          type: array
-        actionGroupIds:
-          items:
-            type: number
-            format: double
-          type: array
-        communityIds:
-          items:
-            type: string
-          type: array
-      type: object
-    BackfillAnalyticsDataEntryPointJobPayload:
-      properties:
-        delayBetweenAnalyticsServiceRequests:
-          type: number
-          format: double
-        activationIdsPerAnalyticsServiceRequest:
-          type: number
-          format: double
-        activationIdsPerJob:
-          type: number
-          format: double
-        activationIds:
-          items:
-            type: number
-            format: double
-          type: array
-        actionGroupIds:
-          items:
-            type: number
-            format: double
-          type: array
-        communityIds:
-          items:
-            type: string
-          type: array
-        periodEnd:
+        unit:
           type: string
-        periodStart:
-          type: string
+          enum:
+          - CENTIMETERS
+          - MILLIMETERS
+          - INCHES
+          - PIXELS
+          - PERCENT
+          - POINTS
+        height:
+          type: number
+          format: double
+        width:
+          type: number
+          format: double
+      required:
+      - unit
       type: object
-    EnrichedCreatorsResponseV3:
+    EnrichedCampaignsResponse:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/TopPerformer'
+            $ref: '#/components/schemas/EnrichedCampaignData'
           type: array
       required:
       - data

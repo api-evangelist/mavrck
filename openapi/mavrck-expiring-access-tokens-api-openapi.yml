@@ -9,7 +9,7 @@ servers:
 security:
 - apiKey: []
 tags:
-- name: ExpiringAccessTokens
+- name: Expiring Access Tokens
 paths:
   /v1/expiring-access-tokens:
     post:
@@ -36,15 +36,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - ExpiringAccessTokens
+      - Expiring Access Tokens
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ExpiringAccessTokenEvent'
         required: true
+      summary: Handle expiring access token
+      x-summary-source: derived
 components:
   schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ExpiringAccessTokenEvent:
       properties:
         tokenId:
@@ -71,22 +89,6 @@ components:
       - eventType
       - appId
       type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ServerError:
       properties:
         message:

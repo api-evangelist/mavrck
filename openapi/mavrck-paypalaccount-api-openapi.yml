@@ -19,7 +19,7 @@ paths:
       x-handler: paypal/paypal_account_controller.js
       x-access:
       - administrator
-      summary: Get a PayPal account for a member.
+      summary: Get a PayPal account for a member
       parameters:
       - name: membershipId
         in: path
@@ -75,7 +75,7 @@ paths:
       x-handler: paypal/paypal_account_controller.js
       x-access:
       - administrator
-      summary: Upsert a PayPal account for a member.
+      summary: Upsert a PayPal account for a member
       parameters:
       - name: membershipId
         in: path
@@ -128,6 +128,21 @@ paths:
         required: true
 components:
   schemas:
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    EmptyObject:
+      type: object
+      properties: {}
     Error:
       type: object
       properties:
@@ -159,21 +174,6 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    EmptyObject:
-      type: object
-      properties: {}
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
   securitySchemes:
     apiKey:
       type: apiKey

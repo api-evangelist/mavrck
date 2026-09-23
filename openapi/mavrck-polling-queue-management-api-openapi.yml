@@ -55,6 +55,8 @@ paths:
           - instagram
           - instagram-story
           - non-instagram
+      summary: Purge polling queue
+      x-summary-source: derived
   /v1/polling/management/queues/stats:
     get:
       operationId: getAllPollingQueueStats
@@ -88,6 +90,8 @@ paths:
         Returns approximate message counts for each queue.'
       tags:
       - Polling Queue Management
+      summary: Get all polling queue stats
+      x-summary-source: derived
   /v1/polling/management/queues/stats/single:
     get:
       operationId: getSinglePollingQueueStats
@@ -130,8 +134,46 @@ paths:
           - instagram
           - instagram-story
           - non-instagram
+      summary: Get single polling queue stats
+      x-summary-source: derived
 components:
   schemas:
+    QueueStats:
+      properties:
+        queueUrl:
+          type: string
+        approximateNumberOfMessages:
+          type: number
+          format: double
+        approximateNumberOfMessagesNotVisible:
+          type: number
+          format: double
+        approximateNumberOfMessagesDelayed:
+          type: number
+          format: double
+      required:
+      - queueUrl
+      - approximateNumberOfMessages
+      - approximateNumberOfMessagesNotVisible
+      - approximateNumberOfMessagesDelayed
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     AllQueueStatsResponse:
       properties:
         queues:
@@ -149,6 +191,22 @@ components:
           type: object
       required:
       - queues
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     PurgeQueueResponse:
@@ -174,64 +232,12 @@ components:
       - instagram-story
       - non-instagram
       type: string
-    QueueStats:
-      properties:
-        queueUrl:
-          type: string
-        approximateNumberOfMessages:
-          type: number
-          format: double
-        approximateNumberOfMessagesNotVisible:
-          type: number
-          format: double
-        approximateNumberOfMessagesDelayed:
-          type: number
-          format: double
-      required:
-      - queueUrl
-      - approximateNumberOfMessages
-      - approximateNumberOfMessagesNotVisible
-      - approximateNumberOfMessagesDelayed
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
         details:
           properties: {}
           additionalProperties:

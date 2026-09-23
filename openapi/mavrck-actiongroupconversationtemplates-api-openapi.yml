@@ -60,6 +60,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ActionGroupConversationTemplatePostBody'
         required: true
+      summary: Create action group conversation template
+      x-summary-source: derived
     get:
       operationId: getActionGroupConversationTemplates
       responses:
@@ -102,6 +104,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get action group conversation templates
+      x-summary-source: derived
     delete:
       operationId: resetActionGroupConversationTemplates
       responses:
@@ -140,6 +144,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Reset action group conversation templates
+      x-summary-source: derived
   /v1/action-groups/{actionGroupId}/conversation-templates/{id}/copy:
     post:
       operationId: copyActionGroupConversationTemplate
@@ -195,6 +201,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ActionGroupConversationTemplateCopyPostBody'
         required: true
+      summary: Copy action group conversation template
+      x-summary-source: derived
   /v1/action-groups/{actionGroupId}/conversation-templates/{id}:
     delete:
       operationId: deleteActionGroupConversationTemplate
@@ -248,6 +256,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Delete action group conversation template
+      x-summary-source: derived
     put:
       operationId: updateActionGroupConversationTemplate
       responses:
@@ -298,6 +308,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ActionGroupConversationTemplatePutBody'
         required: true
+      summary: Update action group conversation template
+      x-summary-source: derived
   /v1/action-groups/{actionGroupId}/conversation-templates/reorder:
     post:
       operationId: reorderActionGroupConversationTemplates
@@ -347,8 +359,36 @@ paths:
             schema:
               $ref: '#/components/schemas/ActionGroupConversationTemplateReorderPutBody'
         required: true
+      summary: Reorder action group conversation templates
+      x-summary-source: derived
 components:
   schemas:
+    ActionGroupConversationTemplateCopyPostBody:
+      properties:
+        deliveryMethod:
+          type: string
+          enum:
+          - manual
+          - automatic
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplateReorderPutResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActionGroupConversationTemplate'
+          type: array
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplatePostResponse:
+      properties:
+        id:
+          type: number
+          format: double
+      required:
+      - id
+      type: object
+      additionalProperties: false
     Administrator:
       properties:
         id:
@@ -386,98 +426,20 @@ components:
       - defaultTemplates
       type: object
       additionalProperties: false
-    ActionGroupConversationTemplate:
+    NotFoundError:
       properties:
-        createdAt:
-          type: string
-          format: date-time
-        createdByAccountId:
-          type: number
-          format: double
-        deliveryMethod:
+        message:
           type: string
           enum:
-          - manual
-          - automatic
-        disabled:
-          type: boolean
-        html:
-          type: string
-        id:
-          type: number
-          format: double
-        lastModifiedByAccountId:
-          type: number
-          format: double
-        listId:
-          type: number
-          format: double
-        order:
-          type: number
-          format: double
-        version:
-          type: number
-          format: double
-        sendOnDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        sendOnDays:
-          type:
-          - number
-          - 'null'
-          format: double
-        sendOnEvent:
-          type:
-          - string
-          - 'null'
-          enum:
-          - due_date
-          - draft_due_date
-          - status_entry
-          - specific_date
-          - draft_needs_revision
-          - concept_due_date
-          - concept_needs_revision
-          - null
-        sendOnStatusId:
-          type:
-          - number
-          - 'null'
-          format: double
-        sendOnTimeframe:
-          type:
-          - string
-          - 'null'
-          enum:
-          - before
-          - after
-          - null
-        slug:
-          type: string
-        subject:
-          type: string
-        title:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-        lastModifiedBy:
-          $ref: '#/components/schemas/Administrator'
-        createdBy:
-          $ref: '#/components/schemas/Administrator'
-        ListCustomStatus:
-          additionalProperties: true
-        ActionGroup:
-          additionalProperties: false
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
           type: object
       required:
-      - html
-      - id
-      - listId
-      - subject
-      - title
+      - message
+      - details
       type: object
       additionalProperties: false
     BadRequestError:
@@ -493,92 +455,6 @@ components:
           - Bad Request
       required:
       - message
-      type: object
-      additionalProperties: false
-    ActionGroupConversationTemplateCopyPostBody:
-      properties:
-        deliveryMethod:
-          type: string
-          enum:
-          - manual
-          - automatic
-      type: object
-      additionalProperties: false
-    ActionGroupConversationTemplateCopyPostResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ActionGroupConversationTemplate'
-          type: array
-        copy:
-          $ref: '#/components/schemas/ActionGroupConversationTemplate'
-      required:
-      - data
-      - copy
-      type: object
-    ActionGroupConversationTemplatePostBody:
-      properties:
-        deliveryMethod:
-          type: string
-          enum:
-          - manual
-          - automatic
-        disabled:
-          type: boolean
-        html:
-          type: string
-        order:
-          type: number
-          format: double
-        version:
-          type: number
-          format: double
-        sendOnDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        sendOnDays:
-          type:
-          - number
-          - 'null'
-          format: double
-        sendOnEvent:
-          type:
-          - string
-          - 'null'
-          enum:
-          - due_date
-          - draft_due_date
-          - status_entry
-          - specific_date
-          - draft_needs_revision
-          - concept_due_date
-          - concept_needs_revision
-          - null
-        sendOnStatusId:
-          type:
-          - number
-          - 'null'
-          format: double
-        sendOnTimeframe:
-          type:
-          - string
-          - 'null'
-          enum:
-          - before
-          - after
-          - null
-        slug:
-          type: string
-        subject:
-          type: string
-        title:
-          type: string
-      required:
-      - html
-      - subject
-      - title
       type: object
       additionalProperties: false
     ActionGroupConversationTemplateReorderPutBody:
@@ -675,6 +551,83 @@ components:
       - details
       type: object
       additionalProperties: false
+    ActionGroupConversationTemplateCopyPostResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActionGroupConversationTemplate'
+          type: array
+        copy:
+          $ref: '#/components/schemas/ActionGroupConversationTemplate'
+      required:
+      - data
+      - copy
+      type: object
+    ActionGroupConversationTemplatePostBody:
+      properties:
+        deliveryMethod:
+          type: string
+          enum:
+          - manual
+          - automatic
+        disabled:
+          type: boolean
+        html:
+          type: string
+        order:
+          type: number
+          format: double
+        version:
+          type: number
+          format: double
+        sendOnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sendOnDays:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnEvent:
+          type:
+          - string
+          - 'null'
+          enum:
+          - due_date
+          - draft_due_date
+          - status_entry
+          - specific_date
+          - draft_needs_revision
+          - concept_due_date
+          - concept_needs_revision
+          - null
+        sendOnStatusId:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnTimeframe:
+          type:
+          - string
+          - 'null'
+          enum:
+          - before
+          - after
+          - null
+        slug:
+          type: string
+        subject:
+          type: string
+        title:
+          type: string
+      required:
+      - html
+      - subject
+      - title
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -691,37 +644,98 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
+    ActionGroupConversationTemplate:
       properties:
-        message:
+        createdAt:
+          type: string
+          format: date-time
+        createdByAccountId:
+          type: number
+          format: double
+        deliveryMethod:
           type: string
           enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ActionGroupConversationTemplatePostResponse:
-      properties:
+          - manual
+          - automatic
+        disabled:
+          type: boolean
+        html:
+          type: string
         id:
           type: number
           format: double
+        lastModifiedByAccountId:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+        order:
+          type: number
+          format: double
+        version:
+          type: number
+          format: double
+        sendOnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sendOnDays:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnEvent:
+          type:
+          - string
+          - 'null'
+          enum:
+          - due_date
+          - draft_due_date
+          - status_entry
+          - specific_date
+          - draft_needs_revision
+          - concept_due_date
+          - concept_needs_revision
+          - null
+        sendOnStatusId:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnTimeframe:
+          type:
+          - string
+          - 'null'
+          enum:
+          - before
+          - after
+          - null
+        slug:
+          type: string
+        subject:
+          type: string
+        title:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          $ref: '#/components/schemas/Administrator'
+        createdBy:
+          $ref: '#/components/schemas/Administrator'
+        ListCustomStatus:
+          additionalProperties: true
+        ActionGroup:
+          additionalProperties: false
+          type: object
       required:
+      - html
       - id
-      type: object
-      additionalProperties: false
-    ActionGroupConversationTemplateReorderPutResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ActionGroupConversationTemplate'
-          type: array
+      - listId
+      - subject
+      - title
       type: object
       additionalProperties: false
   securitySchemes:

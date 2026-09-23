@@ -16,7 +16,7 @@ paths:
       tags:
       - InfluencerContractCampaignTemplates
       operationId: getCampaignTemplate
-      summary: Get influencer contract template for this action group, referred to as a campaign client-side.
+      summary: Get influencer contract template for this action group, referred to as a…
       x-handler: influencer_contracts/campaign_templates/influencer_contract_campaign_template_controller.js
       x-access:
       - administrator
@@ -70,7 +70,7 @@ paths:
       - administrator
       x-handler: influencer_contracts/campaign_templates/influencer_contract_campaign_template_controller.js
       operationId: createCampaignTemplate
-      summary: Create an influencer contract template for this campaign.
+      summary: Create an influencer contract template for this campaign
       parameters:
       - name: campaignId
         in: path
@@ -122,7 +122,7 @@ paths:
       - administrator
       x-handler: influencer_contracts/campaign_templates/influencer_contract_campaign_template_controller.js
       operationId: updateCampaignTemplate
-      summary: Generate a contract for this campaign, and update this campaign's template if necessary.
+      summary: Generate a contract for this campaign, and update this campaign's template if…
       parameters:
       - name: campaignId
         in: path
@@ -173,7 +173,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    InfluencerContractCampaignTemplate:
+      name: data
+      in: body
+      required: true
+      schema:
+        type: object
+        required:
+        - campaignId
+        - template
+        properties:
+          id:
+            type: integer
+            description: Unique integer identifying a single campaign-level influencer contract template.
+          campaignId:
+            type: integer
+            description: Unique integer identifying a single action group, referred to as a campaign client-side.
+          template:
+            type: string
+            description: Campaign-level influencer contract template.
   schemas:
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    AdministratorAccountsDeprecated:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        communityId:
+          type: string
+        id:
+          type: string
+        image:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDeprecated'
     Error:
       type: object
       properties:
@@ -237,57 +288,6 @@ components:
           type: string
         description:
           type: string
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
-    AdministratorAccountsDeprecated:
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-        communityId:
-          type: string
-        id:
-          type: string
-        image:
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/RoleDeprecated'
-  parameters:
-    InfluencerContractCampaignTemplate:
-      name: data
-      in: body
-      required: true
-      schema:
-        type: object
-        required:
-        - campaignId
-        - template
-        properties:
-          id:
-            type: integer
-            description: Unique integer identifying a single campaign-level influencer contract template.
-          campaignId:
-            type: integer
-            description: Unique integer identifying a single action group, referred to as a campaign client-side.
-          template:
-            type: string
-            description: Campaign-level influencer contract template.
   securitySchemes:
     apiKey:
       type: apiKey

@@ -9,7 +9,7 @@ servers:
 security:
 - apiKey: []
 tags:
-- name: AccountInvitations
+- name: Account Invitations
 paths:
   /v1/account-invitations:
     get:
@@ -46,7 +46,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - AccountInvitations
+      - Account Invitations
       parameters:
       - in: query
         name: communityId
@@ -65,6 +65,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get account invitations
+      x-summary-source: derived
     post:
       operationId: postAccountInvitation
       responses:
@@ -99,13 +101,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - AccountInvitations
+      - Account Invitations
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AccountActivationPostRequestBody'
         required: true
+      summary: Post account invitation
+      x-summary-source: derived
   /v1/account-invitations/{id}:
     put:
       operationId: putAccountInvitation
@@ -141,7 +145,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - AccountInvitations
+      - Account Invitations
       parameters:
       - in: path
         name: id
@@ -155,6 +159,8 @@ paths:
             schema:
               $ref: '#/components/schemas/AccountActivationPutRequestBody'
         required: true
+      summary: Put account invitation
+      x-summary-source: derived
     delete:
       operationId: deleteAccountInvitation
       responses:
@@ -185,7 +191,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - AccountInvitations
+      - Account Invitations
       parameters:
       - in: path
         name: id
@@ -193,6 +199,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Delete account invitation
+      x-summary-source: derived
   /v1/account-invitations/{id}/refresh:
     post:
       operationId: refreshAccountInvitation
@@ -228,7 +236,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - AccountInvitations
+      - Account Invitations
       parameters:
       - in: path
         name: id
@@ -236,6 +244,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Refresh account invitation
+      x-summary-source: derived
   /v1/account-invitations/accept:
     get:
       operationId: acceptAccountInvitation
@@ -267,13 +277,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - AccountInvitations
+      - Account Invitations
       parameters:
       - in: query
         name: signature
         required: true
         schema:
           type: string
+      summary: Accept account invitation
+      x-summary-source: derived
   /v1/account-invitations/post-registration:
     get:
       operationId: postRegistration
@@ -305,86 +317,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - AccountInvitations
+      - Account Invitations
       parameters:
       - in: query
         name: signature
         required: true
         schema:
           type: string
+      summary: Post registration
+      x-summary-source: derived
 components:
   schemas:
-    AccountActivationPostRequestBody:
-      properties:
-        communityId:
-          type: string
-        email:
-          type: string
-        inviteeRoleId:
-          type: number
-          format: double
-      required:
-      - communityId
-      - email
-      - inviteeRoleId
-      type: object
-      additionalProperties: false
-    AccountActivationPutRequestBody:
-      properties:
-        email:
-          type: string
-        inviteeRoleId:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    ResponseBody_AccountInvitationDomain-Array_:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AccountInvitationDomain'
-          type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -409,6 +358,30 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    AccountActivationPostRequestBody:
+      properties:
+        communityId:
+          type: string
+        email:
+          type: string
+        inviteeRoleId:
+          type: number
+          format: double
+      required:
+      - communityId
+      - email
+      - inviteeRoleId
+      type: object
+      additionalProperties: false
+    AccountActivationPutRequestBody:
+      properties:
+        email:
+          type: string
+        inviteeRoleId:
+          type: number
+          format: double
       type: object
       additionalProperties: false
     AccountInvitationDomain:
@@ -448,12 +421,24 @@ components:
       - updatedAt
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ResponseBody_AccountInvitationDomain-Array_:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AccountInvitationDomain'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -462,6 +447,35 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
   securitySchemes:

@@ -2,43 +2,31 @@ openapi: 3.2.0
 info:
   version: 1.0.0
   description: Identify your most influential customers and activate them to drive more conversions on social.
-  title: MAVRCK.IO Review Form Responses API
+  title: MAVRCK.IO Tracking Links API
 servers:
 - url: http://app.splashscore.com/v1
 - url: https://app.splashscore.com/v1
 security:
 - apiKey: []
 tags:
-- name: ReviewFormResponses
+- name: Tracking Links
 paths:
-  /v1/action-groups/{actionGroupId}/review-form-responses:
+  /v1/action-groups/{id}/tracking-links:
     get:
-      operationId: getReviewFormResponses
+      operationId: getTrackingLinks
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBody_ReviewFormResponse-Array_'
-        '400':
-          description: Invalid Parameter
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidateErrorJSON'
+                $ref: '#/components/schemas/TrackingLinksGetResponse'
         '403':
-          description: Invalid API Key
+          description: Access forbidden
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenError'
-        '404':
-          description: Review Responses not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundError'
         '500':
           description: Server Error
           content:
@@ -46,91 +34,44 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - ReviewFormResponses
+      - Tracking Links
       parameters:
       - in: path
-        name: actionGroupId
+        name: id
         required: true
         schema:
           type: number
           format: double
       - in: query
-        name: ratingsFilter
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: number
-            format: double
-      - in: query
-        name: reviewCharacterCountFilter
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: number
-            format: double
-      - in: query
-        name: products
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: number
-            format: double
-      - in: query
-        name: limit
-        required: false
+        name: globalUserId
+        required: true
         schema:
           type: number
           format: double
-      - in: query
-        name: offset
-        required: false
-        schema:
-          type: number
-          format: double
-      - in: query
-        name: orderBy
-        required: false
-        schema:
-          type: string
-      summary: Get review form responses
+      summary: Get tracking links
       x-summary-source: derived
-  /v1/review-form-responses:
-    get:
-      operationId: getInstanceLevelReviews
+  /v1/action-groups/{id}/tracking-links/{trackingLinkId}:
+    put:
+      operationId: updateTrackingLink
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBody_ReviewFormResponse-Array_'
-        '400':
-          description: Invalid Parameter
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidateErrorJSON'
+                $ref: '#/components/schemas/TSOAEmptyObject'
         '403':
-          description: Invalid API Key
+          description: Access forbidden
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenError'
-        '404':
-          description: Review Responses not found
+        '409':
+          description: Conflict
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotFoundError'
+                $ref: '#/components/schemas/ConflictError'
         '500':
           description: Server Error
           content:
@@ -138,56 +79,71 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - ReviewFormResponses
+      - Tracking Links
       parameters:
-      - in: query
-        name: ratingsFilter
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: number
-            format: double
-      - in: query
-        name: reviewCharacterCountFilter
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: number
-            format: double
-      - in: query
-        name: products
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: array
-          items:
-            type: number
-            format: double
-      - in: query
-        name: limit
-        required: false
+      - in: path
+        name: id
+        required: true
         schema:
           type: number
           format: double
-      - in: query
-        name: offset
-        required: false
+      - in: path
+        name: trackingLinkId
+        required: true
         schema:
           type: number
           format: double
-      - in: query
-        name: orderBy
-        required: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditTrackingLinkBody'
+        required: true
+      summary: Update tracking link
+      x-summary-source: derived
+    delete:
+      operationId: deleteTrackingLink
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TSOAEmptyObject'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenError'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+      tags:
+      - Tracking Links
+      parameters:
+      - in: path
+        name: id
+        required: true
         schema:
-          type: string
-      summary: Get instance level reviews
+          type: number
+          format: double
+      - in: path
+        name: trackingLinkId
+        required: true
+        schema:
+          type: number
+          format: double
+      summary: Delete tracking link
       x-summary-source: derived
 components:
   schemas:
@@ -252,6 +208,64 @@ components:
       - updatedAt
       type: object
       additionalProperties: false
+    Audience:
+      properties:
+        id:
+          type: number
+          format: double
+        name:
+          type: string
+        criteria:
+          items:
+            $ref: '#/components/schemas/InfluencerDataPointCriteria'
+          type: array
+      required:
+      - id
+      - name
+      - criteria
+      type: object
+      additionalProperties: false
+    Administrator:
+      properties:
+        id:
+          type: number
+          format: double
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          type: string
+      type: object
+      additionalProperties: false
+    PowerReviewsPage:
+      properties:
+        PowerReviewsApp:
+          items:
+            $ref: '#/components/schemas/PowerReviewsApp'
+          type: array
+        externalPageId:
+          type: string
+        id:
+          type: number
+          format: double
+        powerReviewsAppId:
+          type: string
+        reviewProductId:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
     PowerReviewsApp:
       properties:
         apiKey:
@@ -278,355 +292,13 @@ components:
       - name
       type: object
       additionalProperties: false
-    PowerReviewsPage:
+    YotpoAppProduct:
       properties:
-        PowerReviewsApp:
-          items:
-            $ref: '#/components/schemas/PowerReviewsApp'
-          type: array
-        externalPageId:
-          type: string
-        id:
-          type: number
-          format: double
-        powerReviewsAppId:
-          type: string
         reviewProductId:
           type: number
           format: double
-      type: object
-      additionalProperties: false
-    ActionGroup:
-      properties:
-        actions:
-          items:
-            $ref: '#/components/schemas/Action'
-          type: array
-        activatedUsersMetrics:
-          type: number
-          format: double
-        activityBudget:
-          type: number
-          format: double
-        application:
-          properties:
-            requestBrandedContentPermission:
-              type: boolean
-          type: object
-        audience:
-          $ref: '#/components/schemas/Audience'
-        autoAcceptApplicant:
-          type: boolean
-        brief:
+        youtpoProductId:
           type: string
-        campaign:
-          $ref: '#/components/schemas/Campaign'
-        clicksMetrics:
-          type: number
-          format: double
-        community:
-          properties:
-            instagramHandle:
-              type: string
-          type: object
-        communityId:
-          type: string
-        contentDueDate:
-          type: string
-        contentType:
-          type: string
-        conversionsCountMetrics:
-          type: number
-          format: double
-        conversionsValueMetrics:
-          type: number
-          format: double
-        cost:
-          type: number
-          format: double
-        cpa:
-          type: number
-          format: double
-        cpe:
-          type: number
-          format: double
-        cpeGoal:
-          type: number
-          format: double
-        cpm:
-          type: number
-          format: double
-        cpmGoal:
-          type: number
-          format: double
-        cpp:
-          type: number
-          format: double
-        committedAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        paidAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        readyAmount:
-          type:
-          - number
-          - 'null'
-          format: double
-        roiValue:
-          type:
-          - number
-          - 'null'
-          format: double
-        createdAt:
-          type: string
-        description:
-          type: string
-        draftDueDate:
-          type: string
-        conceptDueDate:
-          type: string
-        endDate:
-          type: string
-        engagementRateGoal:
-          type: number
-          format: double
-        engagements:
-          type: number
-          format: double
-        engagementsGoal:
-          type: number
-          format: double
-        engagementsMetrics:
-          type: number
-          format: double
-        ftcHashtag:
-          type: string
-        fulfilled:
-          type: number
-          format: double
-        globalUserListDefinitionId:
-          type: number
-          format: double
-        hasPointsEnabled:
-          type: boolean
-        hasScheduledNotifications:
-          type: boolean
-        hideOnIcm:
-          type: boolean
-        id:
-          type: number
-          format: double
-        image:
-          type: string
-        impressions:
-          type: number
-          format: double
-        impressionsGoal:
-          type: number
-          format: double
-        impressionsMetrics:
-          type: number
-          format: double
-        incentive:
-          $ref: '#/components/schemas/Incentive'
-        incentives:
-          items:
-            $ref: '#/components/schemas/Incentive'
-          type: array
-        influencerReviewDeliverable:
-          properties:
-            listId:
-              type: number
-              format: double
-            count:
-              type: number
-              format: double
-            id:
-              type: number
-              format: double
-          type: object
-        internalDescription:
-          type: string
-        isAutoCreated:
-          type: boolean
-        isLaterCreatorExperienceEnabled:
-          type: boolean
-        isPrimaryReferralActivity:
-          type: boolean
-        listId:
-          type: number
-          format: double
-        listDeliverables:
-          items:
-            $ref: '#/components/schemas/ListDeliverable'
-          type: array
-        locale:
-          type: string
-        mainType:
-          type: string
-        multipleActivations:
-          type: boolean
-        name:
-          type: string
-        notInCommunity:
-          type: boolean
-        numberOfInfluencers:
-          type: number
-          format: double
-        openGraphTags:
-          type: string
-        pending:
-          type: number
-          format: double
-        points:
-          properties:
-            max:
-              type: number
-              format: double
-            min:
-              type: number
-              format: double
-          type: object
-        posts:
-          type: number
-          format: double
-        primaryNetwork:
-          type: string
-        programId:
-          type: number
-          format: double
-        ready:
-          type: number
-          format: double
-        requiredHashtag:
-          type: string
-        budgetReferenceId:
-          type:
-          - string
-          - 'null'
-        budgetReferenceIdType:
-          type: object
-        brandSuitabilityGuidelines:
-          type: string
-        shareableReportLink:
-          type: string
-        startDate:
-          type: string
-        status:
-          type: string
-        termsOfServiceLink:
-          type: string
-        title:
-          type: string
-        type:
-          type: string
-        url:
-          type: string
-        workflowStatuses:
-          items:
-            $ref: '#/components/schemas/ListCustomStatus'
-          type: array
-        workflowSummary:
-          properties:
-            completed:
-              type: number
-              format: double
-            participants:
-              type: number
-              format: double
-            applicants:
-              type: number
-              format: double
-            candidates:
-              type: number
-              format: double
-            rejected:
-              type: number
-              format: double
-            accepted:
-              type: number
-              format: double
-          type: object
-      required:
-      - communityId
-      - id
-      type: object
-      additionalProperties: false
-    Administrator:
-      properties:
-        id:
-          type: number
-          format: double
-        email:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type:
-          - string
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        approves:
-          type: boolean
-        createdAt:
-          type: string
-      type: object
-      additionalProperties: false
-    Audience:
-      properties:
-        id:
-          type: number
-          format: double
-        name:
-          type: string
-        criteria:
-          items:
-            $ref: '#/components/schemas/InfluencerDataPointCriteria'
-          type: array
-      required:
-      - id
-      - name
-      - criteria
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     BazaarVoiceAppProduct:
@@ -804,6 +476,41 @@ components:
       - archivedAt
       type: object
       additionalProperties: false
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    EditTrackingLinkBody:
+      properties:
+        title:
+          type: string
+        destinationUrl:
+          type: string
+        providerCode:
+          type: string
+        communityId:
+          type: string
+      required:
+      - title
+      - destinationUrl
+      - providerCode
+      - communityId
+      type: object
+      additionalProperties: false
     Artifact:
       properties:
         before:
@@ -826,18 +533,6 @@ components:
           type: string
         resourceUrl:
           type: string
-      type: object
-      additionalProperties: false
-    ResponseBody_ReviewFormResponse-Array_:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ReviewFormResponse'
-          type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-      required:
-      - data
       type: object
       additionalProperties: false
     ReviewForm:
@@ -870,6 +565,16 @@ components:
                 $ref: '#/components/schemas/Membership'
             type: object
           type: array
+      type: object
+      additionalProperties: false
+    TrackingLinksGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TrackingLink'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
       type: object
       additionalProperties: false
     NetworkName:
@@ -927,35 +632,6 @@ components:
           format: double
       required:
       - key
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
       type: object
       additionalProperties: false
     Action:
@@ -1057,6 +733,22 @@ components:
       - type
       type: object
       additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     IncentiveTermsAndConditions:
       properties:
         params:
@@ -1135,37 +827,6 @@ components:
       - name
       type: object
       additionalProperties: false
-    ReviewFormResponse:
-      properties:
-        globalUserId:
-          type: number
-          format: double
-        membershipId:
-          type: number
-          format: double
-        rating:
-          type: number
-          format: double
-        reviewCharacterCount:
-          type: number
-          format: double
-        fullName:
-          type: string
-        profilePic:
-          type: string
-        questionResponses:
-          items:
-            $ref: '#/components/schemas/QuestionResponse'
-          type: array
-        createdAt:
-          type: string
-          format: date-time
-        reviewForm:
-          $ref: '#/components/schemas/ReviewForm'
-        product:
-          $ref: '#/components/schemas/Product'
-      type: object
-      additionalProperties: false
     BonusTier:
       description: 'Swagger 2 representation of a tiered bonus entry.
 
@@ -1239,6 +900,26 @@ components:
           $ref: '#/components/schemas/RoutingOptions'
         success:
           $ref: '#/components/schemas/RoutingOptions'
+      type: object
+      additionalProperties: false
+    ConflictError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Conflict
+        httpStatusCode:
+          type: number
+          format: double
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - httpStatusCode
+      - details
       type: object
       additionalProperties: false
     Incentive:
@@ -1389,6 +1070,10 @@ components:
           type: boolean
         shares:
           type: boolean
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
       type: object
       additionalProperties: false
     DataPointDefinition:
@@ -1700,21 +1385,265 @@ components:
           $ref: '#/components/schemas/Artifact'
       type: object
       additionalProperties: false
-    QuestionResponse:
+    ActionGroup:
       properties:
-        question:
-          $ref: '#/components/schemas/Question'
-        value:
-          type: string
-      type: object
-      additionalProperties: false
-    YotpoAppProduct:
-      properties:
-        reviewProductId:
+        actions:
+          items:
+            $ref: '#/components/schemas/Action'
+          type: array
+        activatedUsersMetrics:
           type: number
           format: double
-        youtpoProductId:
+        activityBudget:
+          type: number
+          format: double
+        application:
+          properties:
+            requestBrandedContentPermission:
+              type: boolean
+          type: object
+        audience:
+          $ref: '#/components/schemas/Audience'
+        autoAcceptApplicant:
+          type: boolean
+        brief:
           type: string
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        clicksMetrics:
+          type: number
+          format: double
+        community:
+          properties:
+            instagramHandle:
+              type: string
+          type: object
+        communityId:
+          type: string
+        contentDueDate:
+          type: string
+        contentType:
+          type: string
+        conversionsCountMetrics:
+          type: number
+          format: double
+        conversionsValueMetrics:
+          type: number
+          format: double
+        cost:
+          type: number
+          format: double
+        cpa:
+          type: number
+          format: double
+        cpe:
+          type: number
+          format: double
+        cpeGoal:
+          type: number
+          format: double
+        cpm:
+          type: number
+          format: double
+        cpmGoal:
+          type: number
+          format: double
+        cpp:
+          type: number
+          format: double
+        committedAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        paidAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        readyAmount:
+          type:
+          - number
+          - 'null'
+          format: double
+        roiValue:
+          type:
+          - number
+          - 'null'
+          format: double
+        createdAt:
+          type: string
+        description:
+          type: string
+        draftDueDate:
+          type: string
+        conceptDueDate:
+          type: string
+        endDate:
+          type: string
+        engagementRateGoal:
+          type: number
+          format: double
+        engagements:
+          type: number
+          format: double
+        engagementsGoal:
+          type: number
+          format: double
+        engagementsMetrics:
+          type: number
+          format: double
+        ftcHashtag:
+          type: string
+        fulfilled:
+          type: number
+          format: double
+        globalUserListDefinitionId:
+          type: number
+          format: double
+        hasPointsEnabled:
+          type: boolean
+        hasScheduledNotifications:
+          type: boolean
+        hideOnIcm:
+          type: boolean
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        impressions:
+          type: number
+          format: double
+        impressionsGoal:
+          type: number
+          format: double
+        impressionsMetrics:
+          type: number
+          format: double
+        incentive:
+          $ref: '#/components/schemas/Incentive'
+        incentives:
+          items:
+            $ref: '#/components/schemas/Incentive'
+          type: array
+        influencerReviewDeliverable:
+          properties:
+            listId:
+              type: number
+              format: double
+            count:
+              type: number
+              format: double
+            id:
+              type: number
+              format: double
+          type: object
+        internalDescription:
+          type: string
+        isAutoCreated:
+          type: boolean
+        isLaterCreatorExperienceEnabled:
+          type: boolean
+        isPrimaryReferralActivity:
+          type: boolean
+        listId:
+          type: number
+          format: double
+        listDeliverables:
+          items:
+            $ref: '#/components/schemas/ListDeliverable'
+          type: array
+        locale:
+          type: string
+        mainType:
+          type: string
+        multipleActivations:
+          type: boolean
+        name:
+          type: string
+        notInCommunity:
+          type: boolean
+        numberOfInfluencers:
+          type: number
+          format: double
+        openGraphTags:
+          type: string
+        pending:
+          type: number
+          format: double
+        points:
+          properties:
+            max:
+              type: number
+              format: double
+            min:
+              type: number
+              format: double
+          type: object
+        posts:
+          type: number
+          format: double
+        primaryNetwork:
+          type: string
+        programId:
+          type: number
+          format: double
+        ready:
+          type: number
+          format: double
+        requiredHashtag:
+          type: string
+        budgetReferenceId:
+          type:
+          - string
+          - 'null'
+        budgetReferenceIdType:
+          type: object
+        brandSuitabilityGuidelines:
+          type: string
+        shareableReportLink:
+          type: string
+        startDate:
+          type: string
+        status:
+          type: string
+        termsOfServiceLink:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        workflowStatuses:
+          items:
+            $ref: '#/components/schemas/ListCustomStatus'
+          type: array
+        workflowSummary:
+          properties:
+            completed:
+              type: number
+              format: double
+            participants:
+              type: number
+              format: double
+            applicants:
+              type: number
+              format: double
+            candidates:
+              type: number
+              format: double
+            rejected:
+              type: number
+              format: double
+            accepted:
+              type: number
+              format: double
+          type: object
+      required:
+      - communityId
+      - id
       type: object
       additionalProperties: false
     MavrckSupportedCurrencies:

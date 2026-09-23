@@ -101,6 +101,8 @@ paths:
             schema:
               $ref: '#/components/schemas/GlobalUserMergeSearchRequest'
         required: true
+      summary: Get global user merges
+      x-summary-source: derived
   /v1/global-users-merge:
     post:
       operationId: globalUserMerge
@@ -133,8 +135,40 @@ paths:
             schema:
               $ref: '#/components/schemas/GlobalUserMergeRequest'
         required: true
+      summary: Global user merge
+      x-summary-source: derived
 components:
   schemas:
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GlobalUserMergeRequest:
+      properties:
+        source:
+          type: string
+        newId:
+          type: number
+          format: double
+        oldId:
+          type: number
+          format: double
+      required:
+      - newId
+      - oldId
+      type: object
     GlobalUserMergeSearchRequest:
       properties:
         globalUserId:
@@ -165,36 +199,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    GlobalUserMergeRequest:
-      properties:
-        source:
-          type: string
-        newId:
-          type: number
-          format: double
-        oldId:
-          type: number
-          format: double
-      required:
-      - newId
-      - oldId
-      type: object
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
         details:
           properties: {}
           additionalProperties:

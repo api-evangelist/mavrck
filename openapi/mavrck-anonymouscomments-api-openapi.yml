@@ -66,6 +66,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateAnonymousCommentBody'
         required: true
+      summary: Create anonymous comment
+      x-summary-source: derived
     get:
       operationId: queryAnonymousComments
       responses:
@@ -140,23 +142,10 @@ paths:
         schema:
           type: string
           default: DESC
+      summary: Query anonymous comments
+      x-summary-source: derived
 components:
   schemas:
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
     CreateAnonymousCommentBody:
       properties:
         text:
@@ -176,36 +165,31 @@ components:
       - email
       type: object
       additionalProperties: false
-    ForbiddenError:
+    QueryAnonymousCommentsResult:
       properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
+        data:
+          items:
+            $ref: '#/components/schemas/DBAnonymousComment'
+          type: array
+        meta:
+          properties:
+            totalCount:
+              type: number
+              format: double
+            limit:
+              type: number
+              format: double
+            offset:
+              type: number
+              format: double
+          required:
+          - totalCount
+          - limit
+          - offset
           type: object
       required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+      - data
+      - meta
       type: object
       additionalProperties: false
     NotFoundError:
@@ -222,6 +206,21 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
       type: object
       additionalProperties: false
     DBAnonymousComment:
@@ -263,31 +262,36 @@ components:
       - createdAt
       type: object
       additionalProperties: false
-    QueryAnonymousCommentsResult:
+    ForbiddenError:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DBAnonymousComment'
-          type: array
-        meta:
-          properties:
-            totalCount:
-              type: number
-              format: double
-            limit:
-              type: number
-              format: double
-            offset:
-              type: number
-              format: double
-          required:
-          - totalCount
-          - limit
-          - offset
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
           type: object
       required:
-      - data
-      - meta
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

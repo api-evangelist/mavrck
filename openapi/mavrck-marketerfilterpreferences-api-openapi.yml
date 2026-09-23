@@ -63,6 +63,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get marketer filter preferences
+      x-summary-source: derived
     put:
       operationId: setMarketerFilterPreferences
       responses:
@@ -100,54 +102,19 @@ paths:
             schema:
               $ref: '#/components/schemas/MarketerFilterPreferenceBody'
         required: true
+      summary: Set marketer filter preferences
+      x-summary-source: derived
 components:
   schemas:
-    MarketerFiltersItem:
+    ReportsTableSortModel:
       properties:
-        filters:
-          properties:
-            reportsFilters:
-              $ref: '#/components/schemas/ReportsFilters'
-            actionGroupIds:
-              items:
-                type: number
-                format: double
-              type: array
-            sortDirection:
-              type: string
-            sortColumn:
-              type: string
-            fromDate:
-              type: string
-            toDate:
-              type: string
-          type: object
-      required:
-      - filters
-      type: object
-      additionalProperties: false
-    ReportingGranularity:
-      type: string
-      enum:
-      - year
-      - quarter
-      - month
-      - week
-      - day
-    ForbiddenError:
-      properties:
-        message:
+        id:
           type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        desc:
+          type: boolean
       required:
-      - message
-      - details
+      - id
+      - desc
       type: object
       additionalProperties: false
     ReportsFilters:
@@ -212,15 +179,100 @@ components:
           type: boolean
       type: object
       additionalProperties: false
-    ReportsTableSortModel:
+    MarketerFiltersItem:
       properties:
-        id:
-          type: string
-        desc:
-          type: boolean
+        filters:
+          properties:
+            reportsFilters:
+              $ref: '#/components/schemas/ReportsFilters'
+            actionGroupIds:
+              items:
+                type: number
+                format: double
+              type: array
+            sortDirection:
+              type: string
+            sortColumn:
+              type: string
+            fromDate:
+              type: string
+            toDate:
+              type: string
+          type: object
       required:
-      - id
-      - desc
+      - filters
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ReportingGranularity:
+      type: string
+      enum:
+      - year
+      - quarter
+      - month
+      - week
+      - day
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     MarketerFilterPreferenceBody:
@@ -252,54 +304,6 @@ components:
       - filters
       - communityId
       - s4AccountId
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

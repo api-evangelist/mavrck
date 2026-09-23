@@ -61,6 +61,8 @@ paths:
           type: string
       x-sharedCipherParameters:
         actionGroupId: actionGroupId
+      summary: Get audience insights
+      x-summary-source: derived
   /v1/campaign-performance/audience-insights/aggregate:
     get:
       operationId: getAggregatedAudienceInsights
@@ -132,6 +134,8 @@ paths:
           items:
             type: number
             format: double
+      summary: Get aggregated audience insights
+      x-summary-source: derived
   /v1/campaign-performance/post-metrics:
     get:
       operationId: getPostMetrics
@@ -234,6 +238,8 @@ paths:
           default: DESC
       x-sharedCipherParameters:
         actionGroupId: actionGroupId
+      summary: Get post metrics
+      x-summary-source: derived
   /v1/campaign-performance/influencers-metrics:
     get:
       operationId: getInfluencersMetrics
@@ -337,6 +343,8 @@ paths:
           default: DESC
       x-sharedCipherParameters:
         actionGroupId: actionGroupId
+      summary: Get influencers metrics
+      x-summary-source: derived
   /v1/campaign-performance/influencers-conversions:
     get:
       operationId: getInfluencersConversions
@@ -438,156 +446,36 @@ paths:
           default: DESC
       x-sharedCipherParameters:
         actionGroupId: actionGroupId
+      summary: Get influencers conversions
+      x-summary-source: derived
 components:
   schemas:
-    PostMetric:
+    Age:
       properties:
-        activationId:
-          type: number
-          format: double
-        impressions:
-          type: number
-          format: double
-        network:
+        age:
           type: string
-        ugcPhoto:
-          type: string
-        image:
-          type:
-          - string
-          - 'null'
-        text:
-          type:
-          - string
-          - 'null'
-        postLink:
-          type: string
-        date:
-          type: string
-        engagements:
-          type: number
-          format: double
-        benchmarkAverageEngagements:
-          type: number
-          format: double
-        engagementRate:
-          type: number
-          format: double
-        engagementRateDif:
-          type: number
-          format: double
-        benchmarkEngagementRate:
-          type: number
-          format: double
-        reach:
-          type: number
-          format: double
-        impressionsEngagementRate:
-          type: number
-          format: double
-        emvValue:
+        percent:
           type: number
           format: double
       required:
-      - activationId
-      - impressions
-      - network
-      - ugcPhoto
-      - image
-      - text
-      - postLink
-      - date
-      - engagements
-      - benchmarkAverageEngagements
-      - engagementRate
-      - engagementRateDif
-      - benchmarkEngagementRate
-      - reach
-      - impressionsEngagementRate
-      - emvValue
+      - age
+      - percent
       type: object
       additionalProperties: false
-    TopInfluencerConversions:
+    ValidateErrorJSON:
       properties:
-        firstName:
+        message:
           type: string
-        lastName:
-          type: string
-        profilePhoto:
-          type:
-          - string
-          - 'null'
-        instagramHandle:
-          type:
-          - string
-          - 'null'
-        igProfilePhoto:
-          type:
-          - string
-          - 'null'
-        facebookAvatar:
-          type:
-          - string
-          - 'null'
-        globalUserId:
-          type: number
-          format: double
-        membershipId:
-          type: number
-          format: double
-        clicks:
-          type: number
-          format: double
-        conversions:
-          type: number
-          format: double
-        conversionsValue:
-          type: number
-          format: double
-      required:
-      - firstName
-      - lastName
-      - profilePhoto
-      - instagramHandle
-      - igProfilePhoto
-      - facebookAvatar
-      - globalUserId
-      - membershipId
-      - clicks
-      - conversions
-      - conversionsValue
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
+          enum:
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
             additionalProperties: true
           type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
       required:
       - message
-      type: object
-      additionalProperties: false
-    GenderImpressions:
-      properties:
-        femaleImpressions:
-          type: number
-          format: double
-        maleImpressions:
-          type: number
-          format: double
-        totalImpressions:
-          type: number
-          format: double
-      required:
-      - femaleImpressions
-      - maleImpressions
-      - totalImpressions
+      - details
       type: object
       additionalProperties: false
     TopInfluencerMetrics:
@@ -654,65 +542,6 @@ components:
       - emvValue
       type: object
       additionalProperties: false
-    City:
-      properties:
-        city:
-          type: string
-        cityState:
-          type: string
-        impressions:
-          type: number
-          format: double
-      required:
-      - city
-      - cityState
-      - impressions
-      type: object
-      additionalProperties: false
-    Age:
-      properties:
-        age:
-          type: string
-        percent:
-          type: number
-          format: double
-      required:
-      - age
-      - percent
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     NotFoundError:
       properties:
         message:
@@ -727,6 +556,21 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
       type: object
       additionalProperties: false
     CampaignAudienceInsights:
@@ -756,6 +600,105 @@ components:
       - totalAudienceImpressions
       type: object
       additionalProperties: false
+    GenderImpressions:
+      properties:
+        femaleImpressions:
+          type: number
+          format: double
+        maleImpressions:
+          type: number
+          format: double
+        totalImpressions:
+          type: number
+          format: double
+      required:
+      - femaleImpressions
+      - maleImpressions
+      - totalImpressions
+      type: object
+      additionalProperties: false
+    TopInfluencerConversions:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        profilePhoto:
+          type:
+          - string
+          - 'null'
+        instagramHandle:
+          type:
+          - string
+          - 'null'
+        igProfilePhoto:
+          type:
+          - string
+          - 'null'
+        facebookAvatar:
+          type:
+          - string
+          - 'null'
+        globalUserId:
+          type: number
+          format: double
+        membershipId:
+          type: number
+          format: double
+        clicks:
+          type: number
+          format: double
+        conversions:
+          type: number
+          format: double
+        conversionsValue:
+          type: number
+          format: double
+      required:
+      - firstName
+      - lastName
+      - profilePhoto
+      - instagramHandle
+      - igProfilePhoto
+      - facebookAvatar
+      - globalUserId
+      - membershipId
+      - clicks
+      - conversions
+      - conversionsValue
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    City:
+      properties:
+        city:
+          type: string
+        cityState:
+          type: string
+        impressions:
+          type: number
+          format: double
+      required:
+      - city
+      - cityState
+      - impressions
+      type: object
+      additionalProperties: false
     Country:
       properties:
         country:
@@ -768,12 +711,12 @@ components:
       - impressions
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -782,6 +725,73 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    PostMetric:
+      properties:
+        activationId:
+          type: number
+          format: double
+        impressions:
+          type: number
+          format: double
+        network:
+          type: string
+        ugcPhoto:
+          type: string
+        image:
+          type:
+          - string
+          - 'null'
+        text:
+          type:
+          - string
+          - 'null'
+        postLink:
+          type: string
+        date:
+          type: string
+        engagements:
+          type: number
+          format: double
+        benchmarkAverageEngagements:
+          type: number
+          format: double
+        engagementRate:
+          type: number
+          format: double
+        engagementRateDif:
+          type: number
+          format: double
+        benchmarkEngagementRate:
+          type: number
+          format: double
+        reach:
+          type: number
+          format: double
+        impressionsEngagementRate:
+          type: number
+          format: double
+        emvValue:
+          type: number
+          format: double
+      required:
+      - activationId
+      - impressions
+      - network
+      - ugcPhoto
+      - image
+      - text
+      - postLink
+      - date
+      - engagements
+      - benchmarkAverageEngagements
+      - engagementRate
+      - engagementRateDif
+      - benchmarkEngagementRate
+      - reach
+      - impressionsEngagementRate
+      - emvValue
       type: object
       additionalProperties: false
   securitySchemes:

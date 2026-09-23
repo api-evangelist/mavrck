@@ -59,8 +59,51 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get merge tags catalog
+      x-summary-source: derived
 components:
   schemas:
+    MergeTagsCatalogResponse:
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/CatalogResponseGroup'
+          type: array
+      required:
+      - groups
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     CatalogResponseGroup:
       properties:
         tags:
@@ -99,15 +142,6 @@ components:
       - kind
       - key
       type: object
-    MergeTagsCatalogResponse:
-      properties:
-        groups:
-          items:
-            $ref: '#/components/schemas/CatalogResponseGroup'
-          type: array
-      required:
-      - groups
-      type: object
     ForbiddenError:
       properties:
         message:
@@ -130,38 +164,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
         details:
           properties: {}
           additionalProperties:

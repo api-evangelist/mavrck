@@ -47,6 +47,8 @@ paths:
             schema:
               $ref: '#/components/schemas/PowerReviewsProductRequestBody'
         required: true
+      summary: Create power reviews product
+      x-summary-source: derived
     put:
       operationId: editPowerReviewsProduct
       responses:
@@ -82,36 +84,29 @@ paths:
             schema:
               $ref: '#/components/schemas/PowerReviewsProductRequestBody'
         required: true
+      summary: Edit power reviews product
+      x-summary-source: derived
 components:
   schemas:
-    PowerReviewsProductRequestBody:
+    Product:
       properties:
-        powerReviewsAppId:
-          type: string
-        externalPageId:
-          type: string
-        image:
+        bazaarVoiceAppProduct:
+          $ref: '#/components/schemas/BazaarVoiceAppProduct'
+        communityId:
           type: string
         description:
           type: string
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        powerReviewsPage:
+          $ref: '#/components/schemas/PowerReviewsPage'
         title:
           type: string
-        productId:
-          type: number
-          format: double
-      required:
-      - externalPageId
-      - image
-      - description
-      - title
-      type: object
-    YotpoAppProduct:
-      properties:
-        reviewProductId:
-          type: number
-          format: double
-        youtpoProductId:
-          type: string
+        yotpoAppProduct:
+          $ref: '#/components/schemas/YotpoAppProduct'
       type: object
       additionalProperties: false
     PowerReviewsApp:
@@ -158,28 +153,12 @@ components:
           format: double
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -199,33 +178,58 @@ components:
           type: string
       type: object
       additionalProperties: false
-    Product:
+    PowerReviewsProductRequestBody:
       properties:
-        bazaarVoiceAppProduct:
-          $ref: '#/components/schemas/BazaarVoiceAppProduct'
-        communityId:
+        powerReviewsAppId:
+          type: string
+        externalPageId:
+          type: string
+        image:
           type: string
         description:
           type: string
-        id:
-          type: number
-          format: double
-        image:
-          type: string
-        powerReviewsPage:
-          $ref: '#/components/schemas/PowerReviewsPage'
         title:
           type: string
-        yotpoAppProduct:
-          $ref: '#/components/schemas/YotpoAppProduct'
+        productId:
+          type: number
+          format: double
+      required:
+      - externalPageId
+      - image
+      - description
+      - title
       type: object
-      additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    YotpoAppProduct:
+      properties:
+        reviewProductId:
+          type: number
+          format: double
+        youtpoProductId:
+          type: string
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:

@@ -48,6 +48,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get tik tok campaign fields
+      x-summary-source: derived
     put:
       operationId: upsertTikTokCampaignFields
       responses:
@@ -90,15 +92,12 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateTikTokCampaignFieldsOrBrandInfoBody'
         required: true
+      summary: Upsert tik tok campaign fields
+      x-summary-source: derived
 components:
   schemas:
-    TikTokBrandFields:
-      properties:
-        brandDescription:
-          type: string
-        brandName:
-          type: string
-      type: object
+    TikTokCampaignOrBrandInfoFieldsResponse:
+      $ref: '#/components/schemas/TikTokBrandFields'
     BadRequestError:
       properties:
         details:
@@ -114,8 +113,13 @@ components:
       - message
       type: object
       additionalProperties: false
-    TikTokCampaignOrBrandInfoFieldsResponse:
-      $ref: '#/components/schemas/TikTokBrandFields'
+    TikTokBrandFields:
+      properties:
+        brandDescription:
+          type: string
+        brandName:
+          type: string
+      type: object
     ForbiddenError:
       properties:
         message:

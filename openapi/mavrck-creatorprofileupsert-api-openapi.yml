@@ -43,10 +43,10 @@ paths:
             schema:
               $ref: '#/components/schemas/CreatorProfileUpsertEvent'
         required: true
+      summary: Handle creator profile upsert
+      x-summary-source: derived
 components:
   schemas:
-    CreatorProfileUpsertEvent:
-      type: object
     ForbiddenError:
       properties:
         message:
@@ -95,6 +95,8 @@ components:
       - details
       type: object
       additionalProperties: false
+    CreatorProfileUpsertEvent:
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

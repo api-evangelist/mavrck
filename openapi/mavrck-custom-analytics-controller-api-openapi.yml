@@ -53,6 +53,8 @@ paths:
         required: false
         schema:
           type: string
+      summary: Get omni analytics dashboard
+      x-summary-source: derived
   /v1/custom-analytics/dashboard-types:
     get:
       operationId: getDashboardTypes
@@ -95,8 +97,54 @@ paths:
         required: true
         schema:
           type: string
+      summary: Get dashboard types
+      x-summary-source: derived
 components:
   schemas:
+    DashboardTypesResponse:
+      properties:
+        dashboardTypes:
+          items:
+            type: string
+          type: array
+        instanceId:
+          type: string
+      required:
+      - dashboardTypes
+      - instanceId
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -126,50 +174,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    DashboardTypesResponse:
-      properties:
-        dashboardTypes:
-          items:
-            type: string
-          type: array
-        instanceId:
-          type: string
-      required:
-      - dashboardTypes
-      - instanceId
-      type: object
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
         details:
           properties: {}
           additionalProperties:

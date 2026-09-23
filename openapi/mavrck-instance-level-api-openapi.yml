@@ -1,7 +1,9 @@
 openapi: 3.2.0
 info:
   title: Later Influence™ Instance Level API
-  description: "\n# Description\nThe Reporting API enables deep analysis and reporting of marketing campaigns, social media performance, and influencer effectiveness.\nIt provides comprehensive performance insights at multiple levels:\n- Instance Level: Get instance details, overall performance, and performance over time\n- Campaign Level: Retrieve detailed campaign performance metrics\n- Social Network Level: Analyze performance across different social networks and calculate return on investment\n- Influencer Level: Evaluate individual influencer performance\n- Post Level: Access granular performance data for individual posts\n\n# Authentication\nIn order to use the Reporting API, OAuth2 authentication is required. The API uses the client credentials flow for authentication. To obtain an access token:\n\n1. Request the client credentials (client ID and client secret) from the support team.\n2. Make a POST request to the token endpoint: `https://api.mavrck.co/oauth/token`, including your client credentials in the request body.\n\nCurl Example: \n```\ncurl --request POST \\\n  --url 'https://api.mavrck.co/oauth/token' \\\n  --header 'Content-Type: application/json' \\\n  --header 'accept: application/json' \\\n  --data '{\n    \"clientId\": \"<client_id>\",\n    \"clientSecret\": \"<client_secret>\"\n  }'\n```\n\n3. Include the obtained access token in the Authorization header of your API requests:\n\nCurl Example: \n```\ncurl --request GET \\\n  --url 'https://api.mavrck.co/v1/reporting/instance/details' \\\n  --header 'Content-Type: application/json' \\\n  --header 'accept: application/json' \\\n  --header 'Authorization: Bearer **<your_access_token>**' \\\n```\n\nFor security reasons, access tokens have a limited lifespan of 12 hours. You should implement a mechanism to refresh the token when it expires.\n\n# Data Availability\n- Most endpoints return analytics that are current up to the previous day, as several social media platforms apply a 24-hour reporting delay.\n- Data access is limited to the specific account or instances associated with the provided API credentials.\n- Analytics are recorded on a daily basis and appear only when they fall within the selected date-range filters. For example, if a post was published a week ago but receives its first interaction today, that interaction will only be included when today’s date is part of the chosen range.\n\n# Base Filters\nAll endpoints support the following filters:\n- `startDate` (ISO 8601 format, e.g. 2024-01-01)\n- `endDate` (ISO 8601 format, e.g. 2024-01-01). There is a limit of up to 2 years for the selected date range.\n- `instanceIds` array of instance ids. If not provided, all instances associated with the API credentials will be considered.\n- `campaignIds` array of campaign ids, if no campaign ids are provided, all campaigns for the instance will be used\n- `reportingGroupIds` array of reporting group ids, if no reporting group ids are provided, all reporting groups for the instance will be used\n\n# Pagination\n- The pagination is available for endpoints returning large datasets.\n- Use `pageSize` and `pageNumber` query parameters to control the results. For the `pageSize` parameter, the default is 50 and the maximum is 100.\n\n# Versioning\n- API versioning supported through URI path\n\n# Changelog\n\n---\n\n## 2025-11-25 Introduce Multi-instance support\n### Added\n- `GET /instances` API - Retrieve the list of instances accessible by the provided API credentials.\n- `GET /instances/details` API - Get detailed information about the instances associated with the provided API credentials such as `influencersCount`, `campaignsCount`, and other relevant metrics. It is similar to the existing `GET /instance/details` endpoint but supports multiple instances.\n\n### Changed\n- All endpoints now support an `instanceIds` query parameter, allowing you to filter results by specific instance IDs when your credentials have access to multiple instances.\n- `GET /campaigns/performance` response includes a new string field `instanceId`.\n- `GET /post/performance` response includes a new string field `instanceId`.\n\n"
+  description: '# Description
+
+    The Reporting API enables deep analysis and reporting of marketing campaigns, social media performance, and influencer effectiveness.'
   version: 1.2.1
   contact:
     name: Developer
@@ -33,9 +35,10 @@ paths:
                       $ref: '#/components/schemas/InstancesResponseDto'
                     meta:
                       example: null
-      summary: ''
+      summary: Get allowed instances
       tags:
       - Instance Level
+      x-summary-source: derived
   /v1/reporting/instance/details:
     get:
       description: Get details for associated instance available for the provided API credentials. If the credentials have access to multiple instances, the first one will be returned, consider using `GET /instances/details` to get details for all instances.
@@ -54,9 +57,10 @@ paths:
                       $ref: '#/components/schemas/InstanceDetailsResponseDto'
                     meta:
                       example: null
-      summary: ''
+      summary: Get info about instance and campaigns
       tags:
       - Instance Level
+      x-summary-source: derived
   /v1/reporting/instances/details:
     get:
       description: Get details for all the associated instances available for the provided API credentials
@@ -77,9 +81,10 @@ paths:
                         $ref: '#/components/schemas/InstanceDetailsResponseDto'
                     meta:
                       example: null
-      summary: ''
+      summary: Get info about multiple instances and campaigns
       tags:
       - Instance Level
+      x-summary-source: derived
   /v1/reporting/instance/performance:
     get:
       description: Get instance performance details.
@@ -136,9 +141,10 @@ paths:
                       $ref: '#/components/schemas/InstancePerformanceResponseDto'
                     meta:
                       example: null
-      summary: ''
+      summary: Get instance performance
       tags:
       - Instance Level
+      x-summary-source: derived
   /v1/reporting/instance/performance-over-time:
     get:
       description: Get instance performance details over time.
@@ -226,11 +232,68 @@ paths:
                             $ref: '#/components/schemas/InstancePerformanceOverTimeMetricsDto'
                           date:
                             $ref: '#/components/schemas/PerformanceOverTimeDateDto'
-      summary: ''
+      summary: Get performance over time
       tags:
       - Instance Level
+      x-summary-source: derived
 components:
   schemas:
+    ReportingApiGranularResponseDto:
+      type: object
+      properties:
+        data:
+          type: object
+          description: A data object containing a generic metrics object | array and a date object
+          additionalProperties: true
+        meta:
+          type: object
+          description: Metadata containing page information
+          properties:
+            page:
+              type: number
+              example: 1
+            totalPages:
+              type: number
+              example: 10
+      required:
+      - data
+      - meta
+    InstanceDetailsResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the instance
+          example: instance_123
+        campaignsCount:
+          type: number
+          description: Number of campaigns associated with the instance
+          example: 5
+        influencersCount:
+          type: number
+          description: Number of influencers associated with the instance
+          example: 10
+        campaigns:
+          description: List of campaigns associated with the instance
+          example:
+          - id: 49761
+            title: demo campaign 1
+            description: ''
+            status: LIVE
+            startDate: '2023-06-06T06:52:00.000Z'
+          - id: 49762
+            title: demo campaign 2
+            description: null
+            status: LIVE
+            startDate: '2023-06-07T06:29:00.000Z'
+          type: array
+          items:
+            $ref: '#/components/schemas/InstanceCampaignDto'
+      required:
+      - id
+      - campaignsCount
+      - influencersCount
+      - campaigns
     InstancePerformanceResponseDto:
       type: object
       properties:
@@ -298,6 +361,19 @@ components:
       - estimatedContentCost
       - campaignsCost
       - conversionValue
+    InstancesResponseDto:
+      type: object
+      properties:
+        instanceIds:
+          description: A list of instance ids the API credentials have access to
+          example:
+          - instance_123
+          - instance_456
+          type: array
+          items:
+            type: string
+      required:
+      - instanceIds
     ReportingApiResponseDto:
       type: object
       properties:
@@ -319,6 +395,44 @@ components:
       required:
       - data
       - meta
+    InstanceCampaignDto:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Unique identifier for the campaign
+          example: 1
+        title:
+          type:
+          - string
+          - 'null'
+          description: Title of the campaign
+          example: Summer Sale Campaign
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the campaign
+          example: This campaign is focused on summer sales.
+        status:
+          type:
+          - string
+          - 'null'
+          description: Status of the campaign
+          example: active
+        startDate:
+          type:
+          - string
+          - 'null'
+          description: Start date of the campaign
+          format: date-time
+          example: '2023-10-01T00:00:00Z'
+      required:
+      - id
+      - title
+      - description
+      - status
+      - startDate
     PerformanceOverTimeDateDto:
       type: object
       properties:
@@ -422,113 +536,6 @@ components:
       - engagementRate
       - cpe
       - cpm
-    ReportingApiGranularResponseDto:
-      type: object
-      properties:
-        data:
-          type: object
-          description: A data object containing a generic metrics object | array and a date object
-          additionalProperties: true
-        meta:
-          type: object
-          description: Metadata containing page information
-          properties:
-            page:
-              type: number
-              example: 1
-            totalPages:
-              type: number
-              example: 10
-      required:
-      - data
-      - meta
-    InstancesResponseDto:
-      type: object
-      properties:
-        instanceIds:
-          description: A list of instance ids the API credentials have access to
-          example:
-          - instance_123
-          - instance_456
-          type: array
-          items:
-            type: string
-      required:
-      - instanceIds
-    InstanceDetailsResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the instance
-          example: instance_123
-        campaignsCount:
-          type: number
-          description: Number of campaigns associated with the instance
-          example: 5
-        influencersCount:
-          type: number
-          description: Number of influencers associated with the instance
-          example: 10
-        campaigns:
-          description: List of campaigns associated with the instance
-          example:
-          - id: 49761
-            title: demo campaign 1
-            description: ''
-            status: LIVE
-            startDate: '2023-06-06T06:52:00.000Z'
-          - id: 49762
-            title: demo campaign 2
-            description: null
-            status: LIVE
-            startDate: '2023-06-07T06:29:00.000Z'
-          type: array
-          items:
-            $ref: '#/components/schemas/InstanceCampaignDto'
-      required:
-      - id
-      - campaignsCount
-      - influencersCount
-      - campaigns
-    InstanceCampaignDto:
-      type: object
-      properties:
-        id:
-          type: number
-          description: Unique identifier for the campaign
-          example: 1
-        title:
-          type:
-          - string
-          - 'null'
-          description: Title of the campaign
-          example: Summer Sale Campaign
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the campaign
-          example: This campaign is focused on summer sales.
-        status:
-          type:
-          - string
-          - 'null'
-          description: Status of the campaign
-          example: active
-        startDate:
-          type:
-          - string
-          - 'null'
-          description: Start date of the campaign
-          format: date-time
-          example: '2023-10-01T00:00:00Z'
-      required:
-      - id
-      - title
-      - description
-      - status
-      - startDate
   securitySchemes:
     JWT:
       type: http

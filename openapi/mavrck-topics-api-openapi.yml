@@ -70,14 +70,16 @@ paths:
         required: false
         schema:
           type: string
+      summary: Get topics
+      x-summary-source: derived
 components:
   schemas:
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -86,24 +88,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    ResponseMetadataModel:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
       type: object
       additionalProperties: false
     NotFoundError:
@@ -112,22 +96,6 @@ components:
           type: string
           enum:
           - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -161,12 +129,46 @@ components:
       - meta
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ResponseMetadataModel:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:

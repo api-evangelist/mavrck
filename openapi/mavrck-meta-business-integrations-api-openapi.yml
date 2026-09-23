@@ -43,6 +43,8 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - Meta Business Integrations
+      summary: Disconnect business integrations
+      x-summary-source: derived
     post:
       operationId: connectBusinessIntegration
       responses:
@@ -84,6 +86,8 @@ paths:
             schema:
               $ref: '#/components/schemas/MetaConnectBusinessIntegrationRequestBody'
         required: true
+      summary: Connect business integration
+      x-summary-source: derived
     get:
       operationId: getBusinessIntegrations
       responses:
@@ -126,6 +130,8 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - Meta Business Integrations
+      summary: Get business integrations
+      x-summary-source: derived
   /v2/marketers/meta/business/integrations/{id}:
     patch:
       operationId: enableBusinessIntegration
@@ -175,62 +181,10 @@ paths:
             schema:
               $ref: '#/components/schemas/MetaEnableBusinessIntegrationRequestBody'
         required: true
+      summary: Enable business integration
+      x-summary-source: derived
 components:
   schemas:
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    MetaConnectBusinessIntegrationRequestBody:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     NotFoundError:
       properties:
         message:
@@ -269,6 +223,37 @@ components:
       - enabled
       type: object
       additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     MetaEnableBusinessIntegrationRequestBody:
       properties:
         enabled:
@@ -277,6 +262,29 @@ components:
           - true
       required:
       - enabled
+      type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    MetaConnectBusinessIntegrationRequestBody:
+      properties:
+        code:
+          type: string
+      required:
+      - code
       type: object
   securitySchemes:
     apiKey:

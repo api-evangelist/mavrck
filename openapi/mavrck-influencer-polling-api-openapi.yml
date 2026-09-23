@@ -43,19 +43,26 @@ paths:
             schema:
               $ref: '#/components/schemas/InfluencerPollingRequestBody'
         required: true
+      summary: Add influencer polling messages
+      x-summary-source: derived
 components:
   schemas:
-    InfluencerPollingRequestBody:
+    ValidateErrorJSON:
       properties:
-        globalUserId:
-          type: number
-          format: double
-        actionGroupId:
-          type: number
-          format: double
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - actionGroupId
+      - message
+      - details
       type: object
+      additionalProperties: false
     NotFoundError:
       properties:
         message:
@@ -88,22 +95,17 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    InfluencerPollingRequestBody:
       properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        globalUserId:
+          type: number
+          format: double
+        actionGroupId:
+          type: number
+          format: double
       required:
-      - message
-      - details
+      - actionGroupId
       type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

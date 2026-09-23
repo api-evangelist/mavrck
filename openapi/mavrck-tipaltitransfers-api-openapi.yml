@@ -53,8 +53,68 @@ paths:
         required: true
         schema:
           type: string
+      summary: Get tipalti transfer
+      x-summary-source: derived
 components:
   schemas:
+    TipaltiPaymentStatus:
+      type: string
+      enum:
+      - INITIATED
+      - SUBMITTING
+      - SUBMITTED
+      - SUBMITTED_UNCONFIRMED
+      - PAYMENT_APPROVED
+      - PROCESSING
+      - SUCCESS
+      - FAILED
+      - PAYMENT_CANCELED
+      - VOIDED
+      - DEFERRED
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TipaltiTransferWithStatusHistoryResponse:
+      $ref: '#/components/schemas/CreateTipaltiTransferResponse'
+      description: 'GET /v1/tipalti/transfers/{rewardWinId} — the most recent attempt for a reward win with its
+
+        status history. Same shape as the create response (payment-service TipaltiPaymentView).'
+    TipaltiSupportedCurrencyCodes:
+      type: string
+      enum:
+      - USD
+      - EUR
+      - GBP
+      - CAD
     CreateTipaltiTransferResponse:
       description: Mirrors the payment-service TipaltiPaymentView returned by POST /tipalti-payments/register.
       properties:
@@ -127,42 +187,6 @@ components:
       - statusHistory
       type: object
       additionalProperties: false
-    TipaltiPaymentStatusHistoryItem:
-      type: object
-      properties:
-        id:
-          type: number
-          format: double
-        transferId:
-          type: number
-          format: double
-        providerStatusCode:
-          type: string
-        providerStatusMessage:
-          type: string
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
-    TipaltiPaymentStatus:
-      type: string
-      enum:
-      - INITIATED
-      - SUBMITTING
-      - SUBMITTED
-      - SUBMITTED_UNCONFIRMED
-      - PAYMENT_APPROVED
-      - PROCESSING
-      - SUCCESS
-      - FAILED
-      - PAYMENT_CANCELED
-      - VOIDED
-      - DEFERRED
-    TipaltiTransferWithStatusHistoryResponse:
-      $ref: '#/components/schemas/CreateTipaltiTransferResponse'
-      description: 'GET /v1/tipalti/transfers/{rewardWinId} — the most recent attempt for a reward win with its
-
-        status history. Same shape as the create response (payment-service TipaltiPaymentView).'
     ForbiddenError:
       properties:
         message:
@@ -195,45 +219,23 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    TipaltiPaymentStatusHistoryItem:
       type: object
-      additionalProperties: false
-    TipaltiSupportedCurrencyCodes:
-      type: string
-      enum:
-      - USD
-      - EUR
-      - GBP
-      - CAD
-    ValidateErrorJSON:
       properties:
-        message:
+        id:
+          type: number
+          format: double
+        transferId:
+          type: number
+          format: double
+        providerStatusCode:
           type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
+        providerStatusMessage:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
   securitySchemes:
     apiKey:
       type: apiKey

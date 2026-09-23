@@ -80,6 +80,8 @@ paths:
         required: false
         schema:
           type: string
+      summary: Get content
+      x-summary-source: derived
 components:
   schemas:
     ResponseMetadata:
@@ -100,69 +102,6 @@ components:
           format: double
       type: object
       additionalProperties: false
-    ContentMedia:
-      properties:
-        videos:
-          items:
-            properties:
-              duration:
-                type: number
-                format: double
-              size:
-                $ref: '#/components/schemas/ContentMediaSize'
-              url:
-                type: string
-            required:
-            - url
-            type: object
-          type: array
-        images:
-          items:
-            properties:
-              size:
-                $ref: '#/components/schemas/ContentMediaSize'
-              url:
-                type: string
-            required:
-            - url
-            type: object
-          type: array
-      type: object
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    ContentMediaSize:
-      properties:
-        unit:
-          type: string
-          enum:
-          - CENTIMETERS
-          - MILLIMETERS
-          - INCHES
-          - PIXELS
-          - PERCENT
-          - POINTS
-        height:
-          type: number
-          format: double
-        width:
-          type: number
-          format: double
-      required:
-      - unit
-      type: object
     ContentResponse:
       properties:
         meta:
@@ -188,6 +127,57 @@ components:
       required:
       - id
       type: object
+    ContentMediaSize:
+      properties:
+        unit:
+          type: string
+          enum:
+          - CENTIMETERS
+          - MILLIMETERS
+          - INCHES
+          - PIXELS
+          - PERCENT
+          - POINTS
+        height:
+          type: number
+          format: double
+        width:
+          type: number
+          format: double
+      required:
+      - unit
+      type: object
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
     Content:
       properties:
         content:
@@ -272,54 +262,6 @@ components:
       - content
       - binding
       type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ContentInfo:
       properties:
         dateCreated:
@@ -350,6 +292,34 @@ components:
       - media
       - type
       - profile
+      type: object
+    ContentMedia:
+      properties:
+        videos:
+          items:
+            properties:
+              duration:
+                type: number
+                format: double
+              size:
+                $ref: '#/components/schemas/ContentMediaSize'
+              url:
+                type: string
+            required:
+            - url
+            type: object
+          type: array
+        images:
+          items:
+            properties:
+              size:
+                $ref: '#/components/schemas/ContentMediaSize'
+              url:
+                type: string
+            required:
+            - url
+            type: object
+          type: array
       type: object
     ContentEngagements:
       properties:
@@ -462,6 +432,38 @@ components:
           - array
           - 'null'
       type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

@@ -53,25 +53,26 @@ paths:
             schema:
               $ref: '#/components/schemas/WebPluginConversionBody'
         required: true
+      summary: Create conversion
+      x-summary-source: derived
 components:
   schemas:
-    Pick_WebPluginConversionBody.Exclude_keyofWebPluginConversionBody.promoCode-or-orderId__:
+    ValidateErrorJSON:
       properties:
-        communityId:
+        message:
           type: string
-        conversionValue:
-          type: number
-          format: double
-        conversionCode:
-          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - communityId
-      - conversionValue
-      - conversionCode
+      - message
+      - details
       type: object
-      description: From T, pick a set of properties whose keys are in the union K
-    WebPluginConversionResponse:
-      $ref: '#/components/schemas/Omit_WebPluginConversionBody.promoCode-or-orderId_'
+      additionalProperties: false
     WebPluginConversionBody:
       properties:
         orderId:
@@ -90,66 +91,6 @@ components:
       - conversionCode
       - communityId
       type: object
-    ResponseBody_WebPluginConversionResponse-Array_:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/WebPluginConversionResponse'
-          type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    Omit_WebPluginConversionBody.promoCode-or-orderId_:
-      $ref: '#/components/schemas/Pick_WebPluginConversionBody.Exclude_keyofWebPluginConversionBody.promoCode-or-orderId__'
-      description: Construct a type with the properties of T except for those in type K.
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     NotFoundError:
       properties:
         message:
@@ -166,12 +107,44 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    Omit_WebPluginConversionBody.promoCode-or-orderId_:
+      $ref: '#/components/schemas/Pick_WebPluginConversionBody.Exclude_keyofWebPluginConversionBody.promoCode-or-orderId__'
+      description: Construct a type with the properties of T except for those in type K.
+    WebPluginConversionResponse:
+      $ref: '#/components/schemas/Omit_WebPluginConversionBody.promoCode-or-orderId_'
+    ResponseBody_WebPluginConversionResponse-Array_:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WebPluginConversionResponse'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    Pick_WebPluginConversionBody.Exclude_keyofWebPluginConversionBody.promoCode-or-orderId__:
+      properties:
+        communityId:
+          type: string
+        conversionValue:
+          type: number
+          format: double
+        conversionCode:
+          type: string
+      required:
+      - communityId
+      - conversionValue
+      - conversionCode
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -180,6 +153,35 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
   securitySchemes:

@@ -43,6 +43,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateShareableLinksVisitorBody'
         required: true
+      summary: Create shareable links visitor
+      x-summary-source: derived
     get:
       operationId: getShareableLinksVisitors
       responses:
@@ -107,45 +109,10 @@ paths:
         schema:
           type: string
           format: date-time
+      summary: Get shareable links visitors
+      x-summary-source: derived
 components:
   schemas:
-    CreateShareableLinksVisitorBody:
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        cipher:
-          type: string
-        dashboardType:
-          type:
-          - string
-          - 'null'
-      required:
-      - firstName
-      - lastName
-      - email
-      - cipher
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ShareableLinksVisitorResponse:
       properties:
         id:
@@ -192,22 +159,6 @@ components:
       - updatedAt
       type: object
       additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ShareableLinksVisitorsListResponse:
       properties:
         data:
@@ -224,6 +175,59 @@ components:
           type: string
           enum:
           - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CreateShareableLinksVisitorBody:
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        cipher:
+          type: string
+        dashboardType:
+          type:
+          - string
+          - 'null'
+      required:
+      - firstName
+      - lastName
+      - email
+      - cipher
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:

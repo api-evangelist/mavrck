@@ -9,7 +9,7 @@ servers:
 security:
 - apiKey: []
 tags:
-- name: ExchangeRates
+- name: Exchange Rates
 paths:
   /v1/exchange-rates:
     get:
@@ -40,28 +40,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - ExchangeRates
+      - Exchange Rates
       parameters:
       - in: query
         name: currencyCode
         required: true
         schema:
           type: string
+      summary: Get exchange rates
+      x-summary-source: derived
 components:
   schemas:
-    ExchangeRate:
+    ValidateErrorJSON:
       properties:
-        base:
+        message:
           type: string
-        rates:
+          enum:
+          - Validation failed
+        details:
           properties: {}
           additionalProperties:
-            type: number
-            format: double
+            additionalProperties: true
           type: object
       required:
-      - base
-      - rates
+      - message
+      - details
       type: object
       additionalProperties: false
     ResponseBody_ExchangeRate_:
@@ -72,19 +75,6 @@ components:
           $ref: '#/components/schemas/ResponseMeta'
       required:
       - data
-      type: object
-      additionalProperties: false
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -103,6 +93,21 @@ components:
       - details
       type: object
       additionalProperties: false
+    ExchangeRate:
+      properties:
+        base:
+          type: string
+        rates:
+          properties: {}
+          additionalProperties:
+            type: number
+            format: double
+          type: object
+      required:
+      - base
+      - rates
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -119,20 +124,17 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ResponseMeta:
       properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
   securitySchemes:

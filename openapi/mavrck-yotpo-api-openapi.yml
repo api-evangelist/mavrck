@@ -43,6 +43,8 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - Yotpo
+      summary: Get yotpo apps
+      x-summary-source: derived
     post:
       operationId: createYotpoApp
       responses:
@@ -78,8 +80,26 @@ paths:
             schema:
               $ref: '#/components/schemas/YotpoAppPostRequest'
         required: true
+      summary: Create yotpo app
+      x-summary-source: derived
 components:
   schemas:
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     YotpoAppPostRequest:
       properties:
         data:
@@ -87,6 +107,22 @@ components:
       required:
       - data
       type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     YotpoAppPostRequestBody:
       properties:
         secretKey:
@@ -100,6 +136,22 @@ components:
       - name
       - apiKey
       type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     YotpoAppResponse:
       properties:
         name:
@@ -123,54 +175,6 @@ components:
       - apiKey
       - id
       type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

@@ -51,6 +51,8 @@ paths:
           - media-binder
           - media-updater
           - creator-updater
+      summary: Purge tik tok queue
+      x-summary-source: derived
   /v1/ttcm/management/queues/stats:
     get:
       operationId: getTikTokQueueStats
@@ -81,8 +83,20 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - TikTok TTCM
+      summary: Get tik tok queue stats
+      x-summary-source: derived
 components:
   schemas:
+    Components.Schemas.PurgeQueueResponse:
+      properties:
+        success:
+          type: boolean
+        queueName:
+          type: string
+        message:
+          type: string
+      type: object
+      additionalProperties: false
     QueueStats:
       properties:
         queueUrl:
@@ -103,14 +117,30 @@ components:
       - approximateNumberOfMessagesDelayed
       type: object
       additionalProperties: false
-    Components.Schemas.PurgeQueueResponse:
+    ValidateErrorJSON:
       properties:
-        success:
-          type: boolean
-        queueName:
-          type: string
         message:
           type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Components.Schemas.QueueStatsResponse:
+      properties:
+        mediaBinderQueue:
+          $ref: '#/components/schemas/QueueStats'
+        mediaUpdaterQueue:
+          $ref: '#/components/schemas/QueueStats'
+        creatorUpdaterQueue:
+          $ref: '#/components/schemas/QueueStats'
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -143,32 +173,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    Components.Schemas.QueueStatsResponse:
-      properties:
-        mediaBinderQueue:
-          $ref: '#/components/schemas/QueueStats'
-        mediaUpdaterQueue:
-          $ref: '#/components/schemas/QueueStats'
-        creatorUpdaterQueue:
-          $ref: '#/components/schemas/QueueStats'
       type: object
       additionalProperties: false
   securitySchemes:

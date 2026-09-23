@@ -19,7 +19,7 @@ paths:
       x-access:
       - administrator
       operationId: bulkAssignActionGroupCustomStatuses
-      summary: Assign an action group custom status to candidates in bulk.
+      summary: Assign an action group custom status to candidates in bulk
       parameters:
       - name: actionGroupId
         in: path
@@ -130,6 +130,8 @@ paths:
         required: false
         schema:
           type: boolean
+      summary: Get tracking statuses
+      x-summary-source: derived
     post:
       operationId: createTrackingStatus
       responses:
@@ -178,6 +180,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ListCustomStatus'
         required: true
+      summary: Create tracking status
+      x-summary-source: derived
   /v1/action-groups/{actionGroupId}/custom-statuses/{id}/reorder:
     put:
       operationId: reorderTrackingStatus
@@ -233,6 +237,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ListCustomStatus'
         required: true
+      summary: Reorder tracking status
+      x-summary-source: derived
   /v1/action-groups/{actionGroupId}/custom-statuses/{id}:
     put:
       operationId: updateTrackingStatus
@@ -288,6 +294,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Partial_ListCustomStatus_'
         required: true
+      summary: Update tracking status
+      x-summary-source: derived
   /v1/action-groups/custom-statuses/{id}/delete:
     delete:
       operationId: deleteTrackingStatus
@@ -331,8 +339,71 @@ paths:
         schema:
           type: number
           format: double
+      summary: Delete tracking status
+      x-summary-source: derived
 components:
   schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ConversationTemplate:
+      properties:
+        category:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/Administrator'
+        communityId:
+          type: string
+        html:
+          type: string
+        id:
+          type: number
+          format: double
+        isArchived:
+          type: boolean
+        lastModifiedBy:
+          $ref: '#/components/schemas/Administrator'
+        subject:
+          type: string
+        title:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        version:
+          type: number
+          format: double
+      required:
+      - category
+      - createdAt
+      - html
+      - id
+      - isArchived
+      - title
+      - updatedAt
+      type: object
+      additionalProperties: false
+    EmptyObject:
+      type: object
+      properties: {}
     Administrator:
       properties:
         id:
@@ -356,94 +427,306 @@ components:
           type: string
       type: object
       additionalProperties: false
-    ResponseMetadata:
+    ValidateErrorJSON:
       properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
+        message:
           type: string
           enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
-    Error:
+    ActionGroupCandidateQueryFilter:
       type: object
+      required:
+      - expectedNumberOfInfluencers
       properties:
-        type:
+        userFilter:
+          $ref: '#/components/schemas/UserSearch'
+        q:
           type: string
-          description: A key representing the type of error that has occurred.
-        error:
-          type: string
-          description: A static description of the type of error.
-        params:
+          description: Search parameter.
+        statusId:
           type: array
-          description: For errors invovling parameters, this is an array containing the invalid parameters.
           items:
-            type: string
-        keys:
+            type: integer
+        workflowStageId:
+          type: integer
+        customStatusId:
+          type: array
+          items:
+            type:
+            - integer
+            - string
+        customInfluencerStatusId:
+          type: array
+          items:
+            type:
+            - integer
+            - string
+        dueDate:
           type: array
           items:
             type:
             - string
-            - object
-        artifactLinks:
-          $ref: '#/components/schemas/LinksDeprecated'
-        parent:
-          type: object
-          properties:
+        completed:
+          type: boolean
+        optedIn:
+          type: integer
+        participating:
+          type: array
+          items:
             type:
-              type: string
-              description: A key representing the type of error generated by a request to an external API.
-            error:
-              type: string
-              description: A static description of the parent error.
-    Partial_ListCustomStatus_:
-      properties:
-        actionGroupId:
-          type: number
-          format: double
-        auxiliaryLabel:
-          type: string
-        ctaLabel:
-          type: string
-        custom:
-          type: boolean
-        disabled:
-          type: boolean
-        enabled:
-          type: boolean
-        id:
-          type: number
-          format: double
-        label:
-          type: string
-        linkedStages:
-          items:
-            type: string
+            - integer
+            - string
+        excludedGlobalUserIds:
           type: array
-        phase:
-          type: string
-        slug:
-          type: string
-        statusOrder:
-          type: number
-          format: double
-        templates:
           items:
-            $ref: '#/components/schemas/ConversationTemplate'
-          type: array
+            type: integer
+        expectedNumberOfInfluencers:
+          type: integer
+        orderProperty:
+          type: string
+          enum:
+          - statusId
+          - upvotes
+          - downvotes
+          - netVotes
+          - totalVotes
+          - dueDate
+          - optedInDate
+          - engagements
+          - createdAt
+          - customStatusId
+          - customInfluencerStatusId
+          - quote
+          - user.stageJoinDate
+          - user.id
+          - user.age
+          - user.audienceFakeEngagersLevel
+          - user.audienceFakeFollowersLevel
+          - user.audienceFraudLevel
+          - user.audiencePercentageFemale
+          - user.audiencePercentage_13_17
+          - user.audiencePercentage_18_24
+          - user.audiencePercentage_25_34
+          - user.audiencePercentage_35_44
+          - user.audiencePercentage_45_54
+          - user.audiencePercentage_55_64
+          - user.audiencePercentage_65_plus
+          - user.audiencePredominantAgeRange
+          - user.audiencePredominantCity
+          - user.audiencePredominantCountry
+          - user.birthday
+          - user.city
+          - user.country
+          - user.deleted
+          - user.email
+          - user.fullName
+          - user.gender
+          - user.instagramHandle
+          - user.lastRefreshedAt
+          - user.loadSource
+          - user.nudityLevel
+          - user.profanityLevel
+          - user.state
+          - user.violenceLevel
+          - listMemberCostAndPerformance.listMemberId
+          - listMemberCostAndPerformance.rewards
+          - listMemberCostAndPerformance.value
+          - listMemberCostAndPerformance.cost
+          - listMemberCostAndPerformance.posts
+          - listMemberCostAndPerformance.engagements
+          - listMemberCostAndPerformance.impressions
+          - listMemberCostAndPerformance.clicks
+          - listMemberCostAndPerformance.conversions
+          - listMemberCostAndPerformance.conversionValue
+          - listMemberCostAndPerformance.cpm
+          - listMemberCostAndPerformance.cpp
+          - listMemberCostAndPerformance.cpe
+          - listMemberCostAndPerformance.committedAmount
+          - listMemberCostAndPerformance.readyAmount
+          - listMemberCostAndPerformance.paidAmount
+          - listMemberCostAndPerformance.emvValue
+          - listMemberCostAndPerformance.roiValue
+          - user.instagramAccount.globalUserId
+          - user.instagramAccount.analysisVersion
+          - user.instagramAccount.audienceFakeCommentersLevel
+          - user.instagramAccount.audienceFakeCommentersPercentage
+          - user.instagramAccount.audienceFakeEngagersLevel
+          - user.instagramAccount.audienceFakeFollowersLevel
+          - user.instagramAccount.audienceFakeFollowersPercentage
+          - user.instagramAccount.audienceFakeLikersLevel
+          - user.instagramAccount.audienceFakeLikersPercentage
+          - user.instagramAccount.audienceFraudLevel
+          - user.instagramAccount.audiencePercentageFemale
+          - user.instagramAccount.audiencePercentage_13_17
+          - user.instagramAccount.audiencePercentage_18_24
+          - user.instagramAccount.audiencePercentage_25_34
+          - user.instagramAccount.audiencePercentage_35_44
+          - user.instagramAccount.audiencePercentage_45_54
+          - user.instagramAccount.audiencePercentage_55_64
+          - user.instagramAccount.audiencePercentage_65_plus
+          - user.instagramAccount.audiencePredominantAgeRange
+          - user.instagramAccount.audiencePredominantCity
+          - user.instagramAccount.audiencePredominantCountry
+          - user.instagramAccount.averageComments
+          - user.instagramAccount.averageEngagements
+          - user.instagramAccount.averageLikes
+          - user.instagramAccount.bio
+          - user.instagramAccount.boughtFollowers
+          - user.instagramAccount.createdAt
+          - user.instagramAccount.engagementRate
+          - user.instagramAccount.followersCount
+          - user.instagramAccount.followingCount
+          - user.instagramAccount.fullName
+          - user.instagramAccount.handle
+          - user.instagramAccount.instagramExternalId
+          - user.instagramAccount.instagramProfileId
+          - user.instagramAccount.isBusiness
+          - user.instagramAccount.isPrivate
+          - user.instagramAccount.lastAnalyzedAt
+          - user.instagramAccount.lastAnalyzedFollowersFraudAt
+          - user.instagramAccount.loadSource
+          - user.instagramAccount.mediaCount
+          - user.instagramAccount.nudityLevel
+          - user.instagramAccount.previewPostsLastUpdatedAt
+          - user.instagramAccount.profanityLevel
+          - user.instagramAccount.profilePicture
+          - user.instagramAccount.profileType
+          - user.instagramAccount.sourceDetail
+          - user.instagramAccount.sponsoredPostRate
+          - user.instagramAccount.topicsLastAnalyzedAt
+          - user.instagramAccount.updatedAt
+          - user.instagramAccount.violenceLevel
+          - user.instagramAccount.website
+          - user.facebookProfile.id
+          - user.facebookProfile.averageComments
+          - user.facebookProfile.averageEngagements
+          - user.facebookProfile.averageLikes
+          - user.facebookProfile.engagementRate
+          - user.facebookProfile.facebookExternalId
+          - user.facebookProfile.facebookCreator
+          - user.facebookProfile.link
+          - user.facebookProfile.name
+          - user.facebookProfile.picture
+          - user.facebookProfile.reach
+          - user.facebookProfile.type
+          - user.twitterAccount.id
+          - user.twitterAccount.userId
+          - user.twitterAccount.handle
+          - user.twitterAccount.fullName
+          - user.twitterAccount.profilePicture
+          - user.twitterAccount.description
+          - user.twitterAccount.followersCount
+          - user.twitterAccount.followingCount
+          - user.twitterAccount.listedCount
+          - user.twitterAccount.accountCreatedAt
+          - user.twitterAccount.location
+          - user.twitterAccount.geoEnabled
+          - user.twitterAccount.lang
+          - user.twitterAccount.timeZone
+          - user.twitterAccount.utcOffset
+          - user.twitterAccount.verified
+          - user.twitterAccount.protected
+          - user.twitterAccount.averageFavorites
+          - user.twitterAccount.averageRetweets
+          - user.twitterAccount.averageEngagements
+          - user.twitterAccount.engagementRate
+          - user.twitterAccount.primaryAccount
+          - user.twitterAccount.twitterExternalId
+          - user.twitterAccount.createdAt
+          - user.pinterestAccount.id
+          - user.pinterestAccount.averageEngagements
+          - user.pinterestAccount.bio
+          - user.pinterestAccount.boardsCount
+          - user.pinterestAccount.createdAt
+          - user.pinterestAccount.engagementRate
+          - user.pinterestAccount.externalId
+          - user.pinterestAccount.firstName
+          - user.pinterestAccount.followersCount
+          - user.pinterestAccount.followingCount
+          - user.pinterestAccount.lastName
+          - user.pinterestAccount.monthlyViewers
+          - user.pinterestAccount.pinsCount
+          - user.pinterestAccount.primaryAccount
+          - user.pinterestAccount.profilePicture
+          - user.pinterestAccount.updatedAt
+          - user.pinterestAccount.userId
+          - user.pinterestAccount.username
+          - user.blog.id
+          - user.blog.globalUserId
+          - user.blog.language
+          - user.blog.name
+          - user.blog.platform
+          - user.blog.url
+          - user.youtubeChannel.id
+          - user.youtubeChannel.userId
+          - user.youtubeChannel.username
+          - user.youtubeChannel.bio
+          - user.youtubeChannel.accountCreatedAt
+          - user.youtubeChannel.profilePicture
+          - user.youtubeChannel.followersCount
+          - user.youtubeChannel.videoCount
+          - user.youtubeChannel.commentCount
+          - user.youtubeChannel.viewCount
+          - user.youtubeChannel.primaryAccount
+          - user.youtubeChannel.youtubeExternalId
+          - user.youtubeChannel.handle
+          - user.youtubeChannel.global_user_id
+          - draftContent.id
+          - draftContent.text
+          - draftContent.listMemberId
+          - draftContent.createdAt
+          - draftContent.updatedAt
+          - draftContent.status
+          - draftContent.contentType
+          - draftContent.notes
+          - draftContent.contentUrl
+          - draftContent.isArchived
+          - draftContent.archivedByAccountId
+          - draftContent.archivedByGlobalUserId
+          - draftContent.archivedAt
+          - draftContent.threadId
+          - draftContent.feedback
+          - draftContent.uploaderType
+          - draftContent.uploaderAccountId
+          - draftContent.uploaderGlobalUserId
+          - user.tiktokCreator.followersCount
+          - user.tiktokCreator.engagementRate
+    LinksDeprecated:
       type: object
-      description: Make all properties in T optional
-    TSOAEmptyObject:
-      properties: {}
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     UserSearch:
@@ -2266,6 +2549,59 @@ components:
                 type:
                 - integer
                 - string
+    Partial_ListCustomStatus_:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        auxiliaryLabel:
+          type: string
+        ctaLabel:
+          type: string
+        custom:
+          type: boolean
+        disabled:
+          type: boolean
+        enabled:
+          type: boolean
+        id:
+          type: number
+          format: double
+        label:
+          type: string
+        linkedStages:
+          items:
+            type: string
+          type: array
+        phase:
+          type: string
+        slug:
+          type: string
+        statusOrder:
+          type: number
+          format: double
+        templates:
+          items:
+            $ref: '#/components/schemas/ConversationTemplate'
+          type: array
+      type: object
+      description: Make all properties in T optional
+    ActionGroupCustomStatusDeleteResponse:
+      properties:
+        operation:
+          type: string
+      type: object
+    ActionGroupCustomStatusesGetResponse:
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
+        data:
+          items:
+            $ref: '#/components/schemas/ListCustomStatus'
+          type: array
+      required:
+      - data
+      type: object
     ListCustomStatus:
       properties:
         templates:
@@ -2302,6 +2638,37 @@ components:
           type: number
           format: double
       type: object
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
     ForbiddenError:
       properties:
         message:
@@ -2318,373 +2685,16 @@ components:
       - details
       type: object
       additionalProperties: false
-    ConversationTemplate:
-      properties:
-        category:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        createdBy:
-          $ref: '#/components/schemas/Administrator'
-        communityId:
-          type: string
-        html:
-          type: string
-        id:
-          type: number
-          format: double
-        isArchived:
-          type: boolean
-        lastModifiedBy:
-          $ref: '#/components/schemas/Administrator'
-        subject:
-          type: string
-        title:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-        version:
-          type: number
-          format: double
-      required:
-      - category
-      - createdAt
-      - html
-      - id
-      - isArchived
-      - title
-      - updatedAt
+    TSOAEmptyObject:
+      properties: {}
       type: object
       additionalProperties: false
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ActionGroupCustomStatusDeleteResponse:
-      properties:
-        operation:
-          type: string
-      type: object
-    ActionGroupCustomStatusesGetResponse:
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMetadata'
-        data:
-          items:
-            $ref: '#/components/schemas/ListCustomStatus'
-          type: array
-      required:
-      - data
-      type: object
-    EmptyObject:
-      type: object
-      properties: {}
-    ActionGroupCandidateQueryFilter:
-      type: object
-      required:
-      - expectedNumberOfInfluencers
-      properties:
-        userFilter:
-          $ref: '#/components/schemas/UserSearch'
-        q:
-          type: string
-          description: Search parameter.
-        statusId:
-          type: array
-          items:
-            type: integer
-        workflowStageId:
-          type: integer
-        customStatusId:
-          type: array
-          items:
-            type:
-            - integer
-            - string
-        customInfluencerStatusId:
-          type: array
-          items:
-            type:
-            - integer
-            - string
-        dueDate:
-          type: array
-          items:
-            type:
-            - string
-        completed:
-          type: boolean
-        optedIn:
-          type: integer
-        participating:
-          type: array
-          items:
-            type:
-            - integer
-            - string
-        excludedGlobalUserIds:
-          type: array
-          items:
-            type: integer
-        expectedNumberOfInfluencers:
-          type: integer
-        orderProperty:
-          type: string
-          enum:
-          - statusId
-          - upvotes
-          - downvotes
-          - netVotes
-          - totalVotes
-          - dueDate
-          - optedInDate
-          - engagements
-          - createdAt
-          - customStatusId
-          - customInfluencerStatusId
-          - quote
-          - user.stageJoinDate
-          - user.id
-          - user.age
-          - user.audienceFakeEngagersLevel
-          - user.audienceFakeFollowersLevel
-          - user.audienceFraudLevel
-          - user.audiencePercentageFemale
-          - user.audiencePercentage_13_17
-          - user.audiencePercentage_18_24
-          - user.audiencePercentage_25_34
-          - user.audiencePercentage_35_44
-          - user.audiencePercentage_45_54
-          - user.audiencePercentage_55_64
-          - user.audiencePercentage_65_plus
-          - user.audiencePredominantAgeRange
-          - user.audiencePredominantCity
-          - user.audiencePredominantCountry
-          - user.birthday
-          - user.city
-          - user.country
-          - user.deleted
-          - user.email
-          - user.fullName
-          - user.gender
-          - user.instagramHandle
-          - user.lastRefreshedAt
-          - user.loadSource
-          - user.nudityLevel
-          - user.profanityLevel
-          - user.state
-          - user.violenceLevel
-          - listMemberCostAndPerformance.listMemberId
-          - listMemberCostAndPerformance.rewards
-          - listMemberCostAndPerformance.value
-          - listMemberCostAndPerformance.cost
-          - listMemberCostAndPerformance.posts
-          - listMemberCostAndPerformance.engagements
-          - listMemberCostAndPerformance.impressions
-          - listMemberCostAndPerformance.clicks
-          - listMemberCostAndPerformance.conversions
-          - listMemberCostAndPerformance.conversionValue
-          - listMemberCostAndPerformance.cpm
-          - listMemberCostAndPerformance.cpp
-          - listMemberCostAndPerformance.cpe
-          - listMemberCostAndPerformance.committedAmount
-          - listMemberCostAndPerformance.readyAmount
-          - listMemberCostAndPerformance.paidAmount
-          - listMemberCostAndPerformance.emvValue
-          - listMemberCostAndPerformance.roiValue
-          - user.instagramAccount.globalUserId
-          - user.instagramAccount.analysisVersion
-          - user.instagramAccount.audienceFakeCommentersLevel
-          - user.instagramAccount.audienceFakeCommentersPercentage
-          - user.instagramAccount.audienceFakeEngagersLevel
-          - user.instagramAccount.audienceFakeFollowersLevel
-          - user.instagramAccount.audienceFakeFollowersPercentage
-          - user.instagramAccount.audienceFakeLikersLevel
-          - user.instagramAccount.audienceFakeLikersPercentage
-          - user.instagramAccount.audienceFraudLevel
-          - user.instagramAccount.audiencePercentageFemale
-          - user.instagramAccount.audiencePercentage_13_17
-          - user.instagramAccount.audiencePercentage_18_24
-          - user.instagramAccount.audiencePercentage_25_34
-          - user.instagramAccount.audiencePercentage_35_44
-          - user.instagramAccount.audiencePercentage_45_54
-          - user.instagramAccount.audiencePercentage_55_64
-          - user.instagramAccount.audiencePercentage_65_plus
-          - user.instagramAccount.audiencePredominantAgeRange
-          - user.instagramAccount.audiencePredominantCity
-          - user.instagramAccount.audiencePredominantCountry
-          - user.instagramAccount.averageComments
-          - user.instagramAccount.averageEngagements
-          - user.instagramAccount.averageLikes
-          - user.instagramAccount.bio
-          - user.instagramAccount.boughtFollowers
-          - user.instagramAccount.createdAt
-          - user.instagramAccount.engagementRate
-          - user.instagramAccount.followersCount
-          - user.instagramAccount.followingCount
-          - user.instagramAccount.fullName
-          - user.instagramAccount.handle
-          - user.instagramAccount.instagramExternalId
-          - user.instagramAccount.instagramProfileId
-          - user.instagramAccount.isBusiness
-          - user.instagramAccount.isPrivate
-          - user.instagramAccount.lastAnalyzedAt
-          - user.instagramAccount.lastAnalyzedFollowersFraudAt
-          - user.instagramAccount.loadSource
-          - user.instagramAccount.mediaCount
-          - user.instagramAccount.nudityLevel
-          - user.instagramAccount.previewPostsLastUpdatedAt
-          - user.instagramAccount.profanityLevel
-          - user.instagramAccount.profilePicture
-          - user.instagramAccount.profileType
-          - user.instagramAccount.sourceDetail
-          - user.instagramAccount.sponsoredPostRate
-          - user.instagramAccount.topicsLastAnalyzedAt
-          - user.instagramAccount.updatedAt
-          - user.instagramAccount.violenceLevel
-          - user.instagramAccount.website
-          - user.facebookProfile.id
-          - user.facebookProfile.averageComments
-          - user.facebookProfile.averageEngagements
-          - user.facebookProfile.averageLikes
-          - user.facebookProfile.engagementRate
-          - user.facebookProfile.facebookExternalId
-          - user.facebookProfile.facebookCreator
-          - user.facebookProfile.link
-          - user.facebookProfile.name
-          - user.facebookProfile.picture
-          - user.facebookProfile.reach
-          - user.facebookProfile.type
-          - user.twitterAccount.id
-          - user.twitterAccount.userId
-          - user.twitterAccount.handle
-          - user.twitterAccount.fullName
-          - user.twitterAccount.profilePicture
-          - user.twitterAccount.description
-          - user.twitterAccount.followersCount
-          - user.twitterAccount.followingCount
-          - user.twitterAccount.listedCount
-          - user.twitterAccount.accountCreatedAt
-          - user.twitterAccount.location
-          - user.twitterAccount.geoEnabled
-          - user.twitterAccount.lang
-          - user.twitterAccount.timeZone
-          - user.twitterAccount.utcOffset
-          - user.twitterAccount.verified
-          - user.twitterAccount.protected
-          - user.twitterAccount.averageFavorites
-          - user.twitterAccount.averageRetweets
-          - user.twitterAccount.averageEngagements
-          - user.twitterAccount.engagementRate
-          - user.twitterAccount.primaryAccount
-          - user.twitterAccount.twitterExternalId
-          - user.twitterAccount.createdAt
-          - user.pinterestAccount.id
-          - user.pinterestAccount.averageEngagements
-          - user.pinterestAccount.bio
-          - user.pinterestAccount.boardsCount
-          - user.pinterestAccount.createdAt
-          - user.pinterestAccount.engagementRate
-          - user.pinterestAccount.externalId
-          - user.pinterestAccount.firstName
-          - user.pinterestAccount.followersCount
-          - user.pinterestAccount.followingCount
-          - user.pinterestAccount.lastName
-          - user.pinterestAccount.monthlyViewers
-          - user.pinterestAccount.pinsCount
-          - user.pinterestAccount.primaryAccount
-          - user.pinterestAccount.profilePicture
-          - user.pinterestAccount.updatedAt
-          - user.pinterestAccount.userId
-          - user.pinterestAccount.username
-          - user.blog.id
-          - user.blog.globalUserId
-          - user.blog.language
-          - user.blog.name
-          - user.blog.platform
-          - user.blog.url
-          - user.youtubeChannel.id
-          - user.youtubeChannel.userId
-          - user.youtubeChannel.username
-          - user.youtubeChannel.bio
-          - user.youtubeChannel.accountCreatedAt
-          - user.youtubeChannel.profilePicture
-          - user.youtubeChannel.followersCount
-          - user.youtubeChannel.videoCount
-          - user.youtubeChannel.commentCount
-          - user.youtubeChannel.viewCount
-          - user.youtubeChannel.primaryAccount
-          - user.youtubeChannel.youtubeExternalId
-          - user.youtubeChannel.handle
-          - user.youtubeChannel.global_user_id
-          - draftContent.id
-          - draftContent.text
-          - draftContent.listMemberId
-          - draftContent.createdAt
-          - draftContent.updatedAt
-          - draftContent.status
-          - draftContent.contentType
-          - draftContent.notes
-          - draftContent.contentUrl
-          - draftContent.isArchived
-          - draftContent.archivedByAccountId
-          - draftContent.archivedByGlobalUserId
-          - draftContent.archivedAt
-          - draftContent.threadId
-          - draftContent.feedback
-          - draftContent.uploaderType
-          - draftContent.uploaderAccountId
-          - draftContent.uploaderGlobalUserId
-          - user.tiktokCreator.followersCount
-          - user.tiktokCreator.engagementRate
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
         details:
           properties: {}
           additionalProperties:

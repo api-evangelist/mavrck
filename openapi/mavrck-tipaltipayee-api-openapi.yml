@@ -53,8 +53,26 @@ paths:
         required: true
         schema:
           type: string
+      summary: Get tipalti payee by ref code
+      x-summary-source: derived
 components:
   schemas:
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     BadRequestError:
       properties:
         details:
@@ -92,22 +110,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

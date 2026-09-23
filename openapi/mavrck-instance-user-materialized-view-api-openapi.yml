@@ -37,8 +37,26 @@ paths:
         required: true
       tags:
       - Instance User Materialized View
+      summary: Put
+      x-summary-source: derived
 components:
   schemas:
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -55,6 +73,15 @@ components:
       - details
       type: object
       additionalProperties: false
+    InstanceUserMaterializedViewRequestBody:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ViewQueryParam'
+          type: array
+      required:
+      - data
+      type: object
     ViewQueryParam:
       properties:
         globalUserId:
@@ -74,31 +101,6 @@ components:
         facebookProfileId:
           type: number
           format: double
-      type: object
-      additionalProperties: false
-    InstanceUserMaterializedViewRequestBody:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ViewQueryParam'
-          type: array
-      required:
-      - data
-      type: object
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

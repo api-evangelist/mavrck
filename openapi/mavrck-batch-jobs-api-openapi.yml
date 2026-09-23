@@ -9,12 +9,12 @@ servers:
 security:
 - apiKey: []
 tags:
-- name: BatchJobs
+- name: Batch Jobs
 paths:
   /batch-jobs/{listId}/status:
     get:
       tags:
-      - BatchJobs
+      - Batch Jobs
       x-handler: batch_jobs/batch_jobs_controller.js
       x-access:
       - administrator
@@ -68,10 +68,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      summary: Get progress for batch jobs with list id
+      x-summary-source: derived
   /batch-jobs/{communityId}/summary:
     get:
       tags:
-      - BatchJobs
+      - Batch Jobs
       x-handler: batch_jobs/batch_jobs_controller.js
       x-access:
       - administrator
@@ -125,8 +127,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      summary: Get batch jobs summary
+      x-summary-source: derived
 components:
   schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
     Error:
       type: object
       properties:
@@ -158,36 +192,6 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
     BatchJob:
       type: object
       properties:

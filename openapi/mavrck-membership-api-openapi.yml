@@ -41,6 +41,8 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - Membership
+      summary: Get membership contact info
+      x-summary-source: derived
     put:
       operationId: updateMembershipContactInfo
       responses:
@@ -76,6 +78,8 @@ paths:
             schema:
               $ref: '#/components/schemas/MembershipContactInfoDeprecated'
         required: true
+      summary: Update membership contact info
+      x-summary-source: derived
   /v1/influencers/{id}/contact-info:
     put:
       operationId: updateInfluencerContactInfo
@@ -120,6 +124,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateInfluencerContactInfoBody'
         required: true
+      summary: Update influencer contact info
+      x-summary-source: derived
   /v1/membership/signature:
     put:
       operationId: updateSignature
@@ -162,6 +168,8 @@ paths:
             schema:
               $ref: '#/components/schemas/updateSignatureBody'
         required: true
+      summary: Update signature
+      x-summary-source: derived
   /v1/membership/summary:
     get:
       operationId: getMembershipSummary
@@ -192,6 +200,8 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - Membership
+      summary: Get membership summary
+      x-summary-source: derived
   /v1/membership-profile-info:
     put:
       operationId: updateMembershipProfileInfo
@@ -224,6 +234,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateMembershipProfileInfo'
         required: true
+      summary: Update membership profile info
+      x-summary-source: derived
   /v1/membership/{id}:
     get:
       operationId: getMembership
@@ -267,6 +279,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get membership
+      x-summary-source: derived
     put:
       operationId: updateMembership
       responses:
@@ -315,6 +329,8 @@ paths:
             schema:
               $ref: '#/components/schemas/updateMembershipBody'
         required: true
+      summary: Update membership
+      x-summary-source: derived
   /v1/remove-membership:
     post:
       operationId: removeMembership
@@ -357,27 +373,24 @@ paths:
             schema:
               $ref: '#/components/schemas/removeMembershipBody'
         required: true
+      summary: Remove membership
+      x-summary-source: derived
 components:
   schemas:
-    GetMembershipSummaryResponse:
+    ValidateErrorJSON:
       properties:
-        totalPoints:
-          type: number
-          format: double
-        totalActivations:
-          type: number
-          format: double
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - totalPoints
-      - totalActivations
-      type: object
-      additionalProperties: false
-    UpdateMembershipProfileInfo:
-      properties:
-        data:
-          $ref: '#/components/schemas/MembershipProfileInfo'
-      required:
-      - data
+      - message
+      - details
       type: object
       additionalProperties: false
     NotFoundError:
@@ -396,14 +409,53 @@ components:
       - details
       type: object
       additionalProperties: false
-    Pick_UpdateMemberContactInfoData.gender-or-genderDescription_:
+    Gender:
+      enum:
+      - describe
+      - female
+      - male
+      - non_bin
+      - other
+      type: string
+    _MembershipContactInfo:
       properties:
+        age:
+          type: number
+          format: double
+        apt:
+          type: string
+        birthday:
+          type: object
+        city:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        emailIsVerified:
+          type: boolean
+        firstName:
+          type: string
+        fullName:
+          type: string
         gender:
           $ref: '#/components/schemas/Gender'
         genderDescription:
           type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+        zip:
+          type: string
+        talentManagerEmail:
+          type: string
       type: object
-      description: From T, pick a set of properties whose keys are in the union K
+      additionalProperties: false
     removeMembershipBody:
       properties:
         activityId:
@@ -414,6 +466,14 @@ components:
             type: number
             format: double
           type: array
+      type: object
+      additionalProperties: false
+    UpdateMembershipProfileInfo:
+      properties:
+        data:
+          $ref: '#/components/schemas/MembershipProfileInfo'
+      required:
+      - data
       type: object
       additionalProperties: false
     UpdateInfluencerContactInfoBody:
@@ -459,43 +519,21 @@ components:
           type: array
       type: object
       additionalProperties: false
-    _MembershipContactInfo:
+    updateMembershipBody:
       properties:
-        age:
-          type: number
-          format: double
-        apt:
-          type: string
-        birthday:
-          type: object
-        city:
-          type: string
-        country:
-          type: string
-        email:
-          type: string
-        emailIsVerified:
+        blacklisted:
           type: boolean
-        firstName:
+        status:
           type: string
-        fullName:
+          enum:
+          - USER
+          - REJECTED
+        membershipType:
           type: string
-        gender:
-          $ref: '#/components/schemas/Gender'
-        genderDescription:
-          type: string
-        lastName:
-          type: string
-        phone:
-          type: string
-        state:
-          type: string
-        street:
-          type: string
-        zip:
-          type: string
-        talentManagerEmail:
-          type: string
+          enum:
+          - EMPLOYEE
+          - CUSTOMER
+          - NORMAL
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -512,6 +550,16 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    MembershipProfileInfo:
+      properties:
+        membershipContactInfo:
+          $ref: '#/components/schemas/Pick_UpdateMemberContactInfoData.gender-or-genderDescription_'
+        memberSelectedEthnicities:
+          items:
+            $ref: '#/components/schemas/MembershipEthnicity'
+          type: array
       type: object
       additionalProperties: false
     ServerError:
@@ -541,38 +589,17 @@ components:
       - ethnicGroupDescription
       type: object
       additionalProperties: false
-    Gender:
-      enum:
-      - describe
-      - female
-      - male
-      - non_bin
-      - other
-      type: string
-    EthnicGroup:
-      enum:
-      - American Indian or Alaska Native
-      - Asian
-      - Black or African American
-      - Hispanic, Latinx, or Spanish origin
-      - Other
-      - Pacific Islander
-      - Prefer not to say
-      - White
-      type: string
-    SocialPresenceInput:
+    GetMembershipSummaryResponse:
       properties:
-        platform:
-          type: string
-        username:
-          type: string
+        totalPoints:
+          type: number
+          format: double
+        totalActivations:
+          type: number
+          format: double
       required:
-      - platform
-      - username
-      type: object
-      additionalProperties: false
-    TSOAEmptyObject:
-      properties: {}
+      - totalPoints
+      - totalActivations
       type: object
       additionalProperties: false
     MembershipContactInfoDeprecated:
@@ -614,55 +641,20 @@ components:
           type: string
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     updateSignatureBody:
       properties:
         signedTermsAndConditions:
           type: boolean
       type: object
       additionalProperties: false
-    MembershipProfileInfo:
+    Pick_UpdateMemberContactInfoData.gender-or-genderDescription_:
       properties:
-        membershipContactInfo:
-          $ref: '#/components/schemas/Pick_UpdateMemberContactInfoData.gender-or-genderDescription_'
-        memberSelectedEthnicities:
-          items:
-            $ref: '#/components/schemas/MembershipEthnicity'
-          type: array
-      type: object
-      additionalProperties: false
-    updateMembershipBody:
-      properties:
-        blacklisted:
-          type: boolean
-        status:
+        gender:
+          $ref: '#/components/schemas/Gender'
+        genderDescription:
           type: string
-          enum:
-          - USER
-          - REJECTED
-        membershipType:
-          type: string
-          enum:
-          - EMPLOYEE
-          - CUSTOMER
-          - NORMAL
       type: object
-      additionalProperties: false
+      description: From T, pick a set of properties whose keys are in the union K
     GetMembershipResponse:
       properties:
         blacklisted:
@@ -714,6 +706,32 @@ components:
           type: string
         fullName:
           type: string
+      type: object
+      additionalProperties: false
+    SocialPresenceInput:
+      properties:
+        platform:
+          type: string
+        username:
+          type: string
+      required:
+      - platform
+      - username
+      type: object
+      additionalProperties: false
+    EthnicGroup:
+      enum:
+      - American Indian or Alaska Native
+      - Asian
+      - Black or African American
+      - Hispanic, Latinx, or Spanish origin
+      - Other
+      - Pacific Islander
+      - Prefer not to say
+      - White
+      type: string
+    TSOAEmptyObject:
+      properties: {}
       type: object
       additionalProperties: false
   securitySchemes:

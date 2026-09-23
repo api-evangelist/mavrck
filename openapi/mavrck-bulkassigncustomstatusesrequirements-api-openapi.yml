@@ -78,8 +78,38 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get requirements
+      x-summary-source: derived
 components:
   schemas:
+    WorkflowStatusRequirement:
+      properties:
+        type:
+          type: string
+          enum:
+          - promo_code
+        satisfied:
+          type: boolean
+      required:
+      - type
+      - satisfied
+      type: object
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     BadRequestError:
       properties:
         details:
@@ -95,18 +125,6 @@ components:
       - message
       type: object
       additionalProperties: false
-    WorkflowStatusRequirement:
-      properties:
-        type:
-          type: string
-          enum:
-          - promo_code
-        satisfied:
-          type: boolean
-      required:
-      - type
-      - satisfied
-      type: object
     ForbiddenError:
       properties:
         message:
@@ -139,22 +157,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

@@ -42,6 +42,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get lightbox tik tok graphs
+      x-summary-source: derived
 components:
   schemas:
     DemographicsGraphsResponse:
@@ -56,17 +58,6 @@ components:
       description: '*
 
         Demographics Pro Graphs'
-    GraphDatapoint:
-      properties:
-        value:
-          type: number
-          format: double
-        display:
-          type: string
-      required:
-      - value
-      - display
-      type: object
     DemographicsGraph:
       properties:
         data:
@@ -78,6 +69,17 @@ components:
       required:
       - data
       - id
+      type: object
+    GraphDatapoint:
+      properties:
+        value:
+          type: number
+          format: double
+        display:
+          type: string
+      required:
+      - value
+      - display
       type: object
     ForbiddenError:
       properties:

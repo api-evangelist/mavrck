@@ -64,6 +64,8 @@ paths:
         required: false
         schema:
           type: boolean
+      summary: Get influencer campaign history
+      x-summary-source: derived
   /v1/influencer-campaign/{actionGroupId}:
     get:
       operationId: getInfluencerCampaign
@@ -107,32 +109,18 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get influencer campaign
+      x-summary-source: derived
 components:
   schemas:
     LegacyInfluencerCampaignGetResponse:
       type: object
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -168,15 +156,31 @@ components:
       required:
       - data
       type: object
-    InfluencerCampaignHistory:
-      type: object
-      properties: {}
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    InfluencerCampaignHistory:
+      type: object
+      properties: {}
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:

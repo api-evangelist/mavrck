@@ -47,8 +47,24 @@ paths:
             schema:
               $ref: '#/components/schemas/ActionGroupStatusQueryRequest'
         required: true
+      summary: Get action group statuses
+      x-summary-source: derived
 components:
   schemas:
+    ActionGroupStatusQueryRequest:
+      properties:
+        actionGroupIds:
+          items:
+            type: integer
+            format: int32
+          type: array
+          description: Array of action group IDs to query (max 100)
+          minItems: 1
+          maxItems: 100
+      required:
+      - actionGroupIds
+      type: object
+      additionalProperties: false
     BadRequestError:
       properties:
         details:
@@ -64,20 +80,11 @@ components:
       - message
       type: object
       additionalProperties: false
-    ActionGroupStatusQueryRequest:
-      properties:
-        actionGroupIds:
-          items:
-            type: integer
-            format: int32
-          type: array
-          description: Array of action group IDs to query (max 100)
-          minItems: 1
-          maxItems: 100
-      required:
-      - actionGroupIds
+    ActionGroupStatusMap:
+      properties: {}
       type: object
-      additionalProperties: false
+      additionalProperties:
+        type: string
     ForbiddenError:
       properties:
         message:
@@ -110,11 +117,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    ActionGroupStatusMap:
-      properties: {}
-      type: object
-      additionalProperties:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

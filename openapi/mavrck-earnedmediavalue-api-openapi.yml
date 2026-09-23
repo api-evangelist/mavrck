@@ -49,6 +49,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateEmvParams'
         required: true
+      summary: Backfill emv
+      x-summary-source: derived
   /v1/earned-media-value/backfill-lists-and-list-members:
     post:
       operationId: backfillEmvForListsAndListMembers
@@ -87,6 +89,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateEmvParams'
         required: true
+      summary: Backfill emv for lists and list members
+      x-summary-source: derived
 components:
   schemas:
     UpdateEmvParams:
@@ -97,28 +101,12 @@ components:
           type: string
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -145,12 +133,28 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:

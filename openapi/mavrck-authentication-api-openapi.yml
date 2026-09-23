@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Mavrck Authentication API
   version: '1.0'
-  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: mavrck-authentication-api-openapi.yml, mavrck-reporting-api.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: mavrck-openapi.json, mavrck-reporting-api.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: http://app.splashscore.com/v1
 - url: https://app.splashscore.com/v1
@@ -15,7 +15,7 @@ paths:
       tags:
       - Authentication
       x-handler: auth/facebook_controller.js
-      summary: Pass Facebook access grant information in exchange for a JWT to include in the header of requests.
+      summary: Pass Facebook access grant information in exchange for a JWT to include in the…
       parameters:
       - name: ^mdp_.+$
         in: query
@@ -104,6 +104,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postApiKeyFacebook
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -112,7 +114,7 @@ paths:
       tags:
       - Authentication
       x-handler: auth/influencer_auto_login/influencer_auto_login_controller.js
-      summary: Pass encrypted user key in exchange for a JWT to include in the header of requests.
+      summary: Pass encrypted user key in exchange for a JWT to include in the header of…
       responses:
         '200':
           description: User info
@@ -163,6 +165,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postAutoLogin
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -171,7 +175,7 @@ paths:
       tags:
       - Authentication
       x-handler: auth/instagram_business_controller.js
-      summary: Pass Facebook access grant information in exchange for a JWT to include in the header of requests.
+      summary: Pass Facebook access grant information in exchange for a JWT to include in the…
       x-access:
       - influencer
       responses:
@@ -234,6 +238,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postConnectedAccountInstagramBusiness
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -242,7 +248,7 @@ paths:
       tags:
       - Authentication
       x-handler: email_auth/email_auth_lookup_controller.js
-      summary: Pass an email and check if it needs verification or existing login credentials submitted in order to proceed
+      summary: Pass an email and check if it needs verification or existing login credentials…
       parameters:
       - name: ^mdp_.+$
         in: query
@@ -319,6 +325,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postEmailAuthLookup
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -327,7 +335,7 @@ paths:
       tags:
       - Authentication
       x-handler: email_auth/email_auth_signup_controller.js
-      summary: Pass an email verification request key and new password in exchange for a JWT to include in the header of requests.
+      summary: Pass an email verification request key and new password in exchange for a JWT…
       responses:
         '200':
           description: User Info.
@@ -390,6 +398,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postEmailAuthSignup
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -398,7 +408,7 @@ paths:
       tags:
       - Authentication
       x-handler: email_auth/email_auth_login_controller.js
-      summary: Pass an email and password in exchange for a JWT to include in the header of requests.
+      summary: Pass an email and password in exchange for a JWT to include in the header of…
       parameters:
       - name: ^mdp_.+$
         in: query
@@ -463,6 +473,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postEmailAuthLogin
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -515,6 +527,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postEmailAuthForgotPassword
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -523,7 +537,7 @@ paths:
       tags:
       - Authentication
       x-handler: email_auth/email_auth_reset_password_controller.js
-      summary: Pass an email reset password request key and new password in exchange for a JWT to include in the header of requests.
+      summary: Pass an email reset password request key and new password in exchange for a JWT…
       responses:
         '200':
           description: User Info.
@@ -572,6 +586,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postEmailAuthResetPassword
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -580,7 +596,7 @@ paths:
       tags:
       - Authentication
       x-handler: email_verification_request/email_verification_request_validate_controller.js
-      summary: Validate an email verification request.
+      summary: Validate an email verification request
       responses:
         '200':
           description: Email verification request is valid.
@@ -650,6 +666,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postEmailVerificationRequestValidate
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -707,6 +725,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: postEmailVerificationRequestCreate
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -717,7 +737,7 @@ paths:
       x-handler: login_credentials/login_credentials_controller.js
       x-access:
       - influencer
-      summary: Update existing influencer login credentials.
+      summary: Update existing influencer login credentials
       responses:
         '200':
           description: User Info.
@@ -767,6 +787,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      operationId: putLoginCredentialsUpdate
+      x-operation-id-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -814,6 +836,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      summary: Login admin
+      x-summary-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -883,6 +907,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      summary: Exchange code for token
+      x-summary-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -924,6 +950,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      summary: Swap community
+      x-summary-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -976,6 +1004,8 @@ paths:
           type: string
       security:
       - apiKey: []
+      summary: Get reset key
+      x-summary-source: derived
     post:
       operationId: resetPassword
       responses:
@@ -1019,6 +1049,8 @@ paths:
         required: true
       security:
       - apiKey: []
+      summary: Reset password
+      x-summary-source: derived
     servers:
     - url: http://app.splashscore.com/v1
     - url: https://app.splashscore.com/v1
@@ -1053,6 +1085,204 @@ paths:
     - url: https://api.mavrck.co
 components:
   schemas:
+    FacebookConnectionInfo:
+      $ref: '#/components/schemas/FacebookProfileDeprecated'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PinterestConnectionInfo:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the Pinterest connection flow.
+        handle:
+          type: string
+          description: Client's Pinterest account handle
+        profilePicture:
+          type: string
+          description: Client's Pinterest profile picture
+    TikTokConnectionInfo:
+      type: object
+      properties:
+        primaryAccount:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the TikTok connection flow.
+        handle:
+          type: string
+          description: Client's TikTok account handle
+        profilePicture:
+          type: string
+          description: Client's TikTok profile picture
+    FacebookAccessCodeExchangeRequest:
+      properties:
+        redirectUri:
+          type: string
+        code:
+          type: string
+      required:
+      - redirectUri
+      - code
+      type: object
+    TwitterConnectionInfoDeprecated:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the Twitter connection flow.
+        handle:
+          type: string
+          description: Client's Twitter account handle
+        profilePicture:
+          type: string
+          description: Client's Twitter profile picture
+    BasicAuthPostRequest:
+      properties:
+        password:
+          type: string
+        email:
+          type: string
+      required:
+      - password
+      - email
+      type: object
+    SwapAppRequestBody:
+      properties:
+        communityId:
+          type: string
+      required:
+      - communityId
+      type: object
+      additionalProperties: false
+    PostRequestBody:
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        resetKey:
+          type: string
+      required:
+      - email
+      - password
+      - resetKey
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    FacebookProfileDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        facebookExternalId:
+          type: string
+        name:
+          type: string
+        link:
+          type: string
+        picture:
+          type: string
+        reach:
+          type: integer
+        averageLikes:
+          type: integer
+        averageComments:
+          type: integer
+        averageEngagements:
+          type: integer
+        engagementRate:
+          type: number
+        type:
+          type: string
+        available:
+          type: boolean
+        active:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+        facebookUser:
+          type: object
+          properties:
+            isExpired:
+              type: boolean
     Error:
       type: object
       properties:
@@ -1084,69 +1314,11 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    SwapAppRequestBody:
-      properties:
-        communityId:
-          type: string
-      required:
-      - communityId
+    EmailAccount:
       type: object
-      additionalProperties: false
-    BasicAuthPostResponse:
-      properties:
-        token:
-          type: string
-        communityId:
-          type: string
-      required:
-      - token
-      - communityId
-      type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    PinterestConnectionInfo:
-      type: object
-      properties:
-        expiresAt:
-          type: string
-          format: date-time
-          description: The date by which the client should re-prompt the Pinterest connection flow.
-        handle:
-          type: string
-          description: Client's Pinterest account handle
-        profilePicture:
-          type: string
-          description: Client's Pinterest profile picture
-    FacebookConnectionInfo:
-      $ref: '#/components/schemas/FacebookProfileDeprecated'
-    PostRequestBody:
       properties:
         email:
           type: string
-        password:
-          type: string
-        resetKey:
-          type: string
-      required:
-      - email
-      - password
-      - resetKey
-      type: object
-      additionalProperties: false
     SwapAppPostResponse:
       properties:
         token:
@@ -1155,34 +1327,9 @@ components:
       - token
       type: object
       additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    EmptyObject:
       type: object
-      additionalProperties: false
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
+      properties: {}
     InstagramConnectionInfo:
       type: object
       properties:
@@ -1209,61 +1356,32 @@ components:
         profilePicture:
           type: string
           description: Client's Instagram profile picture
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    MembershipRejection:
       type: object
-      additionalProperties: false
-    FacebookAccessCodeExchangeRequest:
+      description: Passed when an influencer does not meet the entrance criteria for the community.
       properties:
-        redirectUri:
+        redirectLink:
           type: string
-        code:
+        rejectReason:
+          type: string
+        missingCriteria:
+          type: array
+          items:
+            type: string
+    BasicAuthPostResponse:
+      properties:
+        token:
+          type: string
+        communityId:
           type: string
       required:
-      - redirectUri
-      - code
+      - token
+      - communityId
       type: object
-    TikTokConnectionInfo:
-      type: object
-      properties:
-        primaryAccount:
-          type: boolean
-        expiresAt:
-          type: string
-          format: date-time
-          description: The date by which the client should re-prompt the TikTok connection flow.
-        handle:
-          type: string
-          description: Client's TikTok account handle
-        profilePicture:
-          type: string
-          description: Client's TikTok profile picture
     TSOAEmptyObject:
       properties: {}
       type: object
       additionalProperties: false
-    BasicAuthPostRequest:
-      properties:
-        password:
-          type: string
-        email:
-          type: string
-      required:
-      - password
-      - email
-      type: object
     Profile:
       type: object
       properties:
@@ -1337,40 +1455,6 @@ components:
                 type: string
               ethnicGroupDescription:
                 type: string
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    TwitterConnectionInfoDeprecated:
-      type: object
-      properties:
-        expiresAt:
-          type: string
-          format: date-time
-          description: The date by which the client should re-prompt the Twitter connection flow.
-        handle:
-          type: string
-          description: Client's Twitter account handle
-        profilePicture:
-          type: string
-          description: Client's Twitter profile picture
-    EmailAccount:
-      type: object
-      properties:
-        email:
-          type: string
     Blog:
       properties:
         globalUserId:
@@ -1396,58 +1480,15 @@ components:
           - 'null'
       type: object
       additionalProperties: false
-    EmptyObject:
-      type: object
-      properties: {}
-    MembershipRejection:
-      type: object
-      description: Passed when an influencer does not meet the entrance criteria for the community.
-      properties:
-        redirectLink:
-          type: string
-        rejectReason:
-          type: string
-        missingCriteria:
-          type: array
-          items:
-            type: string
-    FacebookProfileDeprecated:
+    TokenResponseDto:
       type: object
       properties:
-        id:
-          type: integer
-        facebookExternalId:
+        jwt:
           type: string
-        name:
-          type: string
-        link:
-          type: string
-        picture:
-          type: string
-        reach:
-          type: integer
-        averageLikes:
-          type: integer
-        averageComments:
-          type: integer
-        averageEngagements:
-          type: integer
-        engagementRate:
-          type: number
-        type:
-          type: string
-        available:
-          type: boolean
-        active:
-          type: boolean
-        expiresAt:
-          type: string
-          format: date-time
-        facebookUser:
-          type: object
-          properties:
-            isExpired:
-              type: boolean
+          description: The JWT token using which the reporting APIs need to be authenticated
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+      required:
+      - jwt
     TokenRequestDto:
       type: object
       properties:
@@ -1462,15 +1503,6 @@ components:
       required:
       - clientId
       - clientSecret
-    TokenResponseDto:
-      type: object
-      properties:
-        jwt:
-          type: string
-          description: The JWT token using which the reporting APIs need to be authenticated
-          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-      required:
-      - jwt
   securitySchemes:
     apiKey:
       type: apiKey
@@ -1482,5 +1514,5 @@ components:
       bearerFormat: JWT
       description: JWT obtained from the OAuth2 token endpoint
 x-refined-from:
-- mavrck-authentication-api-openapi.yml
+- mavrck-openapi.json
 - mavrck-reporting-api.json

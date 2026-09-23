@@ -58,54 +58,16 @@ paths:
         required: false
         schema:
           type: string
+      summary: Get influencer links
+      x-summary-source: derived
 components:
   schemas:
-    GetInfluencerLinksResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/InfluencerLinks'
-          type: array
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    InfluencerLinks:
-      properties:
-        key:
-          type: string
-        label:
-          type: string
-        url:
-          type: string
-      required:
-      - key
-      - label
-      - url
-      type: object
-      additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -132,12 +94,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -146,6 +108,46 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    InfluencerLinks:
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        url:
+          type: string
+      required:
+      - key
+      - label
+      - url
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GetInfluencerLinksResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InfluencerLinks'
+          type: array
+      required:
+      - data
       type: object
       additionalProperties: false
   securitySchemes:

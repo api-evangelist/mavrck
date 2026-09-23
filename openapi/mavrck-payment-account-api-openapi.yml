@@ -9,7 +9,7 @@ servers:
 security:
 - apiKey: []
 tags:
-- name: PaymentAccount
+- name: Payment Account
 paths:
   /v1/payment-accounts:
     get:
@@ -48,7 +48,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
+      summary: Get instance payment accounts
+      x-summary-source: derived
     post:
       operationId: createPaymentAccount
       responses:
@@ -83,13 +85,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreatePaymentAccountData'
         required: true
+      summary: Create payment account
+      x-summary-source: derived
   /v1/payment-accounts/net-deposits:
     get:
       operationId: getNetDepositsForPaymentAccounts
@@ -127,7 +131,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
       parameters:
       - in: query
         name: paymentAccountIds
@@ -139,6 +143,8 @@ paths:
           items:
             type: number
             format: double
+      summary: Get net deposits for payment accounts
+      x-summary-source: derived
   /v1/payment-accounts/{paymentAccountId}:
     get:
       operationId: getPaymentAccountById
@@ -174,7 +180,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
       parameters:
       - in: path
         name: paymentAccountId
@@ -182,6 +188,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get payment account by id
+      x-summary-source: derived
   /v1/payment-accounts/{paymentAccountId}/transactions:
     post:
       operationId: recordAccountingTransaction
@@ -223,7 +231,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
       parameters:
       - in: path
         name: paymentAccountId
@@ -237,6 +245,8 @@ paths:
             schema:
               $ref: '#/components/schemas/AccountingTransactionCreateDetails'
         required: true
+      summary: Record accounting transaction
+      x-summary-source: derived
   /v1/payment-accounts/info/supported-currencies:
     get:
       operationId: getStripeSupportedCurrencies
@@ -272,7 +282,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
+      summary: Get stripe supported currencies
+      x-summary-source: derived
   /v1/payment-accounts/info/instance:
     get:
       operationId: getInstanceInternationalCurrencies
@@ -308,7 +320,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
+      summary: Get instance international currencies
+      x-summary-source: derived
   /v1/payment-accounts/instance/{instanceId}:
     get:
       operationId: getPaymentAccountByInstanceId
@@ -344,13 +358,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
       parameters:
       - in: path
         name: instanceId
         required: true
         schema:
           type: string
+      summary: Get payment account by instance id
+      x-summary-source: derived
     put:
       operationId: updateInstanceInternationalCurrency
       responses:
@@ -385,7 +401,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
       parameters:
       - in: path
         name: instanceId
@@ -398,6 +414,8 @@ paths:
             schema:
               $ref: '#/components/schemas/PaymentAccountSupportedCurrenciesRequestBody'
         required: true
+      summary: Update instance international currency
+      x-summary-source: derived
   /v1/payment-accounts/{paymentAccountId}/transactions/{transactionId}/reward-wins/{rewardWinId}:
     patch:
       operationId: updateTransactionAndRewardWin
@@ -433,7 +451,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
       parameters:
       - in: path
         name: paymentAccountId
@@ -459,6 +477,8 @@ paths:
             schema:
               $ref: '#/components/schemas/TaxUpdateRequestDTO'
         required: true
+      summary: Update transaction and reward win
+      x-summary-source: derived
   /v1/payment-accounts/{paymentAccountId}/transactions/{transactionId}:
     patch:
       operationId: updateTransaction
@@ -494,7 +514,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerError'
       tags:
-      - PaymentAccount
+      - Payment Account
       parameters:
       - in: path
         name: paymentAccountId
@@ -514,6 +534,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdatePaymentAccountTransactionRequestDTO'
         required: true
+      summary: Update transaction
+      x-summary-source: derived
 components:
   schemas:
     PaymentAccountNetDeposits:
@@ -538,32 +560,27 @@ components:
       - earliestTransactionDate
       type: object
       additionalProperties: false
-    UpdatePaymentAccountTransactionRequestDTO:
+    TaxLineItemType:
+      type: string
+      enum:
+      - GST
+      - HST
+      - VAT
+      - PST
+      - QST
+      - RST
+    CreatePaymentAccountData:
       properties:
-        budgetReferenceId:
-          type:
-          - string
-          - 'null'
-        budgetReferenceIdType:
+        currencyCode:
           type: object
-        taxId:
-          type:
-          - string
-          - 'null'
-        invoiceNumber:
-          type:
-          - string
-          - 'null'
-        taxLineItems:
-          items:
-            $ref: '#/components/schemas/TaxLineItem'
-          type:
-          - array
-          - 'null'
         communityId:
           type: string
+        cashPaymentAppId:
+          type: number
+          format: double
+      required:
+      - communityId
       type: object
-      additionalProperties: false
     NotFoundError:
       properties:
         message:
@@ -580,37 +597,28 @@ components:
       - details
       type: object
       additionalProperties: false
-    TaxUpdateRequestDTO:
+    TaxLineItem:
       properties:
-        taxId:
-          type:
-          - string
-          - 'null'
-        invoiceNumber:
-          type:
-          - string
-          - 'null'
-        taxLineItems:
-          items:
-            $ref: '#/components/schemas/TaxLineItem'
-          type:
-          - array
-          - 'null'
+        amount:
+          type: number
+          format: double
+        type:
+          $ref: '#/components/schemas/TaxLineItemType'
+      required:
+      - amount
+      - type
       type: object
-      additionalProperties: false
-    StripeSupportedCurrencies:
-      items:
-        $ref: '#/components/schemas/StripeInternationalCurrency'
-      type: array
-    TaxLineItemType:
+    PaymentAccountType:
+      enum:
+      - CASH
+      - GIFT_CARD
+      type: string
+    AccountingTransactionType:
       type: string
       enum:
-      - GST
-      - HST
-      - VAT
-      - PST
-      - QST
-      - RST
+      - BALANCE_INCREASE
+      - BALANCE_DECREASE
+      - BALANCE_TRANSFER
     PaymentAccountSupportedCurrenciesRequestBody:
       properties:
         instanceId:
@@ -654,66 +662,78 @@ components:
       - details
       type: object
       additionalProperties: false
-    PaymentAccountType:
-      enum:
-      - CASH
-      - GIFT_CARD
-      type: string
-    StripeInternationalCurrency:
+    Partial_PaymentAccountSupportedCurrencies_:
       properties:
-        country:
+        instanceId:
           type: string
-        currencyCode:
-          type: string
-        name:
-          type: string
-        symbol:
-          type: string
-      required:
-      - country
-      - currencyCode
-      - name
-      - symbol
+        internationalCurrencies:
+          type:
+          - string
+          - 'null'
+      type: object
+      description: Make all properties in T optional
+    DBPaymentAccountWithAssociations:
+      type: object
+      properties: {}
+    TaxUpdateRequestDTO:
+      properties:
+        taxId:
+          type:
+          - string
+          - 'null'
+        invoiceNumber:
+          type:
+          - string
+          - 'null'
+        taxLineItems:
+          items:
+            $ref: '#/components/schemas/TaxLineItem'
+          type:
+          - array
+          - 'null'
       type: object
       additionalProperties: false
-    AccountingTransactionCreateDetails:
+    UpdatePaymentAccountTransactionRequestDTO:
       properties:
-        budgetReferenceIdType:
-          type: object
         budgetReferenceId:
           type:
           - string
           - 'null'
-        targetPaymentAccountId:
-          type: number
-          format: double
-        transactionType:
-          $ref: '#/components/schemas/AccountingTransactionType'
-        description:
+        budgetReferenceIdType:
+          type: object
+        taxId:
+          type:
+          - string
+          - 'null'
+        invoiceNumber:
+          type:
+          - string
+          - 'null'
+        taxLineItems:
+          items:
+            $ref: '#/components/schemas/TaxLineItem'
+          type:
+          - array
+          - 'null'
+        communityId:
           type: string
-        amount:
-          type: number
-          format: double
-        paymentAccountId:
-          type: number
-          format: double
-      required:
-      - transactionType
-      - description
-      - amount
-      - paymentAccountId
       type: object
-    TaxLineItem:
+      additionalProperties: false
+    BadRequestError:
       properties:
-        amount:
-          type: number
-          format: double
-        type:
-          $ref: '#/components/schemas/TaxLineItemType'
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
       required:
-      - amount
-      - type
+      - message
       type: object
+      additionalProperties: false
     DBPaymentAccount:
       properties:
         updatedAt:
@@ -750,56 +770,58 @@ components:
       - balance
       - id
       type: object
+    StripeInternationalCurrency:
+      properties:
+        country:
+          type: string
+        currencyCode:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+      required:
+      - country
+      - currencyCode
+      - name
+      - symbol
+      type: object
+      additionalProperties: false
+    StripeSupportedCurrencies:
+      items:
+        $ref: '#/components/schemas/StripeInternationalCurrency'
+      type: array
+    AccountingTransactionCreateDetails:
+      properties:
+        budgetReferenceIdType:
+          type: object
+        budgetReferenceId:
+          type:
+          - string
+          - 'null'
+        targetPaymentAccountId:
+          type: number
+          format: double
+        transactionType:
+          $ref: '#/components/schemas/AccountingTransactionType'
+        description:
+          type: string
+        amount:
+          type: number
+          format: double
+        paymentAccountId:
+          type: number
+          format: double
+      required:
+      - transactionType
+      - description
+      - amount
+      - paymentAccountId
+      type: object
     TSOAEmptyObject:
       properties: {}
       type: object
       additionalProperties: false
-    Partial_PaymentAccountSupportedCurrencies_:
-      properties:
-        instanceId:
-          type: string
-        internationalCurrencies:
-          type:
-          - string
-          - 'null'
-      type: object
-      description: Make all properties in T optional
-    AccountingTransactionType:
-      type: string
-      enum:
-      - BALANCE_INCREASE
-      - BALANCE_DECREASE
-      - BALANCE_TRANSFER
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    DBPaymentAccountWithAssociations:
-      type: object
-      properties: {}
-    CreatePaymentAccountData:
-      properties:
-        currencyCode:
-          type: object
-        communityId:
-          type: string
-        cashPaymentAppId:
-          type: number
-          format: double
-      required:
-      - communityId
-      type: object
   securitySchemes:
     apiKey:
       type: apiKey

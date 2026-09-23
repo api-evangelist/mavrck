@@ -57,6 +57,8 @@ paths:
           type: array
           items:
             type: string
+      summary: Get entitlements
+      x-summary-source: derived
     put:
       operationId: updateEntitlements
       responses:
@@ -94,6 +96,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateEntitlementFields'
         required: true
+      summary: Update entitlements
+      x-summary-source: derived
   /v1/entitlements/bulk:
     put:
       operationId: bulkUpdateEntitlements
@@ -148,15 +152,24 @@ paths:
             schema:
               $ref: '#/components/schemas/BulkUpdateEntitlementsRequest'
         required: true
+      summary: Bulk update entitlements
+      x-summary-source: derived
 components:
   schemas:
-    EntitlementGroup:
-      type: string
-      enum:
-      - omni
-      - mavely
-      - private_label
-      description: Predefined instance groups that the backend can resolve without the frontend sending individual IDs.
+    UpdateEntitlementFields:
+      properties:
+        communityId:
+          type: string
+        label:
+          type: string
+        featureId:
+          $ref: '#/components/schemas/FeatureId'
+        featureEnabled:
+          type: boolean
+      required:
+      - featureId
+      - featureEnabled
+      type: object
     FeatureId:
       type: string
       enum:
@@ -291,6 +304,81 @@ components:
         `groups` and `communityIds` can be combined (merged with OR).
 
         `allCommunities` is exclusive and ignores the other two.'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Entitlement:
+      properties:
+        id:
+          type: number
+          format: double
+        featureId:
+          $ref: '#/components/schemas/FeatureId'
+        communityId:
+          type: string
+        featureEnabled:
+          type: boolean
+        label:
+          type: string
+      required:
+      - id
+      - featureId
+      - communityId
+      - featureEnabled
+      type: object
+      additionalProperties: false
+    EntitlementGroup:
+      type: string
+      enum:
+      - omni
+      - mavely
+      - private_label
+      description: Predefined instance groups that the backend can resolve without the frontend sending individual IDs.
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     BulkUpdateEntitlementsResponse:
       properties:
         paymentProvisioning:
@@ -340,78 +428,12 @@ components:
         cascade info (bazaarvoice/submit_review coupling) and payment provisioning results
 
         (stripe/mavely) when those side-effects are triggered.'
-    Entitlement:
-      properties:
-        id:
-          type: number
-          format: double
-        featureId:
-          $ref: '#/components/schemas/FeatureId'
-        communityId:
-          type: string
-        featureEnabled:
-          type: boolean
-        label:
-          type: string
-      required:
-      - id
-      - featureId
-      - communityId
-      - featureEnabled
-      type: object
-      additionalProperties: false
-    UpdateEntitlementFields:
-      properties:
-        communityId:
-          type: string
-        label:
-          type: string
-        featureId:
-          $ref: '#/components/schemas/FeatureId'
-        featureEnabled:
-          type: boolean
-      required:
-      - featureId
-      - featureEnabled
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -431,22 +453,6 @@ components:
       required:
       - data
       type: object
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

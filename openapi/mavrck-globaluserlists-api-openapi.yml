@@ -19,7 +19,7 @@ paths:
       x-handler: global_user_lists/global_user_list_member_controller.js
       x-access:
       - administrator
-      summary: Add candidates of an action group to a global user list.
+      summary: Add candidates of an action group to a global user list
       parameters:
       - name: id
         in: path
@@ -89,7 +89,7 @@ paths:
       x-handler: global_user_lists/global_user_list_member_controller.js
       x-access:
       - administrator
-      summary: Move candidates of an action group from one global user list to another.
+      summary: Move candidates of an action group from one global user list to another
       parameters:
       - name: id
         in: path
@@ -166,7 +166,7 @@ paths:
       x-handler: global_user_lists/global_user_list_member_remove_controller.js
       x-access:
       - administrator
-      summary: Remove candidates of an action group from global user lists.
+      summary: Remove candidates of an action group from global user lists
       parameters:
       - name: id
         in: path
@@ -238,7 +238,7 @@ paths:
       x-handler: global_user_lists/global_user_list_controller.js
       x-access:
       - administrator
-      summary: Retrieve global user lists.
+      summary: Retrieve global user lists
       parameters:
       - $ref: '#/components/parameters/orderByParam'
       - $ref: '#/components/parameters/limitParam'
@@ -294,7 +294,7 @@ paths:
       x-handler: global_user_lists/global_user_list_controller.js
       x-access:
       - administrator
-      summary: Create a global user list.
+      summary: Create a global user list
       responses:
         '200':
           description: GlobalUserList URI.
@@ -350,7 +350,7 @@ paths:
       x-handler: global_user_lists/global_user_list_controller.js
       x-access:
       - administrator
-      summary: Retrieve a single global user list.
+      summary: Retrieve a single global user list
       parameters:
       - name: id
         in: path
@@ -401,7 +401,7 @@ paths:
       x-handler: global_user_lists/global_user_list_controller.js
       x-access:
       - administrator
-      summary: Update a global user list.
+      summary: Update a global user list
       parameters:
       - name: id
         in: path
@@ -458,7 +458,7 @@ paths:
       x-handler: global_user_lists/global_user_list_controller.js
       x-access:
       - administrator
-      summary: Delete a global user list.
+      summary: Delete a global user list
       parameters:
       - name: id
         in: path
@@ -510,7 +510,7 @@ paths:
       x-handler: global_user_lists/global_user_list_definition_archive_controller.js
       x-access:
       - administrator
-      summary: Archive a global user list.
+      summary: Archive a global user list
       parameters:
       - name: id
         in: path
@@ -556,7 +556,7 @@ paths:
       x-handler: global_user_lists/global_user_list_definition_unarchive_controller.js
       x-access:
       - administrator
-      summary: Unarchive a global user list.
+      summary: Unarchive a global user list
       parameters:
       - name: id
         in: path
@@ -602,7 +602,7 @@ paths:
       x-handler: global_user_lists/global_user_list_member_controller.js
       x-access:
       - administrator
-      summary: Add members to a global user list.
+      summary: Add members to a global user list
       parameters:
       - name: globalUserListId
         in: path
@@ -669,7 +669,7 @@ paths:
       x-handler: global_user_lists/global_user_list_member_controller.js
       x-access:
       - administrator
-      summary: Move members from one global user list to another.
+      summary: Move members from one global user list to another
       parameters:
       - name: globalUserListId
         in: path
@@ -740,7 +740,7 @@ paths:
       x-handler: global_user_lists/global_user_list_member_remove_controller.js
       x-access:
       - administrator
-      summary: Remove members from global user lists.
+      summary: Remove members from global user lists
       responses:
         '200':
           description: Members removed successfully.
@@ -817,37 +817,279 @@ components:
           format: double
       type: object
       additionalProperties: false
-    Error:
+    EmptyObject:
       type: object
+      properties: {}
+    ActionGroupCandidateQueryFilter:
+      type: object
+      required:
+      - expectedNumberOfInfluencers
       properties:
-        type:
+        userFilter:
+          $ref: '#/components/schemas/UserSearch'
+        q:
           type: string
-          description: A key representing the type of error that has occurred.
-        error:
-          type: string
-          description: A static description of the type of error.
-        params:
+          description: Search parameter.
+        statusId:
           type: array
-          description: For errors invovling parameters, this is an array containing the invalid parameters.
           items:
-            type: string
-        keys:
+            type: integer
+        workflowStageId:
+          type: integer
+        customStatusId:
+          type: array
+          items:
+            type:
+            - integer
+            - string
+        customInfluencerStatusId:
+          type: array
+          items:
+            type:
+            - integer
+            - string
+        dueDate:
           type: array
           items:
             type:
             - string
-            - object
-        artifactLinks:
-          $ref: '#/components/schemas/LinksDeprecated'
-        parent:
-          type: object
-          properties:
+        completed:
+          type: boolean
+        optedIn:
+          type: integer
+        participating:
+          type: array
+          items:
             type:
-              type: string
-              description: A key representing the type of error generated by a request to an external API.
-            error:
-              type: string
-              description: A static description of the parent error.
+            - integer
+            - string
+        excludedGlobalUserIds:
+          type: array
+          items:
+            type: integer
+        expectedNumberOfInfluencers:
+          type: integer
+        orderProperty:
+          type: string
+          enum:
+          - statusId
+          - upvotes
+          - downvotes
+          - netVotes
+          - totalVotes
+          - dueDate
+          - optedInDate
+          - engagements
+          - createdAt
+          - customStatusId
+          - customInfluencerStatusId
+          - quote
+          - user.stageJoinDate
+          - user.id
+          - user.age
+          - user.audienceFakeEngagersLevel
+          - user.audienceFakeFollowersLevel
+          - user.audienceFraudLevel
+          - user.audiencePercentageFemale
+          - user.audiencePercentage_13_17
+          - user.audiencePercentage_18_24
+          - user.audiencePercentage_25_34
+          - user.audiencePercentage_35_44
+          - user.audiencePercentage_45_54
+          - user.audiencePercentage_55_64
+          - user.audiencePercentage_65_plus
+          - user.audiencePredominantAgeRange
+          - user.audiencePredominantCity
+          - user.audiencePredominantCountry
+          - user.birthday
+          - user.city
+          - user.country
+          - user.deleted
+          - user.email
+          - user.fullName
+          - user.gender
+          - user.instagramHandle
+          - user.lastRefreshedAt
+          - user.loadSource
+          - user.nudityLevel
+          - user.profanityLevel
+          - user.state
+          - user.violenceLevel
+          - listMemberCostAndPerformance.listMemberId
+          - listMemberCostAndPerformance.rewards
+          - listMemberCostAndPerformance.value
+          - listMemberCostAndPerformance.cost
+          - listMemberCostAndPerformance.posts
+          - listMemberCostAndPerformance.engagements
+          - listMemberCostAndPerformance.impressions
+          - listMemberCostAndPerformance.clicks
+          - listMemberCostAndPerformance.conversions
+          - listMemberCostAndPerformance.conversionValue
+          - listMemberCostAndPerformance.cpm
+          - listMemberCostAndPerformance.cpp
+          - listMemberCostAndPerformance.cpe
+          - listMemberCostAndPerformance.committedAmount
+          - listMemberCostAndPerformance.readyAmount
+          - listMemberCostAndPerformance.paidAmount
+          - listMemberCostAndPerformance.emvValue
+          - listMemberCostAndPerformance.roiValue
+          - user.instagramAccount.globalUserId
+          - user.instagramAccount.analysisVersion
+          - user.instagramAccount.audienceFakeCommentersLevel
+          - user.instagramAccount.audienceFakeCommentersPercentage
+          - user.instagramAccount.audienceFakeEngagersLevel
+          - user.instagramAccount.audienceFakeFollowersLevel
+          - user.instagramAccount.audienceFakeFollowersPercentage
+          - user.instagramAccount.audienceFakeLikersLevel
+          - user.instagramAccount.audienceFakeLikersPercentage
+          - user.instagramAccount.audienceFraudLevel
+          - user.instagramAccount.audiencePercentageFemale
+          - user.instagramAccount.audiencePercentage_13_17
+          - user.instagramAccount.audiencePercentage_18_24
+          - user.instagramAccount.audiencePercentage_25_34
+          - user.instagramAccount.audiencePercentage_35_44
+          - user.instagramAccount.audiencePercentage_45_54
+          - user.instagramAccount.audiencePercentage_55_64
+          - user.instagramAccount.audiencePercentage_65_plus
+          - user.instagramAccount.audiencePredominantAgeRange
+          - user.instagramAccount.audiencePredominantCity
+          - user.instagramAccount.audiencePredominantCountry
+          - user.instagramAccount.averageComments
+          - user.instagramAccount.averageEngagements
+          - user.instagramAccount.averageLikes
+          - user.instagramAccount.bio
+          - user.instagramAccount.boughtFollowers
+          - user.instagramAccount.createdAt
+          - user.instagramAccount.engagementRate
+          - user.instagramAccount.followersCount
+          - user.instagramAccount.followingCount
+          - user.instagramAccount.fullName
+          - user.instagramAccount.handle
+          - user.instagramAccount.instagramExternalId
+          - user.instagramAccount.instagramProfileId
+          - user.instagramAccount.isBusiness
+          - user.instagramAccount.isPrivate
+          - user.instagramAccount.lastAnalyzedAt
+          - user.instagramAccount.lastAnalyzedFollowersFraudAt
+          - user.instagramAccount.loadSource
+          - user.instagramAccount.mediaCount
+          - user.instagramAccount.nudityLevel
+          - user.instagramAccount.previewPostsLastUpdatedAt
+          - user.instagramAccount.profanityLevel
+          - user.instagramAccount.profilePicture
+          - user.instagramAccount.profileType
+          - user.instagramAccount.sourceDetail
+          - user.instagramAccount.sponsoredPostRate
+          - user.instagramAccount.topicsLastAnalyzedAt
+          - user.instagramAccount.updatedAt
+          - user.instagramAccount.violenceLevel
+          - user.instagramAccount.website
+          - user.facebookProfile.id
+          - user.facebookProfile.averageComments
+          - user.facebookProfile.averageEngagements
+          - user.facebookProfile.averageLikes
+          - user.facebookProfile.engagementRate
+          - user.facebookProfile.facebookExternalId
+          - user.facebookProfile.facebookCreator
+          - user.facebookProfile.link
+          - user.facebookProfile.name
+          - user.facebookProfile.picture
+          - user.facebookProfile.reach
+          - user.facebookProfile.type
+          - user.twitterAccount.id
+          - user.twitterAccount.userId
+          - user.twitterAccount.handle
+          - user.twitterAccount.fullName
+          - user.twitterAccount.profilePicture
+          - user.twitterAccount.description
+          - user.twitterAccount.followersCount
+          - user.twitterAccount.followingCount
+          - user.twitterAccount.listedCount
+          - user.twitterAccount.accountCreatedAt
+          - user.twitterAccount.location
+          - user.twitterAccount.geoEnabled
+          - user.twitterAccount.lang
+          - user.twitterAccount.timeZone
+          - user.twitterAccount.utcOffset
+          - user.twitterAccount.verified
+          - user.twitterAccount.protected
+          - user.twitterAccount.averageFavorites
+          - user.twitterAccount.averageRetweets
+          - user.twitterAccount.averageEngagements
+          - user.twitterAccount.engagementRate
+          - user.twitterAccount.primaryAccount
+          - user.twitterAccount.twitterExternalId
+          - user.twitterAccount.createdAt
+          - user.pinterestAccount.id
+          - user.pinterestAccount.averageEngagements
+          - user.pinterestAccount.bio
+          - user.pinterestAccount.boardsCount
+          - user.pinterestAccount.createdAt
+          - user.pinterestAccount.engagementRate
+          - user.pinterestAccount.externalId
+          - user.pinterestAccount.firstName
+          - user.pinterestAccount.followersCount
+          - user.pinterestAccount.followingCount
+          - user.pinterestAccount.lastName
+          - user.pinterestAccount.monthlyViewers
+          - user.pinterestAccount.pinsCount
+          - user.pinterestAccount.primaryAccount
+          - user.pinterestAccount.profilePicture
+          - user.pinterestAccount.updatedAt
+          - user.pinterestAccount.userId
+          - user.pinterestAccount.username
+          - user.blog.id
+          - user.blog.globalUserId
+          - user.blog.language
+          - user.blog.name
+          - user.blog.platform
+          - user.blog.url
+          - user.youtubeChannel.id
+          - user.youtubeChannel.userId
+          - user.youtubeChannel.username
+          - user.youtubeChannel.bio
+          - user.youtubeChannel.accountCreatedAt
+          - user.youtubeChannel.profilePicture
+          - user.youtubeChannel.followersCount
+          - user.youtubeChannel.videoCount
+          - user.youtubeChannel.commentCount
+          - user.youtubeChannel.viewCount
+          - user.youtubeChannel.primaryAccount
+          - user.youtubeChannel.youtubeExternalId
+          - user.youtubeChannel.handle
+          - user.youtubeChannel.global_user_id
+          - draftContent.id
+          - draftContent.text
+          - draftContent.listMemberId
+          - draftContent.createdAt
+          - draftContent.updatedAt
+          - draftContent.status
+          - draftContent.contentType
+          - draftContent.notes
+          - draftContent.contentUrl
+          - draftContent.isArchived
+          - draftContent.archivedByAccountId
+          - draftContent.archivedByGlobalUserId
+          - draftContent.archivedAt
+          - draftContent.threadId
+          - draftContent.feedback
+          - draftContent.uploaderType
+          - draftContent.uploaderAccountId
+          - draftContent.uploaderGlobalUserId
+          - user.tiktokCreator.followersCount
+          - user.tiktokCreator.engagementRate
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
     UserSearch:
       type: object
       additionalProperties: false
@@ -2682,279 +2924,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
-    EmptyObject:
-      type: object
-      properties: {}
-    ActionGroupCandidateQueryFilter:
-      type: object
-      required:
-      - expectedNumberOfInfluencers
-      properties:
-        userFilter:
-          $ref: '#/components/schemas/UserSearch'
-        q:
-          type: string
-          description: Search parameter.
-        statusId:
-          type: array
-          items:
-            type: integer
-        workflowStageId:
-          type: integer
-        customStatusId:
-          type: array
-          items:
-            type:
-            - integer
-            - string
-        customInfluencerStatusId:
-          type: array
-          items:
-            type:
-            - integer
-            - string
-        dueDate:
-          type: array
-          items:
-            type:
-            - string
-        completed:
-          type: boolean
-        optedIn:
-          type: integer
-        participating:
-          type: array
-          items:
-            type:
-            - integer
-            - string
-        excludedGlobalUserIds:
-          type: array
-          items:
-            type: integer
-        expectedNumberOfInfluencers:
-          type: integer
-        orderProperty:
-          type: string
-          enum:
-          - statusId
-          - upvotes
-          - downvotes
-          - netVotes
-          - totalVotes
-          - dueDate
-          - optedInDate
-          - engagements
-          - createdAt
-          - customStatusId
-          - customInfluencerStatusId
-          - quote
-          - user.stageJoinDate
-          - user.id
-          - user.age
-          - user.audienceFakeEngagersLevel
-          - user.audienceFakeFollowersLevel
-          - user.audienceFraudLevel
-          - user.audiencePercentageFemale
-          - user.audiencePercentage_13_17
-          - user.audiencePercentage_18_24
-          - user.audiencePercentage_25_34
-          - user.audiencePercentage_35_44
-          - user.audiencePercentage_45_54
-          - user.audiencePercentage_55_64
-          - user.audiencePercentage_65_plus
-          - user.audiencePredominantAgeRange
-          - user.audiencePredominantCity
-          - user.audiencePredominantCountry
-          - user.birthday
-          - user.city
-          - user.country
-          - user.deleted
-          - user.email
-          - user.fullName
-          - user.gender
-          - user.instagramHandle
-          - user.lastRefreshedAt
-          - user.loadSource
-          - user.nudityLevel
-          - user.profanityLevel
-          - user.state
-          - user.violenceLevel
-          - listMemberCostAndPerformance.listMemberId
-          - listMemberCostAndPerformance.rewards
-          - listMemberCostAndPerformance.value
-          - listMemberCostAndPerformance.cost
-          - listMemberCostAndPerformance.posts
-          - listMemberCostAndPerformance.engagements
-          - listMemberCostAndPerformance.impressions
-          - listMemberCostAndPerformance.clicks
-          - listMemberCostAndPerformance.conversions
-          - listMemberCostAndPerformance.conversionValue
-          - listMemberCostAndPerformance.cpm
-          - listMemberCostAndPerformance.cpp
-          - listMemberCostAndPerformance.cpe
-          - listMemberCostAndPerformance.committedAmount
-          - listMemberCostAndPerformance.readyAmount
-          - listMemberCostAndPerformance.paidAmount
-          - listMemberCostAndPerformance.emvValue
-          - listMemberCostAndPerformance.roiValue
-          - user.instagramAccount.globalUserId
-          - user.instagramAccount.analysisVersion
-          - user.instagramAccount.audienceFakeCommentersLevel
-          - user.instagramAccount.audienceFakeCommentersPercentage
-          - user.instagramAccount.audienceFakeEngagersLevel
-          - user.instagramAccount.audienceFakeFollowersLevel
-          - user.instagramAccount.audienceFakeFollowersPercentage
-          - user.instagramAccount.audienceFakeLikersLevel
-          - user.instagramAccount.audienceFakeLikersPercentage
-          - user.instagramAccount.audienceFraudLevel
-          - user.instagramAccount.audiencePercentageFemale
-          - user.instagramAccount.audiencePercentage_13_17
-          - user.instagramAccount.audiencePercentage_18_24
-          - user.instagramAccount.audiencePercentage_25_34
-          - user.instagramAccount.audiencePercentage_35_44
-          - user.instagramAccount.audiencePercentage_45_54
-          - user.instagramAccount.audiencePercentage_55_64
-          - user.instagramAccount.audiencePercentage_65_plus
-          - user.instagramAccount.audiencePredominantAgeRange
-          - user.instagramAccount.audiencePredominantCity
-          - user.instagramAccount.audiencePredominantCountry
-          - user.instagramAccount.averageComments
-          - user.instagramAccount.averageEngagements
-          - user.instagramAccount.averageLikes
-          - user.instagramAccount.bio
-          - user.instagramAccount.boughtFollowers
-          - user.instagramAccount.createdAt
-          - user.instagramAccount.engagementRate
-          - user.instagramAccount.followersCount
-          - user.instagramAccount.followingCount
-          - user.instagramAccount.fullName
-          - user.instagramAccount.handle
-          - user.instagramAccount.instagramExternalId
-          - user.instagramAccount.instagramProfileId
-          - user.instagramAccount.isBusiness
-          - user.instagramAccount.isPrivate
-          - user.instagramAccount.lastAnalyzedAt
-          - user.instagramAccount.lastAnalyzedFollowersFraudAt
-          - user.instagramAccount.loadSource
-          - user.instagramAccount.mediaCount
-          - user.instagramAccount.nudityLevel
-          - user.instagramAccount.previewPostsLastUpdatedAt
-          - user.instagramAccount.profanityLevel
-          - user.instagramAccount.profilePicture
-          - user.instagramAccount.profileType
-          - user.instagramAccount.sourceDetail
-          - user.instagramAccount.sponsoredPostRate
-          - user.instagramAccount.topicsLastAnalyzedAt
-          - user.instagramAccount.updatedAt
-          - user.instagramAccount.violenceLevel
-          - user.instagramAccount.website
-          - user.facebookProfile.id
-          - user.facebookProfile.averageComments
-          - user.facebookProfile.averageEngagements
-          - user.facebookProfile.averageLikes
-          - user.facebookProfile.engagementRate
-          - user.facebookProfile.facebookExternalId
-          - user.facebookProfile.facebookCreator
-          - user.facebookProfile.link
-          - user.facebookProfile.name
-          - user.facebookProfile.picture
-          - user.facebookProfile.reach
-          - user.facebookProfile.type
-          - user.twitterAccount.id
-          - user.twitterAccount.userId
-          - user.twitterAccount.handle
-          - user.twitterAccount.fullName
-          - user.twitterAccount.profilePicture
-          - user.twitterAccount.description
-          - user.twitterAccount.followersCount
-          - user.twitterAccount.followingCount
-          - user.twitterAccount.listedCount
-          - user.twitterAccount.accountCreatedAt
-          - user.twitterAccount.location
-          - user.twitterAccount.geoEnabled
-          - user.twitterAccount.lang
-          - user.twitterAccount.timeZone
-          - user.twitterAccount.utcOffset
-          - user.twitterAccount.verified
-          - user.twitterAccount.protected
-          - user.twitterAccount.averageFavorites
-          - user.twitterAccount.averageRetweets
-          - user.twitterAccount.averageEngagements
-          - user.twitterAccount.engagementRate
-          - user.twitterAccount.primaryAccount
-          - user.twitterAccount.twitterExternalId
-          - user.twitterAccount.createdAt
-          - user.pinterestAccount.id
-          - user.pinterestAccount.averageEngagements
-          - user.pinterestAccount.bio
-          - user.pinterestAccount.boardsCount
-          - user.pinterestAccount.createdAt
-          - user.pinterestAccount.engagementRate
-          - user.pinterestAccount.externalId
-          - user.pinterestAccount.firstName
-          - user.pinterestAccount.followersCount
-          - user.pinterestAccount.followingCount
-          - user.pinterestAccount.lastName
-          - user.pinterestAccount.monthlyViewers
-          - user.pinterestAccount.pinsCount
-          - user.pinterestAccount.primaryAccount
-          - user.pinterestAccount.profilePicture
-          - user.pinterestAccount.updatedAt
-          - user.pinterestAccount.userId
-          - user.pinterestAccount.username
-          - user.blog.id
-          - user.blog.globalUserId
-          - user.blog.language
-          - user.blog.name
-          - user.blog.platform
-          - user.blog.url
-          - user.youtubeChannel.id
-          - user.youtubeChannel.userId
-          - user.youtubeChannel.username
-          - user.youtubeChannel.bio
-          - user.youtubeChannel.accountCreatedAt
-          - user.youtubeChannel.profilePicture
-          - user.youtubeChannel.followersCount
-          - user.youtubeChannel.videoCount
-          - user.youtubeChannel.commentCount
-          - user.youtubeChannel.viewCount
-          - user.youtubeChannel.primaryAccount
-          - user.youtubeChannel.youtubeExternalId
-          - user.youtubeChannel.handle
-          - user.youtubeChannel.global_user_id
-          - draftContent.id
-          - draftContent.text
-          - draftContent.listMemberId
-          - draftContent.createdAt
-          - draftContent.updatedAt
-          - draftContent.status
-          - draftContent.contentType
-          - draftContent.notes
-          - draftContent.contentUrl
-          - draftContent.isArchived
-          - draftContent.archivedByAccountId
-          - draftContent.archivedByGlobalUserId
-          - draftContent.archivedAt
-          - draftContent.threadId
-          - draftContent.feedback
-          - draftContent.uploaderType
-          - draftContent.uploaderAccountId
-          - draftContent.uploaderGlobalUserId
-          - user.tiktokCreator.followersCount
-          - user.tiktokCreator.engagementRate
     UserQueryFilter:
       type: object
       required:
@@ -3133,6 +3102,37 @@ components:
           - youtubeChannel.handle
           - youtubeChannel.global_user_id
           - user.stageJoinDate
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
   parameters:
     limitParam:
       in: query
@@ -3140,6 +3140,12 @@ components:
       name: limit
       schema:
         type: integer
+    labelParam:
+      name: label
+      in: query
+      required: false
+      schema:
+        type: string
     orderByParam:
       in: query
       description: Attribute to order by.
@@ -3152,12 +3158,6 @@ components:
       name: offset
       schema:
         type: integer
-    labelParam:
-      name: label
-      in: query
-      required: false
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

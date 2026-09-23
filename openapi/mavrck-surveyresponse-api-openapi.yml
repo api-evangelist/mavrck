@@ -61,6 +61,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get survey summaries
+      x-summary-source: derived
   /v1/action-groups/{actionGroupId}/survey-responses:
     get:
       operationId: getSurveyResponses
@@ -126,6 +128,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get survey responses
+      x-summary-source: derived
 components:
   schemas:
     ResponseMetadata:
@@ -146,12 +150,12 @@ components:
           format: double
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -162,12 +166,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -216,12 +220,12 @@ components:
       - options
       type: object
       additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -310,16 +314,12 @@ components:
       - zip
       type: object
       additionalProperties: false
-    Record_string.any_:
-      properties: {}
-      type: object
-      description: Construct a type with a set of properties K of type T
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -330,6 +330,10 @@ components:
       - details
       type: object
       additionalProperties: false
+    Record_string.any_:
+      properties: {}
+      type: object
+      description: Construct a type with a set of properties K of type T
   securitySchemes:
     apiKey:
       type: apiKey

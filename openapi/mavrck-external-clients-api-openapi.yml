@@ -9,7 +9,7 @@ servers:
 security:
 - apiKey: []
 tags:
-- name: ExternalClients
+- name: External Clients
 paths:
   /v1/admin/external-clients:
     post:
@@ -47,7 +47,7 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       description: Create a new external client
       tags:
-      - ExternalClients
+      - External Clients
       requestBody:
         content:
           application/json:
@@ -55,6 +55,8 @@ paths:
               $ref: '#/components/schemas/CreateExternalClientBody'
         description: The client details (name required, clientId and clientSecret optional for migration)
         required: true
+      summary: Create external client
+      x-summary-source: derived
     get:
       operationId: getAllExternalClients
       responses:
@@ -92,7 +94,7 @@ paths:
 
         Includes deleted clients and separates active/inactive instances.'
       tags:
-      - ExternalClients
+      - External Clients
       parameters:
       - description: Optional client ID to filter results
         in: query
@@ -116,6 +118,8 @@ paths:
           type: number
           format: double
           default: 20
+      summary: Get all external clients
+      x-summary-source: derived
   /v1/admin/external-clients/{clientId}/secrets:
     post:
       operationId: regenerateExternalClientSecret
@@ -152,7 +156,7 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       description: Regenerate the client secret
       tags:
-      - ExternalClients
+      - External Clients
       parameters:
       - description: The unique identifier for the client
         in: path
@@ -160,6 +164,8 @@ paths:
         required: true
         schema:
           type: string
+      summary: Regenerate external client secret
+      x-summary-source: derived
   /v1/admin/external-clients/{clientId}:
     delete:
       operationId: deleteExternalClient
@@ -196,7 +202,7 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       description: Soft delete a client and all associated instances
       tags:
-      - ExternalClients
+      - External Clients
       parameters:
       - description: The unique identifier for the client
         in: path
@@ -204,6 +210,8 @@ paths:
         required: true
         schema:
           type: string
+      summary: Delete external client
+      x-summary-source: derived
   /v1/admin/external-clients/{clientId}/instances:
     post:
       operationId: associateExternalClientInstances
@@ -240,7 +248,7 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       description: Associate instances to a client
       tags:
-      - ExternalClients
+      - External Clients
       parameters:
       - description: The unique identifier for the client
         in: path
@@ -255,6 +263,8 @@ paths:
               $ref: '#/components/schemas/AssociateInstancesBody'
         description: The instance IDs to associate
         required: true
+      summary: Associate external client instances
+      x-summary-source: derived
   /v1/admin/external-clients/{clientId}/instances/{instanceId}:
     delete:
       operationId: deleteExternalClientInstance
@@ -291,7 +301,7 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       description: Soft delete a client instance association
       tags:
-      - ExternalClients
+      - External Clients
       parameters:
       - description: The unique identifier for the client
         in: path
@@ -305,24 +315,10 @@ paths:
         required: true
         schema:
           type: string
+      summary: Delete external client instance
+      x-summary-source: derived
 components:
   schemas:
-    EmptySuccessResponse:
-      description: Empty success response
-      properties: {}
-      type: object
-      additionalProperties: false
-    AssociateInstancesBody:
-      description: Request body for associating instances
-      properties:
-        instanceIds:
-          items:
-            type: string
-          type: array
-      required:
-      - instanceIds
-      type: object
-      additionalProperties: false
     GetAllClientsResponse:
       description: Paginated response for getting all clients with instances
       properties:
@@ -355,53 +351,6 @@ components:
       - pagination
       type: object
       additionalProperties: false
-    CreateExternalClientBody:
-      description: Request body for creating an external client
-      properties:
-        name:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-      required:
-      - name
-      type: object
-      additionalProperties: false
-    CreateExternalClientResponse:
-      properties:
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        name:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-      required:
-      - clientId
-      - clientSecret
-      - name
-      - createdAt
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     RegenerateSecretResponse:
       properties:
         clientId:
@@ -417,12 +366,28 @@ components:
       - regeneratedAt
       type: object
       additionalProperties: false
-    NotFoundError:
+    EmptySuccessResponse:
+      description: Empty success response
+      properties: {}
+      type: object
+      additionalProperties: false
+    AssociateInstancesBody:
+      description: Request body for associating instances
+      properties:
+        instanceIds:
+          items:
+            type: string
+          type: array
+      required:
+      - instanceIds
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -433,12 +398,25 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    CreateExternalClientBody:
+      description: Request body for creating an external client
+      properties:
+        name:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+      required:
+      - name
+      type: object
+      additionalProperties: false
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -485,12 +463,46 @@ components:
       - disconnectedInstances
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CreateExternalClientResponse:
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - clientId
+      - clientSecret
+      - name
+      - createdAt
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:

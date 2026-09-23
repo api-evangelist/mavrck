@@ -60,6 +60,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ConceptContentCommentPostBody'
         required: true
+      summary: Create concept content comment
+      x-summary-source: derived
   /v1/concept-content/{conceptContentId}/comments/{id}:
     put:
       operationId: updateConceptContentComment
@@ -111,6 +113,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ConceptContentCommentPutBody'
         required: true
+      summary: Update concept content comment
+      x-summary-source: derived
   /v1/concept-content/{conceptContentId}/status:
     put:
       operationId: updateConceptContentStatus
@@ -160,6 +164,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ConceptContentStatusUpdateBody'
         required: true
+      summary: Update concept content status
+      x-summary-source: derived
   /v1/concept-content/{conceptContentId}/feedback:
     put:
       operationId: updateConceptContentFeedback
@@ -209,6 +215,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ConceptContentFeedbackUpdateBody'
         required: true
+      summary: Update concept content feedback
+      x-summary-source: derived
     get:
       operationId: getConceptContentFeedback
       responses:
@@ -263,6 +271,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get concept content feedback
+      x-summary-source: derived
   /v1/concept-content/{conceptContentId}/feedback/{id}:
     delete:
       operationId: archiveConceptContentFeedback
@@ -308,6 +318,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Archive concept content feedback
+      x-summary-source: derived
   /v1/concept-content:
     post:
       operationId: createConceptContent
@@ -350,6 +362,8 @@ paths:
             schema:
               $ref: '#/components/schemas/AdminConceptContentPostBody'
         required: true
+      summary: Create concept content
+      x-summary-source: derived
   /v1/concept-content/{conceptContentId}:
     put:
       operationId: updateConceptContent
@@ -399,6 +413,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ConceptContentUpdateBody'
         required: true
+      summary: Update concept content
+      x-summary-source: derived
     delete:
       operationId: archiveConceptContent
       responses:
@@ -441,6 +457,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Archive concept content
+      x-summary-source: derived
   /v1/concept-content/{conceptContentId}/view:
     post:
       operationId: createConceptContentViewed
@@ -490,6 +508,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateConceptContentViewed'
         required: true
+      summary: Create concept content viewed
+      x-summary-source: derived
   /v1/list-member/{listMemberId}/concept-content:
     get:
       operationId: getConceptContentForListMember
@@ -553,24 +573,50 @@ paths:
           type: string
           enum:
           - createdAt
+      summary: Get concept content for list member
+      x-summary-source: derived
 components:
   schemas:
-    ConceptContentStatusUpdateBody:
-      description: 'The status a reviewer may set. Excludes `pending` — that is the submitted/awaiting state
-
-        seeded on submission, not a reviewer action (mirrors drafts). The path param is authoritative,
-
-        so the body carries only the status (no redundant id / envelope).'
+    InfluencerConceptContentPostFile:
       properties:
-        status:
+        originalFile:
+          properties:
+            path:
+              type: string
+          required:
+          - path
+          type: object
+        isUploaded:
+          type: boolean
+        lastModified:
+          type: number
+          format: double
+        url:
+          type: string
+        type:
+          type: string
+        size:
+          type: number
+          format: double
+        name:
+          type: string
+        code:
+          type: string
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
           type: string
           enum:
-          - approved
-          - conditionally_approved
-          - rejected
-          - rejected_no_notification
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - status
+      - message
+      - details
       type: object
       additionalProperties: false
     CreateConceptContentViewed:
@@ -579,26 +625,6 @@ components:
           type: string
       required:
       - email
-      type: object
-      additionalProperties: false
-    ConceptContentCommentPutBody:
-      properties:
-        isArchived:
-          type: boolean
-      required:
-      - isArchived
-      type: object
-      additionalProperties: false
-    ResponseBody_ConceptContentFeedbackEntry-Array_:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ConceptContentFeedbackEntry'
-          type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-      required:
-      - data
       type: object
       additionalProperties: false
     NotFoundError:
@@ -617,183 +643,29 @@ components:
       - details
       type: object
       additionalProperties: false
-    Pick_AdministratorAccountDomain.email-or-first_name-or-image-or-last_name_:
+    ConceptContentStatusUpdateBody:
+      description: 'The status a reviewer may set. Excludes `pending` — that is the submitted/awaiting state
+
+        seeded on submission, not a reviewer action (mirrors drafts). The path param is authoritative,
+
+        so the body carries only the status (no redundant id / envelope).'
       properties:
-        image:
-          type:
-          - string
-          - 'null'
-        email:
+        status:
           type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
+          enum:
+          - approved
+          - conditionally_approved
+          - rejected
+          - rejected_no_notification
       required:
-      - email
+      - status
       type: object
-      description: From T, pick a set of properties whose keys are in the union K
+      additionalProperties: false
     AdministratorAccountView:
       $ref: '#/components/schemas/Pick_AdministratorAccountDomain.email-or-first_name-or-image-or-last_name_'
-    InfluencerConceptContentGetResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/InfluencerConceptContentDto'
-          type: array
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     InfluencerConceptContentDto:
       type: object
       properties: {}
-    ConceptContentCommentEntry:
-      properties:
-        id:
-          type: number
-          format: double
-        conceptId:
-          type: number
-          format: double
-        accountId:
-          type:
-          - number
-          - 'null'
-          format: double
-        administratorAccount:
-          $ref: '#/components/schemas/AdministratorAccountView'
-        commenterName:
-          type:
-          - string
-          - 'null'
-        commenterType:
-          type: string
-        text:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        isArchived:
-          type: boolean
-      required:
-      - id
-      - conceptId
-      - accountId
-      - commenterName
-      - commenterType
-      - text
-      - createdAt
-      - isArchived
-      type: object
-      additionalProperties: false
-    ConceptContentFeedbackEntry:
-      properties:
-        id:
-          type: number
-          format: double
-        conceptId:
-          type: number
-          format: double
-        accountId:
-          type:
-          - number
-          - 'null'
-          format: double
-        administratorAccount:
-          $ref: '#/components/schemas/AdministratorAccountView'
-        text:
-          type: string
-        commenterType:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        isArchived:
-          type: boolean
-      required:
-      - id
-      - conceptId
-      - accountId
-      - text
-      - commenterType
-      - createdAt
-      - isArchived
-      type: object
-      additionalProperties: false
-    ConceptViewed:
-      properties:
-        email:
-          type: string
-        conceptId:
-          type: number
-          format: double
-        viewedAt:
-          type: string
-          format: date-time
-      required:
-      - email
-      - conceptId
-      - viewedAt
-      type: object
-      additionalProperties: false
-    TSOAEmptyObject:
-      properties: {}
-      type: object
-      additionalProperties: false
-    ConceptContentCommentPostBody:
-      properties:
-        commenterName:
-          type: string
-        text:
-          type: string
-      required:
-      - text
-      type: object
-      additionalProperties: false
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
     AdminConceptContentPostBody:
       properties:
         contentType:
@@ -837,12 +709,54 @@ components:
           type: string
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ConceptContentCommentPutBody:
+      properties:
+        isArchived:
+          type: boolean
+      required:
+      - isArchived
+      type: object
+      additionalProperties: false
+    ConceptContentFeedbackEntry:
+      properties:
+        id:
+          type: number
+          format: double
+        conceptId:
+          type: number
+          format: double
+        accountId:
+          type:
+          - number
+          - 'null'
+          format: double
+        administratorAccount:
+          $ref: '#/components/schemas/AdministratorAccountView'
+        text:
+          type: string
+        commenterType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      required:
+      - id
+      - conceptId
+      - accountId
+      - text
+      - commenterType
+      - createdAt
+      - isArchived
+      type: object
+      additionalProperties: false
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -851,6 +765,63 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    ConceptContentCommentPostResponse:
+      $ref: '#/components/schemas/ConceptContentCommentEntry'
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    Pick_AdministratorAccountDomain.email-or-first_name-or-image-or-last_name_:
+      properties:
+        image:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+      required:
+      - email
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    ConceptContentCommentPostBody:
+      properties:
+        commenterName:
+          type: string
+        text:
+          type: string
+      required:
+      - text
       type: object
       additionalProperties: false
     ConceptContentFeedbackUpdateBody:
@@ -875,34 +846,85 @@ components:
       - message
       type: object
       additionalProperties: false
-    ConceptContentCommentPostResponse:
-      $ref: '#/components/schemas/ConceptContentCommentEntry'
-    InfluencerConceptContentPostFile:
+    ResponseBody_ConceptContentFeedbackEntry-Array_:
       properties:
-        originalFile:
-          properties:
-            path:
-              type: string
-          required:
-          - path
-          type: object
-        isUploaded:
-          type: boolean
-        lastModified:
-          type: number
-          format: double
-        url:
-          type: string
-        type:
-          type: string
-        size:
-          type: number
-          format: double
-        name:
-          type: string
-        code:
-          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/ConceptContentFeedbackEntry'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
       type: object
+      additionalProperties: false
+    ConceptViewed:
+      properties:
+        email:
+          type: string
+        conceptId:
+          type: number
+          format: double
+        viewedAt:
+          type: string
+          format: date-time
+      required:
+      - email
+      - conceptId
+      - viewedAt
+      type: object
+      additionalProperties: false
+    ConceptContentCommentEntry:
+      properties:
+        id:
+          type: number
+          format: double
+        conceptId:
+          type: number
+          format: double
+        accountId:
+          type:
+          - number
+          - 'null'
+          format: double
+        administratorAccount:
+          $ref: '#/components/schemas/AdministratorAccountView'
+        commenterName:
+          type:
+          - string
+          - 'null'
+        commenterType:
+          type: string
+        text:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        isArchived:
+          type: boolean
+      required:
+      - id
+      - conceptId
+      - accountId
+      - commenterName
+      - commenterType
+      - text
+      - createdAt
+      - isArchived
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    InfluencerConceptContentGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InfluencerConceptContentDto'
+          type: array
+      type: object
+      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

@@ -60,8 +60,34 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateDraftContentViewed'
         required: true
+      summary: Create draft content viewed
+      x-summary-source: derived
 components:
   schemas:
+    CreateDraftContentViewed:
+      properties:
+        email:
+          type: string
+      required:
+      - email
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     BadRequestError:
       properties:
         details:
@@ -75,30 +101,6 @@ components:
           - Bad Request
       required:
       - message
-      type: object
-      additionalProperties: false
-    CreateDraftContentViewed:
-      properties:
-        email:
-          type: string
-      required:
-      - email
-      type: object
-      additionalProperties: false
-    DraftContentViewed:
-      properties:
-        email:
-          type: string
-        draftContentId:
-          type: number
-          format: double
-        viewedAt:
-          type: string
-          format: date-time
-      required:
-      - email
-      - draftContentId
-      - viewedAt
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -117,28 +119,28 @@ components:
       - details
       type: object
       additionalProperties: false
+    DraftContentViewed:
+      properties:
+        email:
+          type: string
+        draftContentId:
+          type: number
+          format: double
+        viewedAt:
+          type: string
+          format: date-time
+      required:
+      - email
+      - draftContentId
+      - viewedAt
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

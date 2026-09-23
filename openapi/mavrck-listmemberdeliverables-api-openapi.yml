@@ -60,6 +60,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ListMemberDeliverablePostRequest'
         required: true
+      summary: Create list member deliverable
+      x-summary-source: derived
     get:
       operationId: getListMemberDeliverables
       responses:
@@ -119,6 +121,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get list member deliverables
+      x-summary-source: derived
   /v1/lists/{listId}/list-member-deliverables/bulk-assign:
     post:
       operationId: bulkAssignDeliverables
@@ -168,6 +172,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ListMemberDeliverableBulkAssignPostRequest'
         required: true
+      summary: Bulk assign deliverables
+      x-summary-source: derived
   /v1/lists/{listId}/list-member-deliverables/bulk-assign-summary:
     post:
       operationId: queryBulkAssignSummary
@@ -217,6 +223,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ListMemberDeliverableBulkAssignSummaryPostRequest'
         required: true
+      summary: Query bulk assign summary
+      x-summary-source: derived
   /v1/lists/{listId}/list-member-deliverables/{listMemberDeliverableId}:
     put:
       operationId: updateListMemberDeliverable
@@ -268,6 +276,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ListMemberDeliverablePutRequest'
         required: true
+      summary: Update list member deliverable
+      x-summary-source: derived
     delete:
       operationId: deleteListMemberDeliverable
       responses:
@@ -312,6 +322,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Delete list member deliverable
+      x-summary-source: derived
   /v1/lists/{listId}/list-member-deliverables/summary:
     get:
       operationId: getListMemberDeliverablesSummary
@@ -361,100 +373,57 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get list member deliverables summary
+      x-summary-source: derived
 components:
   schemas:
-    ListMemberDeliverablePutRequest:
+    NetworkSlug:
+      type: string
+      enum:
+      - blog
+      - facebook
+      - facebook_group
+      - facebook_live
+      - facebook_reel
+      - image
+      - instagram
+      - instagram_reel
+      - instagram_story
+      - linkedin
+      - pinterest
+      - snapchat_story
+      - tiktok
+      - twitch_stream
+      - twitter
+      - video
+      - youtube_video
+      - youtube_shorts
+    ListMemberDeliverable:
       properties:
-        count:
-          type: number
-          format: double
-        listId:
-          type: number
-          format: double
-        listMemberDeliverableId:
-          type: number
-          format: double
-      required:
-      - count
-      - listId
-      - listMemberDeliverableId
-      type: object
-      additionalProperties: false
-    ListMemberDeliverableGetResponse:
-      properties:
-        deliverables:
-          items:
-            $ref: '#/components/schemas/ListMemberDeliverable'
-          type: array
-      required:
-      - deliverables
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    ListMemberDeliverablePostRequest:
-      properties:
-        count:
-          type: number
-          format: double
-        contentType:
-          $ref: '#/components/schemas/NetworkSlug'
-        listId:
-          type: number
-          format: double
         listMemberId:
           type: number
           format: double
-      required:
-      - count
-      - contentType
-      - listId
-      - listMemberId
-      type: object
-      additionalProperties: false
-    ListMemberDeliverableBulkAssignPostRequest:
-      properties:
-        deliverables:
-          items:
-            properties:
-              contentType:
-                $ref: '#/components/schemas/NetworkSlug'
-              count:
-                type: number
-                format: double
-            required:
-            - contentType
-            - count
-            type: object
-          type: array
         listId:
           type: number
           format: double
-        queryFilter:
-          additionalProperties: true
-        globalUserIds:
-          items:
-            type: number
-            format: double
-          type: array
+        id:
+          type: number
+          format: double
+        count:
+          type: number
+          format: double
+        contentTypeName:
+          $ref: '#/components/schemas/NetworkName'
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
       required:
-      - deliverables
+      - listMemberId
       - listId
+      - id
+      - count
+      - contentTypeName
+      - contentType
       type: object
-      additionalProperties: false
     ListMemberDeliverableBulkAssignSummaryPostResponse:
       properties:
         summary:
@@ -734,32 +703,100 @@ components:
       required:
       - summary
       type: object
-    ListMemberDeliverable:
+    NotFoundError:
       properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ListMemberDeliverablePostRequest:
+      properties:
+        count:
+          type: number
+          format: double
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
+        listId:
+          type: number
+          format: double
         listMemberId:
+          type: number
+          format: double
+      required:
+      - count
+      - contentType
+      - listId
+      - listMemberId
+      type: object
+      additionalProperties: false
+    ListMemberDeliverablePutRequest:
+      properties:
+        count:
           type: number
           format: double
         listId:
           type: number
           format: double
-        id:
+        listMemberDeliverableId:
           type: number
           format: double
-        count:
-          type: number
-          format: double
-        contentTypeName:
-          $ref: '#/components/schemas/NetworkName'
-        contentType:
-          $ref: '#/components/schemas/NetworkSlug'
       required:
-      - listMemberId
-      - listId
-      - id
       - count
-      - contentTypeName
-      - contentType
+      - listId
+      - listMemberDeliverableId
       type: object
+      additionalProperties: false
+    ListMemberDeliverableGetResponse:
+      properties:
+        deliverables:
+          items:
+            $ref: '#/components/schemas/ListMemberDeliverable'
+          type: array
+      required:
+      - deliverables
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ListMemberDeliverableBulkAssignSummaryPostRequest:
+      properties:
+        listId:
+          type: number
+          format: double
+        queryFilter:
+          additionalProperties: true
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - listId
+      type: object
+      additionalProperties: false
     NetworkName:
       type: string
       enum:
@@ -781,6 +818,36 @@ components:
       - Video
       - YouTube Video
       - YouTube Shorts
+    ListMemberDeliverableBulkAssignPostRequest:
+      properties:
+        deliverables:
+          items:
+            properties:
+              contentType:
+                $ref: '#/components/schemas/NetworkSlug'
+              count:
+                type: number
+                format: double
+            required:
+            - contentType
+            - count
+            type: object
+          type: array
+        listId:
+          type: number
+          format: double
+        queryFilter:
+          additionalProperties: true
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - deliverables
+      - listId
+      type: object
+      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -795,75 +862,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    NetworkSlug:
-      type: string
-      enum:
-      - blog
-      - facebook
-      - facebook_group
-      - facebook_live
-      - facebook_reel
-      - image
-      - instagram
-      - instagram_reel
-      - instagram_story
-      - linkedin
-      - pinterest
-      - snapchat_story
-      - tiktok
-      - twitch_stream
-      - twitter
-      - video
-      - youtube_video
-      - youtube_shorts
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ListMemberDeliverableBulkAssignSummaryPostRequest:
-      properties:
-        listId:
-          type: number
-          format: double
-        queryFilter:
-          additionalProperties: true
-        globalUserIds:
-          items:
-            type: number
-            format: double
-          type: array
-      required:
-      - listId
       type: object
       additionalProperties: false
     ListMemberDeliverablesSummaryGetResponse:
@@ -918,6 +916,22 @@ components:
       required:
       - completed
       - failed
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

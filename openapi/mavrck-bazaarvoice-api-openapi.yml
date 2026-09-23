@@ -43,6 +43,8 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - BazaarVoice
+      summary: Get bazaar apps
+      x-summary-source: derived
     post:
       operationId: createBazaarApp
       responses:
@@ -78,6 +80,8 @@ paths:
             schema:
               $ref: '#/components/schemas/BazaarVoiceAppPostRequest'
         required: true
+      summary: Create bazaar app
+      x-summary-source: derived
   /v1/bazaar-apps/locales:
     get:
       operationId: getBazaarAppLocales
@@ -110,12 +114,49 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - BazaarVoice
+      summary: Get bazaar app locales
+      x-summary-source: derived
 components:
   schemas:
     BazaarVoiceLocaleResponse:
       $ref: '#/components/schemas/DBBazaarVoiceLocale'
     BazaarVoiceAppResponse:
       $ref: '#/components/schemas/DBBazaarVoiceApp'
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBBazaarVoiceCommunityApp:
+      properties:
+        bazaarAppId:
+          type: number
+          format: double
+        communityId:
+          type: string
+      required:
+      - bazaarAppId
+      - communityId
+      type: object
+    BazaarVoiceAppPostRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/BazaarVoiceAppPostRequestBody'
+      required:
+      - data
+      type: object
+      additionalProperties: false
     BazaarVoiceAppPostRequestBody:
       properties:
         locales:
@@ -152,17 +193,35 @@ components:
       - details
       type: object
       additionalProperties: false
-    DBBazaarVoiceCommunityApp:
+    DBBazaarVoiceLocale:
       properties:
-        bazaarAppId:
-          type: number
-          format: double
-        communityId:
+        country:
+          type: string
+        language:
+          type: string
+        code:
           type: string
       required:
-      - bazaarAppId
-      - communityId
+      - country
+      - language
+      - code
       type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     DBBazaarVoiceApp:
       properties:
         BazaarVoiceLocales:
@@ -189,59 +248,6 @@ components:
       - secret
       - apiKey
       - id
-      type: object
-    BazaarVoiceAppPostRequest:
-      properties:
-        data:
-          $ref: '#/components/schemas/BazaarVoiceAppPostRequestBody'
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    DBBazaarVoiceLocale:
-      properties:
-        country:
-          type: string
-        language:
-          type: string
-        code:
-          type: string
-      required:
-      - country
-      - language
-      - code
       type: object
   securitySchemes:
     apiKey:

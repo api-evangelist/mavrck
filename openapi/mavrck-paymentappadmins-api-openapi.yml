@@ -47,18 +47,59 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - PaymentAppAdmins
+      summary: Get payment app admin
+      x-summary-source: derived
 components:
   schemas:
-    CashPaymentPermission:
+    PaymentAppAdmin:
       properties:
-        canAddTransactions:
-          type: boolean
-        cashPaymentAppId:
+        s4AccountId:
           type: number
           format: double
+        cashPaymentPermissions:
+          items:
+            $ref: '#/components/schemas/CashPaymentPermission'
+          type: array
+        giftCardPermissions:
+          items:
+            $ref: '#/components/schemas/GiftCardPaymentPermission'
+          type: array
       required:
-      - canAddTransactions
-      - cashPaymentAppId
+      - s4AccountId
+      - cashPaymentPermissions
+      - giftCardPermissions
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     GiftCardPaymentPermission:
@@ -71,6 +112,18 @@ components:
       required:
       - canAddTransactions
       - giftCardAppId
+      type: object
+      additionalProperties: false
+    CashPaymentPermission:
+      properties:
+        canAddTransactions:
+          type: boolean
+        cashPaymentAppId:
+          type: number
+          format: double
+      required:
+      - canAddTransactions
+      - cashPaymentAppId
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -103,57 +156,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    PaymentAppAdmin:
-      properties:
-        s4AccountId:
-          type: number
-          format: double
-        cashPaymentPermissions:
-          items:
-            $ref: '#/components/schemas/CashPaymentPermission'
-          type: array
-        giftCardPermissions:
-          items:
-            $ref: '#/components/schemas/GiftCardPaymentPermission'
-          type: array
-      required:
-      - s4AccountId
-      - cashPaymentPermissions
-      - giftCardPermissions
       type: object
       additionalProperties: false
   securitySchemes:

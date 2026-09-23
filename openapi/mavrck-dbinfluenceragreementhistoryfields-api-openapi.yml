@@ -47,8 +47,24 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateInfluencerAgreementHistoryFieldsBody'
         required: true
+      summary: Update ifluencer agreement history fields
+      x-summary-source: derived
 components:
   schemas:
+    CreateInfluencerAgreementHistoryFieldsBody:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        communityId:
+          type: string
+        name:
+          type: string
+      required:
+      - actionGroupId
+      - communityId
+      type: object
+      additionalProperties: false
     DBInfluencerAgreementHistoryFields:
       properties:
         updateReason:
@@ -160,20 +176,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    CreateInfluencerAgreementHistoryFieldsBody:
-      properties:
-        actionGroupId:
-          type: number
-          format: double
-        communityId:
-          type: string
-        name:
-          type: string
-      required:
-      - actionGroupId
-      - communityId
       type: object
       additionalProperties: false
   securitySchemes:

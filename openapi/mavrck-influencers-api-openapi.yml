@@ -18,7 +18,7 @@ paths:
       x-handler: influencers/influencer_controller.js
       x-access:
       - administrator
-      summary: Retrieve a list of influencers.
+      summary: Retrieve a list of influencers
       operationId: getInfluencers
       parameters:
       - name: q
@@ -62,6 +62,36 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
     Error:
       type: object
       properties:
@@ -93,24 +123,6 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
     InfluencerPreview:
       type: object
       properties:
@@ -126,18 +138,6 @@ components:
           type: string
         email:
           type: string
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
   parameters:
     limitParam:
       in: query

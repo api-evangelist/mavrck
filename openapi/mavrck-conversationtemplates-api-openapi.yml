@@ -53,6 +53,8 @@ paths:
         required: false
         schema:
           type: boolean
+      summary: Get conversation templates
+      x-summary-source: derived
     post:
       operationId: createConversationTemplate
       responses:
@@ -94,6 +96,8 @@ paths:
             schema:
               $ref: '#/components/schemas/ConversationTemplatePostBody'
         required: true
+      summary: Create conversation template
+      x-summary-source: derived
   /v1/conversation-templates/{id}:
     get:
       operationId: getConversationTemplate
@@ -137,6 +141,8 @@ paths:
         schema:
           type: number
           format: double
+      summary: Get conversation template
+      x-summary-source: derived
     put:
       operationId: updateConversationTemplate
       responses:
@@ -185,31 +191,10 @@ paths:
             schema:
               $ref: '#/components/schemas/ConversationTemplatePutBody'
         required: true
+      summary: Update conversation template
+      x-summary-source: derived
 components:
   schemas:
-    Administrator:
-      properties:
-        id:
-          type: number
-          format: double
-        email:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type:
-          - string
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        approves:
-          type: boolean
-        createdAt:
-          type: string
-      type: object
-      additionalProperties: false
     ResponseMetadata:
       properties:
         limit:
@@ -228,12 +213,6 @@ components:
           format: double
       type: object
       additionalProperties: false
-    TSOAEmptyObject:
-      properties: {}
-      type: object
-      additionalProperties: false
-    GetConversationTemplateByIdResponse:
-      type: object
     ConversationTemplatePostResponse:
       properties:
         id:
@@ -241,22 +220,6 @@ components:
           format: double
       required:
       - id
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     ConversationTemplate:
@@ -299,22 +262,35 @@ components:
       - updatedAt
       type: object
       additionalProperties: false
-    ConversationTemplatesGetResponse:
+    Administrator:
       properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMetadata'
-        data:
-          items:
-            $ref: '#/components/schemas/ConversationTemplate'
-          type: array
+        id:
+          type: number
+          format: double
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          type: string
       type: object
       additionalProperties: false
-    ServerError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -323,6 +299,35 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    ConversationTemplatePostBody:
+      properties:
+        category:
+          type: string
+        html:
+          type: string
+        isArchived:
+          type: boolean
+        subject:
+          type: string
+        title:
+          type: string
+      required:
+      - category
+      - html
+      - subject
+      - title
+      type: object
+      additionalProperties: false
+    ConversationTemplatesGetResponse:
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
+        data:
+          items:
+            $ref: '#/components/schemas/ConversationTemplate'
+          type: array
       type: object
       additionalProperties: false
     NotFoundError:
@@ -360,31 +365,34 @@ components:
           format: double
       type: object
       additionalProperties: false
-    ConversationTemplatePostBody:
-      properties:
-        category:
-          type: string
-        html:
-          type: string
-        isArchived:
-          type: boolean
-        subject:
-          type: string
-        title:
-          type: string
-      required:
-      - category
-      - html
-      - subject
-      - title
+    GetConversationTemplateByIdResponse:
       type: object
-      additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:

@@ -171,6 +171,48 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    EmptyObject:
+      type: object
+      properties: {}
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    Metric:
+      type: object
+      properties:
+        id:
+          type: integer
+        displayName:
+          type: string
+        name:
+          type: string
     Error:
       type: object
       properties:
@@ -202,24 +244,6 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
     CommunityMetric:
       type: object
       properties:
@@ -229,30 +253,6 @@ components:
           type: boolean
         metric:
           $ref: '#/components/schemas/Metric'
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
-    Metric:
-      type: object
-      properties:
-        id:
-          type: integer
-        displayName:
-          type: string
-        name:
-          type: string
-    EmptyObject:
-      type: object
-      properties: {}
   securitySchemes:
     apiKey:
       type: apiKey

@@ -49,6 +49,8 @@ paths:
                 $ref: '#/components/schemas/ServerError'
       tags:
       - Meta Ad Admin
+      summary: Get system users ad accounts info
+      x-summary-source: derived
   /v1/admin/meta/backfill/ad-insights:
     post:
       operationId: backfillAdAccountInsightsData
@@ -87,6 +89,8 @@ paths:
             schema:
               $ref: '#/components/schemas/BackfillMetaAdInsightsJobPayload'
         required: true
+      summary: Backfill ad account insights data
+      x-summary-source: derived
   /v1/admin/meta/backfill/ad-insights/push:
     post:
       operationId: pushAdAccountInsightsData
@@ -125,6 +129,8 @@ paths:
             schema:
               $ref: '#/components/schemas/PushMetaAdInsightsJobPayload'
         required: true
+      summary: Push ad account insights data
+      x-summary-source: derived
   /v1/admin/meta/backfill/ads:
     post:
       operationId: backfillAdInformationForAdAccount
@@ -163,6 +169,8 @@ paths:
             schema:
               $ref: '#/components/schemas/BackfillMetaAdInsightsJobPayload'
         required: true
+      summary: Backfill ad information for ad account
+      x-summary-source: derived
   /v1/admin/meta/backfill/ads/lifetime-insights:
     post:
       operationId: backfillLifetimeAdInsights
@@ -201,6 +209,8 @@ paths:
             schema:
               $ref: '#/components/schemas/BackfillMetaAdInsightsJobPayload'
         required: true
+      summary: Backfill lifetime ad insights
+      x-summary-source: derived
 components:
   schemas:
     MetaSystemUsersAdAccountsResponse:
@@ -255,6 +265,50 @@ components:
       - name
       - id
       type: object
+    PushMetaAdInsightsJobPayload:
+      properties:
+        endDate:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+      required:
+      - endDate
+      - startDate
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     BackfillMetaAdInsightsJobPayload:
       properties:
         externalAdIdList:
@@ -311,50 +365,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    PushMetaAdInsightsJobPayload:
-      properties:
-        endDate:
-          type: string
-          format: date-time
-        startDate:
-          type: string
-          format: date-time
-      required:
-      - endDate
-      - startDate
-      type: object
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
         details:
           properties: {}
           additionalProperties:

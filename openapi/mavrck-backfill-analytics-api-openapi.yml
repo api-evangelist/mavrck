@@ -53,6 +53,8 @@ paths:
             schema:
               $ref: '#/components/schemas/BackfillFollowersAtPostRequest'
         required: true
+      summary: Backfill followers at post
+      x-summary-source: derived
   /v1/backfill-analytics/update-content-activation-summary:
     post:
       operationId: updateContentActivationSummary
@@ -95,6 +97,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateContentActivationSummaryRequest'
         required: true
+      summary: Update content activation summary
+      x-summary-source: derived
 components:
   schemas:
     UpdateContentActivationSummaryEntity:
@@ -107,68 +111,12 @@ components:
       required:
       - activationId
       type: object
-    BackfillFollowersAtPostRequest:
-      properties:
-        batchSize:
-          type: number
-          format: double
-        network:
-          type: string
-        endDate:
-          type: string
-        startDate:
-          type: string
-      required:
-      - network
-      - endDate
-      - startDate
-      type: object
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    UpdateContentActivationSummaryRequest:
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/UpdateContentActivationSummaryEntity'
-          type: array
-      required:
-      - entities
-      type: object
-    BackfillFollowersAtPostResponse:
-      properties:
-        message:
-          type: string
-        processedBatches:
-          type: number
-          format: double
-        updatedRecords:
-          type: number
-          format: double
-      required:
-      - message
-      - processedBatches
-      - updatedRecords
-      type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -195,6 +143,78 @@ components:
       - details
       type: object
       additionalProperties: false
+    BackfillFollowersAtPostResponse:
+      properties:
+        message:
+          type: string
+        processedBatches:
+          type: number
+          format: double
+        updatedRecords:
+          type: number
+          format: double
+      required:
+      - message
+      - processedBatches
+      - updatedRecords
+      type: object
+    UpdateContentActivationSummaryRequest:
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/UpdateContentActivationSummaryEntity'
+          type: array
+      required:
+      - entities
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BackfillFollowersAtPostRequest:
+      properties:
+        batchSize:
+          type: number
+          format: double
+        network:
+          type: string
+        endDate:
+          type: string
+        startDate:
+          type: string
+      required:
+      - network
+      - endDate
+      - startDate
+      type: object
     UpdateContentActivationSummaryResponse:
       properties:
         message:
@@ -227,22 +247,6 @@ components:
       - processedEntities
       - updatedRecords
       type: object
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey
