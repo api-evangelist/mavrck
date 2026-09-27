@@ -94,28 +94,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -142,6 +126,26 @@ components:
       - details
       type: object
       additionalProperties: false
+    UpdateInstagramProfilePictureRequest:
+      items:
+        $ref: '#/components/schemas/UpdateInstagramProfilePictureItem'
+      type: array
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     UpdateInstagramProfilePictureItem:
       properties:
         imageUrl:
@@ -154,12 +158,12 @@ components:
       required:
       - instagramProfileId
       type: object
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -170,10 +174,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    UpdateInstagramProfilePictureRequest:
-      items:
-        $ref: '#/components/schemas/UpdateInstagramProfilePictureItem'
-      type: array
   securitySchemes:
     apiKey:
       type: apiKey

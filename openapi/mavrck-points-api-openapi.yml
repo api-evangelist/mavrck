@@ -133,24 +133,6 @@ paths:
                   type: string
 components:
   schemas:
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
     PointTransaction:
       type: object
       properties:
@@ -182,6 +164,32 @@ components:
         incentiveClaimId:
           type: integer
           description: Incentive claim ID associated.
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    PointGrantURI:
+      type: object
+      required:
+      - sourceId
+      properties:
+        sourceId:
+          type: integer
+          description: Unique identifier representing the source of the point granted.
     LinksDeprecated:
       type: object
       x-access:
@@ -225,19 +233,11 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    PointGrantURI:
-      type: object
-      required:
-      - sourceId
-      properties:
-        sourceId:
-          type: integer
-          description: Unique identifier representing the source of the point granted.
   parameters:
-    limitParam:
+    offsetParam:
       in: query
-      description: Maximum number of items to return
-      name: limit
+      description: Number of items to skip
+      name: offset
       schema:
         type: integer
     orderByParam:
@@ -246,10 +246,10 @@ components:
       name: orderBy
       schema:
         type: string
-    offsetParam:
+    limitParam:
       in: query
-      description: Number of items to skip
-      name: offset
+      description: Maximum number of items to return
+      name: limit
       schema:
         type: integer
   securitySchemes:

@@ -112,18 +112,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
     InfluencerContractCommunityTemplate:
       type: object
       properties:
@@ -144,6 +132,27 @@ components:
           format: date-time
         updatedBy:
           $ref: '#/components/schemas/AdministratorAccountsDeprecated'
+    RoleDeprecated:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
     AdministratorAccountsDeprecated:
       type: object
       properties:
@@ -194,15 +203,6 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    RoleDeprecated:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
   parameters:
     InfluencerContractCommunityTemplate:
       name: data

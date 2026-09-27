@@ -51,6 +51,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ActionGroupStatusQueryRequest:
       properties:
         actionGroupIds:
@@ -63,21 +79,6 @@ components:
           maxItems: 100
       required:
       - actionGroupIds
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
       type: object
       additionalProperties: false
     ActionGroupStatusMap:
@@ -101,20 +102,19 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    BadRequestError:
       properties:
-        message:
-          type: string
-          enum:
-          - Server Error
         details:
           properties: {}
           additionalProperties:
             additionalProperties: true
           type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
       required:
       - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

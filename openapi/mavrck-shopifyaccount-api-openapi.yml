@@ -394,12 +394,23 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NotFoundError:
+    ConnectShopifyAccountBody:
+      properties:
+        token:
+          type: string
+        shop:
+          type: string
+      required:
+      - token
+      - shop
+      type: object
+      additionalProperties: false
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -408,21 +419,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
       type: object
       additionalProperties: false
     UninstallShopifyRequest:
@@ -434,31 +430,6 @@ components:
       - shopId
       type: object
       additionalProperties: false
-    ShopifyAccountResponse:
-      properties:
-        updatedAt:
-          type: string
-          format: date-time
-        createdAt:
-          type: string
-          format: date-time
-        shopifyAccessToken:
-          type: string
-        shopName:
-          type: string
-        communityId:
-          type: string
-        id:
-          type: number
-          format: double
-      required:
-      - updatedAt
-      - createdAt
-      - shopifyAccessToken
-      - shopName
-      - communityId
-      - id
-      type: object
     ForbiddenError:
       properties:
         message:
@@ -491,12 +462,52 @@ components:
       - shopifyAccessToken
       type: object
       additionalProperties: false
-    ServerError:
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ShopifyAccountResponse:
+      properties:
+        updatedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        shopifyAccessToken:
+          type: string
+        shopName:
+          type: string
+        communityId:
+          type: string
+        id:
+          type: number
+          format: double
+      required:
+      - updatedAt
+      - createdAt
+      - shopifyAccessToken
+      - shopName
+      - communityId
+      - id
+      type: object
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -505,17 +516,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    ConnectShopifyAccountBody:
-      properties:
-        token:
-          type: string
-        shop:
-          type: string
-      required:
-      - token
-      - shop
       type: object
       additionalProperties: false
   securitySchemes:

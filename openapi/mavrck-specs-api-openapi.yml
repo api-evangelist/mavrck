@@ -238,14 +238,20 @@ components:
           format: double
       type: object
       additionalProperties: false
-    SpecsPutRequest:
+    ServerError:
       properties:
-        destinationUrl:
+        message:
           type: string
-        title:
-          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - title
+      - message
+      - details
       type: object
       additionalProperties: false
     Spec:
@@ -278,6 +284,32 @@ components:
       - deletedAt
       type: object
       additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SpecsPutRequest:
+      properties:
+        destinationUrl:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      type: object
+      additionalProperties: false
     SpecsPostRequest:
       properties:
         destinationUrl:
@@ -304,38 +336,6 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/ResponseMetadata'
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

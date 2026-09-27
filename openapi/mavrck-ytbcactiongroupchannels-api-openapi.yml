@@ -173,12 +173,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ValidateErrorJSON:
+    SetYoutubeChannelRequest:
+      properties:
+        channelInput:
+          type: string
+        hasNoYoutubeChannel:
+          type: boolean
+      type: object
+      additionalProperties: false
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -226,24 +234,6 @@ components:
       - hasNoYoutubeChannel
       type: object
       additionalProperties: false
-    ActionGroupCampaignCodeResponse:
-      properties:
-        campaignCode:
-          type:
-          - string
-          - 'null'
-      required:
-      - campaignCode
-      type: object
-      additionalProperties: false
-    SetYoutubeChannelRequest:
-      properties:
-        channelInput:
-          type: string
-        hasNoYoutubeChannel:
-          type: boolean
-      type: object
-      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -260,12 +250,22 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    ActionGroupCampaignCodeResponse:
+      properties:
+        campaignCode:
+          type:
+          - string
+          - 'null'
+      required:
+      - campaignCode
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:

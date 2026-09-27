@@ -176,54 +176,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    Spec:
-      properties:
-        id:
-          type: number
-          format: double
-        title:
-          type: string
-        destinationUrl:
-          type: string
-        laterInfluenceCampaignId:
-          type: number
-          format: double
-        provider:
-          type: string
-        isDeleted:
-          type: boolean
-        deletedAt:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - title
-      - destinationUrl
-      - laterInfluenceCampaignId
-      - provider
-      - isDeleted
-      - deletedAt
-      type: object
-      additionalProperties: false
     LinksPostResponse:
       properties:
         data:
@@ -271,14 +223,30 @@ components:
       - deletedAt
       type: object
       additionalProperties: false
-    LinksGetResponse:
+    MavelyURLData:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Link'
-          type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMetadata'
+        details:
+          type: object
+        metadata:
+          type: object
+      type: object
+      additionalProperties: false
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
     LinkMetrics:
@@ -336,20 +304,12 @@ components:
       - title
       type: object
       additionalProperties: false
-    MavelyURLData:
-      properties:
-        details:
-          type: object
-        metadata:
-          type: object
-      type: object
-      additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -360,12 +320,52 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    Spec:
+      properties:
+        id:
+          type: number
+          format: double
+        title:
+          type: string
+        destinationUrl:
+          type: string
+        laterInfluenceCampaignId:
+          type: number
+          format: double
+        provider:
+          type: string
+        isDeleted:
+          type: boolean
+        deletedAt:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - title
+      - destinationUrl
+      - laterInfluenceCampaignId
+      - provider
+      - isDeleted
+      - deletedAt
+      type: object
+      additionalProperties: false
+    LinksGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
+      type: object
+      additionalProperties: false
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:

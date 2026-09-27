@@ -150,21 +150,23 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SharedCipherPostBody:
+    SharedCipherWithOptionsAndCipher:
+      type: object
+      properties: {}
+    ServerError:
       properties:
-        actionGroupId:
-          type:
-          - number
-          - 'null'
-          format: double
-        options:
-          additionalProperties: false
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
           type: object
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          description: ISO 8601 timestamp. Null or omitted means the link never expires.
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     SharedCipherPutBody:
@@ -184,16 +186,6 @@ components:
       - options
       type: object
       additionalProperties: false
-    SharedCiphersGetResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SharedCipherWithOptionsAndCipher'
-          type: array
-      required:
-      - data
-      type: object
-      additionalProperties: false
     SharedLinkExpiredError:
       properties:
         message:
@@ -210,22 +202,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    SharedCipherPostResponse:
-      properties:
-        cipher:
-          type: string
-        version:
-          type: string
-      required:
-      - cipher
-      - version
-      type: object
-      additionalProperties: false
-    SharedCipherGetResponse:
-      $ref: '#/components/schemas/SharedCipher'
-    SharedCipherWithOptionsAndCipher:
-      type: object
-      properties: {}
     ForbiddenError:
       properties:
         message:
@@ -242,22 +218,46 @@ components:
       - details
       type: object
       additionalProperties: false
+    SharedCipherPostBody:
+      properties:
+        actionGroupId:
+          type:
+          - number
+          - 'null'
+          format: double
+        options:
+          additionalProperties: false
+          type: object
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          description: ISO 8601 timestamp. Null or omitted means the link never expires.
+      type: object
+      additionalProperties: false
     SharedCipher:
       type: object
-    ServerError:
+    SharedCipherPostResponse:
       properties:
-        message:
+        cipher:
           type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        version:
+          type: string
       required:
-      - message
-      - details
+      - cipher
+      - version
+      type: object
+      additionalProperties: false
+    SharedCipherGetResponse:
+      $ref: '#/components/schemas/SharedCipher'
+    SharedCiphersGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SharedCipherWithOptionsAndCipher'
+          type: array
+      required:
+      - data
       type: object
       additionalProperties: false
   securitySchemes:

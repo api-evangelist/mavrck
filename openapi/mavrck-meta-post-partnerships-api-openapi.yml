@@ -112,6 +112,46 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    MetaCreatePostPartnershipRequestBody:
+      properties:
+        activationId:
+          type: number
+          format: double
+      required:
+      - activationId
+      type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     MetaPostPartnershipRequestDto:
       properties:
         id:
@@ -139,22 +179,12 @@ components:
       - activationId
       type: object
       additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
+    MetaPostPartnershipRequestStatus:
+      type: string
+      enum:
+      - pending
+      - granted
+      - denied
     BadRequestError:
       properties:
         details:
@@ -170,42 +200,12 @@ components:
       - message
       type: object
       additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    MetaPostPartnershipRequestStatus:
-      type: string
-      enum:
-      - pending
-      - granted
-      - denied
-    MetaCreatePostPartnershipRequestBody:
-      properties:
-        activationId:
-          type: number
-          format: double
-      required:
-      - activationId
-      type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

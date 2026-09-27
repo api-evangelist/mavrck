@@ -208,18 +208,6 @@ components:
               type: string
               description: A static description of the parent error.
   parameters:
-    limitParam:
-      in: query
-      description: Maximum number of items to return
-      name: limit
-      schema:
-        type: integer
-    offsetParam:
-      in: query
-      description: Number of items to skip
-      name: offset
-      schema:
-        type: integer
     orderDirection:
       in: query
       description: Select the direction by which the data will be ordered, ascending or descending.
@@ -229,6 +217,18 @@ components:
         enum:
         - ASC
         - DESC
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
+      schema:
+        type: integer
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
+      schema:
+        type: integer
   securitySchemes:
     apiKey:
       type: apiKey

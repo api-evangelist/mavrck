@@ -377,6 +377,34 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    updateMembershipBody:
+      properties:
+        blacklisted:
+          type: boolean
+        status:
+          type: string
+          enum:
+          - USER
+          - REJECTED
+        membershipType:
+          type: string
+          enum:
+          - EMPLOYEE
+          - CUSTOMER
+          - NORMAL
+      type: object
+      additionalProperties: false
+    SocialPresenceInput:
+      properties:
+        platform:
+          type: string
+        username:
+          type: string
+      required:
+      - platform
+      - username
+      type: object
+      additionalProperties: false
     ValidateErrorJSON:
       properties:
         message:
@@ -393,30 +421,29 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
+    EthnicGroup:
+      enum:
+      - American Indian or Alaska Native
+      - Asian
+      - Black or African American
+      - Hispanic, Latinx, or Spanish origin
+      - Other
+      - Pacific Islander
+      - Prefer not to say
+      - White
+      type: string
+    removeMembershipBody:
       properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+        activityId:
+          type: number
+          format: double
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
       type: object
       additionalProperties: false
-    Gender:
-      enum:
-      - describe
-      - female
-      - male
-      - non_bin
-      - other
-      type: string
     _MembershipContactInfo:
       properties:
         age:
@@ -456,16 +483,28 @@ components:
           type: string
       type: object
       additionalProperties: false
-    removeMembershipBody:
+    Gender:
+      enum:
+      - describe
+      - female
+      - male
+      - non_bin
+      - other
+      type: string
+    ServerError:
       properties:
-        activityId:
-          type: number
-          format: double
-        globalUserIds:
-          items:
-            type: number
-            format: double
-          type: array
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     UpdateMembershipProfileInfo:
@@ -519,89 +558,6 @@ components:
           type: array
       type: object
       additionalProperties: false
-    updateMembershipBody:
-      properties:
-        blacklisted:
-          type: boolean
-        status:
-          type: string
-          enum:
-          - USER
-          - REJECTED
-        membershipType:
-          type: string
-          enum:
-          - EMPLOYEE
-          - CUSTOMER
-          - NORMAL
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    MembershipProfileInfo:
-      properties:
-        membershipContactInfo:
-          $ref: '#/components/schemas/Pick_UpdateMemberContactInfoData.gender-or-genderDescription_'
-        memberSelectedEthnicities:
-          items:
-            $ref: '#/components/schemas/MembershipEthnicity'
-          type: array
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    MembershipEthnicity:
-      properties:
-        ethnicGroup:
-          $ref: '#/components/schemas/EthnicGroup'
-        ethnicGroupDescription:
-          type: string
-      required:
-      - ethnicGroup
-      - ethnicGroupDescription
-      type: object
-      additionalProperties: false
-    GetMembershipSummaryResponse:
-      properties:
-        totalPoints:
-          type: number
-          format: double
-        totalActivations:
-          type: number
-          format: double
-      required:
-      - totalPoints
-      - totalActivations
-      type: object
-      additionalProperties: false
     MembershipContactInfoDeprecated:
       properties:
         age:
@@ -647,6 +603,45 @@ components:
           type: boolean
       type: object
       additionalProperties: false
+    MembershipProfileInfo:
+      properties:
+        membershipContactInfo:
+          $ref: '#/components/schemas/Pick_UpdateMemberContactInfoData.gender-or-genderDescription_'
+        memberSelectedEthnicities:
+          items:
+            $ref: '#/components/schemas/MembershipEthnicity'
+          type: array
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GetMembershipSummaryResponse:
+      properties:
+        totalPoints:
+          type: number
+          format: double
+        totalActivations:
+          type: number
+          format: double
+      required:
+      - totalPoints
+      - totalActivations
+      type: object
+      additionalProperties: false
     Pick_UpdateMemberContactInfoData.gender-or-genderDescription_:
       properties:
         gender:
@@ -655,6 +650,33 @@ components:
           type: string
       type: object
       description: From T, pick a set of properties whose keys are in the union K
+    MembershipEthnicity:
+      properties:
+        ethnicGroup:
+          $ref: '#/components/schemas/EthnicGroup'
+        ethnicGroupDescription:
+          type: string
+      required:
+      - ethnicGroup
+      - ethnicGroupDescription
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     GetMembershipResponse:
       properties:
         blacklisted:
@@ -708,28 +730,6 @@ components:
           type: string
       type: object
       additionalProperties: false
-    SocialPresenceInput:
-      properties:
-        platform:
-          type: string
-        username:
-          type: string
-      required:
-      - platform
-      - username
-      type: object
-      additionalProperties: false
-    EthnicGroup:
-      enum:
-      - American Indian or Alaska Native
-      - Asian
-      - Black or African American
-      - Hispanic, Latinx, or Spanish origin
-      - Other
-      - Pacific Islander
-      - Prefer not to say
-      - White
-      type: string
     TSOAEmptyObject:
       properties: {}
       type: object

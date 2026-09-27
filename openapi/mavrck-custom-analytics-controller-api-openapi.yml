@@ -101,40 +101,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DashboardTypesResponse:
-      properties:
-        dashboardTypes:
-          items:
-            type: string
-          type: array
-        instanceId:
-          type: string
-      required:
-      - dashboardTypes
-      - instanceId
-      type: object
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -161,6 +133,34 @@ components:
       - details
       type: object
       additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DashboardTypesResponse:
+      properties:
+        dashboardTypes:
+          items:
+            type: string
+          type: array
+        instanceId:
+          type: string
+      required:
+      - dashboardTypes
+      - instanceId
+      type: object
     EmbedUrlResponse:
       properties:
         embed_url:
@@ -168,12 +168,12 @@ components:
       required:
       - embed_url
       type: object
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

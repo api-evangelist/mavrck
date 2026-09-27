@@ -140,93 +140,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    EventLog:
-      properties:
-        communityId:
-          type: string
-        occurredAt:
-          type: string
-          format: date-time
-        invokedBy:
-          type: string
-        eventType:
-          type: string
-        resourceType:
-          type: string
-        resourceId:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        metadata:
-          properties:
-            rejectedBriefUpdate:
-              type: boolean
-            briefVersion:
-              type: number
-              format: double
-            copiedFromActionGroupId:
-              type: number
-              format: double
-          type:
-          - object
-          - 'null'
-      required:
-      - communityId
-      - eventType
-      - resourceType
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     EventLogGetResponse:
       properties:
         data:
@@ -267,6 +180,77 @@ components:
       - details
       type: object
       additionalProperties: false
+    EventLog:
+      properties:
+        communityId:
+          type: string
+        occurredAt:
+          type: string
+          format: date-time
+        invokedBy:
+          type: string
+        eventType:
+          type: string
+        resourceType:
+          type: string
+        resourceId:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        metadata:
+          properties:
+            rejectedBriefUpdate:
+              type: boolean
+            briefVersion:
+              type: number
+              format: double
+            copiedFromActionGroupId:
+              type: number
+              format: double
+          type:
+          - object
+          - 'null'
+      required:
+      - communityId
+      - eventType
+      - resourceType
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
     EventLogPostRequestBody:
       properties:
         resourceId:
@@ -274,6 +258,22 @@ components:
           format: double
       required:
       - resourceId
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

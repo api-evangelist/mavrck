@@ -173,38 +173,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     Gender:
       enum:
       - describe
@@ -213,41 +181,12 @@ components:
       - non_bin
       - other
       type: string
-    RetrieveGlobalUserElasticsearchDocumentsRequestBody:
-      properties:
-        facebookProfileIds:
-          items:
-            type: number
-            format: double
-          type: array
-        globalUserIds:
-          items:
-            type: number
-            format: double
-          type: array
-        instagramProfileIds:
-          items:
-            type: number
-            format: double
-          type: array
-        membershipIds:
-          items:
-            type: number
-            format: double
-          type: array
-        options:
-          properties:
-            index:
-              type: string
-          type: object
-      type: object
-      additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -489,12 +428,73 @@ components:
           additionalProperties: true
       type: object
       additionalProperties: false
-    ServerError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    RetrieveGlobalUserElasticsearchDocumentsRequestBody:
+      properties:
+        facebookProfileIds:
+          items:
+            type: number
+            format: double
+          type: array
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+        instagramProfileIds:
+          items:
+            type: number
+            format: double
+          type: array
+        membershipIds:
+          items:
+            type: number
+            format: double
+          type: array
+        options:
+          properties:
+            index:
+              type: string
+          type: object
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

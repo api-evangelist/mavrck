@@ -363,30 +363,69 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ActionGroupConversationTemplateCopyPostBody:
+    ActionGroupConversationTemplatePostBody:
       properties:
         deliveryMethod:
           type: string
           enum:
           - manual
           - automatic
-      type: object
-      additionalProperties: false
-    ActionGroupConversationTemplateReorderPutResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ActionGroupConversationTemplate'
-          type: array
-      type: object
-      additionalProperties: false
-    ActionGroupConversationTemplatePostResponse:
-      properties:
-        id:
+        disabled:
+          type: boolean
+        html:
+          type: string
+        order:
           type: number
           format: double
+        version:
+          type: number
+          format: double
+        sendOnDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        sendOnDays:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnEvent:
+          type:
+          - string
+          - 'null'
+          enum:
+          - due_date
+          - draft_due_date
+          - status_entry
+          - specific_date
+          - draft_needs_revision
+          - concept_due_date
+          - concept_needs_revision
+          - null
+        sendOnStatusId:
+          type:
+          - number
+          - 'null'
+          format: double
+        sendOnTimeframe:
+          type:
+          - string
+          - 'null'
+          enum:
+          - before
+          - after
+          - null
+        slug:
+          type: string
+        subject:
+          type: string
+        title:
+          type: string
       required:
-      - id
+      - html
+      - subject
+      - title
       type: object
       additionalProperties: false
     Administrator:
@@ -412,60 +451,24 @@ components:
           type: string
       type: object
       additionalProperties: false
-    ActionGroupConversationTemplatesGetResponse:
+    ActionGroupConversationTemplateCopyPostResponse:
       properties:
         data:
           items:
             $ref: '#/components/schemas/ActionGroupConversationTemplate'
           type: array
-        defaultTemplates:
-          items:
-            $ref: '#/components/schemas/ActionGroupConversationTemplatePostBody'
-          type: array
+        copy:
+          $ref: '#/components/schemas/ActionGroupConversationTemplate'
       required:
-      - defaultTemplates
+      - data
+      - copy
       type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    ActionGroupConversationTemplateReorderPutBody:
+    ActionGroupConversationTemplateReorderPutResponse:
       properties:
         data:
           items:
-            type: number
-            format: double
+            $ref: '#/components/schemas/ActionGroupConversationTemplate'
           type: array
-      required:
-      - data
       type: object
       additionalProperties: false
     ActionGroupConversationTemplatePutBody:
@@ -535,6 +538,40 @@ components:
           type: string
       type: object
       additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplateCopyPostBody:
+      properties:
+        deliveryMethod:
+          type: string
+          enum:
+          - manual
+          - automatic
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplatePostResponse:
+      properties:
+        id:
+          type: number
+          format: double
+      required:
+      - id
+      type: object
+      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -551,97 +588,44 @@ components:
       - details
       type: object
       additionalProperties: false
-    ActionGroupConversationTemplateCopyPostResponse:
+    BadRequestError:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ActionGroupConversationTemplate'
-          type: array
-        copy:
-          $ref: '#/components/schemas/ActionGroupConversationTemplate'
-      required:
-      - data
-      - copy
-      type: object
-    ActionGroupConversationTemplatePostBody:
-      properties:
-        deliveryMethod:
-          type: string
-          enum:
-          - manual
-          - automatic
-        disabled:
-          type: boolean
-        html:
-          type: string
-        order:
-          type: number
-          format: double
-        version:
-          type: number
-          format: double
-        sendOnDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        sendOnDays:
-          type:
-          - number
-          - 'null'
-          format: double
-        sendOnEvent:
-          type:
-          - string
-          - 'null'
-          enum:
-          - due_date
-          - draft_due_date
-          - status_entry
-          - specific_date
-          - draft_needs_revision
-          - concept_due_date
-          - concept_needs_revision
-          - null
-        sendOnStatusId:
-          type:
-          - number
-          - 'null'
-          format: double
-        sendOnTimeframe:
-          type:
-          - string
-          - 'null'
-          enum:
-          - before
-          - after
-          - null
-        slug:
-          type: string
-        subject:
-          type: string
-        title:
-          type: string
-      required:
-      - html
-      - subject
-      - title
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
         details:
           properties: {}
           additionalProperties:
             additionalProperties: true
           type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
       required:
       - message
-      - details
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplateReorderPutBody:
+      properties:
+        data:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    ActionGroupConversationTemplatesGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ActionGroupConversationTemplate'
+          type: array
+        defaultTemplates:
+          items:
+            $ref: '#/components/schemas/ActionGroupConversationTemplatePostBody'
+          type: array
+      required:
+      - defaultTemplates
       type: object
       additionalProperties: false
     ActionGroupConversationTemplate:
@@ -736,6 +720,22 @@ components:
       - listId
       - subject
       - title
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

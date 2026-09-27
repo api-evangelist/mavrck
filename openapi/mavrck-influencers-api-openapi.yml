@@ -62,6 +62,21 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    InfluencerPreview:
+      type: object
+      properties:
+        id:
+          type: integer
+        globalUserId:
+          type: integer
+        profilePic:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
     ResponseMetadata:
       properties:
         limit:
@@ -123,32 +138,17 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    InfluencerPreview:
-      type: object
-      properties:
-        id:
-          type: integer
-        globalUserId:
-          type: integer
-        profilePic:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
   parameters:
-    limitParam:
-      in: query
-      description: Maximum number of items to return
-      name: limit
-      schema:
-        type: integer
     offsetParam:
       in: query
       description: Number of items to skip
       name: offset
+      schema:
+        type: integer
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
       schema:
         type: integer
   securitySchemes:

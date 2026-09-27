@@ -144,6 +144,106 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ResponseBody__disassociations-ActivationTagAssociation-Array--disassociatedCount-number--__:
+      properties:
+        data:
+          properties:
+            disassociatedCount:
+              type: number
+              format: double
+            disassociations:
+              items:
+                $ref: '#/components/schemas/ActivationTagAssociation'
+              type: array
+          required:
+          - disassociatedCount
+          - disassociations
+          type: object
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActivationTagAssociation:
+      properties:
+        tagId:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+        activationId:
+          type: number
+          format: double
+      required:
+      - tagId
+      - createdAt
+      - activationId
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ActivationTagDisassociationDeleteResponse:
+      $ref: '#/components/schemas/ResponseBody__disassociations-ActivationTagAssociation-Array--disassociatedCount-number--__'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ActivationTagAssociationPostRequestBody:
       type: object
       properties:
@@ -225,106 +325,6 @@ components:
           type:
           - array
           - 'null'
-    ActivationTagDisassociationDeleteResponse:
-      $ref: '#/components/schemas/ResponseBody__disassociations-ActivationTagAssociation-Array--disassociatedCount-number--__'
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ActivationTagAssociation:
-      properties:
-        tagId:
-          type: number
-          format: double
-        createdAt:
-          type: string
-          format: date-time
-        activationId:
-          type: number
-          format: double
-      required:
-      - tagId
-      - createdAt
-      - activationId
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ResponseBody__disassociations-ActivationTagAssociation-Array--disassociatedCount-number--__:
-      properties:
-        data:
-          properties:
-            disassociatedCount:
-              type: number
-              format: double
-            disassociations:
-              items:
-                $ref: '#/components/schemas/ActivationTagAssociation'
-              type: array
-          required:
-          - disassociatedCount
-          - disassociations
-          type: object
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-      required:
-      - data
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

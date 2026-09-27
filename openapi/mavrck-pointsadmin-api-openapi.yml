@@ -183,12 +183,24 @@ components:
       - data
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    CommunityEngagementPointMapping:
+      properties:
+        ratio:
+          type: number
+          format: double
+        maxPointsCap:
+          type: number
+          format: double
+        stepAmount:
+          type: number
+          format: double
+      type: object
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -199,12 +211,28 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -231,34 +259,6 @@ components:
       properties: {}
       type: object
       additionalProperties: false
-    CommunityEngagementPointMapping:
-      properties:
-        ratio:
-          type: number
-          format: double
-        maxPointsCap:
-          type: number
-          format: double
-        stepAmount:
-          type: number
-          format: double
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     GetCommunityActionObjectiveResponse:
       properties:
         data:
@@ -269,12 +269,12 @@ components:
       - data
       type: object
       additionalProperties: false
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

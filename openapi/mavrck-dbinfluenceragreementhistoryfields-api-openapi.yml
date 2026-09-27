@@ -131,19 +131,20 @@ components:
       - globalUserId
       - id
       type: object
-    BadRequestError:
+    ServerError:
       properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:
             additionalProperties: true
           type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
       required:
       - message
+      - details
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -162,20 +163,19 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    BadRequestError:
       properties:
-        message:
-          type: string
-          enum:
-          - Server Error
         details:
           properties: {}
           additionalProperties:
             additionalProperties: true
           type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
       required:
       - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

@@ -420,100 +420,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PayableEntity:
-      properties:
-        id:
-          type: number
-          format: double
-        cashPaymentAppId:
-          type: number
-          format: double
-        providerStatus:
-          $ref: '#/components/schemas/TipaltiProviderStatus'
-        isPayable:
-          type: boolean
-        isActive:
-          type: boolean
-        provider:
-          type: string
-          enum:
-          - TIPALTI
-      required:
-      - id
-      - cashPaymentAppId
-      - providerStatus
-      - isPayable
-      - isActive
-      - provider
-      type: object
-      additionalProperties: false
-    VerificationCodeResponse:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
-      additionalProperties: false
-    PropagatePaymentRecipientLinksRequest:
-      description: 'Account-level reconnect. Re-links every active campaign membership of the given
-
-        creators to the newly connected recipient.'
-      properties:
-        creator_profile_ids:
-          items:
-            type: string
-          type: array
-        payment_recipient_uuid:
-          type: string
-      required:
-      - creator_profile_ids
-      - payment_recipient_uuid
-      type: object
-      additionalProperties: false
-    ClearPaymentRecipientLinksRequest:
-      description: 'Account-level disconnect. latergram expands a Later Social account to its
-
-        creators'' CDS creator_profile_ids and calls this to clear the link from every
-
-        active campaign membership. SAPI resolves each creator_profile_id to a
-
-        global_user_id; a profile that can''t be resolved has no memberships to touch
-
-        and is skipped.
-
-
-        payment_recipient_uuid is optional: when omitted, every live link on the
-
-        payable memberships is cleared (a full account disconnect). When present, only
-
-        links to that specific recipient are cleared — used by the propagate worker''s
-
-        compensating clear to undo links it created for a recipient that was severed
-
-        mid-flight, without touching links to any other recipient.'
-      properties:
-        creator_profile_ids:
-          items:
-            type: string
-          type: array
-        payment_recipient_uuid:
-          type: string
-      required:
-      - creator_profile_ids
-      type: object
-      additionalProperties: false
-    VerificationCodeRequest:
-      properties:
-        email:
-          type: string
-        clientId:
-          type: string
-      required:
-      - email
-      - clientId
-      type: object
-      additionalProperties: false
     OnboardingReminderRequestBody:
       description: 'Domain types for payment-recipient creator notifications (onboarding reminder + payment
 
@@ -532,44 +438,6 @@ components:
       required:
       - globalUserId
       - actionGroupId
-      type: object
-      additionalProperties: false
-    PaymentRecipientCreateRequest:
-      properties:
-        email:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        companyName:
-          type: string
-        country:
-          type: string
-        include:
-          items:
-            type: string
-            enum:
-            - TIPALTI_PAYEE
-          type: array
-      required:
-      - email
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     PaymentRecipientLinksMutationResult:
@@ -602,45 +470,6 @@ components:
       - email
       - clientId
       - code
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    TipaltiPayeeIframeUrlResponse:
-      properties:
-        url:
-          type: string
-      required:
-      - url
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     PaymentRecipientView:
@@ -702,6 +531,137 @@ components:
       - details
       type: object
       additionalProperties: false
+    TipaltiPayeeIframeUrlResponse:
+      properties:
+        url:
+          type: string
+      required:
+      - url
+      type: object
+      additionalProperties: false
+    PaymentRecipientCreateRequest:
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        country:
+          type: string
+        include:
+          items:
+            type: string
+            enum:
+            - TIPALTI_PAYEE
+          type: array
+      required:
+      - email
+      type: object
+      additionalProperties: false
+    ClearPaymentRecipientLinksRequest:
+      description: 'Account-level disconnect. latergram expands a Later Social account to its
+
+        creators'' CDS creator_profile_ids and calls this to clear the link from every
+
+        active campaign membership. SAPI resolves each creator_profile_id to a
+
+        global_user_id; a profile that can''t be resolved has no memberships to touch
+
+        and is skipped.
+
+
+        payment_recipient_uuid is optional: when omitted, every live link on the
+
+        payable memberships is cleared (a full account disconnect). When present, only
+
+        links to that specific recipient are cleared — used by the propagate worker''s
+
+        compensating clear to undo links it created for a recipient that was severed
+
+        mid-flight, without touching links to any other recipient.'
+      properties:
+        creator_profile_ids:
+          items:
+            type: string
+          type: array
+        payment_recipient_uuid:
+          type: string
+      required:
+      - creator_profile_ids
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    VerificationCodeRequest:
+      properties:
+        email:
+          type: string
+        clientId:
+          type: string
+      required:
+      - email
+      - clientId
+      type: object
+      additionalProperties: false
+    PayableEntity:
+      properties:
+        id:
+          type: number
+          format: double
+        cashPaymentAppId:
+          type: number
+          format: double
+        providerStatus:
+          $ref: '#/components/schemas/TipaltiProviderStatus'
+        isPayable:
+          type: boolean
+        isActive:
+          type: boolean
+        provider:
+          type: string
+          enum:
+          - TIPALTI
+      required:
+      - id
+      - cashPaymentAppId
+      - providerStatus
+      - isPayable
+      - isActive
+      - provider
+      type: object
+      additionalProperties: false
     TipaltiProviderStatus:
       type: string
       enum:
@@ -710,6 +670,46 @@ components:
       - SUSPENDED
       - BLOCKED_BY_TIPALTI
       - INTERNAL_VALUE
+    VerificationCodeResponse:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PropagatePaymentRecipientLinksRequest:
+      description: 'Account-level reconnect. Re-links every active campaign membership of the given
+
+        creators to the newly connected recipient.'
+      properties:
+        creator_profile_ids:
+          items:
+            type: string
+          type: array
+        payment_recipient_uuid:
+          type: string
+      required:
+      - creator_profile_ids
+      - payment_recipient_uuid
+      type: object
+      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

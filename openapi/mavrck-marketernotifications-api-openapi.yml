@@ -76,6 +76,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SetNotificationPreferenceBodyDefinition:
+      properties:
+        actionGroupId:
+          type: string
+        data:
+          $ref: '#/components/schemas/NotificationPreferenceFlags'
+      required:
+      - actionGroupId
+      - data
+      type: object
     NotificationPreferenceFlags:
       properties:
         emailTimeframe:
@@ -144,31 +154,24 @@ components:
 
 
         Do not make these required until every client sends them.'
-    NotificationType:
-      enum:
-      - MESSAGE
-      - DRAFT
-      - CONTENT
-      - APPLICATION
-      - CONFIRMATION
-      - FAILED_PAYMENT
-      type: string
-    SetNotificationPreferenceBodyDefinition:
+    NotificationQueryFields:
       properties:
+        notificationTypes:
+          items:
+            $ref: '#/components/schemas/NotificationType'
+          type: array
         actionGroupId:
+          type: number
+          format: double
+        notificationGroupId:
           type: string
-        data:
-          $ref: '#/components/schemas/NotificationPreferenceFlags'
-      required:
-      - actionGroupId
-      - data
       type: object
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -196,30 +199,21 @@ components:
       - data
       - params
       type: object
-    NotificationQueryFields:
-      properties:
-        notificationTypes:
-          items:
-            $ref: '#/components/schemas/NotificationType'
-          type: array
-        actionGroupId:
-          type: number
-          format: double
-        notificationGroupId:
-          type: string
-      type: object
-    EmailNotificationTimeframe:
+    NotificationType:
       enum:
-      - TWO_H
-      - FOUR_H
-      - DAILY
+      - MESSAGE
+      - DRAFT
+      - CONTENT
+      - APPLICATION
+      - CONFIRMATION
+      - FAILED_PAYMENT
       type: string
-    ServerError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -230,6 +224,12 @@ components:
       - details
       type: object
       additionalProperties: false
+    EmailNotificationTimeframe:
+      enum:
+      - TWO_H
+      - FOUR_H
+      - DAILY
+      type: string
   securitySchemes:
     apiKey:
       type: apiKey

@@ -188,54 +188,8 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    EmailSmtpDTO:
-      properties:
-        id:
-          type: number
-          format: double
-        communityId:
-          type: string
-        fromEmail:
-          type: string
-        fromName:
-          type: string
-      required:
-      - id
-      - communityId
-      - fromEmail
-      - fromName
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    PostEmailSettingsResponse:
+      properties: {}
       type: object
       additionalProperties: false
     ValidationError:
@@ -261,6 +215,40 @@ components:
       - argument
       type: object
       additionalProperties: false
+    EmailSmtpDTO:
+      properties:
+        id:
+          type: number
+          format: double
+        communityId:
+          type: string
+        fromEmail:
+          type: string
+        fromName:
+          type: string
+      required:
+      - id
+      - communityId
+      - fromEmail
+      - fromName
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     PostEmailSettingsRequest:
       properties:
         id:
@@ -270,10 +258,6 @@ components:
       required:
       - id
       - subscribed
-      type: object
-      additionalProperties: false
-    PostEmailSettingsResponse:
-      properties: {}
       type: object
       additionalProperties: false
     GetEmailSettingsResponse:
@@ -306,12 +290,28 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

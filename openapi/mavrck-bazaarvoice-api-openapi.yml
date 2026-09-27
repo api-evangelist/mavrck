@@ -118,26 +118,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BazaarVoiceLocaleResponse:
-      $ref: '#/components/schemas/DBBazaarVoiceLocale'
-    BazaarVoiceAppResponse:
-      $ref: '#/components/schemas/DBBazaarVoiceApp'
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     DBBazaarVoiceCommunityApp:
       properties:
         bazaarAppId:
@@ -149,12 +129,20 @@ components:
       - bazaarAppId
       - communityId
       type: object
-    BazaarVoiceAppPostRequest:
+    ServerError:
       properties:
-        data:
-          $ref: '#/components/schemas/BazaarVoiceAppPostRequestBody'
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - data
+      - message
+      - details
       type: object
       additionalProperties: false
     BazaarVoiceAppPostRequestBody:
@@ -193,6 +181,24 @@ components:
       - details
       type: object
       additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BazaarVoiceAppResponse:
+      $ref: '#/components/schemas/DBBazaarVoiceApp'
     DBBazaarVoiceLocale:
       properties:
         country:
@@ -206,22 +212,6 @@ components:
       - language
       - code
       type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     DBBazaarVoiceApp:
       properties:
         BazaarVoiceLocales:
@@ -249,6 +239,16 @@ components:
       - apiKey
       - id
       type: object
+    BazaarVoiceAppPostRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/BazaarVoiceAppPostRequestBody'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    BazaarVoiceLocaleResponse:
+      $ref: '#/components/schemas/DBBazaarVoiceLocale'
   securitySchemes:
     apiKey:
       type: apiKey

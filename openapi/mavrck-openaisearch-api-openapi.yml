@@ -66,19 +66,18 @@ components:
       - details
       type: object
       additionalProperties: false
-    BadRequestError:
+    OpenAISearchBody:
       properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
+        query:
           type: string
-          enum:
-          - Bad Request
+        city:
+          type: string
+        state:
+          type: string
       required:
-      - message
+      - query
+      - city
+      - state
       type: object
       additionalProperties: false
     ServerError:
@@ -97,18 +96,19 @@ components:
       - details
       type: object
       additionalProperties: false
-    OpenAISearchBody:
+    BadRequestError:
       properties:
-        query:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
           type: string
-        city:
-          type: string
-        state:
-          type: string
+          enum:
+          - Bad Request
       required:
-      - query
-      - city
-      - state
+      - message
       type: object
       additionalProperties: false
   securitySchemes:

@@ -51,6 +51,50 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CashPaymentPermission:
+      properties:
+        canAddTransactions:
+          type: boolean
+        cashPaymentAppId:
+          type: number
+          format: double
+      required:
+      - canAddTransactions
+      - cashPaymentAppId
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     PaymentAppAdmin:
       properties:
         s4AccountId:
@@ -68,6 +112,18 @@ components:
       - s4AccountId
       - cashPaymentPermissions
       - giftCardPermissions
+      type: object
+      additionalProperties: false
+    GiftCardPaymentPermission:
+      properties:
+        canAddTransactions:
+          type: boolean
+        giftCardAppId:
+          type: number
+          format: double
+      required:
+      - canAddTransactions
+      - giftCardAppId
       type: object
       additionalProperties: false
     ValidateErrorJSON:
@@ -92,62 +148,6 @@ components:
           type: string
           enum:
           - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    GiftCardPaymentPermission:
-      properties:
-        canAddTransactions:
-          type: boolean
-        giftCardAppId:
-          type: number
-          format: double
-      required:
-      - canAddTransactions
-      - giftCardAppId
-      type: object
-      additionalProperties: false
-    CashPaymentPermission:
-      properties:
-        canAddTransactions:
-          type: boolean
-        cashPaymentAppId:
-          type: number
-          format: double
-      required:
-      - canAddTransactions
-      - cashPaymentAppId
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
         details:
           properties: {}
           additionalProperties:

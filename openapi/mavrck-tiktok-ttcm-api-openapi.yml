@@ -87,16 +87,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Components.Schemas.PurgeQueueResponse:
-      properties:
-        success:
-          type: boolean
-        queueName:
-          type: string
-        message:
-          type: string
-      type: object
-      additionalProperties: false
     QueueStats:
       properties:
         queueUrl:
@@ -117,12 +107,38 @@ components:
       - approximateNumberOfMessagesDelayed
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Components.Schemas.PurgeQueueResponse:
+      properties:
+        success:
+          type: boolean
+        queueName:
+          type: string
+        message:
+          type: string
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -143,28 +159,12 @@ components:
           $ref: '#/components/schemas/QueueStats'
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:

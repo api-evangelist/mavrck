@@ -195,24 +195,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
     ConversationTemplatePostResponse:
       properties:
         id:
@@ -220,6 +202,29 @@ components:
           format: double
       required:
       - id
+      type: object
+      additionalProperties: false
+    Administrator:
+      properties:
+        id:
+          type: number
+          format: double
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          type: string
       type: object
       additionalProperties: false
     ConversationTemplate:
@@ -262,35 +267,32 @@ components:
       - updatedAt
       type: object
       additionalProperties: false
-    Administrator:
+    ResponseMetadata:
       properties:
-        id:
+        limit:
           type: number
           format: double
-        email:
+        offset:
+          type: number
+          format: double
+        status:
           type: string
-        first_name:
-          type: string
-        last_name:
-          type:
-          - string
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        approves:
-          type: boolean
-        createdAt:
-          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    GetConversationTemplateByIdResponse:
+      type: object
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -299,25 +301,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    ConversationTemplatePostBody:
-      properties:
-        category:
-          type: string
-        html:
-          type: string
-        isArchived:
-          type: boolean
-        subject:
-          type: string
-        title:
-          type: string
-      required:
-      - category
-      - html
-      - subject
-      - title
       type: object
       additionalProperties: false
     ConversationTemplatesGetResponse:
@@ -330,12 +313,28 @@ components:
           type: array
       type: object
       additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -365,34 +364,35 @@ components:
           format: double
       type: object
       additionalProperties: false
-    GetConversationTemplateByIdResponse:
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     TSOAEmptyObject:
       properties: {}
       type: object
       additionalProperties: false
-    ServerError:
+    ConversationTemplatePostBody:
+      properties:
+        category:
+          type: string
+        html:
+          type: string
+        isArchived:
+          type: boolean
+        subject:
+          type: string
+        title:
+          type: string
+      required:
+      - category
+      - html
+      - subject
+      - title
+      type: object
+      additionalProperties: false
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

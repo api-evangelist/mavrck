@@ -65,35 +65,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NetworkAccount:
-      properties:
-        averageEngagements:
-          type: number
-          format: double
-        engagementRate:
-          type: number
-          format: double
-        firstName:
-          type: string
-        followersCount:
-          type: number
-          format: double
-        id:
-          type: number
-          format: double
-        primaryAccount:
-          type: boolean
-        profilePicture:
-          type: string
-        reach:
-          type: number
-          format: double
-        username:
-          type: string
-      required:
-      - id
-      type: object
-      additionalProperties: false
     TikTokAudienceGendersDistribution:
       properties:
         gender:
@@ -109,72 +80,11 @@ components:
       - percentage
       type: object
       additionalProperties: false
-    TikTokAudienceCountriesDistribution:
+    TextSafeSearch:
       properties:
-        country:
-          type:
-          - string
-          - 'null'
-        percentage:
-          type:
-          - number
-          - 'null'
+        profanityWordCount:
+          type: number
           format: double
-      required:
-      - country
-      - percentage
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ActivationContentNetwork:
-      type: string
-      enum:
-      - blog
-      - facebook
-      - facebook_live
-      - facebook_reel
-      - facebook_group
-      - image
-      - instagram
-      - instagram_reel
-      - instagram_story
-      - linkedin
-      - musical_ly
-      - pinterest
-      - snapchat_story
-      - tiktok
-      - twitch_stream
-      - twitter
-      - youtube_video
-      - youtube_shorts
-      - video
-    VisualSafeSearch:
-      properties:
-        adult:
-          type: string
-        medical:
-          type: string
-        racy:
-          type: string
-        spoof:
-          type: string
-        violence:
-          type: string
       type: object
       additionalProperties: false
     Activation:
@@ -232,6 +142,35 @@ components:
       - membershipId
       - ugcPhoto
       - ugcText
+      type: object
+      additionalProperties: false
+    NetworkAccount:
+      properties:
+        averageEngagements:
+          type: number
+          format: double
+        engagementRate:
+          type: number
+          format: double
+        firstName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        primaryAccount:
+          type: boolean
+        profilePicture:
+          type: string
+        reach:
+          type: number
+          format: double
+        username:
+          type: string
+      required:
+      - id
       type: object
       additionalProperties: false
     ActivationContent:
@@ -419,6 +358,74 @@ components:
       - clicks
       - activationId
       type: object
+    ActivationContentNetwork:
+      type: string
+      enum:
+      - blog
+      - facebook
+      - facebook_live
+      - facebook_reel
+      - facebook_group
+      - image
+      - instagram
+      - instagram_reel
+      - instagram_story
+      - linkedin
+      - musical_ly
+      - pinterest
+      - snapchat_story
+      - tiktok
+      - twitch_stream
+      - twitter
+      - youtube_video
+      - youtube_shorts
+      - video
+    VisualSafeSearch:
+      properties:
+        adult:
+          type: string
+        medical:
+          type: string
+        racy:
+          type: string
+        spoof:
+          type: string
+        violence:
+          type: string
+      type: object
+      additionalProperties: false
+    TikTokAudienceCountriesDistribution:
+      properties:
+        country:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - country
+      - percentage
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     TikTokAudienceAgeDistribution:
       properties:
         age:
@@ -433,37 +440,6 @@ components:
       required:
       - age
       - percentage
-      type: object
-      additionalProperties: false
-    TikTokAudienceInterestDistribution:
-      properties:
-        interestTag:
-          type:
-          - string
-          - 'null'
-        percentage:
-          type:
-          - number
-          - 'null'
-          format: double
-      required:
-      - interestTag
-      - percentage
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -482,6 +458,53 @@ components:
       - details
       type: object
       additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    TikTokAudienceInterestDistribution:
+      properties:
+        interestTag:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - interestTag
+      - percentage
+      type: object
+      additionalProperties: false
     TikTokVideoViewsBySource:
       properties:
         source:
@@ -495,29 +518,6 @@ components:
           format: double
       required:
       - videoViews
-      type: object
-      additionalProperties: false
-    TextSafeSearch:
-      properties:
-        profanityWordCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     PreviewPost:

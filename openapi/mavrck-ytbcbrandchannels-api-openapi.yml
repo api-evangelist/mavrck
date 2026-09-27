@@ -172,6 +172,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SetYoutubeChannelRequest:
+      properties:
+        channelInput:
+          type: string
+        hasNoYoutubeChannel:
+          type: boolean
+      type: object
+      additionalProperties: false
     BrandChannelValidationResponse:
       properties:
         channelId:
@@ -193,30 +201,6 @@ components:
       - title
       - channelHandle
       - thumbnailUri
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    SetYoutubeChannelRequest:
-      properties:
-        channelInput:
-          type: string
-        hasNoYoutubeChannel:
-          type: boolean
       type: object
       additionalProperties: false
     BrandYoutubeChannelResponse:
@@ -247,12 +231,12 @@ components:
       - hasNoYoutubeChannel
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -271,12 +255,28 @@ components:
       - channelInput
       type: object
       additionalProperties: false
-    ServerError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
         details:
           properties: {}
           additionalProperties:

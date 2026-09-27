@@ -173,27 +173,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    InfluencerContractCampaignTemplate:
-      name: data
-      in: body
-      required: true
-      schema:
-        type: object
-        required:
-        - campaignId
-        - template
-        properties:
-          id:
-            type: integer
-            description: Unique integer identifying a single campaign-level influencer contract template.
-          campaignId:
-            type: integer
-            description: Unique integer identifying a single action group, referred to as a campaign client-side.
-          template:
-            type: string
-            description: Campaign-level influencer contract template.
   schemas:
+    RoleDeprecated:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+    InfluencerContractCampaignTemplate:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique integer identifying a single campaign-level influencer contract template.
+        campaignId:
+          type: integer
+          description: Unique integer identifying a single action group, referred to as a campaign client-side.
+        template:
+          type: string
+          description: Campaign-level influencer contract template.
+        contract:
+          type: string
+          description: Campaign-level influencer contract.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          $ref: '#/components/schemas/AdministratorAccountsDeprecated'
     LinksDeprecated:
       type: object
       x-access:
@@ -256,38 +268,26 @@ components:
             error:
               type: string
               description: A static description of the parent error.
+  parameters:
     InfluencerContractCampaignTemplate:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique integer identifying a single campaign-level influencer contract template.
-        campaignId:
-          type: integer
-          description: Unique integer identifying a single action group, referred to as a campaign client-side.
-        template:
-          type: string
-          description: Campaign-level influencer contract template.
-        contract:
-          type: string
-          description: Campaign-level influencer contract.
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        updatedBy:
-          $ref: '#/components/schemas/AdministratorAccountsDeprecated'
-    RoleDeprecated:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
+      name: data
+      in: body
+      required: true
+      schema:
+        type: object
+        required:
+        - campaignId
+        - template
+        properties:
+          id:
+            type: integer
+            description: Unique integer identifying a single campaign-level influencer contract template.
+          campaignId:
+            type: integer
+            description: Unique integer identifying a single action group, referred to as a campaign client-side.
+          template:
+            type: string
+            description: Campaign-level influencer contract template.
   securitySchemes:
     apiKey:
       type: apiKey

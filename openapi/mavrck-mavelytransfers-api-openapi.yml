@@ -57,44 +57,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MavelyTransferWithStatusHistoryResponse:
-      properties:
-        instanceId:
-          type: string
-        actionGroupId:
-          type: number
-          format: double
-        statusHistory:
-          items:
-            $ref: '#/components/schemas/MavelyTransferStatusRecord'
-          type: array
-      required:
-      - instanceId
-      - actionGroupId
-      - statusHistory
-      type: object
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -138,12 +106,44 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    MavelyTransferWithStatusHistoryResponse:
+      properties:
+        instanceId:
+          type: string
+        actionGroupId:
+          type: number
+          format: double
+        statusHistory:
+          items:
+            $ref: '#/components/schemas/MavelyTransferStatusRecord'
+          type: array
+      required:
+      - instanceId
+      - actionGroupId
+      - statusHistory
+      type: object
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

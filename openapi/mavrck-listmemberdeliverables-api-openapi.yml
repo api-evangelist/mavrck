@@ -377,27 +377,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NetworkSlug:
-      type: string
-      enum:
-      - blog
-      - facebook
-      - facebook_group
-      - facebook_live
-      - facebook_reel
-      - image
-      - instagram
-      - instagram_reel
-      - instagram_story
-      - linkedin
-      - pinterest
-      - snapchat_story
-      - tiktok
-      - twitch_stream
-      - twitter
-      - video
-      - youtube_video
-      - youtube_shorts
     ListMemberDeliverable:
       properties:
         listMemberId:
@@ -424,6 +403,80 @@ components:
       - contentTypeName
       - contentType
       type: object
+    ListMemberDeliverablePostRequest:
+      properties:
+        count:
+          type: number
+          format: double
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
+        listId:
+          type: number
+          format: double
+        listMemberId:
+          type: number
+          format: double
+      required:
+      - count
+      - contentType
+      - listId
+      - listMemberId
+      type: object
+      additionalProperties: false
+    NetworkSlug:
+      type: string
+      enum:
+      - blog
+      - facebook
+      - facebook_group
+      - facebook_live
+      - facebook_reel
+      - image
+      - instagram
+      - instagram_reel
+      - instagram_story
+      - linkedin
+      - pinterest
+      - snapchat_story
+      - tiktok
+      - twitch_stream
+      - twitter
+      - video
+      - youtube_video
+      - youtube_shorts
+    ListMemberDeliverablePutRequest:
+      properties:
+        count:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+        listMemberDeliverableId:
+          type: number
+          format: double
+      required:
+      - count
+      - listId
+      - listMemberDeliverableId
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ListMemberDeliverableBulkAssignSummaryPostResponse:
       properties:
         summary:
@@ -703,151 +756,6 @@ components:
       required:
       - summary
       type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ListMemberDeliverablePostRequest:
-      properties:
-        count:
-          type: number
-          format: double
-        contentType:
-          $ref: '#/components/schemas/NetworkSlug'
-        listId:
-          type: number
-          format: double
-        listMemberId:
-          type: number
-          format: double
-      required:
-      - count
-      - contentType
-      - listId
-      - listMemberId
-      type: object
-      additionalProperties: false
-    ListMemberDeliverablePutRequest:
-      properties:
-        count:
-          type: number
-          format: double
-        listId:
-          type: number
-          format: double
-        listMemberDeliverableId:
-          type: number
-          format: double
-      required:
-      - count
-      - listId
-      - listMemberDeliverableId
-      type: object
-      additionalProperties: false
-    ListMemberDeliverableGetResponse:
-      properties:
-        deliverables:
-          items:
-            $ref: '#/components/schemas/ListMemberDeliverable'
-          type: array
-      required:
-      - deliverables
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    ListMemberDeliverableBulkAssignSummaryPostRequest:
-      properties:
-        listId:
-          type: number
-          format: double
-        queryFilter:
-          additionalProperties: true
-        globalUserIds:
-          items:
-            type: number
-            format: double
-          type: array
-      required:
-      - listId
-      type: object
-      additionalProperties: false
-    NetworkName:
-      type: string
-      enum:
-      - Blog
-      - Facebook
-      - Facebook Group
-      - Facebook Live
-      - Facebook Reel
-      - Image
-      - Instagram
-      - Instagram Reel
-      - Instagram Story
-      - LinkedIn
-      - Pinterest
-      - Snapchat Story
-      - TikTok
-      - Twitch Stream
-      - Twitter
-      - Video
-      - YouTube Video
-      - YouTube Shorts
-    ListMemberDeliverableBulkAssignPostRequest:
-      properties:
-        deliverables:
-          items:
-            properties:
-              contentType:
-                $ref: '#/components/schemas/NetworkSlug'
-              count:
-                type: number
-                format: double
-            required:
-            - contentType
-            - count
-            type: object
-          type: array
-        listId:
-          type: number
-          format: double
-        queryFilter:
-          additionalProperties: true
-        globalUserIds:
-          items:
-            type: number
-            format: double
-          type: array
-      required:
-      - deliverables
-      - listId
-      type: object
-      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -864,26 +772,14 @@ components:
       - details
       type: object
       additionalProperties: false
-    ListMemberDeliverablesSummaryGetResponse:
+    ListMemberDeliverableGetResponse:
       properties:
-        summary:
+        deliverables:
           items:
-            properties:
-              count:
-                type: number
-                format: double
-              contentTypeName:
-                type: object
-              contentType:
-                type: object
-            required:
-            - count
-            - contentTypeName
-            - contentType
-            type: object
+            $ref: '#/components/schemas/ListMemberDeliverable'
           type: array
       required:
-      - summary
+      - deliverables
       type: object
       additionalProperties: false
     ListMemberDeliverableBulkAssignPostResponse:
@@ -918,12 +814,100 @@ components:
       - failed
       type: object
       additionalProperties: false
-    ServerError:
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ListMemberDeliverableBulkAssignPostRequest:
+      properties:
+        deliverables:
+          items:
+            properties:
+              contentType:
+                $ref: '#/components/schemas/NetworkSlug'
+              count:
+                type: number
+                format: double
+            required:
+            - contentType
+            - count
+            type: object
+          type: array
+        listId:
+          type: number
+          format: double
+        queryFilter:
+          additionalProperties: true
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - deliverables
+      - listId
+      type: object
+      additionalProperties: false
+    NetworkName:
+      type: string
+      enum:
+      - Blog
+      - Facebook
+      - Facebook Group
+      - Facebook Live
+      - Facebook Reel
+      - Image
+      - Instagram
+      - Instagram Reel
+      - Instagram Story
+      - LinkedIn
+      - Pinterest
+      - Snapchat Story
+      - TikTok
+      - Twitch Stream
+      - Twitter
+      - Video
+      - YouTube Video
+      - YouTube Shorts
+    ListMemberDeliverablesSummaryGetResponse:
+      properties:
+        summary:
+          items:
+            properties:
+              count:
+                type: number
+                format: double
+              contentTypeName:
+                type: object
+              contentType:
+                type: object
+            required:
+            - count
+            - contentTypeName
+            - contentType
+            type: object
+          type: array
+      required:
+      - summary
+      type: object
+      additionalProperties: false
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -932,6 +916,22 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    ListMemberDeliverableBulkAssignSummaryPostRequest:
+      properties:
+        listId:
+          type: number
+          format: double
+        queryFilter:
+          additionalProperties: true
+        globalUserIds:
+          items:
+            type: number
+            format: double
+          type: array
+      required:
+      - listId
       type: object
       additionalProperties: false
   securitySchemes:

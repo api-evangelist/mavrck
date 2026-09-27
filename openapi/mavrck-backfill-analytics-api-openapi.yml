@@ -101,22 +101,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UpdateContentActivationSummaryEntity:
-      properties:
-        activationId:
-          type: number
-          format: double
-      additionalProperties:
-        additionalProperties: true
-      required:
-      - activationId
-      type: object
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -127,12 +117,63 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    UpdateContentActivationSummaryRequest:
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/UpdateContentActivationSummaryEntity'
+          type: array
+      required:
+      - entities
+      type: object
+    UpdateContentActivationSummaryEntity:
+      properties:
+        activationId:
+          type: number
+          format: double
+      additionalProperties:
+        additionalProperties: true
+      required:
+      - activationId
+      type: object
+    BackfillFollowersAtPostRequest:
+      properties:
+        batchSize:
+          type: number
+          format: double
+        network:
+          type: string
+        endDate:
+          type: string
+        startDate:
+          type: string
+      required:
+      - network
+      - endDate
+      - startDate
+      type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -157,63 +198,6 @@ components:
       - message
       - processedBatches
       - updatedRecords
-      type: object
-    UpdateContentActivationSummaryRequest:
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/UpdateContentActivationSummaryEntity'
-          type: array
-      required:
-      - entities
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    BackfillFollowersAtPostRequest:
-      properties:
-        batchSize:
-          type: number
-          format: double
-        network:
-          type: string
-        endDate:
-          type: string
-        startDate:
-          type: string
-      required:
-      - network
-      - endDate
-      - startDate
       type: object
     UpdateContentActivationSummaryResponse:
       properties:
@@ -247,6 +231,22 @@ components:
       - processedEntities
       - updatedRecords
       type: object
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

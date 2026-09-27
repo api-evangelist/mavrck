@@ -186,6 +186,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CreateSubscriberBody:
+      properties:
+        url:
+          type: string
+      required:
+      - url
+      type: object
+      additionalProperties: false
+    UpdateSubscriberBody:
+      properties:
+        isEnabled:
+          type: boolean
+      required:
+      - isEnabled
+      type: object
+      additionalProperties: false
     SubscriberPingResponse:
       properties:
         testResult:
@@ -197,62 +213,6 @@ components:
           - FAILURE
       required:
       - testResult
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    UpdateSubscriberBody:
-      properties:
-        isEnabled:
-          type: boolean
-      required:
-      - isEnabled
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     ServerError:
@@ -271,12 +231,36 @@ components:
       - details
       type: object
       additionalProperties: false
-    CreateSubscriberBody:
+    ForbiddenError:
       properties:
-        url:
+        message:
           type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - url
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     Subscriber:
@@ -297,6 +281,22 @@ components:
       - isEnabled
       - token
       - url
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

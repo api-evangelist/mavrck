@@ -82,6 +82,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PowerReviewsAppsGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PowerReviewsApp'
+          type: array
+      type: object
     PowerReviewsApp:
       properties:
         apiKey:
@@ -108,12 +115,12 @@ components:
       - name
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -124,13 +131,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    PowerReviewsAppsGetResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/PowerReviewsApp'
-          type: array
-      type: object
     ForbiddenError:
       properties:
         message:
@@ -166,12 +166,12 @@ components:
       - name
       type: object
       additionalProperties: false
-    ServerError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:

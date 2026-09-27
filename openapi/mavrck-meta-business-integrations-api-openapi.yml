@@ -185,12 +185,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NotFoundError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -201,6 +201,53 @@ components:
       - details
       type: object
       additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    MetaEnableBusinessIntegrationRequestBody:
+      properties:
+        enabled:
+          type: boolean
+          enum:
+          - true
+      required:
+      - enabled
+      type: object
+    MetaConnectBusinessIntegrationRequestBody:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
     MetaBusinessIntegrationDto:
       properties:
         id:
@@ -223,27 +270,12 @@ components:
       - enabled
       type: object
       additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -254,38 +286,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    MetaEnableBusinessIntegrationRequestBody:
-      properties:
-        enabled:
-          type: boolean
-          enum:
-          - true
-      required:
-      - enabled
-      type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    MetaConnectBusinessIntegrationRequestBody:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
   securitySchemes:
     apiKey:
       type: apiKey

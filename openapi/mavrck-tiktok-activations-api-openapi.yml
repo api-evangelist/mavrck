@@ -63,19 +63,99 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TikTokVideoViewsBySource:
+    TikTokAudienceGendersDistribution:
       properties:
-        source:
+        gender:
           type:
           - string
           - 'null'
-        videoViews:
+        percentage:
           type:
           - number
           - 'null'
           format: double
       required:
-      - videoViews
+      - percentage
+      type: object
+      additionalProperties: false
+    TikTokAudienceCountriesDistribution:
+      properties:
+        country:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - country
+      - percentage
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TikTokAudienceAgeDistribution:
+      properties:
+        age:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - age
+      - percentage
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     PutTikTokContentActivationRequestBody:
@@ -175,9 +255,9 @@ components:
       - shares
       type: object
       additionalProperties: false
-    TikTokAudienceGendersDistribution:
+    TikTokAudienceInterestDistribution:
       properties:
-        gender:
+        interestTag:
           type:
           - string
           - 'null'
@@ -187,6 +267,7 @@ components:
           - 'null'
           format: double
       required:
+      - interestTag
       - percentage
       type: object
       additionalProperties: false
@@ -206,100 +287,19 @@ components:
       - details
       type: object
       additionalProperties: false
-    TikTokAudienceCountriesDistribution:
+    TikTokVideoViewsBySource:
       properties:
-        country:
+        source:
           type:
           - string
           - 'null'
-        percentage:
+        videoViews:
           type:
           - number
           - 'null'
           format: double
       required:
-      - country
-      - percentage
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    TikTokAudienceInterestDistribution:
-      properties:
-        interestTag:
-          type:
-          - string
-          - 'null'
-        percentage:
-          type:
-          - number
-          - 'null'
-          format: double
-      required:
-      - interestTag
-      - percentage
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    TikTokAudienceAgeDistribution:
-      properties:
-        age:
-          type:
-          - string
-          - 'null'
-        percentage:
-          type:
-          - number
-          - 'null'
-          format: double
-      required:
-      - age
-      - percentage
+      - videoViews
       type: object
       additionalProperties: false
   securitySchemes:

@@ -96,48 +96,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TikTokCampaignOrBrandInfoFieldsResponse:
-      $ref: '#/components/schemas/TikTokBrandFields'
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    TikTokBrandFields:
-      properties:
-        brandDescription:
-          type: string
-        brandName:
-          type: string
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    CreateTikTokCampaignFieldsOrBrandInfoBody:
-      $ref: '#/components/schemas/TikTokBrandFields'
     ServerError:
       properties:
         message:
@@ -154,6 +112,48 @@ components:
       - details
       type: object
       additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TikTokBrandFields:
+      properties:
+        brandDescription:
+          type: string
+        brandName:
+          type: string
+      type: object
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    TikTokCampaignOrBrandInfoFieldsResponse:
+      $ref: '#/components/schemas/TikTokBrandFields'
+    CreateTikTokCampaignFieldsOrBrandInfoBody:
+      $ref: '#/components/schemas/TikTokBrandFields'
   securitySchemes:
     apiKey:
       type: apiKey
