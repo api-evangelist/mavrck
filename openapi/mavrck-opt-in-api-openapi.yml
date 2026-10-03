@@ -115,6 +115,84 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    InstagramAudienceCountry:
+      properties:
+        percentage:
+          type: number
+          format: double
+        iso_code:
+          type: string
+        end_time:
+          $ref: '#/components/schemas/DateOrTimestamp'
+        country_name:
+          type: string
+        count:
+          type: number
+          format: double
+      type: object
+    CreatorOptInFacebook:
+      properties:
+        verified:
+          type: boolean
+        timezone:
+          type: string
+        state:
+          type: string
+        reach:
+          type: number
+          format: double
+        profile_url:
+          type: string
+        profile_type:
+          type: string
+        picture:
+          type: string
+        phone:
+          type: string
+        personal_blog_url:
+          type: string
+        location:
+          type: string
+        locale:
+          type: string
+        likes_count:
+          type: number
+          format: double
+        last_name:
+          type: string
+        handle:
+          type: string
+        gender:
+          type: string
+        full_name:
+          type: string
+        friend_count:
+          type: string
+        following_count:
+          type: number
+          format: double
+        follower_count:
+          type: number
+          format: double
+        first_name:
+          type: string
+        email:
+          type: string
+        currency:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        category:
+          type: string
+        birthday:
+          $ref: '#/components/schemas/DateOrTimestamp'
+        authentic_public_figure:
+          type: boolean
+      required:
+      - profile_url
+      type: object
     InstagramAudienceLocale:
       properties:
         percentage:
@@ -128,12 +206,127 @@ components:
           type: number
           format: double
       type: object
-    CreatorOptOutRequest:
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    CreatorOptInRequestWithCreatorProfileId:
       properties:
         creator_profile_id:
           type: string
+        influencer:
+          $ref: '#/components/schemas/Pick_CreatorOptInRequest.social_medias_'
       required:
       - creator_profile_id
+      type: object
+      additionalProperties: false
+    InstagramAudience:
+      properties:
+        predominant_country:
+          type: string
+        predominant_city:
+          type: string
+        predominant_age_range:
+          type: string
+        locales:
+          items:
+            $ref: '#/components/schemas/InstagramAudienceLocale'
+          type: array
+        gender_percentages:
+          properties:
+            F:
+              type: number
+              format: double
+            M:
+              type: number
+              format: double
+            U:
+              type: number
+              format: double
+          type: object
+        countries:
+          items:
+            $ref: '#/components/schemas/InstagramAudienceCountry'
+          type: array
+        cities:
+          items:
+            $ref: '#/components/schemas/InstagramAudienceCity'
+          type: array
+        age_percentages:
+          properties:
+            65+:
+              type: number
+              format: double
+            55-64:
+              type: number
+              format: double
+            45-54:
+              type: number
+              format: double
+            35-44:
+              type: number
+              format: double
+            25-34:
+              type: number
+              format: double
+            18-24:
+              type: number
+              format: double
+            13-17:
+              type: number
+              format: double
+          type: object
+      type: object
+    DateOrTimestamp:
+      type: object
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Pick_CreatorOptInRequest.social_medias_:
+      properties:
+        social_medias:
+          $ref: '#/components/schemas/CreatorOptInRequestSocialMedias'
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     CreatorOptInTikTok:
@@ -225,185 +418,31 @@ components:
       - profile_image
       - handle_name
       type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    CreatorOptInRequestSocialMedias:
-      properties:
-        twitter:
-          $ref: '#/components/schemas/CreatorOptInTwitter'
-        tiktok:
-          $ref: '#/components/schemas/CreatorOptInTikTok'
-        pinterest:
-          $ref: '#/components/schemas/CreatorOptInPinterest'
-        facebook:
-          $ref: '#/components/schemas/CreatorOptInFacebook'
-        instagram:
-          $ref: '#/components/schemas/CreatorOptInInstagram'
-      type: object
-    CreatorOptInFacebook:
-      properties:
-        verified:
-          type: boolean
-        timezone:
-          type: string
-        state:
-          type: string
-        reach:
-          type: number
-          format: double
-        profile_url:
-          type: string
-        profile_type:
-          type: string
-        picture:
-          type: string
-        phone:
-          type: string
-        personal_blog_url:
-          type: string
-        location:
-          type: string
-        locale:
-          type: string
-        likes_count:
-          type: number
-          format: double
-        last_name:
-          type: string
-        handle:
-          type: string
-        gender:
-          type: string
-        full_name:
-          type: string
-        friend_count:
-          type: string
-        following_count:
-          type: number
-          format: double
-        follower_count:
-          type: number
-          format: double
-        first_name:
-          type: string
-        email:
-          type: string
-        currency:
-          type: string
-        country:
-          type: string
-        city:
-          type: string
-        category:
-          type: string
-        birthday:
-          $ref: '#/components/schemas/DateOrTimestamp'
-        authentic_public_figure:
-          type: boolean
-      required:
-      - profile_url
-      type: object
-    CreatorOptInPinterest:
-      properties:
-        username:
-          type: string
-        profile_picture:
-          type: string
-        pinterest_external_id:
-          type: string
-        pins_count:
-          type: number
-          format: double
-        monthly_viewers:
-          type: number
-          format: double
-        last_name:
-          type: string
-        following_count:
-          type: number
-          format: double
-        followers_count:
-          type: number
-          format: double
-        first_name:
-          type: string
-        engagement_rate:
-          type: number
-          format: double
-        boards_count:
-          type: number
-          format: double
-        bio:
-          type: string
-        average_engagements:
-          type: number
-          format: double
-        account_created_at:
-          $ref: '#/components/schemas/DateOrTimestamp'
-      required:
-      - username
-      type: object
-    Pick_CreatorOptInRequest.social_medias_:
-      properties:
-        social_medias:
-          $ref: '#/components/schemas/CreatorOptInRequestSocialMedias'
-      type: object
-      description: From T, pick a set of properties whose keys are in the union K
-    CreatorOptInRequestWithCreatorProfileId:
+    CreatorOptOutRequest:
       properties:
         creator_profile_id:
           type: string
-        influencer:
-          $ref: '#/components/schemas/Pick_CreatorOptInRequest.social_medias_'
       required:
       - creator_profile_id
       type: object
       additionalProperties: false
-    InstagramAudienceCountry:
+    InstagramAudienceCity:
       properties:
+        state:
+          type: string
         percentage:
           type: number
           format: double
-        iso_code:
-          type: string
         end_time:
           $ref: '#/components/schemas/DateOrTimestamp'
-        country_name:
-          type: string
         count:
           type: number
           format: double
-      type: object
-    ForbiddenError:
-      properties:
-        message:
+        city_state:
           type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+        city_name:
+          type: string
       type: object
-      additionalProperties: false
     CreatorOptInInstagram:
       properties:
         website:
@@ -459,25 +498,6 @@ components:
         Professional accounts include Business and Creator accounts.
 
         Personal accounts are not yet supported.'
-    InstagramAudienceCity:
-      properties:
-        state:
-          type: string
-        percentage:
-          type: number
-          format: double
-        end_time:
-          $ref: '#/components/schemas/DateOrTimestamp'
-        count:
-          type: number
-          format: double
-        city_state:
-          type: string
-        city_name:
-          type: string
-      type: object
-    DateOrTimestamp:
-      type: object
     CreatorOptInTwitter:
       properties:
         verified:
@@ -532,79 +552,59 @@ components:
       - twitter_external_id
       - handle
       type: object
-    InstagramAudience:
+    CreatorOptInRequestSocialMedias:
       properties:
-        predominant_country:
-          type: string
-        predominant_city:
-          type: string
-        predominant_age_range:
-          type: string
-        locales:
-          items:
-            $ref: '#/components/schemas/InstagramAudienceLocale'
-          type: array
-        gender_percentages:
-          properties:
-            F:
-              type: number
-              format: double
-            M:
-              type: number
-              format: double
-            U:
-              type: number
-              format: double
-          type: object
-        countries:
-          items:
-            $ref: '#/components/schemas/InstagramAudienceCountry'
-          type: array
-        cities:
-          items:
-            $ref: '#/components/schemas/InstagramAudienceCity'
-          type: array
-        age_percentages:
-          properties:
-            65+:
-              type: number
-              format: double
-            55-64:
-              type: number
-              format: double
-            45-54:
-              type: number
-              format: double
-            35-44:
-              type: number
-              format: double
-            25-34:
-              type: number
-              format: double
-            18-24:
-              type: number
-              format: double
-            13-17:
-              type: number
-              format: double
-          type: object
+        twitter:
+          $ref: '#/components/schemas/CreatorOptInTwitter'
+        tiktok:
+          $ref: '#/components/schemas/CreatorOptInTikTok'
+        pinterest:
+          $ref: '#/components/schemas/CreatorOptInPinterest'
+        facebook:
+          $ref: '#/components/schemas/CreatorOptInFacebook'
+        instagram:
+          $ref: '#/components/schemas/CreatorOptInInstagram'
       type: object
-    NotFoundError:
+    CreatorOptInPinterest:
       properties:
-        message:
+        username:
           type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        profile_picture:
+          type: string
+        pinterest_external_id:
+          type: string
+        pins_count:
+          type: number
+          format: double
+        monthly_viewers:
+          type: number
+          format: double
+        last_name:
+          type: string
+        following_count:
+          type: number
+          format: double
+        followers_count:
+          type: number
+          format: double
+        first_name:
+          type: string
+        engagement_rate:
+          type: number
+          format: double
+        boards_count:
+          type: number
+          format: double
+        bio:
+          type: string
+        average_engagements:
+          type: number
+          format: double
+        account_created_at:
+          $ref: '#/components/schemas/DateOrTimestamp'
       required:
-      - message
-      - details
+      - username
       type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

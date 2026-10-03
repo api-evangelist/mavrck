@@ -956,12 +956,515 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ListCustomStatusDeprecated:
+      type: object
+      required:
+      - label
+      properties:
+        id:
+          type: integer
+        label:
+          type: string
+        ctaLabel:
+          type: string
+        auxiliaryLabel:
+          type: string
+        slug:
+          type: string
+        phase:
+          type: string
+        statusOrder:
+          type: integer
+        disabled:
+          type: boolean
+        custom:
+          type: boolean
+        linkedStages:
+          type: array
+          items:
+            type: string
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationTemplateDeprecated'
+        requirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkflowStatusRequirementDeprecated'
+    DBMessageEvent:
+      properties:
+        email:
+          type: string
+        status:
+          type: string
+        reason:
+          type: string
+        userAgent:
+          type: string
+        ip:
+          type: string
+        occurredAt:
+          type: string
+          format: date-time
+        event:
+          type: object
+        sgEventId:
+          type: string
+        messageId:
+          type: object
+        id:
+          type: number
+          format: double
+      required:
+      - occurredAt
+      - event
+      - messageId
+      type: object
     UploadInlineImageResult:
       properties:
         link:
           type: string
       required:
       - link
+      type: object
+      additionalProperties: false
+    ConversationResponseMetadata:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+        markedAsUnreadCount:
+          type: integer
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    AdministratorDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type:
+          - string
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        approves:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+          description: The date and time that the assessment was created.
+    ListMemberDeprecated:
+      type: object
+      properties:
+        id:
+          type: integer
+        globalUserId:
+          type: integer
+        listId:
+          type: integer
+        statusId:
+          type: integer
+        statusLocked:
+          type: boolean
+        customStatusId:
+          type: integer
+        customStatus:
+          $ref: '#/components/schemas/ListCustomStatusDeprecated'
+        customInfluencerStatusId:
+          type: integer
+        optedIn:
+          type: boolean
+        optedInDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        postedDate:
+          type: string
+          format: date
+        engagements:
+          type: number
+        concept:
+          type: string
+        quote:
+          type: number
+        participating:
+          type: boolean
+        completed:
+          type: boolean
+        instanceUser:
+          $ref: '#/components/schemas/InstanceUserMaterializedView'
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: integer
+        communityId:
+          type: string
+        subject:
+          type: string
+        mostRecentMessageCreatedAt:
+          type: string
+          format: date-time
+        mostRecentMessageParsedReply:
+          type: string
+        mostRecentMessageSenderDisplayName:
+          type: string
+        hasAttachment:
+          type: boolean
+        hasInbound:
+          type: boolean
+        hasOutbound:
+          type: boolean
+        markedAsUnread:
+          type: boolean
+        messageCount:
+          type: integer
+        draftCount:
+          type: integer
+        contextType:
+          type: string
+        contextTitle:
+          type: string
+        contextLink:
+          type: string
+        isArchived:
+          type: boolean
+        listMembers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListMemberDeprecated'
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageRecipient'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+    QueryByMessageResult:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DBMessageEvent'
+          type: array
+        meta:
+          properties:
+            offset:
+              type: number
+              format: double
+            limit:
+              type: number
+              format: double
+            totalCount:
+              type: number
+              format: double
+          required:
+          - totalCount
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+      additionalProperties: false
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+        subject:
+          type: string
+        messageIdHeader:
+          type: string
+        conversationId:
+          type: string
+        scheduledFor:
+          type: string
+          format: date-time
+        scheduledMessage:
+          type: object
+          properties:
+            id:
+              type: integer
+            createdAt:
+              type: string
+              format: date-time
+            messageId:
+              type: integer
+            accountId:
+              type: integer
+            communityId:
+              type: string
+            sendAt:
+              type: string
+              format: date-time
+            status:
+              type: string
+            updatedAt:
+              type: string
+              format: date-time
+        inReplyToHeader:
+          type: string
+        status:
+          type: string
+        html:
+          type: string
+        parsedReply:
+          type: string
+        isInbound:
+          type: boolean
+        hasBeenOpened:
+          type: boolean
+        hasBeenDelivered:
+          type: boolean
+        hasBeenBounced:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        sentAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        sentBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        modifiedBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        createdBy:
+          $ref: '#/components/schemas/AdministratorDeprecated'
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageRecipient'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConversationTemplateDeprecated'
+        draftReply:
+          type: object
+          properties:
+            id:
+              type: integer
+            subject:
+              type: string
+            messageIdHeader:
+              type: string
+            conversationId:
+              type: string
+            scheduledFor:
+              type: string
+              format: date-time
+            scheduledMessage:
+              type: object
+              properties:
+                id:
+                  type: integer
+                createdAt:
+                  type: string
+                  format: date-time
+                messageId:
+                  type: integer
+                accountId:
+                  type: integer
+                communityId:
+                  type: string
+                sendAt:
+                  type: string
+                  format: date-time
+                status:
+                  type: string
+                updatedAt:
+                  type: string
+                  format: date-time
+            inReplyToHeader:
+              type: string
+            status:
+              type: string
+            html:
+              type: string
+            parsedReply:
+              type: string
+            isInbound:
+              type: boolean
+            hasBeenOpened:
+              type: boolean
+            hasBeenDelivered:
+              type: boolean
+            hasBeenBounced:
+              type: boolean
+            createdAt:
+              type: string
+              format: date-time
+            sentAt:
+              type: string
+              format: date-time
+            modifiedAt:
+              type: string
+              format: date-time
+            sentBy:
+              $ref: '#/components/schemas/AdministratorDeprecated'
+            modifiedBy:
+              $ref: '#/components/schemas/AdministratorDeprecated'
+            createdBy:
+              $ref: '#/components/schemas/AdministratorDeprecated'
+            recipients:
+              type: array
+              items:
+                $ref: '#/components/schemas/MessageRecipient'
+            attachments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Attachment'
+            templates:
+              type: array
+              items:
+                $ref: '#/components/schemas/ConversationTemplateDeprecated'
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    WorkflowStatusRequirementDeprecated:
+      type: object
+      properties:
+        satisfied:
+          type: boolean
+        incentiveId:
+          type: number
+        name:
+          type: string
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    MessageRecipient:
+      type: object
+      properties:
+        displayName:
+          type:
+          - string
+          - 'null'
+        email:
+          type: string
+        emailId:
+          type: integer
+        role:
+          type: string
+          enum:
+          - from
+          - to
+          - cc
+    ConversationBulkActionRequestBody:
+      properties:
+        conversationIds:
+          items:
+            type: number
+            format: double
+          type: array
+        search:
+          type: string
       type: object
       additionalProperties: false
     Attachment:
@@ -1024,314 +1527,6 @@ components:
           type: string
         isArchived:
           type: boolean
-    QueryByMessageResult:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DBMessageEvent'
-          type: array
-        meta:
-          properties:
-            offset:
-              type: number
-              format: double
-            limit:
-              type: number
-              format: double
-            totalCount:
-              type: number
-              format: double
-          required:
-          - totalCount
-          type: object
-      required:
-      - data
-      - meta
-      type: object
-      additionalProperties: false
-    DBMessageEvent:
-      properties:
-        email:
-          type: string
-        status:
-          type: string
-        reason:
-          type: string
-        userAgent:
-          type: string
-        ip:
-          type: string
-        occurredAt:
-          type: string
-          format: date-time
-        event:
-          type: object
-        sgEventId:
-          type: string
-        messageId:
-          type: object
-        id:
-          type: number
-          format: double
-      required:
-      - occurredAt
-      - event
-      - messageId
-      type: object
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ConversationResponseMetadata:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-        limit:
-          type: integer
-        offset:
-          type: integer
-        markedAsUnreadCount:
-          type: integer
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    MessageRecipient:
-      type: object
-      properties:
-        displayName:
-          type:
-          - string
-          - 'null'
-        email:
-          type: string
-        emailId:
-          type: integer
-        role:
-          type: string
-          enum:
-          - from
-          - to
-          - cc
-    Conversation:
-      type: object
-      properties:
-        id:
-          type: integer
-        communityId:
-          type: string
-        subject:
-          type: string
-        mostRecentMessageCreatedAt:
-          type: string
-          format: date-time
-        mostRecentMessageParsedReply:
-          type: string
-        mostRecentMessageSenderDisplayName:
-          type: string
-        hasAttachment:
-          type: boolean
-        hasInbound:
-          type: boolean
-        hasOutbound:
-          type: boolean
-        markedAsUnread:
-          type: boolean
-        messageCount:
-          type: integer
-        draftCount:
-          type: integer
-        contextType:
-          type: string
-        contextTitle:
-          type: string
-        contextLink:
-          type: string
-        isArchived:
-          type: boolean
-        listMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListMemberDeprecated'
-        participants:
-          type: array
-          items:
-            $ref: '#/components/schemas/MessageRecipient'
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-    ListCustomStatusDeprecated:
-      type: object
-      required:
-      - label
-      properties:
-        id:
-          type: integer
-        label:
-          type: string
-        ctaLabel:
-          type: string
-        auxiliaryLabel:
-          type: string
-        slug:
-          type: string
-        phase:
-          type: string
-        statusOrder:
-          type: integer
-        disabled:
-          type: boolean
-        custom:
-          type: boolean
-        linkedStages:
-          type: array
-          items:
-            type: string
-        templates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationTemplateDeprecated'
-        requirements:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkflowStatusRequirementDeprecated'
-    WorkflowStatusRequirementDeprecated:
-      type: object
-      properties:
-        satisfied:
-          type: boolean
-        incentiveId:
-          type: number
-        name:
-          type: string
-    AdministratorDeprecated:
-      type: object
-      properties:
-        id:
-          type: integer
-        email:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type:
-          - string
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        approves:
-          type: boolean
-        createdAt:
-          format: date-time
-          type: string
-          description: The date and time that the assessment was created.
-    CampaignFolder:
-      type: object
-      properties:
-        title:
-          type: string
-        id:
-          type: string
-        unread:
-          type: integer
-    ListMemberDeprecated:
-      type: object
-      properties:
-        id:
-          type: integer
-        globalUserId:
-          type: integer
-        listId:
-          type: integer
-        statusId:
-          type: integer
-        statusLocked:
-          type: boolean
-        customStatusId:
-          type: integer
-        customStatus:
-          $ref: '#/components/schemas/ListCustomStatusDeprecated'
-        customInfluencerStatusId:
-          type: integer
-        optedIn:
-          type: boolean
-        optedInDate:
-          type: string
-          format: date
-        dueDate:
-          type: string
-          format: date
-        postedDate:
-          type: string
-          format: date
-        engagements:
-          type: number
-        concept:
-          type: string
-        quote:
-          type: number
-        participating:
-          type: boolean
-        completed:
-          type: boolean
-        instanceUser:
-          $ref: '#/components/schemas/InstanceUserMaterializedView'
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     InstanceUserMaterializedView:
       type: object
       properties:
@@ -1703,53 +1898,27 @@ components:
           type: integer
         twitterEngagementRate:
           type: number
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    Error:
+    CampaignFolder:
       type: object
       properties:
-        type:
+        title:
           type: string
-          description: A key representing the type of error that has occurred.
-        error:
+        id:
           type: string
-          description: A static description of the type of error.
-        params:
-          type: array
-          description: For errors invovling parameters, this is an array containing the invalid parameters.
-          items:
-            type: string
-        keys:
-          type: array
-          items:
-            type:
-            - string
-            - object
-        artifactLinks:
-          $ref: '#/components/schemas/LinksDeprecated'
-        parent:
-          type: object
-          properties:
-            type:
-              type: string
-              description: A key representing the type of error generated by a request to an external API.
-            error:
-              type: string
-              description: A static description of the parent error.
+        unread:
+          type: integer
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
     GeneralFolders:
       type: object
       properties:
@@ -1763,176 +1932,16 @@ components:
           type: integer
         archived:
           type: integer
-    ConversationBulkActionRequestBody:
-      properties:
-        conversationIds:
-          items:
-            type: number
-            format: double
-          type: array
-        search:
-          type: string
-      type: object
-      additionalProperties: false
-    Message:
-      type: object
-      properties:
-        id:
-          type: integer
-        subject:
-          type: string
-        messageIdHeader:
-          type: string
-        conversationId:
-          type: string
-        scheduledFor:
-          type: string
-          format: date-time
-        scheduledMessage:
-          type: object
-          properties:
-            id:
-              type: integer
-            createdAt:
-              type: string
-              format: date-time
-            messageId:
-              type: integer
-            accountId:
-              type: integer
-            communityId:
-              type: string
-            sendAt:
-              type: string
-              format: date-time
-            status:
-              type: string
-            updatedAt:
-              type: string
-              format: date-time
-        inReplyToHeader:
-          type: string
-        status:
-          type: string
-        html:
-          type: string
-        parsedReply:
-          type: string
-        isInbound:
-          type: boolean
-        hasBeenOpened:
-          type: boolean
-        hasBeenDelivered:
-          type: boolean
-        hasBeenBounced:
-          type: boolean
-        createdAt:
-          type: string
-          format: date-time
-        sentAt:
-          type: string
-          format: date-time
-        modifiedAt:
-          type: string
-          format: date-time
-        sentBy:
-          $ref: '#/components/schemas/AdministratorDeprecated'
-        modifiedBy:
-          $ref: '#/components/schemas/AdministratorDeprecated'
-        createdBy:
-          $ref: '#/components/schemas/AdministratorDeprecated'
-        recipients:
-          type: array
-          items:
-            $ref: '#/components/schemas/MessageRecipient'
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachment'
-        templates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationTemplateDeprecated'
-        draftReply:
-          type: object
-          properties:
-            id:
-              type: integer
-            subject:
-              type: string
-            messageIdHeader:
-              type: string
-            conversationId:
-              type: string
-            scheduledFor:
-              type: string
-              format: date-time
-            scheduledMessage:
-              type: object
-              properties:
-                id:
-                  type: integer
-                createdAt:
-                  type: string
-                  format: date-time
-                messageId:
-                  type: integer
-                accountId:
-                  type: integer
-                communityId:
-                  type: string
-                sendAt:
-                  type: string
-                  format: date-time
-                status:
-                  type: string
-                updatedAt:
-                  type: string
-                  format: date-time
-            inReplyToHeader:
-              type: string
-            status:
-              type: string
-            html:
-              type: string
-            parsedReply:
-              type: string
-            isInbound:
-              type: boolean
-            hasBeenOpened:
-              type: boolean
-            hasBeenDelivered:
-              type: boolean
-            hasBeenBounced:
-              type: boolean
-            createdAt:
-              type: string
-              format: date-time
-            sentAt:
-              type: string
-              format: date-time
-            modifiedAt:
-              type: string
-              format: date-time
-            sentBy:
-              $ref: '#/components/schemas/AdministratorDeprecated'
-            modifiedBy:
-              $ref: '#/components/schemas/AdministratorDeprecated'
-            createdBy:
-              $ref: '#/components/schemas/AdministratorDeprecated'
-            recipients:
-              type: array
-              items:
-                $ref: '#/components/schemas/MessageRecipient'
-            attachments:
-              type: array
-              items:
-                $ref: '#/components/schemas/Attachment'
-            templates:
-              type: array
-              items:
-                $ref: '#/components/schemas/ConversationTemplateDeprecated'
   parameters:
+    orderDirection:
+      in: query
+      description: Select the direction by which the data will be ordered, ascending or descending.
+      name: orderDirection
+      schema:
+        type: string
+        enum:
+        - ASC
+        - DESC
     limitParam:
       in: query
       description: Maximum number of items to return
@@ -1972,15 +1981,6 @@ components:
             type: string
           html:
             type: string
-    orderDirection:
-      in: query
-      description: Select the direction by which the data will be ordered, ascending or descending.
-      name: orderDirection
-      schema:
-        type: string
-        enum:
-        - ASC
-        - DESC
   securitySchemes:
     apiKey:
       type: apiKey

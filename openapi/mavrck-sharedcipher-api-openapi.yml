@@ -150,72 +150,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SharedCipherWithOptionsAndCipher:
-      type: object
-      properties: {}
-    ServerError:
+    SharedCiphersGetResponse:
       properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/SharedCipherWithOptionsAndCipher'
+          type: array
       required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    SharedCipherPutBody:
-      properties:
-        id:
-          type: number
-          format: double
-        options:
-          additionalProperties: false
-          type: object
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          description: ISO 8601 timestamp. Null means the link never expires.
-      required:
-      - options
-      type: object
-      additionalProperties: false
-    SharedLinkExpiredError:
-      properties:
-        message:
-          type: string
-          enum:
-          - This shared link has expired.
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+      - data
       type: object
       additionalProperties: false
     SharedCipherPostBody:
@@ -235,8 +177,6 @@ components:
           description: ISO 8601 timestamp. Null or omitted means the link never expires.
       type: object
       additionalProperties: false
-    SharedCipher:
-      type: object
     SharedCipherPostResponse:
       properties:
         cipher:
@@ -248,18 +188,78 @@ components:
       - version
       type: object
       additionalProperties: false
-    SharedCipherGetResponse:
-      $ref: '#/components/schemas/SharedCipher'
-    SharedCiphersGetResponse:
+    ServerError:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SharedCipherWithOptionsAndCipher'
-          type: array
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - data
+      - message
+      - details
       type: object
       additionalProperties: false
+    SharedCipher:
+      type: object
+    SharedCipherPutBody:
+      properties:
+        id:
+          type: number
+          format: double
+        options:
+          additionalProperties: false
+          type: object
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          description: ISO 8601 timestamp. Null means the link never expires.
+      required:
+      - options
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SharedCipherGetResponse:
+      $ref: '#/components/schemas/SharedCipher'
+    SharedLinkExpiredError:
+      properties:
+        message:
+          type: string
+          enum:
+          - This shared link has expired.
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SharedCipherWithOptionsAndCipher:
+      type: object
+      properties: {}
   securitySchemes:
     apiKey:
       type: apiKey

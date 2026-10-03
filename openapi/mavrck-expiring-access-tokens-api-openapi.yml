@@ -63,32 +63,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    ExpiringAccessTokenEvent:
-      properties:
-        tokenId:
-          type: string
-        tokenExpiresAt:
-          type:
-          - string
-          - 'null'
-        refreshTokenExpiresAt:
-          type:
-          - string
-          - 'null'
-        platform:
-          type: string
-        eventType:
-          type: string
-        appId:
-          type: string
-      required:
-      - tokenId
-      - tokenExpiresAt
-      - refreshTokenExpiresAt
-      - platform
-      - eventType
-      - appId
-      type: object
     ServerError:
       properties:
         message:
@@ -121,6 +95,32 @@ components:
       - details
       type: object
       additionalProperties: false
+    ExpiringAccessTokenEvent:
+      properties:
+        tokenId:
+          type: string
+        tokenExpiresAt:
+          type:
+          - string
+          - 'null'
+        refreshTokenExpiresAt:
+          type:
+          - string
+          - 'null'
+        platform:
+          type: string
+        eventType:
+          type: string
+        appId:
+          type: string
+      required:
+      - tokenId
+      - tokenExpiresAt
+      - refreshTokenExpiresAt
+      - platform
+      - eventType
+      - appId
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

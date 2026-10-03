@@ -63,9 +63,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TikTokAudienceGendersDistribution:
+    TikTokAudienceInterestDistribution:
       properties:
-        gender:
+        interestTag:
           type:
           - string
           - 'null'
@@ -75,79 +75,16 @@ components:
           - 'null'
           format: double
       required:
+      - interestTag
       - percentage
       type: object
       additionalProperties: false
-    TikTokAudienceCountriesDistribution:
-      properties:
-        country:
-          type:
-          - string
-          - 'null'
-        percentage:
-          type:
-          - number
-          - 'null'
-          format: double
-      required:
-      - country
-      - percentage
-      type: object
-      additionalProperties: false
-    ServerError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    TikTokAudienceAgeDistribution:
-      properties:
-        age:
-          type:
-          - string
-          - 'null'
-        percentage:
-          type:
-          - number
-          - 'null'
-          format: double
-      required:
-      - age
-      - percentage
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -255,9 +192,25 @@ components:
       - shares
       type: object
       additionalProperties: false
-    TikTokAudienceInterestDistribution:
+    ServerError:
       properties:
-        interestTag:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TikTokAudienceCountriesDistribution:
+      properties:
+        country:
           type:
           - string
           - 'null'
@@ -267,16 +220,32 @@ components:
           - 'null'
           format: double
       required:
-      - interestTag
+      - country
       - percentage
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -300,6 +269,37 @@ components:
           format: double
       required:
       - videoViews
+      type: object
+      additionalProperties: false
+    TikTokAudienceGendersDistribution:
+      properties:
+        gender:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - percentage
+      type: object
+      additionalProperties: false
+    TikTokAudienceAgeDistribution:
+      properties:
+        age:
+          type:
+          - string
+          - 'null'
+        percentage:
+          type:
+          - number
+          - 'null'
+          format: double
+      required:
+      - age
+      - percentage
       type: object
       additionalProperties: false
   securitySchemes:

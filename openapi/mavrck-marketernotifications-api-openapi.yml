@@ -86,6 +86,38 @@ components:
       - actionGroupId
       - data
       type: object
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     NotificationPreferenceFlags:
       properties:
         emailTimeframe:
@@ -154,34 +186,6 @@ components:
 
 
         Do not make these required until every client sends them.'
-    NotificationQueryFields:
-      properties:
-        notificationTypes:
-          items:
-            $ref: '#/components/schemas/NotificationType'
-          type: array
-        actionGroupId:
-          type: number
-          format: double
-        notificationGroupId:
-          type: string
-      type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     NotificationUpdateFields:
       properties:
         windowIsClosed:
@@ -208,22 +212,18 @@ components:
       - CONFIRMATION
       - FAILED_PAYMENT
       type: string
-    ValidateErrorJSON:
+    NotificationQueryFields:
       properties:
-        message:
+        notificationTypes:
+          items:
+            $ref: '#/components/schemas/NotificationType'
+          type: array
+        actionGroupId:
+          type: number
+          format: double
+        notificationGroupId:
           type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
-      additionalProperties: false
     EmailNotificationTimeframe:
       enum:
       - TWO_H

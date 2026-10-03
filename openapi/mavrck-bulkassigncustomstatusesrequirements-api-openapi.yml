@@ -82,12 +82,40 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    WorkflowStatusRequirement:
+      properties:
+        type:
+          type: string
+          enum:
+          - promo_code
+        satisfied:
+          type: boolean
+      required:
+      - type
+      - satisfied
+      type: object
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -114,6 +142,16 @@ components:
       - details
       type: object
       additionalProperties: false
+    BulkAssignCustomStatusesRequirementsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WorkflowStatusRequirement'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
     BadRequestError:
       properties:
         details:
@@ -127,44 +165,6 @@ components:
           - Bad Request
       required:
       - message
-      type: object
-      additionalProperties: false
-    BulkAssignCustomStatusesRequirementsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/WorkflowStatusRequirement'
-          type: array
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    WorkflowStatusRequirement:
-      properties:
-        type:
-          type: string
-          enum:
-          - promo_code
-        satisfied:
-          type: boolean
-      required:
-      - type
-      - satisfied
-      type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

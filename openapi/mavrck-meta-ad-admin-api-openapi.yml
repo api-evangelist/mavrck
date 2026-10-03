@@ -213,35 +213,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PushMetaAdInsightsJobPayload:
-      properties:
-        endDate:
-          type: string
-          format: date-time
-        startDate:
-          type: string
-          format: date-time
-      required:
-      - endDate
-      - startDate
-      type: object
-    MetaSystemUserPermissions:
-      properties:
-        data:
-          items:
-            properties:
-              status:
-                type: string
-              permission:
-                type: string
-            required:
-            - status
-            - permission
-            type: object
-          type: array
-      required:
-      - data
-      type: object
     BackfillMetaAdInsightsJobPayload:
       properties:
         externalAdIdList:
@@ -259,54 +230,6 @@ components:
             format: double
           type: array
       type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     MetaSystemUsersAdAccountsResponse:
       properties:
         adAccounts:
@@ -359,6 +282,38 @@ components:
       - name
       - id
       type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     NotFoundError:
       properties:
         message:
@@ -375,6 +330,51 @@ components:
       - details
       type: object
       additionalProperties: false
+    MetaSystemUserPermissions:
+      properties:
+        data:
+          items:
+            properties:
+              status:
+                type: string
+              permission:
+                type: string
+            required:
+            - status
+            - permission
+            type: object
+          type: array
+      required:
+      - data
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PushMetaAdInsightsJobPayload:
+      properties:
+        endDate:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+      required:
+      - endDate
+      - startDate
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

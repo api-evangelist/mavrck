@@ -174,50 +174,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    RoleDeprecated:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-    InfluencerContractCampaignTemplate:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique integer identifying a single campaign-level influencer contract template.
-        campaignId:
-          type: integer
-          description: Unique integer identifying a single action group, referred to as a campaign client-side.
-        template:
-          type: string
-          description: Campaign-level influencer contract template.
-        contract:
-          type: string
-          description: Campaign-level influencer contract.
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        updatedBy:
-          $ref: '#/components/schemas/AdministratorAccountsDeprecated'
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
     AdministratorAccountsDeprecated:
       type: object
       properties:
@@ -237,6 +193,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RoleDeprecated'
+    RoleDeprecated:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
     Error:
       type: object
       properties:
@@ -268,6 +233,41 @@ components:
             error:
               type: string
               description: A static description of the parent error.
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    InfluencerContractCampaignTemplate:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique integer identifying a single campaign-level influencer contract template.
+        campaignId:
+          type: integer
+          description: Unique integer identifying a single action group, referred to as a campaign client-side.
+        template:
+          type: string
+          description: Campaign-level influencer contract template.
+        contract:
+          type: string
+          description: Campaign-level influencer contract.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          $ref: '#/components/schemas/AdministratorAccountsDeprecated'
   parameters:
     InfluencerContractCampaignTemplate:
       name: data

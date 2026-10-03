@@ -214,29 +214,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    ConversionTagPostBody:
-      properties:
-        name:
-          type: string
-        communityId:
-          type: string
-      required:
-      - name
-      type: object
-      additionalProperties: false
     ConversionTag:
       properties:
         code:
@@ -258,22 +235,6 @@ components:
       - isConversionValueEnabled
       type: object
       additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ResponseBody_ConversionTag-Array_:
       properties:
         data:
@@ -286,12 +247,28 @@ components:
       - data
       type: object
       additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -318,6 +295,22 @@ components:
       - details
       type: object
       additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     IdObject:
       properties:
         id:
@@ -327,28 +320,35 @@ components:
       - id
       type: object
       additionalProperties: false
+    ConversionTagPostBody:
+      properties:
+        name:
+          type: string
+        communityId:
+          type: string
+      required:
+      - name
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
     ConversionTagPutBody:
       properties:
         name:
           type: string
       required:
       - name
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

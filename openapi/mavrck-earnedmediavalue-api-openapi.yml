@@ -93,12 +93,36 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UpdateEmvParams:
+    NotFoundError:
       properties:
-        periodStart:
+        message:
           type: string
-        periodEnd:
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
           type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     ServerError:
@@ -133,36 +157,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    UpdateEmvParams:
       properties:
-        message:
+        periodStart:
           type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
+        periodEnd:
           type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

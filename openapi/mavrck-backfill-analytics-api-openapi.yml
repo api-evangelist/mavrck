@@ -101,47 +101,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    UpdateContentActivationSummaryRequest:
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/UpdateContentActivationSummaryEntity'
-          type: array
-      required:
-      - entities
-      type: object
     UpdateContentActivationSummaryEntity:
       properties:
         activationId:
@@ -152,38 +111,6 @@ components:
       required:
       - activationId
       type: object
-    BackfillFollowersAtPostRequest:
-      properties:
-        batchSize:
-          type: number
-          format: double
-        network:
-          type: string
-        endDate:
-          type: string
-        startDate:
-          type: string
-      required:
-      - network
-      - endDate
-      - startDate
-      type: object
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     BackfillFollowersAtPostResponse:
       properties:
         message:
@@ -247,6 +174,79 @@ components:
       - details
       type: object
       additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    UpdateContentActivationSummaryRequest:
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/UpdateContentActivationSummaryEntity'
+          type: array
+      required:
+      - entities
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BackfillFollowersAtPostRequest:
+      properties:
+        batchSize:
+          type: number
+          format: double
+        network:
+          type: string
+        endDate:
+          type: string
+        startDate:
+          type: string
+      required:
+      - network
+      - endDate
+      - startDate
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

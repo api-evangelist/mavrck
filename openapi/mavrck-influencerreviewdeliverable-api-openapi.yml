@@ -94,12 +94,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ServerError:
+    InfluencerReviewDeliverablePostBody:
+      properties:
+        count:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+      required:
+      - count
+      - listId
+      type: object
+      additionalProperties: false
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -110,12 +123,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -142,25 +155,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    InfluencerReviewDeliverablePostBody:
-      properties:
-        count:
-          type: number
-          format: double
-        listId:
-          type: number
-          format: double
-      required:
-      - count
-      - listId
-      type: object
-      additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:

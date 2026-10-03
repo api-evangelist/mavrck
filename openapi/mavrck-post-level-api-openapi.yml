@@ -124,6 +124,59 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ReportingApiResponseDto:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+        meta:
+          type:
+          - object
+          - 'null'
+          description: Metadata containing page information
+          properties:
+            page:
+              type: number
+              example: 1
+            totalPages:
+              type: number
+              example: 10
+      required:
+      - data
+      - meta
+    CreatorProfileDto:
+      type: object
+      properties:
+        handleName:
+          type: string
+          description: Handle name of the creator
+          example: johndoe
+        network:
+          type: string
+          description: Social network of the creator
+          example: Instagram
+        fullName:
+          type:
+          - string
+          - 'null'
+          description: Full name of the creator
+          example: John Doe
+        profileImage:
+          type:
+          - string
+          - 'null'
+          description: Profile image URL
+          example: https://example.com/profile.jpg
+        profileLink:
+          type:
+          - string
+          - 'null'
+          description: Profile link
+          example: https://instagram.com/johndoe
+      required:
+      - handleName
+      - network
     PostPerformanceResponseDto:
       type: object
       properties:
@@ -219,59 +272,6 @@ components:
       - socialNetwork
       - contentUrl
       - contentImageUrl
-    CreatorProfileDto:
-      type: object
-      properties:
-        handleName:
-          type: string
-          description: Handle name of the creator
-          example: johndoe
-        network:
-          type: string
-          description: Social network of the creator
-          example: Instagram
-        fullName:
-          type:
-          - string
-          - 'null'
-          description: Full name of the creator
-          example: John Doe
-        profileImage:
-          type:
-          - string
-          - 'null'
-          description: Profile image URL
-          example: https://example.com/profile.jpg
-        profileLink:
-          type:
-          - string
-          - 'null'
-          description: Profile link
-          example: https://instagram.com/johndoe
-      required:
-      - handleName
-      - network
-    ReportingApiResponseDto:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: false
-        meta:
-          type:
-          - object
-          - 'null'
-          description: Metadata containing page information
-          properties:
-            page:
-              type: number
-              example: 1
-            totalPages:
-              type: number
-              example: 10
-      required:
-      - data
-      - meta
   securitySchemes:
     JWT:
       type: http

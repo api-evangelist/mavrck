@@ -94,12 +94,56 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    UpdateInstagramProfilePictureItem:
+      properties:
+        imageUrl:
+          type:
+          - string
+          - 'null'
+        instagramProfileId:
+          type: number
+          format: double
+      required:
+      - instagramProfileId
+      type: object
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -130,50 +174,6 @@ components:
       items:
         $ref: '#/components/schemas/UpdateInstagramProfilePictureItem'
       type: array
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    UpdateInstagramProfilePictureItem:
-      properties:
-        imageUrl:
-          type:
-          - string
-          - 'null'
-        instagramProfileId:
-          type: number
-          format: double
-      required:
-      - instagramProfileId
-      type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

@@ -405,6 +405,22 @@ components:
       - shop
       type: object
       additionalProperties: false
+    CreateShopifyAccountData:
+      properties:
+        communityId:
+          type: string
+        shopName:
+          type: string
+        apiKey:
+          type: string
+        shopifyAccessToken:
+          type: string
+      required:
+      - communityId
+      - shopName
+      - shopifyAccessToken
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -421,13 +437,20 @@ components:
       - details
       type: object
       additionalProperties: false
-    UninstallShopifyRequest:
+    NotFoundError:
       properties:
-        shopId:
-          type: number
-          format: double
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - shopId
+      - message
+      - details
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -446,35 +469,13 @@ components:
       - details
       type: object
       additionalProperties: false
-    CreateShopifyAccountData:
+    UninstallShopifyRequest:
       properties:
-        communityId:
-          type: string
-        shopName:
-          type: string
-        apiKey:
-          type: string
-        shopifyAccessToken:
-          type: string
+        shopId:
+          type: number
+          format: double
       required:
-      - communityId
-      - shopName
-      - shopifyAccessToken
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
+      - shopId
       type: object
       additionalProperties: false
     ShopifyAccountResponse:
@@ -502,20 +503,19 @@ components:
       - communityId
       - id
       type: object
-    NotFoundError:
+    BadRequestError:
       properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
             additionalProperties: true
           type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
       required:
       - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

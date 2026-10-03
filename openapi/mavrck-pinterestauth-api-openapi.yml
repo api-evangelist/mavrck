@@ -90,15 +90,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PinterestAuthPostResponse:
+    PinterestAuthPostRequestBody:
       properties:
-        pinterest:
-          $ref: '#/components/schemas/AuthenticatedInfluencerSocialMediaProfile'
-        token:
+        code:
+          type: string
+        redirectUri:
           type: string
       required:
-      - pinterest
-      - token
+      - code
+      - redirectUri
       type: object
       additionalProperties: false
     ServerError:
@@ -133,15 +133,28 @@ components:
       - details
       type: object
       additionalProperties: false
-    PinterestAuthPostRequestBody:
+    PinterestAuthPostResponse:
       properties:
-        code:
-          type: string
-        redirectUri:
+        pinterest:
+          $ref: '#/components/schemas/AuthenticatedInfluencerSocialMediaProfile'
+        token:
           type: string
       required:
-      - code
-      - redirectUri
+      - pinterest
+      - token
+      type: object
+      additionalProperties: false
+    AuthenticatedInfluencerSocialMediaProfile:
+      properties:
+        expiresAt:
+          type: string
+        handle:
+          type: string
+        profilePicture:
+          type: string
+      required:
+      - expiresAt
+      - handle
       type: object
       additionalProperties: false
     BadRequestError:
@@ -157,19 +170,6 @@ components:
           - Bad Request
       required:
       - message
-      type: object
-      additionalProperties: false
-    AuthenticatedInfluencerSocialMediaProfile:
-      properties:
-        expiresAt:
-          type: string
-        handle:
-          type: string
-        profilePicture:
-          type: string
-      required:
-      - expiresAt
-      - handle
       type: object
       additionalProperties: false
   securitySchemes:

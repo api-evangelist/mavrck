@@ -63,27 +63,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CatalogResponseTag:
-      properties:
-        subtitleI18nKey:
-          type: string
-        subtitle:
-          type: string
-        titleI18nKey:
-          type: string
-        title:
-          type: string
-        kind:
-          type: string
-          enum:
-          - data
-          - link
-        key:
-          type: string
-      required:
-      - kind
-      - key
-      type: object
     CatalogResponseGroup:
       properties:
         tags:
@@ -101,12 +80,12 @@ components:
       - titleI18nKey
       - key
       type: object
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -117,12 +96,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -149,21 +128,33 @@ components:
       - details
       type: object
       additionalProperties: false
-    MergeTagsCatalogResponse:
+    CatalogResponseTag:
       properties:
-        groups:
-          items:
-            $ref: '#/components/schemas/CatalogResponseGroup'
-          type: array
+        subtitleI18nKey:
+          type: string
+        subtitle:
+          type: string
+        titleI18nKey:
+          type: string
+        title:
+          type: string
+        kind:
+          type: string
+          enum:
+          - data
+          - link
+        key:
+          type: string
       required:
-      - groups
+      - kind
+      - key
       type: object
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -174,6 +165,15 @@ components:
       - details
       type: object
       additionalProperties: false
+    MergeTagsCatalogResponse:
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/CatalogResponseGroup'
+          type: array
+      required:
+      - groups
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

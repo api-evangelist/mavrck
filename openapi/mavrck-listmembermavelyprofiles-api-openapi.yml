@@ -172,19 +172,6 @@ components:
       required:
       - mavelyListMembers
       type: object
-    MavelyListMember:
-      properties:
-        actionGroupId:
-          type: number
-          format: double
-        globalUserId:
-          type: number
-          format: double
-        mavelyProfileId:
-          type: string
-      required:
-      - actionGroupId
-      type: object
     ForbiddenError:
       properties:
         message:
@@ -230,6 +217,19 @@ components:
       - mavelyProfileId
       type: object
       additionalProperties: false
+    MavelyListMember:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        globalUserId:
+          type: number
+          format: double
+        mavelyProfileId:
+          type: string
+      required:
+      - actionGroupId
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

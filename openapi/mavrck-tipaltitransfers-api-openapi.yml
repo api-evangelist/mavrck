@@ -57,13 +57,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TipaltiSupportedCurrencyCodes:
-      type: string
-      enum:
-      - USD
-      - EUR
-      - GBP
-      - CAD
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -80,6 +89,39 @@ components:
       - details
       type: object
       additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    TipaltiPaymentStatusHistoryItem:
+      type: object
+      properties:
+        id:
+          type: number
+          format: double
+        transferId:
+          type: number
+          format: double
+        providerStatusCode:
+          type: string
+        providerStatusMessage:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
     CreateTipaltiTransferResponse:
       description: Mirrors the payment-service TipaltiPaymentView returned by POST /tipalti-payments/register.
       properties:
@@ -168,27 +210,18 @@ components:
       - details
       type: object
       additionalProperties: false
+    TipaltiSupportedCurrencyCodes:
+      type: string
+      enum:
+      - USD
+      - EUR
+      - GBP
+      - CAD
     TipaltiTransferWithStatusHistoryResponse:
       $ref: '#/components/schemas/CreateTipaltiTransferResponse'
       description: 'GET /v1/tipalti/transfers/{rewardWinId} — the most recent attempt for a reward win with its
 
         status history. Same shape as the create response (payment-service TipaltiPaymentView).'
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     TipaltiPaymentStatus:
       type: string
       enum:
@@ -203,39 +236,6 @@ components:
       - PAYMENT_CANCELED
       - VOIDED
       - DEFERRED
-    TipaltiPaymentStatusHistoryItem:
-      type: object
-      properties:
-        id:
-          type: number
-          format: double
-        transferId:
-          type: number
-          format: double
-        providerStatusCode:
-          type: string
-        providerStatusMessage:
-          type: string
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

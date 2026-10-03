@@ -62,20 +62,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    InfluencerLinks:
-      properties:
-        key:
-          type: string
-        label:
-          type: string
-        url:
-          type: string
-      required:
-      - key
-      - label
-      - url
-      type: object
-      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -92,22 +78,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    GetInfluencerLinksResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/InfluencerLinks'
-          type: array
-      required:
-      - data
-      type: object
-      additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -134,12 +110,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -148,6 +124,30 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    GetInfluencerLinksResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/InfluencerLinks'
+          type: array
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    InfluencerLinks:
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        url:
+          type: string
+      required:
+      - key
+      - label
+      - url
       type: object
       additionalProperties: false
   securitySchemes:

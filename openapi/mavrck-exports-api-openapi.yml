@@ -196,12 +196,22 @@ components:
       - type
       type: object
       additionalProperties: false
-    ExportType:
-      enum:
-      - ACTIONGROUPINFLUENCERS
-      - MEMBERINFLUENCERS
-      - PROGRAMPERFORMANCECAMPAIGN
-      type: string
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -218,12 +228,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -234,12 +244,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -302,22 +312,12 @@ components:
       - postsWithUGC
       type: object
       additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
+    ExportType:
+      enum:
+      - ACTIONGROUPINFLUENCERS
+      - MEMBERINFLUENCERS
+      - PROGRAMPERFORMANCECAMPAIGN
+      type: string
   securitySchemes:
     apiKey:
       type: apiKey

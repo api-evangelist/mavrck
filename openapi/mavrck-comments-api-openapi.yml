@@ -289,19 +289,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
     Administrator:
       properties:
         id:
@@ -325,6 +312,27 @@ components:
           type: string
       type: object
       additionalProperties: false
+    GlobalUserCommentPostBody:
+      properties:
+        text:
+          type: string
+        resource:
+          properties:
+            type:
+              type: string
+              enum:
+              - ActionGroup
+            id:
+              type: number
+              format: double
+          required:
+          - type
+          - id
+          type: object
+      required:
+      - text
+      type: object
+      additionalProperties: false
     Pick_Comment.id_:
       properties:
         id:
@@ -332,27 +340,20 @@ components:
           format: double
       type: object
       description: From T, pick a set of properties whose keys are in the union K
-    Comment:
+    GlobalUserCommentPatchBody:
       properties:
-        author:
-          $ref: '#/components/schemas/Administrator'
-        createdAt:
-          type: string
-        id:
-          type: number
-          format: double
-        text:
-          type: string
         pinned:
           type: boolean
+      required:
+      - pinned
       type: object
       additionalProperties: false
-    ServerError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -363,12 +364,28 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -393,6 +410,22 @@ components:
       - resourceId
       type: object
       description: From T, pick a set of properties whose keys are in the union K
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     NotificationComment:
       properties:
         id:
@@ -418,20 +451,19 @@ components:
       - text
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    Comment:
       properties:
-        message:
+        author:
+          $ref: '#/components/schemas/Administrator'
+        createdAt:
           type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+        id:
+          type: number
+          format: double
+        text:
+          type: string
+        pinned:
+          type: boolean
       type: object
       additionalProperties: false
     IdObject:
@@ -441,6 +473,19 @@ components:
           format: double
       required:
       - id
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
     ResponseBody_NotificationComment-Array_:
@@ -453,51 +498,6 @@ components:
           $ref: '#/components/schemas/ResponseMeta'
       required:
       - data
-      type: object
-      additionalProperties: false
-    GlobalUserCommentPostBody:
-      properties:
-        text:
-          type: string
-        resource:
-          properties:
-            type:
-              type: string
-              enum:
-              - ActionGroup
-            id:
-              type: number
-              format: double
-          required:
-          - type
-          - id
-          type: object
-      required:
-      - text
-      type: object
-      additionalProperties: false
-    GlobalUserCommentPatchBody:
-      properties:
-        pinned:
-          type: boolean
-      required:
-      - pinned
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     NotificationCommentPostBody:

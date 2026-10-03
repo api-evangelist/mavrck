@@ -201,6 +201,22 @@ components:
       - details
       type: object
       additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -217,6 +233,22 @@ components:
       - details
       type: object
       additionalProperties: false
+    MetaConnectBusinessIntegrationRequestBody:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    MetaEnableBusinessIntegrationRequestBody:
+      properties:
+        enabled:
+          type: boolean
+          enum:
+          - true
+      required:
+      - enabled
+      type: object
     BadRequestError:
       properties:
         details:
@@ -232,22 +264,6 @@ components:
       - message
       type: object
       additionalProperties: false
-    MetaEnableBusinessIntegrationRequestBody:
-      properties:
-        enabled:
-          type: boolean
-          enum:
-          - true
-      required:
-      - enabled
-      type: object
-    MetaConnectBusinessIntegrationRequestBody:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
     MetaBusinessIntegrationDto:
       properties:
         id:
@@ -268,22 +284,6 @@ components:
       - administratorId
       - externalBusinessId
       - enabled
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

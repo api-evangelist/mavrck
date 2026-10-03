@@ -97,49 +97,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PaymentAccountType:
-      enum:
-      - CASH
-      - GIFT_CARD
-      type: string
-    ServerError:
+    ConfigureMavrckProviderAppToInstanceBody:
       properties:
-        message:
+        appType:
+          $ref: '#/components/schemas/PaymentAccountType'
+        provider:
+          $ref: '#/components/schemas/PaymentAppProvider'
+        communityId:
           type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
+        currencyCode:
           type: object
       required:
-      - message
-      - details
+      - appType
+      - provider
       type: object
       additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -166,6 +144,43 @@ components:
       - provider
       type: object
       additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PaymentAccountType:
+      enum:
+      - CASH
+      - GIFT_CARD
+      type: string
     PaymentAppProvider:
       enum:
       - PAYPAL
@@ -174,27 +189,12 @@ components:
       - MAVELY
       - TIPALTI
       type: string
-    ConfigureMavrckProviderAppToInstanceBody:
-      properties:
-        appType:
-          $ref: '#/components/schemas/PaymentAccountType'
-        provider:
-          $ref: '#/components/schemas/PaymentAppProvider'
-        communityId:
-          type: string
-        currencyCode:
-          type: object
-      required:
-      - appType
-      - provider
-      type: object
-      additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:

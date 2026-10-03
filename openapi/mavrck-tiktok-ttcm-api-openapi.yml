@@ -87,32 +87,28 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    QueueStats:
-      properties:
-        queueUrl:
-          type: string
-        approximateNumberOfMessages:
-          type: number
-          format: double
-        approximateNumberOfMessagesNotVisible:
-          type: number
-          format: double
-        approximateNumberOfMessagesDelayed:
-          type: number
-          format: double
-      required:
-      - queueUrl
-      - approximateNumberOfMessages
-      - approximateNumberOfMessagesNotVisible
-      - approximateNumberOfMessagesDelayed
-      type: object
-      additionalProperties: false
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -133,6 +129,16 @@ components:
           type: string
       type: object
       additionalProperties: false
+    Components.Schemas.QueueStatsResponse:
+      properties:
+        mediaBinderQueue:
+          $ref: '#/components/schemas/QueueStats'
+        mediaUpdaterQueue:
+          $ref: '#/components/schemas/QueueStats'
+        creatorUpdaterQueue:
+          $ref: '#/components/schemas/QueueStats'
+      type: object
+      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -149,30 +155,24 @@ components:
       - details
       type: object
       additionalProperties: false
-    Components.Schemas.QueueStatsResponse:
+    QueueStats:
       properties:
-        mediaBinderQueue:
-          $ref: '#/components/schemas/QueueStats'
-        mediaUpdaterQueue:
-          $ref: '#/components/schemas/QueueStats'
-        creatorUpdaterQueue:
-          $ref: '#/components/schemas/QueueStats'
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
+        queueUrl:
           type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        approximateNumberOfMessages:
+          type: number
+          format: double
+        approximateNumberOfMessagesNotVisible:
+          type: number
+          format: double
+        approximateNumberOfMessagesDelayed:
+          type: number
+          format: double
       required:
-      - message
-      - details
+      - queueUrl
+      - approximateNumberOfMessages
+      - approximateNumberOfMessagesNotVisible
+      - approximateNumberOfMessagesDelayed
       type: object
       additionalProperties: false
   securitySchemes:

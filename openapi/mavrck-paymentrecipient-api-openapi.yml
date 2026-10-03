@@ -420,56 +420,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OnboardingReminderRequestBody:
-      description: 'Domain types for payment-recipient creator notifications (onboarding reminder + payment
-
-        confirmation). These mirror the Stripe notification payloads but are provider-agnostic: the
-
-        creator only ever sees generic "payment information" copy, while the code refers to the
-
-        internal "payment recipient" concept.'
+    PayableEntity:
       properties:
-        globalUserId:
+        id:
           type: number
           format: double
-        actionGroupId:
+        cashPaymentAppId:
           type: number
           format: double
-      required:
-      - globalUserId
-      - actionGroupId
-      type: object
-      additionalProperties: false
-    PaymentRecipientLinksMutationResult:
-      description: 'Result of a bulk clear/propagate. `memberships` is how many campaign
-
-        memberships the operation matched (clearable set for clear, active set for
-
-        propagate); `affected` is how many link rows actually changed.'
-      properties:
-        memberships:
-          type: number
-          format: double
-        affected:
-          type: number
-          format: double
-      required:
-      - memberships
-      - affected
-      type: object
-      additionalProperties: false
-    VerificationConfirmRequest:
-      properties:
-        email:
+        providerStatus:
+          $ref: '#/components/schemas/TipaltiProviderStatus'
+        isPayable:
+          type: boolean
+        isActive:
+          type: boolean
+        provider:
           type: string
-        clientId:
-          type: string
-        code:
-          type: string
+          enum:
+          - TIPALTI
       required:
-      - email
-      - clientId
-      - code
+      - id
+      - cashPaymentAppId
+      - providerStatus
+      - isPayable
+      - isActive
+      - provider
       type: object
       additionalProperties: false
     PaymentRecipientView:
@@ -515,50 +490,36 @@ components:
       - payableEntities
       type: object
       additionalProperties: false
-    ServerError:
+    PaymentRecipientLinksMutationResult:
+      description: 'Result of a bulk clear/propagate. `memberships` is how many campaign
+
+        memberships the operation matched (clearable set for clear, active set for
+
+        propagate); `affected` is how many link rows actually changed.'
       properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        memberships:
+          type: number
+          format: double
+        affected:
+          type: number
+          format: double
       required:
-      - message
-      - details
+      - memberships
+      - affected
       type: object
       additionalProperties: false
-    TipaltiPayeeIframeUrlResponse:
-      properties:
-        url:
-          type: string
-      required:
-      - url
-      type: object
-      additionalProperties: false
-    PaymentRecipientCreateRequest:
+    VerificationConfirmRequest:
       properties:
         email:
           type: string
-        firstName:
+        clientId:
           type: string
-        lastName:
+        code:
           type: string
-        companyName:
-          type: string
-        country:
-          type: string
-        include:
-          items:
-            type: string
-            enum:
-            - TIPALTI_PAYEE
-          type: array
       required:
       - email
+      - clientId
+      - code
       type: object
       additionalProperties: false
     ClearPaymentRecipientLinksRequest:
@@ -593,12 +554,12 @@ components:
       - creator_profile_ids
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -609,73 +570,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    BadRequestError:
+    TipaltiPayeeIframeUrlResponse:
       properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    VerificationCodeRequest:
-      properties:
-        email:
-          type: string
-        clientId:
+        url:
           type: string
       required:
-      - email
-      - clientId
-      type: object
-      additionalProperties: false
-    PayableEntity:
-      properties:
-        id:
-          type: number
-          format: double
-        cashPaymentAppId:
-          type: number
-          format: double
-        providerStatus:
-          $ref: '#/components/schemas/TipaltiProviderStatus'
-        isPayable:
-          type: boolean
-        isActive:
-          type: boolean
-        provider:
-          type: string
-          enum:
-          - TIPALTI
-      required:
-      - id
-      - cashPaymentAppId
-      - providerStatus
-      - isPayable
-      - isActive
-      - provider
-      type: object
-      additionalProperties: false
-    TipaltiProviderStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - BLOCKED
-      - SUSPENDED
-      - BLOCKED_BY_TIPALTI
-      - INTERNAL_VALUE
-    VerificationCodeResponse:
-      properties:
-        code:
-          type: string
-      required:
-      - code
+      - url
       type: object
       additionalProperties: false
     NotFoundError:
@@ -692,6 +592,106 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    PaymentRecipientCreateRequest:
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        country:
+          type: string
+        include:
+          items:
+            type: string
+            enum:
+            - TIPALTI_PAYEE
+          type: array
+      required:
+      - email
+      type: object
+      additionalProperties: false
+    TipaltiProviderStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - BLOCKED
+      - SUSPENDED
+      - BLOCKED_BY_TIPALTI
+      - INTERNAL_VALUE
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    VerificationCodeRequest:
+      properties:
+        email:
+          type: string
+        clientId:
+          type: string
+      required:
+      - email
+      - clientId
+      type: object
+      additionalProperties: false
+    VerificationCodeResponse:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+      additionalProperties: false
+    OnboardingReminderRequestBody:
+      description: 'Domain types for payment-recipient creator notifications (onboarding reminder + payment
+
+        confirmation). These mirror the Stripe notification payloads but are provider-agnostic: the
+
+        creator only ever sees generic "payment information" copy, while the code refers to the
+
+        internal "payment recipient" concept.'
+      properties:
+        globalUserId:
+          type: number
+          format: double
+        actionGroupId:
+          type: number
+          format: double
+      required:
+      - globalUserId
+      - actionGroupId
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
       type: object
       additionalProperties: false
     PropagatePaymentRecipientLinksRequest:

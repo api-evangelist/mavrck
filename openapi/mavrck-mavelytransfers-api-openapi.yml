@@ -57,12 +57,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -73,29 +73,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    MavelyTransferStatusRecord:
-      type: object
-      properties:
-        id:
-          type: number
-          format: double
-        transferId:
-          type: number
-          format: double
-        providerStatusCode:
-          type: string
-        providerStatusMessage:
-          type: string
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -138,12 +121,12 @@ components:
       - actionGroupId
       - statusHistory
       type: object
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -154,6 +137,23 @@ components:
       - details
       type: object
       additionalProperties: false
+    MavelyTransferStatusRecord:
+      type: object
+      properties:
+        id:
+          type: number
+          format: double
+        transferId:
+          type: number
+          format: double
+        providerStatusCode:
+          type: string
+        providerStatusMessage:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
   securitySchemes:
     apiKey:
       type: apiKey

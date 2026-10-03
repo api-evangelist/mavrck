@@ -186,41 +186,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CreateSubscriberBody:
-      properties:
-        url:
-          type: string
-      required:
-      - url
-      type: object
-      additionalProperties: false
-    UpdateSubscriberBody:
-      properties:
-        isEnabled:
-          type: boolean
-      required:
-      - isEnabled
-      type: object
-      additionalProperties: false
-    SubscriberPingResponse:
-      properties:
-        testResult:
-          type: string
-          enum:
-          - SUCCESS
-          - SUBSCRIBER_NOT_FOUND
-          - SUBSCRIBER_DISABLED
-          - FAILURE
-      required:
-      - testResult
-      type: object
-      additionalProperties: false
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -231,12 +202,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -283,12 +254,12 @@ components:
       - url
       type: object
       additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -297,6 +268,35 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    UpdateSubscriberBody:
+      properties:
+        isEnabled:
+          type: boolean
+      required:
+      - isEnabled
+      type: object
+      additionalProperties: false
+    CreateSubscriberBody:
+      properties:
+        url:
+          type: string
+      required:
+      - url
+      type: object
+      additionalProperties: false
+    SubscriberPingResponse:
+      properties:
+        testResult:
+          type: string
+          enum:
+          - SUCCESS
+          - SUBSCRIBER_NOT_FOUND
+          - SUBSCRIBER_DISABLED
+          - FAILURE
+      required:
+      - testResult
       type: object
       additionalProperties: false
   securitySchemes:

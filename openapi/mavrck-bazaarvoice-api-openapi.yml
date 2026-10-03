@@ -118,59 +118,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DBBazaarVoiceCommunityApp:
-      properties:
-        bazaarAppId:
-          type: number
-          format: double
-        communityId:
-          type: string
-      required:
-      - bazaarAppId
-      - communityId
-      type: object
+    BazaarVoiceAppResponse:
+      $ref: '#/components/schemas/DBBazaarVoiceApp'
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    BazaarVoiceAppPostRequestBody:
-      properties:
-        locales:
-          items:
-            type: string
-          type: array
-        secret:
-          type: string
-        name:
-          type: string
-        environment:
-          type: string
-        apiKey:
-          type: string
-      required:
-      - locales
-      - secret
-      - name
-      - apiKey
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -197,21 +152,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    BazaarVoiceAppResponse:
-      $ref: '#/components/schemas/DBBazaarVoiceApp'
-    DBBazaarVoiceLocale:
-      properties:
-        country:
-          type: string
-        language:
-          type: string
-        code:
-          type: string
-      required:
-      - country
-      - language
-      - code
-      type: object
     DBBazaarVoiceApp:
       properties:
         BazaarVoiceLocales:
@@ -239,6 +179,37 @@ components:
       - apiKey
       - id
       type: object
+    DBBazaarVoiceLocale:
+      properties:
+        country:
+          type: string
+        language:
+          type: string
+        code:
+          type: string
+      required:
+      - country
+      - language
+      - code
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BazaarVoiceLocaleResponse:
+      $ref: '#/components/schemas/DBBazaarVoiceLocale'
     BazaarVoiceAppPostRequest:
       properties:
         data:
@@ -247,8 +218,37 @@ components:
       - data
       type: object
       additionalProperties: false
-    BazaarVoiceLocaleResponse:
-      $ref: '#/components/schemas/DBBazaarVoiceLocale'
+    BazaarVoiceAppPostRequestBody:
+      properties:
+        locales:
+          items:
+            type: string
+          type: array
+        secret:
+          type: string
+        name:
+          type: string
+        environment:
+          type: string
+        apiKey:
+          type: string
+      required:
+      - locales
+      - secret
+      - name
+      - apiKey
+      type: object
+    DBBazaarVoiceCommunityApp:
+      properties:
+        bazaarAppId:
+          type: number
+          format: double
+        communityId:
+          type: string
+      required:
+      - bazaarAppId
+      - communityId
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

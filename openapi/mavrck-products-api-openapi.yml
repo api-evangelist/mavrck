@@ -107,17 +107,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ResponseMeta:
+    YotpoAppProduct:
       properties:
-        limit:
+        reviewProductId:
           type: number
           format: double
-        offset:
+        youtpoProductId:
+          type: string
+      type: object
+      additionalProperties: false
+    BazaarVoiceAppProduct:
+      properties:
+        reviewProductId:
           type: number
           format: double
-        totalCount:
-          type: number
-          format: double
+        externalBazaarProductId:
+          type: string
       type: object
       additionalProperties: false
     PowerReviewsApp:
@@ -146,16 +151,25 @@ components:
       - name
       type: object
       additionalProperties: false
-    ResponseBody_Product-Array_:
+    Product:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Product'
-          type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-      required:
-      - data
+        bazaarVoiceAppProduct:
+          $ref: '#/components/schemas/BazaarVoiceAppProduct'
+        communityId:
+          type: string
+        description:
+          type: string
+        id:
+          type: number
+          format: double
+        image:
+          type: string
+        powerReviewsPage:
+          $ref: '#/components/schemas/PowerReviewsPage'
+        title:
+          type: string
+        yotpoAppProduct:
+          $ref: '#/components/schemas/YotpoAppProduct'
       type: object
       additionalProperties: false
     ServerError:
@@ -174,21 +188,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    BazaarVoiceAppProduct:
-      properties:
-        reviewProductId:
-          type: number
-          format: double
-        externalBazaarProductId:
-          type: string
-      type: object
-      additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -217,33 +222,12 @@ components:
           format: double
       type: object
       additionalProperties: false
-    Product:
-      properties:
-        bazaarVoiceAppProduct:
-          $ref: '#/components/schemas/BazaarVoiceAppProduct'
-        communityId:
-          type: string
-        description:
-          type: string
-        id:
-          type: number
-          format: double
-        image:
-          type: string
-        powerReviewsPage:
-          $ref: '#/components/schemas/PowerReviewsPage'
-        title:
-          type: string
-        yotpoAppProduct:
-          $ref: '#/components/schemas/YotpoAppProduct'
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -254,13 +238,29 @@ components:
       - details
       type: object
       additionalProperties: false
-    YotpoAppProduct:
+    ResponseBody_Product-Array_:
       properties:
-        reviewProductId:
+        data:
+          items:
+            $ref: '#/components/schemas/Product'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+      required:
+      - data
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
           type: number
           format: double
-        youtpoProductId:
-          type: string
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
   securitySchemes:

@@ -46,18 +46,17 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DemographicsGraphsResponse:
+    GraphDatapoint:
       properties:
-        graphs:
-          items:
-            $ref: '#/components/schemas/DemographicsGraph'
-          type: array
+        value:
+          type: number
+          format: double
+        display:
+          type: string
       required:
-      - graphs
+      - value
+      - display
       type: object
-      description: '*
-
-        Demographics Pro Graphs'
     ServerError:
       properties:
         message:
@@ -74,6 +73,18 @@ components:
       - details
       type: object
       additionalProperties: false
+    DemographicsGraphsResponse:
+      properties:
+        graphs:
+          items:
+            $ref: '#/components/schemas/DemographicsGraph'
+          type: array
+      required:
+      - graphs
+      type: object
+      description: '*
+
+        Demographics Pro Graphs'
     ForbiddenError:
       properties:
         message:
@@ -101,17 +112,6 @@ components:
       required:
       - data
       - id
-      type: object
-    GraphDatapoint:
-      properties:
-        value:
-          type: number
-          format: double
-        display:
-          type: string
-      required:
-      - value
-      - display
       type: object
   securitySchemes:
     apiKey:

@@ -180,27 +180,28 @@ components:
           type: boolean
       type: object
       additionalProperties: false
-    BrandChannelValidationResponse:
+    BrandChannelValidationRequest:
       properties:
-        channelId:
+        channelInput:
           type: string
-        title:
-          type:
-          - string
-          - 'null'
-        channelHandle:
-          type:
-          - string
-          - 'null'
-        thumbnailUri:
-          type:
-          - string
-          - 'null'
       required:
-      - channelId
-      - title
-      - channelHandle
-      - thumbnailUri
+      - channelInput
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     BrandYoutubeChannelResponse:
@@ -231,44 +232,27 @@ components:
       - hasNoYoutubeChannel
       type: object
       additionalProperties: false
-    ServerError:
+    BrandChannelValidationResponse:
       properties:
-        message:
+        channelId:
           type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        title:
+          type:
+          - string
+          - 'null'
+        channelHandle:
+          type:
+          - string
+          - 'null'
+        thumbnailUri:
+          type:
+          - string
+          - 'null'
       required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    BrandChannelValidationRequest:
-      properties:
-        channelInput:
-          type: string
-      required:
-      - channelInput
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+      - channelId
+      - title
+      - channelHandle
+      - thumbnailUri
       type: object
       additionalProperties: false
     ValidateErrorJSON:
@@ -277,6 +261,22 @@ components:
           type: string
           enum:
           - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:

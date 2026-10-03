@@ -113,6 +113,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -129,9 +145,22 @@ components:
       - details
       type: object
       additionalProperties: false
-    InfluencerCampaignHistory:
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
-      properties: {}
+      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -157,38 +186,9 @@ components:
       required:
       - data
       type: object
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    InfluencerCampaignHistory:
       type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
+      properties: {}
     LegacyInfluencerCampaignGetResponse:
       type: object
   securitySchemes:

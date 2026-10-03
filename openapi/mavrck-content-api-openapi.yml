@@ -104,83 +104,89 @@ components:
       required:
       - unit
       type: object
-    ResponseMetadata:
+    Content:
       properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    ContentInfo:
-      properties:
-        dateCreated:
-          type: number
-          format: double
-        urlCanonical:
-          type: string
-        url:
-          type: string
-        text:
-          type: string
-        media:
-          $ref: '#/components/schemas/ContentMedia'
-        engagements:
-          $ref: '#/components/schemas/ContentEngagements'
-        status:
-          type: string
-          enum:
-          - DRAFT
-          - PUBLISHED
-        type:
-          type: string
-        profile:
+        content:
+          $ref: '#/components/schemas/ContentInfo'
+        binding:
+          properties:
+            source:
+              type: string
+            dateBound:
+              type: number
+              format: double
+            administrator:
+              properties:
+                id:
+                  type: number
+                  format: double
+              required:
+              - id
+              type: object
+            globalUser:
+              properties:
+                membership:
+                  properties:
+                    id:
+                      type: number
+                      format: double
+                  required:
+                  - id
+                  type: object
+                listMember:
+                  properties:
+                    id:
+                      type: number
+                      format: double
+                  required:
+                  - id
+                  type: object
+                id:
+                  type: number
+                  format: double
+              required:
+              - membership
+              - listMember
+              - id
+              type: object
+            campaign:
+              properties:
+                type:
+                  type: string
+                listId:
+                  type: number
+                  format: double
+                title:
+                  type: string
+                id:
+                  type: number
+                  format: double
+              required:
+              - type
+              - id
+              type: object
+            instance:
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+              required:
+              - id
+              type: object
+            id:
+              type: number
+              format: double
+          required:
+          - source
+          - dateBound
+          - campaign
+          - instance
+          - id
           type: object
-        externalId:
-          $ref: '#/components/schemas/ContentExternalIdentity'
       required:
-      - media
-      - type
-      - profile
-      type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ContentExternalIdentity:
-      properties:
-        alternativeIds:
-          items:
-            $ref: '#/components/schemas/ContentExternalIdentity'
-          type: array
-        type:
-          type: string
-        id:
-          type: string
-      required:
-      - id
+      - content
+      - binding
       type: object
     ContentMedia:
       properties:
@@ -210,12 +216,28 @@ components:
             type: object
           type: array
       type: object
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -337,6 +359,96 @@ components:
           - array
           - 'null'
       type: object
+    ContentResponse:
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
+        data:
+          items:
+            $ref: '#/components/schemas/Content'
+          type: array
+      required:
+      - meta
+      - data
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ContentExternalIdentity:
+      properties:
+        alternativeIds:
+          items:
+            $ref: '#/components/schemas/ContentExternalIdentity'
+          type: array
+        type:
+          type: string
+        id:
+          type: string
+      required:
+      - id
+      type: object
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ContentInfo:
+      properties:
+        dateCreated:
+          type: number
+          format: double
+        urlCanonical:
+          type: string
+        url:
+          type: string
+        text:
+          type: string
+        media:
+          $ref: '#/components/schemas/ContentMedia'
+        engagements:
+          $ref: '#/components/schemas/ContentEngagements'
+        status:
+          type: string
+          enum:
+          - DRAFT
+          - PUBLISHED
+        type:
+          type: string
+        profile:
+          type: object
+        externalId:
+          $ref: '#/components/schemas/ContentExternalIdentity'
+      required:
+      - media
+      - type
+      - profile
+      type: object
     BadRequestError:
       properties:
         details:
@@ -350,118 +462,6 @@ components:
           - Bad Request
       required:
       - message
-      type: object
-      additionalProperties: false
-    Content:
-      properties:
-        content:
-          $ref: '#/components/schemas/ContentInfo'
-        binding:
-          properties:
-            source:
-              type: string
-            dateBound:
-              type: number
-              format: double
-            administrator:
-              properties:
-                id:
-                  type: number
-                  format: double
-              required:
-              - id
-              type: object
-            globalUser:
-              properties:
-                membership:
-                  properties:
-                    id:
-                      type: number
-                      format: double
-                  required:
-                  - id
-                  type: object
-                listMember:
-                  properties:
-                    id:
-                      type: number
-                      format: double
-                  required:
-                  - id
-                  type: object
-                id:
-                  type: number
-                  format: double
-              required:
-              - membership
-              - listMember
-              - id
-              type: object
-            campaign:
-              properties:
-                type:
-                  type: string
-                listId:
-                  type: number
-                  format: double
-                title:
-                  type: string
-                id:
-                  type: number
-                  format: double
-              required:
-              - type
-              - id
-              type: object
-            instance:
-              properties:
-                name:
-                  type: string
-                id:
-                  type: string
-              required:
-              - id
-              type: object
-            id:
-              type: number
-              format: double
-          required:
-          - source
-          - dateBound
-          - campaign
-          - instance
-          - id
-          type: object
-      required:
-      - content
-      - binding
-      type: object
-    ContentResponse:
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMetadata'
-        data:
-          items:
-            $ref: '#/components/schemas/Content'
-          type: array
-      required:
-      - meta
-      - data
-      type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
   securitySchemes:

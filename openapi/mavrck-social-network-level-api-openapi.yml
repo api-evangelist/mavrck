@@ -168,6 +168,77 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    NetworkPerformanceResponseDto:
+      type: object
+      properties:
+        socialNetwork:
+          type: string
+          example: Instagram
+          enum:
+          - blog
+          - facebook
+          - facebook_live
+          - facebook_group
+          - facebook_reel
+          - image
+          - instagram
+          - instagram_reel
+          - instagram_story
+          - linkedin
+          - musical_ly
+          - pinterest
+          - snapchat_story
+          - tiktok
+          - twitch_stream
+          - twitter
+          - youtube_video
+          - youtube_shorts
+          - video
+          description: Name of the social network
+        postsCount:
+          type:
+          - number
+          - 'null'
+          example: 100
+          description: Total number of posts
+        impressions:
+          type:
+          - number
+          - 'null'
+          example: 10000
+          description: Total number of impressions
+        impressionsPerPosts:
+          type:
+          - number
+          - 'null'
+          example: 100
+          description: ' Average impressions per post'
+        engagements:
+          type:
+          - number
+          - 'null'
+          example: 500
+          description: Total number of engagements
+        engagementsPerPosts:
+          type:
+          - number
+          - 'null'
+          example: 5
+          description: Average engagements per post
+        engagementRate:
+          type:
+          - number
+          - 'null'
+          example: 0.05
+          description: Engagement rate as a decimal
+      required:
+      - socialNetwork
+      - postsCount
+      - impressions
+      - impressionsPerPosts
+      - engagements
+      - engagementsPerPosts
+      - engagementRate
     NetworkReturnOnInvestmentResponseDto:
       type: object
       properties:
@@ -245,77 +316,6 @@ components:
       - valueGenerated
       - estimatedContentCost
       - returnOnInvestment
-    NetworkPerformanceResponseDto:
-      type: object
-      properties:
-        socialNetwork:
-          type: string
-          example: Instagram
-          enum:
-          - blog
-          - facebook
-          - facebook_live
-          - facebook_group
-          - facebook_reel
-          - image
-          - instagram
-          - instagram_reel
-          - instagram_story
-          - linkedin
-          - musical_ly
-          - pinterest
-          - snapchat_story
-          - tiktok
-          - twitch_stream
-          - twitter
-          - youtube_video
-          - youtube_shorts
-          - video
-          description: Name of the social network
-        postsCount:
-          type:
-          - number
-          - 'null'
-          example: 100
-          description: Total number of posts
-        impressions:
-          type:
-          - number
-          - 'null'
-          example: 10000
-          description: Total number of impressions
-        impressionsPerPosts:
-          type:
-          - number
-          - 'null'
-          example: 100
-          description: ' Average impressions per post'
-        engagements:
-          type:
-          - number
-          - 'null'
-          example: 500
-          description: Total number of engagements
-        engagementsPerPosts:
-          type:
-          - number
-          - 'null'
-          example: 5
-          description: Average engagements per post
-        engagementRate:
-          type:
-          - number
-          - 'null'
-          example: 0.05
-          description: Engagement rate as a decimal
-      required:
-      - socialNetwork
-      - postsCount
-      - impressions
-      - impressionsPerPosts
-      - engagements
-      - engagementsPerPosts
-      - engagementRate
     ReportingApiResponseDto:
       type: object
       properties:

@@ -156,15 +156,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Entitlements:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Entitlement'
-          type: array
-      required:
-      - data
-      type: object
     Entitlement:
       properties:
         id:
@@ -183,145 +174,6 @@ components:
       - featureId
       - communityId
       - featureEnabled
-      type: object
-      additionalProperties: false
-    EntitlementGroup:
-      type: string
-      enum:
-      - omni
-      - mavely
-      - private_label
-      description: Predefined instance groups that the backend can resolve without the frontend sending individual IDs.
-    BulkUpdateEntitlementsRequest:
-      properties:
-        communityIds:
-          items:
-            type: string
-          type: array
-        groups:
-          items:
-            $ref: '#/components/schemas/EntitlementGroup'
-          type: array
-        allCommunities:
-          type: boolean
-        featureEnabled:
-          type: boolean
-        featureId:
-          $ref: '#/components/schemas/FeatureId'
-      required:
-      - featureEnabled
-      - featureId
-      type: object
-      description: 'Request body for PUT /v1/entitlements/bulk.
-
-
-        Exactly one targeting strategy is required:
-
-        - `allCommunities: true` — updates every community (and flips features.default_state).
-
-        - `groups` — backend resolves to matching community IDs (prefix match or hardcoded list).
-
-        - `communityIds` — explicit list of community IDs.
-
-
-        `groups` and `communityIds` can be combined (merged with OR).
-
-        `allCommunities` is exclusive and ignores the other two.'
-    BulkUpdateEntitlementsResponse:
-      properties:
-        paymentProvisioning:
-          properties:
-            failed:
-              type: number
-              format: double
-            succeeded:
-              type: number
-              format: double
-            attempted:
-              type: number
-              format: double
-          required:
-          - failed
-          - succeeded
-          - attempted
-          type: object
-          description: Present when enabling stripe_payments or mavely_payments triggers payment provider app provisioning.
-        cascaded:
-          properties:
-            affectedCount:
-              type: number
-              format: double
-            featureEnabled:
-              type: boolean
-            featureId:
-              $ref: '#/components/schemas/FeatureId'
-          required:
-          - affectedCount
-          - featureEnabled
-          - featureId
-          type: object
-          description: Present when the operation triggered a dependent feature flag cascade.
-        affectedCount:
-          type: number
-          format: double
-          description: Number of feature_toggles rows updated by the primary operation.
-      required:
-      - affectedCount
-      type: object
-      description: 'Response from PUT /v1/entitlements/bulk.
-
-
-        Always includes the count of feature_toggles rows updated. Optionally includes
-
-        cascade info (bazaarvoice/submit_review coupling) and payment provisioning results
-
-        (stripe/mavely) when those side-effects are triggered.'
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     FeatureId:
@@ -453,6 +305,154 @@ components:
       - details
       type: object
       additionalProperties: false
+    BulkUpdateEntitlementsRequest:
+      properties:
+        communityIds:
+          items:
+            type: string
+          type: array
+        groups:
+          items:
+            $ref: '#/components/schemas/EntitlementGroup'
+          type: array
+        allCommunities:
+          type: boolean
+        featureEnabled:
+          type: boolean
+        featureId:
+          $ref: '#/components/schemas/FeatureId'
+      required:
+      - featureEnabled
+      - featureId
+      type: object
+      description: 'Request body for PUT /v1/entitlements/bulk.
+
+
+        Exactly one targeting strategy is required:
+
+        - `allCommunities: true` — updates every community (and flips features.default_state).
+
+        - `groups` — backend resolves to matching community IDs (prefix match or hardcoded list).
+
+        - `communityIds` — explicit list of community IDs.
+
+
+        `groups` and `communityIds` can be combined (merged with OR).
+
+        `allCommunities` is exclusive and ignores the other two.'
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    Entitlements:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Entitlement'
+          type: array
+      required:
+      - data
+      type: object
+    EntitlementGroup:
+      type: string
+      enum:
+      - omni
+      - mavely
+      - private_label
+      description: Predefined instance groups that the backend can resolve without the frontend sending individual IDs.
+    BulkUpdateEntitlementsResponse:
+      properties:
+        paymentProvisioning:
+          properties:
+            failed:
+              type: number
+              format: double
+            succeeded:
+              type: number
+              format: double
+            attempted:
+              type: number
+              format: double
+          required:
+          - failed
+          - succeeded
+          - attempted
+          type: object
+          description: Present when enabling stripe_payments or mavely_payments triggers payment provider app provisioning.
+        cascaded:
+          properties:
+            affectedCount:
+              type: number
+              format: double
+            featureEnabled:
+              type: boolean
+            featureId:
+              $ref: '#/components/schemas/FeatureId'
+          required:
+          - affectedCount
+          - featureEnabled
+          - featureId
+          type: object
+          description: Present when the operation triggered a dependent feature flag cascade.
+        affectedCount:
+          type: number
+          format: double
+          description: Number of feature_toggles rows updated by the primary operation.
+      required:
+      - affectedCount
+      type: object
+      description: 'Response from PUT /v1/entitlements/bulk.
+
+
+        Always includes the count of feature_toggles rows updated. Optionally includes
+
+        cascade info (bazaarvoice/submit_review coupling) and payment provisioning results
+
+        (stripe/mavely) when those side-effects are triggered.'
   securitySchemes:
     apiKey:
       type: apiKey

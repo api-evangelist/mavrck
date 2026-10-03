@@ -220,22 +220,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ResponseMetadata:
+    SpecsPutRequest:
       properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
+        destinationUrl:
           type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
+        title:
+          type: string
+      required:
+      - title
       type: object
       additionalProperties: false
     ServerError:
@@ -244,6 +236,22 @@ components:
           type: string
           enum:
           - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -284,30 +292,14 @@ components:
       - deletedAt
       type: object
       additionalProperties: false
-    ForbiddenError:
+    SpecsGetResponse:
       properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    SpecsPutRequest:
-      properties:
-        destinationUrl:
-          type: string
-        title:
-          type: string
-      required:
-      - title
+        data:
+          items:
+            $ref: '#/components/schemas/Spec'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
       type: object
       additionalProperties: false
     SpecsPostRequest:
@@ -328,14 +320,22 @@ components:
       - provider
       type: object
       additionalProperties: false
-    SpecsGetResponse:
+    ResponseMetadata:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Spec'
-          type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMetadata'
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
   securitySchemes:

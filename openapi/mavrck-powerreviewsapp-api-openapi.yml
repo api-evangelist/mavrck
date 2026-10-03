@@ -82,13 +82,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PowerReviewsAppsGetResponse:
+    PowerReviewsAppPostBody:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/PowerReviewsApp'
-          type: array
+        apiKey:
+          type: string
+        environment:
+          type: string
+        locale:
+          type: string
+        merchantId:
+          type: string
+        name:
+          type: string
+      required:
+      - apiKey
+      - locale
+      - merchantId
+      - name
       type: object
+      additionalProperties: false
     PowerReviewsApp:
       properties:
         apiKey:
@@ -115,6 +127,13 @@ components:
       - name
       type: object
       additionalProperties: false
+    PowerReviewsAppsGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PowerReviewsApp'
+          type: array
+      type: object
     ServerError:
       properties:
         message:
@@ -131,12 +150,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -147,31 +166,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    PowerReviewsAppPostBody:
-      properties:
-        apiKey:
-          type: string
-        environment:
-          type: string
-        locale:
-          type: string
-        merchantId:
-          type: string
-        name:
-          type: string
-      required:
-      - apiKey
-      - locale
-      - merchantId
-      - name
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:

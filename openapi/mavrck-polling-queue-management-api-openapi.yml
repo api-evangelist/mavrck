@@ -138,32 +138,50 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    QueueStats:
-      properties:
-        queueUrl:
-          type: string
-        approximateNumberOfMessages:
-          type: number
-          format: double
-        approximateNumberOfMessagesNotVisible:
-          type: number
-          format: double
-        approximateNumberOfMessagesDelayed:
-          type: number
-          format: double
-      required:
-      - queueUrl
-      - approximateNumberOfMessages
-      - approximateNumberOfMessagesNotVisible
-      - approximateNumberOfMessagesDelayed
-      type: object
-      additionalProperties: false
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PollingQueueType:
+      enum:
+      - instagram
+      - instagram-story
+      - non-instagram
+      type: string
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -191,28 +209,6 @@ components:
       - message
       type: object
       additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    PollingQueueType:
-      enum:
-      - instagram
-      - instagram-story
-      - non-instagram
-      type: string
     AllQueueStatsResponse:
       properties:
         queues:
@@ -232,20 +228,24 @@ components:
       - queues
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    QueueStats:
       properties:
-        message:
+        queueUrl:
           type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        approximateNumberOfMessages:
+          type: number
+          format: double
+        approximateNumberOfMessagesNotVisible:
+          type: number
+          format: double
+        approximateNumberOfMessagesDelayed:
+          type: number
+          format: double
       required:
-      - message
-      - details
+      - queueUrl
+      - approximateNumberOfMessages
+      - approximateNumberOfMessagesNotVisible
+      - approximateNumberOfMessagesDelayed
       type: object
       additionalProperties: false
   securitySchemes:

@@ -57,58 +57,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SendMessageAttachment:
-      properties:
-        originalName:
-          type: string
-        mimeType:
-          type: string
-        disposition:
-          type: string
-        size:
-          type: number
-          format: double
-        index:
-          type: number
-          format: double
-        buffer:
-          type: string
-        encoding:
-          type: string
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     BulkActionGroupScheduleMessagePostBody:
       properties:
         actionGroupId:
@@ -165,19 +113,40 @@ components:
       - addTalentManager
       type: object
       additionalProperties: false
-    BadRequestError:
+    SendMessageAttachment:
       properties:
+        originalName:
+          type: string
+        mimeType:
+          type: string
+        disposition:
+          type: string
+        size:
+          type: number
+          format: double
+        index:
+          type: number
+          format: double
+        buffer:
+          type: string
+        encoding:
+          type: string
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
         details:
           properties: {}
           additionalProperties:
             additionalProperties: true
           type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
       required:
       - message
+      - details
       type: object
       additionalProperties: false
     NotFoundError:
@@ -194,6 +163,37 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
       type: object
       additionalProperties: false
   securitySchemes:

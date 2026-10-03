@@ -41,6 +41,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     InstanceUserMaterializedViewRequestBody:
       properties:
         data:
@@ -69,22 +85,6 @@ components:
         facebookProfileId:
           type: number
           format: double
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
       type: object
       additionalProperties: false
     ValidateErrorJSON:

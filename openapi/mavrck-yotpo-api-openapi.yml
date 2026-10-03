@@ -84,6 +84,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    YotpoAppPostRequestBody:
+      properties:
+        secretKey:
+          type: string
+        name:
+          type: string
+        apiKey:
+          type: string
+      required:
+      - secretKey
+      - name
+      - apiKey
+      type: object
     ServerError:
       properties:
         message:
@@ -100,19 +113,22 @@ components:
       - details
       type: object
       additionalProperties: false
-    YotpoAppPostRequestBody:
+    NotFoundError:
       properties:
-        secretKey:
+        message:
           type: string
-        name:
-          type: string
-        apiKey:
-          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - secretKey
-      - name
-      - apiKey
+      - message
+      - details
       type: object
+      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -159,22 +175,6 @@ components:
       required:
       - data
       type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

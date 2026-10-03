@@ -188,10 +188,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PostEmailSettingsResponse:
-      properties: {}
-      type: object
-      additionalProperties: false
     ValidationError:
       properties:
         property:
@@ -215,22 +211,20 @@ components:
       - argument
       type: object
       additionalProperties: false
-    EmailSmtpDTO:
+    ValidateErrorJSON:
       properties:
-        id:
-          type: number
-          format: double
-        communityId:
+        message:
           type: string
-        fromEmail:
-          type: string
-        fromName:
-          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - id
-      - communityId
-      - fromEmail
-      - fromName
+      - message
+      - details
       type: object
       additionalProperties: false
     ServerError:
@@ -249,17 +243,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    PostEmailSettingsRequest:
-      properties:
-        id:
-          type: string
-        subscribed:
-          type: boolean
-      required:
-      - id
-      - subscribed
-      type: object
-      additionalProperties: false
     GetEmailSettingsResponse:
       properties:
         isMember:
@@ -272,6 +255,22 @@ components:
       - isMember
       - isSubscribed
       - isGloballyDeleted
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     ForbiddenError:
@@ -290,36 +289,37 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    PostEmailSettingsResponse:
+      properties: {}
       type: object
       additionalProperties: false
-    NotFoundError:
+    PostEmailSettingsRequest:
       properties:
-        message:
+        id:
           type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        subscribed:
+          type: boolean
       required:
-      - message
-      - details
+      - id
+      - subscribed
+      type: object
+      additionalProperties: false
+    EmailSmtpDTO:
+      properties:
+        id:
+          type: number
+          format: double
+        communityId:
+          type: string
+        fromEmail:
+          type: string
+        fromName:
+          type: string
+      required:
+      - id
+      - communityId
+      - fromEmail
+      - fromName
       type: object
       additionalProperties: false
   securitySchemes:

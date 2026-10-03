@@ -62,51 +62,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    InfluencerPreview:
-      type: object
-      properties:
-        id:
-          type: integer
-        globalUserId:
-          type: integer
-        profilePic:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
     Error:
       type: object
       properties:
@@ -138,17 +93,62 @@ components:
             error:
               type: string
               description: A static description of the parent error.
+    InfluencerPreview:
+      type: object
+      properties:
+        id:
+          type: integer
+        globalUserId:
+          type: integer
+        profilePic:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
   parameters:
-    offsetParam:
-      in: query
-      description: Number of items to skip
-      name: offset
-      schema:
-        type: integer
     limitParam:
       in: query
       description: Maximum number of items to return
       name: limit
+      schema:
+        type: integer
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
       schema:
         type: integer
   securitySchemes:

@@ -204,9 +204,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CashPaymentAppUpdateResponse:
-      type: object
-      properties: {}
+    DBCashPaymentAppProvider:
+      enum:
+      - PAYPAL
+      - STRIPE
+      - MAVELY
+      - TIPALTI
+      type: string
     CreateCashPaymentAppBody:
       properties:
         tipaltiPayerEntityId:
@@ -251,6 +255,22 @@ components:
       - description
       - additionalCommunityIds
       type: object
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -267,37 +287,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    ProviderEnvironment:
-      enum:
-      - LIVE
-      - SANDBOX
-      type: string
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    DBCashPaymentAppProvider:
-      enum:
-      - PAYPAL
-      - STRIPE
-      - MAVELY
-      - TIPALTI
-      type: string
-    CashPaymentAppUpdatePayload:
-      type: object
-      properties: {}
     ValidateErrorJSON:
       properties:
         message:
@@ -444,12 +433,17 @@ components:
           type: object
       type: object
       description: Make all properties in T optional
-    NotFoundError:
+    ProviderEnvironment:
+      enum:
+      - LIVE
+      - SANDBOX
+      type: string
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -460,6 +454,12 @@ components:
       - details
       type: object
       additionalProperties: false
+    CashPaymentAppUpdateResponse:
+      type: object
+      properties: {}
+    CashPaymentAppUpdatePayload:
+      type: object
+      properties: {}
   securitySchemes:
     apiKey:
       type: apiKey

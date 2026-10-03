@@ -171,18 +171,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Metric:
-      type: object
-      properties:
-        id:
-          type: integer
-        displayName:
-          type: string
-        name:
-          type: string
-    EmptyObject:
-      type: object
-      properties: {}
     CommunityMetric:
       type: object
       properties:
@@ -192,36 +180,6 @@ components:
           type: boolean
         metric:
           $ref: '#/components/schemas/Metric'
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
     Error:
       type: object
       properties:
@@ -253,6 +211,48 @@ components:
             error:
               type: string
               description: A static description of the parent error.
+    EmptyObject:
+      type: object
+      properties: {}
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    Metric:
+      type: object
+      properties:
+        id:
+          type: integer
+        displayName:
+          type: string
+        name:
+          type: string
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

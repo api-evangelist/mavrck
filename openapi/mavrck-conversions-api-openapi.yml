@@ -57,19 +57,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
+    Omit_WebPluginConversionBody.promoCode-or-orderId_:
+      $ref: '#/components/schemas/Pick_WebPluginConversionBody.Exclude_keyofWebPluginConversionBody.promoCode-or-orderId__'
+      description: Construct a type with the properties of T except for those in type K.
     ResponseBody_WebPluginConversionResponse-Array_:
       properties:
         data:
@@ -82,9 +72,22 @@ components:
       - data
       type: object
       additionalProperties: false
-    Omit_WebPluginConversionBody.promoCode-or-orderId_:
-      $ref: '#/components/schemas/Pick_WebPluginConversionBody.Exclude_keyofWebPluginConversionBody.promoCode-or-orderId__'
-      description: Construct a type with the properties of T except for those in type K.
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -101,12 +104,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -117,23 +120,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    WebPluginConversionResponse:
-      $ref: '#/components/schemas/Omit_WebPluginConversionBody.promoCode-or-orderId_'
-    Pick_WebPluginConversionBody.Exclude_keyofWebPluginConversionBody.promoCode-or-orderId__:
-      properties:
-        communityId:
-          type: string
-        conversionValue:
-          type: number
-          format: double
-        conversionCode:
-          type: string
-      required:
-      - communityId
-      - conversionValue
-      - conversionCode
-      type: object
-      description: From T, pick a set of properties whose keys are in the union K
     WebPluginConversionBody:
       properties:
         orderId:
@@ -152,12 +138,12 @@ components:
       - conversionCode
       - communityId
       type: object
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -168,20 +154,34 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
+    Pick_WebPluginConversionBody.Exclude_keyofWebPluginConversionBody.promoCode-or-orderId__:
       properties:
-        message:
+        communityId:
           type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        conversionValue:
+          type: number
+          format: double
+        conversionCode:
+          type: string
       required:
-      - message
-      - details
+      - communityId
+      - conversionValue
+      - conversionCode
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    WebPluginConversionResponse:
+      $ref: '#/components/schemas/Omit_WebPluginConversionBody.promoCode-or-orderId_'
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
   securitySchemes:

@@ -62,17 +62,6 @@ components:
         previous:
           allOf:
           - $ref: '#/components/schemas/WorkflowStage'
-    WorkflowStageChangeNotification:
-      type: object
-      properties:
-        event:
-          $ref: '#/components/schemas/WorkflowStageChangeEvent'
-        subscriberId:
-          type: string
-          description: Unique ID of your webhook. If your application’s HTTP(S) POST endpoint receives multiple instances’ workflow stage change events, or if multiple applications receive the same instance's events, then this value will vary.
-        token:
-          type: string
-          description: A 16-character alphanumeric string used to authorize requests to your application. Your subscriber's token is accessible in the platform.
     Influencer:
       type: object
       description: Details of the influencer whose workflow stage changed.
@@ -85,6 +74,17 @@ components:
           - integer
           - 'null'
           description: Unique ID of the relationship between the influencer and your instance.
+    WorkflowStageChangeNotification:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/WorkflowStageChangeEvent'
+        subscriberId:
+          type: string
+          description: Unique ID of your webhook. If your application’s HTTP(S) POST endpoint receives multiple instances’ workflow stage change events, or if multiple applications receive the same instance's events, then this value will vary.
+        token:
+          type: string
+          description: A 16-character alphanumeric string used to authorize requests to your application. Your subscriber's token is accessible in the platform.
     WorkflowStage:
       type: object
       description: Details of a point in a campaign denoting an influencer's progress towards campaign completion.

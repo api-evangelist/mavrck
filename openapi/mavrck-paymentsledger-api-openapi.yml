@@ -265,45 +265,12 @@ components:
       - offset
       type: object
       additionalProperties: false
-    DBRewardWinType:
-      enum:
-      - OTHER
-      - CASH
-      - PRODUCT
-      - PROMO_CODE
-      - GIFT_CARD
-      - SHOPIFY_DISCOUNT
-      type: string
-    PaymentsLedgerQueryResponse:
-      properties:
-        meta:
-          $ref: '#/components/schemas/PaymentsLedgerMetadata'
-        data:
-          items:
-            $ref: '#/components/schemas/PaymentsLedger'
-          type: array
-      required:
-      - meta
-      - data
-      type: object
-      additionalProperties: false
-    TaxLineItem:
-      properties:
-        amount:
-          type: number
-          format: double
-        type:
-          $ref: '#/components/schemas/TaxLineItemType'
-      required:
-      - amount
-      - type
-      type: object
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -314,26 +281,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    TaxLineItemType:
-      type: string
-      enum:
-      - GST
-      - HST
-      - VAT
-      - PST
-      - QST
-      - RST
-    PaymentAccountType:
-      enum:
-      - CASH
-      - GIFT_CARD
-      type: string
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -360,6 +313,11 @@ components:
       - details
       type: object
       additionalProperties: false
+    PaymentAccountType:
+      enum:
+      - CASH
+      - GIFT_CARD
+      type: string
     PaymentAppProvider:
       enum:
       - PAYPAL
@@ -368,6 +326,22 @@ components:
       - MAVELY
       - TIPALTI
       type: string
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     PaymentsLedger:
       properties:
         transactionDateTime:
@@ -554,22 +528,48 @@ components:
       - budgetReferenceIdType
       type: object
       additionalProperties: false
-    NotFoundError:
+    TaxLineItemType:
+      type: string
+      enum:
+      - GST
+      - HST
+      - VAT
+      - PST
+      - QST
+      - RST
+    DBRewardWinType:
+      enum:
+      - OTHER
+      - CASH
+      - PRODUCT
+      - PROMO_CODE
+      - GIFT_CARD
+      - SHOPIFY_DISCOUNT
+      type: string
+    PaymentsLedgerQueryResponse:
       properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        meta:
+          $ref: '#/components/schemas/PaymentsLedgerMetadata'
+        data:
+          items:
+            $ref: '#/components/schemas/PaymentsLedger'
+          type: array
       required:
-      - message
-      - details
+      - meta
+      - data
       type: object
       additionalProperties: false
+    TaxLineItem:
+      properties:
+        amount:
+          type: number
+          format: double
+        type:
+          $ref: '#/components/schemas/TaxLineItemType'
+      required:
+      - amount
+      - type
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

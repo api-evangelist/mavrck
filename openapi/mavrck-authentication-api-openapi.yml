@@ -1085,6 +1085,31 @@ paths:
     - url: https://api.mavrck.co
 components:
   schemas:
+    Blog:
+      properties:
+        globalUserId:
+          type:
+          - number
+          - 'null'
+          format: double
+        language:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        platform:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
+      type: object
+      additionalProperties: false
     PinterestConnectionInfo:
       type: object
       properties:
@@ -1098,46 +1123,81 @@ components:
         profilePicture:
           type: string
           description: Client's Pinterest profile picture
-    TikTokConnectionInfo:
+    FacebookProfileDeprecated:
       type: object
       properties:
-        primaryAccount:
+        id:
+          type: integer
+        facebookExternalId:
+          type: string
+        name:
+          type: string
+        link:
+          type: string
+        picture:
+          type: string
+        reach:
+          type: integer
+        averageLikes:
+          type: integer
+        averageComments:
+          type: integer
+        averageEngagements:
+          type: integer
+        engagementRate:
+          type: number
+        type:
+          type: string
+        available:
+          type: boolean
+        active:
           type: boolean
         expiresAt:
           type: string
           format: date-time
-          description: The date by which the client should re-prompt the TikTok connection flow.
-        handle:
-          type: string
-          description: Client's TikTok account handle
-        profilePicture:
-          type: string
-          description: Client's TikTok profile picture
-    TwitterConnectionInfoDeprecated:
-      type: object
+        facebookUser:
+          type: object
+          properties:
+            isExpired:
+              type: boolean
+    PostRequestBody:
       properties:
-        expiresAt:
+        email:
           type: string
-          format: date-time
-          description: The date by which the client should re-prompt the Twitter connection flow.
-        handle:
+        password:
           type: string
-          description: Client's Twitter account handle
-        profilePicture:
+        resetKey:
           type: string
-          description: Client's Twitter profile picture
-    LinksDeprecated:
+      required:
+      - email
+      - password
+      - resetKey
       type: object
-      x-access:
-      - anonymous
-      - influencer
+      additionalProperties: false
+    SwapAppPostResponse:
       properties:
-        normal:
+        token:
           type: string
-          description: A normal link to an entity.
-        deep:
+      required:
+      - token
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
           type: string
-          description: A deep link to the entity.
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ValidateErrorJSON:
       properties:
         message:
@@ -1154,27 +1214,55 @@ components:
       - details
       type: object
       additionalProperties: false
-    PostRequestBody:
+    SwapAppRequestBody:
       properties:
-        email:
-          type: string
-        password:
-          type: string
-        resetKey:
+        communityId:
           type: string
       required:
-      - email
-      - password
-      - resetKey
+      - communityId
       type: object
       additionalProperties: false
-    EmailAccount:
-      type: object
+    BasicAuthPostRequest:
       properties:
+        password:
+          type: string
         email:
           type: string
-    FacebookConnectionInfo:
-      $ref: '#/components/schemas/FacebookProfileDeprecated'
+      required:
+      - password
+      - email
+      type: object
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A key representing the type of error that has occurred.
+        error:
+          type: string
+          description: A static description of the type of error.
+        params:
+          type: array
+          description: For errors invovling parameters, this is an array containing the invalid parameters.
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type:
+            - string
+            - object
+        artifactLinks:
+          $ref: '#/components/schemas/LinksDeprecated'
+        parent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: A key representing the type of error generated by a request to an external API.
+            error:
+              type: string
+              description: A static description of the parent error.
     ServerError:
       properties:
         message:
@@ -1189,6 +1277,68 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    TikTokConnectionInfo:
+      type: object
+      properties:
+        primaryAccount:
+          type: boolean
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the TikTok connection flow.
+        handle:
+          type: string
+          description: Client's TikTok account handle
+        profilePicture:
+          type: string
+          description: Client's TikTok profile picture
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BasicAuthPostResponse:
+      properties:
+        token:
+          type: string
+        communityId:
+          type: string
+      required:
+      - token
+      - communityId
+      type: object
+    FacebookAccessCodeExchangeRequest:
+      properties:
+        redirectUri:
+          type: string
+        code:
+          type: string
+      required:
+      - redirectUri
+      - code
+      type: object
+    FacebookConnectionInfo:
+      $ref: '#/components/schemas/FacebookProfileDeprecated'
+    EmailAccount:
+      type: object
+      properties:
+        email:
+          type: string
+    TSOAEmptyObject:
+      properties: {}
       type: object
       additionalProperties: false
     Profile:
@@ -1267,69 +1417,43 @@ components:
     EmptyObject:
       type: object
       properties: {}
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    MembershipRejection:
       type: object
-      additionalProperties: false
-    NotFoundError:
+      description: Passed when an influencer does not meet the entrance criteria for the community.
       properties:
-        message:
+        redirectLink:
           type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    Error:
-      type: object
-      properties:
-        type:
+        rejectReason:
           type: string
-          description: A key representing the type of error that has occurred.
-        error:
-          type: string
-          description: A static description of the type of error.
-        params:
+        missingCriteria:
           type: array
-          description: For errors invovling parameters, this is an array containing the invalid parameters.
           items:
             type: string
-        keys:
-          type: array
-          items:
-            type:
-            - string
-            - object
-        artifactLinks:
-          $ref: '#/components/schemas/LinksDeprecated'
-        parent:
-          type: object
-          properties:
-            type:
-              type: string
-              description: A key representing the type of error generated by a request to an external API.
-            error:
-              type: string
-              description: A static description of the parent error.
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
+    TwitterConnectionInfoDeprecated:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date by which the client should re-prompt the Twitter connection flow.
+        handle:
+          type: string
+          description: Client's Twitter account handle
+        profilePicture:
+          type: string
+          description: Client's Twitter profile picture
     InstagramConnectionInfo:
       type: object
       properties:
@@ -1356,130 +1480,6 @@ components:
         profilePicture:
           type: string
           description: Client's Instagram profile picture
-    Blog:
-      properties:
-        globalUserId:
-          type:
-          - number
-          - 'null'
-          format: double
-        language:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        platform:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-      type: object
-      additionalProperties: false
-    SwapAppPostResponse:
-      properties:
-        token:
-          type: string
-      required:
-      - token
-      type: object
-      additionalProperties: false
-    FacebookProfileDeprecated:
-      type: object
-      properties:
-        id:
-          type: integer
-        facebookExternalId:
-          type: string
-        name:
-          type: string
-        link:
-          type: string
-        picture:
-          type: string
-        reach:
-          type: integer
-        averageLikes:
-          type: integer
-        averageComments:
-          type: integer
-        averageEngagements:
-          type: integer
-        engagementRate:
-          type: number
-        type:
-          type: string
-        available:
-          type: boolean
-        active:
-          type: boolean
-        expiresAt:
-          type: string
-          format: date-time
-        facebookUser:
-          type: object
-          properties:
-            isExpired:
-              type: boolean
-    BasicAuthPostRequest:
-      properties:
-        password:
-          type: string
-        email:
-          type: string
-      required:
-      - password
-      - email
-      type: object
-    SwapAppRequestBody:
-      properties:
-        communityId:
-          type: string
-      required:
-      - communityId
-      type: object
-      additionalProperties: false
-    FacebookAccessCodeExchangeRequest:
-      properties:
-        redirectUri:
-          type: string
-        code:
-          type: string
-      required:
-      - redirectUri
-      - code
-      type: object
-    BasicAuthPostResponse:
-      properties:
-        token:
-          type: string
-        communityId:
-          type: string
-      required:
-      - token
-      - communityId
-      type: object
-    TSOAEmptyObject:
-      properties: {}
-      type: object
-      additionalProperties: false
-    MembershipRejection:
-      type: object
-      description: Passed when an influencer does not meet the entrance criteria for the community.
-      properties:
-        redirectLink:
-          type: string
-        rejectReason:
-          type: string
-        missingCriteria:
-          type: array
-          items:
-            type: string
     TokenResponseDto:
       type: object
       properties:

@@ -106,6 +106,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ReportingApiResponseDto:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+        meta:
+          type:
+          - object
+          - 'null'
+          description: Metadata containing page information
+          properties:
+            page:
+              type: number
+              example: 1
+            totalPages:
+              type: number
+              example: 10
+      required:
+      - data
+      - meta
     CampaignPerformanceResponseDto:
       type: object
       properties:
@@ -311,27 +332,6 @@ components:
       - affiliateLinksSales
       - affiliateLinksComissionEarned
       - affiliateLinksRoi
-    ReportingApiResponseDto:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: false
-        meta:
-          type:
-          - object
-          - 'null'
-          description: Metadata containing page information
-          properties:
-            page:
-              type: number
-              example: 1
-            totalPages:
-              type: number
-              example: 10
-      required:
-      - data
-      - meta
   securitySchemes:
     JWT:
       type: http

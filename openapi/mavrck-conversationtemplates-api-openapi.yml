@@ -195,15 +195,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ConversationTemplatePostResponse:
-      properties:
-        id:
-          type: number
-          format: double
-      required:
-      - id
-      type: object
-      additionalProperties: false
     Administrator:
       properties:
         id:
@@ -267,32 +258,54 @@ components:
       - updatedAt
       type: object
       additionalProperties: false
-    ResponseMetadata:
+    TSOAEmptyObject:
+      properties: {}
+      type: object
+      additionalProperties: false
+    ConversationTemplatePostBody:
       properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
+        category:
           type: string
-          enum:
-          - failure
-          - success
-        totalCount:
+        html:
+          type: string
+        isArchived:
+          type: boolean
+        subject:
+          type: string
+        title:
+          type: string
+      required:
+      - category
+      - html
+      - subject
+      - title
+      type: object
+      additionalProperties: false
+    ConversationTemplatePutBody:
+      properties:
+        category:
+          type: string
+        html:
+          type: string
+        createdAt:
+          type: string
+        isArchived:
+          type: boolean
+        subject:
+          type: string
+        title:
+          type: string
+        version:
           type: number
           format: double
       type: object
       additionalProperties: false
-    GetConversationTemplateByIdResponse:
-      type: object
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -303,22 +316,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ConversationTemplatesGetResponse:
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMetadata'
-        data:
-          items:
-            $ref: '#/components/schemas/ConversationTemplate'
-          type: array
-      type: object
-      additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -345,54 +348,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ConversationTemplatePutBody:
-      properties:
-        category:
-          type: string
-        html:
-          type: string
-        createdAt:
-          type: string
-        isArchived:
-          type: boolean
-        subject:
-          type: string
-        title:
-          type: string
-        version:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    TSOAEmptyObject:
-      properties: {}
-      type: object
-      additionalProperties: false
-    ConversationTemplatePostBody:
-      properties:
-        category:
-          type: string
-        html:
-          type: string
-        isArchived:
-          type: boolean
-        subject:
-          type: string
-        title:
-          type: string
-      required:
-      - category
-      - html
-      - subject
-      - title
-      type: object
-      additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -401,6 +362,45 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    ConversationTemplatePostResponse:
+      properties:
+        id:
+          type: number
+          format: double
+      required:
+      - id
+      type: object
+      additionalProperties: false
+    GetConversationTemplateByIdResponse:
+      type: object
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ConversationTemplatesGetResponse:
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
+        data:
+          items:
+            $ref: '#/components/schemas/ConversationTemplate'
+          type: array
       type: object
       additionalProperties: false
   securitySchemes:

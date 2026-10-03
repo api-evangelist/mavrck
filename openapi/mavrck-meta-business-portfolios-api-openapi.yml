@@ -109,13 +109,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UpdateBusinessPortfolioRequestBody:
-      properties:
-        selected:
-          type: boolean
-      required:
-      - selected
-      type: object
     ServerError:
       properties:
         message:
@@ -130,37 +123,6 @@ components:
       required:
       - message
       - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
       type: object
       additionalProperties: false
     MetaBusinessPortfolioAuthorizationDto:
@@ -209,6 +171,44 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    UpdateBusinessPortfolioRequestBody:
+      properties:
+        selected:
+          type: boolean
+      required:
+      - selected
+      type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
       type: object
       additionalProperties: false
   securitySchemes:

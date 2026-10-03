@@ -101,12 +101,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -117,12 +117,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -149,6 +149,29 @@ components:
       - details
       type: object
       additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    EmbedUrlResponse:
+      properties:
+        embed_url:
+          type: string
+      required:
+      - embed_url
+      type: object
     DashboardTypesResponse:
       properties:
         dashboardTypes:
@@ -161,29 +184,6 @@ components:
       - dashboardTypes
       - instanceId
       type: object
-    EmbedUrlResponse:
-      properties:
-        embed_url:
-          type: string
-      required:
-      - embed_url
-      type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

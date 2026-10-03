@@ -137,33 +137,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CreatorDto:
-      type: object
-      properties:
-        globalUserId:
-          type: number
-          description: Global user ID of the creator
-          example: 12345
-        profilePictureUrl:
-          type:
-          - string
-          - 'null'
-          description: Profile picture URL
-          example: https://example.com/profile.jpg
-        fullName:
-          type:
-          - string
-          - 'null'
-          description: Full name of the creator
-          example: John Doe
-        profiles:
-          description: Creator profiles
-          type: array
-          items:
-            $ref: '#/components/schemas/CreatorProfileDto'
-      required:
-      - globalUserId
-      - profiles
     CreatorProfileDto:
       type: object
       properties:
@@ -196,6 +169,33 @@ components:
       required:
       - handleName
       - network
+    CreatorDto:
+      type: object
+      properties:
+        globalUserId:
+          type: number
+          description: Global user ID of the creator
+          example: 12345
+        profilePictureUrl:
+          type:
+          - string
+          - 'null'
+          description: Profile picture URL
+          example: https://example.com/profile.jpg
+        fullName:
+          type:
+          - string
+          - 'null'
+          description: Full name of the creator
+          example: John Doe
+        profiles:
+          description: Creator profiles
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatorProfileDto'
+      required:
+      - globalUserId
+      - profiles
     InfluencerPerformanceResponseDto:
       type: object
       properties:
