@@ -74,7 +74,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MvkSocialAccount:
+    FraudLevel:
+      enum:
+      - low
+      - medium
+      - high
+      type: string
+    MvkBlog:
+      properties:
+        id:
+          type: number
+          format: double
+        url:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - url
+      type: object
+      additionalProperties: false
+    MvkTwitterAccount:
       properties:
         id:
           type: number
@@ -96,27 +116,75 @@ components:
           type: string
         primaryAccount:
           type: boolean
+        description:
+          type: string
+        verified:
+          type: boolean
+        averageFavorites:
+          type: number
+          format: double
+        averageRetweets:
+          type: number
+          format: double
       required:
       - username
       - externalId
       type: object
       additionalProperties: false
-    FraudLevel:
-      enum:
-      - low
-      - medium
-      - high
-      type: string
-    Pick_GlobalUser.id-or-uuid_:
+    MvkInstagramAccount:
       properties:
         id:
-          $ref: '#/components/schemas/GlobalUserId'
-        uuid:
+          type: number
+          format: double
+        username:
           type: string
+        externalId:
+          type: string
+        bio:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        profilePicture:
+          type: string
+        primaryAccount:
+          type: boolean
+        averageLikes:
+          type: number
+          format: double
+        mediaCount:
+          type: number
+          format: double
+        averageComments:
+          type: number
+          format: double
+        averageEngagements:
+          type: number
+          format: double
+        engagementRage:
+          type: number
+          format: double
+        sponsoredPostRate:
+          type: number
+          format: double
+        isBusiness:
+          type: boolean
+        isPrivate:
+          type: boolean
+        audienceFraudLevel:
+          $ref: '#/components/schemas/FraudLevel'
       required:
-      - id
+      - username
+      - externalId
       type: object
-      description: From T, pick a set of properties whose keys are in the union K
+      additionalProperties: false
+    GlobalUserId:
+      type: number
+      format: double
     MvkYoutubeChannel:
       properties:
         id:
@@ -156,20 +224,43 @@ components:
       - externalId
       type: object
       additionalProperties: false
-    MvkBlog:
+    MvkSocialAccount:
       properties:
         id:
           type: number
           format: double
-        url:
+        username:
           type: string
-        name:
+        externalId:
+          type: string
+        bio:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        followersCount:
+          type: number
+          format: double
+        profilePicture:
+          type: string
+        primaryAccount:
+          type: boolean
+      required:
+      - username
+      - externalId
+      type: object
+      additionalProperties: false
+    Pick_GlobalUser.id-or-uuid_:
+      properties:
+        id:
+          $ref: '#/components/schemas/GlobalUserId'
+        uuid:
           type: string
       required:
       - id
-      - url
       type: object
-      additionalProperties: false
+      description: From T, pick a set of properties whose keys are in the union K
     MvkPinterestAccount:
       properties:
         id:
@@ -222,20 +313,14 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
+    RequestData:
       properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/Partial_GlobalUser_'
+          type: array
       required:
-      - message
-      - details
+      - data
       type: object
       additionalProperties: false
     Partial_GlobalUser_:
@@ -258,105 +343,20 @@ components:
           $ref: '#/components/schemas/MvkBlog'
       type: object
       description: Make all properties in T optional
-    MvkTwitterAccount:
+    ValidateErrorJSON:
       properties:
-        id:
-          type: number
-          format: double
-        username:
+        message:
           type: string
-        externalId:
-          type: string
-        bio:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        followersCount:
-          type: number
-          format: double
-        profilePicture:
-          type: string
-        primaryAccount:
-          type: boolean
-        description:
-          type: string
-        verified:
-          type: boolean
-        averageFavorites:
-          type: number
-          format: double
-        averageRetweets:
-          type: number
-          format: double
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - username
-      - externalId
-      type: object
-      additionalProperties: false
-    GlobalUserId:
-      type: number
-      format: double
-    MvkInstagramAccount:
-      properties:
-        id:
-          type: number
-          format: double
-        username:
-          type: string
-        externalId:
-          type: string
-        bio:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        followersCount:
-          type: number
-          format: double
-        profilePicture:
-          type: string
-        primaryAccount:
-          type: boolean
-        averageLikes:
-          type: number
-          format: double
-        mediaCount:
-          type: number
-          format: double
-        averageComments:
-          type: number
-          format: double
-        averageEngagements:
-          type: number
-          format: double
-        engagementRage:
-          type: number
-          format: double
-        sponsoredPostRate:
-          type: number
-          format: double
-        isBusiness:
-          type: boolean
-        isPrivate:
-          type: boolean
-        audienceFraudLevel:
-          $ref: '#/components/schemas/FraudLevel'
-      required:
-      - username
-      - externalId
-      type: object
-      additionalProperties: false
-    RequestData:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Partial_GlobalUser_'
-          type: array
-      required:
-      - data
+      - message
+      - details
       type: object
       additionalProperties: false
     MvkFacebookProfile:

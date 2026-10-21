@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-dbinfluencer-agreement-history-fields-schema.json",
+  "title": "DBInfluencerAgreementHistoryFields",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-dbinfluenceragreementhistoryfields-api-openapi.yml#/components/schemas/DBInfluencerAgreementHistoryFields",
+  "properties": {
+    "updateReason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "GLOBAL_USER_MERGE",
+        null
+      ]
+    },
+    "updatedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "influencerContract": {
+      "additionalProperties": true
+    },
+    "influencerContractLevel": {
+      "type": "string",
+      "enum": [
+        "CAMPAIGN",
+        "INSTANCE"
+      ]
+    },
+    "campaignTermsOfUseUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "termsOfUseUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "influencerAgreementUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "communityId": {
+      "type": "string"
+    },
+    "actionGroupId": {
+      "type": "number",
+      "format": "double"
+    },
+    "globalUserId": {
+      "type": "number",
+      "format": "double"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "updateReason",
+    "updatedAt",
+    "createdAt",
+    "influencerContract",
+    "influencerContractLevel",
+    "campaignTermsOfUseUrl",
+    "termsOfUseUrl",
+    "influencerAgreementUrl",
+    "name",
+    "communityId",
+    "actionGroupId",
+    "globalUserId",
+    "id"
+  ],
+  "type": "object"
+}

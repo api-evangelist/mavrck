@@ -1,0 +1,2698 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-user-query-filter-schema.json",
+  "title": "UserQueryFilter",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-globaluserlists-api-openapi.yml#/components/schemas/UserQueryFilter",
+  "type": "object",
+  "required": [
+    "expectedNumberOfInfluencers"
+  ],
+  "properties": {
+    "userFilter": {
+      "$ref": "#/$defs/UserSearch"
+    },
+    "q": {
+      "type": "string",
+      "description": "Search parameter."
+    },
+    "excludedGlobalUserIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "expectedNumberOfInfluencers": {
+      "type": "integer"
+    },
+    "searchKeywords": {
+      "type": "string"
+    },
+    "orderProperty": {
+      "type": "string",
+      "enum": [
+        "createdAt",
+        "id",
+        "age",
+        "audienceFakeEngagersLevel",
+        "audienceFakeFollowersLevel",
+        "audienceFraudLevel",
+        "audiencePercentageFemale",
+        "audiencePercentage_13_17",
+        "audiencePercentage_18_24",
+        "audiencePercentage_25_34",
+        "audiencePercentage_35_44",
+        "audiencePercentage_45_54",
+        "audiencePercentage_55_64",
+        "audiencePercentage_65_plus",
+        "audiencePredominantAgeRange",
+        "audiencePredominantCity",
+        "audiencePredominantCountry",
+        "birthday",
+        "city",
+        "country",
+        "deleted",
+        "email",
+        "fullName",
+        "gender",
+        "instagramHandle",
+        "lastRefreshedAt",
+        "loadSource",
+        "nudityLevel",
+        "profanityLevel",
+        "state",
+        "violenceLevel",
+        "instagramAccount.globalUserId",
+        "instagramAccount.analysisVersion",
+        "instagramAccount.audienceFakeCommentersLevel",
+        "instagramAccount.audienceFakeCommentersPercentage",
+        "instagramAccount.audienceFakeEngagersLevel",
+        "instagramAccount.audienceFakeFollowersLevel",
+        "instagramAccount.audienceFakeFollowersPercentage",
+        "instagramAccount.audienceFakeLikersLevel",
+        "instagramAccount.audienceFakeLikersPercentage",
+        "instagramAccount.audienceFraudLevel",
+        "instagramAccount.audiencePercentageFemale",
+        "instagramAccount.audiencePercentage_13_17",
+        "instagramAccount.audiencePercentage_18_24",
+        "instagramAccount.audiencePercentage_25_34",
+        "instagramAccount.audiencePercentage_35_44",
+        "instagramAccount.audiencePercentage_45_54",
+        "instagramAccount.audiencePercentage_55_64",
+        "instagramAccount.audiencePercentage_65_plus",
+        "instagramAccount.audiencePredominantAgeRange",
+        "instagramAccount.audiencePredominantCity",
+        "instagramAccount.audiencePredominantCountry",
+        "instagramAccount.averageComments",
+        "instagramAccount.averageEngagements",
+        "instagramAccount.averageLikes",
+        "instagramAccount.bio",
+        "instagramAccount.boughtFollowers",
+        "instagramAccount.createdAt",
+        "instagramAccount.engagementRate",
+        "instagramAccount.followersCount",
+        "instagramAccount.followingCount",
+        "instagramAccount.fullName",
+        "instagramAccount.handle",
+        "instagramAccount.instagramExternalId",
+        "instagramAccount.instagramProfileId",
+        "instagramAccount.isBusiness",
+        "instagramAccount.isPrivate",
+        "instagramAccount.lastAnalyzedAt",
+        "instagramAccount.lastAnalyzedFollowersFraudAt",
+        "instagramAccount.loadSource",
+        "instagramAccount.mediaCount",
+        "instagramAccount.nudityLevel",
+        "instagramAccount.previewPostsLastUpdatedAt",
+        "instagramAccount.profanityLevel",
+        "instagramAccount.profilePicture",
+        "instagramAccount.profileType",
+        "instagramAccount.sourceDetail",
+        "instagramAccount.sponsoredPostRate",
+        "instagramAccount.topicsLastAnalyzedAt",
+        "instagramAccount.updatedAt",
+        "instagramAccount.violenceLevel",
+        "instagramAccount.website",
+        "facebookProfile.id",
+        "facebookProfile.averageComments",
+        "facebookProfile.averageEngagements",
+        "facebookProfile.averageLikes",
+        "facebookProfile.engagementRate",
+        "facebookProfile.facebookExternalId",
+        "facebookProfile.facebookCreator",
+        "facebookProfile.link",
+        "facebookProfile.name",
+        "facebookProfile.picture",
+        "facebookProfile.reach",
+        "facebookProfile.type",
+        "twitterAccount.id",
+        "twitterAccount.userId",
+        "twitterAccount.handle",
+        "twitterAccount.fullName",
+        "twitterAccount.profilePicture",
+        "twitterAccount.description",
+        "twitterAccount.followersCount",
+        "twitterAccount.followingCount",
+        "twitterAccount.listedCount",
+        "twitterAccount.accountCreatedAt",
+        "twitterAccount.location",
+        "twitterAccount.geoEnabled",
+        "twitterAccount.lang",
+        "twitterAccount.timeZone",
+        "twitterAccount.utcOffset",
+        "twitterAccount.verified",
+        "twitterAccount.protected",
+        "twitterAccount.averageFavorites",
+        "twitterAccount.averageRetweets",
+        "twitterAccount.averageEngagements",
+        "twitterAccount.engagementRate",
+        "twitterAccount.primaryAccount",
+        "twitterAccount.twitterExternalId",
+        "twitterAccount.createdAt",
+        "pinterestAccount.id",
+        "pinterestAccount.averageEngagements",
+        "pinterestAccount.bio",
+        "pinterestAccount.boardsCount",
+        "pinterestAccount.createdAt",
+        "pinterestAccount.engagementRate",
+        "pinterestAccount.externalId",
+        "pinterestAccount.firstName",
+        "pinterestAccount.followersCount",
+        "pinterestAccount.followingCount",
+        "pinterestAccount.lastName",
+        "pinterestAccount.monthlyViewers",
+        "pinterestAccount.pinsCount",
+        "pinterestAccount.primaryAccount",
+        "pinterestAccount.profilePicture",
+        "pinterestAccount.updatedAt",
+        "pinterestAccount.userId",
+        "pinterestAccount.username",
+        "blog.id",
+        "blog.globalUserId",
+        "blog.language",
+        "blog.name",
+        "blog.platform",
+        "blog.url",
+        "youtubeChannel.id",
+        "youtubeChannel.userId",
+        "youtubeChannel.username",
+        "youtubeChannel.bio",
+        "youtubeChannel.accountCreatedAt",
+        "youtubeChannel.profilePicture",
+        "youtubeChannel.followersCount",
+        "youtubeChannel.videoCount",
+        "youtubeChannel.commentCount",
+        "youtubeChannel.viewCount",
+        "youtubeChannel.primaryAccount",
+        "youtubeChannel.youtubeExternalId",
+        "youtubeChannel.handle",
+        "youtubeChannel.global_user_id",
+        "user.stageJoinDate"
+      ]
+    }
+  },
+  "$defs": {
+    "UserSearch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DemographicsPro_Audience_Data_Analysis": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "DemographicsPro_Audience_Gender_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_MaritalStatus_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_ParentalStatus_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Age_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Race_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Language_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Country_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_State_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_City_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_EducationStatus_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_PersonalIncome_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Occupation_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Industry_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Employer_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_EducationOrganization_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_LikesAndInterests_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_PeopleInfluences_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_MediaInfluences_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_BrandInfluences_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Favorite_MusicGenre_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Favorite_MusicSoloArtist_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Favorite_MusicBands_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_SportsFollowed_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_SportTeamSupported_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_BrandInfluences_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Country_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Gender_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Age_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Race_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Language_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "DemographicsPro_Audience_Data_Analysis_Facebook": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "DemographicsPro_Audience_Gender_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Country_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_City_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Age_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "DemographicsPro_Audience_Data_Analysis_TikTok": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "DemographicsPro_Audience_Gender_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_MaritalStatus_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_ParentalStatus_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Age_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Race_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Language_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Country_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_State_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_City_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_EducationStatus_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_PersonalIncome_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Occupation_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Industry_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Employer_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_EducationOrganization_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_LikesAndInterests_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_PeopleInfluences_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_MediaInfluences_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_BrandInfluences_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Favorite_MusicGenre_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Favorite_MusicSoloArtist_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Favorite_MusicBands_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_SportsFollowed_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_SportTeamSupported_Max": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Gender_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Age_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Race_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Language_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_Country_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                },
+                "range": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "$gte": {
+                      "type": "number"
+                    },
+                    "$lte": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_State_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "DemographicsPro_Audience_City_All": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "multiTerm",
+              "properties": {
+                "quantifier": {
+                  "type": "string",
+                  "enum": [
+                    "any",
+                    "all"
+                  ]
+                },
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "integer",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "DemographicsPro_Audience_Data_Analysis_Snapchat": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "DemographicsPro_Audience_Age_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Country_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "DemographicsPro_Audience_Gender_Max": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "memberSelectedEthnicities": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ethnicGroup": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "dataPoints": {
+          "type": "object",
+          "x-filter-type": "terms"
+        },
+        "instagramAccount": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "isBusiness": {
+              "type": "boolean",
+              "x-filter-type": "boolean"
+            },
+            "isPrivate": {
+              "type": "boolean",
+              "x-filter-type": "boolean"
+            },
+            "handle": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "followersCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageLikes": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageComments": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageEngagements": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "engagementRate": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "facebookProfile": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "reach": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageLikes": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageComments": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageEngagements": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "engagementRate": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "tiktokCreator": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "audiencePredominantAgeRange": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "audiencePredominantCountry": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "audiencePredominantDevice": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "audiencePredominantGender": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "audiencePredominantLocale": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string"
+              }
+            },
+            "followersCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "engagementRate": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "accountType": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Business",
+              "Brand",
+              "Creator",
+              "Influencer"
+            ]
+          }
+        },
+        "twitterAccount": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "followersCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageFavorites": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageRetweets": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageEngagements": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "engagementRate": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "pinterestAccount": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "followersCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "monthlyViewers": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "averageEngagements": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "engagementRate": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "boardsCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "pinsCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "appMembership": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "totalImpressions": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "lifetimeClicks": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "lifetimeConversions": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "lifetimeConversionsValue": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "mostRecentActivationDate": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          }
+        },
+        "registeredInfluencer": {
+          "type": "object",
+          "additionalProperties": false
+        },
+        "hasPosted": {
+          "type": "object",
+          "additionalProperties": false
+        },
+        "blog": {
+          "type": "object",
+          "x-filter-type": "exists",
+          "additionalProperties": false
+        },
+        "youtubeChannel": {
+          "type": "object",
+          "x-filter-type": "exists",
+          "additionalProperties": false,
+          "properties": {
+            "followersCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "snapchatAccount": {
+          "type": "object",
+          "x-filter-type": "exists",
+          "additionalProperties": false,
+          "properties": {
+            "followersCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "engagementRate": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "profileTier": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "TIER_STANDARD",
+                  "TIER_PUBLIC_OFFICIAL",
+                  "TIER_PUBLIC"
+                ]
+              }
+            },
+            "profileType": {
+              "type": "array",
+              "x-filter-type": "term",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Emerging Creator",
+                  "Snap Star",
+                  "Business",
+                  "Official Business"
+                ]
+              }
+            },
+            "shareAuthorizedDataWithApiPartners": {
+              "type": "boolean",
+              "additionalProperties": false,
+              "x-filter-type": "boolean"
+            }
+          }
+        },
+        "customInfluencerStatusId": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "dueDate": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "audienceLocation": {
+          "type": "object",
+          "x-filter-type": "$or",
+          "additionalProperties": false,
+          "properties": {
+            "audiencePredominantCity": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "audiencePredominantCountry": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "hasSponsoredContent": {
+          "type": "object",
+          "x-filter-type": "$or",
+          "properties": {
+            "instagramPost.isSponsored": {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              }
+            },
+            "tiktokPosts.isSponsored": {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "globalPerformanceComposites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "emv",
+                    "roi",
+                    "cpp",
+                    "cpe",
+                    "cpm",
+                    "sponsoredContentEmv",
+                    "sponsoredContentRoi",
+                    "sponsoredContentCpp",
+                    "sponsoredContentCpe",
+                    "sponsoredContentCpm"
+                  ]
+                }
+              },
+              "payload": {
+                "x-filter-type": "range",
+                "properties": {
+                  "$gte": {
+                    "type": "number"
+                  },
+                  "$lte": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "globalPerformanceMetrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "emv": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "roi": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "cpp": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "cpe": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "cpm": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "sponsoredContentEmv": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "sponsoredContentRoi": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "sponsoredContentCpp": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "sponsoredContentCpe": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "sponsoredContentCpm": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "costPerMavelyLinkClick": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "hasTrackingOrAffiliateLinksData": {
+              "type": "boolean",
+              "additionalProperties": false,
+              "x-filter-type": "boolean"
+            },
+            "brandsCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "campaignsCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            },
+            "boundContentCount": {
+              "type": "object",
+              "additionalProperties": false,
+              "x-filter-type": "range",
+              "properties": {
+                "$gte": {
+                  "type": "number"
+                },
+                "$lte": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "city": {
+          "type": "string",
+          "x-filter-type": "text"
+        },
+        "unverified": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string",
+            "enum": [
+              "hidden",
+              "emails",
+              "excludes"
+            ]
+          }
+        },
+        "country": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Afghanistan",
+              "Albania",
+              "Algeria",
+              "American Samoa",
+              "Andorra",
+              "Angola",
+              "Anguilla",
+              "Antarctica",
+              "Antigua and Barbuda",
+              "Argentina",
+              "Armenia",
+              "Aruba",
+              "Australia",
+              "Austria",
+              "Azerbaijan",
+              "Bahrain",
+              "Bangladesh",
+              "Barbados",
+              "Belarus",
+              "Belgium",
+              "Belize",
+              "Benin",
+              "Bermuda",
+              "Bhutan",
+              "Bolivia",
+              "Bosnia and Herzegovina",
+              "Botswana",
+              "Bouvet Island",
+              "Brazil",
+              "British Indian Ocean Territory",
+              "British Virgin Islands",
+              "Brunei",
+              "Bulgaria",
+              "Burkina Faso",
+              "Burundi",
+              "Cambodia",
+              "Cameroon",
+              "Canada",
+              "Cape Verde",
+              "Caribbean Netherlands",
+              "Cayman Islands",
+              "Central African Republic",
+              "Chad",
+              "Chile",
+              "China",
+              "Christmas Island",
+              "Cocos (Keeling) Islands",
+              "Collectivity of Saint Martin",
+              "Colombia",
+              "Comoros",
+              "Cook Islands",
+              "Costa Rica",
+              "Côte d'Ivoire",
+              "Croatia",
+              "Cuba",
+              "Curaçao",
+              "Cyprus",
+              "Czechia",
+              "Democratic Republic of the Congo",
+              "Denmark",
+              "Djibouti",
+              "Dominica",
+              "Dominican Republic",
+              "Ecuador",
+              "Egypt",
+              "El Salvador",
+              "Equatorial Guinea",
+              "Eritrea",
+              "Estonia",
+              "Ethiopia",
+              "Falkland Islands (Malvinas)",
+              "Faroe Islands",
+              "Federated States of Micronesia",
+              "Fiji",
+              "Finland",
+              "France",
+              "French Guiana",
+              "French Polynesia",
+              "French Southern Territories",
+              "Gabon",
+              "Georgia",
+              "Germany",
+              "Ghana",
+              "Gibraltar",
+              "Greece",
+              "Greenland",
+              "Grenada",
+              "Guadeloupe",
+              "Guam",
+              "Guatemala",
+              "Guernsey",
+              "Guinea",
+              "Guinea-Bissau",
+              "Guyana",
+              "Haiti",
+              "Heard Island and McDonald Islands",
+              "Holy See (Vatican City)",
+              "Honduras",
+              "Hong Kong",
+              "Hungary",
+              "Iceland",
+              "India",
+              "Indonesia",
+              "Iran",
+              "Iraq",
+              "Ireland",
+              "Isle of Man",
+              "Israel",
+              "Jamaica",
+              "Japan",
+              "Italy",
+              "Jersey",
+              "Jordan",
+              "Kazakhstan",
+              "Kenya",
+              "Kiribati",
+              "Kuwait",
+              "Kyrgyzstan",
+              "Laos",
+              "Latvia",
+              "Lebanon",
+              "Lesotho",
+              "Liberia",
+              "Libya",
+              "Liechtenstein",
+              "Lithuania",
+              "Luxembourg",
+              "Macau",
+              "Macedonia (FYROM)",
+              "Madagascar",
+              "Malawi",
+              "Malaysia",
+              "Maldives",
+              "Mali",
+              "Malta",
+              "Marshall Islands",
+              "Martinique",
+              "Mauritania",
+              "Mauritius",
+              "Mayotte",
+              "Mexico",
+              "Moldova",
+              "Monaco",
+              "Mongolia",
+              "Montenegro",
+              "Montserrat",
+              "Morocco",
+              "Mozambique",
+              "Myanmar (Burma)",
+              "Namibia",
+              "Nauru",
+              "Nepal",
+              "Netherlands",
+              "New Caledonia",
+              "New Zealand",
+              "Nicaragua",
+              "Niger",
+              "Nigeria",
+              "Niue",
+              "Norfolk Island",
+              "North Korea",
+              "Northern Mariana Islands",
+              "Norway",
+              "Oman",
+              "Pakistan",
+              "Palau",
+              "Palestine",
+              "Panama",
+              "Papua New Guinea",
+              "Paraguay",
+              "Peru",
+              "Philippines",
+              "Pitcairn",
+              "Poland",
+              "Portugal",
+              "Puerto Rico",
+              "Qatar",
+              "Republic of the Congo",
+              "Reunion",
+              "Romania",
+              "Russia",
+              "Rwanda",
+              "Saint Helena, Ascension and Tristan da Cunha",
+              "Saint Kitts and Nevis",
+              "Saint Lucia",
+              "Saint Pierre and Miquelon",
+              "Saint Vincent and the Grenadines",
+              "Saint-Barthélemy",
+              "Samoa",
+              "San Marino",
+              "Sao Tome and Principe",
+              "Saudi Arabia",
+              "Senegal",
+              "Serbia",
+              "Seychelles",
+              "Sierra Leone",
+              "Singapore",
+              "Sint Maarten (Dutch part)",
+              "Slovakia",
+              "Slovenia",
+              "Solomon Islands",
+              "Somalia",
+              "South Africa",
+              "South Georgia and the South Sandwich Islands",
+              "South Korea",
+              "South Sudan",
+              "Spain",
+              "Sri Lanka",
+              "Sudan",
+              "Suriname",
+              "Svalbard and Jan Mayen",
+              "Swaziland",
+              "Sweden",
+              "Switzerland",
+              "Syria",
+              "Taiwan",
+              "Tajikistan",
+              "Tanzania",
+              "Thailand",
+              "The Bahamas",
+              "The Gambia",
+              "Timor-Leste",
+              "Togo",
+              "Tokelau",
+              "Tonga",
+              "Trinidad and Tobago",
+              "Tunisia",
+              "Turkey",
+              "Turkmenistan",
+              "Turks and Caicos Islands",
+              "Tuvalu",
+              "U.S. Virgin Islands",
+              "Uganda",
+              "Ukraine",
+              "United Arab Emirates",
+              "United Kingdom",
+              "United States Minor Outlying Islands",
+              "United States",
+              "Uruguay",
+              "Uzbekistan",
+              "Vanuatu",
+              "Venezuela",
+              "Vietnam",
+              "Wallis and Futuna",
+              "Western Sahara",
+              "Yemen",
+              "Zambia",
+              "Zimbabwe",
+              "Åland Islands"
+            ]
+          }
+        },
+        "gender": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other",
+              "non_bin",
+              "describe"
+            ]
+          }
+        },
+        "state": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zip": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string"
+          }
+        },
+        "audiencePredominantCountry": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string"
+          }
+        },
+        "audiencePredominantAgeRange": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string"
+          }
+        },
+        "audiencePredominantCity": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string"
+          }
+        },
+        "audienceFraudLevel": {
+          "type": "array",
+          "x-filter-type": "term",
+          "items": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        },
+        "age": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-filter-type": "range",
+          "properties": {
+            "$gte": {
+              "type": "number"
+            },
+            "$lte": {
+              "type": "number"
+            }
+          }
+        },
+        "birthday": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-filter-type": "range",
+          "properties": {
+            "$gte": {
+              "type": "number"
+            },
+            "$lte": {
+              "type": "number"
+            }
+          }
+        },
+        "audiencePercentageFemale": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-filter-type": "range",
+          "properties": {
+            "$gte": {
+              "type": "number"
+            },
+            "$lte": {
+              "type": "number"
+            }
+          }
+        },
+        "cpe": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-filter-type": "range",
+          "properties": {
+            "$gte": {
+              "type": "number"
+            },
+            "$lte": {
+              "type": "number"
+            }
+          }
+        },
+        "cpm": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-filter-type": "range",
+          "properties": {
+            "$gte": {
+              "type": "number"
+            },
+            "$lte": {
+              "type": "number"
+            }
+          }
+        },
+        "cpp": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-filter-type": "range",
+          "properties": {
+            "$gte": {
+              "type": "number"
+            },
+            "$lte": {
+              "type": "number"
+            }
+          }
+        },
+        "lists": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-filter-type": "multiTerm",
+          "properties": {
+            "quantifier": {
+              "type": "string",
+              "enum": [
+                "any",
+                "all"
+              ]
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "integer",
+                  "string"
+                ]
+              }
+            }
+          }
+        },
+        "topics": {
+          "type": "object",
+          "additionalProperties": false,
+          "x-filter-type": "multiTerm",
+          "properties": {
+            "quantifier": {
+              "type": "string",
+              "enum": [
+                "any",
+                "all"
+              ]
+            },
+            "ids": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "integer",
+                  "string"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

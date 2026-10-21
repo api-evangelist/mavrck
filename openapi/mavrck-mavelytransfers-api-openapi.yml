@@ -57,12 +57,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -73,6 +73,22 @@ components:
       - details
       type: object
       additionalProperties: false
+    MavelyTransferWithStatusHistoryResponse:
+      properties:
+        instanceId:
+          type: string
+        actionGroupId:
+          type: number
+          format: double
+        statusHistory:
+          items:
+            $ref: '#/components/schemas/MavelyTransferStatusRecord'
+          type: array
+      required:
+      - instanceId
+      - actionGroupId
+      - statusHistory
+      type: object
     ServerError:
       properties:
         message:
@@ -105,28 +121,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    MavelyTransferWithStatusHistoryResponse:
-      properties:
-        instanceId:
-          type: string
-        actionGroupId:
-          type: number
-          format: double
-        statusHistory:
-          items:
-            $ref: '#/components/schemas/MavelyTransferStatusRecord'
-          type: array
-      required:
-      - instanceId
-      - actionGroupId
-      - statusHistory
-      type: object
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

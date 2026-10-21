@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-payment-recipient-create-request-schema.json",
+  "title": "PaymentRecipientCreateRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-paymentrecipient-api-openapi.yml#/components/schemas/PaymentRecipientCreateRequest",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "include": {
+      "items": {
+        "type": "string",
+        "enum": [
+          "TIPALTI_PAYEE"
+        ]
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "email"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

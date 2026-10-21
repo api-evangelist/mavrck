@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-update-content-activation-summary-request-schema.json",
+  "title": "UpdateContentActivationSummaryRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-backfill-analytics-api-openapi.yml#/components/schemas/UpdateContentActivationSummaryRequest",
+  "properties": {
+    "entities": {
+      "items": {
+        "$ref": "#/$defs/UpdateContentActivationSummaryEntity"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "entities"
+  ],
+  "type": "object",
+  "$defs": {
+    "UpdateContentActivationSummaryEntity": {
+      "properties": {
+        "activationId": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": {
+        "additionalProperties": true
+      },
+      "required": [
+        "activationId"
+      ],
+      "type": "object"
+    }
+  }
+}

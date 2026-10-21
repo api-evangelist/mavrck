@@ -1,0 +1,439 @@
+generated: '2026-10-20'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/mavrck-account-invitations-api-openapi.yml
+- openapi/mavrck-action-groups-api-openapi.yml
+- openapi/mavrck-actiongroupbrief-api-openapi.yml
+- openapi/mavrck-actiongroupbulkscheduledmessages-api-openapi.yml
+- openapi/mavrck-actiongroupconversationtemplates-api-openapi.yml
+vocabulary:
+  name: Mavrck Domain Vocabulary
+  description: 'Terms declared by Mavrck''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-20'
+  terms:
+  - term: ForbiddenError
+    definition: 'Object declared by the contract with fields: message, details.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/ForbiddenError
+  - term: ResponseBody_AccountInvitationDomain-Array_
+    definition: 'Object declared by the contract with fields: data, meta.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/ResponseBody_AccountInvitationDomain-Array_
+  - term: AccountInvitationDomain
+    definition: 'Object declared by the contract with fields: communityId, createdAt, email, mailerStatus, expiresAt, fulfilledByAccountId, id,
+      inviteeRoleId, updatedAt.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/AccountInvitationDomain
+  - term: AccountActivationPostRequestBody
+    definition: 'Object declared by the contract with fields: communityId, email, inviteeRoleId.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/AccountActivationPostRequestBody
+  - term: ResponseMeta
+    definition: 'Object declared by the contract with fields: limit, offset, totalCount.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/ResponseMeta
+  - term: AccountActivationPutRequestBody
+    definition: 'Object declared by the contract with fields: email, inviteeRoleId.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/AccountActivationPutRequestBody
+  - term: ServerError
+    definition: 'Object declared by the contract with fields: message, details.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/ServerError
+  - term: ValidateErrorJSON
+    definition: 'Object declared by the contract with fields: message, details.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/ValidateErrorJSON
+  - term: NotFoundError
+    definition: 'Object declared by the contract with fields: message, details.'
+    tags:
+    - Object
+    source: openapi/mavrck-account-invitations-api-openapi.yml#/components/schemas/NotFoundError
+  - term: ActionGroupParticipantInstagramProfileDto
+    definition: 'Object declared by the contract with fields: profileType, profilePicture, mediaCount, isPrivate, isBusiness, handle, fullName,
+      followingCount, followersCount, engagementRate, averageLikes, averageEngagements. (1 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantInstagramProfileDto
+  - term: ActionGroupParticipantCustomStatusDto
+    definition: 'Object declared by the contract with fields: custom, linkedStages, statusOrder, slug, phase, label, id, disabled, ctaLabel, auxiliaryLabel.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantCustomStatusDto
+  - term: ActionGroupParticipantDto
+    definition: 'Object declared by the contract with fields: user, upvotes, totalVotes, statusId, participating, optedIn, netVotes, listMemberId,
+      listMemberCostAndPerformance, tiktokPosts, instagramPosts, id. (9 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantDto
+  - term: TikTokVideoViewsBySource
+    definition: 'Object declared by the contract with fields: source, videoViews.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/TikTokVideoViewsBySource
+  - term: TikTokAudienceAgeDistribution
+    definition: 'Object declared by the contract with fields: age, percentage.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/TikTokAudienceAgeDistribution
+  - term: BadRequestError
+    definition: 'Object declared by the contract with fields: details, message.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/BadRequestError
+  - term: Framework.NotFoundError
+    definition: 'Object declared by the contract with fields: message, details.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/Framework.NotFoundError
+  - term: PostActivationsRequestBody
+    definition: 'Object declared by the contract with fields: audienceAgeDistribution, audienceCountriesDistribution, audienceGendersDistribution,
+      audienceInterestDistribution, caption, clicks, comments, commentsOrganic, commentsPaid, createdAt, externalId, engagementCount. (20 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/PostActivationsRequestBody
+  - term: ActionGroupParticipantMembershipDto
+    definition: 'Object declared by the contract with fields: contactInfo, updatedAt, totalImpressions, status, mostRecentActivationDate, membershipType,
+      membershipId, lifetimeConversionsValue, lifetimeConversions, lifetimeClicks, id, createdAt. (1 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantMembershipDto
+  - term: Framework.ForbiddenError
+    definition: 'Object declared by the contract with fields: message, details.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/Framework.ForbiddenError
+  - term: ActionGroupParticipantInstagramPostDto
+    definition: 'Object declared by the contract with fields: link, imageUrl.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantInstagramPostDto
+  - term: ActionGroupParticipantApplicationResponseDto
+    definition: 'Object declared by the contract with fields: value, key.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantApplicationResponseDto
+  - term: ActionGroupParticipantFacebookProfileDto
+    definition: 'Object declared by the contract with fields: type, averageLikes, picture, name, facebookExternalId.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantFacebookProfileDto
+  - term: TikTokAudienceCountriesDistribution
+    definition: 'Object declared by the contract with fields: country, percentage.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/TikTokAudienceCountriesDistribution
+  - term: QueryActionGroupParticipantsResponse
+    definition: 'Object declared by the contract with fields: data, meta.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/QueryActionGroupParticipantsResponse
+  - term: QueryActionGroupParticipantMetadata
+    definition: 'Object declared by the contract with fields: offset, limit, totalCount.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/QueryActionGroupParticipantMetadata
+  - term: ActionGroupParticipantTiktokPostDto
+    definition: 'Object declared by the contract with fields: link, imageUrl.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantTiktokPostDto
+  - term: ActionGroupParticipantUserDto
+    definition: 'Object declared by the contract with fields: tiktokCreator, instagramAccount, facebookProfile, appMembership, influencerTopics,
+      state, id, gender, fullName, email, country, city. (13 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantUserDto
+  - term: Framework.BadRequestError
+    definition: 'Object declared by the contract with fields: details, message.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/Framework.BadRequestError
+  - term: TikTokAudienceGendersDistribution
+    definition: 'Object declared by the contract with fields: gender, percentage.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/TikTokAudienceGendersDistribution
+  - term: ActionGroupParticipantTopicDto
+    definition: 'Object declared by the contract with fields: slug, name, id.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantTopicDto
+  - term: ActionGroupParticipantTiktokProfileDto
+    definition: 'Object declared by the contract with fields: status, profileImage, isActive, handleName, globalUserId, followersCount, displayName.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantTiktokProfileDto
+  - term: TikTokAudienceInterestDistribution
+    definition: 'Object declared by the contract with fields: interestTag, percentage.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/TikTokAudienceInterestDistribution
+  - term: ActionGroupParticipantAssessmentDto
+    definition: 'Object declared by the contract with fields: createdAt, assessorName, assessorEmail, approves.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantAssessmentDto
+  - term: Framework.ServerError
+    definition: 'Object declared by the contract with fields: message, details.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/Framework.ServerError
+  - term: ActionGroupParticipantContactInfoDto
+    definition: 'Object declared by the contract with fields: zip, street, state, phone, lastName, genderDescription, gender, fullName, firstName,
+      email, country, city. (2 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantContactInfoDto
+  - term: ActionGroupParticipantCostAndPerformanceDto
+    definition: 'Object declared by the contract with fields: value, rewards, posts, listMemberId, impressions, engagements, cost, conversionValue,
+      conversions, clicks.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupParticipantCostAndPerformanceDto
+  - term: ActionGroupTeaser
+    definition: 'Object declared by the contract with fields: id, title, description, image, type, contentType, startDate, endDate, brand, actions,
+      termsOfServiceLink, listId. (2 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupTeaser
+  - term: ResponseMetadata
+    definition: 'Object declared by the contract with fields: limit, offset, status, totalCount.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ResponseMetadata
+  - term: IncentiveDeprecated
+    definition: 'Object declared by the contract with fields: id, incentiveTitle, incentiveDescription, image, quantity, sweepstakesWinnersQty,
+      type, rewardWinType, sweepstakesUrl, sweepsRules, promocode, multipleClaims. (36 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/IncentiveDeprecated
+  - term: IncentiveTermsAndConditionsDeprecated
+    definition: 'Object declared by the contract with fields: template, preview, params.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/IncentiveTermsAndConditionsDeprecated
+  - term: DataPointDefinitionDeprecated
+    definition: 'Object declared by the contract with fields: id, key, name, description, multi, customSet, type, markUpDescription, communityId,
+      createdAt, updatedAt, mergeTag. (4 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/DataPointDefinitionDeprecated
+  - term: IncentiveUnlockEvent
+    definition: 'Enumeration declared by the contract with values: acceptance, completion, pending_shipment, pending_payment.'
+    tags:
+    - Enumeration
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/IncentiveUnlockEvent
+  - term: ConversationResponseMetadata
+    definition: 'Object declared by the contract with fields: totalCount, limit, offset, markedAsUnreadCount.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ConversationResponseMetadata
+  - term: BazaarVoiceAppProductDeprecated
+    definition: 'Object declared by the contract with fields: reviewProductId, externalBazaarProductId.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/BazaarVoiceAppProductDeprecated
+  - term: LinksDeprecated
+    definition: 'Object declared by the contract with fields: normal, deep.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/LinksDeprecated
+  - term: Conversation
+    definition: 'Object declared by the contract with fields: id, communityId, subject, mostRecentMessageCreatedAt, mostRecentMessageParsedReply,
+      mostRecentMessageSenderDisplayName, hasAttachment, hasInbound, hasOutbound, markedAsUnread, messageCount, draftCount. (7 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/Conversation
+  - term: ActionGroupSubscriber
+    definition: 'Object declared by the contract with fields: email, accountId.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupSubscriber
+  - term: ProductDeprecated
+    definition: 'Object declared by the contract with fields: id, title, description, image, communityId, bazaarVoiceAppProduct, powerReviewsPage,
+      yotpoAppProduct.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ProductDeprecated
+  - term: MembershipContactInfoDeprecated
+    definition: 'Object declared by the contract with fields: age, apt, birthday, city, country, email, emailIsVerified, firstName, fullName,
+      gender, genderDescription, lastName. (5 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/MembershipContactInfoDeprecated
+  - term: ActionTeaserTS
+    definition: 'Object declared by the contract with fields: id, title, description, image, instructions, type, routing, brand.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionTeaserTS
+  - term: WorkflowStatusBuckets
+    definition: 'Object declared by the contract with fields: id, total, accepted, applicants, candidates, completed, participants, pending, rejected.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/WorkflowStatusBuckets
+  - term: ActionGroupPostResponse
+    definition: 'Object declared by the contract with fields: workflowStatuses, title, requiredHashtag, numberOfInfluencers, listId, internalDescription,
+      ftcHashtag, createdAt, brief, activityBudget, id, actions.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupPostResponse
+  - term: ActionGroupCandidateQueryFilter
+    definition: 'Object declared by the contract with fields: userFilter, q, statusId, workflowStageId, customStatusId, customInfluencerStatusId,
+      dueDate, completed, optedIn, participating, excludedGlobalUserIds, expectedNumberOfInfluencers. (1 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupCandidateQueryFilter
+  - term: ListDeliverable
+    definition: 'Object declared by the contract with fields: contentType, contentTypeName, count, id, listId, updatedBy.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ListDeliverable
+  - term: RoutingDeprecated
+    definition: Routing configuration.
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/RoutingDeprecated
+  - term: ActivationURI
+    definition: 'Object declared by the contract with fields: id, incentive, points.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActivationURI
+  - term: QuestionDeprecated
+    definition: 'Object declared by the contract with fields: id, key, type, className, questionText, markUpQuestionText, questionResponses, maxResponses,
+      hasResponses, templateOptions, dataPointDefinitionId, dataPointDefinition. (3 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/QuestionDeprecated
+  - term: ListCustomStatusDeprecated
+    definition: 'Object declared by the contract with fields: id, label, ctaLabel, auxiliaryLabel, slug, phase, statusOrder, disabled, custom,
+      linkedStages, templates, requirements.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ListCustomStatusDeprecated
+  - term: WorkflowStatusRequirementDeprecated
+    definition: 'Object declared by the contract with fields: satisfied, incentiveId, name.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/WorkflowStatusRequirementDeprecated
+  - term: PowerReviewsAppDeprecated
+    definition: 'Object declared by the contract with fields: id, apiKey, environment, merchantId, name, locale, communityId.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/PowerReviewsAppDeprecated
+  - term: AudienceDeprecated
+    definition: 'Object declared by the contract with fields: id, name, criteria.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/AudienceDeprecated
+  - term: InstanceUserMaterializedView
+    definition: 'Object declared by the contract with fields: communityId, lifetimeImpressions, lifetimeClicks, lifetimeConversions, lifetimeValue,
+      blogName, facebookFollowersCount, facebookName, facebookPicture, facebookAverageEngagements, facebookEngagementRate, globalUserId. (40 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/InstanceUserMaterializedView
+  - term: IncentiveClaimDeprecated
+    definition: 'Object declared by the contract with fields: id, membershipId, globalUserId, promocode, createdAt, profilePictureLink, firstName,
+      lastName, email, address, age, gender. (5 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/IncentiveClaimDeprecated
+  - term: ConversionTagDeprecated
+    definition: 'Object declared by the contract with fields: id, name, code, type, isActive, isConversionValueEnabled.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ConversionTagDeprecated
+  - term: RoutingOptionsDeprecated
+    definition: Routing options
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/RoutingOptionsDeprecated
+  - term: ActionGroupIncentivePutBody
+    definition: 'Object declared by the contract with fields: id, actionGroupId, unlockEvent.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ActionGroupIncentivePutBody
+  - term: YotpoAppProductDeprecated
+    definition: 'Object declared by the contract with fields: reviewProductId, yotpoProductId.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/YotpoAppProductDeprecated
+  - term: AdministratorDeprecated
+    definition: 'Object declared by the contract with fields: id, email, first_name, last_name, image, approves, createdAt.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/AdministratorDeprecated
+  - term: Message
+    definition: 'Object declared by the contract with fields: id, subject, messageIdHeader, conversationId, scheduledFor, scheduledMessage, inReplyToHeader,
+      status, html, parsedReply, isInbound, hasBeenOpened. (12 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/Message
+  - term: MessageRecipient
+    definition: 'Object declared by the contract with fields: displayName, email, emailId, role.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/MessageRecipient
+  - term: MetaInformationDeprecated
+    definition: This information is pulled when an external network parses the link for meta tags.
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/MetaInformationDeprecated
+  - term: ListMemberDeprecated
+    definition: 'Object declared by the contract with fields: id, globalUserId, listId, statusId, statusLocked, customStatusId, customStatus,
+      customInfluencerStatusId, optedIn, optedInDate, dueDate, postedDate. (6 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ListMemberDeprecated
+  - term: ConversationTemplateDeprecated
+    definition: 'Object declared by the contract with fields: id, category, title, subject, html, createdBy, lastModifiedBy, createdAt, updatedAt,
+      deliveryMethod, sendOnEvent, sendOnDays. (5 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/ConversationTemplateDeprecated
+  - term: BrandDeprecated
+    definition: 'Object declared by the contract with fields: id, name, logo, accentColor, buttonColor, associatedWithCampaign.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/BrandDeprecated
+  - term: EmailSmtp
+    definition: 'Object declared by the contract with fields: email, name.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/EmailSmtp
+  - term: PowerReviewsPageDeprecated
+    definition: 'Object declared by the contract with fields: id, reviewProductId, powerReviewsAppId, externalPageId, PowerReviewsApp.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/PowerReviewsPageDeprecated
+  - term: MembershipDeprecated
+    definition: 'Object declared by the contract with fields: id, membershipId, status, createdAt, updatedAt, membershipType, blacklisted, utmContent,
+      utmCampaign, contactInfo, pointsCurrentBalance, totalPoints. (6 more)'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/MembershipDeprecated
+  - term: PendingActivationURI
+    definition: 'Object declared by the contract with fields: id.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/PendingActivationURI
+  - term: Gender
+    definition: 'Enumeration declared by the contract with values: describe, female, male, non_bin, other.'
+    tags:
+    - Enumeration
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/Gender
+  - term: InfluencerDataPointCriteriaDeprecated
+    definition: 'Object declared by the contract with fields: key, value, values, minValue, maxValue.'
+    tags:
+    - Object
+    source: openapi/mavrck-action-groups-api-openapi.yml#/components/schemas/InfluencerDataPointCriteriaDeprecated

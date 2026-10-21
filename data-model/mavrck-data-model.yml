@@ -1,26 +1,19 @@
 generated: '2026-08-12'
 method: derived
-source: >-
-  openapi/_original/mavrck-openapi.json (1071 definitions, 548 paths) and
-  openapi/_original/mavrck-reporting-api.json (17 schemas). Relationships are
-  computed from local $ref links and from `<name>Id` / `<name>Ids` reference
-  fields; nothing here is authored by hand.
+source: openapi/_original/mavrck-openapi.json (1071 definitions, 548 paths) and openapi/_original/mavrck-reporting-api.json
+  (17 schemas). Relationships are computed from local $ref links and from `<name>Id` / `<name>Ids` reference fields; nothing
+  here is authored by hand.
 summary:
   spec_definitions: 1071
   definitions_referenced_by_operations: 524
   entities_documented: 36
-  id_convention: >-
-    Numeric surrogate integers on the platform API (`id`, `instanceId`,
-    `campaignId`, `membershipId`) with no type prefixes, plus opaque string GUIDs
-    on the global-user surface (`globalUserId`, and `/v1/global-users/random/guids`).
-    The Reporting API returns string ids (`instanceIds: ["instance_abc"]`).
-    There is no published object-reference page, so no id-prefix table exists to
-    search for.
-  core_spine: >-
-    Instance -> Campaign / ActionGroup -> Candidate / Membership -> GlobalUser.
-    A GlobalUser is the person as Mavrck knows them across every customer; a
-    Membership is that person's relationship to ONE customer instance. Almost
-    every other entity hangs off one of those two.
+  id_convention: 'Numeric surrogate integers on the platform API (`id`, `instanceId`, `campaignId`, `membershipId`) with no
+    type prefixes, plus opaque string GUIDs on the global-user surface (`globalUserId`, and `/v1/global-users/random/guids`).
+    The Reporting API returns string ids (`instanceIds: ["instance_abc"]`). There is no published object-reference page, so
+    no id-prefix table exists to search for.'
+  core_spine: Instance -> Campaign / ActionGroup -> Candidate / Membership -> GlobalUser. A GlobalUser is the person as Mavrck
+    knows them across every customer; a Membership is that person's relationship to ONE customer instance. Almost every other
+    entity hangs off one of those two.
   render: null
 entities:
 - name: InfluencerPreview
@@ -614,3 +607,4 @@ entities:
     via: author
 - name: Topic
   field_count: 3
+relationships: []

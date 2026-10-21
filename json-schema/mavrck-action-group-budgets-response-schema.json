@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-action-group-budgets-response-schema.json",
+  "title": "ActionGroupBudgetsResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-budgets-api-openapi.yml#/components/schemas/ActionGroupBudgetsResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/ActionGroupBudget"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "properties": {
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "totalCount"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "data",
+    "meta"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ActionGroupBudget": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "budget": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "pendingCost": {
+          "type": "number",
+          "format": "double"
+        },
+        "pendingCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "readyCost": {
+          "type": "number",
+          "format": "double"
+        },
+        "readyCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "fulfilledCost": {
+          "type": "number",
+          "format": "double"
+        },
+        "fulfilledCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "balance": {
+          "type": "object"
+        },
+        "title": {
+          "type": "object"
+        },
+        "budgetReferenceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "budgetReferenceIdType": {
+          "type": "object"
+        },
+        "contentDueDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/ActionGroupStatus"
+        },
+        "costsByCurrency": {
+          "items": {
+            "$ref": "#/$defs/ActionGroupBudgetCurrencyRollup"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "pendingCost",
+        "pendingCount",
+        "readyCost",
+        "readyCount",
+        "fulfilledCost",
+        "fulfilledCount",
+        "status"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ActionGroupBudgetCurrencyRollup": {
+      "description": "Per-currency cost rollup for a single action group.",
+      "properties": {
+        "currencyCode": {
+          "type": "string"
+        },
+        "pendingCost": {
+          "type": "number",
+          "format": "double"
+        },
+        "readyCost": {
+          "type": "number",
+          "format": "double"
+        },
+        "fulfilledCost": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "currencyCode",
+        "pendingCost",
+        "readyCost",
+        "fulfilledCost"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ActionGroupStatus": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "READY",
+        "PENDING",
+        "LIVE",
+        "PAUSED",
+        "EXPIRED",
+        "ARCHIVED"
+      ]
+    }
+  }
+}

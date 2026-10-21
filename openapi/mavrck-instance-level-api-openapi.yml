@@ -3,7 +3,135 @@ info:
   title: Later Influence™ Instance Level API
   description: '# Description
 
-    The Reporting API enables deep analysis and reporting of marketing campaigns, social media performance, and influencer effectiveness.'
+    The Reporting API enables deep analysis and reporting of marketing campaigns, social media performance, and influencer effectiveness.
+
+    It provides comprehensive performance insights at multiple levels:
+
+    - Instance Level: Get instance details, overall performance, and performance over time
+
+    - Campaign Level: Retrieve detailed campaign performance metrics
+
+    - Social Network Level: Analyze performance across different social networks and calculate return on investment
+
+    - Influencer Level: Evaluate individual influencer performance
+
+    - Post Level: Access granular performance data for individual posts
+
+
+    # Authentication
+
+    In order to use the Reporting API, OAuth2 authentication is required. The API uses the client credentials flow for authentication. To obtain an access token:
+
+
+    1. Request the client credentials (client ID and client secret) from the support team.
+
+    2. Make a POST request to the token endpoint: `https://api.mavrck.co/oauth/token`, including your client credentials in the request body.
+
+
+    Curl Example:
+
+    ```
+
+    curl --request POST \
+
+    --url ''https://api.mavrck.co/oauth/token'' \
+
+    --header ''Content-Type: application/json'' \
+
+    --header ''accept: application/json'' \
+
+    --data ''{
+
+    "clientId": "",
+
+    "clientSecret": ""
+
+    }''
+
+    ```
+
+
+    3. Include the obtained access token in the Authorization header of your API requests:
+
+
+    Curl Example:
+
+    ```
+
+    curl --request GET \
+
+    --url ''https://api.mavrck.co/v1/reporting/instance/details'' \
+
+    --header ''Content-Type: application/json'' \
+
+    --header ''accept: application/json'' \
+
+    --header ''Authorization: Bearer ****'' \
+
+    ```
+
+
+    For security reasons, access tokens have a limited lifespan of 12 hours. You should implement a mechanism to refresh the token when it expires.
+
+
+    # Data Availability
+
+    - Most endpoints return analytics that are current up to the previous day, as several social media platforms apply a 24-hour reporting delay.
+
+    - Data access is limited to the specific account or instances associated with the provided API credentials.
+
+    - Analytics are recorded on a daily basis and appear only when they fall within the selected date-range filters. For example, if a post was published a week ago but receives its first interaction today, that interaction will only be included when today’s date is part of the chosen range.
+
+
+    # Base Filters
+
+    All endpoints support the following filters:
+
+    - `startDate` (ISO 8601 format, e.g. 2024-01-01)
+
+    - `endDate` (ISO 8601 format, e.g. 2024-01-01). There is a limit of up to 2 years for the selected date range.
+
+    - `instanceIds` array of instance ids. If not provided, all instances associated with the API credentials will be considered.
+
+    - `campaignIds` array of campaign ids, if no campaign ids are provided, all campaigns for the instance will be used
+
+    - `reportingGroupIds` array of reporting group ids, if no reporting group ids are provided, all reporting groups for the instance will be used
+
+
+    # Pagination
+
+    - The pagination is available for endpoints returning large datasets.
+
+    - Use `pageSize` and `pageNumber` query parameters to control the results. For the `pageSize` parameter, the default is 50 and the maximum is 100.
+
+
+    # Versioning
+
+    - API versioning supported through URI path
+
+
+    # Changelog
+
+
+    ---
+
+
+    ## 2025-11-25 Introduce Multi-instance support
+
+    ### Added
+
+    - `GET /instances` API - Retrieve the list of instances accessible by the provided API credentials.
+
+    - `GET /instances/details` API - Get detailed information about the instances associated with the provided API credentials such as `influencersCount`, `campaignsCount`, and other relevant metrics. It is similar to the existing `GET /instance/details` endpoint but supports multiple instances.
+
+
+    ### Changed
+
+    - All endpoints now support an `instanceIds` query parameter, allowing you to filter results by specific instance IDs when your credentials have access to multiple instances.
+
+    - `GET /campaigns/performance` response includes a new string field `instanceId`.
+
+    - `GET /post/performance` response includes a new string field `instanceId`.'
   version: 1.2.1
   contact:
     name: Developer
@@ -238,40 +366,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    InstancesResponseDto:
-      type: object
-      properties:
-        instanceIds:
-          description: A list of instance ids the API credentials have access to
-          example:
-          - instance_123
-          - instance_456
-          type: array
-          items:
-            type: string
-      required:
-      - instanceIds
-    ReportingApiResponseDto:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: false
-        meta:
-          type:
-          - object
-          - 'null'
-          description: Metadata containing page information
-          properties:
-            page:
-              type: number
-              example: 1
-            totalPages:
-              type: number
-              example: 10
-      required:
-      - data
-      - meta
     InstanceDetailsResponseDto:
       type: object
       properties:
@@ -308,6 +402,55 @@ components:
       - campaignsCount
       - influencersCount
       - campaigns
+    PerformanceOverTimeDateDto:
+      type: object
+      properties:
+        year:
+          type: number
+          description: Year
+          example: 2023
+        quarter:
+          type: number
+          description: Quarter
+          example: 4
+        month:
+          type: number
+          description: Month
+          example: 10
+        week:
+          type: number
+          description: Week
+          example: 42
+        day:
+          type: number
+          description: Day
+          example: 15
+        fullDate:
+          type: string
+          description: ISO 8601 date format (YYYY-MM-DD)
+          example: '2023-10-15'
+      required:
+      - year
+    ReportingApiGranularResponseDto:
+      type: object
+      properties:
+        data:
+          type: object
+          description: A data object containing a generic metrics object | array and a date object
+          additionalProperties: true
+        meta:
+          type: object
+          description: Metadata containing page information
+          properties:
+            page:
+              type: number
+              example: 1
+            totalPages:
+              type: number
+              example: 10
+      required:
+      - data
+      - meta
     InstanceCampaignDto:
       type: object
       properties:
@@ -346,15 +489,16 @@ components:
       - description
       - status
       - startDate
-    ReportingApiGranularResponseDto:
+    ReportingApiResponseDto:
       type: object
       properties:
         data:
           type: object
-          description: A data object containing a generic metrics object | array and a date object
-          additionalProperties: true
+          additionalProperties: false
         meta:
-          type: object
+          type:
+          - object
+          - 'null'
           description: Metadata containing page information
           properties:
             page:
@@ -366,102 +510,6 @@ components:
       required:
       - data
       - meta
-    PerformanceOverTimeDateDto:
-      type: object
-      properties:
-        year:
-          type: number
-          description: Year
-          example: 2023
-        quarter:
-          type: number
-          description: Quarter
-          example: 4
-        month:
-          type: number
-          description: Month
-          example: 10
-        week:
-          type: number
-          description: Week
-          example: 42
-        day:
-          type: number
-          description: Day
-          example: 15
-        fullDate:
-          type: string
-          description: ISO 8601 date format (YYYY-MM-DD)
-          example: '2023-10-15'
-      required:
-      - year
-    InstancePerformanceResponseDto:
-      type: object
-      properties:
-        engagements:
-          type:
-          - number
-          - 'null'
-          example: 1000
-          description: Total number of engagements
-        impressions:
-          type:
-          - number
-          - 'null'
-          example: 10000
-          description: Total number of impressions
-        engagementRate:
-          type:
-          - number
-          - 'null'
-          example: 0.1
-          description: Engagement rate as a decimal
-        postsCount:
-          type:
-          - number
-          - 'null'
-          example: 50
-          description: Total number of posts
-        valueGenerated:
-          type:
-          - number
-          - 'null'
-          example: 5000
-          description: Total value generated
-        returnOnInvestment:
-          type:
-          - number
-          - 'null'
-          example: 2.5
-          description: Return on investment as a ratio
-        estimatedContentCost:
-          type:
-          - number
-          - 'null'
-          example: 2000
-          description: Is calculated based on how many posts received metrics in the selected time range vs the amount of money paid to the author(influencer)
-        campaignsCost:
-          type:
-          - number
-          - 'null'
-          example: 3000
-          description: Is calculated based on the paid amount to influencers participating in the selected campaigns
-        conversionValue:
-          type:
-          - number
-          - 'null'
-          example: 7500
-          description: Total tracking links conversion value
-      required:
-      - engagements
-      - impressions
-      - engagementRate
-      - postsCount
-      - valueGenerated
-      - returnOnInvestment
-      - estimatedContentCost
-      - campaignsCost
-      - conversionValue
     InstancePerformanceOverTimeMetricsDto:
       type: object
       properties:
@@ -536,6 +584,86 @@ components:
       - engagementRate
       - cpe
       - cpm
+    InstancesResponseDto:
+      type: object
+      properties:
+        instanceIds:
+          description: A list of instance ids the API credentials have access to
+          example:
+          - instance_123
+          - instance_456
+          type: array
+          items:
+            type: string
+      required:
+      - instanceIds
+    InstancePerformanceResponseDto:
+      type: object
+      properties:
+        engagements:
+          type:
+          - number
+          - 'null'
+          example: 1000
+          description: Total number of engagements
+        impressions:
+          type:
+          - number
+          - 'null'
+          example: 10000
+          description: Total number of impressions
+        engagementRate:
+          type:
+          - number
+          - 'null'
+          example: 0.1
+          description: Engagement rate as a decimal
+        postsCount:
+          type:
+          - number
+          - 'null'
+          example: 50
+          description: Total number of posts
+        valueGenerated:
+          type:
+          - number
+          - 'null'
+          example: 5000
+          description: Total value generated
+        returnOnInvestment:
+          type:
+          - number
+          - 'null'
+          example: 2.5
+          description: Return on investment as a ratio
+        estimatedContentCost:
+          type:
+          - number
+          - 'null'
+          example: 2000
+          description: Is calculated based on how many posts received metrics in the selected time range vs the amount of money paid to the author(influencer)
+        campaignsCost:
+          type:
+          - number
+          - 'null'
+          example: 3000
+          description: Is calculated based on the paid amount to influencers participating in the selected campaigns
+        conversionValue:
+          type:
+          - number
+          - 'null'
+          example: 7500
+          description: Total tracking links conversion value
+      required:
+      - engagements
+      - impressions
+      - engagementRate
+      - postsCount
+      - valueGenerated
+      - returnOnInvestment
+      - estimatedContentCost
+      - campaignsCost
+      - conversionValue
   securitySchemes:
     JWT:
       type: http

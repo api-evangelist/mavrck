@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-incentive-winner-schema.json",
+  "title": "IncentiveWinner",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-incentives-api-openapi.yml#/components/schemas/IncentiveWinner",
+  "type": "object",
+  "required": [
+    "id",
+    "isDisqualified"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for an incentive win."
+    },
+    "winnerGlobalUserId": {
+      "type": "integer"
+    },
+    "winnerMembershipId": {
+      "type": "integer"
+    },
+    "winnerProfilePictureLink": {
+      "type": "string"
+    },
+    "winnerFirstName": {
+      "type": "string"
+    },
+    "winnerLastName": {
+      "type": "string"
+    },
+    "winnerEmail": {
+      "type": "string"
+    },
+    "winnerAddress": {
+      "type": "string"
+    },
+    "winnerAge": {
+      "type": "integer"
+    },
+    "winnerGender": {
+      "type": "string"
+    },
+    "winnerFacebookFriendCount": {
+      "type": "integer",
+      "description": "The friend count of the winner's Facebook account, provided to help identify and disqualify fake profiles."
+    },
+    "winnerLastRewardWonTitle": {
+      "type": "string",
+      "description": "If this influencer has had one or more rewards fulfilled in the past, this gives the title of the reward most recently fulfilled."
+    },
+    "winnerLastRewardFulfilledAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "If this influencer has had one or more rewards fulfilled in the past, this gives the date & time in which the most recent fulfillment occurred."
+    },
+    "isDisqualified": {
+      "type": "boolean",
+      "description": "Indicates whether this incentive winner has been disqualified."
+    },
+    "disqualificationReason": {
+      "type": "string",
+      "description": "If a incentive winner has been disqualified, this is the reason why the disqualification occurred."
+    },
+    "rewardIsFulfilled": {
+      "type": "boolean",
+      "description": "Indicates whether the reward win has been fulfilled. An incentive winner cannot be disqualified if his/her reward has already been fulfilled."
+    }
+  }
+}

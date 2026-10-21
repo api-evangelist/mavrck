@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-meta-post-partnership-request-dto-schema.json",
+  "title": "MetaPostPartnershipRequestDto",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-meta-post-partnerships-api-openapi.yml#/components/schemas/MetaPostPartnershipRequestDto",
+  "properties": {
+    "id": {
+      "type": "number",
+      "format": "double"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "$ref": "#/$defs/MetaPostPartnershipRequestStatus"
+    },
+    "communityId": {
+      "type": "string"
+    },
+    "activationId": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "id",
+    "createdAt",
+    "updatedAt",
+    "status",
+    "communityId",
+    "activationId"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "MetaPostPartnershipRequestStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "granted",
+        "denied"
+      ]
+    }
+  }
+}

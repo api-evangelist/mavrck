@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-query-anonymous-comments-result-schema.json",
+  "title": "QueryAnonymousCommentsResult",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-anonymouscomments-api-openapi.yml#/components/schemas/QueryAnonymousCommentsResult",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/DBAnonymousComment"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "properties": {
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "totalCount",
+        "limit",
+        "offset"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "data",
+    "meta"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "DBAnonymousComment": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "text": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "actionGroupId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "globalUserId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "text",
+        "email",
+        "communityId",
+        "createdAt"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-concept-content-status-update-body-schema.json",
+  "title": "ConceptContentStatusUpdateBody",
+  "description": "The status a reviewer may set. Excludes `pending` — that is the submitted/awaiting state\nseeded on submission, not a reviewer action (mirrors drafts). The path param is authoritative,\nso the body carries only the status (no redundant id / envelope).",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-concepts-api-openapi.yml#/components/schemas/ConceptContentStatusUpdateBody",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "conditionally_approved",
+        "rejected",
+        "rejected_no_notification"
+      ]
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

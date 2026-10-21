@@ -144,89 +144,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    InferAttributes_Features_:
-      properties:
-        featureId:
-          type: string
-        label:
-          type: string
-        defaultState:
-          type: object
-        public:
-          type: object
-      type: object
-      description: 'Utility type to extract Attributes of a given Model class.
-
-
-        It returns all instance properties defined in the Model, except:
-
-        - those inherited from Model (intermediate inheritance works),
-
-        - the ones whose type is a function,
-
-        - the ones manually excluded using the second parameter.
-
-        - the ones branded using {@link NonAttribute}
-
-
-        It cannot detect whether something is a getter or not, you should use the `Excluded`
-
-        parameter to exclude getter & setters from the attribute list.'
-    GetFeatureResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/InferAttributes_Features_'
-      required:
-      - data
-      type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -261,6 +178,29 @@ components:
       - data
       - meta
       type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    UpdateFeatureResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/InferAttributes_Features_'
+      required:
+      - data
+      type: object
     UpdateFeatureRequest:
       properties:
         public:
@@ -270,7 +210,67 @@ components:
         label:
           type: string
       type: object
-    UpdateFeatureResponse:
+    InferAttributes_Features_:
+      properties:
+        featureId:
+          type: string
+        label:
+          type: string
+        defaultState:
+          type: object
+        public:
+          type: object
+      type: object
+      description: 'Utility type to extract Attributes of a given Model class.
+
+
+        It returns all instance properties defined in the Model, except:
+
+        - those inherited from Model (intermediate inheritance works),
+
+        - the ones whose type is a function,
+
+        - the ones manually excluded using the second parameter.
+
+        - the ones branded using {@link NonAttribute}
+
+
+        It cannot detect whether something is a getter or not, you should use the `Excluded`
+
+        parameter to exclude getter & setters from the attribute list.'
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    GetFeatureResponse:
       properties:
         data:
           $ref: '#/components/schemas/InferAttributes_Features_'

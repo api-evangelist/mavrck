@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-profile-schema.json",
+  "title": "Profile",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-authentication-api-openapi.yml#/components/schemas/Profile",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "emailIsVerified": {
+      "type": "boolean"
+    },
+    "facebookExternalId": {
+      "type": "string"
+    },
+    "membershipId": {
+      "type": "integer"
+    },
+    "globalUserId": {
+      "type": "integer"
+    },
+    "isNewMember": {
+      "type": "boolean"
+    },
+    "location": {
+      "type": "string"
+    },
+    "becameMemberAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "connectedAccounts": {
+      "type": "object",
+      "properties": {
+        "facebook": {
+          "$ref": "#/$defs/FacebookConnectionInfo"
+        },
+        "twitter": {
+          "$ref": "#/$defs/TwitterConnectionInfoDeprecated"
+        },
+        "instagram": {
+          "$ref": "#/$defs/InstagramConnectionInfo"
+        },
+        "pinterest": {
+          "$ref": "#/$defs/PinterestConnectionInfo"
+        },
+        "blog": {
+          "$ref": "#/$defs/Blog"
+        },
+        "emailAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EmailAccount"
+          }
+        },
+        "tiktok": {
+          "$ref": "#/$defs/TikTokConnectionInfo"
+        }
+      }
+    },
+    "connectedAccountsCollection": {
+      "type": "object",
+      "properties": {
+        "facebook": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FacebookConnectionInfo"
+          }
+        },
+        "instagram": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InstagramConnectionInfo"
+          }
+        },
+        "tiktok": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TikTokConnectionInfo"
+          }
+        }
+      }
+    },
+    "referralSlug": {
+      "type": "string"
+    },
+    "referralCount": {
+      "type": "integer"
+    },
+    "loginCredentialsExist": {
+      "type": "boolean"
+    },
+    "memberSelectedEthnicities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ethnicGroup": {
+            "type": "string"
+          },
+          "ethnicGroupDescription": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Blog": {
+      "properties": {
+        "globalUserId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "language": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "platform": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "EmailAccount": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "FacebookConnectionInfo": {
+      "$ref": "#/$defs/FacebookProfileDeprecated"
+    },
+    "FacebookProfileDeprecated": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "facebookExternalId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "picture": {
+          "type": "string"
+        },
+        "reach": {
+          "type": "integer"
+        },
+        "averageLikes": {
+          "type": "integer"
+        },
+        "averageComments": {
+          "type": "integer"
+        },
+        "averageEngagements": {
+          "type": "integer"
+        },
+        "engagementRate": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "facebookUser": {
+          "type": "object",
+          "properties": {
+            "isExpired": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "InstagramConnectionInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Instagram Profile Id"
+        },
+        "primaryAccount": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date by which the client should re-prompt the either reconnection flow."
+        },
+        "platformExpiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date by which the client should re-prompt the Instagram Platform connection flow."
+        },
+        "businessExpiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date by which the client should re-prompt the Instagram Business connection flow."
+        },
+        "handle": {
+          "type": "string",
+          "description": "Client's Instagram account handle"
+        },
+        "profilePicture": {
+          "type": "string",
+          "description": "Client's Instagram profile picture"
+        }
+      }
+    },
+    "PinterestConnectionInfo": {
+      "type": "object",
+      "properties": {
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date by which the client should re-prompt the Pinterest connection flow."
+        },
+        "handle": {
+          "type": "string",
+          "description": "Client's Pinterest account handle"
+        },
+        "profilePicture": {
+          "type": "string",
+          "description": "Client's Pinterest profile picture"
+        }
+      }
+    },
+    "TikTokConnectionInfo": {
+      "type": "object",
+      "properties": {
+        "primaryAccount": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date by which the client should re-prompt the TikTok connection flow."
+        },
+        "handle": {
+          "type": "string",
+          "description": "Client's TikTok account handle"
+        },
+        "profilePicture": {
+          "type": "string",
+          "description": "Client's TikTok profile picture"
+        }
+      }
+    },
+    "TwitterConnectionInfoDeprecated": {
+      "type": "object",
+      "properties": {
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date by which the client should re-prompt the Twitter connection flow."
+        },
+        "handle": {
+          "type": "string",
+          "description": "Client's Twitter account handle"
+        },
+        "profilePicture": {
+          "type": "string",
+          "description": "Client's Twitter profile picture"
+        }
+      }
+    }
+  }
+}

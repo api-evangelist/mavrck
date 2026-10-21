@@ -163,15 +163,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ListDeliverableRequest:
-      type: object
-      properties: {}
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -180,6 +177,47 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    ListDeliverable:
+      properties:
+        contentType:
+          $ref: '#/components/schemas/NetworkSlug'
+        contentTypeName:
+          $ref: '#/components/schemas/NetworkName'
+        count:
+          type: number
+          format: double
+        id:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+        updatedBy:
+          type: number
+          format: double
+      required:
+      - contentType
+      - contentTypeName
+      - count
+      - id
+      - listId
       type: object
       additionalProperties: false
     ServerError:
@@ -198,12 +236,36 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    NetworkSlug:
+      type: string
+      enum:
+      - blog
+      - facebook
+      - facebook_group
+      - facebook_live
+      - facebook_reel
+      - image
+      - instagram
+      - instagram_reel
+      - instagram_story
+      - linkedin
+      - pinterest
+      - snapchat_story
+      - tiktok
+      - twitch_stream
+      - twitter
+      - video
+      - youtube_video
+      - youtube_shorts
+    ListDeliverableRequest:
+      type: object
+      properties: {}
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -235,68 +297,6 @@ components:
       - Video
       - YouTube Video
       - YouTube Shorts
-    NetworkSlug:
-      type: string
-      enum:
-      - blog
-      - facebook
-      - facebook_group
-      - facebook_live
-      - facebook_reel
-      - image
-      - instagram
-      - instagram_reel
-      - instagram_story
-      - linkedin
-      - pinterest
-      - snapchat_story
-      - tiktok
-      - twitch_stream
-      - twitter
-      - video
-      - youtube_video
-      - youtube_shorts
-    ListDeliverable:
-      properties:
-        contentType:
-          $ref: '#/components/schemas/NetworkSlug'
-        contentTypeName:
-          $ref: '#/components/schemas/NetworkName'
-        count:
-          type: number
-          format: double
-        id:
-          type: number
-          format: double
-        listId:
-          type: number
-          format: double
-        updatedBy:
-          type: number
-          format: double
-      required:
-      - contentType
-      - contentTypeName
-      - count
-      - id
-      - listId
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

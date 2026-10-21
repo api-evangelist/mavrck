@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-put-tik-tok-content-activation-request-body-schema.json",
+  "title": "PutTikTokContentActivationRequestBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-tiktok-activations-api-openapi.yml#/components/schemas/PutTikTokContentActivationRequestBody",
+  "properties": {
+    "audienceAgeDistribution": {
+      "items": {
+        "$ref": "#/$defs/TikTokAudienceAgeDistribution"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "audienceCountriesDistribution": {
+      "items": {
+        "$ref": "#/$defs/TikTokAudienceCountriesDistribution"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "audienceGendersDistribution": {
+      "items": {
+        "$ref": "#/$defs/TikTokAudienceGendersDistribution"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "audienceInterestDistribution": {
+      "items": {
+        "$ref": "#/$defs/TikTokAudienceInterestDistribution"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "caption": {
+      "type": "string"
+    },
+    "comments": {
+      "type": "number",
+      "format": "double"
+    },
+    "commentsOrganic": {
+      "type": "number",
+      "format": "double"
+    },
+    "commentsPaid": {
+      "type": "number",
+      "format": "double"
+    },
+    "engagementCount": {
+      "type": "number",
+      "format": "double"
+    },
+    "impressions": {
+      "type": "number",
+      "format": "double"
+    },
+    "impressionsSource": {
+      "type": "string"
+    },
+    "likes": {
+      "type": "number",
+      "format": "double"
+    },
+    "likesOrganic": {
+      "type": "number",
+      "format": "double"
+    },
+    "likesPaid": {
+      "type": "number",
+      "format": "double"
+    },
+    "reach": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "shares": {
+      "type": "number",
+      "format": "double"
+    },
+    "sharesOrganic": {
+      "type": "number",
+      "format": "double"
+    },
+    "sharesPaid": {
+      "type": "number",
+      "format": "double"
+    },
+    "link": {
+      "type": "string"
+    },
+    "totalPlayTime": {
+      "type": "number",
+      "format": "double"
+    },
+    "videoCompletionRate": {
+      "type": "number",
+      "format": "double"
+    },
+    "videoViewsBySource": {
+      "items": {
+        "$ref": "#/$defs/TikTokVideoViewsBySource"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "videoViews": {
+      "type": "number",
+      "format": "double"
+    },
+    "videoViewsOrganic": {
+      "type": "number",
+      "format": "double"
+    },
+    "videoViewsPaid": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "comments",
+    "likes",
+    "shares"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "TikTokAudienceAgeDistribution": {
+      "properties": {
+        "age": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "percentage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "age",
+        "percentage"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokAudienceCountriesDistribution": {
+      "properties": {
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "percentage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "country",
+        "percentage"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokAudienceGendersDistribution": {
+      "properties": {
+        "gender": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "percentage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "percentage"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokAudienceInterestDistribution": {
+      "properties": {
+        "interestTag": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "percentage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "interestTag",
+        "percentage"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokVideoViewsBySource": {
+      "properties": {
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "videoViews": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "videoViews"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

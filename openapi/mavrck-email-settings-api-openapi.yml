@@ -188,51 +188,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ValidationError:
-      properties:
-        property:
-          type: string
-        message:
-          type: string
-        schema:
-          type: object
-        instance:
-          additionalProperties: true
-        name:
-          type: string
-        argument:
-          additionalProperties: true
-      required:
-      - property
-      - message
-      - schema
-      - instance
-      - name
-      - argument
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -257,42 +218,6 @@ components:
       - isGloballyDeleted
       type: object
       additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    PostEmailSettingsResponse:
-      properties: {}
-      type: object
-      additionalProperties: false
     PostEmailSettingsRequest:
       properties:
         id:
@@ -302,6 +227,29 @@ components:
       required:
       - id
       - subscribed
+      type: object
+      additionalProperties: false
+    ValidationError:
+      properties:
+        property:
+          type: string
+        message:
+          type: string
+        schema:
+          type: object
+        instance:
+          additionalProperties: true
+        name:
+          type: string
+        argument:
+          additionalProperties: true
+      required:
+      - property
+      - message
+      - schema
+      - instance
+      - name
+      - argument
       type: object
       additionalProperties: false
     EmailSmtpDTO:
@@ -320,6 +268,58 @@ components:
       - communityId
       - fromEmail
       - fromName
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PostEmailSettingsResponse:
+      properties: {}
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

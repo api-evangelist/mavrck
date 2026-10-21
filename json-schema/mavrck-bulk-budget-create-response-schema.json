@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-bulk-budget-create-response-schema.json",
+  "title": "BulkBudgetCreateResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-budgets-api-openapi.yml#/components/schemas/BulkBudgetCreateResponse",
+  "properties": {
+    "created": {
+      "items": {
+        "$ref": "#/$defs/BudgetEntity"
+      },
+      "type": "array"
+    },
+    "conflicts": {
+      "items": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "budgetReferenceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "budgetReferenceId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "errors": {
+      "items": {
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "budgetReferenceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error",
+          "budgetReferenceId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "created",
+    "conflicts",
+    "errors"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "BudgetCurrencyAmount": {
+      "properties": {
+        "currencyCode": {
+          "type": "string"
+        },
+        "fundedAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "spentAmount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "currencyCode",
+        "fundedAmount",
+        "spentAmount"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "BudgetEntity": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "budgetReferenceId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/BudgetReferenceIdType"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "fundedAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "spentAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "amountsByCurrency": {
+          "items": {
+            "$ref": "#/$defs/BudgetCurrencyAmount"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "budgetReferenceId",
+        "type",
+        "communityId",
+        "fundedAmount",
+        "spentAmount"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "BudgetReferenceIdType": {
+      "type": "string",
+      "enum": [
+        "IROF",
+        "OPPORTUNITY"
+      ]
+    }
+  }
+}

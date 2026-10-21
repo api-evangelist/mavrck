@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-bulk-budget-create-dto-schema.json",
+  "title": "BulkBudgetCreateDTO",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-budgets-api-openapi.yml#/components/schemas/BulkBudgetCreateDTO",
+  "properties": {
+    "budgets": {
+      "items": {
+        "$ref": "#/$defs/BudgetCreateRequest"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "budgets"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "BudgetCreateRequest": {
+      "properties": {
+        "budgetReferenceId": {
+          "type": "string"
+        },
+        "budgetReferenceIdType": {
+          "$ref": "#/$defs/BudgetReferenceIdType"
+        },
+        "name": {
+          "type": "string"
+        },
+        "communityId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "budgetReferenceId",
+        "budgetReferenceIdType",
+        "name",
+        "communityId"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "BudgetReferenceIdType": {
+      "type": "string",
+      "enum": [
+        "IROF",
+        "OPPORTUNITY"
+      ]
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-s4instance-branding-response-schema.json",
+  "title": "S4instanceBrandingResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-instances-api-openapi.yml#/components/schemas/S4instanceBrandingResponse",
+  "$ref": "#/$defs/InferAttributes_s4InstanceBranding_",
+  "$defs": {
+    "InferAttributes_s4InstanceBranding_": {
+      "properties": {
+        "brandingId": {
+          "type": "object",
+          "properties": {}
+        },
+        "favicon": {
+          "type": "string"
+        },
+        "logoSmall": {
+          "type": "string"
+        },
+        "logoMedium": {
+          "type": "string"
+        },
+        "logoLarge": {
+          "type": "string"
+        },
+        "primaryColor": {
+          "type": "object",
+          "properties": {}
+        },
+        "hoverColor": {
+          "type": "object",
+          "properties": {}
+        },
+        "secondaryColor": {
+          "type": "object",
+          "properties": {}
+        },
+        "title": {
+          "type": "string"
+        },
+        "customCss": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "object",
+          "properties": {}
+        },
+        "webAddress": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      "type": "object",
+      "description": "Utility type to extract Attributes of a given Model class.\n\nIt returns all instance properties defined in the Model, except:\n- those inherited from Model (intermediate inheritance works),\n- the ones whose type is a function,\n- the ones manually excluded using the second parameter.\n- the ones branded using {@link NonAttribute}\n\nIt cannot detect whether something is a getter or not, you should use the `Excluded`\nparameter to exclude getter & setters from the attribute list."
+    }
+  }
+}

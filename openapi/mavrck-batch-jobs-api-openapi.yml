@@ -131,6 +131,24 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
     Error:
       type: object
       properties:
@@ -187,24 +205,6 @@ components:
           type: integer
         type:
           type: string
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
     LinksDeprecated:
       type: object
       x-access:

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-dbscheduled-message-schema.json",
+  "title": "DBScheduledMessage",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupscheduledmessages-api-openapi.yml#/components/schemas/DBScheduledMessage",
+  "properties": {
+    "accountId": {
+      "type": "number",
+      "format": "double"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    },
+    "communityId": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "messageId": {
+      "type": "number",
+      "format": "double"
+    },
+    "sendAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "$ref": "#/$defs/ScheduledMessageStatus"
+    },
+    "updatedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "conversationId": {
+      "type": "number",
+      "format": "double"
+    },
+    "message": {
+      "properties": {},
+      "additionalProperties": {
+        "additionalProperties": true
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "accountId",
+    "id",
+    "communityId",
+    "createdAt",
+    "messageId",
+    "sendAt",
+    "status",
+    "updatedAt"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ScheduledMessageStatus": {
+      "enum": [
+        "PENDING",
+        "ERROR",
+        "FAILED",
+        "SENT"
+      ],
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-reward-win-bulk-update-body-schema.json",
+  "title": "RewardWinBulkUpdateBody",
+  "description": "Body for PUT /v1/reward-wins/update-objects/bulk.\n\nExplicit allowlist of the fields the bulk-edit endpoint may change: the incentive `id`\n(match key), Order Number, Tracking Number, Comment, and the archive flag. Everything else\non `RewardWinUpdateBody` (fulfillmentStatus, cost, value, tax fields, ...) is intentionally\nexcluded — tsoa strips unknown fields at the edge before they reach the controller. New\nbulk-editable fields must be added here deliberately.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-rewardwins-api-openapi.yml#/components/schemas/RewardWinBulkUpdateBody",
+  "$ref": "#/$defs/Pick_RewardWinUpdateBody.id-or-orderNumber-or-trackingNumber-or-comment-or-isArchived_",
+  "$defs": {
+    "Pick_RewardWinUpdateBody.id-or-orderNumber-or-trackingNumber-or-comment-or-isArchived_": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "isArchived": {
+          "type": "boolean"
+        },
+        "orderNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "trackingNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "comment": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object",
+      "description": "From T, pick a set of properties whose keys are in the union K"
+    }
+  }
+}

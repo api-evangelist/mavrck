@@ -1,0 +1,361 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-enriched-content-response-schema.json",
+  "title": "EnrichedContentResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-analytics-api-openapi.yml#/components/schemas/EnrichedContentResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/EnrichedContentData"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ActivationContentNetwork": {
+      "type": "string",
+      "enum": [
+        "blog",
+        "facebook",
+        "facebook_live",
+        "facebook_reel",
+        "facebook_group",
+        "image",
+        "instagram",
+        "instagram_reel",
+        "instagram_story",
+        "linkedin",
+        "musical_ly",
+        "pinterest",
+        "snapchat_story",
+        "tiktok",
+        "twitch_stream",
+        "twitter",
+        "youtube_video",
+        "youtube_shorts",
+        "video"
+      ]
+    },
+    "ContentEngagements": {
+      "properties": {
+        "avgWatchTime": {
+          "type": "number",
+          "format": "double"
+        },
+        "videoCompletionRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "videoViewTotalTime": {
+          "type": "number",
+          "format": "double"
+        },
+        "followersAtPostDate": {
+          "type": "number",
+          "format": "double"
+        },
+        "engagements": {
+          "type": "number",
+          "format": "double"
+        },
+        "reach": {
+          "type": "number",
+          "format": "double"
+        },
+        "videoViews": {
+          "type": "number",
+          "format": "double"
+        },
+        "viewsPaid": {
+          "type": "number",
+          "format": "double"
+        },
+        "viewsOrganic": {
+          "type": "number",
+          "format": "double"
+        },
+        "views": {
+          "type": "number",
+          "format": "double"
+        },
+        "swipeUps": {
+          "type": "number",
+          "format": "double"
+        },
+        "replies": {
+          "type": "number",
+          "format": "double"
+        },
+        "clicks": {
+          "type": "number",
+          "format": "double"
+        },
+        "impressions": {
+          "type": "number",
+          "format": "double"
+        },
+        "retweets": {
+          "type": "number",
+          "format": "double"
+        },
+        "saves": {
+          "type": "number",
+          "format": "double"
+        },
+        "sharesPaid": {
+          "type": "number",
+          "format": "double"
+        },
+        "sharesOrganic": {
+          "type": "number",
+          "format": "double"
+        },
+        "shares": {
+          "type": "number",
+          "format": "double"
+        },
+        "commentsPaid": {
+          "type": "number",
+          "format": "double"
+        },
+        "commentsOrganic": {
+          "type": "number",
+          "format": "double"
+        },
+        "comments": {
+          "type": "number",
+          "format": "double"
+        },
+        "favorites": {
+          "type": "number",
+          "format": "double"
+        },
+        "closeUps": {
+          "type": "number",
+          "format": "double"
+        },
+        "likesPaid": {
+          "type": "number",
+          "format": "double"
+        },
+        "likesOrganic": {
+          "type": "number",
+          "format": "double"
+        },
+        "likes": {
+          "type": "number",
+          "format": "double"
+        },
+        "hearts": {
+          "type": "number",
+          "format": "double"
+        },
+        "audienceInterestDistribution": {
+          "items": {
+            "additionalProperties": true
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "audienceGendersDistribution": {
+          "items": {
+            "additionalProperties": true
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "audienceCountriesDistribution": {
+          "items": {
+            "additionalProperties": true
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "audienceAgeDistribution": {
+          "items": {
+            "additionalProperties": true
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ContentExternalIdentity": {
+      "properties": {
+        "alternativeIds": {
+          "items": {
+            "$ref": "#/$defs/ContentExternalIdentity"
+          },
+          "type": "array"
+        },
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "ContentInfo": {
+      "properties": {
+        "dateCreated": {
+          "type": "number",
+          "format": "double"
+        },
+        "urlCanonical": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "media": {
+          "$ref": "#/$defs/ContentMedia"
+        },
+        "engagements": {
+          "$ref": "#/$defs/ContentEngagements"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "PUBLISHED"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "object"
+        },
+        "externalId": {
+          "$ref": "#/$defs/ContentExternalIdentity"
+        }
+      },
+      "required": [
+        "media",
+        "type",
+        "profile"
+      ],
+      "type": "object"
+    },
+    "ContentMedia": {
+      "properties": {
+        "videos": {
+          "items": {
+            "properties": {
+              "duration": {
+                "type": "number",
+                "format": "double"
+              },
+              "size": {
+                "$ref": "#/$defs/ContentMediaSize"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "images": {
+          "items": {
+            "properties": {
+              "size": {
+                "$ref": "#/$defs/ContentMediaSize"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ContentMediaSize": {
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": [
+            "CENTIMETERS",
+            "MILLIMETERS",
+            "INCHES",
+            "PIXELS",
+            "PERCENT",
+            "POINTS"
+          ]
+        },
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "width": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "unit"
+      ],
+      "type": "object"
+    },
+    "EnrichedContentData": {
+      "properties": {
+        "network": {
+          "$ref": "#/$defs/ActivationContentNetwork"
+        },
+        "content": {
+          "$ref": "#/$defs/ContentInfo"
+        },
+        "activationId": {
+          "type": "number",
+          "format": "double"
+        },
+        "globalUserId": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "network",
+        "content",
+        "activationId",
+        "globalUserId"
+      ],
+      "type": "object"
+    }
+  }
+}

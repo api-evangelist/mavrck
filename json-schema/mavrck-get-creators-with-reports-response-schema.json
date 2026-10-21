@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-get-creators-with-reports-response-schema.json",
+  "title": "GetCreatorsWithReportsResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-brandsuitability-api-openapi.yml#/components/schemas/GetCreatorsWithReportsResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/CreatorWithReports"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "properties": {
+        "hasMore": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "hasMore"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "data",
+    "meta"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "CreatorWithReports": {
+      "properties": {
+        "globalUserId": {
+          "type": "number",
+          "format": "double"
+        },
+        "latestReportDate": {
+          "type": "string"
+        },
+        "creatorName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "globalUserId",
+        "latestReportDate"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

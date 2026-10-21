@@ -90,23 +90,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PinterestAuthPostRequestBody:
-      properties:
-        code:
-          type: string
-        redirectUri:
-          type: string
-      required:
-      - code
-      - redirectUri
-      type: object
-      additionalProperties: false
-    ServerError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -117,12 +106,40 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    AuthenticatedInfluencerSocialMediaProfile:
+      properties:
+        expiresAt:
+          type: string
+        handle:
+          type: string
+        profilePicture:
+          type: string
+      required:
+      - expiresAt
+      - handle
+      type: object
+      additionalProperties: false
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -144,32 +161,15 @@ components:
       - token
       type: object
       additionalProperties: false
-    AuthenticatedInfluencerSocialMediaProfile:
+    PinterestAuthPostRequestBody:
       properties:
-        expiresAt:
+        code:
           type: string
-        handle:
-          type: string
-        profilePicture:
+        redirectUri:
           type: string
       required:
-      - expiresAt
-      - handle
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
+      - code
+      - redirectUri
       type: object
       additionalProperties: false
   securitySchemes:

@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-campaign-audience-insights-schema.json",
+  "title": "CampaignAudienceInsights",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-campaignperformance-api-openapi.yml#/components/schemas/CampaignAudienceInsights",
+  "properties": {
+    "age": {
+      "items": {
+        "$ref": "#/$defs/Age"
+      },
+      "type": "array"
+    },
+    "cities": {
+      "items": {
+        "$ref": "#/$defs/City"
+      },
+      "type": "array"
+    },
+    "countries": {
+      "items": {
+        "$ref": "#/$defs/Country"
+      },
+      "type": "array"
+    },
+    "gender": {
+      "$ref": "#/$defs/GenderImpressions"
+    },
+    "totalAudienceImpressions": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "age",
+    "cities",
+    "countries",
+    "gender",
+    "totalAudienceImpressions"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "Age": {
+      "properties": {
+        "age": {
+          "type": "string"
+        },
+        "percent": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "age",
+        "percent"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "City": {
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "cityState": {
+          "type": "string"
+        },
+        "impressions": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "city",
+        "cityState",
+        "impressions"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Country": {
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "impressions": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "country",
+        "impressions"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "GenderImpressions": {
+      "properties": {
+        "femaleImpressions": {
+          "type": "number",
+          "format": "double"
+        },
+        "maleImpressions": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalImpressions": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "femaleImpressions",
+        "maleImpressions",
+        "totalImpressions"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

@@ -561,6 +561,37 @@ paths:
         description: Id's of datapoints
         required: true
 components:
+  parameters:
+    q:
+      in: query
+      description: Search parameter.
+      name: q
+      schema:
+        type: string
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
+      schema:
+        type: integer
+    orderByParam:
+      in: query
+      description: Attribute to order by.
+      name: orderBy
+      schema:
+        type: string
+    userFilter:
+      in: query
+      description: Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition.
+      name: userFilter
+      schema:
+        type: string
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
+      schema:
+        type: integer
   schemas:
     DataPointDefinitionSetElementDeprecated:
       type: array
@@ -576,6 +607,27 @@ components:
             type: string
           markUpDisplayLabel:
             type: string
+    EmptyObject:
+      type: object
+      properties: {}
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
     DataPointDefinitionDeprecated:
       type: object
       required:
@@ -655,6 +707,18 @@ components:
                 type: integer
               title:
                 type: string
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
     Error:
       type: object
       properties:
@@ -686,70 +750,6 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    EmptyObject:
-      type: object
-      properties: {}
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-  parameters:
-    userFilter:
-      in: query
-      description: Allows for complex filtering of global users using the jsurl library to stringify instances matching the UserSearch definition.
-      name: userFilter
-      schema:
-        type: string
-    q:
-      in: query
-      description: Search parameter.
-      name: q
-      schema:
-        type: string
-    limitParam:
-      in: query
-      description: Maximum number of items to return
-      name: limit
-      schema:
-        type: integer
-    orderByParam:
-      in: query
-      description: Attribute to order by.
-      name: orderBy
-      schema:
-        type: string
-    offsetParam:
-      in: query
-      description: Number of items to skip
-      name: offset
-      schema:
-        type: integer
   securitySchemes:
     apiKey:
       type: apiKey

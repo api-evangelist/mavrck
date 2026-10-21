@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-cached-creator-summary-response-schema.json",
+  "title": "CachedCreatorSummaryResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-creatorsummary-api-openapi.yml#/components/schemas/CachedCreatorSummaryResponse",
+  "properties": {
+    "summary": {
+      "$ref": "#/$defs/CreatorSummaryDTO",
+      "description": "Structured, per-section summary object."
+    },
+    "rendered": {
+      "type": "string",
+      "description": "Ready-to-read rendered summary with section headers."
+    },
+    "wordCount": {
+      "type": "number",
+      "format": "double"
+    },
+    "generatedAt": {
+      "type": "string",
+      "description": "ISO date-time the summary was generated."
+    },
+    "version": {
+      "type": "number",
+      "format": "double",
+      "description": "Prompt/schema version the summary was generated with."
+    },
+    "cached": {
+      "type": "boolean",
+      "description": "True when served from the creator-summary table, false when generated on this request."
+    }
+  },
+  "required": [
+    "summary",
+    "rendered",
+    "wordCount",
+    "generatedAt",
+    "version",
+    "cached"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "CreatorSummaryDTO": {
+      "properties": {
+        "creatorPersona": {
+          "type": "string"
+        },
+        "platformPresence": {
+          "properties": {
+            "insights": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "insights"
+          ],
+          "type": "object"
+        },
+        "contentFormatBreakdown": {
+          "properties": {
+            "formats": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "overview": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Null when no formats are confirmed, in which case the section is omitted entirely."
+            }
+          },
+          "required": [
+            "formats",
+            "overview"
+          ],
+          "type": "object"
+        },
+        "contentStyle": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Null when the payload carried no posts to describe."
+        },
+        "contentThemesAndNiches": {
+          "properties": {
+            "themes": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "context": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "themes",
+            "context"
+          ],
+          "type": "object"
+        },
+        "audience": {
+          "type": "string"
+        },
+        "brandPartnerships": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "creatorPersona",
+        "platformPresence",
+        "contentFormatBreakdown",
+        "contentStyle",
+        "contentThemesAndNiches",
+        "audience",
+        "brandPartnerships"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

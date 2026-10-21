@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-components-schemas-queue-stats-response-schema.json",
+  "title": "Components.Schemas.QueueStatsResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-tiktok-ttcm-api-openapi.yml#/components/schemas/Components.Schemas.QueueStatsResponse",
+  "properties": {
+    "mediaBinderQueue": {
+      "$ref": "#/$defs/QueueStats"
+    },
+    "mediaUpdaterQueue": {
+      "$ref": "#/$defs/QueueStats"
+    },
+    "creatorUpdaterQueue": {
+      "$ref": "#/$defs/QueueStats"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "QueueStats": {
+      "properties": {
+        "queueUrl": {
+          "type": "string"
+        },
+        "approximateNumberOfMessages": {
+          "type": "number",
+          "format": "double"
+        },
+        "approximateNumberOfMessagesNotVisible": {
+          "type": "number",
+          "format": "double"
+        },
+        "approximateNumberOfMessagesDelayed": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "queueUrl",
+        "approximateNumberOfMessages",
+        "approximateNumberOfMessagesNotVisible",
+        "approximateNumberOfMessagesDelayed"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

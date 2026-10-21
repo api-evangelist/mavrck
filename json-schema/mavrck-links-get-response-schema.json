@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-links-get-response-schema.json",
+  "title": "LinksGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-links-api-openapi.yml#/components/schemas/LinksGetResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/Link"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "$ref": "#/$defs/ResponseMetadata"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "Link": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "link": {
+          "type": "string"
+        },
+        "laterInfluenceCampaignId": {
+          "type": "number",
+          "format": "double"
+        },
+        "destinationUrl": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "deletedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "spec": {
+          "$ref": "#/$defs/Spec"
+        },
+        "metrics": {
+          "$ref": "#/$defs/LinkMetrics"
+        },
+        "urlData": {
+          "$ref": "#/$defs/MavelyURLData"
+        },
+        "failedReason": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "link",
+        "laterInfluenceCampaignId",
+        "destinationUrl",
+        "title",
+        "provider",
+        "isDeleted",
+        "deletedAt"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "LinkMetrics": {
+      "properties": {
+        "clicksCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "salesCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "sales": {
+          "type": "string"
+        },
+        "conversion": {
+          "type": "string"
+        },
+        "commission": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clicksCount",
+        "salesCount",
+        "sales",
+        "conversion",
+        "commission"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "MavelyURLData": {
+      "properties": {
+        "details": {
+          "type": "object"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ResponseMetadata": {
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "failure",
+            "success"
+          ]
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Spec": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "title": {
+          "type": "string"
+        },
+        "destinationUrl": {
+          "type": "string"
+        },
+        "laterInfluenceCampaignId": {
+          "type": "number",
+          "format": "double"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "deletedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "destinationUrl",
+        "laterInfluenceCampaignId",
+        "provider",
+        "isDeleted",
+        "deletedAt"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

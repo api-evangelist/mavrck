@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-admin-concept-content-post-body-schema.json",
+  "title": "AdminConceptContentPostBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-concepts-api-openapi.yml#/components/schemas/AdminConceptContentPostBody",
+  "properties": {
+    "contentType": {
+      "type": "string"
+    },
+    "contentUrl": {
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/InfluencerConceptContentPostFile"
+      },
+      "type": "array"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "threadId": {
+      "type": "string"
+    },
+    "globalUserId": {
+      "type": "number",
+      "format": "double"
+    },
+    "campaignId": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "globalUserId",
+    "campaignId"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "InfluencerConceptContentPostFile": {
+      "properties": {
+        "originalFile": {
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "isUploaded": {
+          "type": "boolean"
+        },
+        "lastModified": {
+          "type": "number",
+          "format": "double"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

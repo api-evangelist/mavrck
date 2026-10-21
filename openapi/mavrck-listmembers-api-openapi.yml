@@ -48,12 +48,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -64,12 +64,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:

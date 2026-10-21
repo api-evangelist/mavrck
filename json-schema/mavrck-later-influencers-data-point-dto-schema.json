@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-later-influencers-data-point-dto-schema.json",
+  "title": "LaterInfluencersDataPointDto",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-laterinfluencer-api-openapi.yml#/components/schemas/LaterInfluencersDataPointDto",
+  "properties": {
+    "dataPointDefinition": {
+      "$ref": "#/$defs/LaterInfluencerDataPointDefinitionDto"
+    },
+    "value": {
+      "type": "string"
+    },
+    "membershipId": {
+      "type": "number",
+      "format": "double"
+    },
+    "isConfirmedByMember": {
+      "type": "boolean"
+    },
+    "lastEditedByAccountId": {
+      "type": "number",
+      "format": "double"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "dataPointDefinition",
+    "value",
+    "membershipId",
+    "isConfirmedByMember",
+    "lastEditedByAccountId",
+    "updatedAt",
+    "createdAt",
+    "id"
+  ],
+  "type": "object",
+  "$defs": {
+    "LaterInfluencerDataPointDefinitionDto": {
+      "properties": {
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "archived": {
+          "type": "boolean"
+        },
+        "multi": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "description",
+        "archived",
+        "multi",
+        "name",
+        "type",
+        "key",
+        "id"
+      ],
+      "type": "object"
+    }
+  }
+}

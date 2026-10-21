@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-query-by-message-result-schema.json",
+  "title": "QueryByMessageResult",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-conversations-api-openapi.yml#/components/schemas/QueryByMessageResult",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/DBMessageEvent"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "properties": {
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "totalCount"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "data",
+    "meta"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "DBMessageEvent": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "userAgent": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "event": {
+          "type": "object"
+        },
+        "sgEventId": {
+          "type": "string"
+        },
+        "messageId": {
+          "type": "object"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "occurredAt",
+        "event",
+        "messageId"
+      ],
+      "type": "object"
+    }
+  }
+}

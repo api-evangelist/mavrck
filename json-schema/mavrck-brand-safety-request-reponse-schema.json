@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-brand-safety-request-reponse-schema.json",
+  "title": "BrandSafetyRequestReponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-globaluser-api-openapi.yml#/components/schemas/BrandSafetyRequestReponse",
+  "properties": {
+    "audienceAuthenticity": {
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message",
+        "status"
+      ],
+      "type": "object"
+    },
+    "contentWarning": {
+      "items": {
+        "properties": {
+          "postId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "postId",
+          "status"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false
+}

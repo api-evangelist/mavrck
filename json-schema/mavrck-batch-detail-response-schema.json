@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-batch-detail-response-schema.json",
+  "title": "BatchDetailResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-brandsuitability-api-openapi.yml#/components/schemas/BatchDetailResponse",
+  "properties": {
+    "batchId": {
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/BatchStatus"
+    },
+    "label": {
+      "type": "string"
+    },
+    "communityName": {
+      "type": "string"
+    },
+    "campaignId": {
+      "type": "number",
+      "format": "double"
+    },
+    "campaignTitle": {
+      "type": "string"
+    },
+    "brandName": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    },
+    "summary": {
+      "$ref": "#/$defs/BatchSummaryCounts"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/BatchReportItem"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "batchId",
+    "status",
+    "createdAt",
+    "updatedAt",
+    "summary",
+    "items"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "BatchMetricRisk": {
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number",
+          "format": "double"
+        },
+        "riskScore": {
+          "type": "number",
+          "format": "double"
+        },
+        "metricName": {
+          "type": "string"
+        },
+        "metric": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "summary",
+        "riskScore",
+        "metricName",
+        "metric"
+      ],
+      "type": "object"
+    },
+    "BatchReportItem": {
+      "properties": {
+        "overallAssessment": {
+          "type": "string"
+        },
+        "metricRisks": {
+          "items": {
+            "$ref": "#/$defs/BatchMetricRisk"
+          },
+          "type": "array"
+        },
+        "failureReason": {
+          "type": "string"
+        },
+        "creatorName": {
+          "type": "string"
+        },
+        "dataConfidence": {
+          "$ref": "#/$defs/DataScoreLevelDTO"
+        },
+        "totalRiskScore": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalScore": {
+          "type": "number",
+          "format": "double"
+        },
+        "progress": {
+          "$ref": "#/$defs/BrandSuitabilityReportProgress"
+        },
+        "status": {
+          "$ref": "#/$defs/BrandSuitabilityReportStatus"
+        },
+        "batchId": {
+          "type": "string"
+        },
+        "reportId": {
+          "type": "string"
+        },
+        "globalUserId": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "status",
+        "batchId",
+        "reportId",
+        "globalUserId"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "BatchStatus": {
+      "enum": [
+        "IN_PROGRESS",
+        "COMPLETED",
+        "PARTIAL_FAILURE",
+        "FAILED"
+      ],
+      "type": "string"
+    },
+    "BatchSummaryCounts": {
+      "properties": {
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "completed": {
+          "type": "number",
+          "format": "double"
+        },
+        "failed": {
+          "type": "number",
+          "format": "double"
+        },
+        "pending": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "total",
+        "completed",
+        "failed",
+        "pending"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "BrandSuitabilityReportProgress": {
+      "enum": [
+        "PENDING",
+        "RESEARCHING",
+        "ASSESSING"
+      ],
+      "type": "string"
+    },
+    "BrandSuitabilityReportStatus": {
+      "enum": [
+        "COMPLETED",
+        "PROCESSING",
+        "FAILED",
+        "NOT_FOUND"
+      ],
+      "type": "string"
+    },
+    "DataScoreLevelDTO": {
+      "description": "Brand Suitability LLM/assessment output DTOs.\n`v0.3 UI:` notes track field consumption by the v0.3 report view. \"unused\" = not read by v0.3 (may be used by legacy/admin). Audited 2026-06-22.",
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "NONE"
+      ],
+      "type": "string"
+    }
+  }
+}

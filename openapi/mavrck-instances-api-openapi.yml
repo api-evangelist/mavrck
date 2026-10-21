@@ -133,8 +133,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    S4instanceBrandingResponse:
-      $ref: '#/components/schemas/InferAttributes_s4InstanceBranding_'
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     UpdateInstanceBrandingBody:
       properties:
         title:
@@ -185,38 +199,8 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
+    S4instanceBrandingResponse:
+      $ref: '#/components/schemas/InferAttributes_s4InstanceBranding_'
     InferAttributes_s4InstanceBranding_:
       properties:
         brandingId:
@@ -269,6 +253,22 @@ components:
         It cannot detect whether something is a getter or not, you should use the `Excluded`
 
         parameter to exclude getter & setters from the attribute list.'
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

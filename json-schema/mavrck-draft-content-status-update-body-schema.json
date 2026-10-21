@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-draft-content-status-update-body-schema.json",
+  "title": "DraftContentStatusUpdateBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-drafts-api-openapi.yml#/components/schemas/DraftContentStatusUpdateBody",
+  "properties": {
+    "draftContentId": {
+      "type": "number",
+      "format": "double"
+    },
+    "data": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "rejected",
+            "rejected_no_notification",
+            "conditionally_approved",
+            "approved"
+          ]
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "draftContentId",
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

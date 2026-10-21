@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-response-body-concept-content-feedback-entry-array-schema.json",
+  "title": "ResponseBody_ConceptContentFeedbackEntry-Array_",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-concepts-api-openapi.yml#/components/schemas/ResponseBody_ConceptContentFeedbackEntry-Array_",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/ConceptContentFeedbackEntry"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "$ref": "#/$defs/ResponseMeta"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "AdministratorAccountView": {
+      "$ref": "#/$defs/Pick_AdministratorAccountDomain.email-or-first_name-or-image-or-last_name_"
+    },
+    "ConceptContentFeedbackEntry": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "conceptId": {
+          "type": "number",
+          "format": "double"
+        },
+        "accountId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "administratorAccount": {
+          "$ref": "#/$defs/AdministratorAccountView"
+        },
+        "text": {
+          "type": "string"
+        },
+        "commenterType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isArchived": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "conceptId",
+        "accountId",
+        "text",
+        "commenterType",
+        "createdAt",
+        "isArchived"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Pick_AdministratorAccountDomain.email-or-first_name-or-image-or-last_name_": {
+      "properties": {
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ],
+      "type": "object",
+      "description": "From T, pick a set of properties whose keys are in the union K"
+    },
+    "ResponseMeta": {
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

@@ -172,12 +172,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SetYoutubeChannelRequest:
+    ForbiddenError:
       properties:
-        channelInput:
+        message:
           type: string
-        hasNoYoutubeChannel:
-          type: boolean
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     BrandChannelValidationRequest:
@@ -188,12 +196,51 @@ components:
       - channelInput
       type: object
       additionalProperties: false
+    BrandChannelValidationResponse:
+      properties:
+        channelId:
+          type: string
+        title:
+          type:
+          - string
+          - 'null'
+        channelHandle:
+          type:
+          - string
+          - 'null'
+        thumbnailUri:
+          type:
+          - string
+          - 'null'
+      required:
+      - channelId
+      - title
+      - channelHandle
+      - thumbnailUri
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -232,59 +279,12 @@ components:
       - hasNoYoutubeChannel
       type: object
       additionalProperties: false
-    BrandChannelValidationResponse:
+    SetYoutubeChannelRequest:
       properties:
-        channelId:
+        channelInput:
           type: string
-        title:
-          type:
-          - string
-          - 'null'
-        channelHandle:
-          type:
-          - string
-          - 'null'
-        thumbnailUri:
-          type:
-          - string
-          - 'null'
-      required:
-      - channelId
-      - title
-      - channelHandle
-      - thumbnailUri
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+        hasNoYoutubeChannel:
+          type: boolean
       type: object
       additionalProperties: false
   securitySchemes:

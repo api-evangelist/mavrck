@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-product-schema.json",
+  "title": "Product",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-product-api-openapi.yml#/components/schemas/Product",
+  "properties": {
+    "bazaarVoiceAppProduct": {
+      "$ref": "#/$defs/BazaarVoiceAppProduct"
+    },
+    "communityId": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    },
+    "image": {
+      "type": "string"
+    },
+    "powerReviewsPage": {
+      "$ref": "#/$defs/PowerReviewsPage"
+    },
+    "title": {
+      "type": "string"
+    },
+    "yotpoAppProduct": {
+      "$ref": "#/$defs/YotpoAppProduct"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "BazaarVoiceAppProduct": {
+      "properties": {
+        "reviewProductId": {
+          "type": "number",
+          "format": "double"
+        },
+        "externalBazaarProductId": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "PowerReviewsApp": {
+      "properties": {
+        "apiKey": {
+          "type": "string"
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "merchantId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "apiKey",
+        "communityId",
+        "id",
+        "locale",
+        "merchantId",
+        "name"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "PowerReviewsPage": {
+      "properties": {
+        "PowerReviewsApp": {
+          "items": {
+            "$ref": "#/$defs/PowerReviewsApp"
+          },
+          "type": "array"
+        },
+        "externalPageId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "powerReviewsAppId": {
+          "type": "string"
+        },
+        "reviewProductId": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "YotpoAppProduct": {
+      "properties": {
+        "reviewProductId": {
+          "type": "number",
+          "format": "double"
+        },
+        "youtpoProductId": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

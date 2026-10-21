@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-action-group-status-query-request-schema.json",
+  "title": "ActionGroupStatusQueryRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupsstatus-api-openapi.yml#/components/schemas/ActionGroupStatusQueryRequest",
+  "properties": {
+    "actionGroupIds": {
+      "items": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "type": "array",
+      "description": "Array of action group IDs to query (max 100)",
+      "minItems": 1,
+      "maxItems": 100
+    }
+  },
+  "required": [
+    "actionGroupIds"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

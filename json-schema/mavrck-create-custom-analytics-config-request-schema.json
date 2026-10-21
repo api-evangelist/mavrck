@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-create-custom-analytics-config-request-schema.json",
+  "title": "CreateCustomAnalyticsConfigRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-custom-analytics-admin-api-openapi.yml#/components/schemas/CreateCustomAnalyticsConfigRequest",
+  "properties": {
+    "roleIds": {
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
+      "type": "array",
+      "description": "Optional array of role IDs that can access this config.\nIf not provided or empty, the config is accessible to anyone with root/administrator/contributor roles (no role restrictions)."
+    },
+    "prefersDark": {
+      "type": "string"
+    },
+    "themeId": {
+      "type": "string"
+    },
+    "filters": {
+      "type": "string"
+    },
+    "userAttributes": {
+      "properties": {
+        "brand_id": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "instance_id": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "externalDashboardId": {
+      "type": "string"
+    },
+    "dashboardType": {
+      "type": "string"
+    },
+    "communityId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The community this config applies to.\nIf null or omitted, creates a default template for the given dashboardType.\nDefault templates apply to any community that doesn't have a community-specific override."
+    }
+  },
+  "required": [
+    "externalDashboardId",
+    "dashboardType"
+  ],
+  "type": "object"
+}

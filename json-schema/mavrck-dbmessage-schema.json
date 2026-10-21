@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-dbmessage-schema.json",
+  "title": "DBMessage",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupscheduledmessages-api-openapi.yml#/components/schemas/DBMessage",
+  "properties": {
+    "recipients": {
+      "items": {
+        "$ref": "#/$defs/DBMessageRecipientView"
+      },
+      "type": "array"
+    },
+    "hasBeenOpened": {
+      "type": "boolean"
+    },
+    "hasBeenBounced": {
+      "type": "boolean"
+    },
+    "hasBeenDelivered": {
+      "type": "boolean"
+    },
+    "modifiedByAccountId": {
+      "type": "number",
+      "format": "double"
+    },
+    "createdByAccountId": {
+      "type": "number",
+      "format": "double"
+    },
+    "sentByAccountId": {
+      "type": "number",
+      "format": "double"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sentAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "conversationId": {
+      "type": "number",
+      "format": "double"
+    },
+    "parsedReply": {
+      "type": "string"
+    },
+    "html": {
+      "type": "string"
+    },
+    "isInbound": {
+      "type": "boolean"
+    },
+    "inReplyToHeader": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ARCHIVED",
+        "DRAFT",
+        "LIVE",
+        "SCHEDULED"
+      ]
+    },
+    "messageIdHeader": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "conversationId",
+    "parsedReply",
+    "html",
+    "isInbound",
+    "inReplyToHeader",
+    "subject",
+    "id"
+  ],
+  "type": "object",
+  "$defs": {
+    "DBMessageRecipientView": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "email": {
+          "type": "string"
+        },
+        "emailId": {
+          "type": "number",
+          "format": "double"
+        },
+        "messageId": {
+          "type": "number",
+          "format": "double"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "from",
+            "to",
+            "cc"
+          ]
+        },
+        "displayName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "emailId",
+        "messageId",
+        "role"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

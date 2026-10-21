@@ -1,0 +1,362 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-payments-ledger-query-response-schema.json",
+  "title": "PaymentsLedgerQueryResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-paymentsledger-api-openapi.yml#/components/schemas/PaymentsLedgerQueryResponse",
+  "properties": {
+    "meta": {
+      "$ref": "#/$defs/PaymentsLedgerMetadata"
+    },
+    "data": {
+      "items": {
+        "$ref": "#/$defs/PaymentsLedger"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "meta",
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "DBRewardWinType": {
+      "enum": [
+        "OTHER",
+        "CASH",
+        "PRODUCT",
+        "PROMO_CODE",
+        "GIFT_CARD",
+        "SHOPIFY_DISCOUNT"
+      ],
+      "type": "string"
+    },
+    "PaymentAccountType": {
+      "enum": [
+        "CASH",
+        "GIFT_CARD"
+      ],
+      "type": "string"
+    },
+    "PaymentAppProvider": {
+      "enum": [
+        "PAYPAL",
+        "STRIPE",
+        "TANGO_CARDS",
+        "MAVELY",
+        "TIPALTI"
+      ],
+      "type": "string"
+    },
+    "PaymentsLedger": {
+      "properties": {
+        "transactionDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "paymentAccountType": {
+          "$ref": "#/$defs/PaymentAccountType"
+        },
+        "actionGroupTitle": {
+          "type": "string"
+        },
+        "transactionDescription": {
+          "type": "string"
+        },
+        "paymentAccountTransactionId": {
+          "type": "number",
+          "format": "double"
+        },
+        "transactionCreatedByEmail": {
+          "type": "string"
+        },
+        "recipientFullName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "recipientEmail": {
+          "type": "string"
+        },
+        "providerSearchableTransactionId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "cashPaymentProviderStatusMessage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cashPaymentStatusForFailure": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cashPaymentProviderStatusCodeForFailure": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cashPaymentProviderStatusMessageForFailure": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "paymentAccountId": {
+          "type": "number",
+          "format": "double"
+        },
+        "rewardWinTitle": {
+          "type": "string"
+        },
+        "rewardWinType": {
+          "$ref": "#/$defs/DBRewardWinType"
+        },
+        "uniqueTransactionId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "actionGroupId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "rewardWinId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "listMemberId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "globalUserId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "listId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "cashPaymentStatus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cashPaymentProviderStatusCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transactionStatus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "paymentAccountTitle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "provider": {
+          "$ref": "#/$defs/PaymentAppProvider"
+        },
+        "valueCurrencyCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "costCurrencyCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "cost": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "exchangeRate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "budgetReferenceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "budgetReferenceIdType": {
+          "type": "object"
+        },
+        "mavelyProfileId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "invoiceNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "taxId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "taxLineItems": {
+          "items": {
+            "$ref": "#/$defs/TaxLineItem"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "transactionDateTime",
+        "communityId",
+        "paymentAccountType",
+        "actionGroupTitle",
+        "transactionDescription",
+        "paymentAccountTransactionId",
+        "transactionCreatedByEmail",
+        "recipientFullName",
+        "recipientEmail",
+        "providerSearchableTransactionId",
+        "externalId",
+        "cashPaymentProviderStatusMessage",
+        "cashPaymentStatusForFailure",
+        "cashPaymentProviderStatusCodeForFailure",
+        "cashPaymentProviderStatusMessageForFailure",
+        "paymentAccountId",
+        "rewardWinTitle",
+        "rewardWinType",
+        "uniqueTransactionId",
+        "actionGroupId",
+        "rewardWinId",
+        "listMemberId",
+        "globalUserId",
+        "listId",
+        "cashPaymentStatus",
+        "cashPaymentProviderStatusCode",
+        "transactionStatus",
+        "paymentAccountTitle",
+        "provider",
+        "valueCurrencyCode",
+        "costCurrencyCode",
+        "value",
+        "cost",
+        "exchangeRate",
+        "budgetReferenceId",
+        "budgetReferenceIdType"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "PaymentsLedgerMetadata": {
+      "properties": {
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "totalCount",
+        "limit",
+        "offset"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TaxLineItem": {
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "$ref": "#/$defs/TaxLineItemType"
+        }
+      },
+      "required": [
+        "amount",
+        "type"
+      ],
+      "type": "object"
+    },
+    "TaxLineItemType": {
+      "type": "string",
+      "enum": [
+        "GST",
+        "HST",
+        "VAT",
+        "PST",
+        "QST",
+        "RST"
+      ]
+    }
+  }
+}

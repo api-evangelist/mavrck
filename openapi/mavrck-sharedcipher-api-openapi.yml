@@ -150,14 +150,36 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SharedCiphersGetResponse:
+    SharedLinkExpiredError:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SharedCipherWithOptionsAndCipher'
-          type: array
+        message:
+          type: string
+          enum:
+          - This shared link has expired.
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
       required:
-      - data
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     SharedCipherPostBody:
@@ -188,22 +210,9 @@ components:
       - version
       type: object
       additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    SharedCipherWithOptionsAndCipher:
       type: object
-      additionalProperties: false
+      properties: {}
     SharedCipher:
       type: object
     SharedCipherPutBody:
@@ -223,12 +232,12 @@ components:
       - options
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -241,25 +250,16 @@ components:
       additionalProperties: false
     SharedCipherGetResponse:
       $ref: '#/components/schemas/SharedCipher'
-    SharedLinkExpiredError:
+    SharedCiphersGetResponse:
       properties:
-        message:
-          type: string
-          enum:
-          - This shared link has expired.
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        data:
+          items:
+            $ref: '#/components/schemas/SharedCipherWithOptionsAndCipher'
+          type: array
       required:
-      - message
-      - details
+      - data
       type: object
       additionalProperties: false
-    SharedCipherWithOptionsAndCipher:
-      type: object
-      properties: {}
   securitySchemes:
     apiKey:
       type: apiKey

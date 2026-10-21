@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-activity-history-schema.json",
+  "title": "ActivityHistory",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-activityhistory-api-openapi.yml#/components/schemas/ActivityHistory",
+  "type": "object",
+  "properties": {
+    "eventType": {
+      "type": "string"
+    },
+    "eventId": {
+      "type": "string"
+    },
+    "activationId": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "eventAt": {
+      "type": "string"
+    },
+    "actorType": {
+      "type": "string"
+    },
+    "tiktokCampaignCode": {
+      "type": "string"
+    },
+    "inviteLink": {
+      "type": "string"
+    },
+    "actorName": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Attachment"
+      }
+    },
+    "markedAsUnread": {
+      "type": "boolean"
+    },
+    "isArchived": {
+      "type": "boolean"
+    },
+    "count": {
+      "type": "integer"
+    },
+    "influencerInitiated": {
+      "type": "boolean"
+    },
+    "scheduledFor": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "scheduledMessageId": {
+      "type": "integer"
+    },
+    "hasScheduledReply": {
+      "type": "boolean"
+    },
+    "rate": {
+      "type": "string"
+    },
+    "concept": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "Attachment": {
+      "type": "object",
+      "properties": {
+        "originalName": {
+          "type": "string"
+        },
+        "encoding": {
+          "type": "string"
+        },
+        "buffer": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "disposition": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "contentId": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

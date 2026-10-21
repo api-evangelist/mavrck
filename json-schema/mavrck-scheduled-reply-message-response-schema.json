@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-scheduled-reply-message-response-schema.json",
+  "title": "ScheduledReplyMessageResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupscheduledmessages-api-openapi.yml#/components/schemas/ScheduledReplyMessageResponse",
+  "properties": {
+    "message": {
+      "type": "object",
+      "properties": {
+        "recipients": {
+          "items": {
+            "properties": {
+              "influencer": {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "profilePic": {
+                    "type": "string"
+                  },
+                  "globalUserId": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "id": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "format": "double"
+                  },
+                  "actionGroupId": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                },
+                "type": "object"
+              },
+              "role": {
+                "type": "string"
+              },
+              "displayName": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "emailId": {
+                "type": "number",
+                "format": "double"
+              },
+              "email": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "html": {
+          "type": "string"
+        },
+        "attachments": {
+          "items": {
+            "$ref": "#/$defs/MessageAttachment"
+          },
+          "type": "array"
+        },
+        "templates": {
+          "items": {
+            "$ref": "#/$defs/CannedResponse"
+          },
+          "type": "array"
+        },
+        "actionGroupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "messageId": {
+          "type": "number",
+          "format": "double"
+        },
+        "globalUserId": {
+          "type": "number",
+          "format": "double"
+        },
+        "sendOnDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "scheduledMessageId": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "message",
+    "scheduledMessageId"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "CannedResponse": {
+      "properties": {
+        "id": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "CANNED"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "html": {
+          "type": "string"
+        },
+        "createdBy": {
+          "properties": {
+            "image": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "id": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "format": "double"
+            }
+          },
+          "type": "object"
+        },
+        "lastModifiedBy": {
+          "properties": {
+            "image": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "id": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "format": "double"
+            }
+          },
+          "type": "object"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "isArchived": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "title",
+        "subject",
+        "html",
+        "createdAt",
+        "isArchived"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "MessageAttachment": {
+      "properties": {
+        "originalName": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "disposition": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "index": {
+          "type": "number",
+          "format": "double"
+        },
+        "encoding": {
+          "type": "string"
+        },
+        "buffer": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "originalName",
+        "mimeType",
+        "disposition",
+        "size",
+        "index",
+        "encoding",
+        "buffer"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

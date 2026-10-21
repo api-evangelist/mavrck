@@ -51,12 +51,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PostMembershipPurchaseResponse:
+    ForbiddenError:
       properties:
-        pointsAwarded:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PostMembershipPurchaseBody:
+      properties:
+        orderId:
+          type: string
+        purchaseValue:
           type: string
       required:
-      - pointsAwarded
+      - orderId
+      - purchaseValue
       type: object
       additionalProperties: false
     ServerError:
@@ -91,31 +110,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    PostMembershipPurchaseBody:
+    PostMembershipPurchaseResponse:
       properties:
-        orderId:
-          type: string
-        purchaseValue:
+        pointsAwarded:
           type: string
       required:
-      - orderId
-      - purchaseValue
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+      - pointsAwarded
       type: object
       additionalProperties: false
   securitySchemes:

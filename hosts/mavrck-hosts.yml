@@ -1,0 +1,125 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 9
+  own: 3
+  other_domain: 6
+  platform: 0
+  roles:
+  - api
+  - docs
+  - identity
+  - legal
+  - other
+  - status
+  - website
+hosts:
+- host: api.later.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: later.com
+  role: api
+  relation: other-domain
+- host: api.mavrck.co
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  - docs
+  registrable_domain: mavrck.co
+  role: api
+  relation: own
+- host: api.splashscore.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: splashscore.com
+  role: api
+  relation: other-domain
+- host: app.mavrck.co
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Login
+  serves: []
+  registrable_domain: mavrck.co
+  role: identity
+  relation: own
+- host: app.splashscore.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: splashscore.com
+  role: other
+  relation: other-domain
+- host: help-influence.later.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Documentation
+  - GettingStarted
+  - Support
+  - HelpCenter
+  serves:
+  - docs
+  - support
+  vendor: zendesk
+  registrable_domain: later.com
+  role: docs
+  relation: other-domain
+- host: later.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - TermsOfService
+  - PrivacyPolicy
+  serves: []
+  registrable_domain: later.com
+  role: legal
+  relation: other-domain
+- host: status.later.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: later.com
+  role: status
+  relation: other-domain
+- host: www.mavrck.co
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  serves:
+  - cdn
+  - hosting
+  vendor: cloudflare
+  registrable_domain: mavrck.co
+  role: website
+  relation: own

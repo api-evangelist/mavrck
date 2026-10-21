@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-draft-content-update-body-schema.json",
+  "title": "DraftContentUpdateBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-drafts-api-openapi.yml#/components/schemas/DraftContentUpdateBody",
+  "properties": {
+    "notes": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/InfluencerDraftContentPostFile"
+      },
+      "type": "array"
+    },
+    "isArchived": {
+      "type": "boolean"
+    },
+    "feedback": {
+      "type": "string"
+    },
+    "draftContentId": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "draftContentId"
+  ],
+  "type": "object",
+  "$defs": {
+    "InfluencerDraftContentPostFile": {
+      "properties": {
+        "originalFile": {
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "isUploaded": {
+          "type": "boolean"
+        },
+        "lastModified": {
+          "type": "number",
+          "format": "double"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

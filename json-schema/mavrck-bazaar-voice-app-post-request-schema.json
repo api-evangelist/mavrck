@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-bazaar-voice-app-post-request-schema.json",
+  "title": "BazaarVoiceAppPostRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-bazaarvoice-api-openapi.yml#/components/schemas/BazaarVoiceAppPostRequest",
+  "properties": {
+    "data": {
+      "$ref": "#/$defs/BazaarVoiceAppPostRequestBody"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "BazaarVoiceAppPostRequestBody": {
+      "properties": {
+        "locales": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "apiKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "locales",
+        "secret",
+        "name",
+        "apiKey"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-partial-list-custom-status-schema.json",
+  "title": "Partial_ListCustomStatus_",
+  "description": "Make all properties in T optional",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupcustomstatuses-api-openapi.yml#/components/schemas/Partial_ListCustomStatus_",
+  "properties": {
+    "actionGroupId": {
+      "type": "number",
+      "format": "double"
+    },
+    "auxiliaryLabel": {
+      "type": "string"
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "custom": {
+      "type": "boolean"
+    },
+    "disabled": {
+      "type": "boolean"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    },
+    "label": {
+      "type": "string"
+    },
+    "linkedStages": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "statusOrder": {
+      "type": "number",
+      "format": "double"
+    },
+    "templates": {
+      "items": {
+        "$ref": "#/$defs/ConversationTemplate"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "Administrator": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approves": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ConversationTemplate": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "$ref": "#/$defs/Administrator"
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "html": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "isArchived": {
+          "type": "boolean"
+        },
+        "lastModifiedBy": {
+          "$ref": "#/$defs/Administrator"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "category",
+        "createdAt",
+        "html",
+        "id",
+        "isArchived",
+        "title",
+        "updatedAt"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

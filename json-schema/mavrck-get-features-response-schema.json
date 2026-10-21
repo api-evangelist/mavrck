@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-get-features-response-schema.json",
+  "title": "GetFeaturesResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-features-api-openapi.yml#/components/schemas/GetFeaturesResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/InferAttributes_Features_"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "properties": {
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "totalCount"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "data",
+    "meta"
+  ],
+  "type": "object",
+  "$defs": {
+    "InferAttributes_Features_": {
+      "properties": {
+        "featureId": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "defaultState": {
+          "type": "object"
+        },
+        "public": {
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "description": "Utility type to extract Attributes of a given Model class.\n\nIt returns all instance properties defined in the Model, except:\n- those inherited from Model (intermediate inheritance works),\n- the ones whose type is a function,\n- the ones manually excluded using the second parameter.\n- the ones branded using {@link NonAttribute}\n\nIt cannot detect whether something is a getter or not, you should use the `Excluded`\nparameter to exclude getter & setters from the attribute list."
+    }
+  }
+}

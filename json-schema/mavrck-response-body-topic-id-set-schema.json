@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-response-body-topic-id-set-schema.json",
+  "title": "ResponseBody_TopicIdSet_",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-influencertopics-api-openapi.yml#/components/schemas/ResponseBody_TopicIdSet_",
+  "properties": {
+    "data": {
+      "$ref": "#/$defs/TopicIdSet"
+    },
+    "meta": {
+      "$ref": "#/$defs/ResponseMeta"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ResponseMeta": {
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TopicIdSet": {
+      "properties": {
+        "topicIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "topicIds"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

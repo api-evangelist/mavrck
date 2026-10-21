@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-pinterest-auth-post-response-schema.json",
+  "title": "PinterestAuthPostResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-pinterestauth-api-openapi.yml#/components/schemas/PinterestAuthPostResponse",
+  "properties": {
+    "pinterest": {
+      "$ref": "#/$defs/AuthenticatedInfluencerSocialMediaProfile"
+    },
+    "token": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "pinterest",
+    "token"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "AuthenticatedInfluencerSocialMediaProfile": {
+      "properties": {
+        "expiresAt": {
+          "type": "string"
+        },
+        "handle": {
+          "type": "string"
+        },
+        "profilePicture": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "expiresAt",
+        "handle"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

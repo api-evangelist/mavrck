@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-creator-research-record-schema.json",
+  "title": "CreatorResearchRecord",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-brandsuitability-api-openapi.yml#/components/schemas/CreatorResearchRecord",
+  "properties": {
+    "globalUserId": {
+      "type": "number",
+      "format": "double"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "findingsVersion": {
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/StoredFinding"
+      },
+      "type": "array"
+    },
+    "metadata": {
+      "properties": {
+        "researchModels": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "totalSourcesAnalyzed": {
+          "type": "number",
+          "format": "double"
+        },
+        "queriesExecuted": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "researchDuration": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "researchModels",
+        "totalSourcesAnalyzed",
+        "queriesExecuted",
+        "researchDuration"
+      ],
+      "type": "object"
+    },
+    "version": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "globalUserId",
+    "created_at",
+    "updated_at",
+    "findingsVersion",
+    "findings",
+    "metadata"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ExtractedAttributes": {
+      "properties": {
+        "names": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "handles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "urls": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "profession": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "topics": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "names",
+        "handles",
+        "urls",
+        "profession",
+        "location",
+        "topics"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "StoredFinding": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "detailedSummary": {
+          "type": "string"
+        },
+        "keyQuotes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sourceDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dateFound": {
+          "type": "string"
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": [
+            "negative",
+            "neutral",
+            "positive",
+            ""
+          ]
+        },
+        "credibility": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "relevance": {
+          "type": "number",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "extractedAttributes": {
+          "$ref": "#/$defs/ExtractedAttributes"
+        },
+        "excluded": {
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

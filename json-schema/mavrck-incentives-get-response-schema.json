@@ -1,0 +1,367 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-incentives-get-response-schema.json",
+  "title": "IncentivesGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-incentives-api-openapi.yml#/components/schemas/IncentivesGetResponse",
+  "properties": {
+    "meta": {
+      "properties": {
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "totalCount"
+      ],
+      "type": "object"
+    },
+    "data": {
+      "items": {
+        "$ref": "#/$defs/Incentive"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "meta",
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "BonusTier": {
+      "description": "Swagger 2 representation of a tiered bonus entry.\n\n`upperBound` is required for `BOUNDED` tiers and must be omitted for\n`OPEN_ENDED` tiers. The bonus-tier validator enforces that conditional rule.\n\nValidation rules:\n- `bonusTiers` may contain at most 5 tiers.\n- Tiers must be sorted by `lowerBound`.\n- Adjacent tiers must be contiguous.\n- The final tier must be `OPEN_ENDED`.\n- `bonusTierCurrencyCode` is required when `bonusTiers` is non-empty.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "BOUNDED",
+            "OPEN_ENDED"
+          ]
+        },
+        "lowerBound": {
+          "type": "number",
+          "format": "double",
+          "description": "Inclusive lower conversion/order bound for this payout tier. Must be non-negative."
+        },
+        "upperBound": {
+          "type": "number",
+          "format": "double",
+          "description": "Exclusive upper conversion/order bound for a `BOUNDED` tier."
+        },
+        "bonusAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Bonus payout amount in `bonusTierCurrencyCode`. Must be positive."
+        }
+      },
+      "required": [
+        "type",
+        "lowerBound",
+        "bonusAmount"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Incentive": {
+      "properties": {
+        "actionGroupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "actionGroupStatus": {
+          "type": "string"
+        },
+        "allocatedWinnersCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "approximateRetailValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "cashPaymentAppId": {
+          "type": "number",
+          "format": "double"
+        },
+        "cashPaymentAppProvider": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "claimedDynamicPromoCodes": {
+          "type": "number",
+          "format": "double"
+        },
+        "claimedIncentivesCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "claimedIncentivesInfluencerCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "claims": {
+          "items": {
+            "$ref": "#/$defs/IncentiveClaim"
+          },
+          "type": "array"
+        },
+        "contestMetric": {
+          "type": "string"
+        },
+        "cost": {
+          "type": "number",
+          "format": "double"
+        },
+        "disqualifiedWinnersCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "endDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exclusiveLinkCta": {
+          "type": "string"
+        },
+        "exclusiveLinkUrl": {
+          "type": "string"
+        },
+        "giftCardEmailTemplateId": {
+          "type": "string"
+        },
+        "giftCardOptionId": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "image": {
+          "type": "string"
+        },
+        "incentiveDescription": {
+          "type": "string"
+        },
+        "incentiveStatus": {
+          "type": "string"
+        },
+        "incentiveTitle": {
+          "type": "string"
+        },
+        "multipleClaims": {
+          "type": "boolean"
+        },
+        "numberPointsRequired": {
+          "type": "number",
+          "format": "double"
+        },
+        "printableCoupon": {
+          "type": "string"
+        },
+        "promocode": {
+          "type": "string"
+        },
+        "promocodeTermsAndConditions": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double"
+        },
+        "rewardId": {
+          "type": "string"
+        },
+        "rewardWinType": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sweepsRules": {
+          "type": "string"
+        },
+        "sweepstakesUrl": {
+          "type": "string"
+        },
+        "sweepstakesWinnersQty": {
+          "type": "number",
+          "format": "double"
+        },
+        "termsAndConditions": {
+          "$ref": "#/$defs/IncentiveTermsAndConditions"
+        },
+        "totalDynamicPromoCodes": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "type": "string"
+        },
+        "unlockEvent": {
+          "$ref": "#/$defs/IncentiveUnlockEvent"
+        },
+        "unlockType": {
+          "type": "string"
+        },
+        "winnerSelectionMethod": {
+          "type": "string"
+        },
+        "winnersSelectedCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "valueCurrencyCode": {
+          "$ref": "#/$defs/MavrckSupportedCurrencies"
+        },
+        "costCurrencyCode": {
+          "$ref": "#/$defs/MavrckSupportedCurrencies"
+        },
+        "bonusTierCurrencyCode": {
+          "$ref": "#/$defs/NullableBonusTierCurrencyCode",
+          "description": "Currency code used for all tiered bonus amounts. Required when `bonusTiers` is non-empty."
+        },
+        "bonusTiers": {
+          "items": {
+            "$ref": "#/$defs/BonusTier"
+          },
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "Tiered bonus payout ladder. Must be sorted, contiguous, contain at most 5 tiers, and end with one `OPEN_ENDED` tier."
+        },
+        "discountCodeId": {
+          "type": "string"
+        },
+        "shippingCodeId": {
+          "type": "string"
+        },
+        "couponActivation": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "IncentiveClaim": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "age": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "conversionCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "engagementCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "facebookFriendCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "globalUserId": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "membershipId": {
+          "type": "number",
+          "format": "double"
+        },
+        "mostRecentRewardFulfilledAt": {
+          "type": "string"
+        },
+        "profilePictureLink": {
+          "type": "string"
+        },
+        "promocode": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "IncentiveTermsAndConditions": {
+      "properties": {
+        "params": {
+          "additionalProperties": false,
+          "type": "object"
+        },
+        "preview": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "IncentiveUnlockEvent": {
+      "type": "string",
+      "enum": [
+        "acceptance",
+        "completion",
+        "pending_shipment",
+        "pending_payment"
+      ]
+    },
+    "MavrckSupportedCurrencies": {
+      "type": "object"
+    },
+    "NullableBonusTierCurrencyCode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "USD",
+        "EUR",
+        "GBP",
+        "AUD",
+        "CAD",
+        null
+      ]
+    }
+  }
+}

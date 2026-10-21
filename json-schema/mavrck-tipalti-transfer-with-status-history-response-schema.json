@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-tipalti-transfer-with-status-history-response-schema.json",
+  "title": "TipaltiTransferWithStatusHistoryResponse",
+  "description": "GET /v1/tipalti/transfers/{rewardWinId} — the most recent attempt for a reward win with its\nstatus history. Same shape as the create response (payment-service TipaltiPaymentView).",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-tipaltitransfers-api-openapi.yml#/components/schemas/TipaltiTransferWithStatusHistoryResponse",
+  "$ref": "#/$defs/CreateTipaltiTransferResponse",
+  "$defs": {
+    "CreateTipaltiTransferResponse": {
+      "description": "Mirrors the payment-service TipaltiPaymentView returned by POST /tipalti-payments/register.",
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "tipaltiPayeeId": {
+          "type": "number",
+          "format": "double"
+        },
+        "refCode": {
+          "type": "string"
+        },
+        "tipaltiPaymentId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tipaltiBatchId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "amountCurrencyCode": {
+          "$ref": "#/$defs/TipaltiSupportedCurrencyCodes"
+        },
+        "paymentAmount": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "paymentAmountCurrency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exchangeRate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "actionGroupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "instanceId": {
+          "type": "string"
+        },
+        "rewardWinId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "latestStatus": {
+          "$ref": "#/$defs/TipaltiPaymentStatus"
+        },
+        "statusHistory": {
+          "items": {
+            "$ref": "#/$defs/TipaltiPaymentStatusHistoryItem"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "tipaltiPayeeId",
+        "refCode",
+        "tipaltiPaymentId",
+        "tipaltiBatchId",
+        "amount",
+        "amountCurrencyCode",
+        "paymentAmount",
+        "paymentAmountCurrency",
+        "exchangeRate",
+        "actionGroupId",
+        "instanceId",
+        "rewardWinId",
+        "latestStatus",
+        "statusHistory"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TipaltiPaymentStatus": {
+      "type": "string",
+      "enum": [
+        "INITIATED",
+        "SUBMITTING",
+        "SUBMITTED",
+        "SUBMITTED_UNCONFIRMED",
+        "PAYMENT_APPROVED",
+        "PROCESSING",
+        "SUCCESS",
+        "FAILED",
+        "PAYMENT_CANCELED",
+        "VOIDED",
+        "DEFERRED"
+      ]
+    },
+    "TipaltiPaymentStatusHistoryItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "transferId": {
+          "type": "number",
+          "format": "double"
+        },
+        "providerStatusCode": {
+          "type": "string"
+        },
+        "providerStatusMessage": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "TipaltiSupportedCurrencyCodes": {
+      "type": "string",
+      "enum": [
+        "USD",
+        "EUR",
+        "GBP",
+        "CAD"
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-onboarding-reminder-request-body-schema.json",
+  "title": "OnboardingReminderRequestBody",
+  "description": "Domain types for payment-recipient creator notifications (onboarding reminder + payment\nconfirmation). These mirror the Stripe notification payloads but are provider-agnostic: the\ncreator only ever sees generic \"payment information\" copy, while the code refers to the\ninternal \"payment recipient\" concept.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-paymentrecipient-api-openapi.yml#/components/schemas/OnboardingReminderRequestBody",
+  "properties": {
+    "globalUserId": {
+      "type": "number",
+      "format": "double"
+    },
+    "actionGroupId": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "globalUserId",
+    "actionGroupId"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

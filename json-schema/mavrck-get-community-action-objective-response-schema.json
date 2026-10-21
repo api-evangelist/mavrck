@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-get-community-action-objective-response-schema.json",
+  "title": "GetCommunityActionObjectiveResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-pointsadmin-api-openapi.yml#/components/schemas/GetCommunityActionObjectiveResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/CommunityActionObjectiveDefinition"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "CommunityActionObjectiveDefinition": {
+      "properties": {
+        "points": {
+          "type": "number",
+          "format": "double"
+        },
+        "objectiveId": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "points",
+        "objectiveId"
+      ],
+      "type": "object"
+    }
+  }
+}

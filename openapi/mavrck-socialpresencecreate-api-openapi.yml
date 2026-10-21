@@ -47,6 +47,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SocialPresenceCreateEvent:
+      properties:
+        id:
+          type: string
+        platformId:
+          type:
+          - string
+          - 'null'
+        platform:
+          type: string
+        subject:
+          type: string
+          enum:
+          - SOCIAL_PRESENCE_CREATE
+      required:
+      - id
+      - platform
+      - subject
+      type: object
     ForbiddenError:
       properties:
         message:
@@ -79,25 +98,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    SocialPresenceCreateEvent:
-      properties:
-        id:
-          type: string
-        platformId:
-          type:
-          - string
-          - 'null'
-        platform:
-          type: string
-        subject:
-          type: string
-          enum:
-          - SOCIAL_PRESENCE_CREATE
-      required:
-      - id
-      - platform
-      - subject
-      type: object
     ValidateErrorJSON:
       properties:
         message:

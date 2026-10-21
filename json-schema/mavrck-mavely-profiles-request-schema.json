@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-mavely-profiles-request-schema.json",
+  "title": "MavelyProfilesRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-listmembermavelyprofiles-api-openapi.yml#/components/schemas/MavelyProfilesRequest",
+  "properties": {
+    "mavelyListMembers": {
+      "items": {
+        "$ref": "#/$defs/MavelyListMember"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "mavelyListMembers"
+  ],
+  "type": "object",
+  "$defs": {
+    "MavelyListMember": {
+      "properties": {
+        "actionGroupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "globalUserId": {
+          "type": "number",
+          "format": "double"
+        },
+        "mavelyProfileId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "actionGroupId"
+      ],
+      "type": "object"
+    }
+  }
+}

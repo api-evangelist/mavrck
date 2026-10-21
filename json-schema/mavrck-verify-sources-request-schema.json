@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-verify-sources-request-schema.json",
+  "title": "VerifySourcesRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-brandsuitabilityharness-api-openapi.yml#/components/schemas/VerifySourcesRequest",
+  "properties": {
+    "globalUserId": {
+      "type": "number",
+      "format": "double"
+    },
+    "creatorContext": {
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "sources": {
+      "items": {
+        "properties": {
+          "credibility": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "sentiment": {
+            "type": "string",
+            "enum": [
+              "negative",
+              "neutral",
+              "positive"
+            ]
+          },
+          "sourceDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "keyQuotes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "detailedSummary": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "sources"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

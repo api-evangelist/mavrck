@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-response-body-list-custom-influencer-status-array-schema.json",
+  "title": "ResponseBody_ListCustomInfluencerStatus-Array_",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupcustominfluencerstatuses-api-openapi.yml#/components/schemas/ResponseBody_ListCustomInfluencerStatus-Array_",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/ListCustomInfluencerStatus"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "$ref": "#/$defs/ResponseMeta"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ListCustomInfluencerStatus": {
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "influencerLabel": {
+          "type": "string"
+        },
+        "influencerInstructions": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "label",
+        "influencerLabel",
+        "influencerInstructions",
+        "id"
+      ],
+      "type": "object"
+    },
+    "ResponseMeta": {
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

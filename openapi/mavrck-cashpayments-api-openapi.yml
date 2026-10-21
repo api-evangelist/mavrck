@@ -211,6 +211,22 @@ components:
       - MAVELY
       - TIPALTI
       type: string
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     CreateCashPaymentAppBody:
       properties:
         tipaltiPayerEntityId:
@@ -255,22 +271,9 @@ components:
       - description
       - additionalCommunityIds
       type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+    CashPaymentAppUpdateResponse:
       type: object
-      additionalProperties: false
+      properties: {}
     ServerError:
       properties:
         message:
@@ -287,22 +290,11 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
+    ProviderEnvironment:
+      enum:
+      - LIVE
+      - SANDBOX
+      type: string
     Partial_CashPaymentAppResponse_:
       properties:
         id:
@@ -433,17 +425,12 @@ components:
           type: object
       type: object
       description: Make all properties in T optional
-    ProviderEnvironment:
-      enum:
-      - LIVE
-      - SANDBOX
-      type: string
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -454,9 +441,22 @@ components:
       - details
       type: object
       additionalProperties: false
-    CashPaymentAppUpdateResponse:
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
-      properties: {}
+      additionalProperties: false
     CashPaymentAppUpdatePayload:
       type: object
       properties: {}

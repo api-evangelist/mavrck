@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-update-incentive-put-body-schema.json",
+  "title": "UpdateIncentivePutBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-incentives-api-openapi.yml#/components/schemas/UpdateIncentivePutBody",
+  "properties": {
+    "actionGroupId": {
+      "type": "number",
+      "format": "double"
+    },
+    "actionGroupStatus": {
+      "type": "string"
+    },
+    "approximateRetailValue": {
+      "type": "number",
+      "format": "double"
+    },
+    "cashPaymentAppId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "claimedDynamicPromoCodes": {
+      "type": "number",
+      "format": "double"
+    },
+    "claimedIncentivesCount": {
+      "type": "number",
+      "format": "double"
+    },
+    "claimedIncentivesInfluencerCount": {
+      "type": "number",
+      "format": "double"
+    },
+    "cost": {
+      "type": "number",
+      "format": "double"
+    },
+    "disqualifiedWinnersCount": {
+      "type": "number",
+      "format": "double"
+    },
+    "incentiveTitle": {
+      "type": "string"
+    },
+    "incentiveStatus": {
+      "type": "string"
+    },
+    "multipleClaims": {
+      "type": "boolean"
+    },
+    "quantity": {
+      "type": "number",
+      "format": "double"
+    },
+    "rewardId": {
+      "type": "string"
+    },
+    "rewardWinType": {
+      "type": "string"
+    },
+    "totalDynamicPromoCodes": {
+      "type": "number",
+      "format": "double"
+    },
+    "type": {
+      "type": "string"
+    },
+    "unlockEvent": {
+      "$ref": "#/$defs/IncentiveUnlockEvent"
+    },
+    "unlockType": {
+      "type": "string"
+    },
+    "winnersSelectedCount": {
+      "type": "number",
+      "format": "double"
+    },
+    "endDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "startDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "costCurrencyCode": {
+      "type": "string"
+    },
+    "valueCurrencyCode": {
+      "type": "string"
+    },
+    "dynamicPromoCodesList": {
+      "type": "string"
+    },
+    "dynamicPromoCodesToAdd": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "cashPaymentAppProvider": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "giftCardEmailTemplateId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "giftCardOptionId": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "shopify": {
+      "type": "object"
+    },
+    "bonusTierCurrencyCode": {
+      "$ref": "#/$defs/NullableBonusTierCurrencyCode",
+      "description": "Currency code used for all tiered bonus amounts. When updated, `bonusTiers` must also be provided."
+    },
+    "bonusTiers": {
+      "items": {
+        "$ref": "#/$defs/BonusTier"
+      },
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "Tiered bonus payout ladder. Must be sorted, contiguous, contain at most 5 tiers, and end with one `OPEN_ENDED` tier."
+    }
+  },
+  "required": [
+    "valueCurrencyCode"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "BonusTier": {
+      "description": "Swagger 2 representation of a tiered bonus entry.\n\n`upperBound` is required for `BOUNDED` tiers and must be omitted for\n`OPEN_ENDED` tiers. The bonus-tier validator enforces that conditional rule.\n\nValidation rules:\n- `bonusTiers` may contain at most 5 tiers.\n- Tiers must be sorted by `lowerBound`.\n- Adjacent tiers must be contiguous.\n- The final tier must be `OPEN_ENDED`.\n- `bonusTierCurrencyCode` is required when `bonusTiers` is non-empty.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "BOUNDED",
+            "OPEN_ENDED"
+          ]
+        },
+        "lowerBound": {
+          "type": "number",
+          "format": "double",
+          "description": "Inclusive lower conversion/order bound for this payout tier. Must be non-negative."
+        },
+        "upperBound": {
+          "type": "number",
+          "format": "double",
+          "description": "Exclusive upper conversion/order bound for a `BOUNDED` tier."
+        },
+        "bonusAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Bonus payout amount in `bonusTierCurrencyCode`. Must be positive."
+        }
+      },
+      "required": [
+        "type",
+        "lowerBound",
+        "bonusAmount"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "IncentiveUnlockEvent": {
+      "type": "string",
+      "enum": [
+        "acceptance",
+        "completion",
+        "pending_shipment",
+        "pending_payment"
+      ]
+    },
+    "NullableBonusTierCurrencyCode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "USD",
+        "EUR",
+        "GBP",
+        "AUD",
+        "CAD",
+        null
+      ]
+    }
+  }
+}

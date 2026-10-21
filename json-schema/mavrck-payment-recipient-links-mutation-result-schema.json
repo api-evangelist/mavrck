@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-payment-recipient-links-mutation-result-schema.json",
+  "title": "PaymentRecipientLinksMutationResult",
+  "description": "Result of a bulk clear/propagate. `memberships` is how many campaign\nmemberships the operation matched (clearable set for clear, active set for\npropagate); `affected` is how many link rows actually changed.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-paymentrecipient-api-openapi.yml#/components/schemas/PaymentRecipientLinksMutationResult",
+  "properties": {
+    "memberships": {
+      "type": "number",
+      "format": "double"
+    },
+    "affected": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "memberships",
+    "affected"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

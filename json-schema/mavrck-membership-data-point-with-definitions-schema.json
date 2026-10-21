@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-membership-data-point-with-definitions-schema.json",
+  "title": "MembershipDataPointWithDefinitions",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-membershipdatapoints-api-openapi.yml#/components/schemas/MembershipDataPointWithDefinitions",
+  "properties": {
+    "lastEditedByAccountId": {
+      "type": "number",
+      "format": "double"
+    },
+    "isConfirmedByMember": {
+      "type": "boolean"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dataPointDefinitionId": {
+      "type": "number",
+      "format": "double"
+    },
+    "membershipId": {
+      "type": "number",
+      "format": "double"
+    },
+    "value": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    },
+    "dataPointDefinition": {
+      "$ref": "#/$defs/DBDataPointDefinition"
+    }
+  },
+  "required": [
+    "lastEditedByAccountId",
+    "isConfirmedByMember",
+    "updatedAt",
+    "createdAt",
+    "dataPointDefinitionId",
+    "membershipId",
+    "value",
+    "id",
+    "dataPointDefinition"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "DBDataPointDefinition": {
+      "properties": {
+        "archived": {
+          "type": "boolean"
+        },
+        "mergeTag": {
+          "type": "boolean"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "customSet": {
+          "type": "boolean"
+        },
+        "markUpDescription": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "multi": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "archived",
+        "mergeTag",
+        "updatedAt",
+        "createdAt",
+        "communityId",
+        "type",
+        "customSet",
+        "multi",
+        "description",
+        "name",
+        "key",
+        "id"
+      ],
+      "type": "object"
+    }
+  }
+}

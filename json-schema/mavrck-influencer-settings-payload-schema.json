@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-influencer-settings-payload-schema.json",
+  "title": "InfluencerSettingsPayload",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-laterinfluencer-api-openapi.yml#/components/schemas/InfluencerSettingsPayload",
+  "properties": {
+    "isDeleted": {
+      "type": "boolean"
+    },
+    "messages": {
+      "$ref": "#/$defs/MessageSettingsPayload"
+    },
+    "source": {
+      "type": "string",
+      "description": "An encrypted string provided by Later Infuence with information such as\nthe ID of the message (`messageId`) that prompted the user to unsubscribe.\nClient applications should not tamper with this value; they should pass it back to Later Influence as is.\n\nExample: Unsubscribe\n\nWhen a brand uses Later Influence to send a message to an influencer,\nthe platform almost always appends a link the influencer can use to unsubscribe from the brand's messages,\nin compliance with the USA's Federal Trade Commission requirements (CAN-SPAM Act):\nhttps://qa.mavrck.co/saf/email-preferences?id=${encryptedString}.\nThe client should pass the `id` query parameter back to Later Influence as `source`."
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "EmailSettingsPayload": {
+      "properties": {
+        "communityId": {
+          "type": "string"
+        },
+        "isSubscribed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "communityId",
+        "isSubscribed"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "MessageSettingsPayload": {
+      "properties": {
+        "email": {
+          "items": {
+            "$ref": "#/$defs/EmailSettingsPayload"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

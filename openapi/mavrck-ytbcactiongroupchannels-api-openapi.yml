@@ -173,12 +173,36 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SetYoutubeChannelRequest:
+    ForbiddenError:
       properties:
-        channelInput:
+        message:
           type: string
-        hasNoYoutubeChannel:
-          type: boolean
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     ActionGroupYoutubeChannelResponse:
@@ -218,20 +242,14 @@ components:
       - hasNoYoutubeChannel
       type: object
       additionalProperties: false
-    ServerError:
+    ActionGroupCampaignCodeResponse:
       properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        campaignCode:
+          type:
+          - string
+          - 'null'
       required:
-      - message
-      - details
+      - campaignCode
       type: object
       additionalProperties: false
     ValidateErrorJSON:
@@ -250,30 +268,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    SetYoutubeChannelRequest:
       properties:
-        message:
+        channelInput:
           type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ActionGroupCampaignCodeResponse:
-      properties:
-        campaignCode:
-          type:
-          - string
-          - 'null'
-      required:
-      - campaignCode
+        hasNoYoutubeChannel:
+          type: boolean
       type: object
       additionalProperties: false
   securitySchemes:

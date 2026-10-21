@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-marketer-filter-preference-body-schema.json",
+  "title": "MarketerFilterPreferenceBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-marketerfilterpreferences-api-openapi.yml#/components/schemas/MarketerFilterPreferenceBody",
+  "properties": {
+    "filters": {
+      "properties": {
+        "reportsFilters": {
+          "$ref": "#/$defs/ReportsFilters"
+        },
+        "actionGroupIds": {
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": "array"
+        },
+        "sortDirection": {
+          "type": "string"
+        },
+        "sortColumn": {
+          "type": "string"
+        },
+        "fromDate": {
+          "type": "string"
+        },
+        "toDate": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "communityId": {
+      "type": "string"
+    },
+    "s4AccountId": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "filters",
+    "communityId",
+    "s4AccountId"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ReportingGranularity": {
+      "type": "string",
+      "enum": [
+        "year",
+        "quarter",
+        "month",
+        "week",
+        "day"
+      ]
+    },
+    "ReportsFilters": {
+      "properties": {
+        "campaignsActiveView": {
+          "type": "string"
+        },
+        "campaignsSortModel": {
+          "$ref": "#/$defs/ReportsTableSortModel"
+        },
+        "campaignsVisibleColumns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "campaignsGallerySortModel": {
+          "$ref": "#/$defs/ReportsTableSortModel"
+        },
+        "campaignsGalleryVisibleColumns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "networksSortModel": {
+          "$ref": "#/$defs/ReportsTableSortModel"
+        },
+        "networksVisibleColumns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "topContentActiveView": {
+          "type": "string"
+        },
+        "topContentSortBy": {
+          "type": "string"
+        },
+        "topContentSortModel": {
+          "$ref": "#/$defs/ReportsTableSortModel"
+        },
+        "topContentVisibleColumns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "topPerformersActiveView": {
+          "type": "string"
+        },
+        "topPerformersSortModel": {
+          "$ref": "#/$defs/ReportsTableSortModel"
+        },
+        "topPerformersSortBy": {
+          "type": "string"
+        },
+        "topPerformersVisibleColumns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "trendsOverTimeGranularity": {
+          "$ref": "#/$defs/ReportingGranularity"
+        },
+        "trendsOverTimeVisibleMetrics": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "network": {
+          "type": "string"
+        },
+        "mediaType": {
+          "type": "string"
+        },
+        "contentDateType": {
+          "type": "string"
+        },
+        "mavelyIntegrationFeatureFlag": {
+          "type": "boolean"
+        },
+        "instagramPaidMediaFeatureFlag": {
+          "type": "boolean"
+        },
+        "tiktokPaidMediaFeatureFlag": {
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ReportsTableSortModel": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "desc"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-get-influencer-links-response-schema.json",
+  "title": "GetInfluencerLinksResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-influencerlinks-api-openapi.yml#/components/schemas/GetInfluencerLinksResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/InfluencerLinks"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "InfluencerLinks": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "url"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

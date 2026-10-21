@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-action-group-conversation-templates-get-response-schema.json",
+  "title": "ActionGroupConversationTemplatesGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupconversationtemplates-api-openapi.yml#/components/schemas/ActionGroupConversationTemplatesGetResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/ActionGroupConversationTemplate"
+      },
+      "type": "array"
+    },
+    "defaultTemplates": {
+      "items": {
+        "$ref": "#/$defs/ActionGroupConversationTemplatePostBody"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "defaultTemplates"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ActionGroupConversationTemplate": {
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdByAccountId": {
+          "type": "number",
+          "format": "double"
+        },
+        "deliveryMethod": {
+          "type": "string",
+          "enum": [
+            "manual",
+            "automatic"
+          ]
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "html": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "lastModifiedByAccountId": {
+          "type": "number",
+          "format": "double"
+        },
+        "listId": {
+          "type": "number",
+          "format": "double"
+        },
+        "order": {
+          "type": "number",
+          "format": "double"
+        },
+        "version": {
+          "type": "number",
+          "format": "double"
+        },
+        "sendOnDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "sendOnDays": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "sendOnEvent": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "due_date",
+            "draft_due_date",
+            "status_entry",
+            "specific_date",
+            "draft_needs_revision",
+            "concept_due_date",
+            "concept_needs_revision",
+            null
+          ]
+        },
+        "sendOnStatusId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "sendOnTimeframe": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "before",
+            "after",
+            null
+          ]
+        },
+        "slug": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastModifiedBy": {
+          "$ref": "#/$defs/Administrator"
+        },
+        "createdBy": {
+          "$ref": "#/$defs/Administrator"
+        },
+        "ListCustomStatus": {
+          "additionalProperties": true
+        },
+        "ActionGroup": {
+          "additionalProperties": false,
+          "type": "object"
+        }
+      },
+      "required": [
+        "html",
+        "id",
+        "listId",
+        "subject",
+        "title"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ActionGroupConversationTemplatePostBody": {
+      "properties": {
+        "deliveryMethod": {
+          "type": "string",
+          "enum": [
+            "manual",
+            "automatic"
+          ]
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "html": {
+          "type": "string"
+        },
+        "order": {
+          "type": "number",
+          "format": "double"
+        },
+        "version": {
+          "type": "number",
+          "format": "double"
+        },
+        "sendOnDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "sendOnDays": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "sendOnEvent": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "due_date",
+            "draft_due_date",
+            "status_entry",
+            "specific_date",
+            "draft_needs_revision",
+            "concept_due_date",
+            "concept_needs_revision",
+            null
+          ]
+        },
+        "sendOnStatusId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "sendOnTimeframe": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "before",
+            "after",
+            null
+          ]
+        },
+        "slug": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "html",
+        "subject",
+        "title"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Administrator": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approves": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

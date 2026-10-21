@@ -145,7 +145,59 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    offsetParam:
+      in: query
+      description: Number of items to skip
+      name: offset
+      schema:
+        type: integer
+    orderDirection:
+      in: query
+      description: Select the direction by which the data will be ordered, ascending or descending.
+      name: orderDirection
+      schema:
+        type: string
+        enum:
+        - ASC
+        - DESC
+    limitParam:
+      in: query
+      description: Maximum number of items to return
+      name: limit
+      schema:
+        type: integer
   schemas:
+    ResponseMetadata:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    LinksDeprecated:
+      type: object
+      x-access:
+      - anonymous
+      - influencer
+      properties:
+        normal:
+          type: string
+          description: A normal link to an entity.
+        deep:
+          type: string
+          description: A deep link to the entity.
     Error:
       type: object
       properties:
@@ -177,58 +229,6 @@ components:
             error:
               type: string
               description: A static description of the parent error.
-    LinksDeprecated:
-      type: object
-      x-access:
-      - anonymous
-      - influencer
-      properties:
-        normal:
-          type: string
-          description: A normal link to an entity.
-        deep:
-          type: string
-          description: A deep link to the entity.
-    ResponseMetadata:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
-          type: string
-          enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-  parameters:
-    orderDirection:
-      in: query
-      description: Select the direction by which the data will be ordered, ascending or descending.
-      name: orderDirection
-      schema:
-        type: string
-        enum:
-        - ASC
-        - DESC
-    limitParam:
-      in: query
-      description: Maximum number of items to return
-      name: limit
-      schema:
-        type: integer
-    offsetParam:
-      in: query
-      description: Number of items to skip
-      name: offset
-      schema:
-        type: integer
   securitySchemes:
     apiKey:
       type: apiKey

@@ -47,12 +47,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NotFoundError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -63,12 +63,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Server Error
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

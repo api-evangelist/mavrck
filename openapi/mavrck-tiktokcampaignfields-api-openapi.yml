@@ -96,6 +96,37 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -114,24 +145,6 @@ components:
       additionalProperties: false
     CreateTikTokCampaignFieldsOrBrandInfoBody:
       $ref: '#/components/schemas/TikTokBrandFields'
-    TikTokCampaignOrBrandInfoFieldsResponse:
-      $ref: '#/components/schemas/TikTokBrandFields'
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     TikTokBrandFields:
       properties:
         brandDescription:
@@ -139,21 +152,8 @@ components:
         brandName:
           type: string
       type: object
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
+    TikTokCampaignOrBrandInfoFieldsResponse:
+      $ref: '#/components/schemas/TikTokBrandFields'
   securitySchemes:
     apiKey:
       type: apiKey

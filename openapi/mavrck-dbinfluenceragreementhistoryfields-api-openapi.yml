@@ -51,6 +51,67 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BadRequestError:
+      properties:
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+        message:
+          type: string
+          enum:
+          - Bad Request
+      required:
+      - message
+      type: object
+      additionalProperties: false
+    CreateInfluencerAgreementHistoryFieldsBody:
+      properties:
+        actionGroupId:
+          type: number
+          format: double
+        communityId:
+          type: string
+        name:
+          type: string
+      required:
+      - actionGroupId
+      - communityId
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     DBInfluencerAgreementHistoryFields:
       properties:
         updateReason:
@@ -117,67 +178,6 @@ components:
       - globalUserId
       - id
       type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    BadRequestError:
-      properties:
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-        message:
-          type: string
-          enum:
-          - Bad Request
-      required:
-      - message
-      type: object
-      additionalProperties: false
-    CreateInfluencerAgreementHistoryFieldsBody:
-      properties:
-        actionGroupId:
-          type: number
-          format: double
-        communityId:
-          type: string
-        name:
-          type: string
-      required:
-      - actionGroupId
-      - communityId
-      type: object
-      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

@@ -145,16 +145,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TSOAEmptyObject:
-      properties: {}
-      type: object
-      additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -163,6 +159,10 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    TSOAEmptyObject:
+      properties: {}
       type: object
       additionalProperties: false
     ServerError:
@@ -171,22 +171,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
         details:
           properties: {}
           additionalProperties:
@@ -222,12 +206,28 @@ components:
           - 'null'
       type: object
       additionalProperties: false
-    ForbiddenError:
+    ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

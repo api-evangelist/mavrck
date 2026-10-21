@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-list-deliverable-schema.json",
+  "title": "ListDeliverable",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-listdeliverables-api-openapi.yml#/components/schemas/ListDeliverable",
+  "properties": {
+    "contentType": {
+      "$ref": "#/$defs/NetworkSlug"
+    },
+    "contentTypeName": {
+      "$ref": "#/$defs/NetworkName"
+    },
+    "count": {
+      "type": "number",
+      "format": "double"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    },
+    "listId": {
+      "type": "number",
+      "format": "double"
+    },
+    "updatedBy": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "contentType",
+    "contentTypeName",
+    "count",
+    "id",
+    "listId"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "NetworkName": {
+      "type": "string",
+      "enum": [
+        "Blog",
+        "Facebook",
+        "Facebook Group",
+        "Facebook Live",
+        "Facebook Reel",
+        "Image",
+        "Instagram",
+        "Instagram Reel",
+        "Instagram Story",
+        "LinkedIn",
+        "Pinterest",
+        "Snapchat Story",
+        "TikTok",
+        "Twitch Stream",
+        "Twitter",
+        "Video",
+        "YouTube Video",
+        "YouTube Shorts"
+      ]
+    },
+    "NetworkSlug": {
+      "type": "string",
+      "enum": [
+        "blog",
+        "facebook",
+        "facebook_group",
+        "facebook_live",
+        "facebook_reel",
+        "image",
+        "instagram",
+        "instagram_reel",
+        "instagram_story",
+        "linkedin",
+        "pinterest",
+        "snapchat_story",
+        "tiktok",
+        "twitch_stream",
+        "twitter",
+        "video",
+        "youtube_video",
+        "youtube_shorts"
+      ]
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-action-group-scheduled-message-post-body-schema.json",
+  "title": "ActionGroupScheduledMessagePostBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupscheduledmessages-api-openapi.yml#/components/schemas/ActionGroupScheduledMessagePostBody",
+  "properties": {
+    "actionGroupId": {
+      "type": "number",
+      "format": "double"
+    },
+    "attachments": {
+      "items": {
+        "$ref": "#/$defs/SendMessageAttachment"
+      },
+      "type": "array"
+    },
+    "globalUserId": {
+      "type": "number",
+      "format": "double"
+    },
+    "html": {
+      "type": "string"
+    },
+    "recipients": {
+      "items": {
+        "$ref": "#/$defs/SendMessageRecipient"
+      },
+      "type": "array"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "templates": {
+      "items": {
+        "additionalProperties": true
+      },
+      "type": "array"
+    },
+    "sendOnDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "actionGroupId",
+    "globalUserId",
+    "html",
+    "subject",
+    "sendOnDate"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "SendMessageAttachment": {
+      "properties": {
+        "originalName": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "disposition": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "index": {
+          "type": "number",
+          "format": "double"
+        },
+        "buffer": {
+          "type": "string"
+        },
+        "encoding": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "SendMessageInfluencer": {
+      "properties": {
+        "actionGroupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "globalUserId": {
+          "type": "number",
+          "format": "double"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "profilePic": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "SendMessageRecipient": {
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "influencer": {
+          "$ref": "#/$defs/SendMessageInfluencer"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

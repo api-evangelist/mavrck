@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-influencer-budgets-response-schema.json",
+  "title": "InfluencerBudgetsResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-budgets-api-openapi.yml#/components/schemas/InfluencerBudgetsResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/InfluencerBudget"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "properties": {
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "totalCount"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "data",
+    "meta"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ActionGroupStatus": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "READY",
+        "PENDING",
+        "LIVE",
+        "PAUSED",
+        "EXPIRED",
+        "ARCHIVED"
+      ]
+    },
+    "DBRewardWinType": {
+      "enum": [
+        "OTHER",
+        "CASH",
+        "PRODUCT",
+        "PROMO_CODE",
+        "GIFT_CARD",
+        "SHOPIFY_DISCOUNT"
+      ],
+      "type": "string"
+    },
+    "InfluencerBudget": {
+      "properties": {
+        "campaignId": {
+          "type": "number",
+          "format": "double"
+        },
+        "campaignName": {
+          "type": "string"
+        },
+        "campaignStatus": {
+          "$ref": "#/$defs/ActionGroupStatus"
+        },
+        "budget": {
+          "type": "number",
+          "format": "double"
+        },
+        "budgetReferenceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "budgetReferenceIdType": {
+          "type": "object"
+        },
+        "influencerName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rewardWinType": {
+          "$ref": "#/$defs/DBRewardWinType"
+        },
+        "rewardWinCashPaymentAppProvider": {
+          "type": "object"
+        },
+        "fulfillmentStatus": {
+          "type": "object"
+        },
+        "cost": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "campaignId",
+        "campaignName",
+        "campaignStatus",
+        "budget",
+        "rewardWinType",
+        "fulfillmentStatus",
+        "cost"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

@@ -220,32 +220,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SpecsPutRequest:
-      properties:
-        destinationUrl:
-          type: string
-        title:
-          type: string
-      required:
-      - title
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -260,6 +234,24 @@ components:
       required:
       - message
       - details
+      type: object
+      additionalProperties: false
+    SpecsPostRequest:
+      properties:
+        destinationUrl:
+          type: string
+        title:
+          type: string
+        laterInfluenceCampaignId:
+          type: number
+          format: double
+        provider:
+          type: string
+      required:
+      - destinationUrl
+      - title
+      - laterInfluenceCampaignId
+      - provider
       type: object
       additionalProperties: false
     Spec:
@@ -292,34 +284,6 @@ components:
       - deletedAt
       type: object
       additionalProperties: false
-    SpecsGetResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Spec'
-          type: array
-        meta:
-          $ref: '#/components/schemas/ResponseMetadata'
-      type: object
-      additionalProperties: false
-    SpecsPostRequest:
-      properties:
-        destinationUrl:
-          type: string
-        title:
-          type: string
-        laterInfluenceCampaignId:
-          type: number
-          format: double
-        provider:
-          type: string
-      required:
-      - destinationUrl
-      - title
-      - laterInfluenceCampaignId
-      - provider
-      type: object
-      additionalProperties: false
     ResponseMetadata:
       properties:
         limit:
@@ -336,6 +300,42 @@ components:
         totalCount:
           type: number
           format: double
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    SpecsGetResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Spec'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetadata'
+      type: object
+      additionalProperties: false
+    SpecsPutRequest:
+      properties:
+        destinationUrl:
+          type: string
+        title:
+          type: string
+      required:
+      - title
       type: object
       additionalProperties: false
   securitySchemes:

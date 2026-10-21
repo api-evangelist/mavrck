@@ -1,0 +1,2145 @@
+{
+  "@context": {
+    "@vocab": "https://mavrck.co/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "mavrck": "https://mavrck.co/schema#",
+    "AccountActivationPostRequestBody": "mavrck:AccountActivationPostRequestBody",
+    "communityId": {
+      "@id": "mavrck:communityId",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "mavrck:email",
+      "@type": "xsd:string"
+    },
+    "inviteeRoleId": {
+      "@id": "mavrck:inviteeRoleId",
+      "@type": "xsd:decimal"
+    },
+    "NotFoundError": "mavrck:NotFoundError",
+    "message": {
+      "@id": "mavrck:message",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "mavrck:details"
+    },
+    "ServerError": "mavrck:ServerError",
+    "AccountActivationPutRequestBody": "mavrck:AccountActivationPutRequestBody",
+    "ValidateErrorJSON": "mavrck:ValidateErrorJSON",
+    "ResponseBody_AccountInvitationDomain-Array_": "mavrck:ResponseBody_AccountInvitationDomain-Array_",
+    "data": {
+      "@id": "mavrck:data",
+      "@container": "@list"
+    },
+    "meta": {
+      "@id": "mavrck:meta",
+      "@type": "@id"
+    },
+    "ForbiddenError": "mavrck:ForbiddenError",
+    "ResponseMeta": "mavrck:ResponseMeta",
+    "limit": {
+      "@id": "mavrck:limit",
+      "@type": "xsd:decimal"
+    },
+    "offset": {
+      "@id": "mavrck:offset",
+      "@type": "xsd:decimal"
+    },
+    "totalCount": {
+      "@id": "mavrck:totalCount",
+      "@type": "xsd:decimal"
+    },
+    "AccountInvitationDomain": "mavrck:AccountInvitationDomain",
+    "createdAt": {
+      "@id": "mavrck:createdAt",
+      "@type": "xsd:string"
+    },
+    "mailerStatus": {
+      "@id": "mavrck:mailerStatus"
+    },
+    "expiresAt": {
+      "@id": "mavrck:expiresAt",
+      "@type": "xsd:string"
+    },
+    "fulfilledByAccountId": {
+      "@id": "mavrck:fulfilledByAccountId",
+      "@type": "xsd:decimal"
+    },
+    "id": {
+      "@id": "mavrck:id",
+      "@type": "xsd:decimal"
+    },
+    "updatedAt": {
+      "@id": "mavrck:updatedAt",
+      "@type": "xsd:string"
+    },
+    "TikTokAudienceInterestDistribution": "mavrck:TikTokAudienceInterestDistribution",
+    "interestTag": {
+      "@id": "mavrck:interestTag",
+      "@type": "xsd:string"
+    },
+    "percentage": {
+      "@id": "mavrck:percentage",
+      "@type": "xsd:decimal"
+    },
+    "ActionGroupParticipantCostAndPerformanceDto": "mavrck:ActionGroupParticipantCostAndPerformanceDto",
+    "value": {
+      "@id": "mavrck:value",
+      "@type": "xsd:decimal"
+    },
+    "rewards": {
+      "@id": "mavrck:rewards",
+      "@type": "xsd:decimal"
+    },
+    "posts": {
+      "@id": "mavrck:posts",
+      "@type": "xsd:decimal"
+    },
+    "listMemberId": {
+      "@id": "mavrck:listMemberId",
+      "@type": "xsd:decimal"
+    },
+    "impressions": {
+      "@id": "mavrck:impressions",
+      "@type": "xsd:decimal"
+    },
+    "engagements": {
+      "@id": "mavrck:engagements",
+      "@type": "xsd:decimal"
+    },
+    "cost": {
+      "@id": "mavrck:cost",
+      "@type": "xsd:decimal"
+    },
+    "conversionValue": {
+      "@id": "mavrck:conversionValue",
+      "@type": "xsd:decimal"
+    },
+    "conversions": {
+      "@id": "mavrck:conversions",
+      "@type": "xsd:decimal"
+    },
+    "clicks": {
+      "@id": "mavrck:clicks",
+      "@type": "xsd:decimal"
+    },
+    "ActionGroupParticipantContactInfoDto": "mavrck:ActionGroupParticipantContactInfoDto",
+    "zip": {
+      "@id": "mavrck:zip",
+      "@type": "xsd:string"
+    },
+    "street": {
+      "@id": "mavrck:street",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "mavrck:state",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "mavrck:phone",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "mavrck:lastName",
+      "@type": "xsd:string"
+    },
+    "genderDescription": {
+      "@id": "mavrck:genderDescription",
+      "@type": "xsd:string"
+    },
+    "gender": {
+      "@id": "mavrck:gender",
+      "@type": "xsd:string"
+    },
+    "fullName": {
+      "@id": "mavrck:fullName",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "mavrck:firstName",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "mavrck:country",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "mavrck:city",
+      "@type": "xsd:string"
+    },
+    "apt": {
+      "@id": "mavrck:apt",
+      "@type": "xsd:string"
+    },
+    "emailIsVerified": {
+      "@id": "mavrck:emailIsVerified",
+      "@type": "xsd:boolean"
+    },
+    "ActionGroupParticipantAssessmentDto": "mavrck:ActionGroupParticipantAssessmentDto",
+    "assessorName": {
+      "@id": "mavrck:assessorName",
+      "@type": "xsd:string"
+    },
+    "assessorEmail": {
+      "@id": "mavrck:assessorEmail",
+      "@type": "xsd:string"
+    },
+    "approves": {
+      "@id": "mavrck:approves",
+      "@type": "xsd:boolean"
+    },
+    "ActionGroupParticipantTiktokPostDto": "mavrck:ActionGroupParticipantTiktokPostDto",
+    "link": {
+      "@id": "mavrck:link",
+      "@type": "xsd:string"
+    },
+    "imageUrl": {
+      "@id": "mavrck:imageUrl",
+      "@type": "xsd:string"
+    },
+    "ActionGroupParticipantCustomStatusDto": "mavrck:ActionGroupParticipantCustomStatusDto",
+    "custom": {
+      "@id": "mavrck:custom",
+      "@type": "xsd:boolean"
+    },
+    "linkedStages": {
+      "@id": "mavrck:linkedStages",
+      "@container": "@list"
+    },
+    "statusOrder": {
+      "@id": "mavrck:statusOrder",
+      "@type": "xsd:decimal"
+    },
+    "slug": {
+      "@id": "mavrck:slug",
+      "@type": "xsd:string"
+    },
+    "phase": {
+      "@id": "mavrck:phase",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "mavrck:label",
+      "@type": "xsd:string"
+    },
+    "disabled": {
+      "@id": "mavrck:disabled",
+      "@type": "xsd:boolean"
+    },
+    "ctaLabel": {
+      "@id": "mavrck:ctaLabel",
+      "@type": "xsd:string"
+    },
+    "auxiliaryLabel": {
+      "@id": "mavrck:auxiliaryLabel",
+      "@type": "xsd:string"
+    },
+    "QueryActionGroupParticipantsResponse": "mavrck:QueryActionGroupParticipantsResponse",
+    "PostActivationsRequestBody": "mavrck:PostActivationsRequestBody",
+    "audienceAgeDistribution": {
+      "@id": "mavrck:audienceAgeDistribution",
+      "@container": "@list"
+    },
+    "audienceCountriesDistribution": {
+      "@id": "mavrck:audienceCountriesDistribution",
+      "@container": "@list"
+    },
+    "audienceGendersDistribution": {
+      "@id": "mavrck:audienceGendersDistribution",
+      "@container": "@list"
+    },
+    "audienceInterestDistribution": {
+      "@id": "mavrck:audienceInterestDistribution",
+      "@container": "@list"
+    },
+    "caption": {
+      "@id": "mavrck:caption",
+      "@type": "xsd:string"
+    },
+    "comments": {
+      "@id": "mavrck:comments",
+      "@type": "xsd:decimal"
+    },
+    "commentsOrganic": {
+      "@id": "mavrck:commentsOrganic",
+      "@type": "xsd:decimal"
+    },
+    "commentsPaid": {
+      "@id": "mavrck:commentsPaid",
+      "@type": "xsd:decimal"
+    },
+    "externalId": {
+      "@id": "mavrck:externalId",
+      "@type": "xsd:string"
+    },
+    "engagementCount": {
+      "@id": "mavrck:engagementCount",
+      "@type": "xsd:decimal"
+    },
+    "image": {
+      "@id": "mavrck:image",
+      "@type": "xsd:string"
+    },
+    "impressionsSource": {
+      "@id": "mavrck:impressionsSource",
+      "@type": "xsd:string"
+    },
+    "likes": {
+      "@id": "mavrck:likes",
+      "@type": "xsd:decimal"
+    },
+    "likesOrganic": {
+      "@id": "mavrck:likesOrganic",
+      "@type": "xsd:decimal"
+    },
+    "likesPaid": {
+      "@id": "mavrck:likesPaid",
+      "@type": "xsd:decimal"
+    },
+    "network": {
+      "@id": "mavrck:network",
+      "@type": "xsd:string"
+    },
+    "reach": {
+      "@id": "mavrck:reach",
+      "@type": "xsd:decimal"
+    },
+    "shares": {
+      "@id": "mavrck:shares",
+      "@type": "xsd:decimal"
+    },
+    "sharesOrganic": {
+      "@id": "mavrck:sharesOrganic",
+      "@type": "xsd:decimal"
+    },
+    "sharesPaid": {
+      "@id": "mavrck:sharesPaid",
+      "@type": "xsd:decimal"
+    },
+    "video": {
+      "@id": "mavrck:video",
+      "@type": "xsd:string"
+    },
+    "videoCompletionRate": {
+      "@id": "mavrck:videoCompletionRate",
+      "@type": "xsd:decimal"
+    },
+    "totalPlayTime": {
+      "@id": "mavrck:totalPlayTime",
+      "@type": "xsd:decimal"
+    },
+    "videoViewsBySource": {
+      "@id": "mavrck:videoViewsBySource",
+      "@container": "@list"
+    },
+    "videoViews": {
+      "@id": "mavrck:videoViews",
+      "@type": "xsd:decimal"
+    },
+    "videoViewsOrganic": {
+      "@id": "mavrck:videoViewsOrganic",
+      "@type": "xsd:decimal"
+    },
+    "videoViewsPaid": {
+      "@id": "mavrck:videoViewsPaid",
+      "@type": "xsd:decimal"
+    },
+    "followersAtPostDate": {
+      "@id": "mavrck:followersAtPostDate",
+      "@type": "xsd:decimal"
+    },
+    "ActionGroupParticipantInstagramProfileDto": "mavrck:ActionGroupParticipantInstagramProfileDto",
+    "profileType": {
+      "@id": "mavrck:profileType",
+      "@type": "xsd:string"
+    },
+    "profilePicture": {
+      "@id": "mavrck:profilePicture",
+      "@type": "xsd:string"
+    },
+    "mediaCount": {
+      "@id": "mavrck:mediaCount",
+      "@type": "xsd:decimal"
+    },
+    "isPrivate": {
+      "@id": "mavrck:isPrivate",
+      "@type": "xsd:boolean"
+    },
+    "isBusiness": {
+      "@id": "mavrck:isBusiness",
+      "@type": "xsd:boolean"
+    },
+    "handle": {
+      "@id": "mavrck:handle",
+      "@type": "xsd:string"
+    },
+    "followingCount": {
+      "@id": "mavrck:followingCount",
+      "@type": "xsd:decimal"
+    },
+    "followersCount": {
+      "@id": "mavrck:followersCount",
+      "@type": "xsd:decimal"
+    },
+    "engagementRate": {
+      "@id": "mavrck:engagementRate",
+      "@type": "xsd:decimal"
+    },
+    "averageLikes": {
+      "@id": "mavrck:averageLikes",
+      "@type": "xsd:decimal"
+    },
+    "averageEngagements": {
+      "@id": "mavrck:averageEngagements",
+      "@type": "xsd:decimal"
+    },
+    "averageComments": {
+      "@id": "mavrck:averageComments",
+      "@type": "xsd:decimal"
+    },
+    "Framework.BadRequestError": "mavrck:Framework.BadRequestError",
+    "TikTokVideoViewsBySource": "mavrck:TikTokVideoViewsBySource",
+    "source": {
+      "@id": "mavrck:source",
+      "@type": "xsd:string"
+    },
+    "ActionGroupParticipantUserDto": "mavrck:ActionGroupParticipantUserDto",
+    "tiktokCreator": {
+      "@id": "mavrck:tiktokCreator",
+      "@type": "@id"
+    },
+    "instagramAccount": {
+      "@id": "mavrck:instagramAccount",
+      "@type": "@id"
+    },
+    "facebookProfile": {
+      "@id": "mavrck:facebookProfile",
+      "@type": "@id"
+    },
+    "appMembership": {
+      "@id": "mavrck:appMembership",
+      "@type": "@id"
+    },
+    "influencerTopics": {
+      "@id": "mavrck:influencerTopics",
+      "@container": "@list"
+    },
+    "birthday": {
+      "@id": "mavrck:birthday",
+      "@type": "xsd:string"
+    },
+    "audiencePredominantCountry": {
+      "@id": "mavrck:audiencePredominantCountry",
+      "@type": "xsd:string"
+    },
+    "audiencePredominantCity": {
+      "@id": "mavrck:audiencePredominantCity",
+      "@type": "xsd:string"
+    },
+    "audiencePredominantAgeRange": {
+      "@id": "mavrck:audiencePredominantAgeRange",
+      "@type": "xsd:string"
+    },
+    "audiencePercentageFemale": {
+      "@id": "mavrck:audiencePercentageFemale",
+      "@type": "xsd:decimal"
+    },
+    "audiencePercentage_65_plus": {
+      "@id": "mavrck:audiencePercentage_65_plus",
+      "@type": "xsd:decimal"
+    },
+    "audiencePercentage_55_64": {
+      "@id": "mavrck:audiencePercentage_55_64",
+      "@type": "xsd:decimal"
+    },
+    "audiencePercentage_45_54": {
+      "@id": "mavrck:audiencePercentage_45_54",
+      "@type": "xsd:decimal"
+    },
+    "audiencePercentage_35_44": {
+      "@id": "mavrck:audiencePercentage_35_44",
+      "@type": "xsd:decimal"
+    },
+    "audiencePercentage_25_34": {
+      "@id": "mavrck:audiencePercentage_25_34",
+      "@type": "xsd:decimal"
+    },
+    "audiencePercentage_18_24": {
+      "@id": "mavrck:audiencePercentage_18_24",
+      "@type": "xsd:decimal"
+    },
+    "audiencePercentage_13_17": {
+      "@id": "mavrck:audiencePercentage_13_17",
+      "@type": "xsd:decimal"
+    },
+    "age": {
+      "@id": "mavrck:age",
+      "@type": "xsd:decimal"
+    },
+    "ActionGroupParticipantMembershipDto": "mavrck:ActionGroupParticipantMembershipDto",
+    "contactInfo": {
+      "@id": "mavrck:contactInfo",
+      "@type": "@id"
+    },
+    "totalImpressions": {
+      "@id": "mavrck:totalImpressions",
+      "@type": "xsd:decimal"
+    },
+    "status": {
+      "@id": "mavrck:status",
+      "@type": "xsd:string"
+    },
+    "mostRecentActivationDate": {
+      "@id": "mavrck:mostRecentActivationDate",
+      "@type": "xsd:dateTime"
+    },
+    "membershipType": {
+      "@id": "mavrck:membershipType",
+      "@type": "xsd:string"
+    },
+    "membershipId": {
+      "@id": "mavrck:membershipId",
+      "@type": "xsd:decimal"
+    },
+    "lifetimeConversionsValue": {
+      "@id": "mavrck:lifetimeConversionsValue",
+      "@type": "xsd:decimal"
+    },
+    "lifetimeConversions": {
+      "@id": "mavrck:lifetimeConversions",
+      "@type": "xsd:decimal"
+    },
+    "lifetimeClicks": {
+      "@id": "mavrck:lifetimeClicks",
+      "@type": "xsd:decimal"
+    },
+    "blacklisted": {
+      "@id": "mavrck:blacklisted",
+      "@type": "xsd:boolean"
+    },
+    "Framework.ServerError": "mavrck:Framework.ServerError",
+    "TikTokAudienceAgeDistribution": "mavrck:TikTokAudienceAgeDistribution",
+    "BadRequestError": "mavrck:BadRequestError",
+    "ActionGroupParticipantFacebookProfileDto": "mavrck:ActionGroupParticipantFacebookProfileDto",
+    "type": {
+      "@id": "mavrck:type",
+      "@type": "xsd:string"
+    },
+    "picture": {
+      "@id": "mavrck:picture",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "mavrck:name",
+      "@type": "xsd:string"
+    },
+    "facebookExternalId": {
+      "@id": "mavrck:facebookExternalId",
+      "@type": "xsd:string"
+    },
+    "ActionGroupParticipantTopicDto": "mavrck:ActionGroupParticipantTopicDto",
+    "ActionGroupParticipantApplicationResponseDto": "mavrck:ActionGroupParticipantApplicationResponseDto",
+    "key": {
+      "@id": "mavrck:key",
+      "@type": "xsd:string"
+    },
+    "ActionGroupParticipantInstagramPostDto": "mavrck:ActionGroupParticipantInstagramPostDto",
+    "TikTokAudienceCountriesDistribution": "mavrck:TikTokAudienceCountriesDistribution",
+    "TikTokAudienceGendersDistribution": "mavrck:TikTokAudienceGendersDistribution",
+    "Framework.NotFoundError": "mavrck:Framework.NotFoundError",
+    "ActionGroupParticipantDto": "mavrck:ActionGroupParticipantDto",
+    "user": {
+      "@id": "mavrck:user",
+      "@type": "@id"
+    },
+    "upvotes": {
+      "@id": "mavrck:upvotes",
+      "@type": "xsd:decimal"
+    },
+    "totalVotes": {
+      "@id": "mavrck:totalVotes",
+      "@type": "xsd:decimal"
+    },
+    "statusId": {
+      "@id": "mavrck:statusId",
+      "@type": "xsd:decimal"
+    },
+    "participating": {
+      "@id": "mavrck:participating",
+      "@type": "xsd:boolean"
+    },
+    "optedIn": {
+      "@id": "mavrck:optedIn",
+      "@type": "xsd:boolean"
+    },
+    "netVotes": {
+      "@id": "mavrck:netVotes",
+      "@type": "xsd:decimal"
+    },
+    "listMemberCostAndPerformance": {
+      "@id": "mavrck:listMemberCostAndPerformance",
+      "@type": "@id"
+    },
+    "tiktokPosts": {
+      "@id": "mavrck:tiktokPosts",
+      "@container": "@list"
+    },
+    "instagramPosts": {
+      "@id": "mavrck:instagramPosts",
+      "@container": "@list"
+    },
+    "hasConversations": {
+      "@id": "mavrck:hasConversations",
+      "@type": "xsd:boolean"
+    },
+    "globalUserId": {
+      "@id": "mavrck:globalUserId",
+      "@type": "xsd:decimal"
+    },
+    "downvotes": {
+      "@id": "mavrck:downvotes",
+      "@type": "xsd:decimal"
+    },
+    "customStatus": {
+      "@id": "mavrck:customStatus",
+      "@type": "@id"
+    },
+    "completed": {
+      "@id": "mavrck:completed",
+      "@type": "xsd:boolean"
+    },
+    "pinnedComment": {
+      "@id": "mavrck:pinnedComment"
+    },
+    "commentsCount": {
+      "@id": "mavrck:commentsCount",
+      "@type": "xsd:decimal"
+    },
+    "assessments": {
+      "@id": "mavrck:assessments",
+      "@container": "@list"
+    },
+    "applicationResponses": {
+      "@id": "mavrck:applicationResponses",
+      "@container": "@list"
+    },
+    "QueryActionGroupParticipantMetadata": "mavrck:QueryActionGroupParticipantMetadata",
+    "Framework.ForbiddenError": "mavrck:Framework.ForbiddenError",
+    "ActionGroupParticipantTiktokProfileDto": "mavrck:ActionGroupParticipantTiktokProfileDto",
+    "profileImage": {
+      "@id": "mavrck:profileImage",
+      "@type": "xsd:string"
+    },
+    "isActive": {
+      "@id": "mavrck:isActive",
+      "@type": "xsd:boolean"
+    },
+    "handleName": {
+      "@id": "mavrck:handleName",
+      "@type": "xsd:string"
+    },
+    "displayName": {
+      "@id": "mavrck:displayName",
+      "@type": "xsd:string"
+    },
+    "BonusTier": "mavrck:BonusTier",
+    "lowerBound": {
+      "@id": "mavrck:lowerBound",
+      "@type": "xsd:decimal"
+    },
+    "upperBound": {
+      "@id": "mavrck:upperBound",
+      "@type": "xsd:decimal"
+    },
+    "bonusAmount": {
+      "@id": "mavrck:bonusAmount",
+      "@type": "xsd:decimal"
+    },
+    "InfluencerDataPointCriteriaDeprecated": "mavrck:InfluencerDataPointCriteriaDeprecated",
+    "values": {
+      "@id": "mavrck:values",
+      "@container": "@list"
+    },
+    "minValue": {
+      "@id": "mavrck:minValue",
+      "@type": "xsd:integer"
+    },
+    "maxValue": {
+      "@id": "mavrck:maxValue",
+      "@type": "xsd:integer"
+    },
+    "ListCustomStatusDeprecated": "mavrck:ListCustomStatusDeprecated",
+    "templates": {
+      "@id": "mavrck:templates",
+      "@container": "@list"
+    },
+    "requirements": {
+      "@id": "mavrck:requirements",
+      "@container": "@list"
+    },
+    "ActionGroupDeprecated": "mavrck:ActionGroupDeprecated",
+    "communityName": {
+      "@id": "mavrck:communityName",
+      "@type": "xsd:string"
+    },
+    "communityImage": {
+      "@id": "mavrck:communityImage",
+      "@type": "xsd:string"
+    },
+    "mainType": {
+      "@id": "mavrck:mainType",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "mavrck:title",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "mavrck:description",
+      "@type": "xsd:string"
+    },
+    "contentType": {
+      "@id": "mavrck:contentType",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "mavrck:url",
+      "@type": "xsd:string"
+    },
+    "startDate": {
+      "@id": "mavrck:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "endDate": {
+      "@id": "mavrck:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "notInCommunity": {
+      "@id": "mavrck:notInCommunity",
+      "@type": "xsd:boolean"
+    },
+    "isAutoCreated": {
+      "@id": "mavrck:isAutoCreated",
+      "@type": "xsd:boolean"
+    },
+    "isPrimaryReferralActivity": {
+      "@id": "mavrck:isPrimaryReferralActivity",
+      "@type": "xsd:boolean"
+    },
+    "multipleActivations": {
+      "@id": "mavrck:multipleActivations",
+      "@type": "xsd:boolean"
+    },
+    "campaign": {
+      "@id": "mavrck:campaign"
+    },
+    "audience": {
+      "@id": "mavrck:audience",
+      "@type": "@id"
+    },
+    "incentive": {
+      "@id": "mavrck:incentive",
+      "@type": "@id"
+    },
+    "incentives": {
+      "@id": "mavrck:incentives",
+      "@container": "@list"
+    },
+    "actions": {
+      "@id": "mavrck:actions",
+      "@container": "@list"
+    },
+    "points": {
+      "@id": "mavrck:points"
+    },
+    "hasScheduledNotifications": {
+      "@id": "mavrck:hasScheduledNotifications",
+      "@type": "xsd:boolean"
+    },
+    "listId": {
+      "@id": "mavrck:listId",
+      "@type": "xsd:integer"
+    },
+    "listDeliverables": {
+      "@id": "mavrck:listDeliverables",
+      "@container": "@list"
+    },
+    "influencerReviewDeliverable": {
+      "@id": "mavrck:influencerReviewDeliverable"
+    },
+    "workflowStatuses": {
+      "@id": "mavrck:workflowStatuses",
+      "@container": "@list"
+    },
+    "locale": {
+      "@id": "mavrck:locale",
+      "@type": "xsd:string"
+    },
+    "activatedUsersMetrics": {
+      "@id": "mavrck:activatedUsersMetrics",
+      "@type": "xsd:integer"
+    },
+    "clicksMetrics": {
+      "@id": "mavrck:clicksMetrics",
+      "@type": "xsd:integer"
+    },
+    "engagementsMetrics": {
+      "@id": "mavrck:engagementsMetrics",
+      "@type": "xsd:integer"
+    },
+    "impressionsMetrics": {
+      "@id": "mavrck:impressionsMetrics",
+      "@type": "xsd:integer"
+    },
+    "conversionsCountMetrics": {
+      "@id": "mavrck:conversionsCountMetrics",
+      "@type": "xsd:integer"
+    },
+    "conversionsValueMetrics": {
+      "@id": "mavrck:conversionsValueMetrics",
+      "@type": "xsd:decimal"
+    },
+    "cpe": {
+      "@id": "mavrck:cpe",
+      "@type": "xsd:decimal"
+    },
+    "cpp": {
+      "@id": "mavrck:cpp",
+      "@type": "xsd:decimal"
+    },
+    "cpm": {
+      "@id": "mavrck:cpm",
+      "@type": "xsd:decimal"
+    },
+    "cpa": {
+      "@id": "mavrck:cpa",
+      "@type": "xsd:decimal"
+    },
+    "committedAmount": {
+      "@id": "mavrck:committedAmount",
+      "@type": "xsd:decimal"
+    },
+    "paidAmount": {
+      "@id": "mavrck:paidAmount",
+      "@type": "xsd:decimal"
+    },
+    "readyAmount": {
+      "@id": "mavrck:readyAmount",
+      "@type": "xsd:decimal"
+    },
+    "roiValue": {
+      "@id": "mavrck:roiValue",
+      "@type": "xsd:decimal"
+    },
+    "workflowSummary": {
+      "@id": "mavrck:workflowSummary"
+    },
+    "requiredHashtag": {
+      "@id": "mavrck:requiredHashtag",
+      "@type": "xsd:string"
+    },
+    "ftcHashtag": {
+      "@id": "mavrck:ftcHashtag",
+      "@type": "xsd:string"
+    },
+    "youtubeHashtag": {
+      "@id": "mavrck:youtubeHashtag",
+      "@type": "xsd:string"
+    },
+    "internalDescription": {
+      "@id": "mavrck:internalDescription",
+      "@type": "xsd:string"
+    },
+    "activityBudget": {
+      "@id": "mavrck:activityBudget"
+    },
+    "numberOfInfluencers": {
+      "@id": "mavrck:numberOfInfluencers"
+    },
+    "cpeGoal": {
+      "@id": "mavrck:cpeGoal",
+      "@type": "xsd:decimal"
+    },
+    "cpmGoal": {
+      "@id": "mavrck:cpmGoal",
+      "@type": "xsd:decimal"
+    },
+    "impressionsGoal": {
+      "@id": "mavrck:impressionsGoal",
+      "@type": "xsd:decimal"
+    },
+    "engagementsGoal": {
+      "@id": "mavrck:engagementsGoal",
+      "@type": "xsd:decimal"
+    },
+    "engagementRateGoal": {
+      "@id": "mavrck:engagementRateGoal",
+      "@type": "xsd:decimal"
+    },
+    "contentDueDate": {
+      "@id": "mavrck:contentDueDate",
+      "@type": "xsd:string"
+    },
+    "draftDueDate": {
+      "@id": "mavrck:draftDueDate",
+      "@type": "xsd:string"
+    },
+    "conceptDueDate": {
+      "@id": "mavrck:conceptDueDate",
+      "@type": "xsd:string"
+    },
+    "primaryNetwork": {
+      "@id": "mavrck:primaryNetwork",
+      "@type": "xsd:string"
+    },
+    "hasPointsEnabled": {
+      "@id": "mavrck:hasPointsEnabled",
+      "@type": "xsd:boolean"
+    },
+    "shareableReportLink": {
+      "@id": "mavrck:shareableReportLink",
+      "@type": "xsd:string"
+    },
+    "termsOfServiceLink": {
+      "@id": "mavrck:termsOfServiceLink",
+      "@type": "xsd:string"
+    },
+    "autoAcceptApplicant": {
+      "@id": "mavrck:autoAcceptApplicant",
+      "@type": "xsd:boolean"
+    },
+    "globalUserListDefinitionId": {
+      "@id": "mavrck:globalUserListDefinitionId",
+      "@type": "xsd:integer"
+    },
+    "ready": {
+      "@id": "mavrck:ready",
+      "@type": "xsd:decimal"
+    },
+    "pending": {
+      "@id": "mavrck:pending",
+      "@type": "xsd:decimal"
+    },
+    "fulfilled": {
+      "@id": "mavrck:fulfilled",
+      "@type": "xsd:decimal"
+    },
+    "brief": {
+      "@id": "mavrck:brief",
+      "@type": "xsd:string"
+    },
+    "hideOnIcm": {
+      "@id": "mavrck:hideOnIcm",
+      "@type": "xsd:boolean"
+    },
+    "application": {
+      "@id": "mavrck:application"
+    },
+    "community": {
+      "@id": "mavrck:community"
+    },
+    "isSetupEnabled": {
+      "@id": "mavrck:isSetupEnabled",
+      "@type": "xsd:boolean"
+    },
+    "isCopied": {
+      "@id": "mavrck:isCopied",
+      "@type": "xsd:boolean"
+    },
+    "hideTemplateUpdateCTA": {
+      "@id": "mavrck:hideTemplateUpdateCTA",
+      "@type": "xsd:boolean"
+    },
+    "isLaterCreatorExperienceEnabled": {
+      "@id": "mavrck:isLaterCreatorExperienceEnabled",
+      "@type": "xsd:boolean"
+    },
+    "isMavelyCreatorExperienceEnabled": {
+      "@id": "mavrck:isMavelyCreatorExperienceEnabled",
+      "@type": "xsd:boolean"
+    },
+    "budgetReferenceId": {
+      "@id": "mavrck:budgetReferenceId",
+      "@type": "xsd:string"
+    },
+    "budgetReferenceIdType": {
+      "@id": "mavrck:budgetReferenceIdType",
+      "@type": "xsd:string"
+    },
+    "brandSuitabilityGuidelines": {
+      "@id": "mavrck:brandSuitabilityGuidelines",
+      "@type": "xsd:string"
+    },
+    "publicSummary": {
+      "@id": "mavrck:publicSummary",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "mavrck:version",
+      "@type": "xsd:integer"
+    },
+    "lastPolledAt": {
+      "@id": "mavrck:lastPolledAt",
+      "@type": "xsd:dateTime"
+    },
+    "IncentiveDeprecated": "mavrck:IncentiveDeprecated",
+    "incentiveTitle": {
+      "@id": "mavrck:incentiveTitle",
+      "@type": "xsd:string"
+    },
+    "incentiveDescription": {
+      "@id": "mavrck:incentiveDescription",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "mavrck:quantity",
+      "@type": "xsd:integer"
+    },
+    "sweepstakesWinnersQty": {
+      "@id": "mavrck:sweepstakesWinnersQty",
+      "@type": "xsd:integer"
+    },
+    "rewardWinType": {
+      "@id": "mavrck:rewardWinType",
+      "@type": "xsd:string"
+    },
+    "sweepstakesUrl": {
+      "@id": "mavrck:sweepstakesUrl",
+      "@type": "xsd:string"
+    },
+    "sweepsRules": {
+      "@id": "mavrck:sweepsRules",
+      "@type": "xsd:string"
+    },
+    "promocode": {
+      "@id": "mavrck:promocode",
+      "@type": "xsd:string"
+    },
+    "multipleClaims": {
+      "@id": "mavrck:multipleClaims",
+      "@type": "xsd:boolean"
+    },
+    "promocodeTermsAndConditions": {
+      "@id": "mavrck:promocodeTermsAndConditions",
+      "@type": "xsd:string"
+    },
+    "exclusiveLinkUrl": {
+      "@id": "mavrck:exclusiveLinkUrl",
+      "@type": "xsd:string"
+    },
+    "exclusiveLinkCta": {
+      "@id": "mavrck:exclusiveLinkCta",
+      "@type": "xsd:string"
+    },
+    "contestMetric": {
+      "@id": "mavrck:contestMetric",
+      "@type": "xsd:string"
+    },
+    "printableCoupon": {
+      "@id": "mavrck:printableCoupon",
+      "@type": "xsd:string"
+    },
+    "rewardId": {
+      "@id": "mavrck:rewardId",
+      "@type": "xsd:string"
+    },
+    "winnerSelectionMethod": {
+      "@id": "mavrck:winnerSelectionMethod",
+      "@type": "xsd:string"
+    },
+    "winnersSelectedCount": {
+      "@id": "mavrck:winnersSelectedCount",
+      "@type": "xsd:integer"
+    },
+    "disqualifiedWinnersCount": {
+      "@id": "mavrck:disqualifiedWinnersCount",
+      "@type": "xsd:integer"
+    },
+    "allocatedWinnersCount": {
+      "@id": "mavrck:allocatedWinnersCount",
+      "@type": "xsd:integer"
+    },
+    "claimedIncentivesInfluencerCount": {
+      "@id": "mavrck:claimedIncentivesInfluencerCount",
+      "@type": "xsd:integer"
+    },
+    "claimedIncentivesCount": {
+      "@id": "mavrck:claimedIncentivesCount",
+      "@type": "xsd:integer"
+    },
+    "actionGroupId": {
+      "@id": "mavrck:actionGroupId",
+      "@type": "xsd:integer"
+    },
+    "cashPaymentAppId": {
+      "@id": "mavrck:cashPaymentAppId",
+      "@type": "xsd:integer"
+    },
+    "giftCardOptionId": {
+      "@id": "mavrck:giftCardOptionId",
+      "@type": "xsd:integer"
+    },
+    "giftCardEmailTemplateId": {
+      "@id": "mavrck:giftCardEmailTemplateId",
+      "@type": "xsd:string"
+    },
+    "actionGroupStatus": {
+      "@id": "mavrck:actionGroupStatus",
+      "@type": "xsd:string"
+    },
+    "incentiveStatus": {
+      "@id": "mavrck:incentiveStatus",
+      "@type": "xsd:string"
+    },
+    "claims": {
+      "@id": "mavrck:claims",
+      "@container": "@list"
+    },
+    "unlockType": {
+      "@id": "mavrck:unlockType",
+      "@type": "xsd:string"
+    },
+    "numberPointsRequired": {
+      "@id": "mavrck:numberPointsRequired",
+      "@type": "xsd:integer"
+    },
+    "approximateRetailValue": {
+      "@id": "mavrck:approximateRetailValue",
+      "@type": "xsd:decimal"
+    },
+    "costCurrencyCode": {
+      "@id": "mavrck:costCurrencyCode",
+      "@type": "xsd:string"
+    },
+    "valueCurrencyCode": {
+      "@id": "mavrck:valueCurrencyCode",
+      "@type": "xsd:string"
+    },
+    "bonusTierCurrencyCode": {
+      "@id": "mavrck:bonusTierCurrencyCode",
+      "@type": "xsd:string"
+    },
+    "bonusTiers": {
+      "@id": "mavrck:bonusTiers",
+      "@container": "@list"
+    },
+    "termsAndConditions": {
+      "@id": "mavrck:termsAndConditions",
+      "@type": "@id"
+    },
+    "totalDynamicPromoCodes": {
+      "@id": "mavrck:totalDynamicPromoCodes",
+      "@type": "xsd:decimal"
+    },
+    "claimedDynamicPromoCodes": {
+      "@id": "mavrck:claimedDynamicPromoCodes",
+      "@type": "xsd:decimal"
+    },
+    "unlockEvent": {
+      "@id": "mavrck:unlockEvent",
+      "@type": "xsd:string"
+    },
+    "cashPaymentAppProvider": {
+      "@id": "mavrck:cashPaymentAppProvider",
+      "@type": "xsd:string"
+    },
+    "discountCodeId": {
+      "@id": "mavrck:discountCodeId",
+      "@type": "xsd:string"
+    },
+    "couponActivation": {
+      "@id": "mavrck:couponActivation",
+      "@type": "xsd:string"
+    },
+    "ActionGroupURI": "mavrck:ActionGroupURI",
+    "ResponseMetadata": "mavrck:ResponseMetadata",
+    "ConversationResponseMetadata": "mavrck:ConversationResponseMetadata",
+    "markedAsUnreadCount": {
+      "@id": "mavrck:markedAsUnreadCount",
+      "@type": "xsd:integer"
+    },
+    "ActivationURI": "mavrck:ActivationURI",
+    "BazaarVoiceAppProductDeprecated": "mavrck:BazaarVoiceAppProductDeprecated",
+    "reviewProductId": {
+      "@id": "mavrck:reviewProductId",
+      "@type": "xsd:integer"
+    },
+    "externalBazaarProductId": {
+      "@id": "mavrck:externalBazaarProductId",
+      "@type": "xsd:string"
+    },
+    "PendingActivationURI": "mavrck:PendingActivationURI",
+    "MetaInformationDeprecated": "mavrck:MetaInformationDeprecated",
+    "UserSearch": "mavrck:UserSearch",
+    "DemographicsPro_Audience_Data_Analysis": {
+      "@id": "mavrck:DemographicsPro_Audience_Data_Analysis"
+    },
+    "DemographicsPro_Audience_Data_Analysis_Facebook": {
+      "@id": "mavrck:DemographicsPro_Audience_Data_Analysis_Facebook"
+    },
+    "DemographicsPro_Audience_Data_Analysis_TikTok": {
+      "@id": "mavrck:DemographicsPro_Audience_Data_Analysis_TikTok"
+    },
+    "DemographicsPro_Audience_Data_Analysis_Snapchat": {
+      "@id": "mavrck:DemographicsPro_Audience_Data_Analysis_Snapchat"
+    },
+    "memberSelectedEthnicities": {
+      "@id": "mavrck:memberSelectedEthnicities"
+    },
+    "dataPoints": {
+      "@id": "mavrck:dataPoints"
+    },
+    "accountType": {
+      "@id": "mavrck:accountType",
+      "@container": "@list"
+    },
+    "twitterAccount": {
+      "@id": "mavrck:twitterAccount"
+    },
+    "pinterestAccount": {
+      "@id": "mavrck:pinterestAccount"
+    },
+    "registeredInfluencer": {
+      "@id": "mavrck:registeredInfluencer"
+    },
+    "hasPosted": {
+      "@id": "mavrck:hasPosted"
+    },
+    "blog": {
+      "@id": "mavrck:blog"
+    },
+    "youtubeChannel": {
+      "@id": "mavrck:youtubeChannel"
+    },
+    "snapchatAccount": {
+      "@id": "mavrck:snapchatAccount"
+    },
+    "customInfluencerStatusId": {
+      "@id": "mavrck:customInfluencerStatusId"
+    },
+    "dueDate": {
+      "@id": "mavrck:dueDate"
+    },
+    "audienceLocation": {
+      "@id": "mavrck:audienceLocation"
+    },
+    "hasSponsoredContent": {
+      "@id": "mavrck:hasSponsoredContent"
+    },
+    "globalPerformanceComposites": {
+      "@id": "mavrck:globalPerformanceComposites",
+      "@container": "@list"
+    },
+    "globalPerformanceMetrics": {
+      "@id": "mavrck:globalPerformanceMetrics"
+    },
+    "unverified": {
+      "@id": "mavrck:unverified",
+      "@container": "@list"
+    },
+    "audienceFraudLevel": {
+      "@id": "mavrck:audienceFraudLevel",
+      "@container": "@list"
+    },
+    "lists": {
+      "@id": "mavrck:lists"
+    },
+    "topics": {
+      "@id": "mavrck:topics"
+    },
+    "EmailSmtp": "mavrck:EmailSmtp",
+    "SubscriberSettings": "mavrck:SubscriberSettings",
+    "emailSmtp": {
+      "@id": "mavrck:emailSmtp",
+      "@type": "@id"
+    },
+    "subscribers": {
+      "@id": "mavrck:subscribers",
+      "@container": "@list"
+    },
+    "ActionDeprecated": "mavrck:ActionDeprecated",
+    "instructions": {
+      "@id": "mavrck:instructions",
+      "@type": "xsd:string"
+    },
+    "linkReference": {
+      "@id": "mavrck:linkReference",
+      "@type": "xsd:string"
+    },
+    "actionGroupType": {
+      "@id": "mavrck:actionGroupType",
+      "@type": "xsd:string"
+    },
+    "actionGroupTitle": {
+      "@id": "mavrck:actionGroupTitle",
+      "@type": "xsd:string"
+    },
+    "ActionGroup": {
+      "@id": "mavrck:ActionGroup"
+    },
+    "routing": {
+      "@id": "mavrck:routing",
+      "@type": "@id"
+    },
+    "survey": {
+      "@id": "mavrck:survey"
+    },
+    "previewContentType": {
+      "@id": "mavrck:previewContentType",
+      "@type": "xsd:string"
+    },
+    "article": {
+      "@id": "mavrck:article"
+    },
+    "submit": {
+      "@id": "mavrck:submit",
+      "@type": "xsd:string"
+    },
+    "reviewFormId": {
+      "@id": "mavrck:reviewFormId",
+      "@type": "xsd:integer"
+    },
+    "productId": {
+      "@id": "mavrck:productId",
+      "@type": "xsd:integer"
+    },
+    "product": {
+      "@id": "mavrck:product",
+      "@type": "@id"
+    },
+    "activations": {
+      "@id": "mavrck:activations",
+      "@container": "@list"
+    },
+    "pendingActivation": {
+      "@id": "mavrck:pendingActivation",
+      "@type": "@id"
+    },
+    "conversion": {
+      "@id": "mavrck:conversion",
+      "@type": "@id"
+    },
+    "conversionAssignedAt": {
+      "@id": "mavrck:conversionAssignedAt",
+      "@type": "xsd:dateTime"
+    },
+    "brand": {
+      "@id": "mavrck:brand",
+      "@type": "@id"
+    },
+    "needsModeration": {
+      "@id": "mavrck:needsModeration",
+      "@type": "xsd:boolean"
+    },
+    "required": {
+      "@id": "mavrck:required",
+      "@type": "xsd:boolean"
+    },
+    "ActionGroupIncentivePutBody": "mavrck:ActionGroupIncentivePutBody",
+    "ActionGroupCandidateQueryFilter": "mavrck:ActionGroupCandidateQueryFilter",
+    "userFilter": {
+      "@id": "mavrck:userFilter",
+      "@type": "@id"
+    },
+    "q": {
+      "@id": "mavrck:q",
+      "@type": "xsd:string"
+    },
+    "workflowStageId": {
+      "@id": "mavrck:workflowStageId",
+      "@type": "xsd:integer"
+    },
+    "customStatusId": {
+      "@id": "mavrck:customStatusId",
+      "@container": "@list"
+    },
+    "excludedGlobalUserIds": {
+      "@id": "mavrck:excludedGlobalUserIds",
+      "@container": "@list"
+    },
+    "expectedNumberOfInfluencers": {
+      "@id": "mavrck:expectedNumberOfInfluencers",
+      "@type": "xsd:integer"
+    },
+    "orderProperty": {
+      "@id": "mavrck:orderProperty",
+      "@type": "xsd:string"
+    },
+    "NetworkName": "mavrck:NetworkName",
+    "AdministratorDeprecated": "mavrck:AdministratorDeprecated",
+    "first_name": {
+      "@id": "mavrck:first_name",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "mavrck:last_name",
+      "@type": "xsd:string"
+    },
+    "ListMemberDeprecated": "mavrck:ListMemberDeprecated",
+    "statusLocked": {
+      "@id": "mavrck:statusLocked",
+      "@type": "xsd:boolean"
+    },
+    "optedInDate": {
+      "@id": "mavrck:optedInDate",
+      "@type": "xsd:date"
+    },
+    "postedDate": {
+      "@id": "mavrck:postedDate",
+      "@type": "xsd:date"
+    },
+    "concept": {
+      "@id": "mavrck:concept",
+      "@type": "xsd:string"
+    },
+    "quote": {
+      "@id": "mavrck:quote",
+      "@type": "xsd:decimal"
+    },
+    "instanceUser": {
+      "@id": "mavrck:instanceUser",
+      "@type": "@id"
+    },
+    "Conversation": "mavrck:Conversation",
+    "subject": {
+      "@id": "mavrck:subject",
+      "@type": "xsd:string"
+    },
+    "mostRecentMessageCreatedAt": {
+      "@id": "mavrck:mostRecentMessageCreatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "mostRecentMessageParsedReply": {
+      "@id": "mavrck:mostRecentMessageParsedReply",
+      "@type": "xsd:string"
+    },
+    "mostRecentMessageSenderDisplayName": {
+      "@id": "mavrck:mostRecentMessageSenderDisplayName",
+      "@type": "xsd:string"
+    },
+    "hasAttachment": {
+      "@id": "mavrck:hasAttachment",
+      "@type": "xsd:boolean"
+    },
+    "hasInbound": {
+      "@id": "mavrck:hasInbound",
+      "@type": "xsd:boolean"
+    },
+    "hasOutbound": {
+      "@id": "mavrck:hasOutbound",
+      "@type": "xsd:boolean"
+    },
+    "markedAsUnread": {
+      "@id": "mavrck:markedAsUnread",
+      "@type": "xsd:boolean"
+    },
+    "messageCount": {
+      "@id": "mavrck:messageCount",
+      "@type": "xsd:integer"
+    },
+    "draftCount": {
+      "@id": "mavrck:draftCount",
+      "@type": "xsd:integer"
+    },
+    "contextType": {
+      "@id": "mavrck:contextType",
+      "@type": "xsd:string"
+    },
+    "contextTitle": {
+      "@id": "mavrck:contextTitle",
+      "@type": "xsd:string"
+    },
+    "contextLink": {
+      "@id": "mavrck:contextLink",
+      "@type": "xsd:string"
+    },
+    "isArchived": {
+      "@id": "mavrck:isArchived",
+      "@type": "xsd:boolean"
+    },
+    "listMembers": {
+      "@id": "mavrck:listMembers",
+      "@container": "@list"
+    },
+    "participants": {
+      "@id": "mavrck:participants",
+      "@container": "@list"
+    },
+    "messages": {
+      "@id": "mavrck:messages",
+      "@container": "@list"
+    },
+    "ListDeliverable": "mavrck:ListDeliverable",
+    "contentTypeName": {
+      "@id": "mavrck:contentTypeName",
+      "@type": "@id"
+    },
+    "count": {
+      "@id": "mavrck:count",
+      "@type": "xsd:decimal"
+    },
+    "updatedBy": {
+      "@id": "mavrck:updatedBy",
+      "@type": "xsd:decimal"
+    },
+    "NetworkSlug": "mavrck:NetworkSlug",
+    "MembershipContactInfoDeprecated": "mavrck:MembershipContactInfoDeprecated",
+    "talentManagerEmail": {
+      "@id": "mavrck:talentManagerEmail",
+      "@type": "xsd:string"
+    },
+    "ConversionTagDeprecated": "mavrck:ConversionTagDeprecated",
+    "code": {
+      "@id": "mavrck:code",
+      "@type": "xsd:string"
+    },
+    "isConversionValueEnabled": {
+      "@id": "mavrck:isConversionValueEnabled",
+      "@type": "xsd:boolean"
+    },
+    "QuestionDeprecated": "mavrck:QuestionDeprecated",
+    "className": {
+      "@id": "mavrck:className",
+      "@type": "xsd:string"
+    },
+    "questionText": {
+      "@id": "mavrck:questionText",
+      "@type": "xsd:string"
+    },
+    "markUpQuestionText": {
+      "@id": "mavrck:markUpQuestionText",
+      "@type": "xsd:string"
+    },
+    "questionResponses": {
+      "@id": "mavrck:questionResponses",
+      "@container": "@list"
+    },
+    "maxResponses": {
+      "@id": "mavrck:maxResponses",
+      "@type": "xsd:integer"
+    },
+    "hasResponses": {
+      "@id": "mavrck:hasResponses",
+      "@type": "xsd:boolean"
+    },
+    "templateOptions": {
+      "@id": "mavrck:templateOptions"
+    },
+    "dataPointDefinitionId": {
+      "@id": "mavrck:dataPointDefinitionId",
+      "@type": "xsd:integer"
+    },
+    "dataPointDefinition": {
+      "@id": "mavrck:dataPointDefinition",
+      "@type": "@id"
+    },
+    "order": {
+      "@id": "mavrck:order",
+      "@type": "xsd:integer"
+    },
+    "hideFromInfluencers": {
+      "@id": "mavrck:hideFromInfluencers",
+      "@type": "xsd:boolean"
+    },
+    "ProductDeprecated": "mavrck:ProductDeprecated",
+    "bazaarVoiceAppProduct": {
+      "@id": "mavrck:bazaarVoiceAppProduct",
+      "@type": "@id"
+    },
+    "powerReviewsPage": {
+      "@id": "mavrck:powerReviewsPage",
+      "@type": "@id"
+    },
+    "yotpoAppProduct": {
+      "@id": "mavrck:yotpoAppProduct",
+      "@type": "@id"
+    },
+    "PowerReviewsAppDeprecated": "mavrck:PowerReviewsAppDeprecated",
+    "apiKey": {
+      "@id": "mavrck:apiKey",
+      "@type": "xsd:string"
+    },
+    "environment": {
+      "@id": "mavrck:environment",
+      "@type": "xsd:string"
+    },
+    "merchantId": {
+      "@id": "mavrck:merchantId",
+      "@type": "xsd:string"
+    },
+    "DataPointDefinitionDeprecated": "mavrck:DataPointDefinitionDeprecated",
+    "multi": {
+      "@id": "mavrck:multi",
+      "@type": "xsd:boolean"
+    },
+    "customSet": {
+      "@id": "mavrck:customSet",
+      "@type": "xsd:boolean"
+    },
+    "markUpDescription": {
+      "@id": "mavrck:markUpDescription",
+      "@type": "xsd:string"
+    },
+    "mergeTag": {
+      "@id": "mavrck:mergeTag",
+      "@type": "xsd:boolean"
+    },
+    "archived": {
+      "@id": "mavrck:archived",
+      "@type": "xsd:boolean"
+    },
+    "setElements": {
+      "@id": "mavrck:setElements",
+      "@type": "@id"
+    },
+    "membersCompleted": {
+      "@id": "mavrck:membersCompleted",
+      "@type": "xsd:integer"
+    },
+    "actionGroups": {
+      "@id": "mavrck:actionGroups",
+      "@container": "@list"
+    },
+    "Gender": "mavrck:Gender",
+    "Error": "mavrck:Error",
+    "error": {
+      "@id": "mavrck:error",
+      "@type": "xsd:string"
+    },
+    "params": {
+      "@id": "mavrck:params",
+      "@container": "@list"
+    },
+    "keys": {
+      "@id": "mavrck:keys",
+      "@container": "@list"
+    },
+    "artifactLinks": {
+      "@id": "mavrck:artifactLinks",
+      "@type": "@id"
+    },
+    "parent": {
+      "@id": "mavrck:parent"
+    },
+    "Message": "mavrck:Message",
+    "messageIdHeader": {
+      "@id": "mavrck:messageIdHeader",
+      "@type": "xsd:string"
+    },
+    "conversationId": {
+      "@id": "mavrck:conversationId",
+      "@type": "xsd:string"
+    },
+    "scheduledFor": {
+      "@id": "mavrck:scheduledFor",
+      "@type": "xsd:dateTime"
+    },
+    "scheduledMessage": {
+      "@id": "mavrck:scheduledMessage"
+    },
+    "inReplyToHeader": {
+      "@id": "mavrck:inReplyToHeader",
+      "@type": "xsd:string"
+    },
+    "html": {
+      "@id": "mavrck:html",
+      "@type": "xsd:string"
+    },
+    "parsedReply": {
+      "@id": "mavrck:parsedReply",
+      "@type": "xsd:string"
+    },
+    "isInbound": {
+      "@id": "mavrck:isInbound",
+      "@type": "xsd:boolean"
+    },
+    "hasBeenOpened": {
+      "@id": "mavrck:hasBeenOpened",
+      "@type": "xsd:boolean"
+    },
+    "hasBeenDelivered": {
+      "@id": "mavrck:hasBeenDelivered",
+      "@type": "xsd:boolean"
+    },
+    "hasBeenBounced": {
+      "@id": "mavrck:hasBeenBounced",
+      "@type": "xsd:boolean"
+    },
+    "sentAt": {
+      "@id": "mavrck:sentAt",
+      "@type": "xsd:dateTime"
+    },
+    "modifiedAt": {
+      "@id": "mavrck:modifiedAt",
+      "@type": "xsd:dateTime"
+    },
+    "sentBy": {
+      "@id": "mavrck:sentBy",
+      "@type": "@id"
+    },
+    "modifiedBy": {
+      "@id": "mavrck:modifiedBy",
+      "@type": "@id"
+    },
+    "createdBy": {
+      "@id": "mavrck:createdBy",
+      "@type": "@id"
+    },
+    "recipients": {
+      "@id": "mavrck:recipients",
+      "@container": "@list"
+    },
+    "attachments": {
+      "@id": "mavrck:attachments",
+      "@container": "@list"
+    },
+    "draftReply": {
+      "@id": "mavrck:draftReply"
+    },
+    "WorkflowStatusRequirementDeprecated": "mavrck:WorkflowStatusRequirementDeprecated",
+    "satisfied": {
+      "@id": "mavrck:satisfied",
+      "@type": "xsd:boolean"
+    },
+    "incentiveId": {
+      "@id": "mavrck:incentiveId",
+      "@type": "xsd:decimal"
+    },
+    "ActionTeaserTS": "mavrck:ActionTeaserTS",
+    "BrandDeprecated": "mavrck:BrandDeprecated",
+    "logo": {
+      "@id": "mavrck:logo",
+      "@type": "xsd:string"
+    },
+    "accentColor": {
+      "@id": "mavrck:accentColor",
+      "@type": "xsd:string"
+    },
+    "buttonColor": {
+      "@id": "mavrck:buttonColor",
+      "@type": "xsd:string"
+    },
+    "associatedWithCampaign": {
+      "@id": "mavrck:associatedWithCampaign",
+      "@type": "xsd:boolean"
+    },
+    "WorkflowStatusBuckets": "mavrck:WorkflowStatusBuckets",
+    "total": {
+      "@id": "mavrck:total",
+      "@type": "xsd:integer"
+    },
+    "accepted": {
+      "@id": "mavrck:accepted",
+      "@type": "xsd:integer"
+    },
+    "applicants": {
+      "@id": "mavrck:applicants",
+      "@type": "xsd:integer"
+    },
+    "candidates": {
+      "@id": "mavrck:candidates",
+      "@type": "xsd:integer"
+    },
+    "rejected": {
+      "@id": "mavrck:rejected",
+      "@type": "xsd:integer"
+    },
+    "MessageRecipient": "mavrck:MessageRecipient",
+    "emailId": {
+      "@id": "mavrck:emailId",
+      "@type": "xsd:integer"
+    },
+    "role": {
+      "@id": "mavrck:role",
+      "@type": "xsd:string"
+    },
+    "RoutingDeprecated": "mavrck:RoutingDeprecated",
+    "success": {
+      "@id": "mavrck:success",
+      "@type": "@id"
+    },
+    "not_eligible": {
+      "@id": "mavrck:not_eligible",
+      "@type": "@id"
+    },
+    "Attachment": "mavrck:Attachment",
+    "originalName": {
+      "@id": "mavrck:originalName",
+      "@type": "xsd:string"
+    },
+    "encoding": {
+      "@id": "mavrck:encoding",
+      "@type": "xsd:string"
+    },
+    "buffer": {
+      "@id": "mavrck:buffer",
+      "@type": "xsd:string"
+    },
+    "mimeType": {
+      "@id": "mavrck:mimeType",
+      "@type": "xsd:string"
+    },
+    "disposition": {
+      "@id": "mavrck:disposition",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "mavrck:size",
+      "@type": "xsd:integer"
+    },
+    "uri": {
+      "@id": "mavrck:uri",
+      "@type": "xsd:string"
+    },
+    "contentId": {
+      "@id": "mavrck:contentId",
+      "@type": "xsd:string"
+    },
+    "ConversationTemplateDeprecated": "mavrck:ConversationTemplateDeprecated",
+    "category": {
+      "@id": "mavrck:category",
+      "@type": "xsd:string"
+    },
+    "lastModifiedBy": {
+      "@id": "mavrck:lastModifiedBy",
+      "@type": "@id"
+    },
+    "deliveryMethod": {
+      "@id": "mavrck:deliveryMethod",
+      "@type": "xsd:string"
+    },
+    "sendOnEvent": {
+      "@id": "mavrck:sendOnEvent",
+      "@type": "xsd:string"
+    },
+    "sendOnDays": {
+      "@id": "mavrck:sendOnDays",
+      "@type": "xsd:integer"
+    },
+    "sendOnTimeframe": {
+      "@id": "mavrck:sendOnTimeframe",
+      "@type": "xsd:string"
+    },
+    "sendOnStatusId": {
+      "@id": "mavrck:sendOnStatusId",
+      "@type": "xsd:integer"
+    },
+    "sendOnDate": {
+      "@id": "mavrck:sendOnDate",
+      "@type": "xsd:string"
+    },
+    "InstanceUserMaterializedView": "mavrck:InstanceUserMaterializedView",
+    "lifetimeImpressions": {
+      "@id": "mavrck:lifetimeImpressions",
+      "@type": "xsd:integer"
+    },
+    "lifetimeValue": {
+      "@id": "mavrck:lifetimeValue",
+      "@type": "xsd:decimal"
+    },
+    "blogName": {
+      "@id": "mavrck:blogName",
+      "@type": "xsd:string"
+    },
+    "facebookFollowersCount": {
+      "@id": "mavrck:facebookFollowersCount",
+      "@type": "xsd:integer"
+    },
+    "facebookName": {
+      "@id": "mavrck:facebookName",
+      "@type": "xsd:string"
+    },
+    "facebookPicture": {
+      "@id": "mavrck:facebookPicture",
+      "@type": "xsd:string"
+    },
+    "facebookAverageEngagements": {
+      "@id": "mavrck:facebookAverageEngagements",
+      "@type": "xsd:integer"
+    },
+    "facebookEngagementRate": {
+      "@id": "mavrck:facebookEngagementRate",
+      "@type": "xsd:decimal"
+    },
+    "instagramHandle": {
+      "@id": "mavrck:instagramHandle",
+      "@type": "xsd:string"
+    },
+    "instagramFullName": {
+      "@id": "mavrck:instagramFullName",
+      "@type": "xsd:string"
+    },
+    "instagramProfilePicture": {
+      "@id": "mavrck:instagramProfilePicture",
+      "@type": "xsd:string"
+    },
+    "instagramFollowersCount": {
+      "@id": "mavrck:instagramFollowersCount",
+      "@type": "xsd:integer"
+    },
+    "instagramAverageEngagements": {
+      "@id": "mavrck:instagramAverageEngagements",
+      "@type": "xsd:integer"
+    },
+    "instagramEngagementRate": {
+      "@id": "mavrck:instagramEngagementRate",
+      "@type": "xsd:decimal"
+    },
+    "pinterestUsername": {
+      "@id": "mavrck:pinterestUsername",
+      "@type": "xsd:string"
+    },
+    "pinterestFollowersCount": {
+      "@id": "mavrck:pinterestFollowersCount",
+      "@type": "xsd:integer"
+    },
+    "pinterestMonthlyViewers": {
+      "@id": "mavrck:pinterestMonthlyViewers",
+      "@type": "xsd:integer"
+    },
+    "twitterHandle": {
+      "@id": "mavrck:twitterHandle",
+      "@type": "xsd:string"
+    },
+    "twitterFollowersCount": {
+      "@id": "mavrck:twitterFollowersCount",
+      "@type": "xsd:integer"
+    },
+    "twitterEngagementRate": {
+      "@id": "mavrck:twitterEngagementRate",
+      "@type": "xsd:decimal"
+    },
+    "IncentiveTermsAndConditionsDeprecated": "mavrck:IncentiveTermsAndConditionsDeprecated",
+    "template": {
+      "@id": "mavrck:template",
+      "@type": "xsd:string"
+    },
+    "preview": {
+      "@id": "mavrck:preview",
+      "@type": "xsd:string"
+    },
+    "MembershipDeprecated": "mavrck:MembershipDeprecated",
+    "utmContent": {
+      "@id": "mavrck:utmContent",
+      "@type": "xsd:string"
+    },
+    "utmCampaign": {
+      "@id": "mavrck:utmCampaign",
+      "@type": "xsd:string"
+    },
+    "pointsCurrentBalance": {
+      "@id": "mavrck:pointsCurrentBalance"
+    },
+    "totalPoints": {
+      "@id": "mavrck:totalPoints",
+      "@type": "xsd:integer"
+    },
+    "RoutingOptionsDeprecated": "mavrck:RoutingOptionsDeprecated",
+    "redirect_url": {
+      "@id": "mavrck:redirect_url",
+      "@type": "xsd:string"
+    },
+    "cta": {
+      "@id": "mavrck:cta",
+      "@type": "xsd:string"
+    },
+    "mode": {
+      "@id": "mavrck:mode",
+      "@type": "xsd:string"
+    },
+    "AudienceDeprecated": "mavrck:AudienceDeprecated",
+    "criteria": {
+      "@id": "mavrck:criteria",
+      "@container": "@list"
+    },
+    "IncentiveUnlockEvent": "mavrck:IncentiveUnlockEvent",
+    "ActionGroupSubscriber": "mavrck:ActionGroupSubscriber",
+    "accountId": {
+      "@id": "mavrck:accountId",
+      "@type": "xsd:decimal"
+    },
+    "ActionGroupPostResponse": "mavrck:ActionGroupPostResponse",
+    "LinksDeprecated": "mavrck:LinksDeprecated",
+    "normal": {
+      "@id": "mavrck:normal",
+      "@type": "xsd:string"
+    },
+    "deep": {
+      "@id": "mavrck:deep",
+      "@type": "xsd:string"
+    },
+    "ActionGroupTeaser": "mavrck:ActionGroupTeaser",
+    "networks": {
+      "@id": "mavrck:networks",
+      "@container": "@list"
+    },
+    "PowerReviewsPageDeprecated": "mavrck:PowerReviewsPageDeprecated",
+    "powerReviewsAppId": {
+      "@id": "mavrck:powerReviewsAppId",
+      "@type": "xsd:string"
+    },
+    "externalPageId": {
+      "@id": "mavrck:externalPageId",
+      "@type": "xsd:string"
+    },
+    "PowerReviewsApp": {
+      "@id": "mavrck:PowerReviewsApp"
+    },
+    "YotpoAppProductDeprecated": "mavrck:YotpoAppProductDeprecated",
+    "yotpoProductId": {
+      "@id": "mavrck:yotpoProductId",
+      "@type": "xsd:string"
+    },
+    "IncentiveClaimDeprecated": "mavrck:IncentiveClaimDeprecated",
+    "profilePictureLink": {
+      "@id": "mavrck:profilePictureLink",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "mavrck:address",
+      "@type": "xsd:string"
+    },
+    "facebookFriendCount": {
+      "@id": "mavrck:facebookFriendCount",
+      "@type": "xsd:integer"
+    },
+    "mostRecentRewardFulfilledAt": {
+      "@id": "mavrck:mostRecentRewardFulfilledAt",
+      "@type": "xsd:dateTime"
+    },
+    "clickCount": {
+      "@id": "mavrck:clickCount",
+      "@type": "xsd:integer"
+    },
+    "conversionCount": {
+      "@id": "mavrck:conversionCount",
+      "@type": "xsd:integer"
+    },
+    "BulkActionGroupScheduleMessagePostBody": "mavrck:BulkActionGroupScheduleMessagePostBody",
+    "globalUserIds": {
+      "@id": "mavrck:globalUserIds"
+    },
+    "addTalentManager": {
+      "@id": "mavrck:addTalentManager",
+      "@type": "xsd:boolean"
+    },
+    "queryFilter": {
+      "@id": "mavrck:queryFilter"
+    },
+    "SendMessageAttachment": "mavrck:SendMessageAttachment",
+    "index": {
+      "@id": "mavrck:index",
+      "@type": "xsd:decimal"
+    },
+    "Administrator": "mavrck:Administrator",
+    "ActionGroupConversationTemplateCopyPostBody": "mavrck:ActionGroupConversationTemplateCopyPostBody",
+    "ActionGroupConversationTemplateReorderPutResponse": "mavrck:ActionGroupConversationTemplateReorderPutResponse",
+    "ActionGroupConversationTemplateCopyPostResponse": "mavrck:ActionGroupConversationTemplateCopyPostResponse",
+    "copy": {
+      "@id": "mavrck:copy",
+      "@type": "@id"
+    },
+    "ActionGroupConversationTemplatePutBody": "mavrck:ActionGroupConversationTemplatePutBody",
+    "ActionGroupConversationTemplatePostResponse": "mavrck:ActionGroupConversationTemplatePostResponse",
+    "ActionGroupConversationTemplatesGetResponse": "mavrck:ActionGroupConversationTemplatesGetResponse",
+    "defaultTemplates": {
+      "@id": "mavrck:defaultTemplates",
+      "@container": "@list"
+    },
+    "ActionGroupConversationTemplate": "mavrck:ActionGroupConversationTemplate",
+    "createdByAccountId": {
+      "@id": "mavrck:createdByAccountId",
+      "@type": "xsd:decimal"
+    },
+    "lastModifiedByAccountId": {
+      "@id": "mavrck:lastModifiedByAccountId",
+      "@type": "xsd:decimal"
+    },
+    "ListCustomStatus": {
+      "@id": "mavrck:ListCustomStatus"
+    },
+    "ActionGroupConversationTemplateReorderPutBody": "mavrck:ActionGroupConversationTemplateReorderPutBody",
+    "ActionGroupConversationTemplatePostBody": "mavrck:ActionGroupConversationTemplatePostBody",
+    "ListCustomInfluencerStatusesResponse": "mavrck:ListCustomInfluencerStatusesResponse",
+    "ResponseBody_ListCustomInfluencerStatus-Array_": "mavrck:ResponseBody_ListCustomInfluencerStatus-Array_",
+    "ListCustomInfluencerStatus": "mavrck:ListCustomInfluencerStatus",
+    "influencerLabel": {
+      "@id": "mavrck:influencerLabel",
+      "@type": "xsd:string"
+    },
+    "influencerInstructions": {
+      "@id": "mavrck:influencerInstructions",
+      "@type": "xsd:string"
+    },
+    "ConversationTemplate": "mavrck:ConversationTemplate",
+    "ActionGroupCustomStatusesGetResponse": "mavrck:ActionGroupCustomStatusesGetResponse",
+    "ActionGroupCustomStatusDeleteResponse": "mavrck:ActionGroupCustomStatusDeleteResponse",
+    "operation": {
+      "@id": "mavrck:operation",
+      "@type": "xsd:string"
+    },
+    "Partial_ListCustomStatus_": "mavrck:Partial_ListCustomStatus_",
+    "enabled": {
+      "@id": "mavrck:enabled",
+      "@type": "xsd:boolean"
+    },
+    "DBMessageRecipientView": "mavrck:DBMessageRecipientView",
+    "messageId": {
+      "@id": "mavrck:messageId",
+      "@type": "xsd:decimal"
+    },
+    "SendMessageInfluencer": "mavrck:SendMessageInfluencer",
+    "profilePic": {
+      "@id": "mavrck:profilePic",
+      "@type": "xsd:string"
+    },
+    "ActionGroupScheduledMessagePutBody": "mavrck:ActionGroupScheduledMessagePutBody",
+    "scheduleId": {
+      "@id": "mavrck:scheduleId",
+      "@type": "xsd:decimal"
+    },
+    "ActionGroupScheduledMessagePostBody": "mavrck:ActionGroupScheduledMessagePostBody",
+    "DBMessage": "mavrck:DBMessage",
+    "modifiedByAccountId": {
+      "@id": "mavrck:modifiedByAccountId",
+      "@type": "xsd:decimal"
+    },
+    "sentByAccountId": {
+      "@id": "mavrck:sentByAccountId",
+      "@type": "xsd:decimal"
+    },
+    "CannedResponse": "mavrck:CannedResponse",
+    "ScheduledReplyMessagePostBody": "mavrck:ScheduledReplyMessagePostBody",
+    "DBScheduledMessage": "mavrck:DBScheduledMessage",
+    "sendAt": {
+      "@id": "mavrck:sendAt",
+      "@type": "xsd:dateTime"
+    },
+    "ScheduledReplyMessageResponse": "mavrck:ScheduledReplyMessageResponse",
+    "scheduledMessageId": {
+      "@id": "mavrck:scheduledMessageId",
+      "@type": "xsd:decimal"
+    },
+    "SendMessageRecipient": "mavrck:SendMessageRecipient",
+    "influencer": {
+      "@id": "mavrck:influencer",
+      "@type": "@id"
+    },
+    "ScheduledMessageStatus": "mavrck:ScheduledMessageStatus"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Mavrck API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Mavrck's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-20) from openapi/mavrck-account-invitations-api-openapi.yml, openapi/mavrck-action-groups-api-openapi.yml, openapi/mavrck-actiongroupbrief-api-openapi.yml.",
+  "dcterms:created": "2026-10-20",
+  "dcterms:source": [
+    "openapi/mavrck-account-invitations-api-openapi.yml",
+    "openapi/mavrck-action-groups-api-openapi.yml",
+    "openapi/mavrck-actiongroupbrief-api-openapi.yml",
+    "openapi/mavrck-actiongroupbulkscheduledmessages-api-openapi.yml",
+    "openapi/mavrck-actiongroupconversationtemplates-api-openapi.yml"
+  ]
+}

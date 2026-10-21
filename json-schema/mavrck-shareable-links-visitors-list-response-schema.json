@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-shareable-links-visitors-list-response-schema.json",
+  "title": "ShareableLinksVisitorsListResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-shareablelinksvisitors-api-openapi.yml#/components/schemas/ShareableLinksVisitorsListResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/ShareableLinksVisitorResponse"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "ShareableLinksVisitorResponse": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "sharedCipherId": {
+          "type": "number",
+          "format": "double"
+        },
+        "communityId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "actionGroupId": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "dashboardType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "sharedCipherId",
+        "communityId",
+        "actionGroupId",
+        "dashboardType",
+        "createdAt",
+        "updatedAt"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

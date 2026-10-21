@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-get-web-plugin-widgets-response-schema.json",
+  "title": "GetWebPluginWidgetsResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-webpluginwidgets-api-openapi.yml#/components/schemas/GetWebPluginWidgetsResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/FilteredWidget"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "FilteredWidget": {
+      "$ref": "#/$defs/Omit_DBWebPluginWidgets.id-or-createdAt-or-updatedAt-or-status_"
+    },
+    "Omit_DBWebPluginWidgets.id-or-createdAt-or-updatedAt-or-status_": {
+      "$ref": "#/$defs/Pick_DBWebPluginWidgets.Exclude_keyofDBWebPluginWidgets.id-or-createdAt-or-updatedAt-or-status__",
+      "description": "Construct a type with the properties of T except for those in type K."
+    },
+    "Pick_DBWebPluginWidgets.Exclude_keyofDBWebPluginWidgets.id-or-createdAt-or-updatedAt-or-status__": {
+      "properties": {
+        "actionGroupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "cssSelector": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "initializationRuleType": {
+          "type": "string"
+        },
+        "targetUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "urlRegexRule": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "widgetHTML": {
+          "type": "string"
+        },
+        "widgetType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "actionGroupId",
+        "communityId",
+        "initializationRuleType",
+        "widgetHTML",
+        "widgetType"
+      ],
+      "type": "object",
+      "description": "From T, pick a set of properties whose keys are in the union K"
+    }
+  }
+}

@@ -101,12 +101,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -149,12 +149,19 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    EmbedUrlResponse:
+      properties:
+        embed_url:
+          type: string
+      required:
+      - embed_url
+      type: object
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -165,13 +172,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    EmbedUrlResponse:
-      properties:
-        embed_url:
-          type: string
-      required:
-      - embed_url
-      type: object
     DashboardTypesResponse:
       properties:
         dashboardTypes:

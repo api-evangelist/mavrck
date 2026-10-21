@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-bazaar-voice-app-response-schema.json",
+  "title": "BazaarVoiceAppResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-bazaarvoice-api-openapi.yml#/components/schemas/BazaarVoiceAppResponse",
+  "$ref": "#/$defs/DBBazaarVoiceApp",
+  "$defs": {
+    "DBBazaarVoiceApp": {
+      "properties": {
+        "BazaarVoiceLocales": {
+          "items": {
+            "$ref": "#/$defs/DBBazaarVoiceLocale"
+          },
+          "type": "array"
+        },
+        "BazaarVoiceCommunityApps": {
+          "items": {
+            "$ref": "#/$defs/DBBazaarVoiceCommunityApp"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "apiKey": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "name",
+        "secret",
+        "apiKey",
+        "id"
+      ],
+      "type": "object"
+    },
+    "DBBazaarVoiceCommunityApp": {
+      "properties": {
+        "bazaarAppId": {
+          "type": "number",
+          "format": "double"
+        },
+        "communityId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "bazaarAppId",
+        "communityId"
+      ],
+      "type": "object"
+    },
+    "DBBazaarVoiceLocale": {
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "country",
+        "language",
+        "code"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -213,23 +213,66 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BackfillMetaAdInsightsJobPayload:
+    PushMetaAdInsightsJobPayload:
       properties:
-        externalAdIdList:
-          items:
-            type: string
-          type: array
-        backfillOnlyNullEntries:
-          type: boolean
-        batchSize:
-          type: number
-          format: double
-        adAccountIds:
-          items:
-            type: number
-            format: double
-          type: array
+        endDate:
+          type: string
+          format: date-time
+        startDate:
+          type: string
+          format: date-time
+      required:
+      - endDate
+      - startDate
       type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     MetaSystemUsersAdAccountsResponse:
       properties:
         adAccounts:
@@ -282,54 +325,6 @@ components:
       - name
       - id
       type: object
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     MetaSystemUserPermissions:
       properties:
         data:
@@ -347,12 +342,12 @@ components:
       required:
       - data
       type: object
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -363,17 +358,22 @@ components:
       - details
       type: object
       additionalProperties: false
-    PushMetaAdInsightsJobPayload:
+    BackfillMetaAdInsightsJobPayload:
       properties:
-        endDate:
-          type: string
-          format: date-time
-        startDate:
-          type: string
-          format: date-time
-      required:
-      - endDate
-      - startDate
+        externalAdIdList:
+          items:
+            type: string
+          type: array
+        backfillOnlyNullEntries:
+          type: boolean
+        batchSize:
+          type: number
+          format: double
+        adAccountIds:
+          items:
+            type: number
+            format: double
+          type: array
       type: object
   securitySchemes:
     apiKey:

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-bulk-action-group-schedule-message-post-body-schema.json",
+  "title": "BulkActionGroupScheduleMessagePostBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actiongroupbulkscheduledmessages-api-openapi.yml#/components/schemas/BulkActionGroupScheduleMessagePostBody",
+  "properties": {
+    "actionGroupId": {
+      "type": "number",
+      "format": "double"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "templates": {
+      "items": {
+        "additionalProperties": true
+      },
+      "type": "array"
+    },
+    "attachments": {
+      "items": {
+        "$ref": "#/$defs/SendMessageAttachment"
+      },
+      "type": "array"
+    },
+    "html": {
+      "type": "string"
+    },
+    "sendOnDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "globalUserIds": {
+      "additionalProperties": true
+    },
+    "addTalentManager": {
+      "type": "boolean"
+    },
+    "queryFilter": {
+      "properties": {
+        "customStatusId": {
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": "array"
+        },
+        "orderProperty": {
+          "type": "string"
+        },
+        "expectedNumberOfInfluencers": {
+          "type": "number",
+          "format": "double"
+        },
+        "excludedGlobalUserIds": {
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": "array"
+        },
+        "userFilter": {
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "expectedNumberOfInfluencers",
+        "excludedGlobalUserIds",
+        "userFilter"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "actionGroupId",
+    "subject",
+    "html",
+    "sendOnDate",
+    "addTalentManager"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "SendMessageAttachment": {
+      "properties": {
+        "originalName": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "disposition": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "index": {
+          "type": "number",
+          "format": "double"
+        },
+        "buffer": {
+          "type": "string"
+        },
+        "encoding": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

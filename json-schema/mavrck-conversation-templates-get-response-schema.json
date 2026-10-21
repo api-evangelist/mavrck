@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-conversation-templates-get-response-schema.json",
+  "title": "ConversationTemplatesGetResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-conversationtemplates-api-openapi.yml#/components/schemas/ConversationTemplatesGetResponse",
+  "properties": {
+    "meta": {
+      "$ref": "#/$defs/ResponseMetadata"
+    },
+    "data": {
+      "items": {
+        "$ref": "#/$defs/ConversationTemplate"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "Administrator": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approves": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ConversationTemplate": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "$ref": "#/$defs/Administrator"
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "html": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "isArchived": {
+          "type": "boolean"
+        },
+        "lastModifiedBy": {
+          "$ref": "#/$defs/Administrator"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "category",
+        "createdAt",
+        "html",
+        "id",
+        "isArchived",
+        "title",
+        "updatedAt"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ResponseMetadata": {
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "failure",
+            "success"
+          ]
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

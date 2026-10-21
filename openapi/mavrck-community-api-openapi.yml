@@ -160,100 +160,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DBCommunityNews:
-      properties:
-        id:
-          type: number
-          format: double
-        community_id:
-          type: string
-        title:
-          type: string
-        desc:
-          type: string
-        img:
-          type: string
-        link:
-          type: string
-        start_date:
-          type: string
-          format: date-time
-        end_date:
-          type: string
-          format: date-time
-        order:
-          type: number
-          format: double
-        status:
-          type: string
-      required:
-      - id
-      - community_id
-      - title
-      - desc
-      - img
-      - link
-      - start_date
-      - end_date
-      - order
-      - status
-      type: object
-      additionalProperties: false
-    ValidationError:
-      properties:
-        property:
-          type: string
-        message:
-          type: string
-        schema:
-          type: object
-        instance:
-          additionalProperties: true
-        name:
-          type: string
-        argument:
-          additionalProperties: true
-      required:
-      - property
-      - message
-      - schema
-      - instance
-      - name
-      - argument
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ForbiddenError:
       properties:
         message:
@@ -355,6 +261,29 @@ components:
         accent_color:
           type: string
       type: object
+    ValidationError:
+      properties:
+        property:
+          type: string
+        message:
+          type: string
+        schema:
+          type: object
+        instance:
+          additionalProperties: true
+        name:
+          type: string
+        argument:
+          additionalProperties: true
+      required:
+      - property
+      - message
+      - schema
+      - instance
+      - name
+      - argument
+      type: object
+      additionalProperties: false
     CommSiteInfo:
       properties:
         accent_color:
@@ -569,6 +498,77 @@ components:
       - start_date
       - terms_link
       - isTest
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    DBCommunityNews:
+      properties:
+        id:
+          type: number
+          format: double
+        community_id:
+          type: string
+        title:
+          type: string
+        desc:
+          type: string
+        img:
+          type: string
+        link:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        order:
+          type: number
+          format: double
+        status:
+          type: string
+      required:
+      - id
+      - community_id
+      - title
+      - desc
+      - img
+      - link
+      - start_date
+      - end_date
+      - order
+      - status
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

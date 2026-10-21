@@ -27,18 +27,15 @@ accessModel:
   method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mavrck.png
 name: Mavrck
-description: Mavrck is an influencer marketing platform, founded in Boston as SplashScore, Inc., that
-  helps consumer brands and agencies discover creators, activate influencer and advocacy campaigns at
-  scale, manage relationships, conversations and content workflows, pay creators, and measure campaign
-  performance across Instagram, TikTok, Facebook, Pinterest, YouTube and Snapchat. On 17 January 2024
-  Mavrck rebranded to Later and the product is now sold as Later Influence; mavrck.co serves a rebrand
-  landing page, while the API host api.mavrck.co remains live and still serves both of the company's published
-  machine-readable contracts. Those are a Swagger 2.0 platform document at https://api.mavrck.co/api-docs
-  (548 paths, 687 operations, 1071 schema definitions, authenticated with a static api-key header) and
-  an OpenAPI 3.0.0 Reporting API published by SwaggerHub owner `mavrck` (11 operations, JWT bearer tokens
-  from a clientId/clientSecret exchange), plus one published webhook contract for workflow stage change
-  events. API access is not self-serve — credentials are issued by a Later Influence Account Manager —
-  and the v1 Reporting API has been publicly announced as deprecated in favour of reporting.api.later.com.
+description: Mavrck is an influencer marketing platform, founded in Boston as SplashScore, Inc., that helps consumer brands and agencies discover
+  creators, activate influencer and advocacy campaigns at scale, manage relationships, conversations and content workflows, pay creators, and
+  measure campaign performance across Instagram, TikTok, Facebook, Pinterest, YouTube and Snapchat. On 17 January 2024 Mavrck rebranded to Later
+  and the product is now sold as Later Influence; mavrck.co serves a rebrand landing page, while the API host api.mavrck.co remains live and still
+  serves both of the company's published machine-readable contracts. Those are a Swagger 2.0 platform document at https://api.mavrck.co/api-docs
+  (548 paths, 687 operations, 1071 schema definitions, authenticated with a static api-key header) and an OpenAPI 3.0.0 Reporting API published
+  by SwaggerHub owner `mavrck` (11 operations, JWT bearer tokens from a clientId/clientSecret exchange), plus one published webhook contract for
+  workflow stage change events. API access is not self-serve — credentials are issued by a Later Influence Account Manager — and the v1 Reporting
+  API has been publicly announced as deprecated in favour of reporting.api.later.com.
 url: https://raw.githubusercontent.com/api-evangelist/mavrck/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -84,18 +81,97 @@ tags_raw:
 - Webhooks
 - SaaS
 - Social-Media
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+common:
+- type: Security
+  url: security/mavrck-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/mavrck-vulnerability-disclosure.yml
+- type: AgenticAccess
+  url: agentic-access/mavrck-agentic-access.yml
+- type: Spectral
+  url: rules/mavrck-rules.yml
+- type: JSONLD
+  url: json-ld/mavrck-context.jsonld
+- type: Vocabulary
+  url: vocabulary/mavrck-vocabulary.yml
+- type: Webhooks
+  url: asyncapi/mavrck-webhooks-asyncapi.yml
+- type: Hosts
+  url: hosts/mavrck-hosts.yml
+- type: Vendors
+  url: vendors/mavrck-vendors.yml
+- type: CapabilityMap
+  url: capabilities/mavrck-capability-edges.yml
+  name: Mavrck Business Capability Map
+- type: AgentSkill
+  url: skills/mavrck-receive-workflow-stage-change-webhook.md
+- type: Authentication
+  url: authentication/mavrck-authentication.yml
+- type: DomainSecurity
+  url: security/mavrck-domain-security.yml
+- type: Website
+  url: https://www.mavrck.co/
+- type: Documentation
+  url: https://help-influence.later.com/hc/en-us
+- type: GettingStarted
+  url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+- type: Support
+  url: https://help-influence.later.com/hc/en-us
+- type: HelpCenter
+  url: https://help-influence.later.com/hc/en-us
+- type: Login
+  url: https://app.mavrck.co/v2/login
+- type: TermsOfService
+  url: https://later.com/terms/
+- type: PrivacyPolicy
+  url: https://later.com/privacy/
+- type: StatusPage
+  url: https://status.later.com/
+- type: Conventions
+  url: conventions/mavrck-conventions.yml
+- type: ErrorCatalog
+  url: errors/mavrck-problem-types.yml
+- type: DataModel
+  url: data-model/mavrck-data-model.yml
+- type: Conformance
+  url: conformance/mavrck-conformance.yml
+- type: Compliance
+  url: security/mavrck-trust-center.yml
+- type: TrustCenter
+  url: security/mavrck-trust-center.yml
+- type: Lifecycle
+  url: lifecycle/mavrck-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/mavrck-lifecycle.yml
+- type: ChangeLog
+  url: changelog/mavrck-changelog.yml
+- type: Plans
+  url: plans/mavrck-plans-pricing.yml
+- type: AsyncAPI
+  url: asyncapi/mavrck-webhooks-asyncapi.yml
+- type: Webhooks
+  url: webhooks/mavrck-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/mavrck-llms.txt
+- type: Overlay
+  url: overlays/mavrck-platform-servers-overlay.yaml
+- type: Overlay
+  url: overlays/mavrck-reporting-api-overlay.yaml
 apis:
 - aid: mavrck:mavrck-reporting-api
   name: Later Influence (Mavrck) Reporting API
-  description: >-
-    The Reporting API exposes Later Influence campaign performance for aggregation outside the platform:
-    instance-level KPIs and time series, campaign performance and estimated ROI, social-network channel
-    mix and return on investment, individual creator performance and post-level content analytics. OpenAPI
-    3.0.0, published by SwaggerHub owner `mavrck`. Authenticates with a clientId/clientSecret exchange
-    at POST /oauth/token that returns a JWT bearer token. This v1 has been publicly announced as deprecated
-    in favour of a v2 at reporting.api.later.com.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  description: 'The Reporting API exposes Later Influence campaign performance for aggregation outside the platform: instance-level KPIs and time
+    series, campaign performance and estimated ROI, social-network channel mix and return on investment, individual creator performance and post-level
+    content analytics. OpenAPI 3.0.0, published by SwaggerHub owner `mavrck`. Authenticates with a clientId/clientSecret exchange at POST /oauth/token
+    that returns a JWT bearer token. This v1 has been publicly announced as deprecated in favour of a v2 at reporting.api.later.com.'
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Reporting
@@ -105,8 +181,7 @@ apis:
   - ROI
   properties:
   - type: Documentation
-    url: >-
-      https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+    url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   - type: APIReference
     url: https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1
   - type: OpenAPI
@@ -129,18 +204,25 @@ apis:
     url: changelog/mavrck-changelog.yml
   - type: Overlay
     url: overlays/mavrck-reporting-api-overlay.yaml
-  - type: RateLimits
-    url: rate-limits/mavrck-rate-limits.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-instance-performance-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-instance-performance-over-time-metrics-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-instance-details-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-performance-over-time-date-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-reporting-api-granular-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-reporting-api-response-dto-schema.json
 - aid: mavrck:mavrck-platform-api
   name: Mavrck Platform API
-  description: >-
-    The full Mavrck (Later Influence) platform surface — 548 paths, 687 operations and 1071 schema definitions
-    covering global users and memberships, communities and lists, campaigns, action groups and candidates,
-    activations, incentives and reward wins, conversations and messaging, drafts and deliverables, brand
-    suitability, analytics, payments (Stripe, PayPal, Tipalti, gift cards) and social integrations for
-    Meta, TikTok, Pinterest, Snapchat, YouTube, Shopify, Yotpo, Bazaarvoice and PowerReviews. Published
-    as Swagger 2.0 without credentials at https://api.mavrck.co/api-docs. Authenticates with a static
-    `api-key` request header.
+  description: The full Mavrck (Later Influence) platform surface — 548 paths, 687 operations and 1071 schema definitions covering global users
+    and memberships, communities and lists, campaigns, action groups and candidates, activations, incentives and reward wins, conversations and
+    messaging, drafts and deliverables, brand suitability, analytics, payments (Stripe, PayPal, Tipalti, gift cards) and social integrations for
+    Meta, TikTok, Pinterest, Snapchat, YouTube, Shopify, Yotpo, Bazaarvoice and PowerReviews. Published as Swagger 2.0 without credentials at
+    https://api.mavrck.co/api-docs. Authenticates with a static `api-key` request header.
   humanURL: https://api.mavrck.co/api-docs
   baseURL: https://api.mavrck.co/v1
   tags:
@@ -173,8 +255,6 @@ apis:
     url: data-model/mavrck-data-model.yml
   - type: Overlay
     url: overlays/mavrck-platform-servers-overlay.yaml
-  - type: RateLimits
-    url: rate-limits/mavrck-rate-limits.yml
   - type: Webhooks
     url: webhooks/mavrck-webhooks.yml
 - aid: mavrck:mavrck-action-groups-api
@@ -193,6 +273,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-query-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-message-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-post-activations-request-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversation-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-post-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-actiongroupbrief-api
@@ -215,8 +307,7 @@ apis:
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-actiongroupbulkscheduledmessages-api
   name: Mavrck Action Group Bulk Scheduled Messages API
-  description: >-
-    The ActionGroupBulkScheduledMessages API from Mavrck — 1 operation(s) for actiongroupbulkscheduledmessages.
+  description: The ActionGroupBulkScheduledMessages API from Mavrck — 1 operation(s) for actiongroupbulkscheduledmessages.
   tags:
   - ActionGroupBulkScheduledMessages
   properties:
@@ -230,12 +321,13 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-bulk-action-group-schedule-message-post-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-actiongroupconversationtemplates-api
   name: Mavrck Action Group Conversation Templates API
-  description: >-
-    The ActionGroupConversationTemplates API from Mavrck — 4 operation(s) for actiongroupconversationtemplates.
+  description: The ActionGroupConversationTemplates API from Mavrck — 4 operation(s) for actiongroupconversationtemplates.
   tags:
   - ActionGroupConversationTemplates
   properties:
@@ -249,12 +341,23 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-conversation-template-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-conversation-template-put-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-conversation-templates-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-conversation-template-copy-post-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-conversation-template-reorder-put-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-conversation-template-reorder-put-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-actiongroupcustominfluencerstatuses-api
   name: Mavrck Action Group Custom Influencer Statuses API
-  description: >-
-    The ActionGroupCustomInfluencerStatuses API from Mavrck — 4 operation(s) for actiongroupcustominfluencerstatuses.
+  description: The ActionGroupCustomInfluencerStatuses API from Mavrck — 4 operation(s) for actiongroupcustominfluencerstatuses.
   tags:
   - ActionGroupCustomInfluencerStatuses
   properties:
@@ -268,12 +371,23 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-query-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-list-custom-influencer-status-array-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-custom-influencer-status-put-request-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-custom-influencer-statuses-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-actiongroupcustomstatuses-api
   name: Mavrck Action Group Custom Statuses API
-  description: >-
-    The ActionGroupCustomStatuses API from Mavrck — 5 operation(s) for actiongroupcustomstatuses.
+  description: The ActionGroupCustomStatuses API from Mavrck — 5 operation(s) for actiongroupcustomstatuses.
   tags:
   - ActionGroupCustomStatuses
   properties:
@@ -287,12 +401,23 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-query-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-partial-list-custom-status-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-custom-status-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-custom-statuses-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-custom-status-delete-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-actiongroupscheduledmessages-api
   name: Mavrck Action Group Scheduled Messages API
-  description: >-
-    The ActionGroupScheduledMessages API from Mavrck — 3 operation(s) for actiongroupscheduledmessages.
+  description: The ActionGroupScheduledMessages API from Mavrck — 3 operation(s) for actiongroupscheduledmessages.
   tags:
   - ActionGroupScheduledMessages
   properties:
@@ -306,6 +431,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-scheduled-reply-message-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-scheduled-reply-message-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-dbmessage-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-dbscheduled-message-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-scheduled-message-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-scheduled-message-put-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-actiongroupsstatus-api
@@ -324,6 +461,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-status-query-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-status-map-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-actions-api
@@ -342,6 +483,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-action-teaser-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-uri-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-activations-api
@@ -360,6 +509,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-uri-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-activation-history-item-array-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-activationtags-api
@@ -378,12 +539,17 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-tags-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-tag-post-request-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-tag-post-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-activationtagsassociations-api
   name: Mavrck Activation Tags Associations API
-  description: >-
-    The ActivationTagsAssociations API from Mavrck — 2 operation(s) for activationtagsassociations.
+  description: The ActivationTagsAssociations API from Mavrck — 2 operation(s) for activationtagsassociations.
   tags:
   - ActivationTagsAssociations
   properties:
@@ -397,6 +563,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-tag-association-post-request-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-tag-association-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-tag-disassociation-delete-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-activityhistory-api
@@ -415,12 +587,15 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-activity-history-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-administrationaccountslowmigration-api
   name: Mavrck Administration Account Slow Migration API
-  description: >-
-    The AdministrationAccountSlowMigration API from Mavrck — 1 operation(s) for administrationaccountslowmigration.
+  description: The AdministrationAccountSlowMigration API from Mavrck — 1 operation(s) for administrationaccountslowmigration.
   tags:
   - AdministrationAccountSlowMigration
   properties:
@@ -434,6 +609,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-slow-migration-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-validate-password-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-administratoraccounts-api
@@ -452,6 +631,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-administrator-account-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-administrator-account-array-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-validate-password-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-analytics-api
@@ -470,6 +655,16 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-backfill-analytics-data-entry-point-job-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-backfill-analytics-cost-data-job-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-enriched-campaigns-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-enriched-content-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-content-report-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-anonymouscomments-api
@@ -488,12 +683,17 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-dbanonymous-comment-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-query-anonymous-comments-result-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-anonymous-comment-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-anonymousincentiveclaim-api
   name: Mavrck Anonymous Incentive Claim API
-  description: >-
-    The AnonymousIncentiveClaim API from Mavrck — 1 operation(s) for anonymousincentiveclaim.
+  description: The AnonymousIncentiveClaim API from Mavrck — 1 operation(s) for anonymousincentiveclaim.
   tags:
   - AnonymousIncentiveClaim
   properties:
@@ -525,6 +725,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-application-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-user-data-point-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-application-states-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-authentication-api
@@ -543,6 +751,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-profile-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-instagram-connection-info-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-facebook-profile-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-token-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-membership-rejection-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-token-response-dto-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-backfill-analytics-api
@@ -561,6 +781,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-update-content-activation-summary-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-backfill-followers-at-post-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-backfill-followers-at-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-content-activation-summary-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-bazaarvoice-api
@@ -579,6 +807,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-bazaar-voice-app-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-bazaar-voice-locale-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-bazaar-voice-app-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-blogs-api
@@ -599,6 +833,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-blog-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-brandsuitability-api
@@ -619,12 +857,23 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-report-stats-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-creator-research-record-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-batch-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-batch-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-creators-with-reports-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-generate-report-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-brandsuitabilityharness-api
   name: Mavrck Brand Suitability Harness API
-  description: >-
-    The BrandSuitabilityHarness API from Mavrck — 10 operation(s) for brandsuitabilityharness.
+  description: The BrandSuitabilityHarness API from Mavrck — 10 operation(s) for brandsuitabilityharness.
   tags:
   - BrandSuitabilityHarness
   properties:
@@ -638,6 +887,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-verify-sources-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-assess-full-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-assess-metric-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-save-creator-context-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-save-brand-context-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-research-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-budgets-api
@@ -656,12 +917,23 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-budget-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-bulk-budget-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-budgets-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-budgets-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-community-budgets-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-bulk-budget-create-dto-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-bulkassigncustomstatusesrequirements-api
   name: Mavrck Bulk Assign Custom Statuses Requirements API
-  description: >-
-    The BulkAssignCustomStatusesRequirements API from Mavrck — 1 operation(s) for bulkassigncustomstatusesrequirements.
+  description: The BulkAssignCustomStatusesRequirements API from Mavrck — 1 operation(s) for bulkassigncustomstatusesrequirements.
   tags:
   - BulkAssignCustomStatusesRequirements
   properties:
@@ -675,6 +947,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-bulk-assign-custom-statuses-requirements-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-campaignapplication-api
@@ -693,6 +967,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-external-campaign-application-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-campaignperformance-api
@@ -713,12 +989,19 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-post-metric-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-top-influencer-metrics-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-top-influencer-conversions-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-campaign-audience-insights-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-campaignplatformcallback-api
   name: Mavrck Campaign Platform Callback API
-  description: >-
-    The CampaignPlatformCallback API from Mavrck — 1 operation(s) for campaignplatformcallback.
+  description: The CampaignPlatformCallback API from Mavrck — 1 operation(s) for campaignplatformcallback.
   tags:
   - CampaignPlatformCallback
   properties:
@@ -732,6 +1015,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-campaign-platform-subscription-callback-payload-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-campaigns-api
@@ -750,6 +1037,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-campaign-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-all-campaigns-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-campaign-uri-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-reporting-group-ids-respnse-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-readonly-any-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-candidates-api
@@ -768,6 +1067,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-query-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-cashpayments-api
@@ -788,6 +1095,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-partial-cash-payment-app-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-cash-payment-app-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-cash-payment-app-update-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-cash-payment-app-update-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-comments-api
@@ -806,6 +1121,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-comment-post-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-communities-api
@@ -826,6 +1143,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-community-administrator-account-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-entitlement-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-community-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-add-to-community-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-account-put-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-community-api
@@ -844,6 +1173,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-comm-site-info-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-community-info-fields-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-dbcommunity-news-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-communitybenchmarks-api
@@ -880,6 +1215,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-community-metric-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-concepts-api
@@ -898,6 +1239,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-concept-content-status-update-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-admin-concept-content-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-concept-content-update-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-concept-viewed-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-concept-content-feedback-entry-array-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-concept-content-get-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-content-api
@@ -916,6 +1269,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-content-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-conversations-api
@@ -934,6 +1289,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-message-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversation-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-query-by-message-result-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-general-folders-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversation-bulk-action-request-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversation-response-metadata-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-conversationtemplates-api
@@ -952,6 +1319,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-conversation-template-put-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversation-template-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversation-templates-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversation-template-post-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-conversation-template-by-id-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-conversions-api
@@ -972,6 +1351,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-web-plugin-conversion-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-web-plugin-conversion-response-array-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-conversiontags-api
@@ -990,6 +1373,16 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-conversion-tag-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-conversion-tag-array-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversion-tag-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-id-object-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-conversion-tag-put-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-creatorprofileupsert-api
@@ -1008,6 +1401,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-creator-profile-upsert-event-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-creatorsummary-api
@@ -1026,6 +1421,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-cached-creator-summary-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-custom-analytics-admin-api
@@ -1044,12 +1441,19 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-custom-analytics-config-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-custom-analytics-config-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-custom-analytics-config-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-custom-analytics-configs-list-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-custom-analytics-controller-api
   name: Mavrck Custom Analytics Controller API
-  description: >-
-    The Custom Analytics Controller API from Mavrck — 2 operation(s) for custom analytics controller.
+  description: The Custom Analytics Controller API from Mavrck — 2 operation(s) for custom analytics controller.
   tags:
   - Custom Analytics Controller
   properties:
@@ -1063,6 +1467,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-dashboard-types-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-embed-url-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-datapoints-api
@@ -1081,12 +1489,17 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-data-point-definition-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-dbinfluenceragreementhistoryfields-api
   name: Mavrck DB Influencer Agreement History Fields API
-  description: >-
-    The DBInfluencerAgreementHistoryFields API from Mavrck — 1 operation(s) for dbinfluenceragreementhistoryfields.
+  description: The DBInfluencerAgreementHistoryFields API from Mavrck — 1 operation(s) for dbinfluenceragreementhistoryfields.
   tags:
   - DBInfluencerAgreementHistoryFields
   properties:
@@ -1100,6 +1513,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-dbinfluencer-agreement-history-fields-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-influencer-agreement-history-fields-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-draftcontentviewed-api
@@ -1118,6 +1535,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-draft-content-viewed-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-draft-content-viewed-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-drafts-api
@@ -1136,6 +1557,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-admin-draft-content-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-draft-content-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-draft-content-update-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-draft-content-status-update-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-draft-content-feedback-entry-array-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-draft-content-get-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-earnedmediavalue-api
@@ -1154,6 +1587,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-update-emv-params-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-elasticsearch-api
@@ -1172,6 +1607,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-elasticsearch-document-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-retrieve-global-user-elasticsearch-documents-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-elasticsearchoptions-api
@@ -1226,6 +1665,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-bulk-update-entitlements-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-exports-api
@@ -1246,6 +1687,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-content-export-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-export-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-facebookprofile-api
@@ -1282,6 +1727,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-facebook-profile-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-features-api
@@ -1300,6 +1751,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-get-features-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-feature-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-feature-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-feature-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-globaluser-api
@@ -1318,6 +1777,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-content-post-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-bulk-actions-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-brand-safety-request-reponse-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-generate-brand-suitability-report-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-get-inconsistencies-post-params-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-repair-post-params-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-globaluseraudience-api
@@ -1336,6 +1807,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-globaluserlists-api
@@ -1354,6 +1827,16 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-query-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-user-query-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-list-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-globalusermerge-api
@@ -1372,6 +1855,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-merge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-merge-search-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-globalusers-api
@@ -1390,6 +1877,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-global-user-list-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-grouphigh-api
@@ -1408,6 +1901,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-demographics-graphs-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-images-api
@@ -1446,6 +1941,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-update-incentive-put-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-incentive-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-incentive-winner-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-incentive-claim-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-incentives-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencer-polling-api
@@ -1464,6 +1971,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-polling-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencercampaign-api
@@ -1482,12 +1991,15 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-campaign-history-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-legacy-influencer-campaign-get-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencercontractcampaigntemplates-api
   name: Mavrck Influencer Contract Campaign Templates API
-  description: >-
-    The InfluencerContractCampaignTemplates API from Mavrck — 2 operation(s) for influencercontractcampaigntemplates.
+  description: The InfluencerContractCampaignTemplates API from Mavrck — 2 operation(s) for influencercontractcampaigntemplates.
   tags:
   - InfluencerContractCampaignTemplates
   properties:
@@ -1501,12 +2013,13 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-contract-campaign-template-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencercontractcommunitytemplates-api
   name: Mavrck Influencer Contract Community Templates API
-  description: >-
-    The InfluencerContractCommunityTemplates API from Mavrck — 2 operation(s) for influencercontractcommunitytemplates.
+  description: The InfluencerContractCommunityTemplates API from Mavrck — 2 operation(s) for influencercontractcommunitytemplates.
   tags:
   - InfluencerContractCommunityTemplates
   properties:
@@ -1520,6 +2033,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-contract-community-template-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencerlinks-api
@@ -1538,6 +2053,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-get-influencer-links-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencerlist-api
@@ -1556,12 +2073,13 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-get-influencer-performance-list-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencerreviewdeliverable-api
   name: Mavrck Influencer Review Deliverable API
-  description: >-
-    The InfluencerReviewDeliverable API from Mavrck — 2 operation(s) for influencerreviewdeliverable.
+  description: The InfluencerReviewDeliverable API from Mavrck — 2 operation(s) for influencerreviewdeliverable.
   tags:
   - InfluencerReviewDeliverable
   properties:
@@ -1575,6 +2093,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-review-deliverable-post-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencers-api
@@ -1593,6 +2113,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-preview-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-influencertopics-api
@@ -1611,6 +2135,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-topic-id-set-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-topic-id-set-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-instagramaccount-api
@@ -1629,13 +2159,13 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-update-instagram-profile-picture-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-instance-user-materialized-view-api
   name: Mavrck Instance User Materialized View API
-  description: >-
-    The Instance User Materialized View API from Mavrck — 1 operation(s) for instance user materialized
-    view.
+  description: The Instance User Materialized View API from Mavrck — 1 operation(s) for instance user materialized view.
   tags:
   - Instance User Materialized View
   properties:
@@ -1649,6 +2179,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-instance-user-materialized-view-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-instancebrands-api
@@ -1667,6 +2199,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-instance-brand-list-item-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-instancedeactivation-api
@@ -1721,6 +2255,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-update-instance-branding-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-s4instance-branding-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-laterinfluencer-api
@@ -1739,6 +2277,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-preview-post-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-influencer-settings-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-stripe-account-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-activation-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-later-influencers-data-point-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-components-schemas-creator-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-links-api
@@ -1757,6 +2307,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-link-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-links-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-link-put-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-links-post-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-listdeliverables-api
@@ -1775,6 +2333,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-list-deliverable-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-deliverable-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-listmember-api
@@ -1793,6 +2355,16 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-query-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-member-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-listmemberdeliverables-api
@@ -1811,12 +2383,15 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-list-member-deliverable-bulk-assign-summary-post-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-member-deliverable-bulk-assign-post-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-listmembermavelyprofiles-api
   name: Mavrck List Member Mavely Profiles API
-  description: >-
-    The ListMemberMavelyProfiles API from Mavrck — 3 operation(s) for listmembermavelyprofiles.
+  description: The ListMemberMavelyProfiles API from Mavrck — 3 operation(s) for listmembermavelyprofiles.
   tags:
   - ListMemberMavelyProfiles
   properties:
@@ -1830,6 +2405,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-list-member-mavely-profile-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-mavely-profiles-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-listmemberrewardwin-api
@@ -1848,6 +2427,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-query-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-enriched-list-member-reward-win-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-bonus-tier-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-member-reward-win-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-member-reward-win-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-list-member-reward-win-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-listmembers-api
@@ -1866,6 +2457,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-list-member-filters-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-lists-api
@@ -1890,8 +2483,7 @@ apis:
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-marketerfilterpreferences-api
   name: Mavrck Marketer Filter Preferences API
-  description: >-
-    The MarketerFilterPreferences API from Mavrck — 1 operation(s) for marketerfilterpreferences.
+  description: The MarketerFilterPreferences API from Mavrck — 1 operation(s) for marketerfilterpreferences.
   tags:
   - MarketerFilterPreferences
   properties:
@@ -1905,6 +2497,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-marketer-filter-preference-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-marketer-filters-item-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-marketernotifications-api
@@ -1923,6 +2519,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-update-notification-body-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-set-notification-preference-body-definition-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-mavelytransfers-api
@@ -1941,6 +2541,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-mavely-transfer-with-status-history-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-membership-api
@@ -1959,6 +2561,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-get-membership-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-influencer-contact-info-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-membership-contact-info-deprecated-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-membership-contact-info-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-membership-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-membership-summary-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-membershipdatapoints-api
@@ -1977,6 +2591,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-membership-data-point-with-definitions-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-membership-data-point-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tsoaempty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-membershippurchases-api
@@ -1995,6 +2615,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-post-membership-purchase-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-post-membership-purchase-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-mergetagscatalog-api
@@ -2013,6 +2637,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-merge-tags-catalog-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-meta-ad-admin-api
@@ -2031,6 +2657,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-meta-system-users-ad-accounts-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-backfill-meta-ad-insights-job-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-push-meta-ad-insights-job-payload-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-meta-business-assets-api
@@ -2049,12 +2681,15 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-meta-business-asset-authorization-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-business-asset-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-meta-business-integrations-api
   name: Mavrck Meta Business Integrations API
-  description: >-
-    The Meta Business Integrations API from Mavrck — 2 operation(s) for meta business integrations.
+  description: The Meta Business Integrations API from Mavrck — 2 operation(s) for meta business integrations.
   tags:
   - Meta Business Integrations
   properties:
@@ -2068,12 +2703,17 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-meta-business-integration-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-meta-enable-business-integration-request-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-meta-connect-business-integration-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-meta-business-portfolios-api
   name: Mavrck Meta Business Portfolios API
-  description: >-
-    The Meta Business Portfolios API from Mavrck — 2 operation(s) for meta business portfolios.
+  description: The Meta Business Portfolios API from Mavrck — 2 operation(s) for meta business portfolios.
   tags:
   - Meta Business Portfolios
   properties:
@@ -2087,6 +2727,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-meta-business-portfolio-authorization-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-business-portfolio-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-meta-post-partnerships-api
@@ -2105,6 +2749,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-meta-post-partnership-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-meta-create-post-partnership-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-networks-api
@@ -2143,6 +2791,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-scheduled-notification-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-openaisearch-api
@@ -2161,6 +2815,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-open-aisearch-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-paymentappadmins-api
@@ -2179,6 +2835,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-payment-app-admin-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-paymentprovider-api
@@ -2197,6 +2855,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-configure-mavrck-provider-app-to-instance-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-payment-provider-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-paymentrecipient-api
@@ -2215,6 +2877,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-clear-payment-recipient-links-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-payment-recipient-view-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-onboarding-reminder-request-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-payment-recipient-links-mutation-result-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-propagate-payment-recipient-links-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-payment-recipient-create-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-paymentsledger-api
@@ -2233,6 +2907,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-payments-ledger-query-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-paypalaccount-api
@@ -2251,6 +2927,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-empty-object-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-pendingbatchjobs-api
@@ -2269,6 +2947,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-get-pending-batch-jobs-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-pinterestauth-api
@@ -2287,6 +2967,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-pinterest-auth-post-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-pinterest-auth-post-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-points-api
@@ -2305,6 +2989,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-point-transaction-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-point-grant-uri-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-pointsadmin-api
@@ -2323,12 +3013,17 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-community-engagement-point-mapping-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-community-action-objective-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-community-action-objective-definition-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-polling-queue-management-api
   name: Mavrck Polling Queue Management API
-  description: >-
-    The Polling Queue Management API from Mavrck — 3 operation(s) for polling queue management.
+  description: The Polling Queue Management API from Mavrck — 3 operation(s) for polling queue management.
   tags:
   - Polling Queue Management
   properties:
@@ -2342,6 +3037,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-queue-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-all-queue-stats-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-purge-queue-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-powerreviewsapp-api
@@ -2360,6 +3061,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-power-reviews-app-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-power-reviews-apps-get-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-previewposts-api
@@ -2378,6 +3083,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-preview-post-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-product-api
@@ -2396,6 +3103,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-product-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-power-reviews-product-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-products-api
@@ -2416,6 +3127,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-product-array-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-program-api
@@ -2472,6 +3185,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-readonly-any-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-reports-api
@@ -2508,6 +3223,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-review-form-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-upsert-review-form-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-reviewformresponse-api
@@ -2544,6 +3263,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-response-body-review-form-response-array-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-reviews-api
@@ -2562,6 +3283,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-review-form-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-rewardwins-api
@@ -2580,6 +3303,18 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-reward-win-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-reward-win-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-reward-win-bulk-update-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-get-summary-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-reward-win-fulfillment-params-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-reward-win-bulk-fulfillment-params-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-shareablelinksvisitors-api
@@ -2598,6 +3333,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-create-shareable-links-visitor-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-shareable-links-visitors-list-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-sharedcipher-api
@@ -2616,6 +3355,16 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-shared-cipher-post-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-shared-cipher-put-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-shared-ciphers-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-shared-cipher-post-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-shared-cipher-get-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-shopifyaccount-api
@@ -2634,6 +3383,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-shopify-account-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-shopify-account-data-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-connect-shopify-account-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-uninstall-shopify-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-shopifyadminapi-api
@@ -2670,12 +3427,13 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-refresh-snapchat-content-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-social-account-ingestion-api
   name: Mavrck Social Account Ingestion API
-  description: >-
-    The Social Account Ingestion API from Mavrck — 1 operation(s) for social account ingestion.
+  description: The Social Account Ingestion API from Mavrck — 1 operation(s) for social account ingestion.
   tags:
   - Social Account Ingestion
   properties:
@@ -2689,6 +3447,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-pick-global-user-id-or-uuid-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-request-data-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-socialpresencecreate-api
@@ -2707,6 +3469,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-social-presence-create-event-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-socialprofileupdates-api
@@ -2725,6 +3489,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-social-profile-update-event-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-specs-api
@@ -2743,6 +3509,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-specs-post-request-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-specs-get-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-specs-put-request-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-subscribers-api
@@ -2761,6 +3533,14 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-subscriber-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-subscriber-ping-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-update-subscriber-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-create-subscriber-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-surveyresponse-api
@@ -2779,6 +3559,12 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-survey-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-survey-response-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-response-metadata-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-surveys-api
@@ -2797,6 +3583,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-get-survey-by-action-id-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-tiktok-activations-api
@@ -2815,6 +3603,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-put-tik-tok-content-activation-request-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-tiktok-ttcm-api
@@ -2833,6 +3623,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-components-schemas-queue-stats-response-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-components-schemas-purge-queue-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-tiktokcampaignfields-api
@@ -2851,6 +3645,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-create-tik-tok-campaign-fields-or-brand-info-body-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-tik-tok-campaign-or-brand-info-fields-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-tipaltipayee-api
@@ -2869,6 +3667,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-tipalti-payee-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-tipaltitransfers-api
@@ -2887,6 +3687,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-tipalti-transfer-with-status-history-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-topics-api
@@ -2907,6 +3709,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-get-topics-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-tracking-link-api
@@ -2945,6 +3749,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-locale-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-uploadpolicy-api
@@ -2964,6 +3770,10 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-signing-data-schema.json
+  - type: JSONSchema
+    url: json-schema/mavrck-file-upload-policies-post-body-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-urlmetadata-api
@@ -3004,6 +3814,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-send-grid-event-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-webpluginwidgets-api
@@ -3022,6 +3834,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-get-web-plugin-widgets-response-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-workflow-api
@@ -3042,6 +3856,8 @@ apis:
     url: overlays/mavrck-platform-servers-overlay.yaml
   - type: Authentication
     url: authentication/mavrck-authentication.yml
+  - type: JSONSchema
+    url: json-schema/mavrck-action-group-candidate-query-filter-schema.json
   baseURL: https://api.mavrck.co/v1
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-yotpo-api
@@ -3064,8 +3880,7 @@ apis:
   humanURL: https://api.mavrck.co/api-docs
 - aid: mavrck:mavrck-ytbcactiongroupchannels-api
   name: Mavrck Ytbc Action Group Channels API
-  description: >-
-    The YtbcActionGroupChannels API from Mavrck — 2 operation(s) for ytbcactiongroupchannels.
+  description: The YtbcActionGroupChannels API from Mavrck — 2 operation(s) for ytbcactiongroupchannels.
   tags:
   - YtbcActionGroupChannels
   properties:
@@ -3108,8 +3923,7 @@ apis:
   - type: OpenAPI
     url: openapi/mavrck-campaign-level-api-openapi.yml
   - type: Documentation
-    url: >-
-      https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+    url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   - type: APIReference
     url: https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1
   - type: Overlay
@@ -3117,8 +3931,7 @@ apis:
   - type: Authentication
     url: authentication/mavrck-authentication.yml
   baseURL: https://api.mavrck.co
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
 - aid: mavrck:mavrck-influencer-level-api
   name: Mavrck Influencer Level API
   description: The Influencer Level API from Mavrck — 1 operation(s) for influencer level.
@@ -3128,8 +3941,7 @@ apis:
   - type: OpenAPI
     url: openapi/mavrck-influencer-level-api-openapi.yml
   - type: Documentation
-    url: >-
-      https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+    url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   - type: APIReference
     url: https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1
   - type: Overlay
@@ -3137,8 +3949,7 @@ apis:
   - type: Authentication
     url: authentication/mavrck-authentication.yml
   baseURL: https://api.mavrck.co
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
 - aid: mavrck:mavrck-instance-level-api
   name: Mavrck Instance Level API
   description: The Instance Level API from Mavrck — 5 operation(s) for instance level.
@@ -3148,8 +3959,7 @@ apis:
   - type: OpenAPI
     url: openapi/mavrck-instance-level-api-openapi.yml
   - type: Documentation
-    url: >-
-      https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+    url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   - type: APIReference
     url: https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1
   - type: Overlay
@@ -3157,8 +3967,7 @@ apis:
   - type: Authentication
     url: authentication/mavrck-authentication.yml
   baseURL: https://api.mavrck.co
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
 - aid: mavrck:mavrck-post-level-api
   name: Mavrck Post Level API
   description: The Post Level API from Mavrck — 1 operation(s) for post level.
@@ -3168,8 +3977,7 @@ apis:
   - type: OpenAPI
     url: openapi/mavrck-post-level-api-openapi.yml
   - type: Documentation
-    url: >-
-      https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+    url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   - type: APIReference
     url: https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1
   - type: Overlay
@@ -3177,8 +3985,7 @@ apis:
   - type: Authentication
     url: authentication/mavrck-authentication.yml
   baseURL: https://api.mavrck.co
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
 - aid: mavrck:mavrck-social-network-level-api
   name: Mavrck Social Network Level API
   description: The Social Network Level API from Mavrck — 2 operation(s) for social network level.
@@ -3188,8 +3995,7 @@ apis:
   - type: OpenAPI
     url: openapi/mavrck-social-network-level-api-openapi.yml
   - type: Documentation
-    url: >-
-      https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+    url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   - type: APIReference
     url: https://api.swaggerhub.com/apis/mavrck/reporting-api/1.2.1
   - type: Overlay
@@ -3197,13 +4003,11 @@ apis:
   - type: Authentication
     url: authentication/mavrck-authentication.yml
   baseURL: https://api.mavrck.co
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
 - aid: mavrck:mavrck-path-api
   name: Mavrck Path API
   description: The Path API from Mavrck — 1 operation(s) for path.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Path
@@ -3219,12 +4023,9 @@ apis:
 - aid: mavrck:mavrck-account-invitations-api
   name: Mavrck Account Invitations API
   description: The Account Invitations API from Mavrck — 5 operation(s) for account invitations.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
-  - AccountInvitations
-  tags_raw:
   - Account Invitations
   properties:
   - type: OpenAPI
@@ -3238,8 +4039,7 @@ apis:
 - aid: mavrck:mavrck-batch-jobs-api
   name: Mavrck Batch Jobs API
   description: The Batch Jobs API from Mavrck — 2 operation(s) for batch jobs.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Batch Jobs
@@ -3255,8 +4055,7 @@ apis:
 - aid: mavrck:mavrck-data-subject-request-api
   name: Mavrck Data Subject Request API
   description: The Data Subject Request API from Mavrck — 1 operation(s) for data subject request.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Data Subject Request
@@ -3272,8 +4071,7 @@ apis:
 - aid: mavrck:mavrck-email-settings-api
   name: Mavrck Email Settings API
   description: The Email Settings API from Mavrck — 3 operation(s) for email settings.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Email Settings
@@ -3289,8 +4087,7 @@ apis:
 - aid: mavrck:mavrck-event-logs-api
   name: Mavrck Event Logs API
   description: The Event Logs API from Mavrck — 1 operation(s) for event logs.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Event Logs
@@ -3306,8 +4103,7 @@ apis:
 - aid: mavrck:mavrck-exchange-rates-api
   name: Mavrck Exchange Rates API
   description: The Exchange Rates API from Mavrck — 1 operation(s) for exchange rates.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Exchange Rates
@@ -3323,8 +4119,7 @@ apis:
 - aid: mavrck:mavrck-expiring-access-tokens-api
   name: Mavrck Expiring Access Tokens API
   description: The Expiring Access Tokens API from Mavrck — 1 operation(s) for expiring access tokens.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Expiring Access Tokens
@@ -3340,8 +4135,7 @@ apis:
 - aid: mavrck:mavrck-external-clients-api
   name: Mavrck External Clients API
   description: The External Clients API from Mavrck — 5 operation(s) for external clients.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - External Clients
@@ -3357,8 +4151,7 @@ apis:
 - aid: mavrck:mavrck-gift-cards-api
   name: Mavrck Gift Cards API
   description: The Gift Cards API from Mavrck — 3 operation(s) for gift cards.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Gift Cards
@@ -3374,8 +4167,7 @@ apis:
 - aid: mavrck:mavrck-opt-in-api
   name: Mavrck Opt In API
   description: The Opt In API from Mavrck — 3 operation(s) for opt in.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Opt In
@@ -3391,8 +4183,7 @@ apis:
 - aid: mavrck:mavrck-payment-account-api
   name: Mavrck Payment Account API
   description: The Payment Account API from Mavrck — 9 operation(s) for payment account.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Payment Account
@@ -3408,12 +4199,9 @@ apis:
 - aid: mavrck:mavrck-referral-program-api
   name: Mavrck Referral Program API
   description: The Referral Program API from Mavrck — 1 operation(s) for referral program.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
-  - ReferralProgram
-  tags_raw:
   - Referral Program
   properties:
   - type: OpenAPI
@@ -3427,8 +4215,7 @@ apis:
 - aid: mavrck:mavrck-stripe-payments-api
   name: Mavrck Stripe Payments API
   description: The Stripe Payments API from Mavrck — 9 operation(s) for stripe payments.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Stripe Payments
@@ -3444,8 +4231,7 @@ apis:
 - aid: mavrck:mavrck-tracking-links-api
   name: Mavrck Tracking Links API
   description: The Tracking Links API from Mavrck — 2 operation(s) for tracking links.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - Tracking Links
@@ -3461,8 +4247,7 @@ apis:
 - aid: mavrck:mavrck-user-account-api
   name: Mavrck User Account API
   description: The User Account API from Mavrck — 3 operation(s) for user account.
-  humanURL: >-
-    https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
+  humanURL: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
   baseURL: https://api.mavrck.co
   tags:
   - User Account
@@ -3475,79 +4260,8 @@ apis:
     url: https://api.mavrck.co/api-docs
   - type: Authentication
     url: authentication/mavrck-authentication.yml
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- FN: APIs.json
-  email: info@apis.io
-common:
-- type: CapabilityMap
-  url: capabilities/mavrck-capability-edges.yml
-  name: Mavrck Business Capability Map
-- type: AgentSkill
-  url: skills/mavrck-receive-workflow-stage-change-webhook.md
-- type: Authentication
-  url: authentication/mavrck-authentication.yml
-- type: DomainSecurity
-  url: security/mavrck-domain-security.yml
-- type: Website
-  url: https://www.mavrck.co/
-- type: Documentation
-  url: https://help-influence.later.com/hc/en-us
-- type: APIReference
-  url: https://api.mavrck.co/api-docs
-- type: GettingStarted
-  url: https://help-influence.later.com/hc/en-us/articles/20462385592087-Implement-the-Reporting-API-for-Later-Influence
-- type: Support
-  url: https://help-influence.later.com/hc/en-us
-- type: HelpCenter
-  url: https://help-influence.later.com/hc/en-us
-- type: Login
-  url: https://app.mavrck.co/v2/login
-- type: TermsOfService
-  url: https://later.com/terms/
-- type: PrivacyPolicy
-  url: https://later.com/privacy/
-- type: StatusPage
-  url: https://status.later.com/
-- type: Conventions
-  url: conventions/mavrck-conventions.yml
-- type: ErrorCatalog
-  url: errors/mavrck-problem-types.yml
-- type: DataModel
-  url: data-model/mavrck-data-model.yml
-- type: Conformance
-  url: conformance/mavrck-conformance.yml
-- type: Compliance
-  url: security/mavrck-trust-center.yml
-- type: TrustCenter
-  url: security/mavrck-trust-center.yml
-- type: Lifecycle
-  url: lifecycle/mavrck-lifecycle.yml
-- type: Deprecation
-  url: lifecycle/mavrck-lifecycle.yml
-- type: ChangeLog
-  url: changelog/mavrck-changelog.yml
-- type: Plans
-  url: plans/mavrck-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/mavrck-rate-limits.yml
-- type: Packages
-  url: packages/mavrck-packages.yml
-- type: AsyncAPI
-  url: asyncapi/mavrck-webhooks-asyncapi.yml
-- type: Webhooks
-  url: webhooks/mavrck-webhooks.yml
-- type: AgentSkill
-  url: skills/_index.yml
-- type: LLMsTxt
-  url: llms/mavrck-llms.txt
-- type: Overlay
-  url: overlays/mavrck-platform-servers-overlay.yaml
-- type: Overlay
-  url: overlays/mavrck-reporting-api-overlay.yaml
 x-enrichment:
-  date: '2026-08-12'
+  date: '2026-10-20'
   status: enriched
-  artifacts_added: 207
-  pass: local-v1
+  artifacts_added: 9
+  pass: local-v5

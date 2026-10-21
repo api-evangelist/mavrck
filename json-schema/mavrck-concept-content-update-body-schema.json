@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-concept-content-update-body-schema.json",
+  "title": "ConceptContentUpdateBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-concepts-api-openapi.yml#/components/schemas/ConceptContentUpdateBody",
+  "properties": {
+    "isArchived": {
+      "type": "boolean"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/InfluencerConceptContentPostFile"
+      },
+      "type": "array"
+    },
+    "text": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "contentUrl": {
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "InfluencerConceptContentPostFile": {
+      "properties": {
+        "originalFile": {
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        },
+        "isUploaded": {
+          "type": "boolean"
+        },
+        "lastModified": {
+          "type": "number",
+          "format": "double"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

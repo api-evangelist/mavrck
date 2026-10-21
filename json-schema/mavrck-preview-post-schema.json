@@ -1,0 +1,617 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-preview-post-schema.json",
+  "title": "PreviewPost",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-laterinfluencer-api-openapi.yml#/components/schemas/PreviewPost",
+  "properties": {
+    "activation": {
+      "$ref": "#/$defs/Activation"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "comments": {
+      "type": "number",
+      "format": "double"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "isSponsored": {
+      "type": "boolean"
+    },
+    "likes": {
+      "type": "number",
+      "format": "double"
+    },
+    "link": {
+      "type": "string"
+    },
+    "mentions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "network": {
+      "type": "string"
+    },
+    "postId": {
+      "type": "string"
+    },
+    "postedTime": {
+      "type": "string"
+    },
+    "shares": {
+      "type": "number",
+      "format": "double"
+    },
+    "source": {
+      "type": "string"
+    },
+    "textSafeSearch": {
+      "$ref": "#/$defs/TextSafeSearch"
+    },
+    "views": {
+      "type": "number",
+      "format": "double"
+    },
+    "visualSafeSearch": {
+      "$ref": "#/$defs/VisualSafeSearch"
+    },
+    "contentType": {
+      "type": "string"
+    },
+    "brandMentions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "Activation": {
+      "properties": {
+        "actionId": {
+          "type": "string"
+        },
+        "approvalStatus": {
+          "type": "string"
+        },
+        "associatedAccount": {
+          "$ref": "#/$defs/NetworkAccount"
+        },
+        "communityId": {
+          "type": "string"
+        },
+        "content": {
+          "$ref": "#/$defs/ActivationContent"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdByAccountId": {
+          "type": "number",
+          "format": "double"
+        },
+        "globalUserId": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "isApproved": {
+          "type": "boolean"
+        },
+        "membershipId": {
+          "type": "number",
+          "format": "double"
+        },
+        "selfReported": {
+          "type": "boolean"
+        },
+        "ugcPhoto": {
+          "type": "string"
+        },
+        "ugcText": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedByAccountId": {
+          "type": "number",
+          "format": "double"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "actionId",
+        "approvalStatus",
+        "communityId",
+        "globalUserId",
+        "id",
+        "isApproved",
+        "membershipId",
+        "ugcPhoto",
+        "ugcText"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ActivationContent": {
+      "properties": {
+        "ytbcLinkState": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "ACTIVE",
+            "DECLINED"
+          ],
+          "description": "CMP-1107: BrandConnect VideoCollaboration consent state for a YouTube video\n(PENDING / ACTIVE / DECLINED). Absent for non-YouTube content or videos whose\nlink state has not been synced. Populated by ActivationService::appendYtbcLinkState."
+        },
+        "emvValue": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "followersAtPostDate": {
+          "type": "number",
+          "format": "double"
+        },
+        "viewsPaid": {
+          "type": "number",
+          "format": "double"
+        },
+        "viewsOrganic": {
+          "type": "number",
+          "format": "double"
+        },
+        "views": {
+          "type": "number",
+          "format": "double"
+        },
+        "videoViewsBySource": {
+          "items": {
+            "$ref": "#/$defs/TikTokVideoViewsBySource"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "videoViewTotalTime": {
+          "type": "number",
+          "format": "double"
+        },
+        "videoCompletionRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "video": {
+          "type": "string"
+        },
+        "verifiedImpressions": {
+          "type": "number",
+          "format": "double"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "text": {
+          "type": "string"
+        },
+        "sharesPaid": {
+          "type": "number",
+          "format": "double"
+        },
+        "sharesOrganic": {
+          "type": "number",
+          "format": "double"
+        },
+        "shares": {
+          "type": "number",
+          "format": "double"
+        },
+        "reach": {
+          "type": "number",
+          "format": "double"
+        },
+        "privacy": {
+          "type": "string"
+        },
+        "postLink": {
+          "type": "string"
+        },
+        "postDate": {
+          "type": "string"
+        },
+        "network": {
+          "$ref": "#/$defs/ActivationContentNetwork"
+        },
+        "manuallyEnteredImpressions": {
+          "type": "number",
+          "format": "double"
+        },
+        "likesPaid": {
+          "type": "number",
+          "format": "double"
+        },
+        "likesOrganic": {
+          "type": "number",
+          "format": "double"
+        },
+        "likes": {
+          "type": "number",
+          "format": "double"
+        },
+        "influencerReportedImpressions": {
+          "type": "number",
+          "format": "double"
+        },
+        "impressionsSource": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "engagements": {
+          "type": "number",
+          "format": "double"
+        },
+        "estimatedImpressionsUpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "estimatedImpressions": {
+          "type": "number",
+          "format": "double"
+        },
+        "conversions": {
+          "type": "number",
+          "format": "double"
+        },
+        "conversionValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "commentsPaid": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "commentsOrganic": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "comments": {
+          "type": "number",
+          "format": "double"
+        },
+        "clicks": {
+          "type": "number",
+          "format": "double"
+        },
+        "carouselPosts": {
+          "items": {
+            "additionalProperties": true
+          },
+          "type": "array"
+        },
+        "canonicalUrlId": {
+          "type": "number",
+          "format": "double"
+        },
+        "benchmarkEngagementRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "benchmarkAverageEngagements": {
+          "type": "number",
+          "format": "double"
+        },
+        "algorithmicImpressions": {
+          "type": "number",
+          "format": "double"
+        },
+        "activationId": {
+          "type": "number",
+          "format": "double"
+        },
+        "audienceInterestDistribution": {
+          "items": {
+            "$ref": "#/$defs/TikTokAudienceInterestDistribution"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "audienceGendersDistribution": {
+          "items": {
+            "$ref": "#/$defs/TikTokAudienceGendersDistribution"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "audienceCountriesDistribution": {
+          "items": {
+            "$ref": "#/$defs/TikTokAudienceCountriesDistribution"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "audienceAgeDistribution": {
+          "items": {
+            "$ref": "#/$defs/TikTokAudienceAgeDistribution"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "emvValue",
+        "video",
+        "text",
+        "shares",
+        "privacy",
+        "postLink",
+        "network",
+        "likes",
+        "image",
+        "engagements",
+        "estimatedImpressions",
+        "conversions",
+        "conversionValue",
+        "comments",
+        "clicks",
+        "activationId"
+      ],
+      "type": "object"
+    },
+    "ActivationContentNetwork": {
+      "type": "string",
+      "enum": [
+        "blog",
+        "facebook",
+        "facebook_live",
+        "facebook_reel",
+        "facebook_group",
+        "image",
+        "instagram",
+        "instagram_reel",
+        "instagram_story",
+        "linkedin",
+        "musical_ly",
+        "pinterest",
+        "snapchat_story",
+        "tiktok",
+        "twitch_stream",
+        "twitter",
+        "youtube_video",
+        "youtube_shorts",
+        "video"
+      ]
+    },
+    "NetworkAccount": {
+      "properties": {
+        "averageEngagements": {
+          "type": "number",
+          "format": "double"
+        },
+        "engagementRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "followersCount": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "primaryAccount": {
+          "type": "boolean"
+        },
+        "profilePicture": {
+          "type": "string"
+        },
+        "reach": {
+          "type": "number",
+          "format": "double"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TextSafeSearch": {
+      "properties": {
+        "profanityWordCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokAudienceAgeDistribution": {
+      "properties": {
+        "age": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "percentage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "age",
+        "percentage"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokAudienceCountriesDistribution": {
+      "properties": {
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "percentage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "country",
+        "percentage"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokAudienceGendersDistribution": {
+      "properties": {
+        "gender": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "percentage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "percentage"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokAudienceInterestDistribution": {
+      "properties": {
+        "interestTag": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "percentage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "interestTag",
+        "percentage"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "TikTokVideoViewsBySource": {
+      "properties": {
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "videoViews": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "required": [
+        "videoViews"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "VisualSafeSearch": {
+      "properties": {
+        "adult": {
+          "type": "string"
+        },
+        "medical": {
+          "type": "string"
+        },
+        "racy": {
+          "type": "string"
+        },
+        "spoof": {
+          "type": "string"
+        },
+        "violence": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

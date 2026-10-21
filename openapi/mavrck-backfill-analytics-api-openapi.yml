@@ -111,6 +111,38 @@ components:
       required:
       - activationId
       type: object
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    BackfillFollowersAtPostRequest:
+      properties:
+        batchSize:
+          type: number
+          format: double
+        network:
+          type: string
+        endDate:
+          type: string
+        startDate:
+          type: string
+      required:
+      - network
+      - endDate
+      - startDate
+      type: object
     BackfillFollowersAtPostResponse:
       properties:
         message:
@@ -126,6 +158,22 @@ components:
       - processedBatches
       - updatedRecords
       type: object
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     UpdateContentActivationSummaryResponse:
       properties:
         message:
@@ -158,44 +206,28 @@ components:
       - processedEntities
       - updatedRecords
       type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ValidateErrorJSON:
       properties:
         message:
           type: string
           enum:
           - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -214,38 +246,6 @@ components:
           type: array
       required:
       - entities
-      type: object
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    BackfillFollowersAtPostRequest:
-      properties:
-        batchSize:
-          type: number
-          format: double
-        network:
-          type: string
-        endDate:
-          type: string
-        startDate:
-          type: string
-      required:
-      - network
-      - endDate
-      - startDate
       type: object
   securitySchemes:
     apiKey:

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-get-pending-batch-jobs-response-schema.json",
+  "title": "GetPendingBatchJobsResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-pendingbatchjobs-api-openapi.yml#/components/schemas/GetPendingBatchJobsResponse",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/PendingBatchJob"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "PendingBatchJob": {
+      "properties": {
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "CREATED",
+            "COMPLETED",
+            "FAILED",
+            "PROCESSING"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

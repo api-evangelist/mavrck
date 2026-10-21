@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-activation-tag-disassociation-delete-response-schema.json",
+  "title": "ActivationTagDisassociationDeleteResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-activationtagsassociations-api-openapi.yml#/components/schemas/ActivationTagDisassociationDeleteResponse",
+  "$ref": "#/$defs/ResponseBody__disassociations-ActivationTagAssociation-Array--disassociatedCount-number--__",
+  "$defs": {
+    "ActivationTagAssociation": {
+      "properties": {
+        "tagId": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "activationId": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "tagId",
+        "createdAt",
+        "activationId"
+      ],
+      "type": "object"
+    },
+    "ResponseBody__disassociations-ActivationTagAssociation-Array--disassociatedCount-number--__": {
+      "properties": {
+        "data": {
+          "properties": {
+            "disassociatedCount": {
+              "type": "number",
+              "format": "double"
+            },
+            "disassociations": {
+              "items": {
+                "$ref": "#/$defs/ActivationTagAssociation"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "disassociatedCount",
+            "disassociations"
+          ],
+          "type": "object"
+        },
+        "meta": {
+          "$ref": "#/$defs/ResponseMeta"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ResponseMeta": {
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

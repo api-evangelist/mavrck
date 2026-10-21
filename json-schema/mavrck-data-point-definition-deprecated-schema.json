@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-data-point-definition-deprecated-schema.json",
+  "title": "DataPointDefinitionDeprecated",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-datapoints-api-openapi.yml#/components/schemas/DataPointDefinitionDeprecated",
+  "type": "object",
+  "required": [
+    "name",
+    "multi",
+    "customSet",
+    "type"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the data point."
+    },
+    "key": {
+      "type": "string",
+      "description": "Key for the datapoint"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name for the data point."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the datapoint definition",
+      "x-access": [
+        "root",
+        "administrator"
+      ]
+    },
+    "multi": {
+      "type": "boolean",
+      "description": "Boolean indicating whether multiple responses are allowed."
+    },
+    "customSet": {
+      "type": "boolean",
+      "description": "Boolean indicating whether there is a custom set of responses, otherwise it is free-form."
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of the data point, e.g. string, integer_range."
+    },
+    "markUpDescription": {
+      "type": "string",
+      "description": "The markup display description for the data point."
+    },
+    "communityId": {
+      "type": "integer",
+      "description": "The communityId to which this data point definition belongs.",
+      "x-access": [
+        "root"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date time data point created.",
+      "x-access": [
+        "root",
+        "administrator"
+      ]
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date time data point updated.",
+      "x-access": [
+        "root",
+        "administrator"
+      ]
+    },
+    "mergeTag": {
+      "type": "boolean",
+      "description": "1 if the data point should be included as a merge tag, 0 otherwise"
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "1 if the data point is archived, 0 if it is not"
+    },
+    "setElements": {
+      "$ref": "#/$defs/DataPointDefinitionSetElementDeprecated"
+    },
+    "membersCompleted": {
+      "type": "integer",
+      "description": "The count of members who have completed this data point.",
+      "x-access": [
+        "administrator"
+      ]
+    },
+    "actionGroups": {
+      "type": "array",
+      "description": "An array of live action groups that this datapoint is a part of",
+      "x-access": [
+        "administrator"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "DataPointDefinitionSetElementDeprecated": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the data point set element."
+          },
+          "key": {
+            "type": "string"
+          },
+          "displayLabel": {
+            "type": "string"
+          },
+          "markUpDisplayLabel": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-set-notification-preference-body-definition-schema.json",
+  "title": "SetNotificationPreferenceBodyDefinition",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-marketernotifications-api-openapi.yml#/components/schemas/SetNotificationPreferenceBodyDefinition",
+  "properties": {
+    "actionGroupId": {
+      "type": "string"
+    },
+    "data": {
+      "$ref": "#/$defs/NotificationPreferenceFlags"
+    }
+  },
+  "required": [
+    "actionGroupId",
+    "data"
+  ],
+  "type": "object",
+  "$defs": {
+    "EmailNotificationTimeframe": {
+      "enum": [
+        "TWO_H",
+        "FOUR_H",
+        "DAILY"
+      ],
+      "type": "string"
+    },
+    "NotificationPreferenceFlags": {
+      "properties": {
+        "emailTimeframe": {
+          "$ref": "#/$defs/EmailNotificationTimeframe"
+        },
+        "emailConceptNotifications": {
+          "type": "boolean"
+        },
+        "emailFailedPaymentNotifications": {
+          "type": "boolean"
+        },
+        "emailDraftNotifications": {
+          "type": "boolean"
+        },
+        "emailApplicationNotifications": {
+          "type": "boolean"
+        },
+        "emailConfirmationNotifications": {
+          "type": "boolean"
+        },
+        "emailContentNotifications": {
+          "type": "boolean"
+        },
+        "emailMessageNotifications": {
+          "type": "boolean"
+        },
+        "showConceptNotifications": {
+          "type": "boolean"
+        },
+        "showFailedPaymentNotifications": {
+          "type": "boolean"
+        },
+        "showDraftNotifications": {
+          "type": "boolean"
+        },
+        "showApplicationNotifications": {
+          "type": "boolean"
+        },
+        "showConfirmationNotifications": {
+          "type": "boolean"
+        },
+        "showContentNotifications": {
+          "type": "boolean"
+        },
+        "showMessageNotifications": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "emailTimeframe",
+        "emailFailedPaymentNotifications",
+        "emailDraftNotifications",
+        "emailApplicationNotifications",
+        "emailConfirmationNotifications",
+        "emailContentNotifications",
+        "emailMessageNotifications",
+        "showFailedPaymentNotifications",
+        "showDraftNotifications",
+        "showApplicationNotifications",
+        "showConfirmationNotifications",
+        "showContentNotifications",
+        "showMessageNotifications"
+      ],
+      "type": "object",
+      "description": "tsoa derives request validation from this type, so a non-optional property is a **required** body\nfield and a client that omits it gets a 400 `ValidateError`.\n\nThat is why the two concept flags are optional and the other twelve are not: later-influence sends\na fixed payload built from its own defaults object, so making these required would reject every\npreference save from any client older than CMP-1542 — and sapi and later-influence deploy on\nindependent cadences. Leaving them out is well defined rather than lossy: the columns are nullable\nwith defaults, and `NotificationPreferencesService.upsert` spreads this object into the statement,\nso an absent key keeps the column's default on insert and its current value on update. An old\nclient cannot clobber a preference it does not know about.\n\nDo not make these required until every client sends them."
+    }
+  }
+}

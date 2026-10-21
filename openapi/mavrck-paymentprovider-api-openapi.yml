@@ -97,6 +97,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PaymentAppProvider:
+      enum:
+      - PAYPAL
+      - STRIPE
+      - TANGO_CARDS
+      - MAVELY
+      - TIPALTI
+      type: string
     ConfigureMavrckProviderAppToInstanceBody:
       properties:
         appType:
@@ -112,12 +136,12 @@ components:
       - provider
       type: object
       additionalProperties: false
-    NotFoundError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -144,22 +168,6 @@ components:
       - provider
       type: object
       additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ValidateErrorJSON:
       properties:
         message:
@@ -176,25 +184,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    PaymentAccountType:
-      enum:
-      - CASH
-      - GIFT_CARD
-      type: string
-    PaymentAppProvider:
-      enum:
-      - PAYPAL
-      - STRIPE
-      - TANGO_CARDS
-      - MAVELY
-      - TIPALTI
-      type: string
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -205,6 +200,11 @@ components:
       - details
       type: object
       additionalProperties: false
+    PaymentAccountType:
+      enum:
+      - CASH
+      - GIFT_CARD
+      type: string
   securitySchemes:
     apiKey:
       type: apiKey

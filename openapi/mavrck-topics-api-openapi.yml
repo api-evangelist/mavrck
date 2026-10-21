@@ -74,12 +74,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ValidateErrorJSON:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -90,20 +90,22 @@ components:
       - details
       type: object
       additionalProperties: false
-    NotFoundError:
+    ResponseMetadataModel:
       properties:
-        message:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        status:
           type: string
           enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
+          - failure
+          - success
+        totalCount:
+          type: number
+          format: double
       type: object
       additionalProperties: false
     ServerError:
@@ -112,22 +114,6 @@ components:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -161,22 +147,36 @@ components:
           type: string
       type: object
       additionalProperties: false
-    ResponseMetadataModel:
+    ValidateErrorJSON:
       properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        status:
+        message:
           type: string
           enum:
-          - failure
-          - success
-        totalCount:
-          type: number
-          format: double
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

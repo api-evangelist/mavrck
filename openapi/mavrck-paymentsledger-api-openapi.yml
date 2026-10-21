@@ -248,29 +248,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PaymentsLedgerMetadata:
-      properties:
-        totalCount:
-          type: number
-          format: double
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-      required:
-      - totalCount
-      - limit
-      - offset
-      type: object
-      additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -281,43 +264,17 @@ components:
       - details
       type: object
       additionalProperties: false
-    ServerError:
+    TaxLineItem:
       properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
+        amount:
+          type: number
+          format: double
+        type:
+          $ref: '#/components/schemas/TaxLineItemType'
       required:
-      - message
-      - details
+      - amount
+      - type
       type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    PaymentAccountType:
-      enum:
-      - CASH
-      - GIFT_CARD
-      type: string
     PaymentAppProvider:
       enum:
       - PAYPAL
@@ -326,12 +283,12 @@ components:
       - MAVELY
       - TIPALTI
       type: string
-    ForbiddenError:
+    ServerError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Server Error
         details:
           properties: {}
           additionalProperties:
@@ -528,15 +485,6 @@ components:
       - budgetReferenceIdType
       type: object
       additionalProperties: false
-    TaxLineItemType:
-      type: string
-      enum:
-      - GST
-      - HST
-      - VAT
-      - PST
-      - QST
-      - RST
     DBRewardWinType:
       enum:
       - OTHER
@@ -546,6 +494,15 @@ components:
       - GIFT_CARD
       - SHOPIFY_DISCOUNT
       type: string
+    TaxLineItemType:
+      type: string
+      enum:
+      - GST
+      - HST
+      - VAT
+      - PST
+      - QST
+      - RST
     PaymentsLedgerQueryResponse:
       properties:
         meta:
@@ -559,17 +516,60 @@ components:
       - data
       type: object
       additionalProperties: false
-    TaxLineItem:
+    PaymentAccountType:
+      enum:
+      - CASH
+      - GIFT_CARD
+      type: string
+    ValidateErrorJSON:
       properties:
-        amount:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    PaymentsLedgerMetadata:
+      properties:
+        totalCount:
           type: number
           format: double
-        type:
-          $ref: '#/components/schemas/TaxLineItemType'
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
       required:
-      - amount
-      - type
+      - totalCount
+      - limit
+      - offset
       type: object
+      additionalProperties: false
   securitySchemes:
     apiKey:
       type: apiKey

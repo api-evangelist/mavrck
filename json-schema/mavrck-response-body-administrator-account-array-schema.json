@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-response-body-administrator-account-array-schema.json",
+  "title": "ResponseBody_AdministratorAccount-Array_",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-administratoraccounts-api-openapi.yml#/components/schemas/ResponseBody_AdministratorAccount-Array_",
+  "properties": {
+    "data": {
+      "items": {
+        "$ref": "#/$defs/AdministratorAccount"
+      },
+      "type": "array"
+    },
+    "meta": {
+      "$ref": "#/$defs/ResponseMeta"
+    }
+  },
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "AdministratorAccount": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "object"
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "roles": {
+          "items": {
+            "$ref": "#/$defs/Role"
+          },
+          "type": "array",
+          "x-deprecated": true
+        },
+        "communityRoles": {
+          "items": {
+            "$ref": "#/$defs/CommunityRole"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "email",
+        "id"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CommunityRole": {
+      "properties": {
+        "roleId": {
+          "type": "number",
+          "format": "double"
+        },
+        "communityId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "roleId",
+        "communityId"
+      ],
+      "type": "object"
+    },
+    "ResponseMeta": {
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "offset": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalCount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Role": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "description"
+      ],
+      "type": "object"
+    }
+  }
+}

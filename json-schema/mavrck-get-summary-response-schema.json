@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-get-summary-response-schema.json",
+  "title": "GetSummaryResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-rewardwins-api-openapi.yml#/components/schemas/GetSummaryResponse",
+  "properties": {
+    "summary": {
+      "properties": {
+        "fulfilled": {
+          "$ref": "#/$defs/RewardWinSummary"
+        },
+        "ready": {
+          "$ref": "#/$defs/RewardWinSummary"
+        },
+        "pending": {
+          "$ref": "#/$defs/RewardWinSummary"
+        }
+      },
+      "required": [
+        "fulfilled",
+        "ready",
+        "pending"
+      ],
+      "type": "object"
+    },
+    "summaryByCurrency": {
+      "items": {
+        "$ref": "#/$defs/RewardWinSummaryByCurrency"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "summary",
+    "summaryByCurrency"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "RewardWinSummary": {
+      "properties": {
+        "cost": {
+          "properties": {
+            "sum": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "required": [
+            "sum"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "cost"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "RewardWinSummaryByCurrency": {
+      "properties": {
+        "currencyCode": {
+          "type": "string"
+        },
+        "pendingCost": {
+          "type": "number",
+          "format": "double"
+        },
+        "readyCost": {
+          "type": "number",
+          "format": "double"
+        },
+        "fulfilledCost": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "currencyCode",
+        "pendingCost",
+        "readyCost",
+        "fulfilledCost"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

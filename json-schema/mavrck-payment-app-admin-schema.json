@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-payment-app-admin-schema.json",
+  "title": "PaymentAppAdmin",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-paymentappadmins-api-openapi.yml#/components/schemas/PaymentAppAdmin",
+  "properties": {
+    "s4AccountId": {
+      "type": "number",
+      "format": "double"
+    },
+    "cashPaymentPermissions": {
+      "items": {
+        "$ref": "#/$defs/CashPaymentPermission"
+      },
+      "type": "array"
+    },
+    "giftCardPermissions": {
+      "items": {
+        "$ref": "#/$defs/GiftCardPaymentPermission"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "s4AccountId",
+    "cashPaymentPermissions",
+    "giftCardPermissions"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "CashPaymentPermission": {
+      "properties": {
+        "canAddTransactions": {
+          "type": "boolean"
+        },
+        "cashPaymentAppId": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "canAddTransactions",
+        "cashPaymentAppId"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "GiftCardPaymentPermission": {
+      "properties": {
+        "canAddTransactions": {
+          "type": "boolean"
+        },
+        "giftCardAppId": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "canAddTransactions",
+        "giftCardAppId"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

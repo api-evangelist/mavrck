@@ -51,6 +51,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     ServerError:
       properties:
         message:
@@ -67,44 +83,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    SigningData:
-      properties:
-        signature:
-          type: string
-        policy:
-          type: string
-        bucket:
-          type: string
-        awsKey:
-          type: string
-      required:
-      - signature
-      - policy
-      - bucket
-      - awsKey
-      type: object
     NotFoundError:
       properties:
         message:
           type: string
           enum:
           - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -123,6 +107,22 @@ components:
       - fileName
       type: object
       additionalProperties: false
+    SigningData:
+      properties:
+        signature:
+          type: string
+        policy:
+          type: string
+        bucket:
+          type: string
+        awsKey:
+          type: string
+      required:
+      - signature
+      - policy
+      - bucket
+      - awsKey
+      type: object
   securitySchemes:
     apiKey:
       type: apiKey

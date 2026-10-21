@@ -94,25 +94,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    InfluencerReviewDeliverablePostBody:
-      properties:
-        count:
-          type: number
-          format: double
-        listId:
-          type: number
-          format: double
-      required:
-      - count
-      - listId
-      type: object
-      additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -139,6 +126,19 @@ components:
       - details
       type: object
       additionalProperties: false
+    InfluencerReviewDeliverablePostBody:
+      properties:
+        count:
+          type: number
+          format: double
+        listId:
+          type: number
+          format: double
+      required:
+      - count
+      - listId
+      type: object
+      additionalProperties: false
     ValidateErrorJSON:
       properties:
         message:
@@ -155,12 +155,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:

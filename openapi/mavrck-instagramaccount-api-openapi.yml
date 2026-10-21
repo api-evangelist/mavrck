@@ -94,6 +94,22 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
     UpdateInstagramProfilePictureItem:
       properties:
         imageUrl:
@@ -106,28 +122,16 @@ components:
       required:
       - instagramProfileId
       type: object
+    UpdateInstagramProfilePictureRequest:
+      items:
+        $ref: '#/components/schemas/UpdateInstagramProfilePictureItem'
+      type: array
     ServerError:
       properties:
         message:
           type: string
           enum:
           - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -154,12 +158,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -170,10 +174,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    UpdateInstagramProfilePictureRequest:
-      items:
-        $ref: '#/components/schemas/UpdateInstagramProfilePictureItem'
-      type: array
   securitySchemes:
     apiKey:
       type: apiKey

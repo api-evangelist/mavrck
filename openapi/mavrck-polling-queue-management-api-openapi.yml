@@ -138,44 +138,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    PollingQueueType:
-      enum:
-      - instagram
-      - instagram-story
-      - non-instagram
-      type: string
     ForbiddenError:
       properties:
         message:
@@ -207,6 +169,28 @@ components:
       - queueUrl
       - success
       - message
+      type: object
+      additionalProperties: false
+    PollingQueueType:
+      enum:
+      - instagram
+      - instagram-story
+      - non-instagram
+      type: string
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
     AllQueueStatsResponse:
@@ -246,6 +230,22 @@ components:
       - approximateNumberOfMessages
       - approximateNumberOfMessagesNotVisible
       - approximateNumberOfMessagesDelayed
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-update-notification-body-definition-schema.json",
+  "title": "UpdateNotificationBodyDefinition",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-marketernotifications-api-openapi.yml#/components/schemas/UpdateNotificationBodyDefinition",
+  "properties": {
+    "data": {
+      "$ref": "#/$defs/NotificationUpdateFields"
+    },
+    "params": {
+      "$ref": "#/$defs/NotificationQueryFields"
+    }
+  },
+  "required": [
+    "data",
+    "params"
+  ],
+  "type": "object",
+  "$defs": {
+    "NotificationQueryFields": {
+      "properties": {
+        "notificationTypes": {
+          "items": {
+            "$ref": "#/$defs/NotificationType"
+          },
+          "type": "array"
+        },
+        "actionGroupId": {
+          "type": "number",
+          "format": "double"
+        },
+        "notificationGroupId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NotificationType": {
+      "enum": [
+        "MESSAGE",
+        "DRAFT",
+        "CONTENT",
+        "APPLICATION",
+        "CONFIRMATION",
+        "FAILED_PAYMENT"
+      ],
+      "type": "string"
+    },
+    "NotificationUpdateFields": {
+      "properties": {
+        "windowIsClosed": {
+          "type": "boolean"
+        },
+        "isUnread": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

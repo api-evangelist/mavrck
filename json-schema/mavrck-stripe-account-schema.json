@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-stripe-account-schema.json",
+  "title": "StripeAccount",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-laterinfluencer-api-openapi.yml#/components/schemas/StripeAccount",
+  "properties": {
+    "accountId": {
+      "type": "string"
+    },
+    "canDelete": {
+      "type": "boolean"
+    },
+    "capabilities": {
+      "type": "string"
+    },
+    "cashPaymentAppId": {
+      "type": "number",
+      "format": "double"
+    },
+    "country": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "currencyCode": {
+      "type": "object"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "globalUserId": {
+      "type": "number",
+      "format": "double"
+    },
+    "handleName": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number",
+      "format": "double"
+    },
+    "isActive": {
+      "type": "boolean",
+      "enum": [
+        true
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "onboardingStatus": {
+      "$ref": "#/$defs/StripeOnboardingStatus"
+    },
+    "updatedAt": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "accountId",
+    "canDelete",
+    "cashPaymentAppId",
+    "createdAt",
+    "globalUserId",
+    "handleName",
+    "id",
+    "isActive",
+    "onboardingStatus",
+    "updatedAt"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "StripeOnboardingStatus": {
+      "enum": [
+        "COMPLETE",
+        "NO_ACCOUNT",
+        "NOT_STARTED",
+        "PENDING",
+        "REJECTED",
+        "RESTRICTED",
+        "RESTRICTED_SOON",
+        "STARTED"
+      ],
+      "type": "string"
+    }
+  }
+}

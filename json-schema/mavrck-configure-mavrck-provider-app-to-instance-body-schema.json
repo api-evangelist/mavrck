@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-configure-mavrck-provider-app-to-instance-body-schema.json",
+  "title": "ConfigureMavrckProviderAppToInstanceBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-paymentprovider-api-openapi.yml#/components/schemas/ConfigureMavrckProviderAppToInstanceBody",
+  "properties": {
+    "appType": {
+      "$ref": "#/$defs/PaymentAccountType"
+    },
+    "provider": {
+      "$ref": "#/$defs/PaymentAppProvider"
+    },
+    "communityId": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "appType",
+    "provider"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "PaymentAccountType": {
+      "enum": [
+        "CASH",
+        "GIFT_CARD"
+      ],
+      "type": "string"
+    },
+    "PaymentAppProvider": {
+      "enum": [
+        "PAYPAL",
+        "STRIPE",
+        "TANGO_CARDS",
+        "MAVELY",
+        "TIPALTI"
+      ],
+      "type": "string"
+    }
+  }
+}

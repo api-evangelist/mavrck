@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-update-influencer-contact-info-body-schema.json",
+  "title": "UpdateInfluencerContactInfoBody",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-membership-api-openapi.yml#/components/schemas/UpdateInfluencerContactInfoBody",
+  "properties": {
+    "age": {
+      "type": "number",
+      "format": "double"
+    },
+    "apt": {
+      "type": "string"
+    },
+    "birthday": {
+      "type": "object"
+    },
+    "city": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "emailIsVerified": {
+      "type": "boolean"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "gender": {
+      "$ref": "#/$defs/Gender"
+    },
+    "genderDescription": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "talentManagerEmail": {
+      "type": "string"
+    },
+    "socialPresences": {
+      "items": {
+        "$ref": "#/$defs/SocialPresenceInput"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "Gender": {
+      "enum": [
+        "describe",
+        "female",
+        "male",
+        "non_bin",
+        "other"
+      ],
+      "type": "string"
+    },
+    "SocialPresenceInput": {
+      "properties": {
+        "platform": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "platform",
+        "username"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-point-transaction-schema.json",
+  "title": "PointTransaction",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-points-api-openapi.yml#/components/schemas/PointTransaction",
+  "type": "object",
+  "properties": {
+    "sourceType": {
+      "type": "string",
+      "description": "The origination of the point transaction."
+    },
+    "actionId": {
+      "type": "integer",
+      "description": "ID of associated action."
+    },
+    "actionType": {
+      "type": "string",
+      "description": "Type of associated action."
+    },
+    "pointGrantTime": {
+      "type": "string",
+      "format": "date",
+      "description": "Datetime points were granted."
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount of points in this transaction."
+    },
+    "activationId": {
+      "type": "integer",
+      "description": "Activation ID associated."
+    },
+    "conversionDatapointId": {
+      "type": "integer",
+      "description": "Conversion data point id associated."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description provided for this points transaction e.g. action group name, incentive name, reason for manual entry."
+    },
+    "incentiveClaimId": {
+      "type": "integer",
+      "description": "Incentive claim ID associated."
+    }
+  }
+}

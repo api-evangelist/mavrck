@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-save-brand-context-request-schema.json",
+  "title": "SaveBrandContextRequest",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-brandsuitabilityharness-api-openapi.yml#/components/schemas/SaveBrandContextRequest",
+  "properties": {
+    "input": {
+      "$ref": "#/$defs/Record_string.unknown_"
+    },
+    "output": {
+      "$ref": "#/$defs/BrandContextDTO"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "BrandContextDTO": {
+      "properties": {
+        "dataConfidence": {
+          "$ref": "#/$defs/DataConfidenceDTO"
+        },
+        "brandName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "industry": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "targetAudience": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "brandValues": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "riskTolerance": {
+          "$ref": "#/$defs/DataScoreLevelDTO"
+        },
+        "potentialCompetitors": {
+          "items": {
+            "type": "string"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "metricRelevanceWeights": {
+          "$ref": "#/$defs/MetricRelevanceWeights"
+        }
+      },
+      "required": [
+        "dataConfidence",
+        "brandName",
+        "description",
+        "industry",
+        "targetAudience",
+        "brandValues",
+        "riskTolerance",
+        "potentialCompetitors",
+        "metricRelevanceWeights"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "DataConfidenceDTO": {
+      "properties": {
+        "confidence": {
+          "$ref": "#/$defs/DataScoreLevelDTO"
+        },
+        "score": {
+          "type": "number",
+          "format": "double"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "confidence",
+        "score",
+        "reason"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "DataScoreLevelDTO": {
+      "description": "Brand Suitability LLM/assessment output DTOs.\n`v0.3 UI:` notes track field consumption by the v0.3 report view. \"unused\" = not read by v0.3 (may be used by legacy/admin). Audited 2026-06-22.",
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "NONE"
+      ],
+      "type": "string"
+    },
+    "MetricRelevanceWeights": {
+      "$ref": "#/$defs/Record_AssessmentMetricsEnum.MetricWeight_"
+    },
+    "MetricWeight": {
+      "properties": {
+        "weight": {
+          "type": "number",
+          "format": "double"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "weight",
+        "reason"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Record_AssessmentMetricsEnum.MetricWeight_": {
+      "properties": {
+        "brandAuthenticity": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "controversyScandals": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "adultContent": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "vulgarityProfanity": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "brandConflicts": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "politicalContent": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "socialClimate": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "misinformation": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "hateSpeech": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "violenceContent": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "substanceAbuse": {
+          "$ref": "#/$defs/MetricWeight"
+        },
+        "competitorConflicts": {
+          "$ref": "#/$defs/MetricWeight"
+        }
+      },
+      "type": "object",
+      "description": "Construct a type with a set of properties K of type T"
+    },
+    "Record_string.unknown_": {
+      "properties": {},
+      "type": "object",
+      "description": "Construct a type with a set of properties K of type T"
+    }
+  }
+}

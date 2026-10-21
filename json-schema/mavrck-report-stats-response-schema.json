@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-report-stats-response-schema.json",
+  "title": "ReportStatsResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-brandsuitability-api-openapi.yml#/components/schemas/ReportStatsResponse",
+  "properties": {
+    "totalReports": {
+      "type": "number",
+      "format": "double"
+    },
+    "totalCreators": {
+      "type": "number",
+      "format": "double"
+    },
+    "byStatus": {
+      "properties": {
+        "PROCESSING": {
+          "type": "number",
+          "format": "double"
+        },
+        "FAILED": {
+          "type": "number",
+          "format": "double"
+        },
+        "COMPLETED": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "PROCESSING",
+        "FAILED",
+        "COMPLETED"
+      ],
+      "type": "object"
+    },
+    "byCampaign": {
+      "items": {
+        "properties": {
+          "reportCount": {
+            "type": "number",
+            "format": "double"
+          },
+          "campaignId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reportCount",
+          "campaignId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "recentFailures": {
+      "items": {
+        "properties": {
+          "createdAt": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "globalUserId": {
+            "type": "number",
+            "format": "double"
+          },
+          "reportId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "createdAt",
+          "reason",
+          "globalUserId",
+          "reportId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "totalReports",
+    "totalCreators",
+    "byStatus",
+    "byCampaign",
+    "recentFailures"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

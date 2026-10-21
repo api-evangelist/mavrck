@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/mavrck/main/json-schema/mavrck-get-action-teaser-response-schema.json",
+  "title": "GetActionTeaserResponse",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/mavrck-actions-api-openapi.yml#/components/schemas/GetActionTeaserResponse",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "instructions": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "routing": {
+      "$ref": "#/$defs/Routing"
+    },
+    "brand": {
+      "$ref": "#/$defs/Brand"
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "Brand": {
+      "properties": {
+        "accentColor": {
+          "type": "string"
+        },
+        "buttonColor": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number",
+          "format": "double"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "associatedWithCampaign": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Routing": {
+      "properties": {
+        "not_eligible": {
+          "$ref": "#/$defs/RoutingOptions"
+        },
+        "success": {
+          "$ref": "#/$defs/RoutingOptions"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "RoutingOptions": {
+      "properties": {
+        "cta": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "redirect_url": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}

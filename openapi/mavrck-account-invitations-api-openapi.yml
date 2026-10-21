@@ -328,68 +328,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AccountActivationPostRequestBody:
-      properties:
-        communityId:
-          type: string
-        email:
-          type: string
-        inviteeRoleId:
-          type: number
-          format: double
-      required:
-      - communityId
-      - email
-      - inviteeRoleId
-      type: object
-      additionalProperties: false
-    NotFoundError:
+    ForbiddenError:
       properties:
         message:
           type: string
           enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    AccountActivationPutRequestBody:
-      properties:
-        email:
-          type: string
-        inviteeRoleId:
-          type: number
-          format: double
-      type: object
-      additionalProperties: false
-    ValidateErrorJSON:
-      properties:
-        message:
-          type: string
-          enum:
-          - Validation failed
+          - Access Forbidden
         details:
           properties: {}
           additionalProperties:
@@ -410,35 +354,6 @@ components:
           $ref: '#/components/schemas/ResponseMeta'
       required:
       - data
-      type: object
-      additionalProperties: false
-    ForbiddenError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Access Forbidden
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ResponseMeta:
-      properties:
-        limit:
-          type: number
-          format: double
-        offset:
-          type: number
-          format: double
-        totalCount:
-          type: number
-          format: double
       type: object
       additionalProperties: false
     AccountInvitationDomain:
@@ -476,6 +391,91 @@ components:
       - id
       - inviteeRoleId
       - updatedAt
+      type: object
+      additionalProperties: false
+    AccountActivationPostRequestBody:
+      properties:
+        communityId:
+          type: string
+        email:
+          type: string
+        inviteeRoleId:
+          type: number
+          format: double
+      required:
+      - communityId
+      - email
+      - inviteeRoleId
+      type: object
+      additionalProperties: false
+    ResponseMeta:
+      properties:
+        limit:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+        totalCount:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    AccountActivationPutRequestBody:
+      properties:
+        email:
+          type: string
+        inviteeRoleId:
+          type: number
+          format: double
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidateErrorJSON:
+      properties:
+        message:
+          type: string
+          enum:
+          - Validation failed
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    NotFoundError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Resource Not Found
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
       type: object
       additionalProperties: false
   securitySchemes:

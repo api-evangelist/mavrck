@@ -102,6 +102,45 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ForbiddenError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Access Forbidden
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ServerError:
+      properties:
+        message:
+          type: string
+          enum:
+          - Server Error
+        details:
+          properties: {}
+          additionalProperties:
+            additionalProperties: true
+          type: object
+      required:
+      - message
+      - details
+      type: object
+      additionalProperties: false
+    ValidatePasswordBody:
+      properties:
+        password:
+          type: string
+      required:
+      - password
+      type: object
     SlowMigrationGetResponse:
       properties:
         requiredActions:
@@ -147,38 +186,6 @@ components:
       - email
       - attributes
       type: object
-    NotFoundError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Resource Not Found
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
-    ServerError:
-      properties:
-        message:
-          type: string
-          enum:
-          - Server Error
-        details:
-          properties: {}
-          additionalProperties:
-            additionalProperties: true
-          type: object
-      required:
-      - message
-      - details
-      type: object
-      additionalProperties: false
     ValidateErrorJSON:
       properties:
         message:
@@ -195,12 +202,12 @@ components:
       - details
       type: object
       additionalProperties: false
-    ForbiddenError:
+    NotFoundError:
       properties:
         message:
           type: string
           enum:
-          - Access Forbidden
+          - Resource Not Found
         details:
           properties: {}
           additionalProperties:
@@ -211,13 +218,6 @@ components:
       - details
       type: object
       additionalProperties: false
-    ValidatePasswordBody:
-      properties:
-        password:
-          type: string
-      required:
-      - password
-      type: object
   securitySchemes:
     apiKey:
       type: apiKey
